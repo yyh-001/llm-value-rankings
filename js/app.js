@@ -13,7 +13,7 @@ const state = {
     models: [],
     filteredModels: [],
     currentPage: 1,
-    sortBy: 'value',
+    sortBy: 'capability',
     providerFilter: '',
     priceRange: '',
     searchQuery: '',
@@ -186,10 +186,31 @@ function filterAndSort() {
         });
     }
     
-    // Sort
+    // Sort based on selected method
     switch (state.sortBy) {
-        case 'value':
-            filtered.sort((a, b) => (b.value_score || 0) - (a.value_score || 0));
+        case 'capability':
+            // Capability-first: strongly favors high intelligence models
+            filtered.sort((a, b) => {
+                const scoreA = a.value_scores?.capability_first || 0;
+                const scoreB = b.value_scores?.capability_first || 0;
+                return scoreB - scoreA;
+            });
+            break;
+        case 'balanced':
+            // Balanced: intelligence^2 / price
+            filtered.sort((a, b) => {
+                const scoreA = a.value_scores?.balanced || 0;
+                const scoreB = b.value_scores?.balanced || 0;
+                return scoreB - scoreA;
+            });
+            break;
+        case 'budget':
+            // Budget: intelligence / sqrt(price)
+            filtered.sort((a, b) => {
+                const scoreA = a.value_scores?.budget || 0;
+                const scoreB = b.value_scores?.budget || 0;
+                return scoreB - scoreA;
+            });
             break;
         case 'intelligence':
             filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
@@ -197,9 +218,13 @@ function filterAndSort() {
         case 'price':
             filtered.sort((a, b) => a.pricing.blended - b.pricing.blended);
             break;
-        case 'price-desc':
-            filtered.sort((a, b) => b.pricing.blended - a.pricing.blended);
-            break;
+        default:
+            // Default to capability-first
+            filtered.sort((a, b) => {
+                const scoreA = a.value_scores?.capability_first || 0;
+                const scoreB = b.value_scores?.capability_first || 0;
+                return scoreB - scoreA;
+            });
     }
     
     state.filteredModels = filtered;

@@ -18,10 +18,11 @@ const translations = {
         // Filters
         search_placeholder: "搜索模型...",
         all_providers: "所有厂商",
-        sort_value: "性价比",
-        sort_intelligence: "能力评分",
-        sort_price: "价格",
-        sort_price_desc: "价格（高到低）",
+        sort_capability: "能力优先",
+        sort_balanced: "综合性价比",
+        sort_budget: "预算友好",
+        sort_intelligence: "纯能力评分",
+        sort_price: "价格（低到高）",
         all_prices: "所有价格",
         price_budget: "$0-1 (经济)",
         price_mid: "$1-5 (中端)",
@@ -40,10 +41,15 @@ const translations = {
         
         // Methodology
         methodology_title: "计算方法",
-        formula: "性价比分数 = 能力评分 / (每百万Token价格)",
-        method_1: "能力评分：基于Artificial Analysis Intelligence Index综合评估",
+        mode_capability_title: "能力优先 (默认)",
+        mode_capability_desc: "强烈偏向高能力模型，适合需要顶级AI能力的用户",
+        mode_balanced_title: "综合性价比",
+        mode_balanced_desc: "能力和价格的平衡，适合大多数用户",
+        mode_budget_title: "预算友好",
+        mode_budget_desc: "更注重价格，适合预算有限的用户",
+        method_1: "能力评分：基于Artificial Analysis Intelligence Index综合benchmark评估 (MMLU, HumanEval, MATH等)",
         method_2: "价格：取输入和输出价格的平均值（Blended Price）",
-        method_3: "分数越高表示每美元获得的AI能力越多",
+        method_3: "使用指数/幂函数加权，确保高能力模型在排名中占据优势",
         
         // Comments
         comments_title: "用户评论",
@@ -88,10 +94,11 @@ const translations = {
         // Filters
         search_placeholder: "Search models...",
         all_providers: "All Providers",
-        sort_value: "Value",
-        sort_intelligence: "Intelligence",
-        sort_price: "Price (Low)",
-        sort_price_desc: "Price (High)",
+        sort_capability: "Capability First",
+        sort_balanced: "Balanced Value",
+        sort_budget: "Budget Friendly",
+        sort_intelligence: "Intelligence Only",
+        sort_price: "Price (Low to High)",
         all_prices: "All Prices",
         price_budget: "$0-1 (Budget)",
         price_mid: "$1-5 (Mid)",
@@ -110,10 +117,15 @@ const translations = {
         
         // Methodology
         methodology_title: "Methodology",
-        formula: "Value Score = Intelligence Score / (Price per 1M Tokens)",
-        method_1: "Intelligence: Based on Artificial Analysis Intelligence Index",
+        mode_capability_title: "Capability First (Default)",
+        mode_capability_desc: "Strongly favors top-tier models. Best for users who need maximum AI capability.",
+        mode_balanced_title: "Balanced Value",
+        mode_balanced_desc: "Balance of capability and price. Good for most users.",
+        mode_budget_title: "Budget Friendly",
+        mode_budget_desc: "Emphasizes price. Best for budget-conscious users.",
+        method_1: "Intelligence: Based on Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH, etc.)",
         method_2: "Price: Blended average of input and output pricing",
-        method_3: "Higher score means more AI capability per dollar",
+        method_3: "Uses exponential/power weighting to favor high-capability models",
         
         // Comments
         comments_title: "User Comments",

@@ -447,19 +447,44 @@ tbody tr:hover {
 
 .methodology h3 {
     font-size: 1.3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: var(--text-primary);
 }
 
-.formula {
-    background: var(--bg-tertiary);
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-md);
-    font-family: monospace;
-    font-size: 1.1rem;
+.ranking-modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    text-align: center;
+}
+
+.mode {
+    background: var(--bg-tertiary);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.mode h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.mode .formula {
+    font-family: monospace;
+    font-size: 0.9rem;
     color: var(--accent-primary);
+    background: var(--bg-primary);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.mode p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
 }
 
 .methodology ul {
