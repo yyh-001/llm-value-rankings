@@ -29,8 +29,8 @@
 ### 本地预览
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/modellist.git
-cd modellist
+git clone https://github.com/YOUR_USERNAME/llm-value-rankings.git
+cd llm-value-rankings
 
 # 任选一种方式启动本地服务
 python -m http.server 8080
@@ -42,11 +42,13 @@ python -m http.server 8080
 
 ### 部署到 GitHub Pages
 
+> GitHub 创建仓库时，Repository name 填 `llm-value-rankings`，Description 可填 **LLM Value Rankings**。
+
 1. Fork 本仓库
 2. 进入 **Settings → Pages**
 3. Source 选择 **Deploy from a branch**
 4. Branch 选 `main`，目录选 **/ (root)**
-5. 保存后等待几分钟，访问 `https://YOUR_USERNAME.github.io/modellist/`
+5. 保存后等待几分钟，访问 `https://YOUR_USERNAME.github.io/llm-value-rankings/`
 
 ### 配置评论系统（可选）
 
@@ -54,7 +56,7 @@ python -m http.server 8080
 
 ```javascript
 const CONFIG = {
-    GITHUB_REPO: 'YOUR_USERNAME/modellist',
+    GITHUB_REPO: 'YOUR_USERNAME/llm-value-rankings',
     // ...
 };
 ```
@@ -76,7 +78,7 @@ git push
 ## 📁 项目结构
 
 ```
-modellist/
+llm-value-rankings/
 ├── index.html                 # 主页面
 ├── css/
 │   └── style.css              # 样式（含暗色模式）
