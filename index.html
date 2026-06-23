@@ -72,12 +72,10 @@
                     <option value="price" data-i18n="sort_price">价格（低到高）</option>
                 </select>
                 <select id="price-range">
-                    <option value="" data-i18n="all_prices">所有价格</option>
-                    <option value="flagship" data-i18n="flagship_models">旗舰模型 (≥65分)</option>
-                    <option value="0-1" data-i18n="price_budget">$0-1 (经济)</option>
-                    <option value="1-5" data-i18n="price_mid">$1-5 (中端)</option>
-                    <option value="5-20" data-i18n="price_premium">$5-20 (高端)</option>
-                    <option value="20-" data-i18n="price_enterprise">$20+ (企业)</option>
+                    <option value="" data-i18n="all_prices">所有模型</option>
+                    <option value="flagship" data-i18n="flagship_models" selected>旗舰模型 (Opus/GPT-5.5/Gemini Pro)</option>
+                    <option value="mainstream" data-i18n="mainstream_models">主力模型 (GPT-4o/Sonnet/DeepSeek)</option>
+                    <option value="budget" data-i18n="budget_models">经济模型 (Mini/Nano/Flash)</option>
                 </select>
             </div>
         </section>

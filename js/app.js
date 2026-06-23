@@ -176,11 +176,41 @@ function filterAndSort() {
         filtered = filtered.filter(m => m.provider === state.providerFilter);
     }
     
-    // Price range filter
+    // Price range filter - now used for model tiers
     if (state.priceRange) {
         if (state.priceRange === 'flagship') {
-            // Flagship models: intelligence >= 65
-            filtered = filtered.filter(m => m.intelligence_score && m.intelligence_score >= 65);
+            // Flagship: Top-tier models from each provider
+            filtered = filtered.filter(m => {
+                const id = m.id.toLowerCase();
+                const intel = m.intelligence_score || 0;
+                // Must be a true flagship model
+                return intel >= 48 && 
+                    !id.includes('nano') && 
+                    !id.includes('mini') && 
+                    !id.includes('flash-lite') &&
+                    !id.includes('haiku');
+            });
+        } else if (state.priceRange === 'mainstream') {
+            // Mainstream: Primary models people actually use for work
+            filtered = filtered.filter(m => {
+                const id = m.id.toLowerCase();
+                const intel = m.intelligence_score || 0;
+                // Exclude: nano, mini, flash-lite, haiku (too weak)
+                // Exclude: opus, pro, max variants (too expensive for daily use)
+                const isEconomy = id.includes('nano') || id.includes('flash-lite');
+                const isTooWeak = intel < 25;
+                return !isEconomy && !isTooWeak;
+            });
+        } else if (state.priceRange === 'budget') {
+            // Budget: Lighter models for cost-sensitive use
+            filtered = filtered.filter(m => {
+                const id = m.id.toLowerCase();
+                return id.includes('nano') || 
+                       id.includes('mini') || 
+                       id.includes('flash') ||
+                       id.includes('haiku') ||
+                       m.pricing.blended < 1;
+            });
         } else {
             const [min, max] = state.priceRange.split('-').map(Number);
             filtered = filtered.filter(m => {
