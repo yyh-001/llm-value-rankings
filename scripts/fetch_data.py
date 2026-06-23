@@ -421,9 +421,9 @@ def process_models(openrouter_models, intelligence_scores):
 
 
 def rank_models(models):
-    """Rank models by value score."""
-    ranked = [m for m in models if m["value_score"] is not None]
-    unranked = [m for m in models if m["value_score"] is None]
+    """Rank models by value score, excluding distill models."""
+    ranked = [m for m in models if m["value_score"] is not None and "distill" not in m["id"].lower()]
+    unranked = [m for m in models if m["value_score"] is None or "distill" in m["id"].lower()]
 
     ranked.sort(key=lambda x: x["value_score"], reverse=True)
     for i, model in enumerate(ranked, 1):
