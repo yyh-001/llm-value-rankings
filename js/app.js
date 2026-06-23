@@ -70,9 +70,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function initElements() {
     elements.searchInput = document.getElementById('search-input');
-    elements.providerFilter = document.getElementById('provider-filter');
-    elements.sortBy = document.getElementById('sort-by');
-    elements.priceRange = document.getElementById('price-range');
     elements.rankingsBody = document.getElementById('rankings-body');
     elements.pagination = document.getElementById('pagination');
     elements.totalModels = document.getElementById('total-models');
@@ -142,6 +139,9 @@ function updateStats(data) {
 }
 
 function populateProviders() {
+    // Skip if provider filter element doesn't exist
+    if (!elements.providerFilter) return;
+    
     const providers = new Set();
     state.models.forEach(m => providers.add(m.provider));
     
@@ -208,6 +208,8 @@ function renderTable() {
         const intelScore = model.intelligence_score || '-';
         const intelClass = getIntelligenceClass(model.intelligence_score);
         
+        const speed = model.speed ? model.speed + ' tok/s' : '-';
+        
         const price = model.pricing.blended;
         const priceClass = getPriceClass(price);
         
@@ -231,6 +233,9 @@ function renderTable() {
                 <td class="col-intelligence">
                     <span class="intelligence-score ${intelClass}">${intelScore}</span>
                 </td>
+                <td class="col-speed">
+                    <span class="speed-display">${speed}</span>
+                </td>
                 <td class="col-price">
                     <span class="price-display ${priceClass}">$${price.toFixed(2)}</span>
                 </td>
@@ -239,11 +244,6 @@ function renderTable() {
                     <div class="value-bar">
                         <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
                     </div>
-                </td>
-                <td class="col-detail">
-                    <button class="btn-detail" onclick="showModelDetail('${model.id}')">
-                        ${lang === 'zh' ? '详情' : 'Detail'}
-                    </button>
                 </td>
             </tr>
         `;
@@ -386,32 +386,18 @@ function showModelDetail(modelId) {
 // Event Listeners
 function initEventListeners() {
     // Search
-    elements.searchInput.addEventListener('input', debounce((e) => {
-        state.searchQuery = e.target.value;
-        filterAndSort();
-    }, 300));
-    
-    // Provider filter
-    elements.providerFilter.addEventListener('change', (e) => {
-        state.providerFilter = e.target.value;
-        filterAndSort();
-    });
-    
-    // Sort
-    elements.sortBy.addEventListener('change', (e) => {
-        state.sortBy = e.target.value;
-        filterAndSort();
-    });
-    
-    // Price range
-    elements.priceRange.addEventListener('change', (e) => {
-        state.priceRange = e.target.value;
-        filterAndSort();
-    });
+    if (elements.searchInput) {
+        elements.searchInput.addEventListener('input', debounce((e) => {
+            state.searchQuery = e.target.value;
+            filterAndSort();
+        }, 300));
+    }
     
     // Modal close
-    elements.modelModal.querySelector('.modal-overlay').addEventListener('click', closeModal);
-    elements.modelModal.querySelector('.modal-close').addEventListener('click', closeModal);
+    if (elements.modelModal) {
+        elements.modelModal.querySelector('.modal-overlay')?.addEventListener('click', closeModal);
+        elements.modelModal.querySelector('.modal-close')?.addEventListener('click', closeModal);
+    }
     
     // ESC key to close modal
     document.addEventListener('keydown', (e) => {

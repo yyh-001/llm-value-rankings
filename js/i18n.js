@@ -30,11 +30,11 @@ const translations = {
         
         // Methodology
         methodology_title: "计算方法",
-        formula: "性价比 = 能力评分² / 价格",
+        formula: "性价比 = 能力² × 速度 / 价格",
         penalty_desc: "低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²",
         method_1: "能力评分：Artificial Analysis Intelligence Index",
-        method_2: "价格：OpenRouter 输入输出平均价 ($/1M tokens)",
-        method_3: "仅展示有benchmark评分的主流模型",
+        method_2: "速度：输出速度 (tokens/s)",
+        method_3: "价格：OpenRouter 输入输出平均价 ($/1M tokens)",
         
         // Comments
         comments_title: "用户评论",
@@ -91,11 +91,11 @@ const translations = {
         
         // Methodology
         methodology_title: "Methodology",
-        formula: "Value = Intelligence² / Price",
+        formula: "Value = Intelligence² × Speed / Price",
         penalty_desc: "Models below average (41) get penalized: multiply by (score/avg)²",
         method_1: "Intelligence: Artificial Analysis Intelligence Index",
-        method_2: "Price: OpenRouter blended average ($/1M tokens)",
-        method_3: "Only shows mainstream models with benchmark scores",
+        method_2: "Speed: Output speed (tokens/s)",
+        method_3: "Price: OpenRouter blended average ($/1M tokens)",
         
         // Comments
         comments_title: "User Comments",

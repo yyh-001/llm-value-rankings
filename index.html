@@ -71,10 +71,10 @@
                             <th class="col-rank" data-i18n="th_rank">排名</th>
                             <th class="col-model" data-i18n="th_model">模型</th>
                             <th class="col-provider" data-i18n="th_provider">厂商</th>
-                            <th class="col-intelligence" data-i18n="th_intelligence">能力评分</th>
-                            <th class="col-price" data-i18n="th_price">价格 ($/1M tokens)</th>
-                            <th class="col-value" data-i18n="th_value">性价比分数</th>
-                            <th class="col-detail" data-i18n="th_detail">详情</th>
+                            <th class="col-intelligence" data-i18n="th_intelligence">能力</th>
+                            <th class="col-speed" data-i18n="th_speed">速度</th>
+                            <th class="col-price" data-i18n="th_price">价格</th>
+                            <th class="col-value" data-i18n="th_value">性价比</th>
                         </tr>
                     </thead>
                     <tbody id="rankings-body">
@@ -91,13 +91,13 @@
         <section class="methodology">
             <h3 data-i18n="methodology_title">计算方法</h3>
             <div class="formula">
-                <span data-i18n="formula">性价比 = 能力评分² / 价格</span>
+                <span data-i18n="formula">性价比 = 能力² × 速度 / 价格</span>
             </div>
             <p data-i18n="penalty_desc">低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²</p>
             <ul>
                 <li data-i18n="method_1">能力评分：Artificial Analysis Intelligence Index</li>
-                <li data-i18n="method_2">价格：OpenRouter 输入输出平均价 ($/1M tokens)</li>
-                <li data-i18n="method_3">仅展示有benchmark评分的主流模型</li>
+                <li data-i18n="method_2">速度：Artificial Analysis 输出速度 (tokens/s)</li>
+                <li data-i18n="method_3">价格：OpenRouter 输入输出平均价 ($/1M tokens)</li>
             </ul>
         </section>
 

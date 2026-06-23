@@ -98,264 +98,249 @@ def get_blended_price(pricing):
 
 def fetch_intelligence_scores():
     """
-    Fetch intelligence scores from Artificial Analysis.
+    Fetch intelligence scores and speed data from Artificial Analysis.
     
-    REAL scores from Artificial Analysis Intelligence Index (0-100 scale)
+    Returns dict mapping model names to their data.
     Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
     """
-    print("Loading intelligence scores from Artificial Analysis...")
+    print("Loading model data from Artificial Analysis...")
     
-    # REAL scores from Artificial Analysis leaderboard
-    scores = {
+    # Intelligence scores (0-100) and speed (tokens/second)
+    model_data = {
         # ===== Anthropic =====
-        "claude-fable-5": 60,
-        "claude-opus-4.8": 56,
-        "claude-opus-4.7": 54,
-        "claude-opus-4.6": 54,
-        "claude-opus-4.5": 54,
-        "claude-opus-4": 52,
-        "claude-sonnet-4.6": 47,
-        "claude-sonnet-4.5": 47,
-        "claude-sonnet-4": 45,
-        "claude-3.5-sonnet": 42,
-        "claude-3-opus": 40,
-        "claude-4.5-haiku": 30,
-        "claude-3.5-haiku": 28,
-        "claude-3-haiku": 25,
+        "claude-fable-5": {"intelligence": 60, "speed": 45},
+        "claude-opus-4.8": {"intelligence": 56, "speed": 48},
+        "claude-opus-4.7": {"intelligence": 54, "speed": 48},
+        "claude-opus-4.6": {"intelligence": 54, "speed": 48},
+        "claude-opus-4.5": {"intelligence": 54, "speed": 48},
+        "claude-opus-4": {"intelligence": 52, "speed": 48},
+        "claude-sonnet-4.6": {"intelligence": 47, "speed": 52},
+        "claude-sonnet-4.5": {"intelligence": 47, "speed": 52},
+        "claude-sonnet-4": {"intelligence": 45, "speed": 52},
+        "claude-3.5-sonnet": {"intelligence": 42, "speed": 55},
+        "claude-3-opus": {"intelligence": 40, "speed": 40},
+        "claude-4.5-haiku": {"intelligence": 30, "speed": 94},
+        "claude-3.5-haiku": {"intelligence": 28, "speed": 90},
+        "claude-3-haiku": {"intelligence": 25, "speed": 85},
         
         # ===== OpenAI =====
-        "gpt-5.5": 55,
-        "gpt-5.4": 40,
-        "gpt-5.3": 40,
-        "gpt-5.2": 40,
-        "gpt-5.1": 52,
-        "gpt-5": 50,
-        "o3": 48,
-        "o4-mini": 44,
-        "gpt-4.1": 42,
-        "gpt-4o": 28,
-        "gpt-4-turbo": 30,
-        "gpt-4o-mini": 25,
-        "gpt-4.1-mini": 38,
-        "gpt-4.1-nano": 32,
-        "gpt-5-mini": 45,
-        "gpt-5-nano": 40,
+        "gpt-5.5": {"intelligence": 55, "speed": 67},
+        "gpt-5.4": {"intelligence": 40, "speed": 183},
+        "gpt-5.3": {"intelligence": 40, "speed": 91},
+        "gpt-5.2": {"intelligence": 40, "speed": 80},
+        "gpt-5.1": {"intelligence": 52, "speed": 75},
+        "gpt-5": {"intelligence": 50, "speed": 70},
+        "o3": {"intelligence": 48, "speed": 170},
+        "o4-mini": {"intelligence": 44, "speed": 180},
+        "gpt-4.1": {"intelligence": 42, "speed": 85},
+        "gpt-4o": {"intelligence": 28, "speed": 90},
+        "gpt-4-turbo": {"intelligence": 30, "speed": 75},
+        "gpt-4o-mini": {"intelligence": 25, "speed": 150},
+        "gpt-4.1-mini": {"intelligence": 38, "speed": 160},
+        "gpt-4.1-nano": {"intelligence": 32, "speed": 180},
+        "gpt-5-mini": {"intelligence": 45, "speed": 120},
+        "gpt-5-nano": {"intelligence": 40, "speed": 174},
         
         # ===== Google =====
-        "gemini-2.5-pro": 48,
-        "gemini-3.1-pro": 46,
-        "gemini-3-flash": 50,
-        "gemini-2.5-flash": 42,
-        "gemini-2.0-flash": 38,
-        "gemini-1.5-pro": 35,
-        "gemini-2.5-flash-lite": 28,
-        "gemini-3.1-flash-lite": 42,
+        "gemini-2.5-pro": {"intelligence": 48, "speed": 125},
+        "gemini-3.1-pro": {"intelligence": 46, "speed": 132},
+        "gemini-3-flash": {"intelligence": 50, "speed": 167},
+        "gemini-2.5-flash": {"intelligence": 42, "speed": 150},
+        "gemini-2.0-flash": {"intelligence": 38, "speed": 160},
+        "gemini-1.5-pro": {"intelligence": 35, "speed": 100},
+        "gemini-2.5-flash-lite": {"intelligence": 28, "speed": 200},
+        "gemini-3.1-flash-lite": {"intelligence": 42, "speed": 331},
         
         # ===== DeepSeek =====
-        "deepseek-r1": 38,
-        "deepseek-v4-pro": 44,
-        "deepseek-v4-flash": 40,
-        "deepseek-v3": 35,
-        "deepseek-v3.2": 36,
-        "deepseek-chat": 35,
+        "deepseek-r1": {"intelligence": 38, "speed": 87},
+        "deepseek-v4-pro": {"intelligence": 44, "speed": 87},
+        "deepseek-v4-flash": {"intelligence": 40, "speed": 105},
+        "deepseek-v3": {"intelligence": 35, "speed": 80},
+        "deepseek-v3.2": {"intelligence": 36, "speed": 82},
+        "deepseek-chat": {"intelligence": 35, "speed": 80},
         
         # ===== xAI =====
-        "grok-4.3": 38,
-        "grok-4": 38,
-        "grok-3": 35,
-        "grok-2": 30,
+        "grok-4.3": {"intelligence": 38, "speed": 171},
+        "grok-4": {"intelligence": 38, "speed": 170},
+        "grok-3": {"intelligence": 35, "speed": 150},
+        "grok-2": {"intelligence": 30, "speed": 120},
         
         # ===== Meta =====
-        "llama-4-maverick": 38,
-        "llama-4-scout": 35,
-        "llama-3.1-405b": 32,
-        "llama-3.1-70b": 28,
-        "llama-3.3-70b": 30,
+        "llama-4-maverick": {"intelligence": 38, "speed": 140},
+        "llama-4-scout": {"intelligence": 35, "speed": 150},
+        "llama-3.1-405b": {"intelligence": 32, "speed": 40},
+        "llama-3.1-70b": {"intelligence": 28, "speed": 60},
+        "llama-3.3-70b": {"intelligence": 30, "speed": 65},
         
         # ===== Qwen / Alibaba =====
-        "qwen3.7-max": 46,
-        "qwen3.6-plus": 40,
-        "qwen-2.5-72b": 32,
-        "qwq-32b": 35,
+        "qwen3.7-max": {"intelligence": 46, "speed": 198},
+        "qwen3.6-plus": {"intelligence": 40, "speed": 53},
+        "qwen-2.5-72b": {"intelligence": 32, "speed": 45},
+        "qwq-32b": {"intelligence": 35, "speed": 60},
         
         # ===== Mistral =====
-        "mistral-large": 35,
-        "codestral": 33,
+        "mistral-large": {"intelligence": 35, "speed": 137},
+        "codestral": {"intelligence": 33, "speed": 130},
         
         # ===== MiniMax =====
-        "minimax-m3": 44,
+        "minimax-m3": {"intelligence": 44, "speed": 85},
         
         # ===== GLM / Zhipu =====
-        "glm-5.2": 51,
-        "glm-5.1": 40,
+        "glm-5.2": {"intelligence": 51, "speed": 114},
+        "glm-5.1": {"intelligence": 40, "speed": 100},
         
         # ===== Kimi =====
-        "kimi-k2.7": 42,
-        "kimi-k2.6": 40,
+        "kimi-k2.7": {"intelligence": 42, "speed": 53},
+        "kimi-k2.6": {"intelligence": 40, "speed": 73},
         
         # ===== Xiaomi =====
-        "mimo-v2.5-pro": 42,
+        "mimo-v2.5-pro": {"intelligence": 42, "speed": 46},
         
         # ===== NVIDIA =====
-        "nemotron-3-ultra": 38,
+        "nemotron-3-ultra": {"intelligence": 38, "speed": 138},
         
         # ===== Cohere =====
-        "command-r-plus": 30,
-        "command-a": 35,
+        "command-r-plus": {"intelligence": 30, "speed": 90},
+        "command-a": {"intelligence": 35, "speed": 199},
         
         # ===== Amazon =====
-        "nova-pro": 28,
+        "nova-pro": {"intelligence": 28, "speed": 80},
         
         # ===== Tencent =====
-        "hy3": 34,
+        "hy3": {"intelligence": 34, "speed": 109},
         
         # ===== Step =====
-        "step-3.7-flash": 30,
+        "step-3.7-flash": {"intelligence": 30, "speed": 402},
     }
     
-    print(f"  Loaded {len(scores)} scores from Artificial Analysis")
-    return scores
+    print(f"  Loaded {len(model_data)} models from Artificial Analysis")
+    return model_data
 
 
-def match_intelligence_score(model_id, model_name, scores):
+def match_model_data(model_id, model_name, model_data):
     """
-    Try to match a model to its intelligence score.
-    Uses exact matching first, then fuzzy matching.
+    Try to match a model to its data (intelligence + speed).
+    Returns dict with intelligence and speed, or None.
     """
     model_id_lower = model_id.lower()
     model_name_lower = model_name.lower() if model_name else ""
-    
-    # Extract the model part after the provider slash
     model_part = model_id_lower.split("/")[-1] if "/" in model_id_lower else model_id_lower
     
-    # Step 1: Exact match (highest priority)
-    for key, score in scores.items():
-        # Check if the key exactly matches the model part
-        if model_part == key or model_part.startswith(key + "-") or model_part.startswith(key + "_"):
-            return score
+    # Step 1: Exact match
+    for key, data in model_data.items():
+        if model_part == key:
+            return data
     
-    # Step 2: Try matching with common suffixes removed
+    # Step 2: Match with suffixes removed
     clean_part = model_part
-    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2", "-0125", "-1106"]:
+    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2"]:
         clean_part = clean_part.replace(suffix, "")
     
-    for key, score in scores.items():
+    for key, data in model_data.items():
         if clean_part == key:
-            return score
+            return data
     
-    # Step 3: Pattern matching with REGEX (be very specific)
+    # Step 3: Pattern matching
     import re
-    
-    # Map of regex patterns to scores - ORDER MATTERS (more specific first)
     patterns = [
-        # Claude - specific versions first (REAL Artificial Analysis scores)
-        (r"claude.*fable.*5", 60),
-        (r"claude.*opus.*4\.[78]", 54),
-        (r"claude.*opus.*4\.[56]", 54),
-        (r"claude.*opus.*4\.[1234]", 52),
-        (r"claude.*opus.*4\b", 52),
-        (r"claude.*sonnet.*4\.[56]", 47),
-        (r"claude.*sonnet.*4\b", 45),
-        (r"claude.*sonnet.*3\.5", 42),
-        (r"claude.*opus.*3", 40),
-        (r"claude.*haiku.*4\.5", 30),
-        (r"claude.*haiku.*3\.5", 28),
-        (r"claude.*haiku.*3", 25),
+        (r"claude.*fable.*5", "claude-fable-5"),
+        (r"claude.*opus.*4\.[78]", "claude-opus-4.7"),
+        (r"claude.*opus.*4\.[56]", "claude-opus-4.5"),
+        (r"claude.*opus.*4\.[1234]", "claude-opus-4"),
+        (r"claude.*opus.*4\b", "claude-opus-4"),
+        (r"claude.*sonnet.*4\.[56]", "claude-sonnet-4.5"),
+        (r"claude.*sonnet.*4\b", "claude-sonnet-4"),
+        (r"claude.*sonnet.*3\.5", "claude-3.5-sonnet"),
+        (r"claude.*opus.*3", "claude-3-opus"),
+        (r"claude.*haiku.*4\.5", "claude-4.5-haiku"),
+        (r"claude.*haiku.*3\.5", "claude-3.5-haiku"),
+        (r"claude.*haiku.*3", "claude-3-haiku"),
         
-        # GPT - specific versions first (REAL scores)
-        (r"gpt-5\.5", 55),
-        (r"gpt-5\.4", 40),
-        (r"gpt-5\.3", 40),
-        (r"gpt-5\.2", 40),
-        (r"gpt-5\.1", 52),
-        (r"gpt-5(?![-.])", 50),
-        (r"gpt-4o-mini", 25),
-        (r"gpt-4o(?!-mini)", 28),
-        (r"gpt-4\.1-nano", 32),
-        (r"gpt-4\.1-mini", 38),
-        (r"gpt-4\.1", 42),
-        (r"gpt-4-turbo", 30),
-        (r"o4-mini", 44),
-        (r"o3-mini", 42),
-        (r"\bo3\b", 48),
+        (r"gpt-5\.5", "gpt-5.5"),
+        (r"gpt-5\.4", "gpt-5.4"),
+        (r"gpt-5\.3", "gpt-5.3"),
+        (r"gpt-5\.2", "gpt-5.2"),
+        (r"gpt-5\.1", "gpt-5.1"),
+        (r"gpt-5(?![-.])", "gpt-5"),
+        (r"gpt-4o-mini", "gpt-4o-mini"),
+        (r"gpt-4o(?!-mini)", "gpt-4o"),
+        (r"gpt-4\.1-nano", "gpt-4.1-nano"),
+        (r"gpt-4\.1-mini", "gpt-4.1-mini"),
+        (r"gpt-4\.1", "gpt-4.1"),
+        (r"gpt-4-turbo", "gpt-4-turbo"),
+        (r"o4-mini", "o4-mini"),
+        (r"o3-mini", "o3"),
+        (r"\bo3\b", "o3"),
         
-        # Gemini (REAL scores)
-        (r"gemini-2\.5-pro", 48),
-        (r"gemini-3\.1-pro", 46),
-        (r"gemini-3\.1-flash-lite", 42),
-        (r"gemini-3(?!-).*flash", 50),
-        (r"gemini-2\.5-flash-lite", 28),
-        (r"gemini-2\.5-flash", 42),
-        (r"gemini-2\.0-flash", 38),
-        (r"gemini-1\.5-pro", 35),
+        (r"gemini-2\.5-pro", "gemini-2.5-pro"),
+        (r"gemini-3\.1-pro", "gemini-3.1-pro"),
+        (r"gemini-3\.1-flash-lite", "gemini-3.1-flash-lite"),
+        (r"gemini-3(?!-).*flash", "gemini-3-flash"),
+        (r"gemini-2\.5-flash-lite", "gemini-2.5-flash-lite"),
+        (r"gemini-2\.5-flash", "gemini-2.5-flash"),
+        (r"gemini-2\.0-flash", "gemini-2.0-flash"),
+        (r"gemini-1\.5-pro", "gemini-1.5-pro"),
         
-        # DeepSeek - BE VERY SPECIFIC (REAL scores)
-        (r"deepseek.*r1-distill", 38),
-        (r"deepseek.*r1-0528", 38),
-        (r"deepseek.*\br1\b", 38),
-        (r"deepseek.*v4-pro", 44),
-        (r"deepseek.*v4-flash", 40),
-        (r"deepseek.*v3\.2", 36),
-        (r"deepseek.*v3\.1.*terminus", 35),
-        (r"deepseek.*v3\.1", 35),
-        (r"deepseek.*v3", 35),
-        (r"deepseek.*chat", 35),
-        (r"deepseek.*coder", 35),
+        (r"deepseek.*r1", "deepseek-r1"),
+        (r"deepseek.*v4-pro", "deepseek-v4-pro"),
+        (r"deepseek.*v4-flash", "deepseek-v4-flash"),
+        (r"deepseek.*v3\.2", "deepseek-v3.2"),
+        (r"deepseek.*v3", "deepseek-v3"),
+        (r"deepseek.*chat", "deepseek-chat"),
         
-        # Grok (REAL scores)
-        (r"grok.*4\.[23]", 38),
-        (r"grok.*4\b", 38),
-        (r"grok.*3", 35),
-        (r"grok.*2", 30),
+        (r"grok.*4\.[23]", "grok-4.3"),
+        (r"grok.*4\b", "grok-4"),
+        (r"grok.*3", "grok-3"),
+        (r"grok.*2", "grok-2"),
         
-        # Llama (REAL scores)
-        (r"llama.*4.*maverick", 38),
-        (r"llama.*4.*scout", 35),
-        (r"llama.*3\.1.*405", 32),
-        (r"llama.*3\.1.*70", 28),
-        (r"llama.*3\.3.*70", 30),
+        (r"llama.*4.*maverick", "llama-4-maverick"),
+        (r"llama.*4.*scout", "llama-4-scout"),
+        (r"llama.*3\.1.*405", "llama-3.1-405b"),
+        (r"llama.*3\.1.*70", "llama-3.1-70b"),
+        (r"llama.*3\.3.*70", "llama-3.3-70b"),
         
-        # Qwen (REAL scores)
-        (r"qwen.*3\.7.*max", 46),
-        (r"qwen.*3\.6.*plus", 40),
-        (r"qwen.*2\.5.*72", 32),
-        (r"\bqwq\b", 35),
+        (r"qwen.*3\.7.*max", "qwen3.7-max"),
+        (r"qwen.*3\.6.*plus", "qwen3.6-plus"),
+        (r"qwen.*2\.5.*72", "qwen-2.5-72b"),
+        (r"\bqwq\b", "qwq-32b"),
         
-        # Other models (REAL scores)
-        (r"minimax.*m3", 44),
-        (r"glm.*5\.2", 51),
-        (r"glm.*5\.1", 40),
-        (r"kimi.*k2\.[67]", 42),
-        (r"mimo.*v2\.5.*pro", 42),
-        (r"nemotron.*3.*ultra", 38),
-        (r"command.*r.*plus", 30),
-        (r"command.*a", 35),
-        (r"nova.*pro", 28),
-        (r"\bhy3\b", 34),
-        (r"step.*3\.7", 30),
+        (r"minimax.*m3", "minimax-m3"),
+        (r"glm.*5\.2", "glm-5.2"),
+        (r"glm.*5\.1", "glm-5.1"),
+        (r"kimi.*k2\.7", "kimi-k2.7"),
+        (r"kimi.*k2\.6", "kimi-k2.6"),
+        (r"mimo.*v2\.5.*pro", "mimo-v2.5-pro"),
+        (r"nemotron.*3.*ultra", "nemotron-3-ultra"),
+        (r"command.*r.*plus", "command-r-plus"),
+        (r"command.*a", "command-a"),
+        (r"nova.*pro", "nova-pro"),
+        (r"\bhy3\b", "hy3"),
+        (r"step.*3\.7", "step-3.7-flash"),
     ]
     
-    for pattern, score in patterns:
+    for pattern, key in patterns:
         if re.search(pattern, model_id_lower) or re.search(pattern, model_name_lower):
-            return score
+            if key in model_data:
+                return model_data[key]
     
     return None
 
 
-def calculate_value_scores(intelligence, price, avg_intelligence=40):
+def calculate_value_scores(intelligence, price, speed, avg_intelligence=40):
     """
-    Calculate value score with penalty for below-average models.
+    Calculate value score: intelligence² × speed / price
     
-    Formula:
-    - Above average: intelligence² / price
-    - Below average: (intelligence² / price) * (intelligence / avg)²  [penalty]
+    With penalty for below-average intelligence models.
     """
     if intelligence is None or price is None or price <= 0:
         return None
     
-    base = (intelligence ** 2) / price
+    # Default speed if not available
+    if speed is None:
+        speed = 80  # Average speed
     
-    # Apply penalty for below-average models
+    base = (intelligence ** 2) * speed / price
+    
     if intelligence < avg_intelligence:
         penalty = (intelligence / avg_intelligence) ** 2
         return round(base * penalty, 2)
@@ -363,20 +348,20 @@ def calculate_value_scores(intelligence, price, avg_intelligence=40):
     return round(base, 2)
 
 
-def process_models(openrouter_models, intelligence_scores):
+def process_models(openrouter_models, model_data):
     """Process and combine model data."""
     processed = []
     seen = set()
     
     # First pass: calculate average intelligence
-    matched_scores = []
+    matched_intelligences = []
     for model in openrouter_models:
         model_id = model.get("id", "")
         model_name = model.get("name", "")
-        intel = match_intelligence_score(model_id, model_name, intelligence_scores)
-        if intel is not None:
-            matched_scores.append(intel)
-    avg_intelligence = sum(matched_scores) / len(matched_scores) if matched_scores else 40
+        data = match_model_data(model_id, model_name, model_data)
+        if data and data.get("intelligence"):
+            matched_intelligences.append(data["intelligence"])
+    avg_intelligence = sum(matched_intelligences) / len(matched_intelligences) if matched_intelligences else 40
     print(f"  Average intelligence score: {avg_intelligence:.1f}")
 
     for model in openrouter_models:
@@ -392,8 +377,10 @@ def process_models(openrouter_models, intelligence_scores):
         if blended_price is None or blended_price <= 0:
             continue
 
-        intelligence = match_intelligence_score(model_id, model_name, intelligence_scores)
-        value_score = calculate_value_scores(intelligence, blended_price, avg_intelligence)
+        data = match_model_data(model_id, model_name, model_data)
+        intelligence = data["intelligence"] if data else None
+        speed = data["speed"] if data else None
+        value_score = calculate_value_scores(intelligence, blended_price, speed, avg_intelligence)
 
         base_name = model_id.split(":")[0] if ":" in model_id else model_id
         if base_name in seen:
@@ -412,6 +399,7 @@ def process_models(openrouter_models, intelligence_scores):
                 "blended": blended_price,
             },
             "intelligence_score": intelligence,
+            "speed": speed,
             "value_score": value_score,
             "created": model.get("created"),
             "description": model.get("description", ""),
@@ -467,10 +455,10 @@ def main():
         print("Error: No models fetched from OpenRouter")
         sys.exit(1)
 
-    intelligence_scores = fetch_intelligence_scores()
+    model_data = fetch_intelligence_scores()
 
     # Process and rank
-    processed = process_models(openrouter_models, intelligence_scores)
+    processed = process_models(openrouter_models, model_data)
     ranked = rank_models(processed)
 
     # Save
@@ -482,8 +470,10 @@ def main():
     print("=" * 60)
     top10 = [m for m in ranked if m["rank"] is not None][:10]
     for m in top10:
+        speed_str = f"{m['speed']:>3d} tok/s" if m['speed'] else "N/A"
         print(f"  #{m['rank']:2d} {m['name']:<30s} "
               f"Score: {m['intelligence_score'] or 'N/A':>3} "
+              f"Speed: {speed_str:>10s} "
               f"Price: ${m['pricing']['blended']:>8.2f}/1M "
               f"Value: {m['value_score']:>8.2f}")
 
