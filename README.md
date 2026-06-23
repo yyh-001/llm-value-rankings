@@ -1,7 +1,10 @@
 # LLM Value Rankings / 大模型性价比排行榜
 
+[![Live Demo](https://img.shields.io/badge/demo-online-6366f1?style=flat-square)](https://yyh-001.github.io/llm-value-rankings/)
 [![GitHub Actions](https://img.shields.io/badge/data-auto--updated-brightgreen)](.github/workflows/update-data.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+**在线访问：** https://yyh-001.github.io/llm-value-rankings/
 
 基于 **Artificial Analysis 能力评分**、**输出速度** 与 **OpenRouter 价格**，计算大模型性价比排名，帮你快速找到「每美元能买到多少 AI 能力」。
 
