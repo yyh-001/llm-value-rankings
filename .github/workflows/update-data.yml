@@ -1,0 +1,49 @@
+name: Update Model Data
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+        
+    - name: Fetch model data
+      run: python scripts/fetch_data.py
+      
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git diff --quiet data/models.json || echo "has_changes=true" >> $GITHUB_OUTPUT
+        
+    - name: Commit and push if changed
+      if: steps.check_changes.outputs.has_changes == 'true'
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add data/models.json
+        git commit -m "chore: update model data [skip ci]"
+        git push
