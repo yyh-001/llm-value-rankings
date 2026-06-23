@@ -60,24 +60,6 @@
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="搜索模型..." data-i18n-placeholder="search_placeholder">
             </div>
-            <div class="filter-group">
-                <select id="provider-filter">
-                    <option value="" data-i18n="all_providers">所有厂商</option>
-                </select>
-                <select id="sort-by">
-                    <option value="capability" data-i18n="sort_capability">能力优先</option>
-                    <option value="balanced" data-i18n="sort_balanced">综合性价比</option>
-                    <option value="budget" data-i18n="sort_budget">预算友好</option>
-                    <option value="intelligence" data-i18n="sort_intelligence">纯能力评分</option>
-                    <option value="price" data-i18n="sort_price">价格（低到高）</option>
-                </select>
-                <select id="price-range">
-                    <option value="" data-i18n="all_prices">所有模型</option>
-                    <option value="flagship" data-i18n="flagship_models" selected>旗舰模型 (Opus/GPT-5.5/Gemini Pro)</option>
-                    <option value="mainstream" data-i18n="mainstream_models">主力模型 (GPT-4o/Sonnet/DeepSeek)</option>
-                    <option value="budget" data-i18n="budget_models">经济模型 (Mini/Nano/Flash)</option>
-                </select>
-            </div>
         </section>
 
         <!-- Rankings Table -->
@@ -108,27 +90,13 @@
         <!-- Methodology -->
         <section class="methodology">
             <h3 data-i18n="methodology_title">计算方法</h3>
-            <div class="ranking-modes">
-                <div class="mode">
-                    <h4 data-i18n="mode_capability_title">🔥 能力优先 (默认)</h4>
-                    <div class="formula">exp(能力评分/12) / 价格</div>
-                    <p data-i18n="mode_capability_desc">强烈偏向高能力模型，适合需要顶级AI能力的用户</p>
-                </div>
-                <div class="mode">
-                    <h4 data-i18n="mode_balanced_title">⚖️ 综合性价比</h4>
-                    <div class="formula">能力评分² / 价格</div>
-                    <p data-i18n="mode_balanced_desc">能力和价格的平衡，适合大多数用户</p>
-                </div>
-                <div class="mode">
-                    <h4 data-i18n="mode_budget_title">💰 预算友好</h4>
-                    <div class="formula">能力评分 / √价格</div>
-                    <p data-i18n="mode_budget_desc">更注重价格，适合预算有限的用户</p>
-                </div>
+            <div class="formula">
+                <span data-i18n="formula">性价比 = 能力评分² / 价格 ($/1M tokens)</span>
             </div>
             <ul>
-                <li data-i18n="method_1">能力评分：基于Artificial Analysis Intelligence Index综合benchmark评估 (MMLU, HumanEval, MATH等)</li>
-                <li data-i18n="method_2">价格：取输入和输出价格的平均值（Blended Price）</li>
-                <li data-i18n="method_3">使用指数/幂函数加权，确保高能力模型在排名中占据优势</li>
+                <li data-i18n="method_1">能力评分：Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH等综合benchmark)</li>
+                <li data-i18n="method_2">价格：OpenRouter API 输入输出平均价</li>
+                <li data-i18n="method_3">仅展示有benchmark评分的主流模型</li>
             </ul>
         </section>
 

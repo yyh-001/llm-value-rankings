@@ -159,117 +159,19 @@ function populateProviders() {
 
 // Filter and Sort
 function filterAndSort() {
-    let filtered = [...state.models];
+    let filtered = state.models.filter(m => m.intelligence_score != null);
     
     // Search filter
     if (state.searchQuery) {
         const query = state.searchQuery.toLowerCase();
         filtered = filtered.filter(m => 
             m.name.toLowerCase().includes(query) ||
-            m.id.toLowerCase().includes(query) ||
-            m.provider.toLowerCase().includes(query)
+            m.id.toLowerCase().includes(query)
         );
     }
     
-    // Provider filter
-    if (state.providerFilter) {
-        filtered = filtered.filter(m => m.provider === state.providerFilter);
-    }
-    
-    // Price range filter - now used for model tiers
-    if (state.priceRange) {
-        if (state.priceRange === 'flagship') {
-            // Flagship: Top-tier models from each provider
-            filtered = filtered.filter(m => {
-                const id = m.id.toLowerCase();
-                const intel = m.intelligence_score || 0;
-                // Must be a true flagship model
-                return intel >= 48 && 
-                    !id.includes('nano') && 
-                    !id.includes('mini') && 
-                    !id.includes('flash-lite') &&
-                    !id.includes('haiku');
-            });
-        } else if (state.priceRange === 'mainstream') {
-            // Mainstream: Primary models people actually use for work
-            filtered = filtered.filter(m => {
-                const id = m.id.toLowerCase();
-                const intel = m.intelligence_score || 0;
-                // Exclude: nano, mini, flash-lite, haiku (too weak)
-                // Exclude: opus, pro, max variants (too expensive for daily use)
-                const isEconomy = id.includes('nano') || id.includes('flash-lite');
-                const isTooWeak = intel < 25;
-                return !isEconomy && !isTooWeak;
-            });
-        } else if (state.priceRange === 'budget') {
-            // Budget: Lighter models for cost-sensitive use
-            filtered = filtered.filter(m => {
-                const id = m.id.toLowerCase();
-                return id.includes('nano') || 
-                       id.includes('mini') || 
-                       id.includes('flash') ||
-                       id.includes('haiku') ||
-                       m.pricing.blended < 1;
-            });
-        } else {
-            const [min, max] = state.priceRange.split('-').map(Number);
-            filtered = filtered.filter(m => {
-                const price = m.pricing.blended;
-                if (max) return price >= min && price < max;
-                return price >= min;
-            });
-        }
-    }
-    
-    // Sort based on selected method
-    switch (state.sortBy) {
-        case 'capability':
-            // If flagship filter is active, sort by pure intelligence
-            if (state.priceRange === 'flagship') {
-                filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
-            } else {
-                // Capability-first: strongly favors high intelligence models
-                filtered.sort((a, b) => {
-                    const scoreA = a.value_scores?.capability_first || 0;
-                    const scoreB = b.value_scores?.capability_first || 0;
-                    return scoreB - scoreA;
-                });
-            }
-            break;
-        case 'balanced':
-            // Balanced: intelligence^2 / price
-            filtered.sort((a, b) => {
-                const scoreA = a.value_scores?.balanced || 0;
-                const scoreB = b.value_scores?.balanced || 0;
-                return scoreB - scoreA;
-            });
-            break;
-        case 'budget':
-            // Budget: intelligence / sqrt(price)
-            filtered.sort((a, b) => {
-                const scoreA = a.value_scores?.budget || 0;
-                const scoreB = b.value_scores?.budget || 0;
-                return scoreB - scoreA;
-            });
-            break;
-        case 'intelligence':
-            filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
-            break;
-        case 'price':
-            filtered.sort((a, b) => a.pricing.blended - b.pricing.blended);
-            break;
-        default:
-            // Default to capability-first
-            if (state.priceRange === 'flagship') {
-                filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
-            } else {
-                filtered.sort((a, b) => {
-                    const scoreA = a.value_scores?.capability_first || 0;
-                    const scoreB = b.value_scores?.capability_first || 0;
-                    return scoreB - scoreA;
-                });
-            }
-    }
+    // Sort by value score (capability²/price)
+    filtered.sort((a, b) => (b.value_score || 0) - (a.value_score || 0));
     
     state.filteredModels = filtered;
     state.currentPage = 1;
@@ -295,54 +197,13 @@ function renderTable() {
         return;
     }
     
-    // Find max value for bar scaling based on current sort method
-    const getValueForSort = (m) => {
-        switch(state.sortBy) {
-            case 'capability': return m.value_scores?.capability_first || 0;
-            case 'balanced': return m.value_scores?.balanced || 0;
-            case 'budget': return m.value_scores?.budget || 0;
-            case 'intelligence': return m.intelligence_score || 0;
-            case 'price': return 1 / (m.pricing.blended || 1); // Inverse for price
-            default: return m.value_scores?.capability_first || 0;
-        }
-    };
-    
-    const maxValue = Math.max(...state.filteredModels.map(m => getValueForSort(m)));
+    // Find max value for bar scaling
+    const maxValue = Math.max(...state.filteredModels.map(m => m.value_score || 0));
     
     elements.rankingsBody.innerHTML = pageModels.map((model, idx) => {
-        // Get the appropriate score based on sort method
-        let displayScore;
-        let displayRank;
-        switch(state.sortBy) {
-            case 'capability':
-                displayScore = model.value_scores?.capability_first;
-                displayRank = model.rank_capability;
-                break;
-            case 'balanced':
-                displayScore = model.value_scores?.balanced;
-                displayRank = model.rank;
-                break;
-            case 'budget':
-                displayScore = model.value_scores?.budget;
-                displayRank = model.rank_budget;
-                break;
-            case 'intelligence':
-                displayScore = model.intelligence_score;
-                displayRank = null;
-                break;
-            case 'price':
-                displayScore = model.pricing.blended;
-                displayRank = null;
-                break;
-            default:
-                displayScore = model.value_scores?.capability_first;
-                displayRank = model.rank_capability;
-        }
-        
-        const rank = displayRank || model.rank || '-';
+        const rank = model.rank || '-';
         const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
-        const providerName = PROVIDER_NAMES[model.provider]?.[lang] || model.provider;
-        const logoSrc = PROVIDER_LOGOS[model.provider] || '';
+        const providerName = model.provider_display || model.provider;
         
         const intelScore = model.intelligence_score || '-';
         const intelClass = getIntelligenceClass(model.intelligence_score);
@@ -350,12 +211,8 @@ function renderTable() {
         const price = model.pricing.blended;
         const priceClass = getPriceClass(price);
         
-        const barValue = getValueForSort(model);
-        const valueBarWidth = maxValue > 0 ? (barValue / maxValue * 100) : 0;
-        
-        // Format display score
-        const formattedScore = displayScore ? 
-            (state.sortBy === 'price' ? `$${displayScore.toFixed(2)}` : Math.round(displayScore).toLocaleString()) : '-';
+        const valueScore = model.value_score || 0;
+        const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
         
         return `
             <tr class="fade-in" style="animation-delay: ${idx * 30}ms">
@@ -369,10 +226,7 @@ function renderTable() {
                     </div>
                 </td>
                 <td class="col-provider">
-                    <span class="provider-badge">
-                        ${logoSrc ? `<img src="${logoSrc}" alt="${providerName}" class="provider-logo">` : ''}
-                        ${providerName}
-                    </span>
+                    <span class="provider-badge">${providerName}</span>
                 </td>
                 <td class="col-intelligence">
                     <span class="intelligence-score ${intelClass}">${intelScore}</span>
@@ -381,7 +235,7 @@ function renderTable() {
                     <span class="price-display ${priceClass}">$${price.toFixed(2)}</span>
                 </td>
                 <td class="col-value">
-                    <span class="value-score">${formattedScore}</span>
+                    <span class="value-score">${Math.round(valueScore)}</span>
                     <div class="value-bar">
                         <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
                     </div>

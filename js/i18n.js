@@ -17,20 +17,6 @@ const translations = {
         
         // Filters
         search_placeholder: "搜索模型...",
-        all_providers: "所有厂商",
-        sort_capability: "能力优先",
-        sort_balanced: "综合性价比",
-        sort_budget: "预算友好",
-        sort_intelligence: "纯能力评分",
-        sort_price: "价格（低到高）",
-        all_prices: "所有模型",
-        flagship_models: "旗舰模型 (Opus/GPT-5.5)",
-        mainstream_models: "主力模型 (GPT-4o/Sonnet)",
-        budget_models: "经济模型 (Mini/Nano/Flash)",
-        price_budget: "$0-1 (经济)",
-        price_mid: "$1-5 (中端)",
-        price_premium: "$5-20 (高端)",
-        price_enterprise: "$20+ (企业)",
         
         // Table
         th_rank: "排名",
@@ -44,15 +30,10 @@ const translations = {
         
         // Methodology
         methodology_title: "计算方法",
-        mode_capability_title: "能力优先 (默认)",
-        mode_capability_desc: "强烈偏向高能力模型，适合需要顶级AI能力的用户",
-        mode_balanced_title: "综合性价比",
-        mode_balanced_desc: "能力和价格的平衡，适合大多数用户",
-        mode_budget_title: "预算友好",
-        mode_budget_desc: "更注重价格，适合预算有限的用户",
-        method_1: "能力评分：基于Artificial Analysis Intelligence Index综合benchmark评估 (MMLU, HumanEval, MATH等)",
-        method_2: "价格：取输入和输出价格的平均值（Blended Price）",
-        method_3: "使用指数/幂函数加权，确保高能力模型在排名中占据优势",
+        formula: "性价比 = 能力评分² / 价格 ($/1M tokens)",
+        method_1: "能力评分：Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH等综合benchmark)",
+        method_2: "价格：OpenRouter API 输入输出平均价",
+        method_3: "仅展示有benchmark评分的主流模型",
         
         // Comments
         comments_title: "用户评论",
@@ -96,20 +77,6 @@ const translations = {
         
         // Filters
         search_placeholder: "Search models...",
-        all_providers: "All Providers",
-        sort_capability: "Capability First",
-        sort_balanced: "Balanced Value",
-        sort_budget: "Budget Friendly",
-        sort_intelligence: "Intelligence Only",
-        sort_price: "Price (Low to High)",
-        all_prices: "All Models",
-        flagship_models: "Flagship (Opus/GPT-5.5)",
-        mainstream_models: "Mainstream (GPT-4o/Sonnet)",
-        budget_models: "Budget (Mini/Nano/Flash)",
-        price_budget: "$0-1 (Budget)",
-        price_mid: "$1-5 (Mid)",
-        price_premium: "$5-20 (Premium)",
-        price_enterprise: "$20+ (Enterprise)",
         
         // Table
         th_rank: "Rank",
@@ -123,15 +90,10 @@ const translations = {
         
         // Methodology
         methodology_title: "Methodology",
-        mode_capability_title: "Capability First (Default)",
-        mode_capability_desc: "Strongly favors top-tier models. Best for users who need maximum AI capability.",
-        mode_balanced_title: "Balanced Value",
-        mode_balanced_desc: "Balance of capability and price. Good for most users.",
-        mode_budget_title: "Budget Friendly",
-        mode_budget_desc: "Emphasizes price. Best for budget-conscious users.",
-        method_1: "Intelligence: Based on Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH, etc.)",
-        method_2: "Price: Blended average of input and output pricing",
-        method_3: "Uses exponential/power weighting to favor high-capability models",
+        formula: "Value = Intelligence² / Price ($/1M tokens)",
+        method_1: "Intelligence: Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH, etc.)",
+        method_2: "Price: OpenRouter API blended (input + output) / 2",
+        method_3: "Only shows mainstream models with benchmark scores",
         
         // Comments
         comments_title: "User Comments",
