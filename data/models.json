@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-06-23T09:45:14.826683Z",
+  "updated_at": "2026-06-23T09:58:20.834632Z",
   "total_models": 309,
-  "ranked_models": 127,
+  "ranked_models": 120,
   "models": [
     {
       "id": "deepseek/deepseek-v4-flash",
@@ -14,18 +14,18 @@
         "completion": 0.18,
         "blended": 0.135
       },
-      "intelligence_score": 62,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 28474.07,
-        "capability_first": 1298.74,
-        "budget": 168.74,
-        "primary": 28474.07
+        "balanced": 11851.85,
+        "capability_first": 207.64,
+        "budget": 108.87,
+        "primary": 11851.85
       },
-      "value_score": 28474.07,
+      "value_score": 11851.85,
       "created": 1777000666,
       "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
       "rank": 1,
-      "rank_capability": 3,
+      "rank_capability": 2,
       "rank_budget": 1
     },
     {
@@ -39,14 +39,14 @@
         "completion": 0.39999999999999997,
         "blended": 0.225
       },
-      "intelligence_score": 75,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 25000.0,
-        "capability_first": 2302.28,
-        "budget": 158.11,
-        "primary": 25000.0
+        "balanced": 11111.11,
+        "capability_first": 286.67,
+        "budget": 105.41,
+        "primary": 11111.11
       },
-      "value_score": 25000.0,
+      "value_score": 11111.11,
       "created": 1754587402,
       "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
       "rank": 2,
@@ -54,54 +54,29 @@
       "rank_budget": 2
     },
     {
-      "id": "openai/gpt-4.1-nano",
-      "name": "OpenAI: GPT-4.1 Nano",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 1047576,
+      "id": "tencent/hy3-preview",
+      "name": "Tencent: Hy3 preview",
+      "provider": "tencent",
+      "provider_display": "Tencent",
+      "context_length": 262144,
       "pricing": {
-        "prompt": 0.09999999999999999,
-        "completion": 0.39999999999999997,
-        "blended": 0.25
+        "prompt": 0.063,
+        "completion": 0.21,
+        "blended": 0.1365
       },
-      "intelligence_score": 70,
+      "intelligence_score": 34,
       "value_scores": {
-        "balanced": 19600.0,
-        "capability_first": 1365.98,
-        "budget": 140.0,
-        "primary": 19600.0
+        "balanced": 8468.86,
+        "capability_first": 124.56,
+        "budget": 92.03,
+        "primary": 8468.86
       },
-      "value_score": 19600.0,
-      "created": 1744651369,
-      "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
+      "value_score": 8468.86,
+      "created": 1776878150,
+      "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
       "rank": 3,
-      "rank_capability": 2,
+      "rank_capability": 6,
       "rank_budget": 3
-    },
-    {
-      "id": "meta-llama/llama-4-scout",
-      "name": "Meta: Llama 4 Scout",
-      "provider": "meta-llama",
-      "provider_display": "Meta-Llama",
-      "context_length": 10000000,
-      "pricing": {
-        "prompt": 0.09999999999999999,
-        "completion": 0.3,
-        "blended": 0.2
-      },
-      "intelligence_score": 60,
-      "value_scores": {
-        "balanced": 18000.0,
-        "capability_first": 742.07,
-        "budget": 134.16,
-        "primary": 18000.0
-      },
-      "value_score": 18000.0,
-      "created": 1743881519,
-      "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
-      "rank": 4,
-      "rank_capability": 10,
-      "rank_budget": 4
     },
     {
       "id": "google/gemini-2.5-flash-lite-preview-09-2025",
@@ -114,19 +89,19 @@
         "completion": 0.39999999999999997,
         "blended": 0.25
       },
-      "intelligence_score": 66,
+      "intelligence_score": 42,
       "value_scores": {
-        "balanced": 17424.0,
-        "capability_first": 978.77,
-        "budget": 132.0,
-        "primary": 17424.0
+        "balanced": 7056.0,
+        "capability_first": 132.46,
+        "budget": 84.0,
+        "primary": 7056.0
       },
-      "value_score": 17424.0,
+      "value_score": 7056.0,
       "created": 1758819686,
       "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
-      "rank": 5,
-      "rank_capability": 4,
-      "rank_budget": 5
+      "rank": 4,
+      "rank_capability": 3,
+      "rank_budget": 4
     },
     {
       "id": "google/gemini-2.5-flash-lite",
@@ -139,43 +114,68 @@
         "completion": 0.39999999999999997,
         "blended": 0.25
       },
-      "intelligence_score": 66,
+      "intelligence_score": 42,
       "value_scores": {
-        "balanced": 17424.0,
-        "capability_first": 978.77,
-        "budget": 132.0,
-        "primary": 17424.0
+        "balanced": 7056.0,
+        "capability_first": 132.46,
+        "budget": 84.0,
+        "primary": 7056.0
       },
-      "value_score": 17424.0,
+      "value_score": 7056.0,
       "created": 1753200276,
       "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
+      "rank": 5,
+      "rank_capability": 4,
+      "rank_budget": 5
+    },
+    {
+      "id": "openai/gpt-4.1-nano",
+      "name": "OpenAI: GPT-4.1 Nano",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 1047576,
+      "pricing": {
+        "prompt": 0.09999999999999999,
+        "completion": 0.39999999999999997,
+        "blended": 0.25
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 7056.0,
+        "capability_first": 132.46,
+        "budget": 84.0,
+        "primary": 7056.0
+      },
+      "value_score": 7056.0,
+      "created": 1744651369,
+      "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
       "rank": 6,
       "rank_capability": 5,
       "rank_budget": 6
     },
     {
-      "id": "meta-llama/llama-3.3-70b-instruct",
-      "name": "Meta: Llama 3.3 70B Instruct",
+      "id": "meta-llama/llama-4-scout",
+      "name": "Meta: Llama 4 Scout",
       "provider": "meta-llama",
       "provider_display": "Meta-Llama",
-      "context_length": 131072,
+      "context_length": 10000000,
       "pricing": {
         "prompt": 0.09999999999999999,
-        "completion": 0.32,
-        "blended": 0.21
+        "completion": 0.3,
+        "blended": 0.2
       },
-      "intelligence_score": 58,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 16019.05,
-        "capability_first": 598.23,
-        "budget": 126.57,
-        "primary": 16019.05
+        "balanced": 6125.0,
+        "capability_first": 92.4,
+        "budget": 78.26,
+        "primary": 6125.0
       },
-      "value_score": 16019.05,
-      "created": 1733506137,
-      "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
+      "value_score": 6125.0,
+      "created": 1743881519,
+      "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
       "rank": 7,
-      "rank_capability": 15,
+      "rank_capability": 7,
       "rank_budget": 7
     },
     {
@@ -189,119 +189,44 @@
         "completion": 0.3432,
         "blended": 0.286
       },
-      "intelligence_score": 64,
+      "intelligence_score": 36,
       "value_scores": {
-        "balanced": 14321.68,
-        "capability_first": 724.22,
-        "budget": 119.67,
-        "primary": 14321.68
+        "balanced": 4531.47,
+        "capability_first": 70.23,
+        "budget": 67.32,
+        "primary": 4531.47
       },
-      "value_score": 14321.68,
+      "value_score": 4531.47,
       "created": 1764594642,
       "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
       "rank": 8,
-      "rank_capability": 11,
+      "rank_capability": 8,
       "rank_budget": 8
     },
     {
-      "id": "openai/gpt-4o-mini-search-preview",
-      "name": "OpenAI: GPT-4o-mini Search Preview",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
+      "id": "meta-llama/llama-3.3-70b-instruct",
+      "name": "Meta: Llama 3.3 70B Instruct",
+      "provider": "meta-llama",
+      "provider_display": "Meta-Llama",
+      "context_length": 131072,
       "pricing": {
-        "prompt": 0.15,
-        "completion": 0.6,
-        "blended": 0.375
+        "prompt": 0.09999999999999999,
+        "completion": 0.32,
+        "blended": 0.21
       },
-      "intelligence_score": 68,
+      "intelligence_score": 30,
       "value_scores": {
-        "balanced": 12330.67,
-        "capability_first": 770.85,
-        "budget": 111.04,
-        "primary": 12330.67
+        "balanced": 4285.71,
+        "capability_first": 58.01,
+        "budget": 65.47,
+        "primary": 4285.71
       },
-      "value_score": 12330.67,
-      "created": 1741818122,
-      "description": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
+      "value_score": 4285.71,
+      "created": 1733506137,
+      "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
       "rank": 9,
-      "rank_capability": 7,
-      "rank_budget": 9
-    },
-    {
-      "id": "openai/gpt-4o-mini-2024-07-18",
-      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
-      "pricing": {
-        "prompt": 0.15,
-        "completion": 0.6,
-        "blended": 0.375
-      },
-      "intelligence_score": 68,
-      "value_scores": {
-        "balanced": 12330.67,
-        "capability_first": 770.85,
-        "budget": 111.04,
-        "primary": 12330.67
-      },
-      "value_score": 12330.67,
-      "created": 1721260800,
-      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
-      "rank": 10,
-      "rank_capability": 8,
-      "rank_budget": 10
-    },
-    {
-      "id": "openai/gpt-4o-mini",
-      "name": "OpenAI: GPT-4o-mini",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
-      "pricing": {
-        "prompt": 0.15,
-        "completion": 0.6,
-        "blended": 0.375
-      },
-      "intelligence_score": 68,
-      "value_scores": {
-        "balanced": 12330.67,
-        "capability_first": 770.85,
-        "budget": 111.04,
-        "primary": 12330.67
-      },
-      "value_score": 12330.67,
-      "created": 1721260800,
-      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
-      "rank": 11,
-      "rank_capability": 9,
-      "rank_budget": 11
-    },
-    {
-      "id": "deepseek/deepseek-v3.2-exp",
-      "name": "DeepSeek: DeepSeek V3.2 Exp",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 163840,
-      "pricing": {
-        "prompt": 0.27,
-        "completion": 0.41,
-        "blended": 0.34
-      },
-      "intelligence_score": 64,
-      "value_scores": {
-        "balanced": 12047.06,
-        "capability_first": 609.2,
-        "budget": 109.76,
-        "primary": 12047.06
-      },
-      "value_score": 12047.06,
-      "created": 1759150481,
-      "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
-      "rank": 12,
       "rank_capability": 13,
-      "rank_budget": 12
+      "rank_budget": 9
     },
     {
       "id": "meta-llama/llama-4-maverick",
@@ -314,44 +239,94 @@
         "completion": 0.6,
         "blended": 0.375
       },
-      "intelligence_score": 65,
+      "intelligence_score": 38,
       "value_scores": {
-        "balanced": 11266.67,
-        "capability_first": 600.34,
-        "budget": 106.14,
-        "primary": 11266.67
+        "balanced": 3850.67,
+        "capability_first": 63.28,
+        "budget": 62.05,
+        "primary": 3850.67
       },
-      "value_score": 11266.67,
+      "value_score": 3850.67,
       "created": 1743881822,
       "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
-      "rank": 13,
-      "rank_capability": 14,
-      "rank_budget": 13
+      "rank": 10,
+      "rank_capability": 10,
+      "rank_budget": 10
     },
     {
-      "id": "deepseek/deepseek-chat",
-      "name": "DeepSeek: DeepSeek V3",
+      "id": "deepseek/deepseek-v3.2-exp",
+      "name": "DeepSeek: DeepSeek V3.2 Exp",
       "provider": "deepseek",
       "provider_display": "DeepSeek",
-      "context_length": 131072,
+      "context_length": 163840,
       "pricing": {
-        "prompt": 0.20020000000000002,
-        "completion": 0.8000999999999999,
-        "blended": 0.5001
+        "prompt": 0.27,
+        "completion": 0.41,
+        "blended": 0.34
       },
-      "intelligence_score": 72,
+      "intelligence_score": 36,
       "value_scores": {
-        "balanced": 10365.93,
-        "capability_first": 806.7,
-        "budget": 101.81,
-        "primary": 10365.93
+        "balanced": 3811.76,
+        "capability_first": 59.08,
+        "budget": 61.74,
+        "primary": 3811.76
       },
-      "value_score": 10365.93,
-      "created": 1735241320,
-      "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
-      "rank": 14,
-      "rank_capability": 6,
-      "rank_budget": 14
+      "value_score": 3811.76,
+      "created": 1759150481,
+      "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
+      "rank": 11,
+      "rank_capability": 12,
+      "rank_budget": 11
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro",
+      "name": "DeepSeek: DeepSeek V4 Pro",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.435,
+        "completion": 0.87,
+        "blended": 0.6525
+      },
+      "intelligence_score": 44,
+      "value_scores": {
+        "balanced": 2967.05,
+        "capability_first": 59.96,
+        "budget": 54.47,
+        "primary": 2967.05
+      },
+      "value_score": 2967.05,
+      "created": 1777000679,
+      "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
+      "rank": 12,
+      "rank_capability": 11,
+      "rank_budget": 12
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "name": "Xiaomi: MiMo-V2.5-Pro",
+      "provider": "xiaomi",
+      "provider_display": "Xiaomi",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.435,
+        "completion": 0.87,
+        "blended": 0.6525
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 2703.45,
+        "capability_first": 50.75,
+        "budget": 51.99,
+        "primary": 2703.45
+      },
+      "value_score": 2703.45,
+      "created": 1776874273,
+      "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
+      "rank": 13,
+      "rank_capability": 16,
+      "rank_budget": 13
     },
     {
       "id": "qwen/qwen-2.5-72b-instruct",
@@ -364,18 +339,43 @@
         "completion": 0.39999999999999997,
         "blended": 0.38
       },
-      "intelligence_score": 58,
+      "intelligence_score": 32,
       "value_scores": {
-        "balanced": 8852.63,
-        "capability_first": 330.6,
-        "budget": 94.09,
-        "primary": 8852.63
+        "balanced": 2694.74,
+        "capability_first": 37.87,
+        "budget": 51.91,
+        "primary": 2694.74
       },
-      "value_score": 8852.63,
+      "value_score": 2694.74,
       "created": 1726704000,
       "description": "Qwen2.5 72B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2: - Significantly more knowledge and has greatly improved capabilities in coding and...",
+      "rank": 14,
+      "rank_capability": 19,
+      "rank_budget": 14
+    },
+    {
+      "id": "minimax/minimax-m3",
+      "name": "MiniMax: MiniMax M3",
+      "provider": "minimax",
+      "provider_display": "Minimax",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.3,
+        "completion": 1.2,
+        "blended": 0.75
+      },
+      "intelligence_score": 44,
+      "value_scores": {
+        "balanced": 2581.33,
+        "capability_first": 52.16,
+        "budget": 50.81,
+        "primary": 2581.33
+      },
+      "value_score": 2581.33,
+      "created": 1780245374,
+      "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "rank": 15,
-      "rank_capability": 26,
+      "rank_capability": 15,
       "rank_budget": 15
     },
     {
@@ -389,18 +389,18 @@
         "completion": 0.77,
         "blended": 0.485
       },
-      "intelligence_score": 64,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 8445.36,
-        "capability_first": 427.07,
-        "budget": 91.9,
-        "primary": 8445.36
+        "balanced": 2525.77,
+        "capability_first": 38.1,
+        "budget": 50.26,
+        "primary": 2525.77
       },
-      "value_score": 8445.36,
+      "value_score": 2525.77,
       "created": 1742824755,
       "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
       "rank": 16,
-      "rank_capability": 20,
+      "rank_capability": 18,
       "rank_budget": 16
     },
     {
@@ -414,269 +414,44 @@
         "completion": 0.7899999999999999,
         "blended": 0.5
       },
-      "intelligence_score": 64,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 8192.0,
-        "capability_first": 414.25,
-        "budget": 90.51,
-        "primary": 8192.0
+        "balanced": 2450.0,
+        "capability_first": 36.96,
+        "budget": 49.5,
+        "primary": 2450.0
       },
-      "value_score": 8192.0,
+      "value_score": 2450.0,
       "created": 1755779628,
       "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
       "rank": 17,
-      "rank_capability": 21,
+      "rank_capability": 22,
       "rank_budget": 17
     },
     {
-      "id": "meta-llama/llama-3.1-70b-instruct",
-      "name": "Meta: Llama 3.1 70B Instruct",
-      "provider": "meta-llama",
-      "provider_display": "Meta-Llama",
+      "id": "deepseek/deepseek-chat",
+      "name": "DeepSeek: DeepSeek V3",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.39999999999999997,
-        "completion": 0.39999999999999997,
-        "blended": 0.4
+        "prompt": 0.20020000000000002,
+        "completion": 0.8000999999999999,
+        "blended": 0.5001
       },
-      "intelligence_score": 57,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 8122.5,
-        "capability_first": 288.96,
-        "budget": 90.12,
-        "primary": 8122.5
+        "balanced": 2449.51,
+        "capability_first": 36.95,
+        "budget": 49.49,
+        "primary": 2449.51
       },
-      "value_score": 8122.5,
-      "created": 1721692800,
-      "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
+      "value_score": 2449.51,
+      "created": 1735241320,
+      "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
       "rank": 18,
-      "rank_capability": 30,
-      "rank_budget": 18
-    },
-    {
-      "id": "openai/gpt-5.4-nano",
-      "name": "OpenAI: GPT-5.4 Nano",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 0.19999999999999998,
-        "completion": 1.25,
-        "blended": 0.725
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 7758.62,
-        "capability_first": 714.5,
-        "budget": 88.08,
-        "primary": 7758.62
-      },
-      "value_score": 7758.62,
-      "created": 1773748187,
-      "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
-      "rank": 19,
-      "rank_capability": 12,
-      "rank_budget": 19
-    },
-    {
-      "id": "deepseek/deepseek-v4-pro",
-      "name": "DeepSeek: DeepSeek V4 Pro",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.435,
-        "completion": 0.87,
-        "blended": 0.6525
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 7509.58,
-        "capability_first": 523.36,
-        "budget": 86.66,
-        "primary": 7509.58
-      },
-      "value_score": 7509.58,
-      "created": 1777000679,
-      "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
-      "rank": 20,
-      "rank_capability": 16,
-      "rank_budget": 20
-    },
-    {
-      "id": "deepseek/deepseek-v3.1-terminus",
-      "name": "DeepSeek: DeepSeek V3.1 Terminus",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 163840,
-      "pricing": {
-        "prompt": 0.27,
-        "completion": 0.95,
-        "blended": 0.61
-      },
-      "intelligence_score": 64,
-      "value_scores": {
-        "balanced": 6714.75,
-        "capability_first": 339.55,
-        "budget": 81.94,
-        "primary": 6714.75
-      },
-      "value_score": 6714.75,
-      "created": 1758548275,
-      "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
-      "rank": 21,
-      "rank_capability": 25,
-      "rank_budget": 21
-    },
-    {
-      "id": "deepseek/deepseek-r1-distill-llama-70b",
-      "name": "DeepSeek: R1 Distill Llama 70B",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 128000,
-      "pricing": {
-        "prompt": 0.7999999999999999,
-        "completion": 0.7999999999999999,
-        "blended": 0.8
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 6480.0,
-        "capability_first": 504.29,
-        "budget": 80.5,
-        "primary": 6480.0
-      },
-      "value_score": 6480.0,
-      "created": 1737663169,
-      "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
-      "rank": 22,
-      "rank_capability": 17,
-      "rank_budget": 22
-    },
-    {
-      "id": "xiaomi/mimo-v2.5-pro",
-      "name": "Xiaomi: MiMo-V2.5-Pro",
-      "provider": "xiaomi",
-      "provider_display": "Xiaomi",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.435,
-        "completion": 0.87,
-        "blended": 0.6525
-      },
-      "intelligence_score": 64,
-      "value_scores": {
-        "balanced": 6277.39,
-        "capability_first": 317.44,
-        "budget": 79.23,
-        "primary": 6277.39
-      },
-      "value_score": 6277.39,
-      "created": 1776874273,
-      "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
-      "rank": 23,
-      "rank_capability": 27,
-      "rank_budget": 23
-    },
-    {
-      "id": "minimax/minimax-m3",
-      "name": "MiniMax: MiniMax M3",
-      "provider": "minimax",
-      "provider_display": "Minimax",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.3,
-        "completion": 1.2,
-        "blended": 0.75
-      },
-      "intelligence_score": 65,
-      "value_scores": {
-        "balanced": 5633.33,
-        "capability_first": 300.17,
-        "budget": 75.06,
-        "primary": 5633.33
-      },
-      "value_score": 5633.33,
-      "created": 1780245374,
-      "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
-      "rank": 24,
-      "rank_capability": 29,
-      "rank_budget": 24
-    },
-    {
-      "id": "mistralai/codestral-2508",
-      "name": "Mistral: Codestral 2508",
-      "provider": "mistralai",
-      "provider_display": "Mistralai",
-      "context_length": 256000,
-      "pricing": {
-        "prompt": 0.3,
-        "completion": 0.8999999999999999,
-        "blended": 0.6
-      },
-      "intelligence_score": 58,
-      "value_scores": {
-        "balanced": 5606.67,
-        "capability_first": 209.38,
-        "budget": 74.88,
-        "primary": 5606.67
-      },
-      "value_score": 5606.67,
-      "created": 1754079630,
-      "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
-      "rank": 25,
-      "rank_capability": 36,
-      "rank_budget": 25
-    },
-    {
-      "id": "google/gemini-3.1-flash-lite",
-      "name": "Google: Gemini 3.1 Flash Lite",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.25,
-        "completion": 1.5,
-        "blended": 0.875
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 5600.0,
-        "capability_first": 390.28,
-        "budget": 74.83,
-        "primary": 5600.0
-      },
-      "value_score": 5600.0,
-      "created": 1778168828,
-      "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
-      "rank": 26,
-      "rank_capability": 22,
-      "rank_budget": 26
-    },
-    {
-      "id": "google/gemini-3.1-flash-lite-preview",
-      "name": "Google: Gemini 3.1 Flash Lite Preview",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.25,
-        "completion": 1.5,
-        "blended": 0.875
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 5600.0,
-        "capability_first": 390.28,
-        "budget": 74.83,
-        "primary": 5600.0
-      },
-      "value_score": 5600.0,
-      "created": 1772512673,
-      "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
-      "rank": 27,
       "rank_capability": 23,
-      "rank_budget": 27
+      "rank_budget": 18
     },
     {
       "id": "openai/gpt-5.1-codex-mini",
@@ -689,19 +464,19 @@
         "completion": 2.0,
         "blended": 1.125
       },
-      "intelligence_score": 75,
+      "intelligence_score": 52,
       "value_scores": {
-        "balanced": 5000.0,
-        "capability_first": 460.46,
-        "budget": 70.71,
-        "primary": 5000.0
+        "balanced": 2403.56,
+        "capability_first": 67.73,
+        "budget": 49.03,
+        "primary": 2403.56
       },
-      "value_score": 5000.0,
+      "value_score": 2403.56,
       "created": 1763057820,
       "description": "GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex",
-      "rank": 28,
-      "rank_capability": 18,
-      "rank_budget": 28
+      "rank": 19,
+      "rank_capability": 9,
+      "rank_budget": 19
     },
     {
       "id": "openai/gpt-5-mini",
@@ -714,19 +489,269 @@
         "completion": 2.0,
         "blended": 1.125
       },
-      "intelligence_score": 75,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 5000.0,
-        "capability_first": 460.46,
-        "budget": 70.71,
-        "primary": 5000.0
+        "balanced": 2222.22,
+        "capability_first": 57.33,
+        "budget": 47.14,
+        "primary": 2222.22
       },
-      "value_score": 5000.0,
+      "value_score": 2222.22,
       "created": 1754587407,
       "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost....",
+      "rank": 20,
+      "rank_capability": 14,
+      "rank_budget": 20
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "name": "OpenAI: GPT-5.4 Nano",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 0.19999999999999998,
+        "completion": 1.25,
+        "blended": 0.725
+      },
+      "intelligence_score": 40,
+      "value_scores": {
+        "balanced": 2206.9,
+        "capability_first": 38.66,
+        "budget": 46.98,
+        "primary": 2206.9
+      },
+      "value_score": 2206.9,
+      "created": 1773748187,
+      "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
+      "rank": 21,
+      "rank_capability": 17,
+      "rank_budget": 21
+    },
+    {
+      "id": "openai/gpt-4o-mini-search-preview",
+      "name": "OpenAI: GPT-4o-mini Search Preview",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 0.15,
+        "completion": 0.6,
+        "blended": 0.375
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 2090.67,
+        "capability_first": 27.5,
+        "budget": 45.72,
+        "primary": 2090.67
+      },
+      "value_score": 2090.67,
+      "created": 1741818122,
+      "description": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
+      "rank": 22,
+      "rank_capability": 32,
+      "rank_budget": 22
+    },
+    {
+      "id": "openai/gpt-4o-mini-2024-07-18",
+      "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 0.15,
+        "completion": 0.6,
+        "blended": 0.375
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 2090.67,
+        "capability_first": 27.5,
+        "budget": 45.72,
+        "primary": 2090.67
+      },
+      "value_score": 2090.67,
+      "created": 1721260800,
+      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
+      "rank": 23,
+      "rank_capability": 33,
+      "rank_budget": 23
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "name": "OpenAI: GPT-4o-mini",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 0.15,
+        "completion": 0.6,
+        "blended": 0.375
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 2090.67,
+        "capability_first": 27.5,
+        "budget": 45.72,
+        "primary": 2090.67
+      },
+      "value_score": 2090.67,
+      "created": 1721260800,
+      "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
+      "rank": 24,
+      "rank_capability": 34,
+      "rank_budget": 24
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "name": "Google: Gemini 3.1 Flash Lite",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.25,
+        "completion": 1.5,
+        "blended": 0.875
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 2016.0,
+        "capability_first": 37.85,
+        "budget": 44.9,
+        "primary": 2016.0
+      },
+      "value_score": 2016.0,
+      "created": 1778168828,
+      "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
+      "rank": 25,
+      "rank_capability": 20,
+      "rank_budget": 25
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite-preview",
+      "name": "Google: Gemini 3.1 Flash Lite Preview",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.25,
+        "completion": 1.5,
+        "blended": 0.875
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 2016.0,
+        "capability_first": 37.85,
+        "budget": 44.9,
+        "primary": 2016.0
+      },
+      "value_score": 2016.0,
+      "created": 1772512673,
+      "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
+      "rank": 26,
+      "rank_capability": 21,
+      "rank_budget": 26
+    },
+    {
+      "id": "deepseek/deepseek-v3.1-terminus",
+      "name": "DeepSeek: DeepSeek V3.1 Terminus",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 163840,
+      "pricing": {
+        "prompt": 0.27,
+        "completion": 0.95,
+        "blended": 0.61
+      },
+      "intelligence_score": 35,
+      "value_scores": {
+        "balanced": 2008.2,
+        "capability_first": 30.29,
+        "budget": 44.81,
+        "primary": 2008.2
+      },
+      "value_score": 2008.2,
+      "created": 1758548275,
+      "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
+      "rank": 27,
+      "rank_capability": 29,
+      "rank_budget": 27
+    },
+    {
+      "id": "meta-llama/llama-3.1-70b-instruct",
+      "name": "Meta: Llama 3.1 70B Instruct",
+      "provider": "meta-llama",
+      "provider_display": "Meta-Llama",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 0.39999999999999997,
+        "completion": 0.39999999999999997,
+        "blended": 0.4
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 1960.0,
+        "capability_first": 25.78,
+        "budget": 44.27,
+        "primary": 1960.0
+      },
+      "value_score": 1960.0,
+      "created": 1721692800,
+      "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
+      "rank": 28,
+      "rank_capability": 36,
+      "rank_budget": 28
+    },
+    {
+      "id": "mistralai/codestral-2508",
+      "name": "Mistral: Codestral 2508",
+      "provider": "mistralai",
+      "provider_display": "Mistralai",
+      "context_length": 256000,
+      "pricing": {
+        "prompt": 0.3,
+        "completion": 0.8999999999999999,
+        "blended": 0.6
+      },
+      "intelligence_score": 33,
+      "value_scores": {
+        "balanced": 1815.0,
+        "capability_first": 26.07,
+        "budget": 42.6,
+        "primary": 1815.0
+      },
+      "value_score": 1815.0,
+      "created": 1754079630,
+      "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
       "rank": 29,
-      "rank_capability": 19,
+      "rank_capability": 35,
       "rank_budget": 29
+    },
+    {
+      "id": "deepseek/deepseek-r1-distill-llama-70b",
+      "name": "DeepSeek: R1 Distill Llama 70B",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 0.7999999999999999,
+        "completion": 0.7999999999999999,
+        "blended": 0.8
+      },
+      "intelligence_score": 38,
+      "value_scores": {
+        "balanced": 1805.0,
+        "capability_first": 29.66,
+        "budget": 42.49,
+        "primary": 1805.0
+      },
+      "value_score": 1805.0,
+      "created": 1737663169,
+      "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
+      "rank": 30,
+      "rank_capability": 30,
+      "rank_budget": 30
     },
     {
       "id": "openai/gpt-4.1-mini",
@@ -739,369 +764,19 @@
         "completion": 1.5999999999999999,
         "blended": 1.0
       },
-      "intelligence_score": 70,
+      "intelligence_score": 42,
       "value_scores": {
-        "balanced": 4900.0,
-        "capability_first": 341.5,
-        "budget": 70.0,
-        "primary": 4900.0
+        "balanced": 1764.0,
+        "capability_first": 33.12,
+        "budget": 42.0,
+        "primary": 1764.0
       },
-      "value_score": 4900.0,
+      "value_score": 1764.0,
       "created": 1744651381,
       "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard...",
-      "rank": 30,
-      "rank_capability": 24,
-      "rank_budget": 30
-    },
-    {
-      "id": "sao10k/l3.3-euryale-70b",
-      "name": "Sao10K: Llama 3.3 Euryale 70B",
-      "provider": "sao10k",
-      "provider_display": "Sao10K",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 0.65,
-        "completion": 0.75,
-        "blended": 0.7
-      },
-      "intelligence_score": 58,
-      "value_scores": {
-        "balanced": 4805.71,
-        "capability_first": 179.47,
-        "budget": 69.32,
-        "primary": 4805.71
-      },
-      "value_score": 4805.71,
-      "created": 1734535928,
-      "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
       "rank": 31,
-      "rank_capability": 42,
-      "rank_budget": 31
-    },
-    {
-      "id": "nousresearch/hermes-3-llama-3.1-70b",
-      "name": "Nous: Hermes 3 70B Instruct",
-      "provider": "nousresearch",
-      "provider_display": "Nousresearch",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 0.7,
-        "completion": 0.7,
-        "blended": 0.7
-      },
-      "intelligence_score": 57,
-      "value_scores": {
-        "balanced": 4641.43,
-        "capability_first": 165.12,
-        "budget": 68.13,
-        "primary": 4641.43
-      },
-      "value_score": 4641.43,
-      "created": 1723939200,
-      "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
-      "rank": 32,
-      "rank_capability": 48,
-      "rank_budget": 32
-    },
-    {
-      "id": "anthropic/claude-3-haiku",
-      "name": "Anthropic: Claude 3 Haiku",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 0.25,
-        "completion": 1.25,
-        "blended": 0.75
-      },
-      "intelligence_score": 55,
-      "value_scores": {
-        "balanced": 4033.33,
-        "capability_first": 130.45,
-        "budget": 63.51,
-        "primary": 4033.33
-      },
-      "value_score": 4033.33,
-      "created": 1710288000,
-      "description": "Claude 3 Haiku is Anthropic's fastest and most compact model for\nnear-instant responsiveness. Quick and accurate targeted performance.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-haiku)\n\n#multimodal",
-      "rank": 33,
-      "rank_capability": 54,
-      "rank_budget": 33
-    },
-    {
-      "id": "deepseek/deepseek-r1-0528",
-      "name": "DeepSeek: R1 0528",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 163840,
-      "pricing": {
-        "prompt": 0.5,
-        "completion": 2.1500000000000004,
-        "blended": 1.325
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 3912.45,
-        "capability_first": 304.47,
-        "budget": 62.55,
-        "primary": 3912.45
-      },
-      "value_score": 3912.45,
-      "created": 1748455170,
-      "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active...",
-      "rank": 34,
       "rank_capability": 28,
-      "rank_budget": 34
-    },
-    {
-      "id": "sao10k/l3.1-euryale-70b",
-      "name": "Sao10K: Llama 3.1 Euryale 70B v2.2",
-      "provider": "sao10k",
-      "provider_display": "Sao10K",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 0.85,
-        "completion": 0.85,
-        "blended": 0.85
-      },
-      "intelligence_score": 57,
-      "value_scores": {
-        "balanced": 3822.35,
-        "capability_first": 135.98,
-        "budget": 61.83,
-        "primary": 3822.35
-      },
-      "value_score": 3822.35,
-      "created": 1724803200,
-      "description": "Euryale L3.1 70B v2.2 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.1](/models/sao10k/l3-euryale-70b).",
-      "rank": 35,
-      "rank_capability": 53,
-      "rank_budget": 35
-    },
-    {
-      "id": "qwen/qwen2.5-vl-72b-instruct",
-      "name": "Qwen: Qwen2.5 VL 72B Instruct",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 0.7999999999999999,
-        "completion": 1.0,
-        "blended": 0.9
-      },
-      "intelligence_score": 58,
-      "value_scores": {
-        "balanced": 3737.78,
-        "capability_first": 139.59,
-        "budget": 61.14,
-        "primary": 3737.78
-      },
-      "value_score": 3737.78,
-      "created": 1738410311,
-      "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
-      "rank": 36,
-      "rank_capability": 51,
-      "rank_budget": 36
-    },
-    {
-      "id": "nousresearch/hermes-3-llama-3.1-405b",
-      "name": "Nous: Hermes 3 405B Instruct",
-      "provider": "nousresearch",
-      "provider_display": "Nousresearch",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 1.0,
-        "completion": 1.0,
-        "blended": 1.0
-      },
-      "intelligence_score": 61,
-      "value_scores": {
-        "balanced": 3721.0,
-        "capability_first": 161.31,
-        "budget": 61.0,
-        "primary": 3721.0
-      },
-      "value_score": 3721.0,
-      "created": 1723766400,
-      "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
-      "rank": 37,
-      "rank_capability": 49,
-      "rank_budget": 37
-    },
-    {
-      "id": "mistralai/mistral-large-2512",
-      "name": "Mistral: Mistral Large 3 2512",
-      "provider": "mistralai",
-      "provider_display": "Mistralai",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.5,
-        "completion": 1.5,
-        "blended": 1.0
-      },
-      "intelligence_score": 59,
-      "value_scores": {
-        "balanced": 3481.0,
-        "capability_first": 136.55,
-        "budget": 59.0,
-        "primary": 3481.0
-      },
-      "value_score": 3481.0,
-      "created": 1764624472,
-      "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
-      "rank": 38,
-      "rank_capability": 52,
-      "rank_budget": 38
-    },
-    {
-      "id": "z-ai/glm-5",
-      "name": "Z.ai: GLM 5",
-      "provider": "z-ai",
-      "provider_display": "Z-Ai",
-      "context_length": 202752,
-      "pricing": {
-        "prompt": 0.6,
-        "completion": 1.92,
-        "blended": 1.26
-      },
-      "intelligence_score": 66,
-      "value_scores": {
-        "balanced": 3457.14,
-        "capability_first": 194.2,
-        "budget": 58.8,
-        "primary": 3457.14
-      },
-      "value_score": 3457.14,
-      "created": 1770829182,
-      "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
-      "rank": 39,
-      "rank_capability": 41,
-      "rank_budget": 39
-    },
-    {
-      "id": "qwen/qwen3.6-plus",
-      "name": "Qwen: Qwen3.6 Plus",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 0.325,
-        "completion": 1.95,
-        "blended": 1.1375
-      },
-      "intelligence_score": 62,
-      "value_scores": {
-        "balanced": 3379.34,
-        "capability_first": 154.14,
-        "budget": 58.13,
-        "primary": 3379.34
-      },
-      "value_score": 3379.34,
-      "created": 1775133557,
-      "description": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...",
-      "rank": 40,
-      "rank_capability": 50,
-      "rank_budget": 40
-    },
-    {
-      "id": "deepseek/deepseek-r1",
-      "name": "DeepSeek: R1",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 163840,
-      "pricing": {
-        "prompt": 0.7,
-        "completion": 2.5,
-        "blended": 1.6
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 3240.0,
-        "capability_first": 252.14,
-        "budget": 56.92,
-        "primary": 3240.0
-      },
-      "value_score": 3240.0,
-      "created": 1737381095,
-      "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
-      "rank": 41,
-      "rank_capability": 31,
-      "rank_budget": 41
-    },
-    {
-      "id": "google/gemini-2.5-flash-image",
-      "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 32768,
-      "pricing": {
-        "prompt": 0.3,
-        "completion": 2.5,
-        "blended": 1.4
-      },
-      "intelligence_score": 66,
-      "value_scores": {
-        "balanced": 3111.43,
-        "capability_first": 174.78,
-        "budget": 55.78,
-        "primary": 3111.43
-      },
-      "value_score": 3111.43,
-      "created": 1759870431,
-      "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
-      "rank": 42,
-      "rank_capability": 43,
-      "rank_budget": 42
-    },
-    {
-      "id": "google/gemini-2.5-flash",
-      "name": "Google: Gemini 2.5 Flash",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.3,
-        "completion": 2.5,
-        "blended": 1.4
-      },
-      "intelligence_score": 66,
-      "value_scores": {
-        "balanced": 3111.43,
-        "capability_first": 174.78,
-        "budget": 55.78,
-        "primary": 3111.43
-      },
-      "value_score": 3111.43,
-      "created": 1750172488,
-      "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
-      "rank": 43,
-      "rank_capability": 44,
-      "rank_budget": 43
-    },
-    {
-      "id": "moonshotai/kimi-k2",
-      "name": "MoonshotAI: Kimi K2 0711",
-      "provider": "moonshotai",
-      "provider_display": "Moonshotai",
-      "context_length": 131072,
-      "pricing": {
-        "prompt": 0.5700000000000001,
-        "completion": 2.3,
-        "blended": 1.435
-      },
-      "intelligence_score": 66,
-      "value_scores": {
-        "balanced": 3035.54,
-        "capability_first": 170.52,
-        "budget": 55.1,
-        "primary": 3035.54
-      },
-      "value_score": 3035.54,
-      "created": 1752263252,
-      "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for...",
-      "rank": 44,
-      "rank_capability": 47,
-      "rank_budget": 44
+      "rank_budget": 31
     },
     {
       "id": "google/gemini-3.1-flash-image",
@@ -1114,19 +789,19 @@
         "completion": 3.0,
         "blended": 1.75
       },
-      "intelligence_score": 70,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 2800.0,
-        "capability_first": 195.14,
-        "budget": 52.92,
-        "primary": 2800.0
+        "balanced": 1428.57,
+        "capability_first": 36.86,
+        "budget": 37.8,
+        "primary": 1428.57
       },
-      "value_score": 2800.0,
+      "value_score": 1428.57,
       "created": 1781754065,
       "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
-      "rank": 45,
-      "rank_capability": 38,
-      "rank_budget": 45
+      "rank": 32,
+      "rank_capability": 24,
+      "rank_budget": 32
     },
     {
       "id": "google/gemini-3.1-flash-image-preview",
@@ -1139,19 +814,19 @@
         "completion": 3.0,
         "blended": 1.75
       },
-      "intelligence_score": 70,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 2800.0,
-        "capability_first": 195.14,
-        "budget": 52.92,
-        "primary": 2800.0
+        "balanced": 1428.57,
+        "capability_first": 36.86,
+        "budget": 37.8,
+        "primary": 1428.57
       },
-      "value_score": 2800.0,
+      "value_score": 1428.57,
       "created": 1772119558,
       "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
-      "rank": 46,
-      "rank_capability": 39,
-      "rank_budget": 46
+      "rank": 33,
+      "rank_capability": 25,
+      "rank_budget": 33
     },
     {
       "id": "google/gemini-3-flash-preview",
@@ -1164,144 +839,94 @@
         "completion": 3.0,
         "blended": 1.75
       },
-      "intelligence_score": 70,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 2800.0,
-        "capability_first": 195.14,
-        "budget": 52.92,
-        "primary": 2800.0
+        "balanced": 1428.57,
+        "capability_first": 36.86,
+        "budget": 37.8,
+        "primary": 1428.57
       },
-      "value_score": 2800.0,
+      "value_score": 1428.57,
       "created": 1765987078,
       "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
-      "rank": 47,
-      "rank_capability": 40,
-      "rank_budget": 47
+      "rank": 34,
+      "rank_capability": 26,
+      "rank_budget": 34
     },
     {
-      "id": "x-ai/grok-4.3",
-      "name": "xAI: Grok 4.3",
-      "provider": "x-ai",
-      "provider_display": "X-Ai",
+      "id": "qwen/qwen3.6-plus",
+      "name": "Qwen: Qwen3.6 Plus",
+      "provider": "qwen",
+      "provider_display": "Qwen",
       "context_length": 1000000,
       "pricing": {
-        "prompt": 1.25,
-        "completion": 2.5,
-        "blended": 1.875
+        "prompt": 0.325,
+        "completion": 1.95,
+        "blended": 1.1375
       },
-      "intelligence_score": 72,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 2764.8,
-        "capability_first": 215.16,
-        "budget": 52.58,
-        "primary": 2764.8
+        "balanced": 1406.59,
+        "capability_first": 24.64,
+        "budget": 37.5,
+        "primary": 1406.59
       },
-      "value_score": 2764.8,
-      "created": 1777591821,
-      "description": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
-      "rank": 48,
-      "rank_capability": 33,
-      "rank_budget": 48
+      "value_score": 1406.59,
+      "created": 1775133557,
+      "description": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...",
+      "rank": 35,
+      "rank_capability": 37,
+      "rank_budget": 35
     },
     {
-      "id": "x-ai/grok-4.20-multi-agent",
-      "name": "xAI: Grok 4.20 Multi-Agent",
-      "provider": "x-ai",
-      "provider_display": "X-Ai",
-      "context_length": 2000000,
+      "id": "stepfun/step-3.7-flash",
+      "name": "StepFun: Step 3.7 Flash",
+      "provider": "stepfun",
+      "provider_display": "Stepfun",
+      "context_length": 256000,
       "pricing": {
-        "prompt": 1.25,
-        "completion": 2.5,
-        "blended": 1.875
+        "prompt": 0.19999999999999998,
+        "completion": 1.15,
+        "blended": 0.675
       },
-      "intelligence_score": 72,
+      "intelligence_score": 30,
       "value_scores": {
-        "balanced": 2764.8,
-        "capability_first": 215.16,
-        "budget": 52.58,
-        "primary": 2764.8
+        "balanced": 1333.33,
+        "capability_first": 18.05,
+        "budget": 36.51,
+        "primary": 1333.33
       },
-      "value_score": 2764.8,
-      "created": 1774979158,
-      "description": "Grok 4.20 Multi-Agent is a variant of xAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
-      "rank": 49,
-      "rank_capability": 34,
-      "rank_budget": 49
+      "value_score": 1333.33,
+      "created": 1779985069,
+      "description": "Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts model. It pairs a 196B-parameter language backbone with a vision encoder for native image and video understanding, activating roughly 11B parameters...",
+      "rank": 36,
+      "rank_capability": 44,
+      "rank_budget": 36
     },
     {
-      "id": "x-ai/grok-4.20",
-      "name": "xAI: Grok 4.20",
-      "provider": "x-ai",
-      "provider_display": "X-Ai",
-      "context_length": 2000000,
+      "id": "sao10k/l3.3-euryale-70b",
+      "name": "Sao10K: Llama 3.3 Euryale 70B",
+      "provider": "sao10k",
+      "provider_display": "Sao10K",
+      "context_length": 131072,
       "pricing": {
-        "prompt": 1.25,
-        "completion": 2.5,
-        "blended": 1.875
+        "prompt": 0.65,
+        "completion": 0.75,
+        "blended": 0.7
       },
-      "intelligence_score": 72,
+      "intelligence_score": 30,
       "value_scores": {
-        "balanced": 2764.8,
-        "capability_first": 215.16,
-        "budget": 52.58,
-        "primary": 2764.8
+        "balanced": 1285.71,
+        "capability_first": 17.4,
+        "budget": 35.86,
+        "primary": 1285.71
       },
-      "value_score": 2764.8,
-      "created": 1774979019,
-      "description": "Grok 4.20 is a reasoning model from xAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering...",
-      "rank": 50,
-      "rank_capability": 35,
-      "rank_budget": 50
-    },
-    {
-      "id": "openai/gpt-5-image-mini",
-      "name": "OpenAI: GPT-5 Image Mini",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 2.5,
-        "completion": 2.0,
-        "blended": 2.25
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 2500.0,
-        "capability_first": 230.23,
-        "budget": 50.0,
-        "primary": 2500.0
-      },
-      "value_score": 2500.0,
-      "created": 1760624583,
-      "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text...",
-      "rank": 51,
-      "rank_capability": 32,
-      "rank_budget": 51
-    },
-    {
-      "id": "nvidia/nemotron-3-ultra-550b-a55b",
-      "name": "NVIDIA: Nemotron 3 Ultra",
-      "provider": "nvidia",
-      "provider_display": "NVIDIA",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 0.5,
-        "completion": 2.2,
-        "blended": 1.35
-      },
-      "intelligence_score": 58,
-      "value_scores": {
-        "balanced": 2491.85,
-        "capability_first": 93.06,
-        "budget": 49.92,
-        "primary": 2491.85
-      },
-      "value_score": 2491.85,
-      "created": 1780551208,
-      "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
-      "rank": 52,
-      "rank_capability": 63,
-      "rank_budget": 52
+      "value_score": 1285.71,
+      "created": 1734535928,
+      "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
+      "rank": 37,
+      "rank_capability": 47,
+      "rank_budget": 37
     },
     {
       "id": "z-ai/glm-5.2",
@@ -1314,69 +939,294 @@
         "completion": 3.08,
         "blended": 2.03
       },
-      "intelligence_score": 66,
+      "intelligence_score": 51,
       "value_scores": {
-        "balanced": 2145.81,
-        "capability_first": 120.54,
-        "budget": 46.32,
-        "primary": 2145.81
+        "balanced": 1281.28,
+        "capability_first": 34.53,
+        "budget": 35.79,
+        "primary": 1281.28
       },
-      "value_score": 2145.81,
+      "value_score": 1281.28,
       "created": 1781631930,
       "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
-      "rank": 53,
-      "rank_capability": 57,
-      "rank_budget": 53
+      "rank": 38,
+      "rank_capability": 27,
+      "rank_budget": 38
     },
     {
-      "id": "openai/gpt-5.4-mini",
-      "name": "OpenAI: GPT-5.4 Mini",
+      "id": "google/gemini-2.5-flash-image",
+      "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 32768,
+      "pricing": {
+        "prompt": 0.3,
+        "completion": 2.5,
+        "blended": 1.4
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 1260.0,
+        "capability_first": 23.65,
+        "budget": 35.5,
+        "primary": 1260.0
+      },
+      "value_score": 1260.0,
+      "created": 1759870431,
+      "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
+      "rank": 39,
+      "rank_capability": 38,
+      "rank_budget": 39
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "name": "Google: Gemini 2.5 Flash",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.3,
+        "completion": 2.5,
+        "blended": 1.4
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 1260.0,
+        "capability_first": 23.65,
+        "budget": 35.5,
+        "primary": 1260.0
+      },
+      "value_score": 1260.0,
+      "created": 1750172488,
+      "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
+      "rank": 40,
+      "rank_capability": 39,
+      "rank_budget": 40
+    },
+    {
+      "id": "mistralai/mistral-large-2512",
+      "name": "Mistral: Mistral Large 3 2512",
+      "provider": "mistralai",
+      "provider_display": "Mistralai",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": 0.5,
+        "completion": 1.5,
+        "blended": 1.0
+      },
+      "intelligence_score": 35,
+      "value_scores": {
+        "balanced": 1225.0,
+        "capability_first": 18.48,
+        "budget": 35.0,
+        "primary": 1225.0
+      },
+      "value_score": 1225.0,
+      "created": 1764624472,
+      "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
+      "rank": 41,
+      "rank_capability": 43,
+      "rank_budget": 41
+    },
+    {
+      "id": "qwen/qwen2.5-vl-72b-instruct",
+      "name": "Qwen: Qwen2.5 VL 72B Instruct",
+      "provider": "qwen",
+      "provider_display": "Qwen",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 0.7999999999999999,
+        "completion": 1.0,
+        "blended": 0.9
+      },
+      "intelligence_score": 32,
+      "value_scores": {
+        "balanced": 1137.78,
+        "capability_first": 15.99,
+        "budget": 33.73,
+        "primary": 1137.78
+      },
+      "value_score": 1137.78,
+      "created": 1738410311,
+      "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
+      "rank": 42,
+      "rank_capability": 49,
+      "rank_budget": 42
+    },
+    {
+      "id": "nousresearch/hermes-3-llama-3.1-70b",
+      "name": "Nous: Hermes 3 70B Instruct",
+      "provider": "nousresearch",
+      "provider_display": "Nousresearch",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 0.7,
+        "completion": 0.7,
+        "blended": 0.7
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 1120.0,
+        "capability_first": 14.73,
+        "budget": 33.47,
+        "primary": 1120.0
+      },
+      "value_score": 1120.0,
+      "created": 1723939200,
+      "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
+      "rank": 43,
+      "rank_capability": 51,
+      "rank_budget": 43
+    },
+    {
+      "id": "openai/gpt-5-image-mini",
+      "name": "OpenAI: GPT-5 Image Mini",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 400000,
       "pricing": {
-        "prompt": 0.75,
-        "completion": 4.5,
-        "blended": 2.625
+        "prompt": 2.5,
+        "completion": 2.0,
+        "blended": 2.25
       },
-      "intelligence_score": 75,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 2142.86,
-        "capability_first": 197.34,
-        "budget": 46.29,
-        "primary": 2142.86
+        "balanced": 1111.11,
+        "capability_first": 28.67,
+        "budget": 33.33,
+        "primary": 1111.11
       },
-      "value_score": 2142.86,
-      "created": 1773748178,
-      "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
-      "rank": 54,
-      "rank_capability": 37,
-      "rank_budget": 54
+      "value_score": 1111.11,
+      "created": 1760624583,
+      "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text...",
+      "rank": 44,
+      "rank_capability": 31,
+      "rank_budget": 44
     },
     {
-      "id": "~moonshotai/kimi-latest",
-      "name": "MoonshotAI Kimi Latest",
-      "provider": "~moonshotai",
-      "provider_display": "~Moonshotai",
-      "context_length": 262144,
+      "id": "deepseek/deepseek-r1-0528",
+      "name": "DeepSeek: R1 0528",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 163840,
       "pricing": {
-        "prompt": 0.66,
-        "completion": 3.41,
-        "blended": 2.035
+        "prompt": 0.5,
+        "completion": 2.1500000000000004,
+        "blended": 1.325
       },
-      "intelligence_score": 66,
+      "intelligence_score": 38,
       "value_scores": {
-        "balanced": 2140.54,
-        "capability_first": 120.24,
-        "budget": 46.27,
-        "primary": 2140.54
+        "balanced": 1089.81,
+        "capability_first": 17.91,
+        "budget": 33.01,
+        "primary": 1089.81
       },
-      "value_score": 2140.54,
-      "created": 1777318428,
-      "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
-      "rank": 55,
-      "rank_capability": 58,
-      "rank_budget": 55
+      "value_score": 1089.81,
+      "created": 1748455170,
+      "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active...",
+      "rank": 45,
+      "rank_capability": 45,
+      "rank_budget": 45
+    },
+    {
+      "id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "NVIDIA: Nemotron 3 Ultra",
+      "provider": "nvidia",
+      "provider_display": "NVIDIA",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 0.5,
+        "completion": 2.2,
+        "blended": 1.35
+      },
+      "intelligence_score": 38,
+      "value_scores": {
+        "balanced": 1069.63,
+        "capability_first": 17.58,
+        "budget": 32.71,
+        "primary": 1069.63
+      },
+      "value_score": 1069.63,
+      "created": 1780551208,
+      "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
+      "rank": 46,
+      "rank_capability": 46,
+      "rank_budget": 46
+    },
+    {
+      "id": "nousresearch/hermes-3-llama-3.1-405b",
+      "name": "Nous: Hermes 3 405B Instruct",
+      "provider": "nousresearch",
+      "provider_display": "Nousresearch",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 1.0,
+        "completion": 1.0,
+        "blended": 1.0
+      },
+      "intelligence_score": 32,
+      "value_scores": {
+        "balanced": 1024.0,
+        "capability_first": 14.39,
+        "budget": 32.0,
+        "primary": 1024.0
+      },
+      "value_score": 1024.0,
+      "created": 1723766400,
+      "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
+      "rank": 47,
+      "rank_capability": 52,
+      "rank_budget": 47
+    },
+    {
+      "id": "sao10k/l3.1-euryale-70b",
+      "name": "Sao10K: Llama 3.1 Euryale 70B v2.2",
+      "provider": "sao10k",
+      "provider_display": "Sao10K",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 0.85,
+        "completion": 0.85,
+        "blended": 0.85
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 922.35,
+        "capability_first": 12.13,
+        "budget": 30.37,
+        "primary": 922.35
+      },
+      "value_score": 922.35,
+      "created": 1724803200,
+      "description": "Euryale L3.1 70B v2.2 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.1](/models/sao10k/l3-euryale-70b).",
+      "rank": 48,
+      "rank_capability": 65,
+      "rank_budget": 48
+    },
+    {
+      "id": "deepseek/deepseek-r1",
+      "name": "DeepSeek: R1",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 163840,
+      "pricing": {
+        "prompt": 0.7,
+        "completion": 2.5,
+        "blended": 1.6
+      },
+      "intelligence_score": 38,
+      "value_scores": {
+        "balanced": 902.5,
+        "capability_first": 14.83,
+        "budget": 30.04,
+        "primary": 902.5
+      },
+      "value_score": 902.5,
+      "created": 1737381095,
+      "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
+      "rank": 49,
+      "rank_capability": 50,
+      "rank_budget": 49
     },
     {
       "id": "moonshotai/kimi-k2.7-code",
@@ -1389,94 +1239,19 @@
         "completion": 3.41,
         "blended": 2.045
       },
-      "intelligence_score": 66,
+      "intelligence_score": 42,
       "value_scores": {
-        "balanced": 2130.07,
-        "capability_first": 119.65,
-        "budget": 46.15,
-        "primary": 2130.07
+        "balanced": 862.59,
+        "capability_first": 16.19,
+        "budget": 29.37,
+        "primary": 862.59
       },
-      "value_score": 2130.07,
+      "value_score": 862.59,
       "created": 1781266361,
       "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
-      "rank": 56,
-      "rank_capability": 59,
-      "rank_budget": 56
-    },
-    {
-      "id": "moonshotai/kimi-k2.6",
-      "name": "MoonshotAI: Kimi K2.6",
-      "provider": "moonshotai",
-      "provider_display": "Moonshotai",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.66,
-        "completion": 3.41,
-        "blended": 2.035
-      },
-      "intelligence_score": 64,
-      "value_scores": {
-        "balanced": 2012.78,
-        "capability_first": 101.78,
-        "budget": 44.86,
-        "primary": 2012.78
-      },
-      "value_score": 2012.78,
-      "created": 1776699402,
-      "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
-      "rank": 57,
-      "rank_capability": 61,
-      "rank_budget": 57
-    },
-    {
-      "id": "openai/o3-mini-high",
-      "name": "OpenAI: o3 Mini High",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 1.1,
-        "completion": 4.4,
-        "blended": 2.75
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 1991.27,
-        "capability_first": 173.31,
-        "budget": 44.62,
-        "primary": 1991.27
-      },
-      "value_score": 1991.27,
-      "created": 1739372611,
-      "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
-      "rank": 58,
-      "rank_capability": 45,
-      "rank_budget": 58
-    },
-    {
-      "id": "openai/o3-mini",
-      "name": "OpenAI: o3 Mini",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 1.1,
-        "completion": 4.4,
-        "blended": 2.75
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 1991.27,
-        "capability_first": 173.31,
-        "budget": 44.62,
-        "primary": 1991.27
-      },
-      "value_score": 1991.27,
-      "created": 1738351721,
-      "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
-      "rank": 59,
-      "rank_capability": 46,
-      "rank_budget": 59
+      "rank": 50,
+      "rank_capability": 48,
+      "rank_budget": 50
     },
     {
       "id": "qwen/qwen3.7-max",
@@ -1489,23 +1264,23 @@
         "completion": 3.75,
         "blended": 2.5
       },
-      "intelligence_score": 68,
+      "intelligence_score": 46,
       "value_scores": {
-        "balanced": 1849.6,
-        "capability_first": 115.63,
-        "budget": 43.01,
-        "primary": 1849.6
+        "balanced": 846.4,
+        "capability_first": 18.49,
+        "budget": 29.09,
+        "primary": 846.4
       },
-      "value_score": 1849.6,
+      "value_score": 846.4,
       "created": 1779376861,
       "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
-      "rank": 60,
-      "rank_capability": 60,
-      "rank_budget": 60
+      "rank": 51,
+      "rank_capability": 42,
+      "rank_budget": 51
     },
     {
-      "id": "openai/o4-mini-high",
-      "name": "OpenAI: o4 Mini High",
+      "id": "openai/o3-mini-high",
+      "name": "OpenAI: o3 Mini High",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 200000,
@@ -1514,23 +1289,23 @@
         "completion": 4.4,
         "blended": 2.75
       },
-      "intelligence_score": 70,
+      "intelligence_score": 48,
       "value_scores": {
-        "balanced": 1781.82,
-        "capability_first": 124.18,
-        "budget": 42.21,
-        "primary": 1781.82
+        "balanced": 837.82,
+        "capability_first": 19.85,
+        "budget": 28.95,
+        "primary": 837.82
       },
-      "value_score": 1781.82,
-      "created": 1744824212,
-      "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
-      "rank": 61,
-      "rank_capability": 55,
-      "rank_budget": 61
+      "value_score": 837.82,
+      "created": 1739372611,
+      "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
+      "rank": 52,
+      "rank_capability": 40,
+      "rank_budget": 52
     },
     {
-      "id": "openai/o4-mini",
-      "name": "OpenAI: o4 Mini",
+      "id": "openai/o3-mini",
+      "name": "OpenAI: o3 Mini",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 200000,
@@ -1539,19 +1314,44 @@
         "completion": 4.4,
         "blended": 2.75
       },
-      "intelligence_score": 70,
+      "intelligence_score": 48,
       "value_scores": {
-        "balanced": 1781.82,
-        "capability_first": 124.18,
-        "budget": 42.21,
-        "primary": 1781.82
+        "balanced": 837.82,
+        "capability_first": 19.85,
+        "budget": 28.95,
+        "primary": 837.82
       },
-      "value_score": 1781.82,
-      "created": 1744820942,
-      "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
-      "rank": 62,
-      "rank_capability": 56,
-      "rank_budget": 62
+      "value_score": 837.82,
+      "created": 1738351721,
+      "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
+      "rank": 53,
+      "rank_capability": 41,
+      "rank_budget": 53
+    },
+    {
+      "id": "anthropic/claude-3-haiku",
+      "name": "Anthropic: Claude 3 Haiku",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 0.25,
+        "completion": 1.25,
+        "blended": 0.75
+      },
+      "intelligence_score": 25,
+      "value_scores": {
+        "balanced": 833.33,
+        "capability_first": 10.71,
+        "budget": 28.87,
+        "primary": 833.33
+      },
+      "value_score": 833.33,
+      "created": 1710288000,
+      "description": "Claude 3 Haiku is Anthropic's fastest and most compact model for\nnear-instant responsiveness. Quick and accurate targeted performance.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-haiku)\n\n#multimodal",
+      "rank": 54,
+      "rank_capability": 70,
+      "rank_budget": 54
     },
     {
       "id": "z-ai/glm-5.1",
@@ -1564,119 +1364,194 @@
         "completion": 3.08,
         "blended": 2.03
       },
-      "intelligence_score": 60,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 1773.4,
-        "capability_first": 73.11,
-        "budget": 42.11,
-        "primary": 1773.4
+        "balanced": 788.18,
+        "capability_first": 13.81,
+        "budget": 28.07,
+        "primary": 788.18
       },
-      "value_score": 1773.4,
+      "value_score": 788.18,
       "created": 1775578025,
       "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
-      "rank": 63,
-      "rank_capability": 74,
-      "rank_budget": 63
+      "rank": 55,
+      "rank_capability": 55,
+      "rank_budget": 55
     },
     {
-      "id": "amazon/nova-pro-v1",
-      "name": "Amazon: Nova Pro 1.0",
-      "provider": "amazon",
-      "provider_display": "Amazon",
-      "context_length": 300000,
+      "id": "moonshotai/kimi-k2.6",
+      "name": "MoonshotAI: Kimi K2.6",
+      "provider": "moonshotai",
+      "provider_display": "Moonshotai",
+      "context_length": 262144,
       "pricing": {
-        "prompt": 0.7999999999999999,
-        "completion": 3.1999999999999997,
-        "blended": 2.0
+        "prompt": 0.66,
+        "completion": 3.41,
+        "blended": 2.035
       },
-      "intelligence_score": 52,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 1352.0,
-        "capability_first": 38.1,
-        "budget": 36.77,
-        "primary": 1352.0
+        "balanced": 786.24,
+        "capability_first": 13.77,
+        "budget": 28.04,
+        "primary": 786.24
       },
-      "value_score": 1352.0,
-      "created": 1733436303,
-      "description": "Amazon Nova Pro 1.0 is a capable multimodal model from Amazon focused on providing a combination of accuracy, speed, and cost for a wide range of tasks. As of December...",
-      "rank": 64,
-      "rank_capability": 98,
-      "rank_budget": 64
+      "value_score": 786.24,
+      "created": 1776699402,
+      "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
+      "rank": 56,
+      "rank_capability": 56,
+      "rank_budget": 56
     },
     {
-      "id": "anthropic/claude-haiku-4.5",
-      "name": "Anthropic: Claude Haiku 4.5",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 200000,
+      "id": "x-ai/grok-4.3",
+      "name": "xAI: Grok 4.3",
+      "provider": "x-ai",
+      "provider_display": "X-Ai",
+      "context_length": 1000000,
       "pricing": {
-        "prompt": 1.0,
-        "completion": 5.0,
-        "blended": 3.0
+        "prompt": 1.25,
+        "completion": 2.5,
+        "blended": 1.875
       },
-      "intelligence_score": 62,
+      "intelligence_score": 38,
       "value_scores": {
-        "balanced": 1281.33,
-        "capability_first": 58.44,
-        "budget": 35.8,
-        "primary": 1281.33
+        "balanced": 770.13,
+        "capability_first": 12.66,
+        "budget": 27.75,
+        "primary": 770.13
       },
-      "value_score": 1281.33,
-      "created": 1760547638,
-      "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
-      "rank": 65,
-      "rank_capability": 84,
-      "rank_budget": 65
+      "value_score": 770.13,
+      "created": 1777591821,
+      "description": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
+      "rank": 57,
+      "rank_capability": 61,
+      "rank_budget": 57
     },
     {
-      "id": "openai/o3",
-      "name": "OpenAI: o3",
+      "id": "x-ai/grok-4.20-multi-agent",
+      "name": "xAI: Grok 4.20 Multi-Agent",
+      "provider": "x-ai",
+      "provider_display": "X-Ai",
+      "context_length": 2000000,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 2.5,
+        "blended": 1.875
+      },
+      "intelligence_score": 38,
+      "value_scores": {
+        "balanced": 770.13,
+        "capability_first": 12.66,
+        "budget": 27.75,
+        "primary": 770.13
+      },
+      "value_score": 770.13,
+      "created": 1774979158,
+      "description": "Grok 4.20 Multi-Agent is a variant of xAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
+      "rank": 58,
+      "rank_capability": 62,
+      "rank_budget": 58
+    },
+    {
+      "id": "x-ai/grok-4.20",
+      "name": "xAI: Grok 4.20",
+      "provider": "x-ai",
+      "provider_display": "X-Ai",
+      "context_length": 2000000,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 2.5,
+        "blended": 1.875
+      },
+      "intelligence_score": 38,
+      "value_scores": {
+        "balanced": 770.13,
+        "capability_first": 12.66,
+        "budget": 27.75,
+        "primary": 770.13
+      },
+      "value_score": 770.13,
+      "created": 1774979019,
+      "description": "Grok 4.20 is a reasoning model from xAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering...",
+      "rank": 59,
+      "rank_capability": 63,
+      "rank_budget": 59
+    },
+    {
+      "id": "openai/o4-mini-high",
+      "name": "OpenAI: o4 Mini High",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 200000,
       "pricing": {
-        "prompt": 2.0,
-        "completion": 8.0,
-        "blended": 5.0
+        "prompt": 1.1,
+        "completion": 4.4,
+        "blended": 2.75
       },
-      "intelligence_score": 74,
+      "intelligence_score": 44,
       "value_scores": {
-        "balanced": 1095.2,
-        "capability_first": 95.32,
-        "budget": 33.09,
-        "primary": 1095.2
+        "balanced": 704.0,
+        "capability_first": 14.23,
+        "budget": 26.53,
+        "primary": 704.0
       },
-      "value_score": 1095.2,
-      "created": 1744823457,
-      "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
-      "rank": 66,
-      "rank_capability": 62,
-      "rank_budget": 66
+      "value_score": 704.0,
+      "created": 1744824212,
+      "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
+      "rank": 60,
+      "rank_capability": 53,
+      "rank_budget": 60
     },
     {
-      "id": "sao10k/l3.1-70b-hanami-x1",
-      "name": "Sao10K: Llama 3.1 70B Hanami x1",
-      "provider": "sao10k",
-      "provider_display": "Sao10K",
-      "context_length": 16000,
+      "id": "openai/o4-mini",
+      "name": "OpenAI: o4 Mini",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 200000,
       "pricing": {
-        "prompt": 3.0,
-        "completion": 3.0,
-        "blended": 3.0
+        "prompt": 1.1,
+        "completion": 4.4,
+        "blended": 2.75
       },
-      "intelligence_score": 57,
+      "intelligence_score": 44,
       "value_scores": {
-        "balanced": 1083.0,
-        "capability_first": 38.53,
-        "budget": 32.91,
-        "primary": 1083.0
+        "balanced": 704.0,
+        "capability_first": 14.23,
+        "budget": 26.53,
+        "primary": 704.0
       },
-      "value_score": 1083.0,
-      "created": 1736302854,
-      "description": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b).",
-      "rank": 67,
-      "rank_capability": 97,
-      "rank_budget": 67
+      "value_score": 704.0,
+      "created": 1744820942,
+      "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
+      "rank": 61,
+      "rank_capability": 54,
+      "rank_budget": 61
+    },
+    {
+      "id": "openai/gpt-5.4-mini",
+      "name": "OpenAI: GPT-5.4 Mini",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 0.75,
+        "completion": 4.5,
+        "blended": 2.625
+      },
+      "intelligence_score": 40,
+      "value_scores": {
+        "balanced": 609.52,
+        "capability_first": 10.68,
+        "budget": 24.69,
+        "primary": 609.52
+      },
+      "value_score": 609.52,
+      "created": 1773748178,
+      "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
+      "rank": 62,
+      "rank_capability": 71,
+      "rank_budget": 62
     },
     {
       "id": "openai/gpt-5.1-codex-max",
@@ -1689,19 +1564,19 @@
         "completion": 10.0,
         "blended": 5.625
       },
-      "intelligence_score": 75,
+      "intelligence_score": 52,
       "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
+        "balanced": 480.71,
+        "capability_first": 13.55,
+        "budget": 21.93,
+        "primary": 480.71
       },
-      "value_score": 1000.0,
+      "value_score": 480.71,
       "created": 1764878934,
       "description": "GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks. It is based on an updated version of the 5.1 reasoning stack and trained on agentic...",
-      "rank": 68,
-      "rank_capability": 64,
-      "rank_budget": 68
+      "rank": 63,
+      "rank_capability": 57,
+      "rank_budget": 63
     },
     {
       "id": "openai/gpt-5.1",
@@ -1714,19 +1589,19 @@
         "completion": 10.0,
         "blended": 5.625
       },
-      "intelligence_score": 75,
+      "intelligence_score": 52,
       "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
+        "balanced": 480.71,
+        "capability_first": 13.55,
+        "budget": 21.93,
+        "primary": 480.71
       },
-      "value_score": 1000.0,
+      "value_score": 480.71,
       "created": 1763060305,
       "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
-      "rank": 69,
-      "rank_capability": 65,
-      "rank_budget": 69
+      "rank": 64,
+      "rank_capability": 58,
+      "rank_budget": 64
     },
     {
       "id": "openai/gpt-5.1-chat",
@@ -1739,19 +1614,19 @@
         "completion": 10.0,
         "blended": 5.625
       },
-      "intelligence_score": 75,
+      "intelligence_score": 52,
       "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
+        "balanced": 480.71,
+        "capability_first": 13.55,
+        "budget": 21.93,
+        "primary": 480.71
       },
-      "value_score": 1000.0,
+      "value_score": 480.71,
       "created": 1763060302,
       "description": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
-      "rank": 70,
-      "rank_capability": 66,
-      "rank_budget": 70
+      "rank": 65,
+      "rank_capability": 59,
+      "rank_budget": 65
     },
     {
       "id": "openai/gpt-5.1-codex",
@@ -1764,219 +1639,19 @@
         "completion": 10.0,
         "blended": 5.625
       },
-      "intelligence_score": 75,
+      "intelligence_score": 52,
       "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
+        "balanced": 480.71,
+        "capability_first": 13.55,
+        "budget": 21.93,
+        "primary": 480.71
       },
-      "value_score": 1000.0,
+      "value_score": 480.71,
       "created": 1763060298,
       "description": "GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
-      "rank": 71,
-      "rank_capability": 67,
-      "rank_budget": 71
-    },
-    {
-      "id": "openai/gpt-5-codex",
-      "name": "OpenAI: GPT-5 Codex",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
-      },
-      "value_score": 1000.0,
-      "created": 1758643403,
-      "description": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
-      "rank": 72,
-      "rank_capability": 68,
-      "rank_budget": 72
-    },
-    {
-      "id": "openai/gpt-5-chat",
-      "name": "OpenAI: GPT-5 Chat",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
-      },
-      "value_score": 1000.0,
-      "created": 1754587837,
-      "description": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications.",
-      "rank": 73,
-      "rank_capability": 69,
-      "rank_budget": 73
-    },
-    {
-      "id": "openai/gpt-5",
-      "name": "OpenAI: GPT-5",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 1000.0,
-        "capability_first": 92.09,
-        "budget": 31.62,
-        "primary": 1000.0
-      },
-      "value_score": 1000.0,
-      "created": 1754587413,
-      "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
-      "rank": 74,
-      "rank_capability": 70,
-      "rank_budget": 74
-    },
-    {
-      "id": "openai/o4-mini-deep-research",
-      "name": "OpenAI: o4 Mini Deep Research",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 2.0,
-        "completion": 8.0,
-        "blended": 5.0
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 980.0,
-        "capability_first": 68.3,
-        "budget": 31.3,
-        "primary": 980.0
-      },
-      "value_score": 980.0,
-      "created": 1760129642,
-      "description": "o4-mini-deep-research is OpenAI's faster, more affordable deep research model—ideal for tackling complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost.",
-      "rank": 75,
-      "rank_capability": 75,
-      "rank_budget": 75
-    },
-    {
-      "id": "openai/gpt-4.1",
-      "name": "OpenAI: GPT-4.1",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 1047576,
-      "pricing": {
-        "prompt": 2.0,
-        "completion": 8.0,
-        "blended": 5.0
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 980.0,
-        "capability_first": 68.3,
-        "budget": 31.3,
-        "primary": 980.0
-      },
-      "value_score": 980.0,
-      "created": 1744651385,
-      "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
-      "rank": 76,
-      "rank_capability": 76,
-      "rank_budget": 76
-    },
-    {
-      "id": "google/gemini-2.5-pro",
-      "name": "Google: Gemini 2.5 Pro",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 973.51,
-        "capability_first": 84.73,
-        "budget": 31.2,
-        "primary": 973.51
-      },
-      "value_score": 973.51,
-      "created": 1750169544,
-      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
-      "rank": 77,
-      "rank_capability": 71,
-      "rank_budget": 77
-    },
-    {
-      "id": "google/gemini-2.5-pro-preview",
-      "name": "Google: Gemini 2.5 Pro Preview 06-05",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 973.51,
-        "capability_first": 84.73,
-        "budget": 31.2,
-        "primary": 973.51
-      },
-      "value_score": 973.51,
-      "created": 1749137257,
-      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
-      "rank": 78,
-      "rank_capability": 72,
-      "rank_budget": 78
-    },
-    {
-      "id": "google/gemini-2.5-pro-preview-05-06",
-      "name": "Google: Gemini 2.5 Pro Preview 05-06",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "blended": 5.625
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 973.51,
-        "capability_first": 84.73,
-        "budget": 31.2,
-        "primary": 973.51
-      },
-      "value_score": 973.51,
-      "created": 1746578513,
-      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
-      "rank": 79,
-      "rank_capability": 73,
-      "rank_budget": 79
+      "rank": 66,
+      "rank_capability": 60,
+      "rank_budget": 66
     },
     {
       "id": "google/gemini-3.5-flash",
@@ -1989,19 +1664,269 @@
         "completion": 9.0,
         "blended": 5.25
       },
-      "intelligence_score": 70,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 933.33,
-        "capability_first": 65.05,
-        "budget": 30.55,
-        "primary": 933.33
+        "balanced": 476.19,
+        "capability_first": 12.29,
+        "budget": 21.82,
+        "primary": 476.19
       },
-      "value_score": 933.33,
+      "value_score": 476.19,
       "created": 1779193800,
       "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
-      "rank": 80,
-      "rank_capability": 82,
-      "rank_budget": 80
+      "rank": 67,
+      "rank_capability": 64,
+      "rank_budget": 67
+    },
+    {
+      "id": "openai/o3",
+      "name": "OpenAI: o3",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 2.0,
+        "completion": 8.0,
+        "blended": 5.0
+      },
+      "intelligence_score": 48,
+      "value_scores": {
+        "balanced": 460.8,
+        "capability_first": 10.92,
+        "budget": 21.47,
+        "primary": 460.8
+      },
+      "value_score": 460.8,
+      "created": 1744823457,
+      "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
+      "rank": 68,
+      "rank_capability": 69,
+      "rank_budget": 68
+    },
+    {
+      "id": "openai/gpt-5-codex",
+      "name": "OpenAI: GPT-5 Codex",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 50,
+      "value_scores": {
+        "balanced": 444.44,
+        "capability_first": 11.47,
+        "budget": 21.08,
+        "primary": 444.44
+      },
+      "value_score": 444.44,
+      "created": 1758643403,
+      "description": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
+      "rank": 69,
+      "rank_capability": 66,
+      "rank_budget": 69
+    },
+    {
+      "id": "openai/gpt-5-chat",
+      "name": "OpenAI: GPT-5 Chat",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 50,
+      "value_scores": {
+        "balanced": 444.44,
+        "capability_first": 11.47,
+        "budget": 21.08,
+        "primary": 444.44
+      },
+      "value_score": 444.44,
+      "created": 1754587837,
+      "description": "GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications.",
+      "rank": 70,
+      "rank_capability": 67,
+      "rank_budget": 70
+    },
+    {
+      "id": "openai/gpt-5",
+      "name": "OpenAI: GPT-5",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 50,
+      "value_scores": {
+        "balanced": 444.44,
+        "capability_first": 11.47,
+        "budget": 21.08,
+        "primary": 444.44
+      },
+      "value_score": 444.44,
+      "created": 1754587413,
+      "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
+      "rank": 71,
+      "rank_capability": 68,
+      "rank_budget": 71
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "name": "Google: Gemini 2.5 Pro",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 48,
+      "value_scores": {
+        "balanced": 409.6,
+        "capability_first": 9.71,
+        "budget": 20.24,
+        "primary": 409.6
+      },
+      "value_score": 409.6,
+      "created": 1750169544,
+      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
+      "rank": 72,
+      "rank_capability": 72,
+      "rank_budget": 72
+    },
+    {
+      "id": "google/gemini-2.5-pro-preview",
+      "name": "Google: Gemini 2.5 Pro Preview 06-05",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 48,
+      "value_scores": {
+        "balanced": 409.6,
+        "capability_first": 9.71,
+        "budget": 20.24,
+        "primary": 409.6
+      },
+      "value_score": 409.6,
+      "created": 1749137257,
+      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
+      "rank": 73,
+      "rank_capability": 73,
+      "rank_budget": 73
+    },
+    {
+      "id": "google/gemini-2.5-pro-preview-05-06",
+      "name": "Google: Gemini 2.5 Pro Preview 05-06",
+      "provider": "google",
+      "provider_display": "Google",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 1.25,
+        "completion": 10.0,
+        "blended": 5.625
+      },
+      "intelligence_score": 48,
+      "value_scores": {
+        "balanced": 409.6,
+        "capability_first": 9.71,
+        "budget": 20.24,
+        "primary": 409.6
+      },
+      "value_score": 409.6,
+      "created": 1746578513,
+      "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
+      "rank": 74,
+      "rank_capability": 74,
+      "rank_budget": 74
+    },
+    {
+      "id": "amazon/nova-pro-v1",
+      "name": "Amazon: Nova Pro 1.0",
+      "provider": "amazon",
+      "provider_display": "Amazon",
+      "context_length": 300000,
+      "pricing": {
+        "prompt": 0.7999999999999999,
+        "completion": 3.1999999999999997,
+        "blended": 2.0
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 392.0,
+        "capability_first": 5.16,
+        "budget": 19.8,
+        "primary": 392.0
+      },
+      "value_score": 392.0,
+      "created": 1733436303,
+      "description": "Amazon Nova Pro 1.0 is a capable multimodal model from Amazon focused on providing a combination of accuracy, speed, and cost for a wide range of tasks. As of December...",
+      "rank": 75,
+      "rank_capability": 87,
+      "rank_budget": 75
+    },
+    {
+      "id": "openai/o4-mini-deep-research",
+      "name": "OpenAI: o4 Mini Deep Research",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 2.0,
+        "completion": 8.0,
+        "blended": 5.0
+      },
+      "intelligence_score": 44,
+      "value_scores": {
+        "balanced": 387.2,
+        "capability_first": 7.82,
+        "budget": 19.68,
+        "primary": 387.2
+      },
+      "value_score": 387.2,
+      "created": 1760129642,
+      "description": "o4-mini-deep-research is OpenAI's faster, more affordable deep research model—ideal for tackling complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost.",
+      "rank": 76,
+      "rank_capability": 75,
+      "rank_budget": 76
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "name": "OpenAI: GPT-4.1",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 1047576,
+      "pricing": {
+        "prompt": 2.0,
+        "completion": 8.0,
+        "blended": 5.0
+      },
+      "intelligence_score": 42,
+      "value_scores": {
+        "balanced": 352.8,
+        "capability_first": 6.62,
+        "budget": 18.78,
+        "primary": 352.8
+      },
+      "value_score": 352.8,
+      "created": 1744651385,
+      "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
+      "rank": 77,
+      "rank_capability": 77,
+      "rank_budget": 77
     },
     {
       "id": "mistralai/mistral-large-2407",
@@ -2014,19 +1939,19 @@
         "completion": 6.0,
         "blended": 4.0
       },
-      "intelligence_score": 59,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 870.25,
-        "capability_first": 34.14,
-        "budget": 29.5,
-        "primary": 870.25
+        "balanced": 306.25,
+        "capability_first": 4.62,
+        "budget": 17.5,
+        "primary": 306.25
       },
-      "value_score": 870.25,
+      "value_score": 306.25,
       "created": 1731978415,
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
-      "rank": 81,
-      "rank_capability": 104,
-      "rank_budget": 81
+      "rank": 78,
+      "rank_capability": 90,
+      "rank_budget": 78
     },
     {
       "id": "mistralai/mistral-large",
@@ -2039,19 +1964,19 @@
         "completion": 6.0,
         "blended": 4.0
       },
-      "intelligence_score": 59,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 870.25,
-        "capability_first": 34.14,
-        "budget": 29.5,
-        "primary": 870.25
+        "balanced": 306.25,
+        "capability_first": 4.62,
+        "budget": 17.5,
+        "primary": 306.25
       },
-      "value_score": 870.25,
+      "value_score": 306.25,
       "created": 1708905600,
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version `mistral-large-2407`). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
-      "rank": 82,
-      "rank_capability": 105,
-      "rank_budget": 82
+      "rank": 79,
+      "rank_capability": 91,
+      "rank_budget": 79
     },
     {
       "id": "google/gemini-3.1-pro-preview-customtools",
@@ -2064,19 +1989,19 @@
         "completion": 12.0,
         "blended": 7.0
       },
-      "intelligence_score": 72,
+      "intelligence_score": 46,
       "value_scores": {
-        "balanced": 740.57,
-        "capability_first": 57.63,
-        "budget": 27.21,
-        "primary": 740.57
+        "balanced": 302.29,
+        "capability_first": 6.6,
+        "budget": 17.39,
+        "primary": 302.29
       },
-      "value_score": 740.57,
+      "value_score": 302.29,
       "created": 1772045923,
       "description": "Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that improves tool selection behavior by preventing overuse of a general bash tool when more efficient third-party...",
-      "rank": 83,
-      "rank_capability": 85,
-      "rank_budget": 83
+      "rank": 80,
+      "rank_capability": 78,
+      "rank_budget": 80
     },
     {
       "id": "google/gemini-3.1-pro-preview",
@@ -2089,118 +2014,193 @@
         "completion": 12.0,
         "blended": 7.0
       },
-      "intelligence_score": 72,
+      "intelligence_score": 46,
       "value_scores": {
-        "balanced": 740.57,
-        "capability_first": 57.63,
-        "budget": 27.21,
-        "primary": 740.57
+        "balanced": 302.29,
+        "capability_first": 6.6,
+        "budget": 17.39,
+        "primary": 302.29
       },
-      "value_score": 740.57,
+      "value_score": 302.29,
       "created": 1771509627,
       "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
+      "rank": 81,
+      "rank_capability": 79,
+      "rank_budget": 81
+    },
+    {
+      "id": "anthropic/claude-haiku-4.5",
+      "name": "Anthropic: Claude Haiku 4.5",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 1.0,
+        "completion": 5.0,
+        "blended": 3.0
+      },
+      "intelligence_score": 30,
+      "value_scores": {
+        "balanced": 300.0,
+        "capability_first": 4.06,
+        "budget": 17.32,
+        "primary": 300.0
+      },
+      "value_score": 300.0,
+      "created": 1760547638,
+      "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
+      "rank": 82,
+      "rank_capability": 92,
+      "rank_budget": 82
+    },
+    {
+      "id": "sao10k/l3.1-70b-hanami-x1",
+      "name": "Sao10K: Llama 3.1 70B Hanami x1",
+      "provider": "sao10k",
+      "provider_display": "Sao10K",
+      "context_length": 16000,
+      "pricing": {
+        "prompt": 3.0,
+        "completion": 3.0,
+        "blended": 3.0
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 261.33,
+        "capability_first": 3.44,
+        "budget": 16.17,
+        "primary": 261.33
+      },
+      "value_score": 261.33,
+      "created": 1736302854,
+      "description": "This is [Sao10K](/sao10k)'s experiment over [Euryale v2.2](/sao10k/l3.1-euryale-70b).",
+      "rank": 83,
+      "rank_capability": 99,
+      "rank_budget": 83
+    },
+    {
+      "id": "openai/gpt-5-image",
+      "name": "OpenAI: GPT-5 Image",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 10.0,
+        "completion": 10.0,
+        "blended": 10.0
+      },
+      "intelligence_score": 50,
+      "value_scores": {
+        "balanced": 250.0,
+        "capability_first": 6.45,
+        "budget": 15.81,
+        "primary": 250.0
+      },
+      "value_score": 250.0,
+      "created": 1760447986,
+      "description": "[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI's GPT-5 model with state-of-the-art image generation capabilities. It offers major improvements in reasoning, code quality, and user experience while incorporating GPT Image 1's superior instruction following,...",
       "rank": 84,
-      "rank_capability": 86,
+      "rank_capability": 80,
       "rank_budget": 84
     },
     {
-      "id": "openai/gpt-4o-search-preview",
-      "name": "OpenAI: GPT-4o Search Preview",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
+      "id": "anthropic/claude-sonnet-4.6",
+      "name": "Anthropic: Claude Sonnet 4.6",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
       "pricing": {
-        "prompt": 2.5,
-        "completion": 10.0,
-        "blended": 6.25
+        "prompt": 3.0,
+        "completion": 15.0,
+        "blended": 9.0
       },
-      "intelligence_score": 68,
+      "intelligence_score": 47,
       "value_scores": {
-        "balanced": 739.84,
-        "capability_first": 46.25,
-        "budget": 27.2,
-        "primary": 739.84
+        "balanced": 245.44,
+        "capability_first": 5.58,
+        "budget": 15.67,
+        "primary": 245.44
       },
-      "value_score": 739.84,
-      "created": 1741817949,
-      "description": "GPT-4o Search Previewis a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
+      "value_score": 245.44,
+      "created": 1771342990,
+      "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
       "rank": 85,
-      "rank_capability": 88,
+      "rank_capability": 85,
       "rank_budget": 85
     },
     {
-      "id": "openai/gpt-4o-2024-11-20",
-      "name": "OpenAI: GPT-4o (2024-11-20)",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
+      "id": "anthropic/claude-sonnet-4.5",
+      "name": "Anthropic: Claude Sonnet 4.5",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
       "pricing": {
-        "prompt": 2.5,
-        "completion": 10.0,
-        "blended": 6.25
+        "prompt": 3.0,
+        "completion": 15.0,
+        "blended": 9.0
       },
-      "intelligence_score": 68,
+      "intelligence_score": 47,
       "value_scores": {
-        "balanced": 739.84,
-        "capability_first": 46.25,
-        "budget": 27.2,
-        "primary": 739.84
+        "balanced": 245.44,
+        "capability_first": 5.58,
+        "budget": 15.67,
+        "primary": 245.44
       },
-      "value_score": 739.84,
-      "created": 1732127594,
-      "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded...",
+      "value_score": 245.44,
+      "created": 1759161676,
+      "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
       "rank": 86,
-      "rank_capability": 89,
+      "rank_capability": 86,
       "rank_budget": 86
     },
     {
-      "id": "openai/gpt-4o-2024-08-06",
-      "name": "OpenAI: GPT-4o (2024-08-06)",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
+      "id": "anthropic/claude-sonnet-4",
+      "name": "Anthropic: Claude Sonnet 4",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
       "pricing": {
-        "prompt": 2.5,
-        "completion": 10.0,
-        "blended": 6.25
+        "prompt": 3.0,
+        "completion": 15.0,
+        "blended": 9.0
       },
-      "intelligence_score": 68,
+      "intelligence_score": 45,
       "value_scores": {
-        "balanced": 739.84,
-        "capability_first": 46.25,
-        "budget": 27.2,
-        "primary": 739.84
+        "balanced": 225.0,
+        "capability_first": 4.72,
+        "budget": 15.0,
+        "primary": 225.0
       },
-      "value_score": 739.84,
-      "created": 1722902400,
-      "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/). GPT-4o (\"o\" for \"omni\") is...",
+      "value_score": 225.0,
+      "created": 1747930371,
+      "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
       "rank": 87,
-      "rank_capability": 90,
+      "rank_capability": 89,
       "rank_budget": 87
     },
     {
-      "id": "openai/gpt-4o",
-      "name": "OpenAI: GPT-4o",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 128000,
+      "id": "anthropic/claude-opus-4.8",
+      "name": "Anthropic: Claude Opus 4.8",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
       "pricing": {
-        "prompt": 2.5,
-        "completion": 10.0,
-        "blended": 6.25
+        "prompt": 5.0,
+        "completion": 25.0,
+        "blended": 15.0
       },
-      "intelligence_score": 68,
+      "intelligence_score": 56,
       "value_scores": {
-        "balanced": 739.84,
-        "capability_first": 46.25,
-        "budget": 27.2,
-        "primary": 739.84
+        "balanced": 209.07,
+        "capability_first": 7.09,
+        "budget": 14.46,
+        "primary": 209.07
       },
-      "value_score": 739.84,
-      "created": 1715558400,
-      "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
+      "value_score": 209.07,
+      "created": 1779905091,
+      "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "rank": 88,
-      "rank_capability": 91,
+      "rank_capability": 76,
       "rank_budget": 88
     },
     {
@@ -2214,18 +2214,18 @@
         "completion": 14.0,
         "blended": 7.875
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 714.29,
-        "capability_first": 65.78,
-        "budget": 26.73,
-        "primary": 714.29
+        "balanced": 203.17,
+        "capability_first": 3.56,
+        "budget": 14.25,
+        "primary": 203.17
       },
-      "value_score": 714.29,
+      "value_score": 203.17,
       "created": 1772564061,
       "description": "GPT-5.3 Chat is an update to ChatGPT's most-used model that makes everyday conversations smoother, more useful, and more directly helpful. It delivers more accurate answers with better contextualization and significantly...",
       "rank": 89,
-      "rank_capability": 77,
+      "rank_capability": 93,
       "rank_budget": 89
     },
     {
@@ -2239,18 +2239,18 @@
         "completion": 14.0,
         "blended": 7.875
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 714.29,
-        "capability_first": 65.78,
-        "budget": 26.73,
-        "primary": 714.29
+        "balanced": 203.17,
+        "capability_first": 3.56,
+        "budget": 14.25,
+        "primary": 203.17
       },
-      "value_score": 714.29,
+      "value_score": 203.17,
       "created": 1771959164,
       "description": "GPT-5.3-Codex is OpenAI’s most advanced agentic coding model, combining the frontier software engineering performance of GPT-5.2-Codex with the broader reasoning and professional knowledge capabilities of GPT-5.2. It achieves state-of-the-art results...",
       "rank": 90,
-      "rank_capability": 78,
+      "rank_capability": 94,
       "rank_budget": 90
     },
     {
@@ -2264,18 +2264,18 @@
         "completion": 14.0,
         "blended": 7.875
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 714.29,
-        "capability_first": 65.78,
-        "budget": 26.73,
-        "primary": 714.29
+        "balanced": 203.17,
+        "capability_first": 3.56,
+        "budget": 14.25,
+        "primary": 203.17
       },
-      "value_score": 714.29,
+      "value_score": 203.17,
       "created": 1768409315,
       "description": "GPT-5.2-Codex is an upgraded version of GPT-5.1-Codex optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
       "rank": 91,
-      "rank_capability": 79,
+      "rank_capability": 95,
       "rank_budget": 91
     },
     {
@@ -2289,18 +2289,18 @@
         "completion": 14.0,
         "blended": 7.875
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 714.29,
-        "capability_first": 65.78,
-        "budget": 26.73,
-        "primary": 714.29
+        "balanced": 203.17,
+        "capability_first": 3.56,
+        "budget": 14.25,
+        "primary": 203.17
       },
-      "value_score": 714.29,
+      "value_score": 203.17,
       "created": 1765389783,
       "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
       "rank": 92,
-      "rank_capability": 80,
+      "rank_capability": 96,
       "rank_budget": 92
     },
     {
@@ -2314,169 +2314,19 @@
         "completion": 14.0,
         "blended": 7.875
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 714.29,
-        "capability_first": 65.78,
-        "budget": 26.73,
-        "primary": 714.29
+        "balanced": 203.17,
+        "capability_first": 3.56,
+        "budget": 14.25,
+        "primary": 203.17
       },
-      "value_score": 714.29,
+      "value_score": 203.17,
       "created": 1765389775,
       "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
       "rank": 93,
-      "rank_capability": 81,
+      "rank_capability": 97,
       "rank_budget": 93
-    },
-    {
-      "id": "openai/gpt-5.4",
-      "name": "OpenAI: GPT-5.4",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 1050000,
-      "pricing": {
-        "prompt": 2.5,
-        "completion": 15.0,
-        "blended": 8.75
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 642.86,
-        "capability_first": 59.2,
-        "budget": 25.35,
-        "primary": 642.86
-      },
-      "value_score": 642.86,
-      "created": 1772734352,
-      "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
-      "rank": 94,
-      "rank_capability": 83,
-      "rank_budget": 94
-    },
-    {
-      "id": "~anthropic/claude-sonnet-latest",
-      "name": "Anthropic Claude Sonnet Latest",
-      "provider": "~anthropic",
-      "provider_display": "~Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 3.0,
-        "completion": 15.0,
-        "blended": 9.0
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 576.0,
-        "capability_first": 44.83,
-        "budget": 24.0,
-        "primary": 576.0
-      },
-      "value_score": 576.0,
-      "created": 1777318368,
-      "description": "This model always redirects to the latest model in the Anthropic Claude Sonnet family.",
-      "rank": 95,
-      "rank_capability": 93,
-      "rank_budget": 95
-    },
-    {
-      "id": "anthropic/claude-sonnet-4.6",
-      "name": "Anthropic: Claude Sonnet 4.6",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 3.0,
-        "completion": 15.0,
-        "blended": 9.0
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 576.0,
-        "capability_first": 44.83,
-        "budget": 24.0,
-        "primary": 576.0
-      },
-      "value_score": 576.0,
-      "created": 1771342990,
-      "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
-      "rank": 96,
-      "rank_capability": 94,
-      "rank_budget": 96
-    },
-    {
-      "id": "anthropic/claude-sonnet-4.5",
-      "name": "Anthropic: Claude Sonnet 4.5",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 3.0,
-        "completion": 15.0,
-        "blended": 9.0
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 576.0,
-        "capability_first": 44.83,
-        "budget": 24.0,
-        "primary": 576.0
-      },
-      "value_score": 576.0,
-      "created": 1759161676,
-      "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
-      "rank": 97,
-      "rank_capability": 95,
-      "rank_budget": 97
-    },
-    {
-      "id": "anthropic/claude-sonnet-4",
-      "name": "Anthropic: Claude Sonnet 4",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 3.0,
-        "completion": 15.0,
-        "blended": 9.0
-      },
-      "intelligence_score": 72,
-      "value_scores": {
-        "balanced": 576.0,
-        "capability_first": 44.83,
-        "budget": 24.0,
-        "primary": 576.0
-      },
-      "value_score": 576.0,
-      "created": 1747930371,
-      "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
-      "rank": 98,
-      "rank_capability": 96,
-      "rank_budget": 98
-    },
-    {
-      "id": "openai/gpt-5-image",
-      "name": "OpenAI: GPT-5 Image",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 10.0,
-        "completion": 10.0,
-        "blended": 10.0
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 562.5,
-        "capability_first": 51.8,
-        "budget": 23.72,
-        "primary": 562.5
-      },
-      "value_score": 562.5,
-      "created": 1760447986,
-      "description": "[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI's GPT-5 model with state-of-the-art image generation capabilities. It offers major improvements in reasoning, code quality, and user experience while incorporating GPT Image 1's superior instruction following,...",
-      "rank": 99,
-      "rank_capability": 87,
-      "rank_budget": 99
     },
     {
       "id": "cohere/command-a",
@@ -2489,18 +2339,168 @@
         "completion": 10.0,
         "blended": 6.25
       },
-      "intelligence_score": 58,
+      "intelligence_score": 35,
       "value_scores": {
-        "balanced": 538.24,
-        "capability_first": 20.1,
-        "budget": 23.2,
-        "primary": 538.24
+        "balanced": 196.0,
+        "capability_first": 2.96,
+        "budget": 14.0,
+        "primary": 196.0
       },
-      "value_score": 538.24,
+      "value_score": 196.0,
       "created": 1741894342,
       "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary...",
+      "rank": 94,
+      "rank_capability": 101,
+      "rank_budget": 94
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Anthropic: Claude Opus 4.7",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 25.0,
+        "blended": 15.0
+      },
+      "intelligence_score": 54,
+      "value_scores": {
+        "balanced": 194.4,
+        "capability_first": 6.0,
+        "budget": 13.94,
+        "primary": 194.4
+      },
+      "value_score": 194.4,
+      "created": 1776351100,
+      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+      "rank": 95,
+      "rank_capability": 81,
+      "rank_budget": 95
+    },
+    {
+      "id": "anthropic/claude-opus-4.6",
+      "name": "Anthropic: Claude Opus 4.6",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 25.0,
+        "blended": 15.0
+      },
+      "intelligence_score": 54,
+      "value_scores": {
+        "balanced": 194.4,
+        "capability_first": 6.0,
+        "budget": 13.94,
+        "primary": 194.4
+      },
+      "value_score": 194.4,
+      "created": 1770219050,
+      "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
+      "rank": 96,
+      "rank_capability": 82,
+      "rank_budget": 96
+    },
+    {
+      "id": "anthropic/claude-opus-4.5",
+      "name": "Anthropic: Claude Opus 4.5",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 25.0,
+        "blended": 15.0
+      },
+      "intelligence_score": 54,
+      "value_scores": {
+        "balanced": 194.4,
+        "capability_first": 6.0,
+        "budget": 13.94,
+        "primary": 194.4
+      },
+      "value_score": 194.4,
+      "created": 1764010580,
+      "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
+      "rank": 97,
+      "rank_capability": 83,
+      "rank_budget": 97
+    },
+    {
+      "id": "openai/gpt-5.4",
+      "name": "OpenAI: GPT-5.4",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 1050000,
+      "pricing": {
+        "prompt": 2.5,
+        "completion": 15.0,
+        "blended": 8.75
+      },
+      "intelligence_score": 40,
+      "value_scores": {
+        "balanced": 182.86,
+        "capability_first": 3.2,
+        "budget": 13.52,
+        "primary": 182.86
+      },
+      "value_score": 182.86,
+      "created": 1772734352,
+      "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
+      "rank": 98,
+      "rank_capability": 100,
+      "rank_budget": 98
+    },
+    {
+      "id": "openai/gpt-5.5",
+      "name": "OpenAI: GPT-5.5",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 1050000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 30.0,
+        "blended": 17.5
+      },
+      "intelligence_score": 55,
+      "value_scores": {
+        "balanced": 172.86,
+        "capability_first": 5.59,
+        "budget": 13.15,
+        "primary": 172.86
+      },
+      "value_score": 172.86,
+      "created": 1777051893,
+      "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
+      "rank": 99,
+      "rank_capability": 84,
+      "rank_budget": 99
+    },
+    {
+      "id": "cohere/command-r-plus-08-2024",
+      "name": "Cohere: Command R+ (08-2024)",
+      "provider": "cohere",
+      "provider_display": "Cohere",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 2.5,
+        "completion": 10.0,
+        "blended": 6.25
+      },
+      "intelligence_score": 30,
+      "value_scores": {
+        "balanced": 144.0,
+        "capability_first": 1.95,
+        "budget": 12.0,
+        "primary": 144.0
+      },
+      "value_score": 144.0,
+      "created": 1724976000,
+      "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
       "rank": 100,
-      "rank_capability": 112,
+      "rank_capability": 104,
       "rank_budget": 100
     },
     {
@@ -2514,269 +2514,169 @@
         "completion": 15.0,
         "blended": 11.5
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 489.13,
-        "capability_first": 45.04,
-        "budget": 22.12,
-        "primary": 489.13
+        "balanced": 139.13,
+        "capability_first": 2.44,
+        "budget": 11.8,
+        "primary": 139.13
       },
-      "value_score": 489.13,
+      "value_score": 139.13,
       "created": 1776797528,
       "description": "[GPT-5.4](https://openrouter.ai/openai/gpt-5.4) Image 2 combines OpenAI's GPT-5.4 model with state-of-the-art image generation capabilities from GPT Image 2. It enables rich multimodal workflows, allowing users to seamlessly move between reasoning, coding, and...",
       "rank": 101,
-      "rank_capability": 92,
+      "rank_capability": 102,
       "rank_budget": 101
     },
     {
-      "id": "cohere/command-r-plus-08-2024",
-      "name": "Cohere: Command R+ (08-2024)",
-      "provider": "cohere",
-      "provider_display": "Cohere",
+      "id": "openai/gpt-4o-search-preview",
+      "name": "OpenAI: GPT-4o Search Preview",
+      "provider": "openai",
+      "provider_display": "OpenAI",
       "context_length": 128000,
       "pricing": {
         "prompt": 2.5,
         "completion": 10.0,
         "blended": 6.25
       },
-      "intelligence_score": 55,
+      "intelligence_score": 28,
       "value_scores": {
-        "balanced": 484.0,
-        "capability_first": 15.65,
-        "budget": 22.0,
-        "primary": 484.0
+        "balanced": 125.44,
+        "capability_first": 1.65,
+        "budget": 11.2,
+        "primary": 125.44
       },
-      "value_score": 484.0,
-      "created": 1724976000,
-      "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
+      "value_score": 125.44,
+      "created": 1741817949,
+      "description": "GPT-4o Search Previewis a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
       "rank": 102,
-      "rank_capability": 115,
+      "rank_capability": 107,
       "rank_budget": 102
     },
     {
-      "id": "openai/gpt-4o-2024-05-13",
-      "name": "OpenAI: GPT-4o (2024-05-13)",
+      "id": "openai/gpt-4o-2024-11-20",
+      "name": "OpenAI: GPT-4o (2024-11-20)",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 128000,
       "pricing": {
-        "prompt": 5.0,
-        "completion": 15.0,
-        "blended": 10.0
+        "prompt": 2.5,
+        "completion": 10.0,
+        "blended": 6.25
       },
-      "intelligence_score": 68,
+      "intelligence_score": 28,
       "value_scores": {
-        "balanced": 462.4,
-        "capability_first": 28.91,
-        "budget": 21.5,
-        "primary": 462.4
+        "balanced": 125.44,
+        "capability_first": 1.65,
+        "budget": 11.2,
+        "primary": 125.44
       },
-      "value_score": 462.4,
-      "created": 1715558400,
-      "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
+      "value_score": 125.44,
+      "created": 1732127594,
+      "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded...",
       "rank": 103,
-      "rank_capability": 109,
+      "rank_capability": 108,
       "rank_budget": 103
     },
     {
-      "id": "anthropic/claude-opus-4.8",
-      "name": "Anthropic: Claude Opus 4.8",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
+      "id": "openai/gpt-4o-2024-08-06",
+      "name": "OpenAI: GPT-4o (2024-08-06)",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
       "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "blended": 15.0
+        "prompt": 2.5,
+        "completion": 10.0,
+        "blended": 6.25
       },
-      "intelligence_score": 76,
+      "intelligence_score": 28,
       "value_scores": {
-        "balanced": 385.07,
-        "capability_first": 37.54,
-        "budget": 19.62,
-        "primary": 385.07
+        "balanced": 125.44,
+        "capability_first": 1.65,
+        "budget": 11.2,
+        "primary": 125.44
       },
-      "value_score": 385.07,
-      "created": 1779905091,
-      "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
+      "value_score": 125.44,
+      "created": 1722902400,
+      "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/). GPT-4o (\"o\" for \"omni\") is...",
       "rank": 104,
-      "rank_capability": 99,
+      "rank_capability": 109,
       "rank_budget": 104
     },
     {
-      "id": "~anthropic/claude-opus-latest",
-      "name": "Anthropic: Claude Opus Latest",
-      "provider": "~anthropic",
-      "provider_display": "~Anthropic",
-      "context_length": 1000000,
+      "id": "openai/gpt-4o",
+      "name": "OpenAI: GPT-4o",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
       "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "blended": 15.0
+        "prompt": 2.5,
+        "completion": 10.0,
+        "blended": 6.25
       },
-      "intelligence_score": 76,
+      "intelligence_score": 28,
       "value_scores": {
-        "balanced": 385.07,
-        "capability_first": 37.54,
-        "budget": 19.62,
-        "primary": 385.07
+        "balanced": 125.44,
+        "capability_first": 1.65,
+        "budget": 11.2,
+        "primary": 125.44
       },
-      "value_score": 385.07,
-      "created": 1776795361,
-      "description": "This model always redirects to the latest model in the Claude Opus family.",
+      "value_score": 125.44,
+      "created": 1715558400,
+      "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
       "rank": 105,
-      "rank_capability": 100,
+      "rank_capability": 110,
       "rank_budget": 105
     },
     {
-      "id": "anthropic/claude-opus-4.7",
-      "name": "Anthropic: Claude Opus 4.7",
+      "id": "anthropic/claude-fable-5",
+      "name": "Anthropic: Claude Fable 5",
       "provider": "anthropic",
       "provider_display": "Anthropic",
       "context_length": 1000000,
       "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "blended": 15.0
+        "prompt": 10.0,
+        "completion": 50.0,
+        "blended": 30.0
       },
-      "intelligence_score": 76,
+      "intelligence_score": 60,
       "value_scores": {
-        "balanced": 385.07,
-        "capability_first": 37.54,
-        "budget": 19.62,
-        "primary": 385.07
+        "balanced": 120.0,
+        "capability_first": 4.95,
+        "budget": 10.95,
+        "primary": 120.0
       },
-      "value_score": 385.07,
-      "created": 1776351100,
-      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+      "value_score": 120.0,
+      "created": 1781007515,
+      "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
       "rank": 106,
-      "rank_capability": 101,
+      "rank_capability": 88,
       "rank_budget": 106
     },
     {
-      "id": "anthropic/claude-opus-4.6",
-      "name": "Anthropic: Claude Opus 4.6",
+      "id": "anthropic/claude-opus-4.8-fast",
+      "name": "Anthropic: Claude Opus 4.8 (Fast)",
       "provider": "anthropic",
       "provider_display": "Anthropic",
       "context_length": 1000000,
       "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "blended": 15.0
+        "prompt": 10.0,
+        "completion": 50.0,
+        "blended": 30.0
       },
-      "intelligence_score": 76,
+      "intelligence_score": 56,
       "value_scores": {
-        "balanced": 385.07,
-        "capability_first": 37.54,
-        "budget": 19.62,
-        "primary": 385.07
+        "balanced": 104.53,
+        "capability_first": 3.54,
+        "budget": 10.22,
+        "primary": 104.53
       },
-      "value_score": 385.07,
-      "created": 1770219050,
-      "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
+      "value_score": 104.53,
+      "created": 1779913703,
+      "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "rank": 107,
-      "rank_capability": 102,
+      "rank_capability": 98,
       "rank_budget": 107
-    },
-    {
-      "id": "anthropic/claude-opus-4.5",
-      "name": "Anthropic: Claude Opus 4.5",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "blended": 15.0
-      },
-      "intelligence_score": 76,
-      "value_scores": {
-        "balanced": 385.07,
-        "capability_first": 37.54,
-        "budget": 19.62,
-        "primary": 385.07
-      },
-      "value_score": 385.07,
-      "created": 1764010580,
-      "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
-      "rank": 108,
-      "rank_capability": 103,
-      "rank_budget": 108
-    },
-    {
-      "id": "openai/gpt-chat-latest",
-      "name": "OpenAI: GPT Chat Latest",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 30.0,
-        "blended": 17.5
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 321.43,
-        "capability_first": 29.6,
-        "budget": 17.93,
-        "primary": 321.43
-      },
-      "value_score": 321.43,
-      "created": 1778000212,
-      "description": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates...",
-      "rank": 109,
-      "rank_capability": 106,
-      "rank_budget": 109
-    },
-    {
-      "id": "~openai/gpt-latest",
-      "name": "OpenAI GPT Latest",
-      "provider": "~openai",
-      "provider_display": "~Openai",
-      "context_length": 1050000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 30.0,
-        "blended": 17.5
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 321.43,
-        "capability_first": 29.6,
-        "budget": 17.93,
-        "primary": 321.43
-      },
-      "value_score": 321.43,
-      "created": 1777318334,
-      "description": "This model always redirects to the latest model in the OpenAI GPT family.",
-      "rank": 110,
-      "rank_capability": 107,
-      "rank_budget": 110
-    },
-    {
-      "id": "openai/gpt-5.5",
-      "name": "OpenAI: GPT-5.5",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 1050000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 30.0,
-        "blended": 17.5
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 321.43,
-        "capability_first": 29.6,
-        "budget": 17.93,
-        "primary": 321.43
-      },
-      "value_score": 321.43,
-      "created": 1777051893,
-      "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
-      "rank": 111,
-      "rank_capability": 108,
-      "rank_budget": 111
     },
     {
       "id": "openai/o3-deep-research",
@@ -2789,18 +2689,118 @@
         "completion": 40.0,
         "blended": 25.0
       },
-      "intelligence_score": 74,
+      "intelligence_score": 48,
       "value_scores": {
-        "balanced": 219.04,
-        "capability_first": 19.06,
-        "budget": 14.8,
-        "primary": 219.04
+        "balanced": 92.16,
+        "capability_first": 2.18,
+        "budget": 9.6,
+        "primary": 92.16
       },
-      "value_score": 219.04,
+      "value_score": 92.16,
       "created": 1760129661,
       "description": "o3-deep-research is OpenAI's advanced model for deep research, designed to tackle complex, multi-step research tasks.\n\nNote: This model always uses the 'web_search' tool which adds additional cost.",
+      "rank": 108,
+      "rank_capability": 103,
+      "rank_budget": 108
+    },
+    {
+      "id": "openai/gpt-4o-2024-05-13",
+      "name": "OpenAI: GPT-4o (2024-05-13)",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 128000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 15.0,
+        "blended": 10.0
+      },
+      "intelligence_score": 28,
+      "value_scores": {
+        "balanced": 78.4,
+        "capability_first": 1.03,
+        "budget": 8.85,
+        "primary": 78.4
+      },
+      "value_score": 78.4,
+      "created": 1715558400,
+      "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
+      "rank": 109,
+      "rank_capability": 112,
+      "rank_budget": 109
+    },
+    {
+      "id": "anthropic/claude-opus-4.1",
+      "name": "Anthropic: Claude Opus 4.1",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 15.0,
+        "completion": 75.0,
+        "blended": 45.0
+      },
+      "intelligence_score": 52,
+      "value_scores": {
+        "balanced": 60.09,
+        "capability_first": 1.69,
+        "budget": 7.75,
+        "primary": 60.09
+      },
+      "value_score": 60.09,
+      "created": 1754411591,
+      "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
+      "rank": 110,
+      "rank_capability": 105,
+      "rank_budget": 110
+    },
+    {
+      "id": "anthropic/claude-opus-4",
+      "name": "Anthropic: Claude Opus 4",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 15.0,
+        "completion": 75.0,
+        "blended": 45.0
+      },
+      "intelligence_score": 52,
+      "value_scores": {
+        "balanced": 60.09,
+        "capability_first": 1.69,
+        "budget": 7.75,
+        "primary": 60.09
+      },
+      "value_score": 60.09,
+      "created": 1747931245,
+      "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
+      "rank": 111,
+      "rank_capability": 106,
+      "rank_budget": 111
+    },
+    {
+      "id": "openai/o3-pro",
+      "name": "OpenAI: o3 Pro",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 200000,
+      "pricing": {
+        "prompt": 20.0,
+        "completion": 80.0,
+        "blended": 50.0
+      },
+      "intelligence_score": 48,
+      "value_scores": {
+        "balanced": 46.08,
+        "capability_first": 1.09,
+        "budget": 6.79,
+        "primary": 46.08
+      },
+      "value_score": 46.08,
+      "created": 1749598352,
+      "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently...",
       "rank": 112,
-      "rank_capability": 113,
+      "rank_capability": 111,
       "rank_budget": 112
     },
     {
@@ -2814,18 +2814,18 @@
         "completion": 30.0,
         "blended": 20.0
       },
-      "intelligence_score": 65,
+      "intelligence_score": 30,
       "value_scores": {
-        "balanced": 211.25,
-        "capability_first": 11.26,
-        "budget": 14.53,
-        "primary": 211.25
+        "balanced": 45.0,
+        "capability_first": 0.61,
+        "budget": 6.71,
+        "primary": 45.0
       },
-      "value_score": 211.25,
+      "value_score": 45.0,
       "created": 1712620800,
       "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
       "rank": 113,
-      "rank_capability": 118,
+      "rank_capability": 117,
       "rank_budget": 113
     },
     {
@@ -2839,194 +2839,19 @@
         "completion": 30.0,
         "blended": 20.0
       },
-      "intelligence_score": 65,
+      "intelligence_score": 30,
       "value_scores": {
-        "balanced": 211.25,
-        "capability_first": 11.26,
-        "budget": 14.53,
-        "primary": 211.25
+        "balanced": 45.0,
+        "capability_first": 0.61,
+        "budget": 6.71,
+        "primary": 45.0
       },
-      "value_score": 211.25,
+      "value_score": 45.0,
       "created": 1706140800,
       "description": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023. **Note:** heavily rate limited by OpenAI while...",
       "rank": 114,
-      "rank_capability": 119,
+      "rank_capability": 118,
       "rank_budget": 114
-    },
-    {
-      "id": "~anthropic/claude-fable-latest",
-      "name": "Anthropic: Claude Fable Latest",
-      "provider": "~anthropic",
-      "provider_display": "~Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 10.0,
-        "completion": 50.0,
-        "blended": 30.0
-      },
-      "intelligence_score": 78,
-      "value_scores": {
-        "balanced": 202.8,
-        "capability_first": 22.17,
-        "budget": 14.24,
-        "primary": 202.8
-      },
-      "value_score": 202.8,
-      "created": 1781029944,
-      "description": "This model always redirects to the latest model in the Claude Fable family.",
-      "rank": 115,
-      "rank_capability": 110,
-      "rank_budget": 115
-    },
-    {
-      "id": "anthropic/claude-fable-5",
-      "name": "Anthropic: Claude Fable 5",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 10.0,
-        "completion": 50.0,
-        "blended": 30.0
-      },
-      "intelligence_score": 78,
-      "value_scores": {
-        "balanced": 202.8,
-        "capability_first": 22.17,
-        "budget": 14.24,
-        "primary": 202.8
-      },
-      "value_score": 202.8,
-      "created": 1781007515,
-      "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
-      "rank": 116,
-      "rank_capability": 111,
-      "rank_budget": 116
-    },
-    {
-      "id": "anthropic/claude-opus-4.8-fast",
-      "name": "Anthropic: Claude Opus 4.8 (Fast)",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 10.0,
-        "completion": 50.0,
-        "blended": 30.0
-      },
-      "intelligence_score": 76,
-      "value_scores": {
-        "balanced": 192.53,
-        "capability_first": 18.77,
-        "budget": 13.88,
-        "primary": 192.53
-      },
-      "value_score": 192.53,
-      "created": 1779913703,
-      "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-      "rank": 117,
-      "rank_capability": 114,
-      "rank_budget": 117
-    },
-    {
-      "id": "anthropic/claude-opus-4.1",
-      "name": "Anthropic: Claude Opus 4.1",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 15.0,
-        "completion": 75.0,
-        "blended": 45.0
-      },
-      "intelligence_score": 76,
-      "value_scores": {
-        "balanced": 128.36,
-        "capability_first": 12.51,
-        "budget": 11.33,
-        "primary": 128.36
-      },
-      "value_score": 128.36,
-      "created": 1754411591,
-      "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
-      "rank": 118,
-      "rank_capability": 116,
-      "rank_budget": 118
-    },
-    {
-      "id": "anthropic/claude-opus-4",
-      "name": "Anthropic: Claude Opus 4",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 15.0,
-        "completion": 75.0,
-        "blended": 45.0
-      },
-      "intelligence_score": 76,
-      "value_scores": {
-        "balanced": 128.36,
-        "capability_first": 12.51,
-        "budget": 11.33,
-        "primary": 128.36
-      },
-      "value_score": 128.36,
-      "created": 1747931245,
-      "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
-      "rank": 119,
-      "rank_capability": 117,
-      "rank_budget": 119
-    },
-    {
-      "id": "openai/o3-pro",
-      "name": "OpenAI: o3 Pro",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 200000,
-      "pricing": {
-        "prompt": 20.0,
-        "completion": 80.0,
-        "blended": 50.0
-      },
-      "intelligence_score": 74,
-      "value_scores": {
-        "balanced": 109.52,
-        "capability_first": 9.53,
-        "budget": 10.47,
-        "primary": 109.52
-      },
-      "value_score": 109.52,
-      "created": 1749598352,
-      "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently...",
-      "rank": 120,
-      "rank_capability": 120,
-      "rank_budget": 120
-    },
-    {
-      "id": "openai/gpt-4",
-      "name": "OpenAI: GPT-4",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 8191,
-      "pricing": {
-        "prompt": 30.0,
-        "completion": 60.0,
-        "blended": 45.0
-      },
-      "intelligence_score": 70,
-      "value_scores": {
-        "balanced": 108.89,
-        "capability_first": 7.59,
-        "budget": 10.43,
-        "primary": 108.89
-      },
-      "value_score": 108.89,
-      "created": 1685232000,
-      "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
-      "rank": 121,
-      "rank_capability": 122,
-      "rank_budget": 121
     },
     {
       "id": "openai/gpt-5-pro",
@@ -3039,19 +2864,19 @@
         "completion": 120.0,
         "blended": 67.5
       },
-      "intelligence_score": 75,
+      "intelligence_score": 50,
       "value_scores": {
-        "balanced": 83.33,
-        "capability_first": 7.67,
-        "budget": 9.13,
-        "primary": 83.33
+        "balanced": 37.04,
+        "capability_first": 0.96,
+        "budget": 6.09,
+        "primary": 37.04
       },
-      "value_score": 83.33,
+      "value_score": 37.04,
       "created": 1759776663,
       "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
-      "rank": 122,
-      "rank_capability": 121,
-      "rank_budget": 122
+      "rank": 115,
+      "rank_capability": 115,
+      "rank_budget": 115
     },
     {
       "id": "anthropic/claude-opus-4.7-fast",
@@ -3064,19 +2889,19 @@
         "completion": 150.0,
         "blended": 90.0
       },
-      "intelligence_score": 76,
+      "intelligence_score": 54,
       "value_scores": {
-        "balanced": 64.18,
-        "capability_first": 6.26,
-        "budget": 8.01,
-        "primary": 64.18
+        "balanced": 32.4,
+        "capability_first": 1.0,
+        "budget": 5.69,
+        "primary": 32.4
       },
-      "value_score": 64.18,
+      "value_score": 32.4,
       "created": 1778613011,
       "description": "Fast-mode variant of [Opus 4.7](/anthropic/claude-opus-4.7) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-      "rank": 123,
-      "rank_capability": 123,
-      "rank_budget": 123
+      "rank": 116,
+      "rank_capability": 113,
+      "rank_budget": 116
     },
     {
       "id": "anthropic/claude-opus-4.6-fast",
@@ -3089,44 +2914,19 @@
         "completion": 150.0,
         "blended": 90.0
       },
-      "intelligence_score": 76,
+      "intelligence_score": 54,
       "value_scores": {
-        "balanced": 64.18,
-        "capability_first": 6.26,
-        "budget": 8.01,
-        "primary": 64.18
+        "balanced": 32.4,
+        "capability_first": 1.0,
+        "budget": 5.69,
+        "primary": 32.4
       },
-      "value_score": 64.18,
+      "value_score": 32.4,
       "created": 1775592472,
       "description": "Fast-mode variant of [Opus 4.6](/anthropic/claude-opus-4.6) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-      "rank": 124,
-      "rank_capability": 124,
-      "rank_budget": 124
-    },
-    {
-      "id": "openai/gpt-5.2-pro",
-      "name": "OpenAI: GPT-5.2 Pro",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 21.0,
-        "completion": 168.0,
-        "blended": 94.5
-      },
-      "intelligence_score": 75,
-      "value_scores": {
-        "balanced": 59.52,
-        "capability_first": 5.48,
-        "budget": 7.72,
-        "primary": 59.52
-      },
-      "value_score": 59.52,
-      "created": 1765389780,
-      "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
-      "rank": 125,
-      "rank_capability": 125,
-      "rank_budget": 125
+      "rank": 117,
+      "rank_capability": 114,
+      "rank_budget": 117
     },
     {
       "id": "openai/gpt-5.5-pro",
@@ -3139,19 +2939,44 @@
         "completion": 180.0,
         "blended": 105.0
       },
-      "intelligence_score": 75,
+      "intelligence_score": 55,
       "value_scores": {
-        "balanced": 53.57,
-        "capability_first": 4.93,
-        "budget": 7.32,
-        "primary": 53.57
+        "balanced": 28.81,
+        "capability_first": 0.93,
+        "budget": 5.37,
+        "primary": 28.81
       },
-      "value_score": 53.57,
+      "value_score": 28.81,
       "created": 1777051896,
       "description": "GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for...",
-      "rank": 126,
-      "rank_capability": 126,
-      "rank_budget": 126
+      "rank": 118,
+      "rank_capability": 116,
+      "rank_budget": 118
+    },
+    {
+      "id": "openai/gpt-5.2-pro",
+      "name": "OpenAI: GPT-5.2 Pro",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 21.0,
+        "completion": 168.0,
+        "blended": 94.5
+      },
+      "intelligence_score": 40,
+      "value_scores": {
+        "balanced": 16.93,
+        "capability_first": 0.3,
+        "budget": 4.11,
+        "primary": 16.93
+      },
+      "value_score": 16.93,
+      "created": 1765389780,
+      "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
+      "rank": 119,
+      "rank_capability": 119,
+      "rank_budget": 119
     },
     {
       "id": "openai/gpt-5.4-pro",
@@ -3164,19 +2989,19 @@
         "completion": 180.0,
         "blended": 105.0
       },
-      "intelligence_score": 75,
+      "intelligence_score": 40,
       "value_scores": {
-        "balanced": 53.57,
-        "capability_first": 4.93,
-        "budget": 7.32,
-        "primary": 53.57
+        "balanced": 15.24,
+        "capability_first": 0.27,
+        "budget": 3.9,
+        "primary": 15.24
       },
-      "value_score": 53.57,
+      "value_score": 15.24,
       "created": 1772734366,
       "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
-      "rank": 127,
-      "rank_capability": 127,
-      "rank_budget": 127
+      "rank": 120,
+      "rank_capability": 120,
+      "rank_budget": 120
     },
     {
       "id": "google/gemini-3-pro-image",
@@ -3194,6 +3019,26 @@
       "value_score": null,
       "created": 1781754054,
       "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "~anthropic/claude-fable-latest",
+      "name": "Anthropic: Claude Fable Latest",
+      "provider": "~anthropic",
+      "provider_display": "~Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 10.0,
+        "completion": 50.0,
+        "blended": 30.0
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1781029944,
+      "description": "This model always redirects to the latest model in the Claude Fable family.",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -3234,26 +3079,6 @@
       "value_score": null,
       "created": 1780491783,
       "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
-      "rank": null,
-      "rank_capability": null,
-      "rank_budget": null
-    },
-    {
-      "id": "stepfun/step-3.7-flash",
-      "name": "StepFun: Step 3.7 Flash",
-      "provider": "stepfun",
-      "provider_display": "Stepfun",
-      "context_length": 256000,
-      "pricing": {
-        "prompt": 0.19999999999999998,
-        "completion": 1.15,
-        "blended": 0.675
-      },
-      "intelligence_score": null,
-      "value_scores": null,
-      "value_score": null,
-      "created": 1779985069,
-      "description": "Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts model. It pairs a 196B-parameter language backbone with a vision encoder for native image and video understanding, activating roughly 11B parameters...",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -3314,6 +3139,26 @@
       "value_score": null,
       "created": 1778247440,
       "description": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool...",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "openai/gpt-chat-latest",
+      "name": "OpenAI: GPT Chat Latest",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 400000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 30.0,
+        "blended": 17.5
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1778000212,
+      "description": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates...",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -3459,6 +3304,26 @@
       "rank_budget": null
     },
     {
+      "id": "~moonshotai/kimi-latest",
+      "name": "MoonshotAI Kimi Latest",
+      "provider": "~moonshotai",
+      "provider_display": "~Moonshotai",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": 0.66,
+        "completion": 3.41,
+        "blended": 2.035
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1777318428,
+      "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
       "id": "~google/gemini-flash-latest",
       "name": "Google Gemini Flash Latest",
       "provider": "~google",
@@ -3474,6 +3339,46 @@
       "value_score": null,
       "created": 1777318398,
       "description": "This model always redirects to the latest model in the Google Gemini Flash family.",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "~anthropic/claude-sonnet-latest",
+      "name": "Anthropic Claude Sonnet Latest",
+      "provider": "~anthropic",
+      "provider_display": "~Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 3.0,
+        "completion": 15.0,
+        "blended": 9.0
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1777318368,
+      "description": "This model always redirects to the latest model in the Anthropic Claude Sonnet family.",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "~openai/gpt-latest",
+      "name": "OpenAI GPT Latest",
+      "provider": "~openai",
+      "provider_display": "~Openai",
+      "context_length": 1050000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 30.0,
+        "blended": 17.5
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1777318334,
+      "description": "This model always redirects to the latest model in the OpenAI GPT family.",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -3599,26 +3504,6 @@
       "rank_budget": null
     },
     {
-      "id": "tencent/hy3-preview",
-      "name": "Tencent: Hy3 preview",
-      "provider": "tencent",
-      "provider_display": "Tencent",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.063,
-        "completion": 0.21,
-        "blended": 0.1365
-      },
-      "intelligence_score": null,
-      "value_scores": null,
-      "value_score": null,
-      "created": 1776878150,
-      "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
-      "rank": null,
-      "rank_capability": null,
-      "rank_budget": null
-    },
-    {
       "id": "xiaomi/mimo-v2.5",
       "name": "Xiaomi: MiMo-V2.5",
       "provider": "xiaomi",
@@ -3654,6 +3539,26 @@
       "value_score": null,
       "created": 1776795886,
       "description": "Ling-2.6-flash is an instant (instruct) model from inclusionAI with 104B total parameters and 7.4B active parameters, designed for real-world agents that require fast responses, strong execution, and high token efficiency....",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "~anthropic/claude-opus-latest",
+      "name": "Anthropic: Claude Opus Latest",
+      "provider": "~anthropic",
+      "provider_display": "~Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 25.0,
+        "blended": 15.0
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1776795361,
+      "description": "This model always redirects to the latest model in the Claude Opus family.",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -4114,6 +4019,26 @@
       "value_score": null,
       "created": 1770908502,
       "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "z-ai/glm-5",
+      "name": "Z.ai: GLM 5",
+      "provider": "z-ai",
+      "provider_display": "Z-Ai",
+      "context_length": 202752,
+      "pricing": {
+        "prompt": 0.6,
+        "completion": 1.92,
+        "blended": 1.26
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1770829182,
+      "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null
@@ -5539,6 +5464,26 @@
       "rank_budget": null
     },
     {
+      "id": "moonshotai/kimi-k2",
+      "name": "MoonshotAI: Kimi K2 0711",
+      "provider": "moonshotai",
+      "provider_display": "Moonshotai",
+      "context_length": 131072,
+      "pricing": {
+        "prompt": 0.5700000000000001,
+        "completion": 2.3,
+        "blended": 1.435
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1752263252,
+      "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for...",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
       "id": "tencent/hunyuan-a13b-instruct",
       "name": "Tencent: Hunyuan A13B Instruct",
       "provider": "tencent",
@@ -6794,6 +6739,26 @@
       "value_score": null,
       "created": 1688256000,
       "description": "One of the highest performing and most popular fine-tunes of Llama 2 13B, with rich descriptions and roleplay. #merge",
+      "rank": null,
+      "rank_capability": null,
+      "rank_budget": null
+    },
+    {
+      "id": "openai/gpt-4",
+      "name": "OpenAI: GPT-4",
+      "provider": "openai",
+      "provider_display": "OpenAI",
+      "context_length": 8191,
+      "pricing": {
+        "prompt": 30.0,
+        "completion": 60.0,
+        "blended": 45.0
+      },
+      "intelligence_score": null,
+      "value_scores": null,
+      "value_score": null,
+      "created": 1685232000,
+      "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
       "rank": null,
       "rank_capability": null,
       "rank_budget": null

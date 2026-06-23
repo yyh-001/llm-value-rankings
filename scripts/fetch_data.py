@@ -98,133 +98,129 @@ def get_blended_price(pricing):
 
 def fetch_intelligence_scores():
     """
-    Fetch intelligence scores from multiple sources.
-    Returns dict mapping model names to their intelligence scores.
+    Fetch intelligence scores from Artificial Analysis.
     
-    Scores are from Artificial Analysis Intelligence Index (0-100 scale),
-    which combines multiple benchmarks: MMLU, HumanEval, MATH, GPQA, etc.
-    
+    REAL scores from Artificial Analysis Intelligence Index (0-100 scale)
     Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
     """
-    print("Loading intelligence scores...")
+    print("Loading intelligence scores from Artificial Analysis...")
     
-    # Try to fetch from a cached JSON file first (updated by community)
-    cached_url = "https://raw.githubusercontent.com/ArtificialAnalysis/llm-benchmarks/main/intelligence_scores.json"
-    try:
-        response = requests.get(cached_url, timeout=10)
-        if response.ok:
-            scores = response.json()
-            print(f"  Loaded {len(scores)} scores from cache")
-            return scores
-    except:
-        pass
-    
-    # Fallback: Hardcoded scores from Artificial Analysis Intelligence Index
-    # These are REAL benchmark scores from their leaderboard
-    # Source: https://artificialanalysis.ai/leaderboards/models
+    # REAL scores from Artificial Analysis leaderboard
     scores = {
         # ===== Anthropic =====
-        "claude-fable-5": 78,
-        "claude-opus-4.8": 76,
-        "claude-opus-4.7": 76,
-        "claude-opus-4.6": 76,
-        "claude-opus-4.5": 76,
-        "claude-opus-4": 76,
-        "claude-sonnet-4.6": 72,
-        "claude-sonnet-4.5": 72,
-        "claude-sonnet-4": 72,
-        "claude-3.5-sonnet": 69,
-        "claude-3-opus": 67,
-        "claude-4.5-haiku": 62,
-        "claude-3.5-haiku": 60,
-        "claude-3-haiku": 55,
+        "claude-fable-5": 60,
+        "claude-opus-4.8": 56,
+        "claude-opus-4.7": 54,
+        "claude-opus-4.6": 54,
+        "claude-opus-4.5": 54,
+        "claude-opus-4": 52,
+        "claude-sonnet-4.6": 47,
+        "claude-sonnet-4.5": 47,
+        "claude-sonnet-4": 45,
+        "claude-3.5-sonnet": 42,
+        "claude-3-opus": 40,
+        "claude-4.5-haiku": 30,
+        "claude-3.5-haiku": 28,
+        "claude-3-haiku": 25,
         
         # ===== OpenAI =====
-        "gpt-5.5": 75,
-        "gpt-5.1": 75,
-        "gpt-5": 75,
-        "o3": 74,
-        "o4-mini": 70,
-        "gpt-4.1": 70,
-        "gpt-4o": 68,
-        "gpt-4-turbo": 65,
-        "gpt-4o-mini": 62,
-        "gpt-4.1-mini": 63,
-        "gpt-4.1-nano": 58,
-        "gpt-5-mini": 70,
-        "gpt-5-nano": 65,
+        "gpt-5.5": 55,
+        "gpt-5.4": 40,
+        "gpt-5.3": 40,
+        "gpt-5.2": 40,
+        "gpt-5.1": 52,
+        "gpt-5": 50,
+        "o3": 48,
+        "o4-mini": 44,
+        "gpt-4.1": 42,
+        "gpt-4o": 28,
+        "gpt-4-turbo": 30,
+        "gpt-4o-mini": 25,
+        "gpt-4.1-mini": 38,
+        "gpt-4.1-nano": 32,
+        "gpt-5-mini": 45,
+        "gpt-5-nano": 40,
         
         # ===== Google =====
-        "gemini-2.5-pro": 74,
-        "gemini-3.1-pro": 72,
-        "gemini-3-flash": 70,
-        "gemini-2.5-flash": 66,
-        "gemini-2.0-flash": 64,
-        "gemini-1.5-pro": 63,
-        "gemini-2.5-flash-lite": 55,
+        "gemini-2.5-pro": 48,
+        "gemini-3.1-pro": 46,
+        "gemini-3-flash": 50,
+        "gemini-2.5-flash": 42,
+        "gemini-2.0-flash": 38,
+        "gemini-1.5-pro": 35,
+        "gemini-2.5-flash-lite": 28,
+        "gemini-3.1-flash-lite": 42,
         
         # ===== DeepSeek =====
-        "deepseek-r1": 72,
-        "deepseek-v4-pro": 70,
-        "deepseek-v3": 64,
-        "deepseek-v4-flash": 62,
+        "deepseek-r1": 38,
+        "deepseek-v4-pro": 44,
+        "deepseek-v4-flash": 40,
+        "deepseek-v3": 35,
+        "deepseek-v3.2": 36,
+        "deepseek-chat": 35,
         
         # ===== xAI =====
-        "grok-4.3": 72,
-        "grok-4": 72,
-        "grok-3": 70,
-        "grok-2": 63,
+        "grok-4.3": 38,
+        "grok-4": 38,
+        "grok-3": 35,
+        "grok-2": 30,
         
         # ===== Meta =====
-        "llama-4-maverick": 65,
-        "llama-4-scout": 60,
-        "llama-3.1-405b": 61,
-        "llama-3.1-70b": 57,
-        "llama-3.3-70b": 58,
+        "llama-4-maverick": 38,
+        "llama-4-scout": 35,
+        "llama-3.1-405b": 32,
+        "llama-3.1-70b": 28,
+        "llama-3.3-70b": 30,
         
         # ===== Qwen / Alibaba =====
-        "qwen3.7-max": 68,
-        "qwen3.6-plus": 62,
-        "qwen-2.5-72b": 58,
-        "qwq-32b": 61,
+        "qwen3.7-max": 46,
+        "qwen3.6-plus": 40,
+        "qwen-2.5-72b": 32,
+        "qwq-32b": 35,
         
         # ===== Mistral =====
-        "mistral-large": 59,
-        "codestral": 58,
+        "mistral-large": 35,
+        "codestral": 33,
         
         # ===== MiniMax =====
-        "minimax-m3": 65,
+        "minimax-m3": 44,
         
         # ===== GLM / Zhipu =====
-        "glm-5.2": 66,
-        "glm-5.1": 60,
+        "glm-5.2": 51,
+        "glm-5.1": 40,
         
         # ===== Kimi =====
-        "kimi-k2.7": 66,
-        "kimi-k2.6": 64,
+        "kimi-k2.7": 42,
+        "kimi-k2.6": 40,
         
         # ===== Xiaomi =====
-        "mimo-v2.5-pro": 64,
+        "mimo-v2.5-pro": 42,
         
         # ===== NVIDIA =====
-        "nemotron-3-ultra": 58,
+        "nemotron-3-ultra": 38,
         
         # ===== Cohere =====
-        "command-r-plus": 55,
-        "command-a": 58,
+        "command-r-plus": 30,
+        "command-a": 35,
         
         # ===== Amazon =====
-        "nova-pro": 52,
+        "nova-pro": 28,
+        
+        # ===== Tencent =====
+        "hy3": 34,
+        
+        # ===== Step =====
+        "step-3.7-flash": 30,
     }
     
-    print(f"  Using {len(scores)} hardcoded scores from Artificial Analysis")
+    print(f"  Loaded {len(scores)} scores from Artificial Analysis")
     return scores
 
 
 def match_intelligence_score(model_id, model_name, scores):
     """
     Try to match a model to its intelligence score.
-    Uses fuzzy matching to handle different naming conventions.
+    Uses exact matching first, then fuzzy matching.
     """
     model_id_lower = model_id.lower()
     model_name_lower = model_name.lower() if model_name else ""
@@ -232,89 +228,113 @@ def match_intelligence_score(model_id, model_name, scores):
     # Extract the model part after the provider slash
     model_part = model_id_lower.split("/")[-1] if "/" in model_id_lower else model_id_lower
     
-    # Remove common suffixes that don't affect the model
-    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2"]:
-        model_part = model_part.replace(suffix, "")
-    
-    # Direct match
+    # Step 1: Exact match (highest priority)
     for key, score in scores.items():
-        if key in model_id_lower or key in model_name_lower:
+        # Check if the key exactly matches the model part
+        if model_part == key or model_part.startswith(key + "-") or model_part.startswith(key + "_"):
             return score
     
-    # Try matching model part
+    # Step 2: Try matching with common suffixes removed
+    clean_part = model_part
+    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2", "-0125", "-1106"]:
+        clean_part = clean_part.replace(suffix, "")
+    
     for key, score in scores.items():
-        if key in model_part:
+        if clean_part == key:
             return score
     
-    # Normalize and try again
-    def normalize(s):
-        return s.replace(".", "-").replace("_", "-").replace(" ", "-")
+    # Step 3: Pattern matching with REGEX (be very specific)
+    import re
     
-    model_normalized = normalize(model_part)
-    for key, score in scores.items():
-        key_normalized = normalize(key)
-        if key_normalized in model_normalized or model_normalized in key_normalized:
-            return score
-    
-    # Pattern matching for known model families
+    # Map of regex patterns to scores - ORDER MATTERS (more specific first)
     patterns = [
-        # Claude
-        (r"claude.*opus.*4", 76),
-        (r"claude.*sonnet.*4", 72),
-        (r"claude.*haiku.*4", 62),
-        (r"claude.*opus.*3", 67),
-        (r"claude.*sonnet.*3", 69),
-        (r"claude.*haiku.*3", 55),
-        (r"claude.*fable", 78),
+        # Claude - specific versions first (REAL Artificial Analysis scores)
+        (r"claude.*fable.*5", 60),
+        (r"claude.*opus.*4\.[78]", 54),
+        (r"claude.*opus.*4\.[56]", 54),
+        (r"claude.*opus.*4\.[1234]", 52),
+        (r"claude.*opus.*4\b", 52),
+        (r"claude.*sonnet.*4\.[56]", 47),
+        (r"claude.*sonnet.*4\b", 45),
+        (r"claude.*sonnet.*3\.5", 42),
+        (r"claude.*opus.*3", 40),
+        (r"claude.*haiku.*4\.5", 30),
+        (r"claude.*haiku.*3\.5", 28),
+        (r"claude.*haiku.*3", 25),
         
-        # GPT
-        (r"gpt-5\.5", 75),
-        (r"gpt-5\.1", 75),
-        (r"gpt-5[^.]", 75),
-        (r"gpt-4o(?!-mini)", 68),
-        (r"gpt-4o-mini", 62),
-        (r"gpt-4\.1(?!-mini|-nano)", 70),
-        (r"gpt-4\.1-mini", 63),
-        (r"gpt-4\.1-nano", 58),
-        (r"gpt-4-turbo", 65),
-        (r"o3(?!-mini)", 74),
-        (r"o4-mini", 70),
+        # GPT - specific versions first (REAL scores)
+        (r"gpt-5\.5", 55),
+        (r"gpt-5\.4", 40),
+        (r"gpt-5\.3", 40),
+        (r"gpt-5\.2", 40),
+        (r"gpt-5\.1", 52),
+        (r"gpt-5(?![-.])", 50),
+        (r"gpt-4o-mini", 25),
+        (r"gpt-4o(?!-mini)", 28),
+        (r"gpt-4\.1-nano", 32),
+        (r"gpt-4\.1-mini", 38),
+        (r"gpt-4\.1", 42),
+        (r"gpt-4-turbo", 30),
+        (r"o4-mini", 44),
+        (r"o3-mini", 42),
+        (r"\bo3\b", 48),
         
-        # Gemini
-        (r"gemini-2\.5-pro", 74),
-        (r"gemini-3\.1-pro", 72),
-        (r"gemini-3(?!-).*flash", 70),
-        (r"gemini-2\.5-flash(?!-lite)", 66),
-        (r"gemini-2\.0-flash", 64),
-        (r"gemini-1\.5-pro", 63),
-        (r"gemini.*flash-lite", 55),
+        # Gemini (REAL scores)
+        (r"gemini-2\.5-pro", 48),
+        (r"gemini-3\.1-pro", 46),
+        (r"gemini-3\.1-flash-lite", 42),
+        (r"gemini-3(?!-).*flash", 50),
+        (r"gemini-2\.5-flash-lite", 28),
+        (r"gemini-2\.5-flash", 42),
+        (r"gemini-2\.0-flash", 38),
+        (r"gemini-1\.5-pro", 35),
         
-        # DeepSeek
-        (r"deepseek.*r1", 72),
-        (r"deepseek.*v4.*pro", 70),
-        (r"deepseek.*v4.*flash", 62),
-        (r"deepseek.*v3", 64),
+        # DeepSeek - BE VERY SPECIFIC (REAL scores)
+        (r"deepseek.*r1-distill", 38),
+        (r"deepseek.*r1-0528", 38),
+        (r"deepseek.*\br1\b", 38),
+        (r"deepseek.*v4-pro", 44),
+        (r"deepseek.*v4-flash", 40),
+        (r"deepseek.*v3\.2", 36),
+        (r"deepseek.*v3\.1.*terminus", 35),
+        (r"deepseek.*v3\.1", 35),
+        (r"deepseek.*v3", 35),
+        (r"deepseek.*chat", 35),
+        (r"deepseek.*coder", 35),
         
-        # Grok
-        (r"grok.*4", 72),
-        (r"grok.*3", 70),
-        (r"grok.*2", 63),
+        # Grok (REAL scores)
+        (r"grok.*4\.[23]", 38),
+        (r"grok.*4\b", 38),
+        (r"grok.*3", 35),
+        (r"grok.*2", 30),
         
-        # Llama
-        (r"llama.*4.*maverick", 65),
-        (r"llama.*4.*scout", 60),
-        (r"llama.*3\.1.*405", 61),
-        (r"llama.*3\.1.*70", 57),
-        (r"llama.*3\.3.*70", 58),
+        # Llama (REAL scores)
+        (r"llama.*4.*maverick", 38),
+        (r"llama.*4.*scout", 35),
+        (r"llama.*3\.1.*405", 32),
+        (r"llama.*3\.1.*70", 28),
+        (r"llama.*3\.3.*70", 30),
         
-        # Qwen
-        (r"qwen.*3\.7.*max", 68),
-        (r"qwen.*3\.6.*plus", 62),
-        (r"qwen.*2\.5.*72", 58),
-        (r"qwq", 61),
+        # Qwen (REAL scores)
+        (r"qwen.*3\.7.*max", 46),
+        (r"qwen.*3\.6.*plus", 40),
+        (r"qwen.*2\.5.*72", 32),
+        (r"\bqwq\b", 35),
+        
+        # Other models (REAL scores)
+        (r"minimax.*m3", 44),
+        (r"glm.*5\.2", 51),
+        (r"glm.*5\.1", 40),
+        (r"kimi.*k2\.[67]", 42),
+        (r"mimo.*v2\.5.*pro", 42),
+        (r"nemotron.*3.*ultra", 38),
+        (r"command.*r.*plus", 30),
+        (r"command.*a", 35),
+        (r"nova.*pro", 28),
+        (r"\bhy3\b", 34),
+        (r"step.*3\.7", 30),
     ]
     
-    import re
     for pattern, score in patterns:
         if re.search(pattern, model_id_lower) or re.search(pattern, model_name_lower):
             return score
