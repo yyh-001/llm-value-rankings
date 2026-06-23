@@ -178,12 +178,17 @@ function filterAndSort() {
     
     // Price range filter
     if (state.priceRange) {
-        const [min, max] = state.priceRange.split('-').map(Number);
-        filtered = filtered.filter(m => {
-            const price = m.pricing.blended;
-            if (max) return price >= min && price < max;
-            return price >= min;
-        });
+        if (state.priceRange === 'flagship') {
+            // Flagship models: intelligence >= 65
+            filtered = filtered.filter(m => m.intelligence_score && m.intelligence_score >= 65);
+        } else {
+            const [min, max] = state.priceRange.split('-').map(Number);
+            filtered = filtered.filter(m => {
+                const price = m.pricing.blended;
+                if (max) return price >= min && price < max;
+                return price >= min;
+            });
+        }
     }
     
     // Sort based on selected method
@@ -251,11 +256,51 @@ function renderTable() {
         return;
     }
     
-    // Find max value for bar scaling
-    const maxValue = Math.max(...state.filteredModels.filter(m => m.value_score).map(m => m.value_score));
+    // Find max value for bar scaling based on current sort method
+    const getValueForSort = (m) => {
+        switch(state.sortBy) {
+            case 'capability': return m.value_scores?.capability_first || 0;
+            case 'balanced': return m.value_scores?.balanced || 0;
+            case 'budget': return m.value_scores?.budget || 0;
+            case 'intelligence': return m.intelligence_score || 0;
+            case 'price': return 1 / (m.pricing.blended || 1); // Inverse for price
+            default: return m.value_scores?.capability_first || 0;
+        }
+    };
+    
+    const maxValue = Math.max(...state.filteredModels.map(m => getValueForSort(m)));
     
     elements.rankingsBody.innerHTML = pageModels.map((model, idx) => {
-        const rank = model.rank || '-';
+        // Get the appropriate score based on sort method
+        let displayScore;
+        let displayRank;
+        switch(state.sortBy) {
+            case 'capability':
+                displayScore = model.value_scores?.capability_first;
+                displayRank = model.rank_capability;
+                break;
+            case 'balanced':
+                displayScore = model.value_scores?.balanced;
+                displayRank = model.rank;
+                break;
+            case 'budget':
+                displayScore = model.value_scores?.budget;
+                displayRank = model.rank_budget;
+                break;
+            case 'intelligence':
+                displayScore = model.intelligence_score;
+                displayRank = null;
+                break;
+            case 'price':
+                displayScore = model.pricing.blended;
+                displayRank = null;
+                break;
+            default:
+                displayScore = model.value_scores?.capability_first;
+                displayRank = model.rank_capability;
+        }
+        
+        const rank = displayRank || model.rank || '-';
         const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
         const providerName = PROVIDER_NAMES[model.provider]?.[lang] || model.provider;
         const logoSrc = PROVIDER_LOGOS[model.provider] || '';
@@ -266,7 +311,12 @@ function renderTable() {
         const price = model.pricing.blended;
         const priceClass = getPriceClass(price);
         
-        const valueBarWidth = model.value_score ? (model.value_score / maxValue * 100) : 0;
+        const barValue = getValueForSort(model);
+        const valueBarWidth = maxValue > 0 ? (barValue / maxValue * 100) : 0;
+        
+        // Format display score
+        const formattedScore = displayScore ? 
+            (state.sortBy === 'price' ? `$${displayScore.toFixed(2)}` : Math.round(displayScore).toLocaleString()) : '-';
         
         return `
             <tr class="fade-in" style="animation-delay: ${idx * 30}ms">
@@ -292,7 +342,7 @@ function renderTable() {
                     <span class="price-display ${priceClass}">$${price.toFixed(2)}</span>
                 </td>
                 <td class="col-value">
-                    <span class="value-score">${model.value_score || '-'}</span>
+                    <span class="value-score">${formattedScore}</span>
                     <div class="value-bar">
                         <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
                     </div>
