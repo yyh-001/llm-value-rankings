@@ -91,11 +91,12 @@
         <section class="methodology">
             <h3 data-i18n="methodology_title">计算方法</h3>
             <div class="formula">
-                <span data-i18n="formula">性价比 = 能力评分² / 价格 ($/1M tokens)</span>
+                <span data-i18n="formula">性价比 = 能力评分² / 价格</span>
             </div>
+            <p data-i18n="penalty_desc">低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²</p>
             <ul>
-                <li data-i18n="method_1">能力评分：Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH等综合benchmark)</li>
-                <li data-i18n="method_2">价格：OpenRouter API 输入输出平均价</li>
+                <li data-i18n="method_1">能力评分：Artificial Analysis Intelligence Index</li>
+                <li data-i18n="method_2">价格：OpenRouter 输入输出平均价 ($/1M tokens)</li>
                 <li data-i18n="method_3">仅展示有benchmark评分的主流模型</li>
             </ul>
         </section>

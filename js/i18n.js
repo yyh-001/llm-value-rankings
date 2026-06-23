@@ -30,9 +30,10 @@ const translations = {
         
         // Methodology
         methodology_title: "计算方法",
-        formula: "性价比 = 能力评分² / 价格 ($/1M tokens)",
-        method_1: "能力评分：Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH等综合benchmark)",
-        method_2: "价格：OpenRouter API 输入输出平均价",
+        formula: "性价比 = 能力评分² / 价格",
+        penalty_desc: "低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²",
+        method_1: "能力评分：Artificial Analysis Intelligence Index",
+        method_2: "价格：OpenRouter 输入输出平均价 ($/1M tokens)",
         method_3: "仅展示有benchmark评分的主流模型",
         
         // Comments
@@ -90,9 +91,10 @@ const translations = {
         
         // Methodology
         methodology_title: "Methodology",
-        formula: "Value = Intelligence² / Price ($/1M tokens)",
-        method_1: "Intelligence: Artificial Analysis Intelligence Index (MMLU, HumanEval, MATH, etc.)",
-        method_2: "Price: OpenRouter API blended (input + output) / 2",
+        formula: "Value = Intelligence² / Price",
+        penalty_desc: "Models below average (41) get penalized: multiply by (score/avg)²",
+        method_1: "Intelligence: Artificial Analysis Intelligence Index",
+        method_2: "Price: OpenRouter blended average ($/1M tokens)",
         method_3: "Only shows mainstream models with benchmark scores",
         
         // Comments
