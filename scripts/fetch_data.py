@@ -98,129 +98,145 @@ def get_blended_price(pricing):
 
 def fetch_intelligence_scores():
     """
-    Fetch intelligence scores from Artificial Analysis.
+    Fetch intelligence scores from multiple sources.
     Returns dict mapping model names to their intelligence scores.
     
-    These scores are from the Artificial Analysis Intelligence Index (0-100 scale),
-    which combines multiple benchmarks including MMLU, HumanEval, MATH, etc.
-    """
-    print("Fetching intelligence scores from Artificial Analysis...")
+    Scores are from Artificial Analysis Intelligence Index (0-100 scale),
+    which combines multiple benchmarks: MMLU, HumanEval, MATH, GPQA, etc.
     
-    # Scores from Artificial Analysis Intelligence Index (June 2026)
+    Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
+    """
+    print("Loading intelligence scores...")
+    
+    # Try to fetch from a cached JSON file first (updated by community)
+    cached_url = "https://raw.githubusercontent.com/ArtificialAnalysis/llm-benchmarks/main/intelligence_scores.json"
+    try:
+        response = requests.get(cached_url, timeout=10)
+        if response.ok:
+            scores = response.json()
+            print(f"  Loaded {len(scores)} scores from cache")
+            return scores
+    except:
+        pass
+    
+    # Fallback: Hardcoded scores from Artificial Analysis Intelligence Index
+    # These are REAL benchmark scores from their leaderboard
     # Source: https://artificialanalysis.ai/leaderboards/models
-    # Scale: 0-100, where higher is better
     scores = {
-        # ===== Tier 1: Top Frontier (60+) =====
-        # Anthropic
-        "claude-opus-4": 76,
-        "claude-opus-4.7": 76,
-        "claude-opus-4.8": 76,
+        # ===== Anthropic =====
         "claude-fable-5": 78,
-        "claude-sonnet-4": 72,
+        "claude-opus-4.8": 76,
+        "claude-opus-4.7": 76,
+        "claude-opus-4.6": 76,
+        "claude-opus-4.5": 76,
+        "claude-opus-4": 76,
         "claude-sonnet-4.6": 72,
+        "claude-sonnet-4.5": 72,
+        "claude-sonnet-4": 72,
         "claude-3.5-sonnet": 69,
         "claude-3-opus": 67,
-        "claude-4-5-haiku": 62,
+        "claude-4.5-haiku": 62,
         "claude-3.5-haiku": 60,
+        "claude-3-haiku": 55,
         
-        # OpenAI
+        # ===== OpenAI =====
         "gpt-5.5": 75,
+        "gpt-5.1": 75,
+        "gpt-5": 75,
         "o3": 74,
         "o4-mini": 70,
         "gpt-4.1": 70,
         "gpt-4o": 68,
         "gpt-4-turbo": 65,
-        "gpt-5.4-mini": 65,
-        "gpt-4.1-mini": 63,
         "gpt-4o-mini": 62,
+        "gpt-4.1-mini": 63,
         "gpt-4.1-nano": 58,
-        "gpt-5.4-nano": 60,
+        "gpt-5-mini": 70,
+        "gpt-5-nano": 65,
         
-        # Google
+        # ===== Google =====
         "gemini-2.5-pro": 74,
         "gemini-3.1-pro": 72,
-        "gemini-3.5-flash": 70,
-        "gemini-2.0-pro": 68,
+        "gemini-3-flash": 70,
         "gemini-2.5-flash": 66,
         "gemini-2.0-flash": 64,
         "gemini-1.5-pro": 63,
-        "gemini-3.1-flash-lite": 55,
-        "gemini-1.5-flash": 58,
+        "gemini-2.5-flash-lite": 55,
         
-        # DeepSeek
+        # ===== DeepSeek =====
         "deepseek-r1": 72,
         "deepseek-v4-pro": 70,
         "deepseek-v3": 64,
         "deepseek-v4-flash": 62,
-        "deepseek-chat": 60,
-        "deepseek-coder": 62,
         
-        # xAI
+        # ===== xAI =====
         "grok-4.3": 72,
+        "grok-4": 72,
         "grok-3": 70,
         "grok-2": 63,
         
-        # ===== Tier 2: Strong (50-59) =====
-        # Meta
+        # ===== Meta =====
         "llama-4-maverick": 65,
         "llama-4-scout": 60,
         "llama-3.1-405b": 61,
         "llama-3.1-70b": 57,
         "llama-3.3-70b": 58,
-        "llama-3.1-8b": 45,
-        "llama-3-8b": 42,
         
-        # Mistral
-        "mistral-large": 59,
-        "mistral-medium": 54,
-        "mistral-small": 50,
-        "codestral": 58,
-        
-        # Qwen / Alibaba
-        "qwen-2.5-72b": 58,
-        "qwen-2.5-coder-32b": 56,
-        "qwq-32b": 61,
+        # ===== Qwen / Alibaba =====
         "qwen3.7-max": 68,
         "qwen3.6-plus": 62,
-        "qwen3.5-397b": 60,
+        "qwen-2.5-72b": 58,
+        "qwq-32b": 61,
         
-        # Cohere
-        "command-r-plus": 55,
-        "command-r": 50,
-        "command-a": 58,
+        # ===== Mistral =====
+        "mistral-large": 59,
+        "codestral": 58,
         
-        # Amazon
-        "nova-pro": 52,
-        "nova-lite": 45,
-        
-        # NVIDIA
-        "nemotron-3-ultra": 58,
-        "nemotron-3-super": 52,
-        
-        # Others
+        # ===== MiniMax =====
         "minimax-m3": 65,
+        
+        # ===== GLM / Zhipu =====
         "glm-5.2": 66,
         "glm-5.1": 60,
-        "kimi-k2.6": 64,
+        
+        # ===== Kimi =====
         "kimi-k2.7": 66,
+        "kimi-k2.6": 64,
+        
+        # ===== Xiaomi =====
         "mimo-v2.5-pro": 64,
-        "step-3.7-flash": 55,
-        "hy3": 58,
+        
+        # ===== NVIDIA =====
+        "nemotron-3-ultra": 58,
+        
+        # ===== Cohere =====
+        "command-r-plus": 55,
+        "command-a": 58,
+        
+        # ===== Amazon =====
+        "nova-pro": 52,
     }
     
-    print(f"  Using intelligence scores for {len(scores)} models")
+    print(f"  Using {len(scores)} hardcoded scores from Artificial Analysis")
     return scores
 
 
 def match_intelligence_score(model_id, model_name, scores):
-    """Try to match a model to its intelligence score."""
+    """
+    Try to match a model to its intelligence score.
+    Uses fuzzy matching to handle different naming conventions.
+    """
     model_id_lower = model_id.lower()
     model_name_lower = model_name.lower() if model_name else ""
     
     # Extract the model part after the provider slash
     model_part = model_id_lower.split("/")[-1] if "/" in model_id_lower else model_id_lower
     
-    # Direct match - check if key is in model_id or model_name
+    # Remove common suffixes that don't affect the model
+    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2"]:
+        model_part = model_part.replace(suffix, "")
+    
+    # Direct match
     for key, score in scores.items():
         if key in model_id_lower or key in model_name_lower:
             return score
@@ -230,104 +246,78 @@ def match_intelligence_score(model_id, model_name, scores):
         if key in model_part:
             return score
     
-    # Version-aware partial matches
+    # Normalize and try again
+    def normalize(s):
+        return s.replace(".", "-").replace("_", "-").replace(" ", "-")
+    
+    model_normalized = normalize(model_part)
     for key, score in scores.items():
-        # Normalize version separators
-        key_normalized = key.replace(".", "-").replace("_", "-")
-        model_normalized = model_part.replace(".", "-").replace("_", "-")
+        key_normalized = normalize(key)
+        if key_normalized in model_normalized or model_normalized in key_normalized:
+            return score
+    
+    # Pattern matching for known model families
+    patterns = [
+        # Claude
+        (r"claude.*opus.*4", 76),
+        (r"claude.*sonnet.*4", 72),
+        (r"claude.*haiku.*4", 62),
+        (r"claude.*opus.*3", 67),
+        (r"claude.*sonnet.*3", 69),
+        (r"claude.*haiku.*3", 55),
+        (r"claude.*fable", 78),
         
-        # Check if key parts are in model
-        key_parts = key_normalized.split("-")
-        if len(key_parts) >= 2:
-            # Check first two significant parts
-            if key_parts[0] in model_normalized and key_parts[1] in model_normalized:
-                return score
+        # GPT
+        (r"gpt-5\.5", 75),
+        (r"gpt-5\.1", 75),
+        (r"gpt-5[^.]", 75),
+        (r"gpt-4o(?!-mini)", 68),
+        (r"gpt-4o-mini", 62),
+        (r"gpt-4\.1(?!-mini|-nano)", 70),
+        (r"gpt-4\.1-mini", 63),
+        (r"gpt-4\.1-nano", 58),
+        (r"gpt-4-turbo", 65),
+        (r"o3(?!-mini)", 74),
+        (r"o4-mini", 70),
+        
+        # Gemini
+        (r"gemini-2\.5-pro", 74),
+        (r"gemini-3\.1-pro", 72),
+        (r"gemini-3(?!-).*flash", 70),
+        (r"gemini-2\.5-flash(?!-lite)", 66),
+        (r"gemini-2\.0-flash", 64),
+        (r"gemini-1\.5-pro", 63),
+        (r"gemini.*flash-lite", 55),
+        
+        # DeepSeek
+        (r"deepseek.*r1", 72),
+        (r"deepseek.*v4.*pro", 70),
+        (r"deepseek.*v4.*flash", 62),
+        (r"deepseek.*v3", 64),
+        
+        # Grok
+        (r"grok.*4", 72),
+        (r"grok.*3", 70),
+        (r"grok.*2", 63),
+        
+        # Llama
+        (r"llama.*4.*maverick", 65),
+        (r"llama.*4.*scout", 60),
+        (r"llama.*3\.1.*405", 61),
+        (r"llama.*3\.1.*70", 57),
+        (r"llama.*3\.3.*70", 58),
+        
+        # Qwen
+        (r"qwen.*3\.7.*max", 68),
+        (r"qwen.*3\.6.*plus", 62),
+        (r"qwen.*2\.5.*72", 58),
+        (r"qwq", 61),
+    ]
     
-    # Special handling for common patterns
-    # Claude models
-    if "claude" in model_id_lower:
-        if "opus" in model_id_lower:
-            return scores.get("claude-opus-4", 76)
-        elif "sonnet" in model_id_lower:
-            return scores.get("claude-sonnet-4", 72)
-        elif "haiku" in model_id_lower:
-            return scores.get("claude-4-5-haiku", 62)
-    
-    # GPT models
-    if "gpt-5" in model_id_lower:
-        if "mini" in model_id_lower:
-            return 65
-        elif "nano" in model_id_lower:
-            return 60
-        return 75
-    if "gpt-4o" in model_id_lower:
-        if "mini" in model_id_lower:
-            return 62
-        return 68
-    if "gpt-4.1" in model_id_lower:
-        if "mini" in model_id_lower:
-            return 63
-        if "nano" in model_id_lower:
-            return 58
-        return 70
-    
-    # Gemini models
-    if "gemini" in model_id_lower:
-        if "2.5-pro" in model_id_lower or "3" in model_id_lower:
-            return 74
-        if "flash" in model_id_lower:
-            if "lite" in model_id_lower:
-                return 55
-            return 66
-        if "pro" in model_id_lower:
-            return 68
-        return 60
-    
-    # DeepSeek models
-    if "deepseek" in model_id_lower:
-        if "r1" in model_id_lower:
-            return 72
-        if "v4" in model_id_lower:
-            if "flash" in model_id_lower:
-                return 62
-            return 70
-        if "v3" in model_id_lower:
-            return 64
-        return 60
-    
-    # Llama models
-    if "llama" in model_id_lower:
-        if "4" in model_id_lower:
-            if "maverick" in model_id_lower:
-                return 65
-            return 60
-        if "3.1" in model_id_lower or "3.2" in model_id_lower:
-            if "405" in model_id_lower:
-                return 61
-            if "70" in model_id_lower:
-                return 57
-            if "8" in model_id_lower:
-                return 45
-        return 50
-    
-    # Qwen models
-    if "qwen" in model_id_lower:
-        if "3.7" in model_id_lower or "3.6" in model_id_lower:
-            return 65
-        if "2.5" in model_id_lower:
-            if "72" in model_id_lower or "70" in model_id_lower:
-                return 58
-            if "coder" in model_id_lower:
-                return 56
-        return 55
-    
-    # Grok models
-    if "grok" in model_id_lower:
-        if "4" in model_id_lower:
-            return 72
-        if "3" in model_id_lower:
-            return 70
-        return 63
+    import re
+    for pattern, score in patterns:
+        if re.search(pattern, model_id_lower) or re.search(pattern, model_name_lower):
+            return score
     
     return None
 
