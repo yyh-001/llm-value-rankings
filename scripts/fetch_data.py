@@ -342,52 +342,48 @@ def match_intelligence_score(model_id, model_name, scores):
     return None
 
 
-def calculate_value_scores(intelligence, price):
+def calculate_value_scores(intelligence, price, avg_intelligence=40):
     """
-    Calculate multiple value scores from different perspectives.
+    Calculate value score with penalty for below-average models.
     
-    Returns a dict with different scoring methods:
-    - balanced: Good balance of capability and price
-    - capability_first: Strongly favors high-capability models
-    - budget: For users who need minimum viable capability at lowest price
+    Formula:
+    - Above average: intelligence² / price
+    - Below average: (intelligence² / price) * (intelligence / avg)²  [penalty]
     """
     if intelligence is None or price is None or price <= 0:
         return None
     
-    import math
+    base = (intelligence ** 2) / price
     
-    # 1. Balanced score: intelligence^2 / price
-    # Good for most users - rewards capability but doesn't ignore price
-    balanced = (intelligence ** 2) / price
+    # Apply penalty for below-average models
+    if intelligence < avg_intelligence:
+        penalty = (intelligence / avg_intelligence) ** 2
+        return round(base * penalty, 2)
     
-    # 2. Capability-first: exp(intelligence/12) / price
-    # For users who need top-tier capability
-    capability_first = math.exp(intelligence / 12) / price
-    
-    # 3. Budget score: intelligence / sqrt(price)
-    # For users optimizing for cost with acceptable capability
-    budget = intelligence / math.sqrt(price)
-    
-    return {
-        "balanced": round(balanced, 2),
-        "capability_first": round(capability_first, 2),
-        "budget": round(budget, 2),
-        # Primary score uses balanced approach
-        "primary": round(balanced, 2)
-    }
+    return round(base, 2)
 
 
 def process_models(openrouter_models, intelligence_scores):
     """Process and combine model data."""
     processed = []
     seen = set()
+    
+    # First pass: calculate average intelligence
+    matched_scores = []
+    for model in openrouter_models:
+        model_id = model.get("id", "")
+        model_name = model.get("name", "")
+        intel = match_intelligence_score(model_id, model_name, intelligence_scores)
+        if intel is not None:
+            matched_scores.append(intel)
+    avg_intelligence = sum(matched_scores) / len(matched_scores) if matched_scores else 40
+    print(f"  Average intelligence score: {avg_intelligence:.1f}")
 
     for model in openrouter_models:
         model_id = model.get("id", "")
         provider = extract_provider(model_id)
         model_name = model.get("name", "")
 
-        # Skip if no pricing
         pricing = model.get("pricing")
         if not pricing:
             continue
@@ -396,13 +392,9 @@ def process_models(openrouter_models, intelligence_scores):
         if blended_price is None or blended_price <= 0:
             continue
 
-        # Get intelligence score
         intelligence = match_intelligence_score(model_id, model_name, intelligence_scores)
+        value_score = calculate_value_scores(intelligence, blended_price, avg_intelligence)
 
-        # Calculate value scores
-        value_scores = calculate_value_scores(intelligence, blended_price)
-
-        # Create unique key to avoid duplicates
         base_name = model_id.split(":")[0] if ":" in model_id else model_id
         if base_name in seen:
             continue
@@ -420,8 +412,7 @@ def process_models(openrouter_models, intelligence_scores):
                 "blended": blended_price,
             },
             "intelligence_score": intelligence,
-            "value_scores": value_scores,
-            "value_score": value_scores["primary"] if value_scores else None,
+            "value_score": value_score,
             "created": model.get("created"),
             "description": model.get("description", ""),
         })
@@ -430,32 +421,16 @@ def process_models(openrouter_models, intelligence_scores):
 
 
 def rank_models(models):
-    """Rank models by different value metrics."""
+    """Rank models by value score."""
     ranked = [m for m in models if m["value_score"] is not None]
     unranked = [m for m in models if m["value_score"] is None]
 
-    # Rank by primary (balanced) score
     ranked.sort(key=lambda x: x["value_score"], reverse=True)
     for i, model in enumerate(ranked, 1):
         model["rank"] = i
 
-    # Also rank by capability_first
-    capability_ranked = sorted([m for m in ranked if m["value_scores"]], 
-                                key=lambda x: x["value_scores"]["capability_first"], reverse=True)
-    for i, model in enumerate(capability_ranked, 1):
-        model["rank_capability"] = i
-
-    # Also rank by budget
-    budget_ranked = sorted([m for m in ranked if m["value_scores"]], 
-                            key=lambda x: x["value_scores"]["budget"], reverse=True)
-    for i, model in enumerate(budget_ranked, 1):
-        model["rank_budget"] = i
-
-    # Unranked models get rank None
     for model in unranked:
         model["rank"] = None
-        model["rank_capability"] = None
-        model["rank_budget"] = None
 
     return ranked + unranked
 
