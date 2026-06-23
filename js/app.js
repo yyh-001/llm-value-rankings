@@ -126,7 +126,7 @@ async function loadData() {
         console.error('Error loading data:', error);
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="7" style="text-align: center; padding: 2rem; color: var(--danger);">
+                <td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">
                     ${window.i18n.t('data_error')}
                 </td>
             </tr>
@@ -255,7 +255,7 @@ function renderTable() {
     if (pageModels.length === 0) {
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                     ${window.i18n.t('no_results')}
                 </td>
             </tr>
@@ -312,6 +312,9 @@ function renderTable() {
                     <div class="value-bar">
                         <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
                     </div>
+                </td>
+                <td class="col-detail">
+                    <button class="btn-detail" onclick="event.stopPropagation(); showModelDetail(${JSON.stringify(model.id)})">${window.i18n.t('th_detail')}</button>
                 </td>
             </tr>
         `;
