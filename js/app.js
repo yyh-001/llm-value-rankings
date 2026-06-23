@@ -194,12 +194,17 @@ function filterAndSort() {
     // Sort based on selected method
     switch (state.sortBy) {
         case 'capability':
-            // Capability-first: strongly favors high intelligence models
-            filtered.sort((a, b) => {
-                const scoreA = a.value_scores?.capability_first || 0;
-                const scoreB = b.value_scores?.capability_first || 0;
-                return scoreB - scoreA;
-            });
+            // If flagship filter is active, sort by pure intelligence
+            if (state.priceRange === 'flagship') {
+                filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
+            } else {
+                // Capability-first: strongly favors high intelligence models
+                filtered.sort((a, b) => {
+                    const scoreA = a.value_scores?.capability_first || 0;
+                    const scoreB = b.value_scores?.capability_first || 0;
+                    return scoreB - scoreA;
+                });
+            }
             break;
         case 'balanced':
             // Balanced: intelligence^2 / price
@@ -225,11 +230,15 @@ function filterAndSort() {
             break;
         default:
             // Default to capability-first
-            filtered.sort((a, b) => {
-                const scoreA = a.value_scores?.capability_first || 0;
-                const scoreB = b.value_scores?.capability_first || 0;
-                return scoreB - scoreA;
-            });
+            if (state.priceRange === 'flagship') {
+                filtered.sort((a, b) => (b.intelligence_score || 0) - (a.intelligence_score || 0));
+            } else {
+                filtered.sort((a, b) => {
+                    const scoreA = a.value_scores?.capability_first || 0;
+                    const scoreB = b.value_scores?.capability_first || 0;
+                    return scoreB - scoreA;
+                });
+            }
     }
     
     state.filteredModels = filtered;
