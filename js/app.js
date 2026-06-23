@@ -77,12 +77,17 @@ function initElements() {
     elements.lastUpdated = document.getElementById('last-updated');
     elements.modelModal = document.getElementById('model-modal');
     elements.modalBody = document.getElementById('modal-body');
+    elements.podium = document.getElementById('podium');
+    elements.podiumSection = document.getElementById('podium-section');
+    elements.resultsCount = document.getElementById('results-count');
 }
 
 // Theme Management
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
     
     document.getElementById('theme-toggle').addEventListener('click', () => {
         const current = document.documentElement.getAttribute('data-theme');
@@ -96,8 +101,10 @@ function initTheme() {
 function initI18n() {
     window.i18n.init();
     window.i18n.onLangChange(() => {
+        renderPodium();
         renderTable();
         updateStats();
+        updateResultsCount();
     });
 }
 
@@ -113,6 +120,7 @@ async function loadData() {
         
         updateStats(data);
         populateProviders();
+        renderPodium();
         filterAndSort();
     } catch (error) {
         console.error('Error loading data:', error);
@@ -175,7 +183,66 @@ function filterAndSort() {
     
     state.filteredModels = filtered;
     state.currentPage = 1;
+    updateResultsCount();
     renderTable();
+}
+
+function updateResultsCount() {
+    if (!elements.resultsCount) return;
+    const count = state.filteredModels.length;
+    elements.resultsCount.textContent = window.i18n.t('results_count').replace('{count}', count);
+}
+
+function formatValueScore(score) {
+    if (!score) return '-';
+    if (score >= 1e6) return (score / 1e6).toFixed(1) + 'M';
+    if (score >= 1e3) return (score / 1e3).toFixed(1) + 'K';
+    return Math.round(score).toString();
+}
+
+const PODIUM_MEDALS = ['🥇', '🥈', '🥉'];
+
+function renderPodium() {
+    if (!elements.podium || !elements.podiumSection) return;
+
+    const top3 = state.models
+        .filter(m => m.rank && m.rank <= 3 && m.value_score != null)
+        .sort((a, b) => a.rank - b.rank);
+
+    if (top3.length === 0) {
+        elements.podiumSection.hidden = true;
+        return;
+    }
+
+    elements.podiumSection.hidden = false;
+    elements.podium.innerHTML = top3.map(model => {
+        const rankClass = `podium-place-${model.rank}`;
+        const medal = PODIUM_MEDALS[model.rank - 1] || '';
+        return `
+            <div class="podium-card ${rankClass} fade-in" onclick="showModelDetail(${JSON.stringify(model.id)})">
+                <div class="podium-medal-wrap">
+                    <span class="podium-medal">${medal}</span>
+                </div>
+                <div class="podium-rank">#${model.rank}</div>
+                <div class="podium-name">${escapeHtml(model.name)}</div>
+                <div class="podium-provider">${escapeHtml(model.provider_display || model.provider)}</div>
+                <div class="podium-metrics">
+                    <div class="podium-metric">
+                        <span class="podium-metric-value">${model.intelligence_score || '-'}</span>
+                        <span class="podium-metric-label">${window.i18n.t('podium_intelligence')}</span>
+                    </div>
+                    <div class="podium-metric">
+                        <span class="podium-metric-value">${model.speed || '-'}<small style="font-size:0.65em;font-weight:500"> tok/s</small></span>
+                        <span class="podium-metric-label">${window.i18n.t('podium_speed')}</span>
+                    </div>
+                    <div class="podium-metric">
+                        <span class="podium-metric-value">$${model.pricing.blended.toFixed(2)}</span>
+                        <span class="podium-metric-label">${window.i18n.t('podium_price')}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 // Render Table
@@ -189,7 +256,7 @@ function renderTable() {
         elements.rankingsBody.innerHTML = `
             <tr>
                 <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-muted);">
-                    ${lang === 'zh' ? '没有找到匹配的模型' : 'No matching models found'}
+                    ${window.i18n.t('no_results')}
                 </td>
             </tr>
         `;
@@ -215,9 +282,10 @@ function renderTable() {
         
         const valueScore = model.value_score || 0;
         const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
+        const topRowClass = rank <= 3 ? 'top-row' : '';
         
         return `
-            <tr class="fade-in" style="animation-delay: ${idx * 30}ms">
+            <tr class="fade-in ${topRowClass}" style="animation-delay: ${idx * 30}ms" onclick="showModelDetail(${JSON.stringify(model.id)})">
                 <td class="col-rank">
                     <span class="rank-badge ${rankClass}">${rank}</span>
                 </td>
@@ -240,7 +308,7 @@ function renderTable() {
                     <span class="price-display ${priceClass}">$${price.toFixed(2)}</span>
                 </td>
                 <td class="col-value">
-                    <span class="value-score">${Math.round(valueScore)}</span>
+                    <span class="value-score">${formatValueScore(valueScore)}</span>
                     <div class="value-bar">
                         <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
                     </div>
@@ -290,7 +358,7 @@ function renderPagination() {
     // First page
     if (startPage > 1) {
         html += `<button class="page-btn" onclick="goToPage(1)">1</button>`;
-        if (startPage > 2) html += `<span style="padding: 0.5rem;">...</span>`;
+        if (startPage > 2) html += `<span class="page-ellipsis">…</span>`;
     }
     
     // Page numbers
@@ -300,7 +368,7 @@ function renderPagination() {
     
     // Last page
     if (endPage < totalPages) {
-        if (endPage < totalPages - 1) html += `<span style="padding: 0.5rem;">...</span>`;
+        if (endPage < totalPages - 1) html += `<span class="page-ellipsis">…</span>`;
         html += `<button class="page-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
     }
     
@@ -364,7 +432,7 @@ function showModelDetail(modelId) {
             </div>
             <div class="detail-item">
                 <span class="detail-label">${window.i18n.t('th_value')}</span>
-                <span class="detail-value" style="color: var(--accent-primary); font-size: 1.3rem;">${model.value_score || '-'}</span>
+                <span class="detail-value" style="color: var(--accent-primary); font-size: 1.3rem;">${formatValueScore(model.value_score)}</span>
             </div>
             <div class="detail-item">
                 <span class="detail-label">${window.i18n.t('value_rank')}</span>

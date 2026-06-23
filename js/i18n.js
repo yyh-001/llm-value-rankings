@@ -7,34 +7,49 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
+        logo_sub: "能力² × 速度 / 价格",
         
         // Hero
-        hero_title: "找到最具性价比的AI模型",
-        hero_desc: "基于综合能力评分和价格，计算每美元获得的AI智能分数",
+        hero_badge: "实时数据 · 每日自动更新",
+        hero_title: "找到最具性价比的 AI 模型",
+        hero_desc: "基于综合能力评分、输出速度与价格，计算每美元获得的 AI 智能分数",
         total_models: "收录模型",
         ranked_models: "已排名",
         last_updated: "更新时间",
+        top_models: "🏅 性价比 Top 3",
         
         // Filters
         search_placeholder: "搜索模型...",
+        results_count: "共 {count} 个模型",
+        no_results: "没有找到匹配的模型",
         
         // Table
         th_rank: "排名",
         th_model: "模型",
         th_provider: "厂商",
-        th_intelligence: "能力评分",
-        th_price: "价格 ($/1M tokens)",
-        th_value: "性价比分数",
+        th_intelligence: "能力",
+        th_speed: "速度",
+        th_price: "价格",
+        th_value: "性价比",
         th_detail: "详情",
         loading: "加载中...",
         
+        // Podium
+        podium_intelligence: "能力",
+        podium_speed: "速度",
+        podium_price: "价格",
+        
         // Methodology
         methodology_title: "计算方法",
+        formula_label: "核心公式",
         formula: "性价比 = 能力² × 速度 / 价格",
-        penalty_desc: "低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²",
-        method_1: "能力评分：Artificial Analysis Intelligence Index",
-        method_2: "速度：输出速度 (tokens/s)",
-        method_3: "价格：OpenRouter 输入输出平均价 ($/1M tokens)",
+        penalty_desc: "低于平均分(40分)的模型会受到惩罚：乘以 (评分/40)²",
+        method_1_title: "能力评分",
+        method_1: "Artificial Analysis Intelligence Index",
+        method_2_title: "输出速度",
+        method_2: "Artificial Analysis 输出速度 (tokens/s)",
+        method_3_title: "Token 价格",
+        method_3: "OpenRouter 输入输出平均价 ($/1M tokens)",
         
         // Comments
         comments_title: "用户评论",
@@ -68,34 +83,49 @@ const translations = {
     en: {
         // Header
         title: "LLM Value Rankings",
+        logo_sub: "Intelligence² × Speed / Price",
         
         // Hero
+        hero_badge: "Live Data · Updated Daily",
         hero_title: "Find the Best Value AI Models",
-        hero_desc: "Calculate AI intelligence per dollar based on capability scores and pricing",
+        hero_desc: "Calculate AI intelligence per dollar based on capability, speed, and pricing",
         total_models: "Total Models",
         ranked_models: "Ranked",
         last_updated: "Last Updated",
+        top_models: "🏅 Top 3 Value Models",
         
         // Filters
         search_placeholder: "Search models...",
+        results_count: "{count} models found",
+        no_results: "No matching models found",
         
         // Table
         th_rank: "Rank",
         th_model: "Model",
         th_provider: "Provider",
-        th_intelligence: "Intelligence",
-        th_price: "Price ($/1M tokens)",
-        th_value: "Value Score",
+        th_intelligence: "Intel",
+        th_speed: "Speed",
+        th_price: "Price",
+        th_value: "Value",
         th_detail: "Detail",
         loading: "Loading...",
         
+        // Podium
+        podium_intelligence: "Intel",
+        podium_speed: "Speed",
+        podium_price: "Price",
+        
         // Methodology
         methodology_title: "Methodology",
+        formula_label: "Core Formula",
         formula: "Value = Intelligence² × Speed / Price",
-        penalty_desc: "Models below average (41) get penalized: multiply by (score/avg)²",
-        method_1: "Intelligence: Artificial Analysis Intelligence Index",
-        method_2: "Speed: Output speed (tokens/s)",
-        method_3: "Price: OpenRouter blended average ($/1M tokens)",
+        penalty_desc: "Models below average (40) get penalized: multiply by (score/40)²",
+        method_1_title: "Intelligence",
+        method_1: "Artificial Analysis Intelligence Index",
+        method_2_title: "Output Speed",
+        method_2: "Artificial Analysis output speed (tokens/s)",
+        method_3_title: "Token Price",
+        method_3: "OpenRouter blended average ($/1M tokens)",
         
         // Comments
         comments_title: "User Comments",

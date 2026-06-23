@@ -5,26 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Value Rankings | 大模型性价比排行榜</title>
     <meta name="description" content="AI Model Value Rankings - Compare price/performance of LLMs | 大模型性价比排行榜">
+    <meta name="theme-color" content="#6366f1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
 </head>
 <body>
+    <div class="bg-decoration" aria-hidden="true">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container header-content">
             <div class="logo">
                 <span class="logo-icon">🏆</span>
-                <h1 class="logo-text" data-i18n="title">大模型性价比排行榜</h1>
+                <div class="logo-text-group">
+                    <h1 class="logo-text" data-i18n="title">大模型性价比排行榜</h1>
+                    <span class="logo-sub" data-i18n="logo_sub">Intelligence² × Speed / Price</span>
+                </div>
             </div>
             <div class="header-actions">
-                <button id="theme-toggle" class="btn-icon" title="Toggle theme">
+                <button id="theme-toggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌙</span>
                 </button>
-                <button id="lang-toggle" class="btn-icon" title="切换语言">
+                <button id="lang-toggle" class="btn-icon btn-lang" title="切换语言" aria-label="Switch language">
                     <span id="lang-label">EN</span>
                 </button>
             </div>
@@ -33,19 +42,20 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h2 data-i18n="hero_title">找到最具性价比的AI模型</h2>
-            <p data-i18n="hero_desc">基于综合能力评分和价格，计算每美元获得的AI智能分数</p>
+        <div class="container hero-inner">
+            <div class="hero-badge" data-i18n="hero_badge">实时数据 · 每日自动更新</div>
+            <h2 class="hero-title" data-i18n="hero_title">找到最具性价比的 AI 模型</h2>
+            <p class="hero-desc" data-i18n="hero_desc">基于综合能力评分、输出速度与价格，计算每美元获得的 AI 智能分数</p>
             <div class="stats-bar" id="stats-bar">
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-value" id="total-models">-</span>
                     <span class="stat-label" data-i18n="total_models">收录模型</span>
                 </div>
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-value" id="ranked-models">-</span>
                     <span class="stat-label" data-i18n="ranked_models">已排名</span>
                 </div>
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-value" id="last-updated">-</span>
                     <span class="stat-label" data-i18n="last_updated">更新时间</span>
                 </div>
@@ -53,13 +63,23 @@
         </div>
     </section>
 
+    <!-- Top 3 Podium -->
+    <section class="podium-section container" id="podium-section" hidden>
+        <h3 class="section-title" data-i18n="top_models">🏅 性价比 Top 3</h3>
+        <div class="podium" id="podium"></div>
+    </section>
+
     <!-- Main Content -->
     <main class="main container">
         <!-- Filters -->
         <section class="filters">
             <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
                 <input type="text" id="search-input" placeholder="搜索模型..." data-i18n-placeholder="search_placeholder">
             </div>
+            <div class="results-count" id="results-count"></div>
         </section>
 
         <!-- Rankings Table -->
@@ -79,7 +99,12 @@
                     </thead>
                     <tbody id="rankings-body">
                         <tr class="loading-row">
-                            <td colspan="7" data-i18n="loading">加载中...</td>
+                            <td colspan="7">
+                                <div class="loading-content">
+                                    <div class="loading-spinner"></div>
+                                    <span data-i18n="loading">加载中...</span>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -89,31 +114,51 @@
 
         <!-- Methodology -->
         <section class="methodology">
-            <h3 data-i18n="methodology_title">计算方法</h3>
-            <div class="formula">
-                <span data-i18n="formula">性价比 = 能力² × 速度 / 价格</span>
+            <h3 class="section-title" data-i18n="methodology_title">计算方法</h3>
+            <div class="methodology-grid">
+                <div class="formula-card">
+                    <div class="formula-label" data-i18n="formula_label">核心公式</div>
+                    <div class="formula" data-i18n="formula">性价比 = 能力² × 速度 / 价格</div>
+                    <p class="penalty-note" data-i18n="penalty_desc">低于平均分(40分)的模型会受到惩罚：乘以 (评分/平均分)²</p>
+                </div>
+                <div class="method-cards">
+                    <div class="method-card">
+                        <span class="method-icon">🧠</span>
+                        <div>
+                            <strong data-i18n="method_1_title">能力评分</strong>
+                            <p data-i18n="method_1">Artificial Analysis Intelligence Index</p>
+                        </div>
+                    </div>
+                    <div class="method-card">
+                        <span class="method-icon">⚡</span>
+                        <div>
+                            <strong data-i18n="method_2_title">输出速度</strong>
+                            <p data-i18n="method_2">Artificial Analysis 输出速度 (tokens/s)</p>
+                        </div>
+                    </div>
+                    <div class="method-card">
+                        <span class="method-icon">💰</span>
+                        <div>
+                            <strong data-i18n="method_3_title">Token 价格</strong>
+                            <p data-i18n="method_3">OpenRouter 输入输出平均价 ($/1M tokens)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p data-i18n="penalty_desc">低于平均分(41分)的模型会受到惩罚：乘以 (评分/平均分)²</p>
-            <ul>
-                <li data-i18n="method_1">能力评分：Artificial Analysis Intelligence Index</li>
-                <li data-i18n="method_2">速度：Artificial Analysis 输出速度 (tokens/s)</li>
-                <li data-i18n="method_3">价格：OpenRouter 输入输出平均价 ($/1M tokens)</li>
-            </ul>
         </section>
 
         <!-- Model Detail Modal -->
-        <div id="model-modal" class="modal hidden">
+        <div id="model-modal" class="modal hidden" role="dialog" aria-modal="true">
             <div class="modal-overlay"></div>
             <div class="modal-content">
-                <button class="modal-close">&times;</button>
+                <button class="modal-close" aria-label="Close">&times;</button>
                 <div id="modal-body"></div>
-                <!-- Comments Section -->
                 <div class="comments-section">
                     <h3 data-i18n="comments_title">用户评论</h3>
                     <div id="comments-list"></div>
                     <div id="comment-form-container">
-                        <p class="login-hint" data-i18n="login_hint">登录GitHub后即可评论</p>
-                        <button id="github-login-btn" class="btn-primary" data-i18n="login_github">使用GitHub登录</button>
+                        <p class="login-hint" data-i18n="login_hint">登录 GitHub 后即可评论</p>
+                        <button id="github-login-btn" class="btn-primary" data-i18n="login_github">使用 GitHub 登录</button>
                     </div>
                 </div>
             </div>
@@ -122,16 +167,15 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
+        <div class="container footer-inner">
             <p data-i18n="footer_text">
-                数据来源：<a href="https://openrouter.ai" target="_blank">OpenRouter</a> & 
-                <a href="https://artificialanalysis.ai" target="_blank">Artificial Analysis</a>
+                数据来源：<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a> &amp;
+                <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">Artificial Analysis</a>
             </p>
-            <p data-i18n="footer_auto">本页面数据由GitHub Actions自动更新，无需人工维护</p>
+            <p data-i18n="footer_auto">本页面数据由 GitHub Actions 自动更新，无需人工维护</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
     <script src="js/github-comments.js"></script>

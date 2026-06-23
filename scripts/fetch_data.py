@@ -96,6 +96,18 @@ def get_blended_price(pricing):
     return round(blended, 4)
 
 
+def is_text_llm(model):
+    """Return True only for text-output LLMs (exclude image generation models)."""
+    architecture = model.get("architecture") or {}
+    output_modalities = architecture.get("output_modalities") or []
+    if "image" in output_modalities:
+        return False
+    model_id = model.get("id", "")
+    if model_id in ("openrouter/auto",):
+        return False
+    return True
+
+
 def fetch_intelligence_scores():
     """
     Fetch intelligence scores and speed data from Artificial Analysis.
@@ -275,7 +287,7 @@ def match_model_data(model_id, model_name, model_data):
         (r"gemini-2\.5-pro", "gemini-2.5-pro"),
         (r"gemini-3\.1-pro", "gemini-3.1-pro"),
         (r"gemini-3\.1-flash-lite", "gemini-3.1-flash-lite"),
-        (r"gemini-3(?!-).*flash", "gemini-3-flash"),
+        (r"gemini-3-flash", "gemini-3-flash"),
         (r"gemini-2\.5-flash-lite", "gemini-2.5-flash-lite"),
         (r"gemini-2\.5-flash", "gemini-2.5-flash"),
         (r"gemini-2\.0-flash", "gemini-2.0-flash"),
@@ -356,6 +368,8 @@ def process_models(openrouter_models, model_data):
     # First pass: calculate average intelligence
     matched_intelligences = []
     for model in openrouter_models:
+        if not is_text_llm(model):
+            continue
         model_id = model.get("id", "")
         model_name = model.get("name", "")
         data = match_model_data(model_id, model_name, model_data)
@@ -366,6 +380,9 @@ def process_models(openrouter_models, model_data):
 
     for model in openrouter_models:
         model_id = model.get("id", "")
+        if not is_text_llm(model):
+            continue
+
         provider = extract_provider(model_id)
         model_name = model.get("name", "")
 
