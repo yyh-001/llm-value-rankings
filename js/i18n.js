@@ -54,7 +54,7 @@ const translations = {
         method_1_title: "能力评分",
         method_1: "Artificial Analysis Intelligence Index",
         method_2_title: "输出速度",
-        method_2: "OpenRouter 各 Provider 实测吞吐量 (tokens/s，p50)",
+        method_2: "OpenRouter 实测吞吐量 (tokens/s)，Endpoints API + 模型页爬取",
         method_3_title: "Token 价格",
         method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 70%",
         
@@ -144,7 +144,7 @@ const translations = {
         method_1_title: "Intelligence",
         method_1: "Artificial Analysis Intelligence Index",
         method_2_title: "Output Speed",
-        method_2: "OpenRouter measured throughput (tokens/s, p50)",
+        method_2: "OpenRouter measured throughput (tokens/s) via API + page scrape",
         method_3_title: "Token Price",
         method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 70% cache hit",
         

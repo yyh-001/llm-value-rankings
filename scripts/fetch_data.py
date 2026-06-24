@@ -7,6 +7,7 @@ to calculate value rankings.
 import json
 import os
 import re
+import statistics
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
@@ -31,10 +32,15 @@ INTELLIGENCE_EXPONENT = 3
 DEFAULT_CACHE_HIT_RATE = 0.7
 INPUT_TOKEN_WEIGHT = 3
 OUTPUT_TOKEN_WEIGHT = 1
-DEFAULT_SPEED = 80
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
+OPENROUTER_MODEL_PAGE = "https://openrouter.ai/{model_id}"
 ENDPOINT_FETCH_WORKERS = 8
+PAGE_FETCH_WORKERS = 6
 ENDPOINT_FETCH_TIMEOUT = 25
+PAGE_FETCH_TIMEOUT = 30
+USER_AGENT = (
+    "LLM-Value-Rankings/1.0 (+https://yyh-001.github.io/llm-value-rankings/)"
+)
 
 # Provider logo mapping
 PROVIDER_LOGOS = {
@@ -93,6 +99,17 @@ def extract_provider(model_id):
 def get_provider_display_name(provider_id):
     """Get display name for provider."""
     return PROVIDER_NAMES.get(provider_id, provider_id.title())
+
+
+def make_http_session():
+    """HTTP session that ignores broken local proxy env and sends OpenRouter auth when set."""
+    session = requests.Session()
+    session.trust_env = False
+    session.headers.update({"User-Agent": USER_AGENT, "Accept": "text/html,application/json"})
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if api_key:
+        session.headers["Authorization"] = f"Bearer {api_key}"
+    return session
 
 
 def get_openrouter_headers():
@@ -226,7 +243,7 @@ def fetch_endpoints_batch(model_ids):
     """Fetch endpoint stats for many models in parallel."""
     unique_ids = list(dict.fromkeys(model_ids))
     results = {}
-    session = requests.Session()
+    session = make_http_session()
     session.headers.update(get_openrouter_headers())
 
     print(f"Fetching OpenRouter endpoint stats for {len(unique_ids)} models...")
@@ -256,6 +273,92 @@ def fetch_endpoints_batch(model_ids):
     return results
 
 
+def scrape_model_page_performance(model_id, session=None):
+    """
+    Scrape throughput / TTFT from an OpenRouter model page.
+
+    Parses embedded endpoint JSON and provider-table rows (e.g. '0.99s | 79 tps').
+    """
+    url = OPENROUTER_MODEL_PAGE.format(model_id=model_id)
+    http = session or make_http_session()
+    try:
+        response = http.get(url, timeout=PAGE_FETCH_TIMEOUT)
+        response.raise_for_status()
+        html = response.text
+    except Exception as exc:
+        print(f"  Warning: page scrape for {model_id}: {exc}")
+        return {"throughput": None, "ttft": None}
+
+    throughputs = []
+    latencies = []
+
+    for match in re.finditer(
+        r'"throughput_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
+        html,
+    ):
+        value = match.group(1) or match.group(2)
+        if value:
+            throughputs.append(float(value))
+
+    for match in re.finditer(
+        r'"latency_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
+        html,
+    ):
+        value = match.group(1) or match.group(2)
+        if value:
+            latencies.append(normalize_latency_seconds(float(value)))
+
+    for match in re.finditer(
+        r"([\d.]+)\s*s[\s\S]{0,120}?([\d.]+)\s*tps",
+        html,
+        re.I,
+    ):
+        latencies.append(normalize_latency_seconds(float(match.group(1))))
+        throughputs.append(float(match.group(2)))
+
+    if not throughputs:
+        throughputs = [float(value) for value in re.findall(r"([\d.]+)\s*tps", html, re.I)]
+
+    throughput = round(statistics.median(throughputs), 1) if throughputs else None
+    ttft = round(min(latencies), 3) if latencies else None
+    return {"throughput": throughput, "ttft": ttft}
+
+
+def fetch_page_stats_batch(model_ids, endpoints_map):
+    """Scrape OpenRouter model pages for models missing endpoint throughput."""
+    need_scrape = [
+        model_id
+        for model_id in model_ids
+        if aggregate_endpoint_metrics(endpoints_map.get(model_id, [])).get("throughput") is None
+    ]
+    results = {}
+    if not need_scrape:
+        return results
+
+    session = make_http_session()
+    print(f"Scraping OpenRouter model pages for speed: {len(need_scrape)} models...")
+    with ThreadPoolExecutor(max_workers=PAGE_FETCH_WORKERS) as executor:
+        futures = {
+            executor.submit(scrape_model_page_performance, model_id, session): model_id
+            for model_id in need_scrape
+        }
+        done = 0
+        for future in as_completed(futures):
+            model_id = futures[future]
+            try:
+                results[model_id] = future.result()
+            except Exception as exc:
+                print(f"  Warning: page stats for {model_id}: {exc}")
+                results[model_id] = {"throughput": None, "ttft": None}
+            done += 1
+            if done % 50 == 0 or done == len(need_scrape):
+                print(f"  Page scrape progress: {done}/{len(need_scrape)}")
+
+    with_stats = sum(1 for stats in results.values() if stats.get("throughput") is not None)
+    print(f"  Models with scraped throughput: {with_stats}/{len(need_scrape)}")
+    return results
+
+
 def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE):
     """
     Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
@@ -268,6 +371,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         healthy = list(endpoints)
 
     throughputs = []
+    throughput_weights = []
     latencies = []
     prompt_prices = []
     prompt_weights = []
@@ -311,6 +415,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         throughput = parse_p50_stat(ep.get("throughput_last_30m"))
         if throughput is not None and throughput > 0:
             throughputs.append(throughput)
+            throughput_weights.append(weight)
 
         latency = normalize_latency_seconds(parse_p50_stat(ep.get("latency_last_30m")))
         if latency is not None and latency > 0:
@@ -328,8 +433,10 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     if prompt_effective is not None and completion_list is not None:
         blended_effective = blend_token_price(prompt_effective, completion_list)
 
+    throughput_avg = weighted_average(throughputs, throughput_weights)
+
     return {
-        "throughput": round(max(throughputs), 1) if throughputs else None,
+        "throughput": round(throughput_avg, 1) if throughput_avg is not None else None,
         "ttft": min(latencies) if latencies else None,
         "prompt_list": prompt_list,
         "completion_list": completion_list,
@@ -390,12 +497,12 @@ def fetch_intelligence_scores():
     """
     Load intelligence scores from Artificial Analysis.
 
-    Speed and TTFT come from OpenRouter endpoint stats; only intelligence is sourced here.
+    Speed and TTFT come from OpenRouter endpoints API + model page scraping.
     Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
     """
     print("Loading intelligence scores from Artificial Analysis...")
     
-    # Intelligence scores (0-100). Speed fields are legacy and ignored.
+    # Intelligence scores (0-100). Speed values below are legacy — stripped on return.
     model_data = {
         # ===== Anthropic =====
         "claude-fable-5": {"intelligence": 60, "speed": 45},
@@ -502,9 +609,13 @@ def fetch_intelligence_scores():
         # ===== Step =====
         "step-3.7-flash": {"intelligence": 30, "speed": 402},
     }
-    
-    print(f"  Loaded {len(model_data)} models from Artificial Analysis")
-    return model_data
+
+    intelligence_only = {
+        key: {"intelligence": entry["intelligence"]}
+        for key, entry in model_data.items()
+    }
+    print(f"  Loaded {len(intelligence_only)} models from Artificial Analysis")
+    return intelligence_only
 
 
 def match_model_data(model_id, model_name, model_data):
@@ -629,13 +740,13 @@ def calculate_value_scores(intelligence, price, speed):
     if intelligence < MIN_INTELLIGENCE:
         return None
 
-    if speed is None:
-        speed = DEFAULT_SPEED
+    if speed is None or speed <= 0:
+        return None
 
     return (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
 
 
-def process_models(openrouter_models, model_data, endpoints_map):
+def process_models(openrouter_models, model_data, endpoints_map, page_stats_map):
     """Process and combine model data from OpenRouter + AA + endpoint stats."""
     processed = []
     seen = set()
@@ -661,9 +772,13 @@ def process_models(openrouter_models, model_data, endpoints_map):
         data = match_model_data(model_id, model_name, model_data)
         intelligence = data["intelligence"] if data else None
         speed = endpoint_metrics.get("throughput")
-        if speed is None and data and data.get("speed"):
-            speed = data["speed"]
         ttft = endpoint_metrics.get("ttft")
+        if speed is None or ttft is None:
+            page_stats = page_stats_map.get(model_id) or {}
+            if speed is None:
+                speed = page_stats.get("throughput")
+            if ttft is None:
+                ttft = page_stats.get("ttft")
 
         if "distill" in model_id.lower():
             value_score = None
@@ -882,9 +997,10 @@ def main():
         candidate_ids.append(model_id)
 
     endpoints_map = fetch_endpoints_batch(candidate_ids)
+    page_stats_map = fetch_page_stats_batch(candidate_ids, endpoints_map)
 
     # Process and rank
-    processed = process_models(openrouter_models, model_data, endpoints_map)
+    processed = process_models(openrouter_models, model_data, endpoints_map, page_stats_map)
     ranked = rank_models(processed)
 
     history = load_rank_history()
