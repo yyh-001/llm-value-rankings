@@ -41,9 +41,9 @@ def load_local_env():
             if key and key not in os.environ:
                 os.environ[key] = value
 
-# Scoring: transform(coding) × speed^0.8 / price, where transform uses avg-baseline squares
+# Scoring: transform(intelligence) × speed^0.8 / price, where transform uses avg-baseline squares
 # f(x) = avg + (x-avg)² if x ≥ avg, else avg - (avg-x)²  (negative → excluded)
-AA_CAPABILITY_FIELD = "coding_index"
+AA_CAPABILITY_FIELD = "intelligence_index"
 MIN_INTELLIGENCE = 25
 SPEED_EXPONENT = 0.8
 DEFAULT_CACHE_HIT_RATE = 0.7
@@ -533,7 +533,7 @@ def slug_tokens(slug):
 
 
 def extract_embedded_aa_score(model):
-    """Read AA capability score (coding_index) attached to an OpenRouter model record."""
+    """Read AA intelligence_index attached to an OpenRouter model record."""
     benchmarks = model.get("benchmarks") or {}
     artificial_analysis = benchmarks.get("artificial_analysis") or {}
     value = artificial_analysis.get(AA_CAPABILITY_FIELD)
@@ -557,7 +557,7 @@ def benchmark_match_score(model_slug, benchmark_slug):
 
 
 def build_intelligence_map(benchmark_rows, openrouter_models):
-    """Map OpenRouter model IDs to AA coding_index via embedded data + exact slug fallback."""
+    """Map OpenRouter model IDs to AA intelligence_index via embedded data + exact slug fallback."""
     scored_rows = [
         row
         for row in benchmark_rows
@@ -607,7 +607,7 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
     """
     Build capability scores from OpenRouter model records and benchmarks API.
 
-    Uses AA coding_index; prefers per-model embedded scores, exact slug fallback only.
+    Uses AA intelligence_index; prefers per-model embedded scores, exact slug fallback only.
     """
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
