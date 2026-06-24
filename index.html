@@ -25,8 +25,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="app-version" content="20250624s">
-    <link rel="stylesheet" href="css/style.css?v=20250624s">
+    <meta name="app-version" content="20250624t">
+    <link rel="stylesheet" href="css/style.css?v=20250624t">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
 </head>
 <body>
@@ -42,7 +42,7 @@
                 <span class="logo-icon">🏆</span>
                 <div class="logo-text-group">
                     <h1 class="logo-text" data-i18n="title">大模型性价比排行榜</h1>
-                    <span class="logo-sub" data-i18n="logo_sub">Intelligence³ × Speed / Price</span>
+                    <span class="logo-sub" data-i18n="logo_sub">Intelligence⁵ × Speed^0.8 / Price</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -146,8 +146,8 @@
             <div class="methodology-grid">
                 <div class="formula-card">
                     <div class="formula-label" data-i18n="formula_label">核心公式</div>
-                    <div class="formula" data-i18n="formula">性价比 = 能力³ × 速度 / 价格</div>
-                    <p class="penalty-note" data-i18n="formula_note">能力采用三次方，能力差距对排名的影响远大于速度或价格的小幅波动</p>
+                    <div class="formula" data-i18n="formula">性价比 = 能力⁵ × 速度^0.8 / 价格</div>
+                    <p class="penalty-note" data-i18n="formula_note">能力采用五次方放大差距，速度取 0.8 次方以削弱纯吞吐刷榜</p>
                     <p class="penalty-note" data-i18n="score_scale">最终分数按百分制显示，榜首模型为 100 分</p>
                     <p class="penalty-note" data-i18n="penalty_desc">能力评分低于 25 分的模型不参与排名</p>
                 </div>
@@ -215,8 +215,8 @@
         </div>
     </footer>
 
-    <script src="js/i18n.js?v=20250624k"></script>
-    <script src="js/app.js?v=20250624s"></script>
+    <script src="js/i18n.js?v=20250624t"></script>
+    <script src="js/app.js?v=20250624t"></script>
     <script src="js/github-comments.js?v=20250624"></script>
 </body>
 </html>

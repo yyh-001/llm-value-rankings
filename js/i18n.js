@@ -7,7 +7,7 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
-        logo_sub: "能力³ × 速度 / 价格",
+        logo_sub: "能力⁵ × 速度^0.8 / 价格",
         
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
@@ -47,8 +47,8 @@ const translations = {
         // Methodology
         methodology_title: "计算方法",
         formula_label: "核心公式",
-        formula: "性价比 = 能力³ × 速度 / 价格",
-        formula_note: "能力采用三次方，能力差距对排名的影响远大于速度或价格的小幅波动",
+        formula: "性价比 = 能力⁵ × 速度^0.8 / 价格",
+        formula_note: "能力采用五次方放大差距，速度取 0.8 次方以削弱纯吞吐刷榜",
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
         penalty_desc: "能力评分低于 25 分的模型不参与排名",
         method_1_title: "能力评分",
@@ -99,7 +99,7 @@ const translations = {
     en: {
         // Header
         title: "LLM Value Rankings",
-        logo_sub: "Intelligence³ × Speed / Price",
+        logo_sub: "Intelligence⁵ × Speed^0.8 / Price",
         
         // Hero
         hero_badge: "Live Data · Updated Daily",
@@ -139,8 +139,8 @@ const translations = {
         // Methodology
         methodology_title: "Methodology",
         formula_label: "Core Formula",
-        formula: "Value = Intelligence³ × Speed / Price",
-        formula_note: "Intelligence is cubed so capability gaps dominate over small speed or price differences",
+        formula: "Value = Intelligence⁵ × Speed^0.8 / Price",
+        formula_note: "Intelligence is raised to the 5th power; speed uses a 0.8 exponent to reduce pure-throughput bias",
         score_scale: "Scores use a 0–100 scale; the top model is 100",
         penalty_desc: "Models scoring below 25 are excluded from ranking",
         method_1_title: "Intelligence",

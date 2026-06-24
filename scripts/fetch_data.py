@@ -41,10 +41,10 @@ def load_local_env():
             if key and key not in os.environ:
                 os.environ[key] = value
 
-# Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
-# Cubed intelligence deliberately prioritizes capability over marginal speed/price gains.
+# Scoring: raw = intelligence⁵ × speed^0.8 / price → normalized to 0–100 in rank_models()
 MIN_INTELLIGENCE = 25
-INTELLIGENCE_EXPONENT = 3
+INTELLIGENCE_EXPONENT = 5
+SPEED_EXPONENT = 0.8
 DEFAULT_CACHE_HIT_RATE = 0.7
 INPUT_TOKEN_WEIGHT = 3
 OUTPUT_TOKEN_WEIGHT = 1
@@ -636,9 +636,9 @@ def lookup_intelligence_score(model_id, intelligence_map):
 
 def calculate_value_scores(intelligence, price, speed):
     """
-    Calculate raw value score: intelligence³ × speed / price.
+    Calculate raw value score: intelligence⁵ × speed^0.8 / price.
 
-    Intelligence is cubed so capability differences dominate the ranking.
+    High intelligence exponent prioritizes capability; damped speed reduces pure-throughput bias.
     Normalized to a 0–100 scale in rank_models(). Models below MIN_INTELLIGENCE are excluded.
     """
     if intelligence is None or price is None or price <= 0:
@@ -650,7 +650,7 @@ def calculate_value_scores(intelligence, price, speed):
     if speed is None or speed <= 0:
         return None
 
-    return (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
+    return (intelligence ** INTELLIGENCE_EXPONENT) * (speed ** SPEED_EXPONENT) / price
 
 
 def process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map):
