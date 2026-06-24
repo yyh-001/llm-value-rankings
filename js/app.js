@@ -255,7 +255,7 @@ function renderPodium() {
         const rankClass = `podium-place-${model.rank}`;
         const medal = PODIUM_MEDALS[model.rank - 1] || '';
         return `
-            <div class="podium-card ${rankClass} fade-in" onclick="showModelDetail(${JSON.stringify(model.id)})">
+            <div class="podium-card ${rankClass} fade-in" data-model-id="${escapeAttr(model.id)}">
                 <div class="podium-medal-wrap">
                     <span class="podium-medal">${medal}</span>
                 </div>
@@ -343,13 +343,13 @@ function renderMobileCards() {
         const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
 
         return `
-            <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" onclick="showModelDetail(${JSON.stringify(model.id)})">
+            <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
                 <div class="model-card-header">
                     <div class="model-card-rank">
                         <span class="rank-badge ${rankClass}">${rank}</span>
                         ${formatRankChangeHtml(model)}
                     </div>
-                    <button class="btn-detail" onclick="event.stopPropagation(); showModelDetail(${JSON.stringify(model.id)})">${window.i18n.t('th_detail')}</button>
+                    <button type="button" class="btn-detail" data-model-id="${escapeAttr(model.id)}">${window.i18n.t('th_detail')}</button>
                 </div>
                 <div class="model-card-body">
                     <h4 class="model-card-name">${escapeHtml(model.name)}</h4>
@@ -428,7 +428,7 @@ function renderTable() {
         const topRowClass = rank <= 3 ? 'top-row' : '';
         
         return `
-            <tr class="fade-in ${topRowClass}" style="animation-delay: ${idx * 30}ms" onclick="showModelDetail(${JSON.stringify(model.id)})">
+            <tr class="fade-in ${topRowClass}" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
                 <td class="col-rank">
                     <span class="rank-badge ${rankClass}">${rank}</span>
                 </td>
@@ -460,7 +460,7 @@ function renderTable() {
                     </div>
                 </td>
                 <td class="col-detail">
-                    <button class="btn-detail" onclick="event.stopPropagation(); showModelDetail(${JSON.stringify(model.id)})">${window.i18n.t('th_detail')}</button>
+                    <button type="button" class="btn-detail" data-model-id="${escapeAttr(model.id)}">${window.i18n.t('th_detail')}</button>
                 </td>
             </tr>
         `;
@@ -597,11 +597,16 @@ function showModelDetail(modelId) {
     `;
     
     // Load comments for this model
-    if (window.githubComments) {
-        window.githubComments.loadComments(modelId);
-    }
-    
+    elements.modelModal.dataset.currentModel = modelId;
     elements.modelModal.classList.remove('hidden');
+
+    if (window.githubComments) {
+        try {
+            window.githubComments.loadComments(modelId);
+        } catch (error) {
+            console.warn('Failed to load comments:', error);
+        }
+    }
 }
 
 // Event Listeners
@@ -623,6 +628,13 @@ function initEventListeners() {
     // ESC key to close modal
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
+    });
+
+    // Model detail clicks via event delegation
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('[data-model-id]');
+        if (!trigger) return;
+        showModelDetail(trigger.dataset.modelId);
     });
 }
 
@@ -647,6 +659,10 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function escapeAttr(text) {
+    return escapeHtml(text).replace(/"/g, '&quot;');
 }
 
 // Make goToPage and showModelDetail global
