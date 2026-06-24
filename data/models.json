@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T06:27:28.612398Z",
+  "updated_at": "2026-06-24T06:32:38.954663Z",
   "total_models": 300,
   "ranked_models": 109,
   "rank_compared_to": "2026-06-23",
@@ -566,14 +566,14 @@
         "prompt": 0.98,
         "completion": 3.08,
         "cache_read": 0.182,
-        "blended": 1.9492,
+        "blended": 1.9537,
         "blended_list": 2.03,
         "cache_hit_rate": 0.5
       },
       "intelligence_score": 51,
       "speed": 114,
       "ttft": null,
-      "value_score": 15.0,
+      "value_score": 14.9,
       "created": 1781631930,
       "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
       "rank": 24,
@@ -629,30 +629,6 @@
       "rank_new": false
     },
     {
-      "id": "deepseek/deepseek-chat-v3-0324",
-      "name": "DeepSeek: DeepSeek V3 0324",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 163840,
-      "pricing": {
-        "prompt": 0.2,
-        "completion": 0.77,
-        "cache_read": 0.11,
-        "blended": 0.4873,
-        "blended_list": 0.485,
-        "cache_hit_rate": 0.5
-      },
-      "intelligence_score": 35,
-      "speed": 80,
-      "ttft": null,
-      "value_score": 13.6,
-      "created": 1742824755,
-      "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
-      "rank": 27,
-      "rank_change": -3,
-      "rank_new": false
-    },
-    {
       "id": "openai/gpt-4o-mini",
       "name": "OpenAI: GPT-4o-mini",
       "provider": "openai",
@@ -672,8 +648,8 @@
       "value_score": 12.7,
       "created": 1721260800,
       "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
-      "rank": 28,
-      "rank_change": 13,
+      "rank": 27,
+      "rank_change": 14,
       "rank_new": false
     },
     {
@@ -696,8 +672,32 @@
       "value_score": 12.7,
       "created": 1721260800,
       "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
+      "rank": 28,
+      "rank_change": 12,
+      "rank_new": false
+    },
+    {
+      "id": "deepseek/deepseek-chat-v3-0324",
+      "name": "DeepSeek: DeepSeek V3 0324",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 163840,
+      "pricing": {
+        "prompt": 0.216,
+        "completion": 0.88,
+        "cache_read": 0.11,
+        "blended": 0.5461,
+        "blended_list": 0.548,
+        "cache_hit_rate": 0.5
+      },
+      "intelligence_score": 35,
+      "speed": 80,
+      "ttft": null,
+      "value_score": 12.1,
+      "created": 1742824755,
+      "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
       "rank": 29,
-      "rank_change": 11,
+      "rank_change": -5,
       "rank_new": false
     },
     {
@@ -3251,11 +3251,11 @@
       "provider_display": "Xiaomi",
       "context_length": 1048576,
       "pricing": {
-        "prompt": 0.105,
+        "prompt": 0.14,
         "completion": 0.28,
         "cache_read": 0.0028,
-        "blended": 0.1839,
-        "blended_list": 0.1925,
+        "blended": 0.1757,
+        "blended_list": 0.21,
         "cache_hit_rate": 0.5
       },
       "intelligence_score": null,
@@ -3829,8 +3829,8 @@
       "pricing": {
         "prompt": 0.385,
         "completion": 2.34,
-        "cache_read": 0.12,
-        "blended": 1.4014,
+        "cache_read": 0.22,
+        "blended": 1.4063,
         "blended_list": 1.3625,
         "cache_hit_rate": 0.5
       },
@@ -3878,7 +3878,7 @@
         "prompt": 0.6,
         "completion": 1.92,
         "cache_read": 0.12,
-        "blended": 1.2587,
+        "blended": 1.2546,
         "blended_list": 1.26,
         "cache_hit_rate": 0.5
       },
@@ -4118,7 +4118,7 @@
         "prompt": 0.06,
         "completion": 0.4,
         "cache_read": 0.01,
-        "blended": 0.2399,
+        "blended": 0.2368,
         "blended_list": 0.23,
         "cache_hit_rate": 0.5
       },
@@ -4214,7 +4214,7 @@
         "prompt": 0.4,
         "completion": 1.75,
         "cache_read": 0.08,
-        "blended": 1.2127,
+        "blended": 1.2379,
         "blended_list": 1.075,
         "cache_hit_rate": 0.5
       },
@@ -4309,8 +4309,8 @@
       "pricing": {
         "prompt": 0.3,
         "completion": 0.9,
-        "cache_read": 0.055,
-        "blended": 0.5388,
+        "cache_read": 0.05,
+        "blended": 0.5381,
         "blended_list": 0.6,
         "cache_hit_rate": 0.5
       },
@@ -5915,11 +5915,11 @@
       "provider_display": "Qwen",
       "context_length": 131702,
       "pricing": {
-        "prompt": 0.12,
+        "prompt": 0.1,
         "completion": 0.24,
         "cache_read": null,
-        "blended": 0.207,
-        "blended_list": 0.18,
+        "blended": 0.1948,
+        "blended_list": 0.17,
         "cache_hit_rate": null
       },
       "intelligence_score": null,
