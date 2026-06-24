@@ -20,6 +20,8 @@ ARTIFICIAL_ANALYSIS_URL = "https://artificialanalysis.ai/leaderboards/models"
 OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
 HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
+REPO_META_FILE = OUTPUT_DIR / "repo.json"
+GITHUB_REPO = "yyh-001/llm-value-rankings"
 
 # Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
 MIN_INTELLIGENCE = 25
@@ -543,6 +545,41 @@ def save_data(models, compare_day=None):
     print(f"  Updated at: {data['updated_at']}")
 
 
+def fetch_repo_meta():
+    """Fetch GitHub repo star count for static hosting (avoids browser API limits)."""
+    print("Fetching GitHub repo meta...")
+    try:
+        response = requests.get(
+            f"https://api.github.com/repos/{GITHUB_REPO}",
+            headers={"Accept": "application/vnd.github.v3+json"},
+            timeout=15,
+        )
+        if response.ok:
+            stars = response.json().get("stargazers_count")
+            if isinstance(stars, int):
+                meta = {
+                    "repo": GITHUB_REPO,
+                    "stars": stars,
+                    "updated_at": datetime.utcnow().isoformat() + "Z",
+                }
+                OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+                with open(REPO_META_FILE, "w", encoding="utf-8") as f:
+                    json.dump(meta, f, indent=2, ensure_ascii=False)
+                print(f"  GitHub stars: {stars}")
+                return
+        print(f"  Warning: GitHub API returned {response.status_code}")
+    except Exception as exc:
+        print(f"  Warning: failed to fetch repo meta: {exc}")
+
+    if REPO_META_FILE.exists():
+        print("  Keeping existing repo.json")
+        return
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    with open(REPO_META_FILE, "w", encoding="utf-8") as f:
+        json.dump({"repo": GITHUB_REPO, "stars": None, "updated_at": None}, f, indent=2)
+
+
 def main():
     """Main entry point."""
     print("=" * 60)
@@ -567,6 +604,7 @@ def main():
 
     # Save
     save_data(ranked, compare_day)
+    fetch_repo_meta()
 
     # Print top 10
     print("\n" + "=" * 60)

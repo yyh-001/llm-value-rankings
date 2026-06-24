@@ -117,16 +117,40 @@ async function initGitHubStar() {
 
     starLink.href = `https://github.com/${CONFIG.GITHUB_REPO}`;
 
+    const cacheKey = document.querySelector('meta[name="app-version"]')?.content || Date.now();
+
     try {
-        const response = await fetch(`https://api.github.com/repos/${CONFIG.GITHUB_REPO}`);
+        const response = await fetch(`data/repo.json?v=${cacheKey}`);
+        if (response.ok) {
+            const data = await response.json();
+            if (starCount && typeof data.stars === 'number') {
+                starCount.textContent = formatStarCount(data.stars);
+                return;
+            }
+        }
+    } catch (error) {
+        console.warn('Failed to load repo meta:', error);
+    }
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${CONFIG.GITHUB_REPO}`, {
+            headers: { Accept: 'application/vnd.github.v3+json' },
+        });
         if (!response.ok) return;
         const data = await response.json();
         if (starCount && typeof data.stargazers_count === 'number') {
-            starCount.textContent = data.stargazers_count;
+            starCount.textContent = formatStarCount(data.stargazers_count);
         }
     } catch (error) {
         console.warn('Failed to load GitHub star count:', error);
     }
+}
+
+function formatStarCount(count) {
+    if (count >= 1000) {
+        return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}k`;
+    }
+    return String(count);
 }
 
 // Theme Management
