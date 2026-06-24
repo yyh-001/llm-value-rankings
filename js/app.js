@@ -290,6 +290,10 @@ function formatPrice(usd) {
     return `$${price.toFixed(2)}`;
 }
 
+function getOpenRouterModelUrl(modelId) {
+    return `https://openrouter.ai/${modelId}`;
+}
+
 function formatLatency(seconds) {
     if (seconds == null || Number.isNaN(Number(seconds)) || Number(seconds) <= 0) return '-';
     const value = Number(seconds);
@@ -631,6 +635,7 @@ function showModelDetail(modelId) {
                 </div>` : '';
     const cacheNoteHtml = model.pricing.cache_hit_rate != null ? `
             <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
+    const openRouterUrl = getOpenRouterModelUrl(model.id);
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
@@ -640,7 +645,7 @@ function showModelDetail(modelId) {
                 <div class="model-detail-identity">
                     <div class="model-detail-titles">
                         <h2 class="model-detail-name">${escapeHtml(model.name)}</h2>
-                        <code class="model-detail-id">${escapeHtml(model.id)}</code>
+                        <a class="model-detail-id" href="${escapeAttr(openRouterUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(model.id)}</a>
                         <span class="provider-badge">${escapeHtml(providerDisplay)}</span>
                     </div>
                 </div>
@@ -650,6 +655,17 @@ function showModelDetail(modelId) {
                 <span class="detail-chip-value">${formatValueScore(model.value_score)}</span>
                 ${formatRankChangeHtml(model, true)}
             </div>
+        </div>
+
+        <div class="model-detail-actions">
+            <a class="btn-openrouter" href="${escapeAttr(openRouterUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttr(window.i18n.t('openrouter_link_aria'))}">
+                <svg class="openrouter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                <span>${window.i18n.t('openrouter_link')}</span>
+            </a>
         </div>
 
         <div class="detail-section">

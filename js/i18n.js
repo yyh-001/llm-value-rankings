@@ -91,6 +91,8 @@ const translations = {
         value_rank: "性价比排名",
         detail_metrics: "核心指标",
         detail_about: "模型简介",
+        openrouter_link: "在 OpenRouter 查看",
+        openrouter_link_aria: "在 OpenRouter 打开此模型页面",
         tokens_unit: "tokens",
         per_million: "每百万",
     },
@@ -181,6 +183,8 @@ const translations = {
         value_rank: "Value Rank",
         detail_metrics: "Key Metrics",
         detail_about: "About",
+        openrouter_link: "View on OpenRouter",
+        openrouter_link_aria: "Open this model on OpenRouter",
         tokens_unit: "tokens",
         per_million: "per million",
     }
