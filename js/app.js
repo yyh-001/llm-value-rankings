@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initI18n();
     initGitHubStar();
     initResponsive();
+    initVersion();
     await loadData();
     initEventListeners();
 });
@@ -96,6 +97,31 @@ function initResponsive() {
         state.isMobile = e.matches;
         renderRankings();
     });
+}
+
+async function initVersion() {
+    const versionLink = document.getElementById('app-version');
+    if (!versionLink) return;
+
+    const metaVersion = document.querySelector('meta[name="app-version"]')?.content;
+    if (metaVersion) {
+        versionLink.textContent = metaVersion;
+    }
+
+    try {
+        const res = await fetch(`version.json?${Date.now()}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const label = data.build || data.commit;
+        if (label) {
+            versionLink.textContent = label;
+        }
+        if (data.commit) {
+            versionLink.href = `https://github.com/${CONFIG.GITHUB_REPO}/commit/${data.commit}`;
+        }
+    } catch {
+        // Keep meta fallback
+    }
 }
 
 async function initGitHubStar() {
@@ -368,6 +394,7 @@ function renderMobileCards() {
                         <strong class="price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</strong>
                     </span>
                 </div>
+                <p class="model-card-hint">${window.i18n.t('card_tap_hint')}</p>
             </article>
         `;
     }).join('');
@@ -623,8 +650,8 @@ function initEventListeners() {
 
     // Model detail clicks via event delegation
     document.addEventListener('click', (e) => {
-        const trigger = e.target.closest('[data-model-id]');
-        if (!trigger) return;
+        const trigger = e.target.closest('.btn-detail, .model-card, .podium-card');
+        if (!trigger?.dataset.modelId) return;
         showModelDetail(trigger.dataset.modelId);
     });
 }

@@ -997,6 +997,29 @@ tbody tr.top-row .col-detail {
     color: var(--accent-primary);
 }
 
+.model-card-hint {
+    margin: 0.5rem 0 0;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.footer-version {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.footer-version a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-left: 0.35rem;
+}
+
+.footer-version a:hover {
+    text-decoration: underline;
+}
+
 .mobile-empty {
     text-align: center;
     padding: 3rem 1rem;
