@@ -158,7 +158,8 @@ function initI18n() {
 // Load Data
 async function loadData() {
     try {
-        const response = await fetch(CONFIG.DATA_URL);
+        const cacheKey = document.querySelector('meta[name="app-version"]')?.content || Date.now();
+        const response = await fetch(`${CONFIG.DATA_URL}?v=${cacheKey}`);
         if (!response.ok) throw new Error('Data fetch failed');
         const data = await response.json();
         
