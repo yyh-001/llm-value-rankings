@@ -385,7 +385,10 @@ def process_models(openrouter_models, model_data):
         data = match_model_data(model_id, model_name, model_data)
         intelligence = data["intelligence"] if data else None
         speed = data["speed"] if data else None
-        value_score = calculate_value_scores(intelligence, blended_price, speed)
+        if "distill" in model_id.lower():
+            value_score = None
+        else:
+            value_score = calculate_value_scores(intelligence, blended_price, speed)
 
         base_name = model_id.split(":")[0] if ":" in model_id else model_id
         if base_name in seen:
@@ -428,6 +431,7 @@ def rank_models(models):
 
     for model in unranked:
         model["rank"] = None
+        model["value_score"] = None
 
     return ranked + unranked
 

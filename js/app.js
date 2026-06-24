@@ -216,7 +216,7 @@ function populateProviders() {
 
 // Filter and Sort
 function filterAndSort() {
-    let filtered = state.models.filter(m => m.intelligence_score != null);
+    let filtered = state.models.filter(m => m.rank != null);
     
     // Search filter
     if (state.searchQuery) {
