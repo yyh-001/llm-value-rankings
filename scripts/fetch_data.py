@@ -311,17 +311,10 @@ def scrape_model_page_performance(model_id, session=None):
         payload = response.text
     except Exception as exc:
         print(f"  Warning: page scrape for {model_id}: {exc}")
-        return {"throughput": None, "ttft": None, "intelligence": None}
+        return {"throughput": None, "ttft": None}
 
     throughputs = []
     latencies = []
-    benchmark_accuracies = []
-
-    for match in re.finditer(
-        r'"benchmark_type":"[^"]+"[^}]*?"accuracy":([\d.]+)',
-        payload,
-    ):
-        benchmark_accuracies.append(float(match.group(1)))
 
     for match in re.finditer(
         r'"throughput_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
@@ -347,30 +340,22 @@ def scrape_model_page_performance(model_id, session=None):
 
     throughput = round(statistics.median(throughputs), 1) if throughputs else None
     ttft = round(min(latencies), 3) if latencies else None
-    intelligence = round(max(benchmark_accuracies) * 100) if benchmark_accuracies else None
-    return {"throughput": throughput, "ttft": ttft, "intelligence": intelligence}
+    return {"throughput": throughput, "ttft": ttft}
 
 
-def fetch_page_stats_batch(model_ids, endpoints_map, intelligence_map=None, model_meta=None):
-    """Scrape OpenRouter model pages for speed and/or missing intelligence scores."""
-    need_scrape = set()
-    for model_id in model_ids:
-        if aggregate_endpoint_metrics(endpoints_map.get(model_id, [])).get("throughput") is None:
-            need_scrape.add(model_id)
-            continue
-        if intelligence_map is None:
-            continue
-        canonical_slug = (model_meta or {}).get(model_id, {}).get("canonical_slug")
-        if lookup_intelligence_score(model_id, canonical_slug, intelligence_map, None) is None:
-            need_scrape.add(model_id)
-
-    need_scrape = sorted(need_scrape)
+def fetch_page_stats_batch(model_ids, endpoints_map):
+    """Scrape OpenRouter model pages for models missing endpoint throughput."""
+    need_scrape = [
+        model_id
+        for model_id in model_ids
+        if aggregate_endpoint_metrics(endpoints_map.get(model_id, [])).get("throughput") is None
+    ]
     results = {}
     if not need_scrape:
         return results
 
     session = make_http_session()
-    print(f"Scraping OpenRouter model pages: {len(need_scrape)} models...")
+    print(f"Scraping OpenRouter model pages for speed: {len(need_scrape)} models...")
     with ThreadPoolExecutor(max_workers=PAGE_FETCH_WORKERS) as executor:
         futures = {
             executor.submit(scrape_model_page_performance, model_id, session): model_id
@@ -389,9 +374,7 @@ def fetch_page_stats_batch(model_ids, endpoints_map, intelligence_map=None, mode
                 print(f"  Page scrape progress: {done}/{len(need_scrape)}")
 
     with_stats = sum(1 for stats in results.values() if stats.get("throughput") is not None)
-    with_intel = sum(1 for stats in results.values() if stats.get("intelligence") is not None)
     print(f"  Models with scraped throughput: {with_stats}/{len(need_scrape)}")
-    print(f"  Models with scraped intelligence: {with_intel}/{len(need_scrape)}")
     return results
 
 
@@ -534,25 +517,77 @@ def normalize_permaslug(slug):
     if not slug:
         return ""
     normalized = slug.lower().split(":")[0]
+    normalized = normalized.replace(".", "-")
     normalized = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", normalized)
-    normalized = re.sub(r"-\d{8,}$", "", normalized)
+    normalized = re.sub(r"-\d{8}$", "", normalized)
     return normalized
 
 
-def register_intelligence_score(scores, permaslug, intelligence):
-    """Store a benchmark score under common permaslug variants."""
-    if intelligence is None or not permaslug:
-        return
-    for key in {permaslug.lower(), normalize_permaslug(permaslug)}:
-        if key:
-            scores[key] = intelligence
+def slug_tokens(slug):
+    """Tokenize a slug for fuzzy matching (handles claude-5-fable vs claude-fable-5)."""
+    normalized = normalize_permaslug(slug)
+    tokens = []
+    for segment in normalized.split("/"):
+        tokens.extend(part for part in segment.split("-") if part)
+    return tuple(sorted(tokens))
 
 
-def fetch_openrouter_intelligence_scores():
+def benchmark_match_score(model_slug, benchmark_slug):
+    """Score how closely an OpenRouter slug matches a benchmark permaslug."""
+    if not model_slug or not benchmark_slug:
+        return 0
+
+    left = normalize_permaslug(model_slug)
+    right = normalize_permaslug(benchmark_slug)
+    if left == right:
+        return 100
+    if slug_tokens(left) == slug_tokens(right):
+        return 90
+    if left.startswith(f"{right}-") or right.startswith(f"{left}-"):
+        return 80
+    if left.startswith(right) or right.startswith(left):
+        return 70
+    return 0
+
+
+def build_intelligence_map(benchmark_rows, openrouter_models):
+    """Map OpenRouter model IDs to intelligence_index via permaslug matching."""
+    scored_rows = [
+        row
+        for row in benchmark_rows
+        if row.get("intelligence_index") is not None and row.get("model_permaslug")
+    ]
+    intelligence_map = {}
+
+    for model in openrouter_models:
+        model_id = model.get("id")
+        if not model_id:
+            continue
+
+        best_score = 0
+        best_intel = None
+        for row in scored_rows:
+            permaslug = row["model_permaslug"]
+            score = max(
+                benchmark_match_score(model_id, permaslug),
+                benchmark_match_score(model.get("canonical_slug"), permaslug),
+            )
+            if score > best_score:
+                best_score = score
+                best_intel = round(float(row["intelligence_index"]))
+
+        if best_score >= 70 and best_intel is not None:
+            intelligence_map[model_id] = best_intel
+
+    return intelligence_map
+
+
+
+def fetch_openrouter_intelligence_scores(openrouter_models):
     """
     Fetch intelligence scores from OpenRouter benchmarks API.
 
-    Requires OPENROUTER_API_KEY. Returns model_permaslug -> intelligence_index (0-100).
+    Requires OPENROUTER_API_KEY. Returns OpenRouter model id -> intelligence_index.
     """
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
@@ -566,7 +601,6 @@ def fetch_openrouter_intelligence_scores():
             OPENROUTER_BENCHMARKS_API,
             params={
                 "source": "artificial-analysis",
-                "task_type": "intelligence",
                 "max_results": 100,
             },
             headers=get_openrouter_headers(),
@@ -578,42 +612,27 @@ def fetch_openrouter_intelligence_scores():
         print(f"  Error fetching OpenRouter benchmarks: {exc}")
         return {}
 
-    scores = {}
     rows = payload.get("data", [])
-    for row in rows:
-        index = row.get("intelligence_index")
-        permaslug = row.get("model_permaslug")
-        if index is None or not permaslug:
-            continue
-        register_intelligence_score(scores, permaslug, round(float(index)))
+    intelligence_map = build_intelligence_map(rows, openrouter_models)
+    with_scores = sum(1 for row in rows if row.get("intelligence_index") is not None)
 
     meta = payload.get("meta") or {}
     as_of = meta.get("as_of")
-    print(f"  Loaded {len(rows)} benchmark rows ({len(scores)} lookup keys)")
+    print(f"  Loaded {len(rows)} benchmark rows ({with_scores} with intelligence_index)")
+    print(f"  Matched {len(intelligence_map)} OpenRouter models")
     if as_of:
         print(f"  Benchmark snapshot: {as_of}")
-    return scores
+    return intelligence_map
 
 
-def fetch_intelligence_scores():
+def fetch_intelligence_scores(openrouter_models):
     """Fetch intelligence scores from OpenRouter."""
-    return fetch_openrouter_intelligence_scores()
+    return fetch_openrouter_intelligence_scores(openrouter_models)
 
 
-def lookup_intelligence_score(model_id, canonical_slug, intelligence_map, page_stats):
+def lookup_intelligence_score(model_id, intelligence_map):
     """Resolve intelligence for an OpenRouter model."""
-    candidates = []
-    for slug in (model_id, canonical_slug):
-        if not slug:
-            continue
-        candidates.extend([slug.lower(), normalize_permaslug(slug)])
-
-    for slug in candidates:
-        if slug in intelligence_map:
-            return intelligence_map[slug]
-
-    page_stats = page_stats or {}
-    return page_stats.get("intelligence")
+    return intelligence_map.get(model_id)
 
 
 def calculate_value_scores(intelligence, price, speed):
@@ -659,12 +678,7 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
             continue
 
         page_stats = page_stats_map.get(model_id) or {}
-        intelligence = lookup_intelligence_score(
-            model_id,
-            model.get("canonical_slug"),
-            intelligence_map,
-            page_stats,
-        )
+        intelligence = lookup_intelligence_score(model_id, intelligence_map)
         speed = endpoint_metrics.get("throughput") or page_stats.get("throughput")
         ttft = endpoint_metrics.get("ttft") or page_stats.get("ttft")
 
@@ -871,7 +885,7 @@ def main():
         print("Error: No models fetched from OpenRouter")
         sys.exit(1)
 
-    intelligence_map = fetch_intelligence_scores()
+    intelligence_map = fetch_intelligence_scores(openrouter_models)
 
     candidate_ids = []
     seen_ids = set()
@@ -886,17 +900,7 @@ def main():
         candidate_ids.append(model_id)
 
     endpoints_map = fetch_endpoints_batch(candidate_ids)
-    model_meta = {
-        model["id"]: model
-        for model in openrouter_models
-        if model.get("id")
-    }
-    page_stats_map = fetch_page_stats_batch(
-        candidate_ids,
-        endpoints_map,
-        intelligence_map=intelligence_map,
-        model_meta=model_meta,
-    )
+    page_stats_map = fetch_page_stats_batch(candidate_ids, endpoints_map)
 
     # Process and rank
     processed = process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map)
