@@ -41,11 +41,10 @@ def load_local_env():
             if key and key not in os.environ:
                 os.environ[key] = value
 
-# Scoring: raw = capability⁵ × speed^0.8 / price → normalized to 0–100 in rank_models()
-# Capability uses AA coding_index from OpenRouter (broader coverage than intelligence_index).
+# Scoring: transform(coding) × speed^0.8 / price, where transform uses avg-baseline squares
+# f(x) = avg + (x-avg)² if x ≥ avg, else avg - (avg-x)²  (negative → excluded)
 AA_CAPABILITY_FIELD = "coding_index"
 MIN_INTELLIGENCE = 25
-INTELLIGENCE_EXPONENT = 5
 SPEED_EXPONENT = 0.8
 DEFAULT_CACHE_HIT_RATE = 0.7
 INPUT_TOKEN_WEIGHT = 3
@@ -664,12 +663,26 @@ def lookup_intelligence_score(model_id, intelligence_map):
     return intelligence_map.get(model_id)
 
 
+def transform_capability_score(raw, avg):
+    """
+    Map raw AA score around the mean with squared deltas.
+
+    Above avg: avg + (raw - avg)² — rewards strong models.
+    Below avg: avg - (avg - raw)² — steep penalty for weak models.
+    """
+    if raw is None or avg is None or avg <= 0:
+        return None
+    if raw >= avg:
+        return avg + (raw - avg) ** 2
+    return avg - (avg - raw) ** 2
+
+
 def calculate_value_scores(intelligence, price, speed, avg_intelligence=None):
     """
-    Calculate raw value score: intelligence⁵ × speed^0.8 / price.
+    Calculate raw value score: transform(coding) × speed^0.8 / price.
 
-    Models below the intelligence average receive an extra (I/avg)² penalty.
-    Normalized to a 0–100 scale in rank_models(). Models below MIN_INTELLIGENCE are excluded.
+    transform() uses avg-baseline squared deltas. Models below MIN_INTELLIGENCE
+    or with non-positive transform are excluded. Normalized to 0–100 in rank_models().
     """
     if intelligence is None or price is None or price <= 0:
         return None
@@ -680,12 +693,14 @@ def calculate_value_scores(intelligence, price, speed, avg_intelligence=None):
     if speed is None or speed <= 0:
         return None
 
-    base = (intelligence ** INTELLIGENCE_EXPONENT) * (speed ** SPEED_EXPONENT) / price
+    if avg_intelligence is None or avg_intelligence <= 0:
+        return None
 
-    if avg_intelligence and avg_intelligence > 0 and intelligence < avg_intelligence:
-        base *= (intelligence / avg_intelligence) ** 2
+    capability = transform_capability_score(intelligence, avg_intelligence)
+    if capability is None or capability <= 0:
+        return None
 
-    return base
+    return capability * (speed ** SPEED_EXPONENT) / price
 
 
 def process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map):

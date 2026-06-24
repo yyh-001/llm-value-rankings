@@ -7,7 +7,7 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
-        logo_sub: "编程⁵ × 速度^0.8 / 价格",
+        logo_sub: "编程均分² × 速度^0.8 / 价格",
         
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
@@ -47,10 +47,10 @@ const translations = {
         // Methodology
         methodology_title: "计算方法",
         formula_label: "核心公式",
-        formula: "性价比 = 编程⁵ × 速度^0.8 / 价格",
-        formula_note: "编程能力⁵ 放大差距，速度^0.8 削弱纯吞吐刷榜；低于均分再乘 (编程/均分)² 惩罚",
+        formula: "性价比 = f(编程) × 速度^0.8 / 价格",
+        formula_note: "f(x)=均分+(x-均分)²（x≥均分）；f(x)=均分-(均分-x)²（x<均分，低分惩罚更重）",
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
-        penalty_desc: "编程分低于 25 不参与排名；低于均分者额外降权",
+        penalty_desc: "原始编程分低于 25，或变换后 ≤0 的模型不参与排名",
         method_1_title: "编程能力",
         method_1: "Artificial Analysis Coding Index（OpenRouter）",
         method_2_title: "输出速度",
@@ -99,7 +99,7 @@ const translations = {
     en: {
         // Header
         title: "LLM Value Rankings",
-        logo_sub: "Coding⁵ × Speed^0.8 / Price",
+        logo_sub: "Coding f(x) × Speed^0.8 / Price",
         
         // Hero
         hero_badge: "Live Data · Updated Daily",
@@ -139,10 +139,10 @@ const translations = {
         // Methodology
         methodology_title: "Methodology",
         formula_label: "Core Formula",
-        formula: "Value = Coding⁵ × Speed^0.8 / Price",
-        formula_note: "Coding⁵ amplifies gaps; speed^0.8 reduces pure-throughput bias; below-average gets (C/avg)² penalty",
+        formula: "Value = f(Coding) × Speed^0.8 / Price",
+        formula_note: "f(x)=avg+(x-avg)² if x≥avg; f(x)=avg-(avg-x)² if x<avg (steeper low-score penalty)",
         score_scale: "Scores use a 0–100 scale; the top model is 100",
-        penalty_desc: "Below 25 excluded; below-average coding score penalized further",
+        penalty_desc: "Excluded if raw coding < 25 or transformed score ≤ 0",
         method_1_title: "Coding",
         method_1: "Artificial Analysis Coding Index (via OpenRouter)",
         method_2_title: "Output Speed",
