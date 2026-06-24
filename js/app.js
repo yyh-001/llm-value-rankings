@@ -801,14 +801,6 @@ function showModelDetail(modelId) {
     elements.modelModal.dataset.currentModel = modelId;
     elements.modelModal.classList.remove('hidden');
     document.body.classList.add('modal-open');
-
-    if (window.githubComments) {
-        try {
-            window.githubComments.loadComments(modelId);
-        } catch (error) {
-            console.warn('Failed to load comments:', error);
-        }
-    }
 }
 
 // Event Listeners

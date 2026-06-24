@@ -1595,103 +1595,6 @@ body.modal-open {
     margin: 0;
 }
 
-/* ===== Comments ===== */
-.comments-section {
-    margin: 1.25rem 1.5rem 1.5rem;
-    padding: 1.125rem 1.25rem 1.25rem;
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
-}
-
-.comments-section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.comments-section-icon {
-    font-size: 1.1rem;
-    line-height: 1;
-}
-
-.comments-list {
-    min-height: 2rem;
-}
-
-.comment-form-box {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed var(--border-color);
-    text-align: center;
-}
-
-.comment-form-box .btn-primary {
-    min-width: 180px;
-}
-
-.comment {
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-md);
-    padding: 1rem;
-    margin-bottom: 0.875rem;
-    border: 1px solid var(--border-color);
-}
-
-.comment-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.625rem;
-}
-
-.comment-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-.comment-user { font-weight: 600; font-size: 0.9rem; }
-.comment-time { font-size: 0.8rem; color: var(--text-muted); }
-.comment-rating { margin-left: auto; color: var(--warning); }
-.comment-body { color: var(--text-secondary); line-height: 1.6; font-size: 0.9rem; }
-
-.comment-form textarea {
-    width: 100%;
-    padding: 0.875rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    resize: vertical;
-    min-height: 100px;
-    margin-bottom: 1rem;
-}
-
-.comment-form textarea:focus {
-    outline: none;
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.rating-input { display: flex; gap: 0.375rem; margin-bottom: 1rem; }
-.rating-star { font-size: 1.4rem; cursor: pointer; transition: transform 0.2s; }
-.rating-star:hover { transform: scale(1.15); }
-.rating-star.active { color: var(--warning); }
-
-.login-hint {
-    color: var(--text-muted);
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
 .btn-primary {
     background: var(--accent-gradient);
     color: white;
@@ -1969,21 +1872,6 @@ body.modal-open {
     .model-detail-desc p {
         font-size: 0.85rem;
         line-height: 1.6;
-    }
-
-    .comments-section {
-        margin: 1rem 1rem 1rem;
-        padding: 1rem;
-    }
-
-    .comments-section-title {
-        font-size: 0.95rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .comment-form-box .btn-primary {
-        width: 100%;
-        min-width: 0;
     }
 
     @keyframes modalIn {

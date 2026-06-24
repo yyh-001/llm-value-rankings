@@ -59,15 +59,6 @@ const translations = {
         method_3_title: "Token 价格",
         method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 70%",
         
-        // Comments
-        comments_title: "用户评论",
-        login_hint: "登录GitHub后即可评论",
-        login_github: "使用GitHub登录",
-        comment_placeholder: "分享你对这个模型的使用体验...",
-        submit_comment: "发表评论",
-        rating_label: "评分",
-        no_comments: "暂无评论，来发表第一条吧",
-        
         // Footer
         footer_text: "数据来源：OpenRouter",
         footer_auto: "本页面数据由GitHub Actions自动更新，无需人工维护",
@@ -76,9 +67,6 @@ const translations = {
         
         // Messages
         data_error: "数据加载失败，请稍后再试",
-        comment_success: "评论发表成功",
-        comment_error: "评论发表失败，请重试",
-        login_required: "请先登录GitHub",
         
         // Model details
         model_detail: "模型详情",
@@ -152,15 +140,6 @@ const translations = {
         method_3_title: "Token Price",
         method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 70% cache hit",
         
-        // Comments
-        comments_title: "User Comments",
-        login_hint: "Login with GitHub to comment",
-        login_github: "Login with GitHub",
-        comment_placeholder: "Share your experience with this model...",
-        submit_comment: "Submit Comment",
-        rating_label: "Rating",
-        no_comments: "No comments yet. Be the first!",
-        
         // Footer
         footer_text: "Data sources: OpenRouter",
         footer_auto: "This page is automatically updated by GitHub Actions",
@@ -169,9 +148,6 @@ const translations = {
         
         // Messages
         data_error: "Failed to load data. Please try again later.",
-        comment_success: "Comment submitted successfully",
-        comment_error: "Failed to submit comment. Please try again.",
-        login_required: "Please login with GitHub first",
         
         // Model details
         model_detail: "Model Details",

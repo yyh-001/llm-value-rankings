@@ -168,8 +168,7 @@ llm-value-rankings/
 ├── css/style.css               # 样式（含暗色模式）
 ├── js/
 │   ├── app.js                  # 主逻辑
-│   ├── i18n.js                 # 国际化
-│   └── github-comments.js      # GitHub Issues 评论（可选）
+│   └── i18n.js                 # 国际化
 ├── data/
 │   ├── models.json             # 模型数据（自动更新）
 │   └── rank_history.json       # 每日排名快照

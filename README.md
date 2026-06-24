@@ -137,8 +137,7 @@ llm-value-rankings/
 ├── css/style.css               # Styles (light / dark)
 ├── js/
 │   ├── app.js                  # Core logic
-│   ├── i18n.js                 # Internationalization
-│   └── github-comments.js      # GitHub Issues comments (optional)
+│   └── i18n.js                 # Internationalization
 ├── data/
 │   ├── models.json             # Model data (auto-updated)
 │   └── rank_history.json       # Daily rank snapshots
