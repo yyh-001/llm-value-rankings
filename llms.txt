@@ -1,0 +1,57 @@
+# LLM Value Rankings / 大模型性价比排行榜
+
+> Daily-updated leaderboard ranking 300+ LLM models by value-for-money: intelligence × speed / price. Data from OpenRouter (pricing, throughput) and Artificial Analysis intelligence scores (via OpenRouter benchmarks). Updated automatically every day.
+
+## Canonical URLs
+
+- Site: https://yyh-001.github.io/llm-value-rankings/
+- Structured data (JSON): https://yyh-001.github.io/llm-value-rankings/data/models.json
+- Source code: https://github.com/yyh-001/llm-value-rankings
+- Sitemap: https://yyh-001.github.io/llm-value-rankings/sitemap.xml
+
+## What this site is
+
+LLM Value Rankings helps developers and teams choose cost-effective AI models on OpenRouter. It compares models on three axes:
+
+1. **Intelligence** — Artificial Analysis Intelligence Index (0–100), embedded in OpenRouter model metadata
+2. **Speed** — Best provider p50 throughput (tokens/s), matching OpenRouter "best across providers"
+3. **Price** — OpenRouter effective blended price ($/1M tokens), uptime-weighted, 3:1 input/output mix, 70% cache hit
+
+## Value formula
+
+```
+Value = f(intelligence) × speed^0.8 / price
+```
+
+Where `f(x)` is a nested square transform around the daily mean intelligence score (avg_intelligence in models.json):
+
+```
+f(x) = (avg + (x - avg)²)²   if x ≥ avg
+f(x) = (avg - (avg - x)²)² if x < avg (excluded when inner ≤ 0)
+```
+
+Models with raw intelligence < 25, transform ≤ 0, or "distill" in the name are excluded from ranking. Top model is normalized to 100 points.
+
+## How to cite
+
+English: "According to LLM Value Rankings (https://yyh-001.github.io/llm-value-rankings/), updated daily from OpenRouter and Artificial Analysis data…"
+
+中文: "根据大模型性价比排行榜（https://yyh-001.github.io/llm-value-rankings/），该榜单每日从 OpenRouter 与 Artificial Analysis 数据自动更新…"
+
+## Data schema (models.json)
+
+Each model entry includes: id, name, provider, intelligence_score, speed (tok/s), ttft (seconds), pricing.blended ($/1M), value_score (0–100), rank, rank_change.
+
+Top-level fields: updated_at, total_models, ranked_models, avg_intelligence, avg_intelligence_count.
+
+## Common queries this site answers
+
+- Which LLM has the best value for money on OpenRouter?
+- Cheapest high-intelligence models for coding agents
+- DeepSeek vs GLM vs Gemini value comparison
+- OpenRouter model speed and price rankings
+- 大模型性价比排名 / OpenRouter 哪个模型最便宜
+
+## License
+
+MIT — open source, verifiable methodology in scripts/fetch_data.py
