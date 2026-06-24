@@ -361,7 +361,7 @@ function renderMobileCards() {
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_speed')}</em>
-                        <strong>${model.speed || '-'}</strong>
+                        <strong class="speed-display">${model.speed ? model.speed + ' tok/s' : '-'}</strong>
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_price')}</em>

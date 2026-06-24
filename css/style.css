@@ -978,13 +978,23 @@ tbody tr.top-row .col-detail {
 .model-card-stat strong {
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--text-primary);
     font-variant-numeric: tabular-nums;
 }
 
 .model-card-stat .intelligence-score,
-.model-card-stat .price-display {
+.model-card-stat .price-display,
+.model-card-stat .speed-display {
     font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.model-card-stat .speed-display {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.model-card-value.value-score {
+    color: var(--accent-primary);
 }
 
 .mobile-empty {
