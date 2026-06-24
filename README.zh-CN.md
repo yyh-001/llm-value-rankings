@@ -130,7 +130,13 @@ gh repo edit yyh-001/llm-value-rankings \
   --description "Daily LLM value rankings — compare 300+ models by intelligence³×speed/price. 大模型性价比排行榜"
 ```
 
-或在仓库 **Settings → Secrets → Actions** 添加 `REPO_SETTINGS_TOKEN`（需 `repo` 权限的 PAT），工作流将优先使用该 Token。
+或在仓库 **Settings → Actions → General → Workflow permissions** 中开启 **Read and write permissions**，然后重新运行 **Sync Repository About** 工作流。
+
+本地一键同步（需 `gh auth login`）：
+
+```bash
+python scripts/sync_repo_about.py
+```
 
 ---
 
