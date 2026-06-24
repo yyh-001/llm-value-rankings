@@ -22,7 +22,7 @@
 
 LLM Value Rankings compares **300+ LLMs** by combining:
 
-- **Intelligence** — [Artificial Analysis](https://artificialanalysis.ai) benchmark scores
+- **Intelligence** — [Artificial Analysis](https://artificialanalysis.ai) Intelligence Index (OpenRouter embedded benchmarks)
 - **Speed** — output tokens per second
 - **Price** — blended input/output cost from [OpenRouter](https://openrouter.ai)
 
@@ -36,7 +36,7 @@ The result is a daily-updated leaderboard that answers one question: **how much 
 
 | | Feature | Description |
 |:---:|---------|-------------|
-| 📊 | **Smart ranking** | `Intelligence³ × Speed / Price`, min score 25 |
+| 📊 | **Smart ranking** | `f(Intelligence) × Speed^0.8 / Price`, min score 25 |
 | 📈 | **Day-over-day delta** | See rank changes vs yesterday (`↑2` / `↓1` / `NEW`) |
 | 🏅 | **Top 3 podium** | Highlight the best value models on the homepage |
 | 🔍 | **Live search** | Filter by model name or ID |
@@ -89,14 +89,21 @@ Or trigger the **Update Model Data** workflow from the Actions tab.
 ### Value score
 
 ```
-Value = Intelligence³ × Speed / Price
+Value = f(Intelligence) × Speed^0.8 / Price
 ```
 
-Intelligence is **cubed** so capability gaps matter more than small speed or price differences.
+`f(x)` is a **nested square transform** around the mean intelligence score:
+
+```
+f(x) = (avg + (x - avg)²)²          if x ≥ avg
+f(x) = (avg - (avg - x)²)²          if x < avg  (excluded when inner ≤ 0)
+```
+
+This rewards models above the average more than a plain square, without the harsh spread of a pure 4th power. The UI shows the **raw** intelligence score; ranking uses the transformed value.
 
 | Metric | Source | Notes |
 |--------|--------|-------|
-| Intelligence | Artificial Analysis | Index score 0–100 |
+| Intelligence | OpenRouter embedded AA `intelligence_index` | Artificial Analysis Intelligence Index, 0–100 |
 | Speed | OpenRouter Endpoints API + RSC page scrape | Median provider throughput (tokens/s); no static fallback |
 | TTFT | OpenRouter Endpoints API | Time-to-first-token p50 in seconds |
 | Price | OpenRouter | Uptime-weighted effective price: 3:1 input/output token mix, 70% cache-hit on input ($/1M) |
@@ -105,9 +112,13 @@ Intelligence is **cubed** so capability gaps matter more than small speed or pri
 
 After computing the raw value above, scores are **normalized to a 0–100 scale**. The top-ranked model is always **100**; others are proportional.
 
-### Minimum intelligence threshold
+### Exclusion rules
 
-Models scoring **below 25** are excluded from ranking — cheap but low-capability models won't clutter the leaderboard.
+Models are excluded from ranking when:
+
+- Raw intelligence score is **below 25**
+- The transformed capability score is **≤ 0** (inner term below zero for below-average models)
+- The model name contains `distill`
 
 ### Ranking rules
 
@@ -144,8 +155,9 @@ llm-value-rankings/
 
 | Data | Provider | Method |
 |------|----------|--------|
-| Pricing | [OpenRouter API](https://openrouter.ai/docs/api-reference/models/list-models) | REST |
-| Intelligence & Speed | [Artificial Analysis](https://artificialanalysis.ai/leaderboards/models) | Scraping + mapping table |
+| Pricing & model list | [OpenRouter API](https://openrouter.ai/docs/api-reference/models/list-models) | REST |
+| Intelligence | OpenRouter embedded AA benchmarks | `intelligence_index` field on model objects |
+| Speed & TTFT | [OpenRouter](https://openrouter.ai) | Endpoints API + RSC page scrape |
 
 ---
 

@@ -21,6 +21,7 @@ const state = {
     searchQuery: '',
     rankComparedTo: null,
     isMobile: false,
+    scoringMeta: null,
 };
 
 // Provider display names
@@ -67,7 +68,10 @@ function initElements() {
     elements.pagination = document.getElementById('pagination');
     elements.totalModels = document.getElementById('total-models');
     elements.rankedModels = document.getElementById('ranked-models');
+    elements.avgIntelligence = document.getElementById('avg-intelligence');
     elements.lastUpdated = document.getElementById('last-updated');
+    elements.formulaAvgNote = document.getElementById('formula-avg-note');
+    elements.formulaDetail = document.getElementById('formula-detail');
     elements.modelModal = document.getElementById('model-modal');
     elements.modalBody = document.getElementById('modal-body');
     elements.podium = document.getElementById('podium');
@@ -176,6 +180,7 @@ function initI18n() {
         renderPodium();
         renderRankings();
         updateStats();
+        updateScoringDisplay();
         updateResultsCount();
         const modelId = elements.modelModal?.dataset?.currentModel;
         if (modelId && !elements.modelModal?.classList.contains('hidden')) {
@@ -195,8 +200,16 @@ async function loadData() {
         state.models = data.models || [];
         state.filteredModels = [...state.models];
         state.rankComparedTo = data.rank_compared_to || null;
+        state.scoringMeta = {
+            total_models: data.total_models,
+            ranked_models: data.ranked_models,
+            updated_at: data.updated_at,
+            avg_intelligence: data.avg_intelligence,
+            avg_intelligence_count: data.avg_intelligence_count,
+        };
         
-        updateStats(data);
+        updateStats();
+        updateScoringDisplay();
         populateProviders();
         renderPodium();
         filterAndSort();
@@ -213,14 +226,70 @@ async function loadData() {
 }
 
 function updateStats(data) {
-    if (data) {
-        elements.totalModels.textContent = data.total_models || 0;
-        elements.rankedModels.textContent = data.ranked_models || 0;
-        if (data.updated_at) {
-            const date = new Date(data.updated_at);
-            const lang = window.i18n.currentLang;
-            elements.lastUpdated.textContent = date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US');
-        }
+    const meta = data || state.scoringMeta;
+    if (!meta) return;
+
+    if (elements.totalModels) {
+        elements.totalModels.textContent = meta.total_models ?? state.models.length;
+    }
+    if (elements.rankedModels) {
+        elements.rankedModels.textContent = meta.ranked_models ?? state.models.filter(m => m.rank).length;
+    }
+    if (elements.lastUpdated && meta.updated_at) {
+        const date = new Date(meta.updated_at);
+        const lang = window.i18n.currentLang;
+        elements.lastUpdated.textContent = date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US');
+    }
+}
+
+function resolveAvgIntelligence(meta) {
+    if (meta?.avg_intelligence != null) {
+        return {
+            avg: meta.avg_intelligence,
+            count: meta.avg_intelligence_count,
+        };
+    }
+
+    const scores = state.models
+        .map(m => m.intelligence_score)
+        .filter(score => score != null);
+    if (!scores.length) return null;
+
+    return {
+        avg: scores.reduce((sum, score) => sum + score, 0) / scores.length,
+        count: scores.length,
+    };
+}
+
+function formatAvg(value) {
+    return Number(value).toFixed(1);
+}
+
+function updateScoringDisplay() {
+    const resolved = resolveAvgIntelligence(state.scoringMeta);
+    if (!resolved) {
+        if (elements.avgIntelligence) elements.avgIntelligence.textContent = '—';
+        if (elements.formulaAvgNote) elements.formulaAvgNote.textContent = '—';
+        if (elements.formulaDetail) elements.formulaDetail.textContent = '—';
+        return;
+    }
+
+    const { avg, count } = resolved;
+    const avgText = formatAvg(avg);
+    const lang = window.i18n.currentLang;
+
+    if (elements.avgIntelligence) {
+        elements.avgIntelligence.textContent = avgText;
+    }
+    if (elements.formulaAvgNote) {
+        elements.formulaAvgNote.textContent = lang === 'zh'
+            ? `当前能力均分 ${avgText}（${count} 个模型，每日自动更新）`
+            : `Current intelligence avg: ${avgText} (${count} models, updated daily)`;
+    }
+    if (elements.formulaDetail) {
+        elements.formulaDetail.textContent = lang === 'zh'
+            ? `f(x)=(${avgText}+(x-${avgText})²)²（x≥${avgText}）；f(x)=(${avgText}-(${avgText}-x)²)²（x<${avgText}，内层≤0排除）`
+            : `f(x)=(${avgText}+(x-${avgText})²)² if x≥${avgText}; f(x)=(${avgText}-(${avgText}-x)²)² if x<${avgText} (excluded when inner ≤0)`;
     }
 }
 

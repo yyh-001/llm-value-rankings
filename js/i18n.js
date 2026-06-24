@@ -15,6 +15,7 @@ const translations = {
         hero_desc: "基于 AA 综合能力指数、输出速度与价格，计算每美元获得的 AI 性价比",
         total_models: "收录模型",
         ranked_models: "已排名",
+        avg_intelligence: "能力均分",
         last_updated: "更新时间",
         top_models: "🏅 性价比 Top 3",
         
@@ -107,6 +108,7 @@ const translations = {
         hero_desc: "AI value per dollar from AA Intelligence Index, speed, and OpenRouter pricing",
         total_models: "Total Models",
         ranked_models: "Ranked",
+        avg_intelligence: "Intel Avg",
         last_updated: "Last Updated",
         top_models: "🏅 Top 3 Value Models",
         

@@ -29,7 +29,11 @@ def main():
         for model in models
         if model.get("intelligence_score") is not None
     }
-    avg_intelligence = compute_avg_intelligence(intelligence_map)
+    avg_intelligence = data.get("avg_intelligence")
+    avg_intelligence_count = data.get("avg_intelligence_count")
+    if avg_intelligence is None:
+        avg_intelligence = compute_avg_intelligence(intelligence_map)
+        avg_intelligence_count = len(intelligence_map)
 
     for model in models:
         pricing = refresh_pricing_blended(model.get("pricing") or {})
@@ -48,7 +52,7 @@ def main():
     models = rank_models(models)
     history = load_rank_history()
     compare_day = apply_rank_changes(models, history)
-    save_data(models, compare_day)
+    save_data(models, compare_day, avg_intelligence, avg_intelligence_count)
 
     ranked = [m for m in models if m.get("rank")]
     print(f"Ranked: {len(ranked)} / {len(models)}")

@@ -872,7 +872,7 @@ def apply_rank_changes(models, history):
     return compare_day
 
 
-def save_data(models, compare_day=None):
+def save_data(models, compare_day=None, avg_intelligence=None, avg_intelligence_count=None):
     """Save processed data to JSON file."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -881,8 +881,12 @@ def save_data(models, compare_day=None):
         "total_models": len(models),
         "ranked_models": len([m for m in models if m["rank"] is not None]),
         "rank_compared_to": compare_day,
-        "models": models,
     }
+    if avg_intelligence is not None:
+        data["avg_intelligence"] = round(avg_intelligence, 2)
+    if avg_intelligence_count is not None:
+        data["avg_intelligence_count"] = avg_intelligence_count
+    data["models"] = models
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
@@ -890,6 +894,8 @@ def save_data(models, compare_day=None):
     print(f"\nData saved to {OUTPUT_FILE}")
     print(f"  Total models: {data['total_models']}")
     print(f"  Ranked models: {data['ranked_models']}")
+    if avg_intelligence is not None:
+        print(f"  Avg intelligence: {data['avg_intelligence']} ({data.get('avg_intelligence_count', '?')} models)")
     print(f"  Updated at: {data['updated_at']}")
 
 
@@ -942,6 +948,8 @@ def main():
         sys.exit(1)
 
     intelligence_map = fetch_intelligence_scores(openrouter_models)
+    avg_intelligence = compute_avg_intelligence(intelligence_map)
+    avg_intelligence_count = len(intelligence_map)
 
     candidate_ids = []
     seen_ids = set()
@@ -967,7 +975,7 @@ def main():
     compare_day = apply_rank_changes(ranked, history)
 
     # Save
-    save_data(ranked, compare_day)
+    save_data(ranked, compare_day, avg_intelligence, avg_intelligence_count)
     fetch_repo_meta()
 
     # Print top 10

@@ -1144,6 +1144,11 @@ tbody tr.top-row .col-detail {
     color: var(--text-secondary);
 }
 
+.formula-avg {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
 .method-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
