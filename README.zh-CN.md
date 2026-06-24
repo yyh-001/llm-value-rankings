@@ -92,12 +92,14 @@ git push
 性价比 = 能力³ × 速度 / 价格
 ```
 
+能力采用 **三次方**，让能力差距在排名中占主导地位（能力 50 比 40 的权重约为 1.95 倍）。
+
 | 指标 | 来源 | 说明 |
 |------|------|------|
 | 能力评分 | Artificial Analysis | Intelligence Index，0–100 分 |
 | 速度 | OpenRouter Endpoints API | 各 Provider 实测吞吐量 p50 (tokens/s)，缺失时默认 80 |
 | 首字延迟 | OpenRouter Endpoints API | TTFT p50（秒），无数据时显示 — |
-| 价格 | OpenRouter | 有效综合价：缓存命中价按 50% 命中率加权后的输入价 + 输出价平均 ($/1M tokens) |
+| 价格 | OpenRouter | uptime 加权有效价：输入:输出按 3:1 混合，输入侧 70% 缓存命中 ($/1M tokens) |
 
 ### 百分制换算
 

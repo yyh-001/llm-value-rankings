@@ -94,12 +94,14 @@ Or trigger the **Update Model Data** workflow from the Actions tab.
 Value = Intelligence³ × Speed / Price
 ```
 
+Intelligence is **cubed** so capability gaps matter more than small speed or price differences.
+
 | Metric | Source | Notes |
 |--------|--------|-------|
 | Intelligence | Artificial Analysis | Index score 0–100 |
 | Speed | OpenRouter Endpoints API | Measured throughput p50 (tokens/s; default 80 if missing) |
 | TTFT | OpenRouter Endpoints API | Time-to-first-token p50 in seconds |
-| Price | OpenRouter | Effective blended price with 50% cache-hit weighting ($/1M tokens) |
+| Price | OpenRouter | Uptime-weighted effective price: 3:1 input/output token mix, 70% cache-hit on input ($/1M) |
 
 ### Score scale (0–100)
 

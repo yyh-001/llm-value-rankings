@@ -25,9 +25,12 @@ REPO_META_FILE = OUTPUT_DIR / "repo.json"
 GITHUB_REPO = "yyh-001/llm-value-rankings"
 
 # Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
+# Cubed intelligence deliberately prioritizes capability over marginal speed/price gains.
 MIN_INTELLIGENCE = 25
 INTELLIGENCE_EXPONENT = 3
-DEFAULT_CACHE_HIT_RATE = 0.5
+DEFAULT_CACHE_HIT_RATE = 0.7
+INPUT_TOKEN_WEIGHT = 3
+OUTPUT_TOKEN_WEIGHT = 1
 DEFAULT_SPEED = 80
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
 ENDPOINT_FETCH_WORKERS = 8
@@ -144,8 +147,28 @@ def weighted_average(values, weights):
     return round(sum(v * w for v, w in zip(values, weights)) / total_weight, 6)
 
 
+def blend_token_price(input_price, output_price):
+    """Blend input/output $/1M rates using typical chat token mix (3:1 input:output)."""
+    if input_price is None or output_price is None:
+        return None
+    total_weight = INPUT_TOKEN_WEIGHT + OUTPUT_TOKEN_WEIGHT
+    return round(
+        (INPUT_TOKEN_WEIGHT * input_price + OUTPUT_TOKEN_WEIGHT * output_price) / total_weight,
+        4,
+    )
+
+
+def effective_input_price(prompt, cache_read, cache_hit_rate):
+    """Apply cache-hit discount to input price when cache read pricing exists."""
+    if prompt is None:
+        return None
+    if cache_read is not None and cache_hit_rate is not None:
+        return prompt * (1 - cache_hit_rate) + cache_read * cache_hit_rate
+    return prompt
+
+
 def get_list_blended_price(pricing):
-    """List-price blended average: (prompt + completion) / 2 per 1M tokens."""
+    """List-price blended rate from catalog pricing ($/1M tokens)."""
     if not pricing:
         return None
 
@@ -157,7 +180,28 @@ def get_list_blended_price(pricing):
     if prompt_price == 0 and completion_price == 0:
         return None
 
-    return round((prompt_price + completion_price) / 2, 4)
+    return blend_token_price(prompt_price, completion_price)
+
+
+def refresh_pricing_blended(pricing):
+    """Recompute blended prices from stored prompt/completion/cache fields."""
+    if not pricing:
+        return pricing
+
+    prompt = pricing.get("prompt")
+    completion = pricing.get("completion")
+    if prompt is None or completion is None:
+        return pricing
+
+    cache_read = pricing.get("cache_read")
+    cache_hit_rate = DEFAULT_CACHE_HIT_RATE if cache_read is not None else None
+    if cache_hit_rate is not None:
+        pricing["cache_hit_rate"] = cache_hit_rate
+
+    prompt_effective = effective_input_price(prompt, cache_read, cache_hit_rate)
+    pricing["blended_list"] = blend_token_price(prompt, completion)
+    pricing["blended"] = blend_token_price(prompt_effective, completion)
+    return pricing
 
 
 def fetch_model_endpoints(model_id, session=None):
@@ -225,11 +269,14 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
 
     throughputs = []
     latencies = []
-    weights = []
+    prompt_prices = []
+    prompt_weights = []
+    completion_prices = []
+    completion_weights = []
     effective_inputs = []
-    list_prompts = []
-    list_completions = []
+    effective_weights = []
     cache_reads = []
+    cache_weights = []
     has_cache = False
 
     for ep in healthy:
@@ -242,21 +289,24 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
             continue
 
         weight = ep.get("uptime_last_1d") or ep.get("uptime_last_30m") or 1.0
-        weights.append(weight)
 
         if prompt is not None:
-            list_prompts.append(prompt)
+            prompt_prices.append(prompt)
+            prompt_weights.append(weight)
             if cache_read is not None:
                 has_cache = True
                 cache_reads.append(cache_read)
+                cache_weights.append(weight)
                 effective_inputs.append(
                     prompt * (1 - cache_hit_rate) + cache_read * cache_hit_rate
                 )
             else:
                 effective_inputs.append(prompt)
+            effective_weights.append(weight)
 
         if completion is not None:
-            list_completions.append(completion)
+            completion_prices.append(completion)
+            completion_weights.append(weight)
 
         throughput = parse_p50_stat(ep.get("throughput_last_30m"))
         if throughput is not None and throughput > 0:
@@ -266,17 +316,17 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         if latency is not None and latency > 0:
             latencies.append(latency)
 
-    prompt_list = min(list_prompts) if list_prompts else None
-    completion_list = min(list_completions) if list_completions else None
-    prompt_effective = weighted_average(effective_inputs, weights[: len(effective_inputs)])
-    cache_read_min = min(cache_reads) if cache_reads else None
+    prompt_list = weighted_average(prompt_prices, prompt_weights)
+    completion_list = weighted_average(completion_prices, completion_weights)
+    prompt_effective = weighted_average(effective_inputs, effective_weights)
+    cache_read_avg = weighted_average(cache_reads, cache_weights)
 
     blended_list = None
     blended_effective = None
     if prompt_list is not None and completion_list is not None:
-        blended_list = round((prompt_list + completion_list) / 2, 4)
+        blended_list = blend_token_price(prompt_list, completion_list)
     if prompt_effective is not None and completion_list is not None:
-        blended_effective = round((prompt_effective + completion_list) / 2, 4)
+        blended_effective = blend_token_price(prompt_effective, completion_list)
 
     return {
         "throughput": round(max(throughputs), 1) if throughputs else None,
@@ -284,7 +334,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         "prompt_list": prompt_list,
         "completion_list": completion_list,
         "prompt_effective": prompt_effective,
-        "cache_read": cache_read_min,
+        "cache_read": cache_read_avg,
         "cache_hit_rate": cache_hit_rate if has_cache else None,
         "blended_list": blended_list,
         "blended_effective": blended_effective,
@@ -307,7 +357,11 @@ def build_pricing_payload(catalog_pricing, endpoint_metrics):
         cache_read = price_per_million(catalog_pricing.get("input_cache_read"))
 
     blended_effective = endpoint_metrics.get("blended_effective")
-    blended_list = endpoint_metrics.get("blended_list") or get_list_blended_price(catalog_pricing)
+    blended_list = endpoint_metrics.get("blended_list")
+    if blended_list is None and prompt_list is not None and completion_list is not None:
+        blended_list = blend_token_price(prompt_list, completion_list)
+    if blended_list is None:
+        blended_list = get_list_blended_price(catalog_pricing)
     blended = blended_effective or blended_list
 
     return {
@@ -566,6 +620,7 @@ def calculate_value_scores(intelligence, price, speed):
     """
     Calculate raw value score: intelligence³ × speed / price.
 
+    Intelligence is cubed so capability differences dominate the ranking.
     Normalized to a 0–100 scale in rank_models(). Models below MIN_INTELLIGENCE are excluded.
     """
     if intelligence is None or price is None or price <= 0:

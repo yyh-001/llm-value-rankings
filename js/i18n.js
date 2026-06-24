@@ -48,6 +48,7 @@ const translations = {
         methodology_title: "计算方法",
         formula_label: "核心公式",
         formula: "性价比 = 能力³ × 速度 / 价格",
+        formula_note: "能力采用三次方，能力差距对排名的影响远大于速度或价格的小幅波动",
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
         penalty_desc: "能力评分低于 25 分的模型不参与排名",
         method_1_title: "能力评分",
@@ -55,7 +56,7 @@ const translations = {
         method_2_title: "输出速度",
         method_2: "OpenRouter 各 Provider 实测吞吐量 (tokens/s，p50)",
         method_3_title: "Token 价格",
-        method_3: "OpenRouter 有效价：缓存命中价加权（默认 50% 命中率）",
+        method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 70%",
         
         // Comments
         comments_title: "用户评论",
@@ -86,7 +87,7 @@ const translations = {
         cache_read_price: "缓存命中价",
         list_price: "挂牌综合价",
         blended_price: "有效综合价",
-        cache_hit_note: "缓存命中率按 50% 估算（OpenRouter 平台数据）",
+        cache_hit_note: "缓存命中率按 70% 估算（Agent/RAG 典型场景）",
         value_rank: "性价比排名",
         detail_metrics: "核心指标",
         detail_about: "模型简介",
@@ -137,6 +138,7 @@ const translations = {
         methodology_title: "Methodology",
         formula_label: "Core Formula",
         formula: "Value = Intelligence³ × Speed / Price",
+        formula_note: "Intelligence is cubed so capability gaps dominate over small speed or price differences",
         score_scale: "Scores use a 0–100 scale; the top model is 100",
         penalty_desc: "Models scoring below 25 are excluded from ranking",
         method_1_title: "Intelligence",
@@ -144,7 +146,7 @@ const translations = {
         method_2_title: "Output Speed",
         method_2: "OpenRouter measured throughput (tokens/s, p50)",
         method_3_title: "Token Price",
-        method_3: "OpenRouter effective price with cache-read weighting (50% hit rate)",
+        method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 70% cache hit",
         
         // Comments
         comments_title: "User Comments",
@@ -175,7 +177,7 @@ const translations = {
         cache_read_price: "Cache Read Price",
         list_price: "List Blended Price",
         blended_price: "Effective Blended Price",
-        cache_hit_note: "Cache hit rate assumed at 50% (OpenRouter platform benchmark)",
+        cache_hit_note: "Cache hit rate assumed at 70% (typical agent/RAG workload)",
         value_rank: "Value Rank",
         detail_metrics: "Key Metrics",
         detail_about: "About",

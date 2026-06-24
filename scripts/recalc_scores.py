@@ -13,6 +13,7 @@ from fetch_data import (
     calculate_value_scores,
     load_rank_history,
     rank_models,
+    refresh_pricing_blended,
     save_data,
 )
 
@@ -23,7 +24,8 @@ def main():
 
     models = data["models"]
     for model in models:
-        pricing = model.get("pricing") or {}
+        pricing = refresh_pricing_blended(model.get("pricing") or {})
+        model["pricing"] = pricing
         blended = pricing.get("blended")
         if "distill" in model["id"].lower():
             model["value_score"] = None
