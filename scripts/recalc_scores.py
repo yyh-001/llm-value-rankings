@@ -11,6 +11,7 @@ from fetch_data import (
     OUTPUT_FILE,
     apply_rank_changes,
     calculate_value_scores,
+    compute_avg_intelligence,
     load_rank_history,
     rank_models,
     refresh_pricing_blended,
@@ -23,6 +24,13 @@ def main():
         data = json.load(f)
 
     models = data["models"]
+    intelligence_map = {
+        model["id"]: model["intelligence_score"]
+        for model in models
+        if model.get("intelligence_score") is not None
+    }
+    avg_intelligence = compute_avg_intelligence(intelligence_map)
+
     for model in models:
         pricing = refresh_pricing_blended(model.get("pricing") or {})
         model["pricing"] = pricing
@@ -34,6 +42,7 @@ def main():
                 model.get("intelligence_score"),
                 blended,
                 model.get("speed"),
+                avg_intelligence,
             )
 
     models = rank_models(models)

@@ -629,16 +629,24 @@ def fetch_intelligence_scores(openrouter_models):
     return fetch_openrouter_intelligence_scores(openrouter_models)
 
 
+def compute_avg_intelligence(intelligence_map):
+    """Mean intelligence across models with AA benchmark scores."""
+    values = list(intelligence_map.values())
+    if not values:
+        return None
+    return sum(values) / len(values)
+
+
 def lookup_intelligence_score(model_id, intelligence_map):
     """Resolve intelligence for an OpenRouter model."""
     return intelligence_map.get(model_id)
 
 
-def calculate_value_scores(intelligence, price, speed):
+def calculate_value_scores(intelligence, price, speed, avg_intelligence=None):
     """
     Calculate raw value score: intelligence⁵ × speed^0.8 / price.
 
-    High intelligence exponent prioritizes capability; damped speed reduces pure-throughput bias.
+    Models below the intelligence average receive an extra (I/avg)² penalty.
     Normalized to a 0–100 scale in rank_models(). Models below MIN_INTELLIGENCE are excluded.
     """
     if intelligence is None or price is None or price <= 0:
@@ -650,13 +658,19 @@ def calculate_value_scores(intelligence, price, speed):
     if speed is None or speed <= 0:
         return None
 
-    return (intelligence ** INTELLIGENCE_EXPONENT) * (speed ** SPEED_EXPONENT) / price
+    base = (intelligence ** INTELLIGENCE_EXPONENT) * (speed ** SPEED_EXPONENT) / price
+
+    if avg_intelligence and avg_intelligence > 0 and intelligence < avg_intelligence:
+        base *= (intelligence / avg_intelligence) ** 2
+
+    return base
 
 
 def process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map):
     """Process and combine model data from OpenRouter + endpoint/page stats."""
     processed = []
     seen = set()
+    avg_intelligence = compute_avg_intelligence(intelligence_map)
 
     for model in openrouter_models:
         model_id = model.get("id", "")
@@ -684,7 +698,9 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
         if "distill" in model_id.lower():
             value_score = None
         else:
-            value_score = calculate_value_scores(intelligence, blended_price, speed)
+            value_score = calculate_value_scores(
+                intelligence, blended_price, speed, avg_intelligence
+            )
 
         base_name = model_id.split(":")[0] if ":" in model_id else model_id
         if base_name in seen:
