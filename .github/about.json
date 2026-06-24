@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "homepage": "https://yyh-001.github.io/llm-value-rankings/",
-  "description": "Daily LLM value rankings — compare 300+ models by intelligence³×speed/price (OpenRouter + Artificial Analysis). 大模型性价比排行榜 · GitHub Pages",
+  "description": "Daily LLM value rankings - compare 300+ models by intelligence, speed and price. OpenRouter + Artificial Analysis. 大模型性价比排行榜",
   "topics": [
     "llm",
     "large-language-models",
