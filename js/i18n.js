@@ -7,12 +7,12 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
-        logo_sub: "能力⁵ × 速度^0.8 / 价格",
+        logo_sub: "编程⁵ × 速度^0.8 / 价格",
         
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
         hero_title: "找到最具性价比的 AI 模型",
-        hero_desc: "基于综合能力评分、输出速度与价格，计算每单位价格获得的 AI 智能分数",
+        hero_desc: "基于 AA 编程能力指数、输出速度与价格，计算每美元获得的编程性价比",
         total_models: "收录模型",
         ranked_models: "已排名",
         last_updated: "更新时间",
@@ -28,7 +28,7 @@ const translations = {
         th_change: "较昨日",
         th_model: "模型",
         th_provider: "厂商",
-        th_intelligence: "能力",
+        th_intelligence: "编程",
         th_speed: "速度",
         th_ttft: "首字延迟",
         th_price: "价格",
@@ -40,19 +40,19 @@ const translations = {
         rank_change_hint: "较昨日排名变化",
         
         // Podium
-        podium_intelligence: "能力",
+        podium_intelligence: "编程",
         podium_speed: "速度",
         podium_price: "价格",
         
         // Methodology
         methodology_title: "计算方法",
         formula_label: "核心公式",
-        formula: "性价比 = 能力⁵ × 速度^0.8 / 价格",
-        formula_note: "能力⁵ 放大差距，速度^0.8 削弱纯吞吐刷榜；低于均分再乘 (能力/均分)² 惩罚",
+        formula: "性价比 = 编程⁵ × 速度^0.8 / 价格",
+        formula_note: "编程能力⁵ 放大差距，速度^0.8 削弱纯吞吐刷榜；低于均分再乘 (编程/均分)² 惩罚",
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
-        penalty_desc: "能力低于 25 分不参与排名；低于均分者额外降权",
-        method_1_title: "能力评分",
-        method_1: "OpenRouter 能力指数",
+        penalty_desc: "编程分低于 25 不参与排名；低于均分者额外降权",
+        method_1_title: "编程能力",
+        method_1: "Artificial Analysis Coding Index（OpenRouter）",
         method_2_title: "输出速度",
         method_2: "OpenRouter 实测吞吐量 (tokens/s)，Endpoints API + RSC 爬取",
         method_3_title: "Token 价格",
@@ -99,12 +99,12 @@ const translations = {
     en: {
         // Header
         title: "LLM Value Rankings",
-        logo_sub: "Intelligence⁵ × Speed^0.8 / Price",
+        logo_sub: "Coding⁵ × Speed^0.8 / Price",
         
         // Hero
         hero_badge: "Live Data · Updated Daily",
         hero_title: "Find the Best Value AI Models",
-        hero_desc: "Calculate AI intelligence per dollar based on capability, speed, and pricing",
+        hero_desc: "Coding value per dollar from AA Coding Index, speed, and OpenRouter pricing",
         total_models: "Total Models",
         ranked_models: "Ranked",
         last_updated: "Last Updated",
@@ -120,7 +120,7 @@ const translations = {
         th_change: "Δ Day",
         th_model: "Model",
         th_provider: "Provider",
-        th_intelligence: "Intel",
+        th_intelligence: "Coding",
         th_speed: "Speed",
         th_ttft: "TTFT",
         th_price: "Price",
@@ -132,19 +132,19 @@ const translations = {
         rank_change_hint: "Rank change vs yesterday",
         
         // Podium
-        podium_intelligence: "Intel",
+        podium_intelligence: "Coding",
         podium_speed: "Speed",
         podium_price: "Price",
         
         // Methodology
         methodology_title: "Methodology",
         formula_label: "Core Formula",
-        formula: "Value = Intelligence⁵ × Speed^0.8 / Price",
-        formula_note: "Intelligence⁵ with speed^0.8; below-average models get an extra (I/avg)² penalty",
+        formula: "Value = Coding⁵ × Speed^0.8 / Price",
+        formula_note: "Coding⁵ amplifies gaps; speed^0.8 reduces pure-throughput bias; below-average gets (C/avg)² penalty",
         score_scale: "Scores use a 0–100 scale; the top model is 100",
-        penalty_desc: "Below 25 excluded; below-average intelligence penalized further",
-        method_1_title: "Intelligence",
-        method_1: "OpenRouter Intelligence Index",
+        penalty_desc: "Below 25 excluded; below-average coding score penalized further",
+        method_1_title: "Coding",
+        method_1: "Artificial Analysis Coding Index (via OpenRouter)",
         method_2_title: "Output Speed",
         method_2: "OpenRouter measured throughput (tokens/s) via API + RSC scrape",
         method_3_title: "Token Price",

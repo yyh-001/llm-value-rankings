@@ -41,7 +41,9 @@ def load_local_env():
             if key and key not in os.environ:
                 os.environ[key] = value
 
-# Scoring: raw = intelligence⁵ × speed^0.8 / price → normalized to 0–100 in rank_models()
+# Scoring: raw = capability⁵ × speed^0.8 / price → normalized to 0–100 in rank_models()
+# Capability uses AA coding_index from OpenRouter (broader coverage than intelligence_index).
+AA_CAPABILITY_FIELD = "coding_index"
 MIN_INTELLIGENCE = 25
 INTELLIGENCE_EXPONENT = 5
 SPEED_EXPONENT = 0.8
@@ -531,11 +533,11 @@ def slug_tokens(slug):
     return tuple(sorted(tokens))
 
 
-def extract_embedded_intelligence_index(model):
-    """Read AA intelligence_index attached to an OpenRouter model record."""
+def extract_embedded_aa_score(model):
+    """Read AA capability score (coding_index) attached to an OpenRouter model record."""
     benchmarks = model.get("benchmarks") or {}
     artificial_analysis = benchmarks.get("artificial_analysis") or {}
-    value = artificial_analysis.get("intelligence_index")
+    value = artificial_analysis.get(AA_CAPABILITY_FIELD)
     if value is None:
         return None
     return round(float(value))
@@ -556,11 +558,11 @@ def benchmark_match_score(model_slug, benchmark_slug):
 
 
 def build_intelligence_map(benchmark_rows, openrouter_models):
-    """Map OpenRouter model IDs to intelligence_index via embedded AA data + exact slug fallback."""
+    """Map OpenRouter model IDs to AA coding_index via embedded data + exact slug fallback."""
     scored_rows = [
         row
         for row in benchmark_rows
-        if row.get("intelligence_index") is not None and row.get("model_permaslug")
+        if row.get(AA_CAPABILITY_FIELD) is not None and row.get("model_permaslug")
     ]
     intelligence_map = {}
     embedded_count = 0
@@ -571,7 +573,7 @@ def build_intelligence_map(benchmark_rows, openrouter_models):
         if not model_id:
             continue
 
-        embedded = extract_embedded_intelligence_index(model)
+        embedded = extract_embedded_aa_score(model)
         if embedded is not None:
             intelligence_map[model_id] = embedded
             embedded_count += 1
@@ -591,29 +593,29 @@ def build_intelligence_map(benchmark_rows, openrouter_models):
             )
             if score > best_score:
                 best_score = score
-                best_intel = round(float(row["intelligence_index"]))
+                best_intel = round(float(row[AA_CAPABILITY_FIELD]))
 
         if best_score >= 90 and best_intel is not None:
             intelligence_map[model_id] = best_intel
             slug_count += 1
 
-    print(f"  Embedded AA scores: {embedded_count}, slug fallback: {slug_count}")
+    print(f"  Embedded AA {AA_CAPABILITY_FIELD}: {embedded_count}, slug fallback: {slug_count}")
     return intelligence_map
 
 
 
 def fetch_openrouter_intelligence_scores(openrouter_models):
     """
-    Build intelligence scores from OpenRouter model records and benchmarks API.
+    Build capability scores from OpenRouter model records and benchmarks API.
 
-    Prefers per-model embedded AA scores; falls back to exact slug matches only.
+    Uses AA coding_index; prefers per-model embedded scores, exact slug fallback only.
     """
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         print("  Warning: OPENROUTER_API_KEY not set; skipping OpenRouter benchmark scores")
         return {}
 
-    print("Fetching intelligence scores from OpenRouter benchmarks API...")
+    print(f"Fetching AA {AA_CAPABILITY_FIELD} from OpenRouter...")
     session = make_http_session()
     try:
         response = session.get(
@@ -633,11 +635,11 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
 
     rows = payload.get("data", [])
     intelligence_map = build_intelligence_map(rows, openrouter_models)
-    with_scores = sum(1 for row in rows if row.get("intelligence_index") is not None)
+    with_scores = sum(1 for row in rows if row.get(AA_CAPABILITY_FIELD) is not None)
 
     meta = payload.get("meta") or {}
     as_of = meta.get("as_of")
-    print(f"  Loaded {len(rows)} benchmark rows ({with_scores} with intelligence_index)")
+    print(f"  Loaded {len(rows)} benchmark rows ({with_scores} with {AA_CAPABILITY_FIELD})")
     print(f"  Matched {len(intelligence_map)} OpenRouter models")
     if as_of:
         print(f"  Benchmark snapshot: {as_of}")
