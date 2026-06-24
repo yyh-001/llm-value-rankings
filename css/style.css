@@ -871,75 +871,120 @@ tbody tr.top-row .col-detail {
 .rankings-cards {
     display: none;
     flex-direction: column;
-    gap: 0.875rem;
+    gap: 0.625rem;
 }
 
 .model-card {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 1rem;
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: background-color 0.15s, border-color 0.15s;
 }
 
 .model-card:active {
-    transform: scale(0.99);
+    background: var(--bg-tertiary);
 }
 
-.model-card-header {
+.model-card-top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
     margin-bottom: 0.75rem;
 }
 
-.model-card-rank {
+.model-card-top .rank-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.model-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.model-card-title-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
 }
 
 .model-card-name {
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 0.2rem;
     line-height: 1.35;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-.model-card-id {
+.model-card-value {
+    font-size: 0.95rem;
+    font-weight: 800;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.model-card-sub {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.model-card-sub .provider-badge {
     font-size: 0.72rem;
-    color: var(--text-muted);
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    margin-bottom: 0.625rem;
-    word-break: break-all;
+    padding: 0.15rem 0.5rem;
 }
 
-.model-card-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-    padding-top: 0.875rem;
-    border-top: 1px solid var(--border-color);
+.model-card-sub .rank-change-inline {
+    margin-left: 0;
 }
 
-.model-card-metric {
+.model-card-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.model-card-stat {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    align-items: center;
+    gap: 0.1rem;
+    flex: 1;
+    min-width: 0;
 }
 
-.model-card-metric-value {
-    grid-column: 1 / -1;
-}
-
-.model-card-metric-label {
-    font-size: 0.68rem;
+.model-card-stat em {
+    font-style: normal;
+    font-size: 0.65rem;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
+}
+
+.model-card-stat strong {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.model-card-stat .intelligence-score,
+.model-card-stat .price-display {
+    font-size: 0.85rem;
 }
 
 .mobile-empty {

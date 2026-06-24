@@ -332,50 +332,41 @@ function renderMobileCards() {
         return;
     }
 
-    const maxValue = Math.max(...state.filteredModels.map(m => m.value_score || 0));
-
     elements.rankingsCards.innerHTML = pageModels.map((model, idx) => {
         const rank = model.rank || '-';
         const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
         const intelClass = getIntelligenceClass(model.intelligence_score);
         const priceClass = getPriceClass(model.pricing.blended);
         const valueScore = model.value_score || 0;
-        const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
 
         return `
             <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
-                <div class="model-card-header">
-                    <div class="model-card-rank">
-                        <span class="rank-badge ${rankClass}">${rank}</span>
-                        ${formatRankChangeHtml(model)}
-                    </div>
-                    <button type="button" class="btn-detail" data-model-id="${escapeAttr(model.id)}">${window.i18n.t('th_detail')}</button>
-                </div>
-                <div class="model-card-body">
-                    <h4 class="model-card-name">${escapeHtml(model.name)}</h4>
-                    <p class="model-card-id">${escapeHtml(model.id)}</p>
-                    <span class="provider-badge">${escapeHtml(model.provider_display || model.provider)}</span>
-                </div>
-                <div class="model-card-metrics">
-                    <div class="model-card-metric">
-                        <span class="model-card-metric-label">${window.i18n.t('th_intelligence')}</span>
-                        <span class="intelligence-score ${intelClass}">${model.intelligence_score || '-'}</span>
-                    </div>
-                    <div class="model-card-metric">
-                        <span class="model-card-metric-label">${window.i18n.t('th_speed')}</span>
-                        <span>${model.speed ? model.speed + ' tok/s' : '-'}</span>
-                    </div>
-                    <div class="model-card-metric">
-                        <span class="model-card-metric-label">${window.i18n.t('th_price')}</span>
-                        <span class="price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</span>
-                    </div>
-                    <div class="model-card-metric model-card-metric-value">
-                        <span class="model-card-metric-label">${window.i18n.t('th_value')}</span>
-                        <span class="value-score">${formatValueScore(valueScore)}</span>
-                        <div class="value-bar">
-                            <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
+                <div class="model-card-top">
+                    <span class="rank-badge ${rankClass}">${rank}</span>
+                    <div class="model-card-info">
+                        <div class="model-card-title-row">
+                            <h4 class="model-card-name">${escapeHtml(model.name)}</h4>
+                            <span class="value-score model-card-value">${formatValueScore(valueScore)}</span>
+                        </div>
+                        <div class="model-card-sub">
+                            <span class="provider-badge">${escapeHtml(model.provider_display || model.provider)}</span>
+                            ${formatRankChangeHtml(model, true)}
                         </div>
                     </div>
+                </div>
+                <div class="model-card-stats">
+                    <span class="model-card-stat">
+                        <em>${window.i18n.t('th_intelligence')}</em>
+                        <strong class="intelligence-score ${intelClass}">${model.intelligence_score || '-'}</strong>
+                    </span>
+                    <span class="model-card-stat">
+                        <em>${window.i18n.t('th_speed')}</em>
+                        <strong>${model.speed || '-'}</strong>
+                    </span>
+                    <span class="model-card-stat">
+                        <em>${window.i18n.t('th_price')}</em>
+                        <strong class="price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</strong>
+                    </span>
                 </div>
             </article>
         `;
@@ -539,7 +530,7 @@ function goToPage(page) {
 // Model Detail
 function showModelDetail(modelId) {
     const model = state.models.find(m => m.id === modelId);
-    if (!model) return;
+    if (!model || !model.pricing) return;
     
     const lang = window.i18n.currentLang;
     const providerName = PROVIDER_NAMES[model.provider]?.[lang] || model.provider;
