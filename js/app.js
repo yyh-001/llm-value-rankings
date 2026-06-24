@@ -22,20 +22,6 @@ const state = {
     isMobile: false,
 };
 
-// Provider logos (SVG data URIs for reliability)
-const PROVIDER_LOGOS = {
-    openai: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzEwYTM0ZiIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgMThjLTQuNDEgMC04LTMuNTktOC04czMuNTktOCA4LTggOCAzLjU5IDggOC0zLjU5IDgtOCA4eiIvPjxwYXRoIGZpbGw9IiMxMGEzNGYiIGQ9Ik0xMiA2Yy0zLjMxIDAtNiAyLjY5LTYgNnMyLjY5IDYgNiA2IDYtMi42OSA2LTYtMi42OS02LTYtNnoiLz48L3N2Zz4=',
-    anthropic: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjZDUwMDAwIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkE8L3RleHQ+PC9zdmc+',
-    google: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyODVGNCIgZD0iTTEyIDI0YzYuNjIgMCAxMi01LjM4IDEyLTEyUzE4LjYyIDAgMTIgMCAwIDUuMzggMCAxMnM1LjM4IDEyIDEyIDEyeiIvPjxwYXRoIGZpbGw9IiNGQkJDMDUiIGQ9Ik0xMi40OCAxMi45aDExLjI5Yy4wNS4yOC4wOC41OC4wOC44OCAwIDMuMy0yLjY3IDYuMDktNi4wOSA2LjA5LTMuMDcgMC01LjY1LTIuMjItNi4wMy01LjE0bC0uMDItLjA3aC0yLjY2Yy40IDMuMjMgMy4xOCA1Ljc2IDYuNTMgNS43NiAzLjYyIDAgNi41Ni0yLjk0IDYuNTYtNi41NiAwLS42OS0uMS0xLjM2LS4yOC0xLjk5aC4wMnoiLz48cGF0aCBmaWxsPSIjMzRBODUzIiBkPSJNNS4yMyA5LjI1Yy0uOTkgMS43NS0uOTkgMy43NSAwIDUuNS41NS45NSAxLjMgMS43MyAyLjE3IDIuMjhsLjAyLS4wN2gyLjY2bC4wMi4wN2MuODctLjU1IDEuNjItMS4zMyAyLjE3LTIuMjhoLTExLjI5Yy0uMDUtLjI4LS4wOC0uNTgtLjA4LS44OCAwLS4zLjAzLS42LjA4LS44OGgxMS4yOWwtLjAyLS4wN2MtLjU1LS45NS0uOC0xLjczLTIuMTctMi4yOEw3LjQgNi45N2MtLjg3LjU1LTEuNjIgMS4zMy0yLjE3IDIuMjh6Ii8+PHBhdGggZmlsbD0iI0VBNDMzNSIgZD0iTTUuMjMgMTQuNzVjLjU1Ljk1IDEuMyAxLjczIDIuMTcgMi4yOGwuMDItLjA3aDcuNjJjLjg3LS41NSAxLjYyLTEuMzMgMi4xNy0yLjI4aC0xMS45NnoiLz48cGF0aCBmaWxsPSIjRkI4QzAwIiBkPSJNMTIgNC44MWMtMi4wNiAwLTMuODkgMS4wNS00Ljk3IDIuNjZsLjAyLS4wN0g0LjM1bC0uMDIuMDdDMi40NSA5LjIgMS4yNiAxMS4yIDEuMjYgMTNoMi42NmMuNC0zLjIzIDMuMTgtNS43NiA2LjUzLTUuNzYgMS4wOCAwIDIuMDguMjUgMi45NS42OWwtLjAyLS4wN2MyLjE0IDEuMzkgMy41NiAzLjc4IDMuNTYgNi41NiAwIC42OS0uMSAxLjM2LS4yOCAxLjk5aDIuNjhjLjE4LS42My4yOC0xLjMuMjgtMS45OSAwLTMuMy0yLjY3LTYuMDktNi4wOS02LjA5eiIvPjwvc3ZnPg==',
-    meta: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzA2NjhFRCIgZD0iTTEyIDI0YzYuNjIgMCAxMi01LjM4IDEyLTEyUzE4LjYyIDAgMTIgMCAwIDUuMzggMCAxMnM1LjM4IDEyIDEyIDEyeiIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPk08L3RleHQ+PC9zdmc+',
-    deepseek: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjNEU3M0Y3IiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkQ8L3RleHQ+PC9zdmc+',
-    xai: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjMDAwMDAwIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPng8L3RleHQ+PC9zdmc+',
-    mistral: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjRkY3MDAwIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPk08L3RleHQ+PC9zdmc+',
-    cohere: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjMzk2OURDIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkM8L3RleHQ+PC9zdmc+',
-    amazon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjRkY5OTAwIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkE8L3RleHQ+PC9zdmc+',
-    nvidia: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjNzZCMjRBIiByeD0iNCIvPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPk48L3RleHQ+PC9zdmc+',
-};
-
 // Provider display names
 const PROVIDER_NAMES = {
     openai: { zh: 'OpenAI', en: 'OpenAI' },
@@ -558,65 +544,92 @@ function goToPage(page) {
 function showModelDetail(modelId) {
     const model = state.models.find(m => m.id === modelId);
     if (!model || !model.pricing) return;
-    
+
     const lang = window.i18n.currentLang;
     const providerName = PROVIDER_NAMES[model.provider]?.[lang] || model.provider;
-    const logoSrc = PROVIDER_LOGOS[model.provider] || '';
-    
+    const providerDisplay = model.provider_display || providerName;
+    const rank = model.rank || '-';
+    const rankClass = rank <= 3 ? `detail-rank-${rank}` : '';
+    const intelClass = getIntelligenceClass(model.intelligence_score);
+    const priceClass = getPriceClass(model.pricing.blended);
+    const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : '';
+
     elements.modalBody.innerHTML = `
-        <div class="model-detail-header">
-            ${logoSrc ? `<img src="${logoSrc}" alt="${providerName}" style="width: 40px; height: 40px;">` : ''}
-            <div>
-                <h2>${escapeHtml(model.name)}</h2>
-                <span style="color: var(--text-muted); font-family: monospace;">${escapeHtml(model.id)}</span>
+        <div class="model-detail-hero ${rankClass}">
+            <div class="model-detail-hero-bg" aria-hidden="true"></div>
+            <div class="model-detail-hero-main">
+                <div class="model-detail-rank-badge">${medal}<span>#${rank}</span></div>
+                <div class="model-detail-identity">
+                    <div class="model-detail-titles">
+                        <h2 class="model-detail-name">${escapeHtml(model.name)}</h2>
+                        <code class="model-detail-id">${escapeHtml(model.id)}</code>
+                        <span class="provider-badge">${escapeHtml(providerDisplay)}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="model-detail-value-chip">
+                <span class="detail-chip-label">${window.i18n.t('th_value')}</span>
+                <span class="detail-chip-value">${formatValueScore(model.value_score)}</span>
+                ${formatRankChangeHtml(model, true)}
             </div>
         </div>
-        
-        <div class="detail-grid">
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('th_provider')}</span>
-                <span class="detail-value">${providerName}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('th_intelligence')}</span>
-                <span class="detail-value ${getIntelligenceClass(model.intelligence_score)}">${model.intelligence_score || '-'}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('context_window')}</span>
-                <span class="detail-value">${model.context_length ? (model.context_length / 1024) + 'K' : '-'}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('input_price')}</span>
-                <span class="detail-value">$${model.pricing.prompt.toFixed(2)}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('output_price')}</span>
-                <span class="detail-value">$${model.pricing.completion.toFixed(2)}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('blended_price')}</span>
-                <span class="detail-value">$${model.pricing.blended.toFixed(2)}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('th_value')}</span>
-                <span class="detail-value" style="color: var(--accent-primary); font-size: 1.3rem;">${formatValueScore(model.value_score)}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('th_change')}</span>
-                <span class="detail-value">${formatRankChangeText(model)}</span>
-            </div>
-            <div class="detail-item">
-                <span class="detail-label">${window.i18n.t('value_rank')}</span>
-                <span class="detail-value">#${model.rank || '-'}</span>
+
+        <div class="detail-section">
+            <h3 class="detail-section-title">${window.i18n.t('detail_metrics')}</h3>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">🧠</span>
+                    <span class="detail-label">${window.i18n.t('th_intelligence')}</span>
+                    <span class="detail-value ${intelClass}">${model.intelligence_score || '-'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">⚡</span>
+                    <span class="detail-label">${window.i18n.t('th_speed')}</span>
+                    <span class="detail-value speed-display">${model.speed ? model.speed + ' tok/s' : '-'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">📄</span>
+                    <span class="detail-label">${window.i18n.t('context_window')}</span>
+                    <span class="detail-value">${model.context_length ? (model.context_length / 1024) + 'K' : '-'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">📥</span>
+                    <span class="detail-label">${window.i18n.t('input_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">$${model.pricing.prompt.toFixed(2)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">📤</span>
+                    <span class="detail-label">${window.i18n.t('output_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">$${model.pricing.completion.toFixed(2)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">💰</span>
+                    <span class="detail-label">${window.i18n.t('blended_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</span>
+                </div>
+                <div class="detail-item detail-item-accent">
+                    <span class="detail-item-icon" aria-hidden="true">📈</span>
+                    <span class="detail-label">${window.i18n.t('th_change')}</span>
+                    <span class="detail-value">${formatRankChangeHtml(model)}</span>
+                </div>
+                <div class="detail-item detail-item-accent">
+                    <span class="detail-item-icon" aria-hidden="true">🏆</span>
+                    <span class="detail-label">${window.i18n.t('value_rank')}</span>
+                    <span class="detail-value detail-rank-value">#${rank}</span>
+                </div>
             </div>
         </div>
-        
-        ${model.description ? `<p style="color: var(--text-secondary); margin-top: 1rem;">${escapeHtml(model.description)}</p>` : ''}
+
+        ${model.description ? `
+        <div class="model-detail-desc">
+            <h3 class="detail-section-title">${window.i18n.t('detail_about')}</h3>
+            <p>${escapeHtml(model.description)}</p>
+        </div>` : ''}
     `;
-    
-    // Load comments for this model
+
     elements.modelModal.dataset.currentModel = modelId;
     elements.modelModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
 
     if (window.githubComments) {
         try {
@@ -658,6 +671,7 @@ function initEventListeners() {
 
 function closeModal() {
     elements.modelModal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
 }
 
 // Utilities

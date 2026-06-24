@@ -83,6 +83,8 @@ const translations = {
         output_price: "输出价格",
         blended_price: "综合价格",
         value_rank: "性价比排名",
+        detail_metrics: "核心指标",
+        detail_about: "模型简介",
         tokens_unit: "tokens",
         per_million: "每百万",
     },
@@ -165,6 +167,8 @@ const translations = {
         output_price: "Output Price",
         blended_price: "Blended Price",
         value_rank: "Value Rank",
+        detail_metrics: "Key Metrics",
+        detail_about: "About",
         tokens_unit: "tokens",
         per_million: "per million",
     }
