@@ -7,7 +7,7 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
-        logo_sub: "能力均分² × 速度^0.8 / 价格",
+        logo_sub: "f(能力²)² × 速度^0.8 / 价格",
         
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
@@ -48,7 +48,7 @@ const translations = {
         methodology_title: "计算方法",
         formula_label: "核心公式",
         formula: "性价比 = f(能力) × 速度^0.8 / 价格",
-        formula_note: "f(x)=均分+(x-均分)²（x≥均分）；f(x)=均分-(均分-x)²（x<均分，低分惩罚更重）",
+        formula_note: "f(x)=(均分+(x-均分)²)²（x≥均分）；f(x)=(均分-(均分-x)²)²（x<均分，内层≤0排除）",
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
         penalty_desc: "原始能力分低于 25，或变换后 ≤0 的模型不参与排名",
         method_1_title: "能力评分",
@@ -140,7 +140,7 @@ const translations = {
         methodology_title: "Methodology",
         formula_label: "Core Formula",
         formula: "Value = f(Intel) × Speed^0.8 / Price",
-        formula_note: "f(x)=avg+(x-avg)² if x≥avg; f(x)=avg-(avg-x)² if x<avg (steeper low-score penalty)",
+        formula_note: "f(x)=(avg+(x-avg)²)² if x≥avg; f(x)=(avg-(avg-x)²)² if x<avg (excluded when inner ≤0)",
         score_scale: "Scores use a 0–100 scale; the top model is 100",
         penalty_desc: "Excluded if raw intelligence < 25 or transformed score ≤ 0",
         method_1_title: "Intelligence",

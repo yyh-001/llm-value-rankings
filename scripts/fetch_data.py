@@ -41,8 +41,8 @@ def load_local_env():
             if key and key not in os.environ:
                 os.environ[key] = value
 
-# Scoring: transform(intelligence) × speed^0.8 / price, where transform uses avg-baseline squares
-# f(x) = avg + (x-avg)² if x ≥ avg, else avg - (avg-x)²  (negative → excluded)
+# Scoring: transform(intelligence) × speed^0.8 / price, nested square on avg-baseline deltas
+# f(x) = (avg + (x-avg)²)² if x ≥ avg; (avg - (avg-x)²)² if x < avg (inner ≤0 → excluded)
 AA_CAPABILITY_FIELD = "intelligence_index"
 MIN_INTELLIGENCE = 25
 SPEED_EXPONENT = 0.8
@@ -665,23 +665,27 @@ def lookup_intelligence_score(model_id, intelligence_map):
 
 def transform_capability_score(raw, avg):
     """
-    Map raw AA score around the mean with squared deltas.
+    Map raw AA score around the mean with nested squares.
 
-    Above avg: avg + (raw - avg)² — rewards strong models.
-    Below avg: avg - (avg - raw)² — steep penalty for weak models.
+    Above avg: (avg + (raw - avg)²)² — rewards strong models.
+    Below avg: (avg - (avg - raw)²)² when inner > 0, else inner (excluded).
     """
     if raw is None or avg is None or avg <= 0:
         return None
     if raw >= avg:
-        return avg + (raw - avg) ** 2
-    return avg - (avg - raw) ** 2
+        inner = avg + (raw - avg) ** 2
+        return inner ** 2
+    inner = avg - (avg - raw) ** 2
+    if inner <= 0:
+        return inner
+    return inner ** 2
 
 
 def calculate_value_scores(intelligence, price, speed, avg_intelligence=None):
     """
     Calculate raw value score: transform(coding) × speed^0.8 / price.
 
-    transform() uses avg-baseline squared deltas. Models below MIN_INTELLIGENCE
+    transform() uses nested avg-baseline squares. Models below MIN_INTELLIGENCE
     or with non-positive transform are excluded. Normalized to 0–100 in rank_models().
     """
     if intelligence is None or price is None or price <= 0:
