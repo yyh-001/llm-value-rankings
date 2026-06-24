@@ -129,37 +129,6 @@ f(x) = (均分 - (均分 - x)²)²          当 x < 均分（内层 ≤ 0 时排
 
 ---
 
-## GitHub 仓库 About 配置
-
-在线演示地址：[https://yyh-001.github.io/llm-value-rankings/](https://yyh-001.github.io/llm-value-rankings/)
-
-仓库 About（网站链接、描述、Topics）由 [`.github/about.json`](.github/about.json) 定义，推送后由 **Sync Repository About** 工作流自动同步。
-
-> **注意**：Actions 的 **Read and write permissions** 只够推送代码，**不能**改仓库 About 的 description 和 topics。需要额外配置 PAT，或在本地用已登录的 `gh` 同步。
-
-### 方式 A：GitHub Actions 自动同步（推荐）
-
-1. 创建 [Fine-grained PAT](https://github.com/settings/tokens?type=beta)，仅授权本仓库，勾选 **Administration → Read and write**
-2. 在仓库 **Settings → Secrets and variables → Actions** 添加 secret：`REPO_SETTINGS_TOKEN`
-3. 手动运行 **Sync Repository About** 工作流，或再次推送 `.github/about.json`
-
-### 方式 B：本地一键同步
-
-```bash
-gh auth login
-python scripts/sync_repo_about.py
-```
-
-### 方式 C：手动填写 About
-
-在仓库首页右侧齿轮 → About，填入：
-
-- **Website**：`https://yyh-001.github.io/llm-value-rankings/`
-- **Description**：`Daily LLM value rankings - compare 300+ models by intelligence, speed and price. OpenRouter + Artificial Analysis. 大模型性价比排行榜`
-- **Topics**：`llm`, `large-language-models`, `ai-ranking`, `openrouter`, `artificial-intelligence`, `model-comparison`, `benchmark`, `token-pricing`, `price-comparison`, `generative-ai`, `machine-learning`, `github-pages`, `static-site`, `deepseek`, `gpt`, `claude`, `gemini`, `value-for-money`, `llm-benchmark`, `ai-tools`
-
----
-
 ## 项目结构
 
 ```
