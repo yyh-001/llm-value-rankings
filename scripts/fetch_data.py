@@ -511,6 +511,29 @@ def is_text_llm(model):
     return True
 
 
+MODEL_SUFFIX_VARIANTS = frozenset({
+    "free", "fast", "preview", "reasoning", "max", "mini", "pro", "turbo",
+    "lite", "thinking", "sonnet", "haiku", "opus", "flash", "nano",
+})
+
+
+def is_valid_model_suffix(suffix):
+    """Allow date or named variant suffixes; reject version bumps like glm-5 -> glm-5-2."""
+    if not suffix:
+        return True
+    if re.match(r"^\d{4}-\d{2}-\d{2}$", suffix):
+        return True
+    if re.match(r"^\d{8}$", suffix):
+        return True
+
+    first_segment = suffix.split("-")[0]
+    if first_segment in MODEL_SUFFIX_VARIANTS:
+        return True
+    if re.match(r"^\d+(\.\d+)?$", first_segment) or re.match(r"^\d+$", suffix):
+        return False
+    return True
+
+
 def normalize_permaslug(slug):
     """Normalize OpenRouter permaslugs for benchmark lookup."""
     if not slug:
@@ -542,10 +565,17 @@ def benchmark_match_score(model_slug, benchmark_slug):
         return 100
     if slug_tokens(left) == slug_tokens(right):
         return 90
-    if left.startswith(f"{right}-") or right.startswith(f"{left}-"):
-        return 80
-    if left.startswith(right) or right.startswith(left):
-        return 70
+
+    for shorter, longer in ((left, right), (right, left)):
+        if longer.startswith(f"{shorter}-"):
+            suffix = longer[len(shorter) + 1:]
+            if is_valid_model_suffix(suffix):
+                return 80
+        elif longer.startswith(shorter) and len(shorter) < len(longer):
+            suffix = longer[len(shorter):].lstrip("-")
+            if suffix and is_valid_model_suffix(suffix):
+                return 70
+
     return 0
 
 
