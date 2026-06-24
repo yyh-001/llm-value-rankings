@@ -25,6 +25,7 @@ const translations = {
         
         // Table
         th_rank: "排名",
+        th_change: "较昨日",
         th_model: "模型",
         th_provider: "厂商",
         th_intelligence: "能力",
@@ -33,6 +34,9 @@ const translations = {
         th_value: "性价比",
         th_detail: "详情",
         loading: "加载中...",
+        github_star: "Star",
+        rank_new: "新",
+        rank_change_hint: "较昨日排名变化",
         
         // Podium
         podium_intelligence: "能力",
@@ -101,6 +105,7 @@ const translations = {
         
         // Table
         th_rank: "Rank",
+        th_change: "Δ Day",
         th_model: "Model",
         th_provider: "Provider",
         th_intelligence: "Intel",
@@ -109,6 +114,9 @@ const translations = {
         th_value: "Value",
         th_detail: "Detail",
         loading: "Loading...",
+        github_star: "Star",
+        rank_new: "NEW",
+        rank_change_hint: "Rank change vs yesterday",
         
         // Podium
         podium_intelligence: "Intel",

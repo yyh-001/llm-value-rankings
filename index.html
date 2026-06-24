@@ -29,6 +29,13 @@
                 </div>
             </div>
             <div class="header-actions">
+                <a id="github-star" class="btn-github" href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub">
+                    <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+                    </svg>
+                    <span class="btn-github-text" data-i18n="github_star">Star</span>
+                    <span id="star-count" class="star-count">—</span>
+                </a>
                 <button id="theme-toggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌙</span>
@@ -89,6 +96,7 @@
                     <thead>
                         <tr>
                             <th class="col-rank" data-i18n="th_rank">排名</th>
+                            <th class="col-change" data-i18n="th_change">较昨日</th>
                             <th class="col-model" data-i18n="th_model">模型</th>
                             <th class="col-provider" data-i18n="th_provider">厂商</th>
                             <th class="col-intelligence" data-i18n="th_intelligence">能力</th>
@@ -100,7 +108,7 @@
                     </thead>
                     <tbody id="rankings-body">
                         <tr class="loading-row">
-                            <td colspan="8">
+                            <td colspan="9">
                                 <div class="loading-content">
                                     <div class="loading-spinner"></div>
                                     <span data-i18n="loading">加载中...</span>
@@ -110,6 +118,7 @@
                     </tbody>
                 </table>
             </div>
+            <div class="rankings-cards" id="rankings-cards" aria-live="polite"></div>
             <div class="pagination" id="pagination"></div>
         </section>
 

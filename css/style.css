@@ -199,6 +199,50 @@ a:hover {
 .header-actions {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.btn-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 40px;
+    padding: 0 0.85rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-github:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.github-icon {
+    width: 14px;
+    height: 14px;
+    color: #f59e0b;
+}
+
+.star-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    padding: 0.1rem 0.35rem;
+    background: var(--bg-tertiary);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
 }
 
 .btn-icon {
@@ -603,7 +647,8 @@ tbody tr.top-row {
 }
 
 .col-rank { width: 56px; text-align: center; }
-.col-model { width: 26%; }
+.col-change { width: 64px; text-align: center; }
+.col-model { width: 24%; }
 .col-provider { width: 11%; }
 .col-intelligence { width: 8%; text-align: center; }
 .col-speed { width: 10%; text-align: center; }
@@ -685,6 +730,32 @@ tbody tr.top-row .col-detail {
     background: var(--bg-tertiary);
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
+}
+
+/* Rank change */
+.rank-change {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.rank-change-inline {
+    margin-left: 0.35rem;
+    font-size: 0.72rem;
+}
+
+.rank-change-up { color: var(--success); }
+.rank-change-down { color: var(--danger); }
+.rank-change-flat,
+.rank-change-none { color: var(--text-muted); }
+.rank-change-new {
+    color: var(--accent-primary);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
 }
 
 /* Model info */
@@ -794,6 +865,87 @@ tbody tr.top-row .col-detail {
 .btn-detail:hover {
     background: var(--accent-primary);
     color: white;
+}
+
+/* Mobile card layout */
+.rankings-cards {
+    display: none;
+    flex-direction: column;
+    gap: 0.875rem;
+}
+
+.model-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.model-card:active {
+    transform: scale(0.99);
+}
+
+.model-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.model-card-rank {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.model-card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+    line-height: 1.35;
+}
+
+.model-card-id {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-bottom: 0.625rem;
+    word-break: break-all;
+}
+
+.model-card-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.model-card-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.model-card-metric-value {
+    grid-column: 1 / -1;
+}
+
+.model-card-metric-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.mobile-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
 }
 
 /* Loading */
@@ -1204,16 +1356,47 @@ tbody tr.top-row .col-detail {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-    .logo-sub { display: none; }
-
-    .hero { padding: 2.5rem 0 1.5rem; }
-
-    .stat-card {
-        min-width: 100px;
-        padding: 1rem 1.25rem;
+    .header-content {
+        height: auto;
+        min-height: var(--header-height);
+        padding: 0.75rem 0;
+        gap: 0.75rem;
     }
 
-    .stat-value { font-size: 1.4rem; }
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .logo-sub { display: none; }
+
+    .btn-github-text { display: none; }
+
+    .btn-github {
+        padding: 0 0.65rem;
+    }
+
+    .hero { padding: 2rem 0 1.25rem; }
+
+    .hero-title { font-size: 1.5rem; }
+
+    .hero-desc {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-bar {
+        gap: 0.625rem;
+    }
+
+    .stat-card {
+        flex: 1;
+        min-width: 0;
+        padding: 0.875rem 0.75rem;
+    }
+
+    .stat-value { font-size: 1.25rem; }
+
+    .stat-label { font-size: 0.75rem; }
 
     .podium {
         grid-template-columns: 1fr;
@@ -1224,21 +1407,43 @@ tbody tr.top-row .col-detail {
     .filters { flex-direction: column; align-items: stretch; }
     .results-count { text-align: center; }
 
-    .col-provider,
-    .col-intelligence { display: none; }
+    .table-container { display: none !important; }
 
-    #rankings-table { min-width: 640px; }
+    .rankings-cards {
+        display: flex;
+    }
 
-    .methodology { padding: 1.5rem; }
-    .modal-content { padding: 1.5rem; }
+    .methodology { padding: 1.25rem; }
+    .modal-content {
+        width: 100%;
+        max-height: 90vh;
+        padding: 1.25rem;
+        border-radius: var(--radius-lg);
+    }
 }
 
 @media (max-width: 480px) {
-    .container { padding: 0 1rem; }
+    .container { padding: 0 0.875rem; }
 
-    th, td { padding: 0.75rem 0.625rem; }
+    .header-actions {
+        gap: 0.375rem;
+    }
 
-    .col-speed { display: none; }
+    .btn-icon,
+    .btn-github {
+        height: 36px;
+    }
 
-    .header-content { height: 56px; }
+    .btn-icon {
+        width: 36px;
+    }
+
+    .hero-badge {
+        font-size: 0.72rem;
+        padding: 0.3rem 0.75rem;
+    }
+
+    .method-cards {
+        grid-template-columns: 1fr;
+    }
 }

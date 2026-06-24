@@ -5,7 +5,8 @@
 const CONFIG = {
     DATA_URL: 'data/models.json',
     ITEMS_PER_PAGE: 20,
-    GITHUB_REPO: '', // Will be set by user
+    GITHUB_REPO: 'yyh-001/llm-value-rankings',
+    MOBILE_BREAKPOINT: 768,
 };
 
 // State
@@ -17,6 +18,8 @@ const state = {
     providerFilter: '',
     priceRange: '',
     searchQuery: '',
+    rankComparedTo: null,
+    isMobile: false,
 };
 
 // Provider logos (SVG data URIs for reliability)
@@ -64,6 +67,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     initElements();
     initTheme();
     initI18n();
+    initGitHubStar();
+    initResponsive();
     await loadData();
     initEventListeners();
 });
@@ -80,6 +85,36 @@ function initElements() {
     elements.podium = document.getElementById('podium');
     elements.podiumSection = document.getElementById('podium-section');
     elements.resultsCount = document.getElementById('results-count');
+    elements.rankingsCards = document.getElementById('rankings-cards');
+    elements.tableContainer = document.querySelector('.table-container');
+}
+
+function initResponsive() {
+    const mq = window.matchMedia(`(max-width: ${CONFIG.MOBILE_BREAKPOINT}px)`);
+    state.isMobile = mq.matches;
+    mq.addEventListener('change', (e) => {
+        state.isMobile = e.matches;
+        renderRankings();
+    });
+}
+
+async function initGitHubStar() {
+    const starLink = document.getElementById('github-star');
+    const starCount = document.getElementById('star-count');
+    if (!starLink || !CONFIG.GITHUB_REPO) return;
+
+    starLink.href = `https://github.com/${CONFIG.GITHUB_REPO}`;
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${CONFIG.GITHUB_REPO}`);
+        if (!response.ok) return;
+        const data = await response.json();
+        if (starCount && typeof data.stargazers_count === 'number') {
+            starCount.textContent = data.stargazers_count;
+        }
+    } catch (error) {
+        console.warn('Failed to load GitHub star count:', error);
+    }
 }
 
 // Theme Management
@@ -102,7 +137,7 @@ function initI18n() {
     window.i18n.init();
     window.i18n.onLangChange(() => {
         renderPodium();
-        renderTable();
+        renderRankings();
         updateStats();
         updateResultsCount();
     });
@@ -117,6 +152,7 @@ async function loadData() {
         
         state.models = data.models || [];
         state.filteredModels = [...state.models];
+        state.rankComparedTo = data.rank_compared_to || null;
         
         updateStats(data);
         populateProviders();
@@ -126,7 +162,7 @@ async function loadData() {
         console.error('Error loading data:', error);
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="8" style="text-align: center; padding: 2rem; color: var(--danger);">
+                <td colspan="9" style="text-align: center; padding: 2rem; color: var(--danger);">
                     ${window.i18n.t('data_error')}
                 </td>
             </tr>
@@ -184,7 +220,7 @@ function filterAndSort() {
     state.filteredModels = filtered;
     state.currentPage = 1;
     updateResultsCount();
-    renderTable();
+    renderRankings();
 }
 
 function updateResultsCount() {
@@ -223,7 +259,7 @@ function renderPodium() {
                 <div class="podium-medal-wrap">
                     <span class="podium-medal">${medal}</span>
                 </div>
-                <div class="podium-rank">#${model.rank}</div>
+                <div class="podium-rank">#${model.rank} ${formatRankChangeHtml(model, true)}</div>
                 <div class="podium-name">${escapeHtml(model.name)}</div>
                 <div class="podium-provider">${escapeHtml(model.provider_display || model.provider)}</div>
                 <div class="podium-metrics">
@@ -245,17 +281,124 @@ function renderPodium() {
     }).join('');
 }
 
-// Render Table
-function renderTable() {
-    const lang = window.i18n.currentLang;
+// Render rankings (table on desktop, cards on mobile)
+function renderRankings() {
+    if (state.isMobile) {
+        renderMobileCards();
+    } else {
+        renderTable();
+    }
+}
+
+function formatRankChangeHtml(model, inline = false) {
+    const text = formatRankChangeText(model);
+    let className = 'rank-change-none';
+    if (model.rank_new) className = 'rank-change-new';
+    else if (model.rank_change > 0) className = 'rank-change-up';
+    else if (model.rank_change < 0) className = 'rank-change-down';
+    else if (model.rank_change === 0) className = 'rank-change-flat';
+    return `<span class="rank-change ${className}${inline ? ' rank-change-inline' : ''}">${text}</span>`;
+}
+
+function formatRankChangeText(model) {
+    if (model.rank_new) return window.i18n.t('rank_new');
+    if (model.rank_change === null || model.rank_change === undefined) return '—';
+    if (model.rank_change === 0) return '—';
+    if (model.rank_change > 0) return `↑${model.rank_change}`;
+    return `↓${Math.abs(model.rank_change)}`;
+}
+
+function getPageModels() {
     const start = (state.currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
     const end = start + CONFIG.ITEMS_PER_PAGE;
-    const pageModels = state.filteredModels.slice(start, end);
+    return state.filteredModels.slice(start, end);
+}
+
+function renderMobileCards() {
+    if (!elements.rankingsCards) return;
+
+    if (elements.tableContainer) {
+        elements.tableContainer.hidden = true;
+    }
+    elements.rankingsCards.hidden = false;
+
+    const pageModels = getPageModels();
+
+    if (pageModels.length === 0) {
+        elements.rankingsCards.innerHTML = `
+            <div class="mobile-empty">${window.i18n.t('no_results')}</div>
+        `;
+        elements.pagination.innerHTML = '';
+        return;
+    }
+
+    const maxValue = Math.max(...state.filteredModels.map(m => m.value_score || 0));
+
+    elements.rankingsCards.innerHTML = pageModels.map((model, idx) => {
+        const rank = model.rank || '-';
+        const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
+        const intelClass = getIntelligenceClass(model.intelligence_score);
+        const priceClass = getPriceClass(model.pricing.blended);
+        const valueScore = model.value_score || 0;
+        const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
+
+        return `
+            <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" onclick="showModelDetail(${JSON.stringify(model.id)})">
+                <div class="model-card-header">
+                    <div class="model-card-rank">
+                        <span class="rank-badge ${rankClass}">${rank}</span>
+                        ${formatRankChangeHtml(model)}
+                    </div>
+                    <button class="btn-detail" onclick="event.stopPropagation(); showModelDetail(${JSON.stringify(model.id)})">${window.i18n.t('th_detail')}</button>
+                </div>
+                <div class="model-card-body">
+                    <h4 class="model-card-name">${escapeHtml(model.name)}</h4>
+                    <p class="model-card-id">${escapeHtml(model.id)}</p>
+                    <span class="provider-badge">${escapeHtml(model.provider_display || model.provider)}</span>
+                </div>
+                <div class="model-card-metrics">
+                    <div class="model-card-metric">
+                        <span class="model-card-metric-label">${window.i18n.t('th_intelligence')}</span>
+                        <span class="intelligence-score ${intelClass}">${model.intelligence_score || '-'}</span>
+                    </div>
+                    <div class="model-card-metric">
+                        <span class="model-card-metric-label">${window.i18n.t('th_speed')}</span>
+                        <span>${model.speed ? model.speed + ' tok/s' : '-'}</span>
+                    </div>
+                    <div class="model-card-metric">
+                        <span class="model-card-metric-label">${window.i18n.t('th_price')}</span>
+                        <span class="price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</span>
+                    </div>
+                    <div class="model-card-metric model-card-metric-value">
+                        <span class="model-card-metric-label">${window.i18n.t('th_value')}</span>
+                        <span class="value-score">${formatValueScore(valueScore)}</span>
+                        <div class="value-bar">
+                            <div class="value-bar-fill" style="width: ${valueBarWidth}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        `;
+    }).join('');
+
+    renderPagination();
+}
+
+// Render Table
+function renderTable() {
+    if (elements.rankingsCards) {
+        elements.rankingsCards.hidden = true;
+    }
+    if (elements.tableContainer) {
+        elements.tableContainer.hidden = false;
+    }
+
+    const pageModels = getPageModels();
     
     if (pageModels.length === 0) {
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="8" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                <td colspan="9" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                     ${window.i18n.t('no_results')}
                 </td>
             </tr>
@@ -288,6 +431,9 @@ function renderTable() {
             <tr class="fade-in ${topRowClass}" style="animation-delay: ${idx * 30}ms" onclick="showModelDetail(${JSON.stringify(model.id)})">
                 <td class="col-rank">
                     <span class="rank-badge ${rankClass}">${rank}</span>
+                </td>
+                <td class="col-change">
+                    ${formatRankChangeHtml(model)}
                 </td>
                 <td class="col-model">
                     <div class="model-info">
@@ -386,7 +532,7 @@ function renderPagination() {
 // Navigation
 function goToPage(page) {
     state.currentPage = page;
-    renderTable();
+    renderRankings();
     document.querySelector('.rankings').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -436,6 +582,10 @@ function showModelDetail(modelId) {
             <div class="detail-item">
                 <span class="detail-label">${window.i18n.t('th_value')}</span>
                 <span class="detail-value" style="color: var(--accent-primary); font-size: 1.3rem;">${formatValueScore(model.value_score)}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">${window.i18n.t('th_change')}</span>
+                <span class="detail-value">${formatRankChangeText(model)}</span>
             </div>
             <div class="detail-item">
                 <span class="detail-label">${window.i18n.t('value_rank')}</span>

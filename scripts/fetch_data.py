@@ -8,7 +8,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
@@ -19,6 +19,7 @@ OPENROUTER_API = "https://openrouter.ai/api/v1/models"
 ARTIFICIAL_ANALYSIS_URL = "https://artificialanalysis.ai/leaderboards/models"
 OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
+HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
 
 # Provider logo mapping
 PROVIDER_LOGOS = {
@@ -440,7 +441,93 @@ def rank_models(models):
     return ranked + unranked
 
 
-def save_data(models):
+def load_rank_history():
+    """Load daily rank snapshots."""
+    if not HISTORY_FILE.exists():
+        return {"snapshots": {}}
+    with open(HISTORY_FILE, encoding="utf-8") as f:
+        data = json.load(f)
+    if "snapshots" not in data:
+        return {"snapshots": data}
+    return data
+
+
+def save_rank_history(history):
+    """Persist rank snapshots, keeping the last 30 days."""
+    snapshots = history.get("snapshots", {})
+    cutoff = (datetime.utcnow() - timedelta(days=30)).strftime("%Y-%m-%d")
+    history["snapshots"] = {
+        day: ranks for day, ranks in snapshots.items() if day >= cutoff
+    }
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, indent=2, ensure_ascii=False)
+
+
+def get_yesterday_ranks(history):
+    """Return the most recent snapshot before today."""
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+    snapshots = history.get("snapshots", {})
+    previous_days = sorted(day for day in snapshots if day < today)
+    if not previous_days:
+        return None, {}
+    compare_day = previous_days[-1]
+    return compare_day, snapshots[compare_day]
+
+
+def seed_yesterday_from_previous_output(history):
+    """Use the previous models.json as yesterday's baseline on first comparison."""
+    _, yesterday_ranks = get_yesterday_ranks(history)
+    if yesterday_ranks:
+        return
+    if not OUTPUT_FILE.exists():
+        return
+    with open(OUTPUT_FILE, encoding="utf-8") as f:
+        previous = json.load(f)
+    old_ranks = {
+        m["id"]: m["rank"]
+        for m in previous.get("models", [])
+        if m.get("rank") is not None
+    }
+    if not old_ranks:
+        return
+    yesterday = (datetime.utcnow() - timedelta(days=1)).strftime("%Y-%m-%d")
+    history.setdefault("snapshots", {})[yesterday] = old_ranks
+    save_rank_history(history)
+    print(f"  Seeded baseline ranks from previous data ({len(old_ranks)} models)")
+
+
+def apply_rank_changes(models, history):
+    """Attach day-over-day rank change vs the previous snapshot."""
+    compare_day, yesterday_ranks = get_yesterday_ranks(history)
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+
+    for model in models:
+        rank = model.get("rank")
+        if rank is None:
+            model["rank_change"] = None
+            model["rank_new"] = False
+            continue
+
+        previous_rank = yesterday_ranks.get(model["id"])
+        if previous_rank is None:
+            model["rank_change"] = None
+            model["rank_new"] = bool(yesterday_ranks)
+        else:
+            model["rank_change"] = previous_rank - rank
+            model["rank_new"] = False
+
+    current_ranks = {
+        model["id"]: model["rank"]
+        for model in models
+        if model.get("rank") is not None
+    }
+    history.setdefault("snapshots", {})[today] = current_ranks
+    save_rank_history(history)
+
+    return compare_day
+
+
+def save_data(models, compare_day=None):
     """Save processed data to JSON file."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -448,6 +535,7 @@ def save_data(models):
         "updated_at": datetime.utcnow().isoformat() + "Z",
         "total_models": len(models),
         "ranked_models": len([m for m in models if m["rank"] is not None]),
+        "rank_compared_to": compare_day,
         "models": models,
     }
 
@@ -478,8 +566,12 @@ def main():
     processed = process_models(openrouter_models, model_data)
     ranked = rank_models(processed)
 
+    history = load_rank_history()
+    seed_yesterday_from_previous_output(history)
+    compare_day = apply_rank_changes(ranked, history)
+
     # Save
-    save_data(ranked)
+    save_data(ranked, compare_day)
 
     # Print top 10
     print("\n" + "=" * 60)
