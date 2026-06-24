@@ -104,7 +104,7 @@ This rewards models above the average more than a plain square, without the hars
 | Metric | Source | Notes |
 |--------|--------|-------|
 | Intelligence | OpenRouter embedded AA `intelligence_index` | Artificial Analysis Intelligence Index, 0–100 |
-| Speed | OpenRouter Endpoints API + RSC page scrape | Median provider throughput (tokens/s); no static fallback |
+| Speed | OpenRouter Endpoints API + RSC page scrape | Best provider peak throughput (max p99 over 30m, tokens/s) |
 | TTFT | OpenRouter Endpoints API | Time-to-first-token p50 in seconds |
 | Price | OpenRouter | Uptime-weighted effective price: 3:1 input/output token mix, 70% cache-hit on input ($/1M) |
 
