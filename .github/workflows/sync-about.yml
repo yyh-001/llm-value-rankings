@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  metadata: write
+  administration: write
 
 jobs:
   sync-about:
@@ -23,8 +23,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          HOMEPAGE=$(jq -r '.homepage' .github/about.json)
-          DESCRIPTION=$(jq -r '.description' .github/about.json)
+          HOMEPAGE=$(python -c "import json; print(json.load(open('.github/about.json'))['homepage'])")
+          DESCRIPTION=$(python -c "import json; print(json.load(open('.github/about.json'))['description'])")
           gh api --method PATCH "/repos/${{ github.repository }}" \
             -f homepage="$HOMEPAGE" \
             -f description="$DESCRIPTION"
@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          jq '{names: .topics}' .github/about.json | \
-            gh api --method PUT "/repos/${{ github.repository }}/topics" \
-              --input - \
-              -H "Accept: application/vnd.github.mercy-preview+json"
+          python -c "import json; json.dump({'names': json.load(open('.github/about.json'))['topics']}, open('topics.json', 'w'))"
+          gh api --method PUT "/repos/${{ github.repository }}/topics" \
+            --input topics.json \
+            -H "Accept: application/vnd.github.mercy-preview+json"
