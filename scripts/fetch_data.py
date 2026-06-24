@@ -275,16 +275,24 @@ def fetch_endpoints_batch(model_ids):
 
 def scrape_model_page_performance(model_id, session=None):
     """
-    Scrape throughput / TTFT from an OpenRouter model page.
+    Scrape throughput / TTFT from an OpenRouter model page via Next.js RSC payload.
 
-    Parses embedded endpoint JSON and provider-table rows (e.g. '0.99s | 79 tps').
+    Plain HTML is client-rendered and empty; the RSC response embeds provider stats.
     """
     url = OPENROUTER_MODEL_PAGE.format(model_id=model_id)
     http = session or make_http_session()
     try:
-        response = http.get(url, timeout=PAGE_FETCH_TIMEOUT)
+        response = http.get(
+            url,
+            headers={
+                "RSC": "1",
+                "Accept": "text/x-component",
+                "User-Agent": USER_AGENT,
+            },
+            timeout=PAGE_FETCH_TIMEOUT,
+        )
         response.raise_for_status()
-        html = response.text
+        payload = response.text
     except Exception as exc:
         print(f"  Warning: page scrape for {model_id}: {exc}")
         return {"throughput": None, "ttft": None}
@@ -294,7 +302,7 @@ def scrape_model_page_performance(model_id, session=None):
 
     for match in re.finditer(
         r'"throughput_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
-        html,
+        payload,
     ):
         value = match.group(1) or match.group(2)
         if value:
@@ -302,22 +310,17 @@ def scrape_model_page_performance(model_id, session=None):
 
     for match in re.finditer(
         r'"latency_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
-        html,
+        payload,
     ):
         value = match.group(1) or match.group(2)
         if value:
             latencies.append(normalize_latency_seconds(float(value)))
 
-    for match in re.finditer(
-        r"([\d.]+)\s*s[\s\S]{0,120}?([\d.]+)\s*tps",
-        html,
-        re.I,
-    ):
-        latencies.append(normalize_latency_seconds(float(match.group(1))))
-        throughputs.append(float(match.group(2)))
+    for value in re.findall(r'p50_throughput(?:_last_30m)?":(\d+(?:\.\d+)?)', payload):
+        throughputs.append(float(value))
 
-    if not throughputs:
-        throughputs = [float(value) for value in re.findall(r"([\d.]+)\s*tps", html, re.I)]
+    for value in re.findall(r'p50_latency(?:_last_30m)?":(\d+(?:\.\d+)?)', payload):
+        latencies.append(normalize_latency_seconds(float(value)))
 
     throughput = round(statistics.median(throughputs), 1) if throughputs else None
     ttft = round(min(latencies), 3) if latencies else None

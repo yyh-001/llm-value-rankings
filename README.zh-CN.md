@@ -97,7 +97,7 @@ git push
 | 指标 | 来源 | 说明 |
 |------|------|------|
 | 能力评分 | Artificial Analysis | Intelligence Index，0–100 分 |
-| 速度 | OpenRouter Endpoints API + 模型页爬取 | 各 Provider 实测吞吐中位数 (tokens/s)，无 AA 静态 fallback |
+| 速度 | OpenRouter Endpoints API + RSC 页面爬取 | Provider 实测吞吐中位数 (tokens/s)，无静态 fallback |
 | 首字延迟 | OpenRouter Endpoints API | TTFT p50（秒），无数据时显示 — |
 | 价格 | OpenRouter | uptime 加权有效价：输入:输出按 3:1 混合，输入侧 70% 缓存命中 ($/1M tokens) |
 

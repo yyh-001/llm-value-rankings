@@ -99,7 +99,7 @@ Intelligence is **cubed** so capability gaps matter more than small speed or pri
 | Metric | Source | Notes |
 |--------|--------|-------|
 | Intelligence | Artificial Analysis | Index score 0–100 |
-| Speed | OpenRouter Endpoints API + model page scrape | Median provider throughput (tokens/s); no AA fallback |
+| Speed | OpenRouter Endpoints API + RSC page scrape | Median provider throughput (tokens/s); no static fallback |
 | TTFT | OpenRouter Endpoints API | Time-to-first-token p50 in seconds |
 | Price | OpenRouter | Uptime-weighted effective price: 3:1 input/output token mix, 70% cache-hit on input ($/1M) |
 
