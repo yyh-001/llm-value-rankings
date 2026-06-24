@@ -4,6 +4,8 @@
 
 **每日更新的大模型性价比排名 —— 帮你看清每美元能买到多少 AI 能力**
 
+🌐 **在线访问：** [https://yyh-001.github.io/llm-value-rankings/](https://yyh-001.github.io/llm-value-rankings/)
+
 [**English**](./README.md) · [**简体中文**](./README.zh-CN.md)
 
 [![Live Demo](https://img.shields.io/badge/在线演示-live-6366f1?style=for-the-badge)](https://yyh-001.github.io/llm-value-rankings/)
@@ -93,8 +95,9 @@ git push
 | 指标 | 来源 | 说明 |
 |------|------|------|
 | 能力评分 | Artificial Analysis | Intelligence Index，0–100 分 |
-| 速度 | Artificial Analysis | 输出速度 (tokens/s)，缺失时默认 80 |
-| 价格 | OpenRouter | 输入与输出 Token 价格的平均值 ($/1M tokens) |
+| 速度 | OpenRouter Endpoints API | 各 Provider 实测吞吐量 p50 (tokens/s)，缺失时默认 80 |
+| 首字延迟 | OpenRouter Endpoints API | TTFT p50（秒），无数据时显示 — |
+| 价格 | OpenRouter | 有效综合价：缓存命中价按 50% 命中率加权后的输入价 + 输出价平均 ($/1M tokens) |
 
 ### 百分制换算
 

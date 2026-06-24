@@ -204,7 +204,7 @@ async function loadData() {
         console.error('Error loading data:', error);
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="9" style="text-align: center; padding: 2rem; color: var(--danger);">
+                <td colspan="10" style="text-align: center; padding: 2rem; color: var(--danger);">
                     ${window.i18n.t('data_error')}
                 </td>
             </tr>
@@ -290,6 +290,18 @@ function formatPrice(usd) {
     return `$${price.toFixed(2)}`;
 }
 
+function formatLatency(seconds) {
+    if (seconds == null || Number.isNaN(Number(seconds)) || Number(seconds) <= 0) return '-';
+    const value = Number(seconds);
+    if (value < 1) return `${Math.round(value * 1000)} ms`;
+    return `${value.toFixed(2)} s`;
+}
+
+function formatSpeed(speed) {
+    if (speed == null || Number.isNaN(Number(speed))) return '-';
+    return `${Math.round(Number(speed))} tok/s`;
+}
+
 const PODIUM_MEDALS = ['🥇', '🥈', '🥉'];
 
 function renderPodium() {
@@ -322,7 +334,7 @@ function renderPodium() {
                         <span class="podium-metric-label">${window.i18n.t('podium_intelligence')}</span>
                     </div>
                     <div class="podium-metric">
-                        <span class="podium-metric-value">${model.speed || '-'}<small style="font-size:0.65em;font-weight:500"> tok/s</small></span>
+                        <span class="podium-metric-value">${formatSpeed(model.speed)}</span>
                         <span class="podium-metric-label">${window.i18n.t('podium_speed')}</span>
                     </div>
                     <div class="podium-metric">
@@ -415,7 +427,11 @@ function renderMobileCards() {
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_speed')}</em>
-                        <strong class="speed-display">${model.speed ? model.speed + ' tok/s' : '-'}</strong>
+                        <strong class="speed-display">${formatSpeed(model.speed)}</strong>
+                    </span>
+                    <span class="model-card-stat">
+                        <em>${window.i18n.t('th_ttft')}</em>
+                        <strong class="latency-display">${formatLatency(model.ttft)}</strong>
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_price')}</em>
@@ -444,7 +460,7 @@ function renderTable() {
     if (pageModels.length === 0) {
         elements.rankingsBody.innerHTML = `
             <tr>
-                <td colspan="9" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                <td colspan="10" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                     ${window.i18n.t('no_results')}
                 </td>
             </tr>
@@ -464,7 +480,8 @@ function renderTable() {
         const intelScore = model.intelligence_score || '-';
         const intelClass = getIntelligenceClass(model.intelligence_score);
         
-        const speed = model.speed ? model.speed + ' tok/s' : '-';
+        const speed = formatSpeed(model.speed);
+        const ttft = formatLatency(model.ttft);
         
         const price = model.pricing.blended;
         const priceClass = getPriceClass(price);
@@ -495,6 +512,9 @@ function renderTable() {
                 </td>
                 <td class="col-speed">
                     <span class="speed-display">${speed}</span>
+                </td>
+                <td class="col-ttft">
+                    <span class="latency-display">${ttft}</span>
                 </td>
                 <td class="col-price">
                     <span class="price-display ${priceClass}">${formatPrice(price)}</span>
@@ -595,6 +615,22 @@ function showModelDetail(modelId) {
     const intelClass = getIntelligenceClass(model.intelligence_score);
     const priceClass = getPriceClass(model.pricing.blended);
     const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : '';
+    const listBlended = model.pricing.blended_list;
+    const showListPrice = listBlended != null && listBlended !== model.pricing.blended;
+    const cacheReadHtml = model.pricing.cache_read != null ? `
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">💾</span>
+                    <span class="detail-label">${window.i18n.t('cache_read_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.cache_read)}</span>
+                </div>` : '';
+    const listPriceHtml = showListPrice ? `
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">🏷️</span>
+                    <span class="detail-label">${window.i18n.t('list_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(listBlended)}</span>
+                </div>` : '';
+    const cacheNoteHtml = model.pricing.cache_hit_rate != null ? `
+            <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
@@ -627,7 +663,12 @@ function showModelDetail(modelId) {
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">⚡</span>
                     <span class="detail-label">${window.i18n.t('th_speed')}</span>
-                    <span class="detail-value speed-display">${model.speed ? model.speed + ' tok/s' : '-'}</span>
+                    <span class="detail-value speed-display">${formatSpeed(model.speed)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-item-icon" aria-hidden="true">⏱️</span>
+                    <span class="detail-label">${window.i18n.t('th_ttft')}</span>
+                    <span class="detail-value latency-display">${formatLatency(model.ttft)}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">📄</span>
@@ -644,6 +685,8 @@ function showModelDetail(modelId) {
                     <span class="detail-label">${window.i18n.t('output_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.completion)}</span>
                 </div>
+                ${cacheReadHtml}
+                ${listPriceHtml}
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">💰</span>
                     <span class="detail-label">${window.i18n.t('blended_price')}</span>
@@ -660,6 +703,7 @@ function showModelDetail(modelId) {
                     <span class="detail-value detail-rank-value">#${rank}</span>
                 </div>
             </div>
+            ${cacheNoteHtml}
         </div>
 
         ${model.description ? `

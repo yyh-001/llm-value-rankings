@@ -1,0 +1,39 @@
+name: Sync Repository About
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/about.json'
+      - '.github/workflows/sync-about.yml'
+
+permissions:
+  contents: read
+  metadata: write
+
+jobs:
+  sync-about:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update homepage and description
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          HOMEPAGE=$(jq -r '.homepage' .github/about.json)
+          DESCRIPTION=$(jq -r '.description' .github/about.json)
+          gh api --method PATCH "/repos/${{ github.repository }}" \
+            -f homepage="$HOMEPAGE" \
+            -f description="$DESCRIPTION"
+
+      - name: Update repository topics
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          jq '{names: .topics}' .github/about.json | \
+            gh api --method PUT "/repos/${{ github.repository }}/topics" \
+              --input - \
+              -H "Accept: application/vnd.github.mercy-preview+json"

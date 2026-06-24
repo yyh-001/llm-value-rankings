@@ -650,9 +650,10 @@ tbody tr.top-row {
 .col-change { width: 64px; text-align: center; }
 .col-model { width: 24%; }
 .col-provider { width: 11%; }
-.col-intelligence { width: 8%; text-align: center; }
-.col-speed { width: 10%; text-align: center; }
-.col-price { width: 9%; text-align: center; }
+.col-intelligence { width: 7%; text-align: center; }
+.col-speed { width: 9%; text-align: center; }
+.col-ttft { width: 8%; text-align: center; }
+.col-price { width: 8%; text-align: center; }
 .col-value {
     width: 11%;
     text-align: center;
@@ -1466,6 +1467,17 @@ body.modal-open {
     gap: 0.75rem;
 }
 
+.detail-pricing-note {
+    margin: 0.75rem 0 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.latency-display {
+    font-variant-numeric: tabular-nums;
+}
+
 .detail-item {
     display: flex;
     flex-direction: column;
@@ -1781,35 +1793,36 @@ body.modal-open {
         padding-bottom: env(safe-area-inset-bottom, 0);
     }
 
-    .modal-toolbar {
-        justify-content: center;
-        padding: 0.625rem 1rem 0.25rem;
-        min-height: 2.25rem;
-    }
-
-    .modal-drag-handle {
-        display: block;
+    .modal-content::after {
+        content: '';
         position: absolute;
-        left: 50%;
         top: 0.5rem;
+        left: 50%;
         transform: translateX(-50%);
-        width: 40px;
+        width: 36px;
         height: 4px;
-        background: var(--border-color);
+        background: rgba(100, 116, 139, 0.35);
         border-radius: 999px;
+        z-index: 4;
+        pointer-events: none;
     }
 
     .modal-close {
-        position: absolute;
+        top: 0.625rem;
         right: 0.75rem;
-        top: 0.375rem;
-        width: 40px;
-        height: 40px;
-        font-size: 1.35rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+        background: rgba(255, 255, 255, 0.85);
+    }
+
+    [data-theme="dark"] .modal-close {
+        background: rgba(30, 41, 59, 0.85);
     }
 
     .model-detail-hero {
-        padding: 0.875rem 1rem 1rem;
+        padding: 2.5rem 1rem 1rem;
+        margin-top: 0;
     }
 
     .model-detail-hero-main {

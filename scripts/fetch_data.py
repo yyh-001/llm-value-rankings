@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -26,6 +27,11 @@ GITHUB_REPO = "yyh-001/llm-value-rankings"
 # Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
 MIN_INTELLIGENCE = 25
 INTELLIGENCE_EXPONENT = 3
+DEFAULT_CACHE_HIT_RATE = 0.5
+DEFAULT_SPEED = 80
+OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
+ENDPOINT_FETCH_WORKERS = 8
+ENDPOINT_FETCH_TIMEOUT = 25
 
 # Provider logo mapping
 PROVIDER_LOGOS = {
@@ -86,21 +92,232 @@ def get_provider_display_name(provider_id):
     return PROVIDER_NAMES.get(provider_id, provider_id.title())
 
 
-def get_blended_price(pricing):
-    """Calculate blended price from input and output pricing."""
+def get_openrouter_headers():
+    """Headers for OpenRouter API; optional API key unlocks latency/throughput stats."""
+    headers = {"Accept": "application/json"}
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    return headers
+
+
+def price_per_million(token_price):
+    """Convert OpenRouter per-token price string to USD per 1M tokens."""
+    if token_price is None or token_price == "":
+        return None
+    value = float(token_price)
+    if value == 0:
+        return 0.0
+    return round(value * 1_000_000, 6)
+
+
+def parse_p50_stat(stat):
+    """Extract p50 from OpenRouter percentile stats (number or {p50: ...})."""
+    if stat is None:
+        return None
+    if isinstance(stat, (int, float)):
+        return float(stat)
+    if isinstance(stat, dict):
+        p50 = stat.get("p50")
+        return float(p50) if p50 is not None else None
+    return None
+
+
+def normalize_latency_seconds(latency):
+    """Normalize latency to seconds (API may return seconds or milliseconds)."""
+    if latency is None:
+        return None
+    if latency > 20:
+        return round(latency / 1000, 3)
+    return round(latency, 3)
+
+
+def weighted_average(values, weights):
+    """Weighted average; falls back to simple mean when weights are missing."""
+    if not values:
+        return None
+    if not weights or len(weights) != len(values):
+        return round(sum(values) / len(values), 6)
+    total_weight = sum(weights)
+    if total_weight <= 0:
+        return round(sum(values) / len(values), 6)
+    return round(sum(v * w for v, w in zip(values, weights)) / total_weight, 6)
+
+
+def get_list_blended_price(pricing):
+    """List-price blended average: (prompt + completion) / 2 per 1M tokens."""
     if not pricing:
         return None
 
-    prompt_price = float(pricing.get("prompt", 0))
-    completion_price = float(pricing.get("completion", 0))
+    prompt_price = price_per_million(pricing.get("prompt"))
+    completion_price = price_per_million(pricing.get("completion"))
 
+    if prompt_price is None or completion_price is None:
+        return None
     if prompt_price == 0 and completion_price == 0:
         return None
 
-    # Blended: average of input and output, converted to per 1M tokens
-    # OpenRouter prices are per token
-    blended = ((prompt_price + completion_price) / 2) * 1_000_000
-    return round(blended, 4)
+    return round((prompt_price + completion_price) / 2, 4)
+
+
+def fetch_model_endpoints(model_id, session=None):
+    """Fetch per-provider endpoint stats for a model."""
+    url = OPENROUTER_ENDPOINTS_API.format(model_id=model_id)
+    http = session or requests
+    try:
+        response = http.get(
+            url,
+            headers=get_openrouter_headers(),
+            timeout=ENDPOINT_FETCH_TIMEOUT,
+        )
+        response.raise_for_status()
+        payload = response.json().get("data") or {}
+        return payload.get("endpoints") or []
+    except Exception as exc:
+        print(f"  Warning: endpoints for {model_id}: {exc}")
+        return []
+
+
+def fetch_endpoints_batch(model_ids):
+    """Fetch endpoint stats for many models in parallel."""
+    unique_ids = list(dict.fromkeys(model_ids))
+    results = {}
+    session = requests.Session()
+    session.headers.update(get_openrouter_headers())
+
+    print(f"Fetching OpenRouter endpoint stats for {len(unique_ids)} models...")
+    with ThreadPoolExecutor(max_workers=ENDPOINT_FETCH_WORKERS) as executor:
+        futures = {
+            executor.submit(fetch_model_endpoints, model_id, session): model_id
+            for model_id in unique_ids
+        }
+        done = 0
+        for future in as_completed(futures):
+            model_id = futures[future]
+            try:
+                results[model_id] = future.result()
+            except Exception as exc:
+                print(f"  Warning: failed endpoints for {model_id}: {exc}")
+                results[model_id] = []
+            done += 1
+            if done % 50 == 0 or done == len(unique_ids):
+                print(f"  Endpoints progress: {done}/{len(unique_ids)}")
+
+    with_stats = sum(
+        1
+        for endpoints in results.values()
+        if aggregate_endpoint_metrics(endpoints).get("throughput") is not None
+    )
+    print(f"  Models with live throughput data: {with_stats}/{len(unique_ids)}")
+    return results
+
+
+def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE):
+    """
+    Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
+
+    Effective input price uses cache_hit_rate when input_cache_read is available
+    (OpenRouter model pages expose real hit rates; the public endpoints API does not).
+    """
+    healthy = [ep for ep in endpoints if ep.get("status") == 0]
+    if not healthy:
+        healthy = list(endpoints)
+
+    throughputs = []
+    latencies = []
+    weights = []
+    effective_inputs = []
+    list_prompts = []
+    list_completions = []
+    cache_reads = []
+    has_cache = False
+
+    for ep in healthy:
+        pricing = ep.get("pricing") or {}
+        prompt = price_per_million(pricing.get("prompt"))
+        completion = price_per_million(pricing.get("completion"))
+        cache_read = price_per_million(pricing.get("input_cache_read"))
+
+        if prompt is None and completion is None:
+            continue
+
+        weight = ep.get("uptime_last_1d") or ep.get("uptime_last_30m") or 1.0
+        weights.append(weight)
+
+        if prompt is not None:
+            list_prompts.append(prompt)
+            if cache_read is not None:
+                has_cache = True
+                cache_reads.append(cache_read)
+                effective_inputs.append(
+                    prompt * (1 - cache_hit_rate) + cache_read * cache_hit_rate
+                )
+            else:
+                effective_inputs.append(prompt)
+
+        if completion is not None:
+            list_completions.append(completion)
+
+        throughput = parse_p50_stat(ep.get("throughput_last_30m"))
+        if throughput is not None and throughput > 0:
+            throughputs.append(throughput)
+
+        latency = normalize_latency_seconds(parse_p50_stat(ep.get("latency_last_30m")))
+        if latency is not None and latency > 0:
+            latencies.append(latency)
+
+    prompt_list = min(list_prompts) if list_prompts else None
+    completion_list = min(list_completions) if list_completions else None
+    prompt_effective = weighted_average(effective_inputs, weights[: len(effective_inputs)])
+    cache_read_min = min(cache_reads) if cache_reads else None
+
+    blended_list = None
+    blended_effective = None
+    if prompt_list is not None and completion_list is not None:
+        blended_list = round((prompt_list + completion_list) / 2, 4)
+    if prompt_effective is not None and completion_list is not None:
+        blended_effective = round((prompt_effective + completion_list) / 2, 4)
+
+    return {
+        "throughput": round(max(throughputs), 1) if throughputs else None,
+        "ttft": min(latencies) if latencies else None,
+        "prompt_list": prompt_list,
+        "completion_list": completion_list,
+        "prompt_effective": prompt_effective,
+        "cache_read": cache_read_min,
+        "cache_hit_rate": cache_hit_rate if has_cache else None,
+        "blended_list": blended_list,
+        "blended_effective": blended_effective,
+        "endpoint_count": len(healthy),
+    }
+
+
+def build_pricing_payload(catalog_pricing, endpoint_metrics):
+    """Merge catalog list prices with endpoint-derived effective prices."""
+    prompt_list = endpoint_metrics.get("prompt_list")
+    completion_list = endpoint_metrics.get("completion_list")
+
+    if prompt_list is None:
+        prompt_list = price_per_million((catalog_pricing or {}).get("prompt"))
+    if completion_list is None:
+        completion_list = price_per_million((catalog_pricing or {}).get("completion"))
+
+    cache_read = endpoint_metrics.get("cache_read")
+    if cache_read is None and catalog_pricing:
+        cache_read = price_per_million(catalog_pricing.get("input_cache_read"))
+
+    blended_effective = endpoint_metrics.get("blended_effective")
+    blended_list = endpoint_metrics.get("blended_list") or get_list_blended_price(catalog_pricing)
+    blended = blended_effective or blended_list
+
+    return {
+        "prompt": prompt_list,
+        "completion": completion_list,
+        "cache_read": cache_read,
+        "blended": blended,
+        "blended_list": blended_list,
+        "cache_hit_rate": endpoint_metrics.get("cache_hit_rate"),
+    }
 
 
 def is_text_llm(model):
@@ -117,14 +334,14 @@ def is_text_llm(model):
 
 def fetch_intelligence_scores():
     """
-    Fetch intelligence scores and speed data from Artificial Analysis.
-    
-    Returns dict mapping model names to their data.
+    Load intelligence scores from Artificial Analysis.
+
+    Speed and TTFT come from OpenRouter endpoint stats; only intelligence is sourced here.
     Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
     """
-    print("Loading model data from Artificial Analysis...")
+    print("Loading intelligence scores from Artificial Analysis...")
     
-    # Intelligence scores (0-100) and speed (tokens/second)
+    # Intelligence scores (0-100). Speed fields are legacy and ignored.
     model_data = {
         # ===== Anthropic =====
         "claude-fable-5": {"intelligence": 60, "speed": 45},
@@ -238,8 +455,8 @@ def fetch_intelligence_scores():
 
 def match_model_data(model_id, model_name, model_data):
     """
-    Try to match a model to its data (intelligence + speed).
-    Returns dict with intelligence and speed, or None.
+    Try to match a model to its Artificial Analysis intelligence score.
+    Returns dict with intelligence, or None.
     """
     model_id_lower = model_id.lower()
     model_name_lower = model_name.lower() if model_name else ""
@@ -358,13 +575,13 @@ def calculate_value_scores(intelligence, price, speed):
         return None
 
     if speed is None:
-        speed = 80
+        speed = DEFAULT_SPEED
 
     return (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
 
 
-def process_models(openrouter_models, model_data):
-    """Process and combine model data."""
+def process_models(openrouter_models, model_data, endpoints_map):
+    """Process and combine model data from OpenRouter + AA + endpoint stats."""
     processed = []
     seen = set()
 
@@ -380,13 +597,19 @@ def process_models(openrouter_models, model_data):
         if not pricing:
             continue
 
-        blended_price = get_blended_price(pricing)
+        endpoint_metrics = aggregate_endpoint_metrics(endpoints_map.get(model_id, []))
+        pricing_payload = build_pricing_payload(pricing, endpoint_metrics)
+        blended_price = pricing_payload.get("blended")
         if blended_price is None or blended_price <= 0:
             continue
 
         data = match_model_data(model_id, model_name, model_data)
         intelligence = data["intelligence"] if data else None
-        speed = data["speed"] if data else None
+        speed = endpoint_metrics.get("throughput")
+        if speed is None and data and data.get("speed"):
+            speed = data["speed"]
+        ttft = endpoint_metrics.get("ttft")
+
         if "distill" in model_id.lower():
             value_score = None
         else:
@@ -403,13 +626,10 @@ def process_models(openrouter_models, model_data):
             "provider": provider,
             "provider_display": get_provider_display_name(provider),
             "context_length": model.get("context_length"),
-            "pricing": {
-                "prompt": float(pricing.get("prompt", 0)) * 1_000_000,
-                "completion": float(pricing.get("completion", 0)) * 1_000_000,
-                "blended": blended_price,
-            },
+            "pricing": pricing_payload,
             "intelligence_score": intelligence,
             "speed": speed,
+            "ttft": ttft,
             "value_score": value_score,
             "created": model.get("created"),
             "description": model.get("description", ""),
@@ -594,8 +814,22 @@ def main():
 
     model_data = fetch_intelligence_scores()
 
+    candidate_ids = []
+    seen_ids = set()
+    for model in openrouter_models:
+        model_id = model.get("id", "")
+        if not is_text_llm(model) or not model.get("pricing"):
+            continue
+        base_name = model_id.split(":")[0] if ":" in model_id else model_id
+        if base_name in seen_ids:
+            continue
+        seen_ids.add(base_name)
+        candidate_ids.append(model_id)
+
+    endpoints_map = fetch_endpoints_batch(candidate_ids)
+
     # Process and rank
-    processed = process_models(openrouter_models, model_data)
+    processed = process_models(openrouter_models, model_data, endpoints_map)
     ranked = rank_models(processed)
 
     history = load_rank_history()
@@ -612,11 +846,13 @@ def main():
     print("=" * 60)
     top10 = [m for m in ranked if m["rank"] is not None][:10]
     for m in top10:
-        speed_str = f"{m['speed']:>3d} tok/s" if m['speed'] else "N/A"
+        speed_str = f"{m['speed']:>5.0f} tok/s" if m.get("speed") else "N/A"
+        ttft_str = f"{m['ttft']:>5.2f}s" if m.get("ttft") else "N/A"
         print(f"  #{m['rank']:2d} {m['name']:<30s} "
               f"Score: {m['intelligence_score'] or 'N/A':>3} "
-              f"Speed: {speed_str:>10s} "
-              f"Price: ${m['pricing']['blended']:>8.2f}/1M "
+              f"Speed: {speed_str:>12s} "
+              f"TTFT: {ttft_str:>8s} "
+              f"Price: ${m['pricing']['blended']:>8.4f}/1M "
               f"Value: {m['value_score']:>8.2f}")
 
 

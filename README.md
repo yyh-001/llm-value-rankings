@@ -4,6 +4,8 @@
 
 **Find the best value AI models — intelligence per dollar, ranked daily.**
 
+🌐 **Live site:** [https://yyh-001.github.io/llm-value-rankings/](https://yyh-001.github.io/llm-value-rankings/)
+
 [**English**](./README.md) · [**简体中文**](./README.zh-CN.md)
 
 [![Live Demo](https://img.shields.io/badge/demo-live-6366f1?style=for-the-badge)](https://yyh-001.github.io/llm-value-rankings/)
@@ -93,8 +95,9 @@ Value = Intelligence³ × Speed / Price
 | Metric | Source | Notes |
 |--------|--------|-------|
 | Intelligence | Artificial Analysis | Index score 0–100 |
-| Speed | Artificial Analysis | Output tokens/s (default 80 if missing) |
-| Price | OpenRouter | Average of input & output ($/1M tokens) |
+| Speed | OpenRouter Endpoints API | Measured throughput p50 (tokens/s; default 80 if missing) |
+| TTFT | OpenRouter Endpoints API | Time-to-first-token p50 in seconds |
+| Price | OpenRouter | Effective blended price with 50% cache-hit weighting ($/1M tokens) |
 
 ### Score scale (0–100)
 

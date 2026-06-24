@@ -32,6 +32,8 @@ jobs:
         pip install requests beautifulsoup4
         
     - name: Fetch model data
+      env:
+        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       run: python scripts/fetch_data.py
       
     - name: Check for changes
