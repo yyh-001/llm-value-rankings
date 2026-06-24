@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta name="app-version" content="20250624">
-    <link rel="stylesheet" href="css/style.css?v=20250624c">
+    <link rel="stylesheet" href="css/style.css?v=20250624f">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
 </head>
 <body>
@@ -163,7 +163,10 @@
     <div id="model-modal" class="modal hidden" role="dialog" aria-modal="true">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-toolbar">
+                <span class="modal-drag-handle" aria-hidden="true"></span>
+                <button class="modal-close" aria-label="Close">&times;</button>
+            </div>
             <div class="modal-body-scroll">
                 <div id="modal-body"></div>
                 <div class="comments-section">
