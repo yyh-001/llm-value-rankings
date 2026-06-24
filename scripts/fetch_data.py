@@ -21,6 +21,10 @@ OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
 HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
 
+# Scoring: value = intelligence³ × speed / price (models below MIN_INTELLIGENCE are excluded)
+MIN_INTELLIGENCE = 25
+INTELLIGENCE_EXPONENT = 3
+
 # Provider logo mapping
 PROVIDER_LOGOS = {
     "openai": "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg",
@@ -339,45 +343,28 @@ def match_model_data(model_id, model_name, model_data):
     return None
 
 
-def calculate_value_scores(intelligence, price, speed, avg_intelligence=40):
+def calculate_value_scores(intelligence, price, speed):
     """
-    Calculate value score: intelligence² × speed / price
-    
-    With penalty for below-average intelligence models.
+    Calculate value score: intelligence³ × speed / price.
+
+    Models with intelligence below MIN_INTELLIGENCE are excluded (returns None).
     """
     if intelligence is None or price is None or price <= 0:
         return None
-    
-    # Default speed if not available
+
+    if intelligence < MIN_INTELLIGENCE:
+        return None
+
     if speed is None:
-        speed = 80  # Average speed
-    
-    base = (intelligence ** 2) * speed / price
-    
-    if intelligence < avg_intelligence:
-        penalty = (intelligence / avg_intelligence) ** 2
-        return round(base * penalty, 2)
-    
-    return round(base, 2)
+        speed = 80
+
+    return round((intelligence ** INTELLIGENCE_EXPONENT) * speed / price, 2)
 
 
 def process_models(openrouter_models, model_data):
     """Process and combine model data."""
     processed = []
     seen = set()
-    
-    # First pass: calculate average intelligence
-    matched_intelligences = []
-    for model in openrouter_models:
-        if not is_text_llm(model):
-            continue
-        model_id = model.get("id", "")
-        model_name = model.get("name", "")
-        data = match_model_data(model_id, model_name, model_data)
-        if data and data.get("intelligence"):
-            matched_intelligences.append(data["intelligence"])
-    avg_intelligence = sum(matched_intelligences) / len(matched_intelligences) if matched_intelligences else 40
-    print(f"  Average intelligence score: {avg_intelligence:.1f}")
 
     for model in openrouter_models:
         model_id = model.get("id", "")
@@ -398,7 +385,7 @@ def process_models(openrouter_models, model_data):
         data = match_model_data(model_id, model_name, model_data)
         intelligence = data["intelligence"] if data else None
         speed = data["speed"] if data else None
-        value_score = calculate_value_scores(intelligence, blended_price, speed, avg_intelligence)
+        value_score = calculate_value_scores(intelligence, blended_price, speed)
 
         base_name = model_id.split(":")[0] if ":" in model_id else model_id
         if base_name in seen:

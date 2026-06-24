@@ -34,7 +34,7 @@ The result is a daily-updated leaderboard that answers one question: **how much 
 
 | | Feature | Description |
 |:---:|---------|-------------|
-| 📊 | **Smart ranking** | `Intelligence² × Speed / Price` with below-average penalty |
+| 📊 | **Smart ranking** | `Intelligence³ × Speed / Price`, min score 25 |
 | 📈 | **Day-over-day delta** | See rank changes vs yesterday (`↑2` / `↓1` / `NEW`) |
 | 🏅 | **Top 3 podium** | Highlight the best value models on the homepage |
 | 🔍 | **Live search** | Filter by model name or ID |
@@ -87,7 +87,7 @@ Or trigger the **Update Model Data** workflow from the Actions tab.
 ### Value score
 
 ```
-Value = Intelligence² × Speed / Price
+Value = Intelligence³ × Speed / Price
 ```
 
 | Metric | Source | Notes |
@@ -96,14 +96,9 @@ Value = Intelligence² × Speed / Price
 | Speed | Artificial Analysis | Output tokens/s (default 80 if missing) |
 | Price | OpenRouter | Average of input & output ($/1M tokens) |
 
-### Below-average penalty
+### Minimum intelligence threshold
 
-Models scoring below the average (40) receive an extra multiplier:
-
-```
-Penalty = (Score / 40)²
-Final   = Base × Penalty
-```
+Models scoring **below 25** are excluded from ranking — cheap but low-capability models won't clutter the leaderboard.
 
 ### Ranking rules
 

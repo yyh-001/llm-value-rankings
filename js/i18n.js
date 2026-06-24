@@ -7,7 +7,7 @@ const translations = {
     zh: {
         // Header
         title: "大模型性价比排行榜",
-        logo_sub: "能力² × 速度 / 价格",
+        logo_sub: "能力³ × 速度 / 价格",
         
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
@@ -46,8 +46,8 @@ const translations = {
         // Methodology
         methodology_title: "计算方法",
         formula_label: "核心公式",
-        formula: "性价比 = 能力² × 速度 / 价格",
-        penalty_desc: "低于平均分(40分)的模型会受到惩罚：乘以 (评分/40)²",
+        formula: "性价比 = 能力³ × 速度 / 价格",
+        penalty_desc: "能力评分低于 25 分的模型不参与排名",
         method_1_title: "能力评分",
         method_1: "Artificial Analysis Intelligence Index",
         method_2_title: "输出速度",
@@ -91,7 +91,7 @@ const translations = {
     en: {
         // Header
         title: "LLM Value Rankings",
-        logo_sub: "Intelligence² × Speed / Price",
+        logo_sub: "Intelligence³ × Speed / Price",
         
         // Hero
         hero_badge: "Live Data · Updated Daily",
@@ -130,8 +130,8 @@ const translations = {
         // Methodology
         methodology_title: "Methodology",
         formula_label: "Core Formula",
-        formula: "Value = Intelligence² × Speed / Price",
-        penalty_desc: "Models below average (40) get penalized: multiply by (score/40)²",
+        formula: "Value = Intelligence³ × Speed / Price",
+        penalty_desc: "Models scoring below 25 are excluded from ranking",
         method_1_title: "Intelligence",
         method_1: "Artificial Analysis Intelligence Index",
         method_2_title: "Output Speed",
