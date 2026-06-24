@@ -338,7 +338,7 @@ def scrape_model_page_performance(model_id, session=None):
     for value in re.findall(r'p50_latency(?:_last_30m)?":(\d+(?:\.\d+)?)', payload):
         latencies.append(normalize_latency_seconds(float(value)))
 
-    throughput = round(statistics.median(throughputs), 1) if throughputs else None
+    throughput = round(max(throughputs), 1) if throughputs else None
     ttft = round(min(latencies), 3) if latencies else None
     return {"throughput": throughput, "ttft": ttft}
 
@@ -382,15 +382,15 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     """
     Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
 
-    Effective input price uses cache_hit_rate when input_cache_read is available
-    (OpenRouter model pages expose real hit rates; the public endpoints API does not).
+    Speed uses the best provider throughput (matches OpenRouter model page).
+    TTFT uses the lowest provider latency.
+    Effective input price uses cache_hit_rate when input_cache_read is available.
     """
     healthy = [ep for ep in endpoints if ep.get("status") == 0]
     if not healthy:
         healthy = list(endpoints)
 
     throughputs = []
-    throughput_weights = []
     latencies = []
     prompt_prices = []
     prompt_weights = []
@@ -434,7 +434,6 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         throughput = parse_p50_stat(ep.get("throughput_last_30m"))
         if throughput is not None and throughput > 0:
             throughputs.append(throughput)
-            throughput_weights.append(weight)
 
         latency = normalize_latency_seconds(parse_p50_stat(ep.get("latency_last_30m")))
         if latency is not None and latency > 0:
@@ -452,10 +451,10 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     if prompt_effective is not None and completion_list is not None:
         blended_effective = blend_token_price(prompt_effective, completion_list)
 
-    throughput_avg = weighted_average(throughputs, throughput_weights)
+    throughput_best = max(throughputs) if throughputs else None
 
     return {
-        "throughput": round(throughput_avg, 1) if throughput_avg is not None else None,
+        "throughput": round(throughput_best, 1) if throughput_best is not None else None,
         "ttft": min(latencies) if latencies else None,
         "prompt_list": prompt_list,
         "completion_list": completion_list,
