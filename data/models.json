@@ -1,13 +1,33 @@
 {
-<<<<<<< HEAD
-  "updated_at": "2026-06-24T08:11:03.981053Z",
-=======
-  "updated_at": "2026-06-24T08:07:29.268786Z",
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+  "updated_at": "2026-06-24T08:13:14.926310Z",
   "total_models": 300,
   "ranked_models": 43,
   "rank_compared_to": "2026-06-23",
   "models": [
+    {
+      "id": "deepseek/deepseek-v4-flash",
+      "name": "DeepSeek: DeepSeek V4 Flash",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.128411,
+        "completion": 0.257451,
+        "cache_read": 0.02979,
+        "blended": 0.1186,
+        "blended_list": 0.1607,
+        "cache_hit_rate": 0.7
+      },
+      "intelligence_score": 40,
+      "speed": 79.0,
+      "ttft": 0.669,
+      "value_score": 100.0,
+      "created": 1777000666,
+      "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
+      "rank": 1,
+      "rank_change": 0,
+      "rank_new": false
+    },
     {
       "id": "xiaomi/mimo-v2.5",
       "name": "Xiaomi: MiMo-V2.5",
@@ -25,217 +45,10 @@
       "intelligence_score": 42,
       "speed": 39.0,
       "ttft": 2.724,
-      "value_score": 100.0,
+      "value_score": 65.8,
       "created": 1776874269,
       "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
-      "rank": 1,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "deepseek/deepseek-v4-flash",
-      "name": "DeepSeek: DeepSeek V4 Flash",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.128411,
-        "completion": 0.25745,
-        "cache_read": 0.029791,
-        "blended": 0.1186,
-        "blended_list": 0.1607,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 40,
-<<<<<<< HEAD
-      "speed": 79.0,
-      "ttft": 0.648,
-      "value_score": 100.0,
-      "created": 1777000666,
-      "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
-      "rank": 1,
-      "rank_change": 0,
-      "rank_new": false
-    },
-    {
-      "id": "xiaomi/mimo-v2.5",
-      "name": "Xiaomi: MiMo-V2.5",
-      "provider": "xiaomi",
-      "provider_display": "Xiaomi",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.123043,
-        "completion": 0.28,
-        "cache_read": 0.0028,
-        "blended": 0.1251,
-        "blended_list": 0.1623,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 42,
-      "speed": 39.0,
-      "ttft": 2.313,
-      "value_score": 54.2,
-      "created": 1776874269,
-      "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
-=======
-      "speed": 34.4,
-      "ttft": 0.657,
-      "value_score": 66.2,
-      "created": 1777000666,
-      "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "rank": 2,
-      "rank_change": -1,
-      "rank_new": false
-    },
-    {
-<<<<<<< HEAD
-=======
-      "id": "inclusionai/ring-2.6-1t",
-      "name": "inclusionAI: Ring-2.6-1T",
-      "provider": "inclusionai",
-      "provider_display": "Inclusionai",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.075,
-        "completion": 0.625,
-        "cache_read": 0.015,
-        "blended": 0.181,
-        "blended_list": 0.2125,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 31,
-      "speed": 102.0,
-      "ttft": 1.205,
-      "value_score": 59.8,
-      "created": 1778247440,
-      "description": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool...",
-      "rank": 3,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "id": "minimax/minimax-m2",
-      "name": "MiniMax: MiniMax M2",
-      "provider": "minimax",
-      "provider_display": "Minimax",
-      "context_length": 204800,
-<<<<<<< HEAD
-=======
-      "pricing": {
-        "prompt": 0.277495,
-        "completion": 1.104979,
-        "cache_read": 0.03,
-        "blended": 0.4193,
-        "blended_list": 0.4844,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 38,
-      "speed": 68.7,
-      "ttft": 0.361,
-      "value_score": 32.0,
-      "created": 1761252093,
-      "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
-      "rank": 4,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "openai/gpt-5.4-nano",
-      "name": "OpenAI: GPT-5.4 Nano",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 0.2,
-        "completion": 1.25,
-        "cache_read": 0.02,
-        "blended": 0.368,
-        "blended_list": 0.4625,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 38,
-      "speed": 45.0,
-      "ttft": 1.342,
-      "value_score": 23.9,
-      "created": 1773748187,
-      "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
-      "rank": 5,
-      "rank_change": 4,
-      "rank_new": false
-    },
-    {
-      "id": "minimax/minimax-m3",
-      "name": "MiniMax: MiniMax M3",
-      "provider": "minimax",
-      "provider_display": "Minimax",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.3,
-        "completion": 1.2,
-        "cache_read": 0.06,
-        "blended": 0.399,
-        "blended_list": 0.525,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 44,
-      "speed": 29.5,
-      "ttft": 1.531,
-      "value_score": 22.5,
-      "created": 1780245374,
-      "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
-      "rank": 6,
-      "rank_change": 11,
-      "rank_new": false
-    },
-    {
-      "id": "qwen/qwen3.6-35b-a3b",
-      "name": "Qwen: Qwen3.6 35B A3B",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.190311,
-        "completion": 1.203509,
-        "cache_read": 0.153796,
-        "blended": 0.4305,
-        "blended_list": 0.4436,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 32,
-      "speed": 80.6,
-      "ttft": 0.317,
-      "value_score": 21.9,
-      "created": 1777260255,
-      "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
-      "rank": 7,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "stepfun/step-3.7-flash",
-      "name": "StepFun: Step 3.7 Flash",
-      "provider": "stepfun",
-      "provider_display": "Stepfun",
-      "context_length": 256000,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "pricing": {
-        "prompt": 0.2,
-        "completion": 1.15,
-        "cache_read": 0.04,
-        "blended": 0.3535,
-        "blended_list": 0.4375,
-        "cache_hit_rate": 0.7
-      },
-<<<<<<< HEAD
-      "intelligence_score": 38,
-      "speed": 154.0,
-      "ttft": 0.361,
-      "value_score": 47.3,
-      "created": 1761252093,
-      "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
-      "rank": 3,
       "rank_change": null,
       "rank_new": true
     },
@@ -259,7 +72,7 @@
       "value_score": 39.4,
       "created": 1778247440,
       "description": "Ring-2.6-1T is a 1T-parameter-scale thinking model with 63B active parameters, built for real-world agent workflows that require both strong capability and operational efficiency. It is optimized for coding agents, tool...",
-      "rank": 4,
+      "rank": 3,
       "rank_change": null,
       "rank_new": true
     },
@@ -283,32 +96,56 @@
       "value_score": 36.1,
       "created": 1777260255,
       "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
+      "rank": 4,
+      "rank_change": null,
+      "rank_new": true
+    },
+    {
+      "id": "minimax/minimax-m2",
+      "name": "MiniMax: MiniMax M2",
+      "provider": "minimax",
+      "provider_display": "Minimax",
+      "context_length": 204800,
+      "pricing": {
+        "prompt": 0.277495,
+        "completion": 1.10498,
+        "cache_read": 0.03,
+        "blended": 0.4193,
+        "blended_list": 0.4844,
+        "cache_hit_rate": 0.7
+      },
+      "intelligence_score": 38,
+      "speed": 115.5,
+      "ttft": 0.351,
+      "value_score": 35.5,
+      "created": 1761252093,
+      "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
       "rank": 5,
       "rank_change": null,
       "rank_new": true
     },
     {
-      "id": "moonshotai/kimi-k2.6",
-      "name": "MoonshotAI: Kimi K2.6",
-      "provider": "moonshotai",
-      "provider_display": "Moonshotai",
-      "context_length": 262144,
+      "id": "z-ai/glm-5.2",
+      "name": "Z.ai: GLM 5.2",
+      "provider": "z-ai",
+      "provider_display": "Z-Ai",
+      "context_length": 1048576,
       "pricing": {
-        "prompt": 0.777989,
-        "completion": 3.58711,
-        "cache_read": 0.172866,
-        "blended": 1.1884,
-        "blended_list": 1.4803,
+        "prompt": 1.357019,
+        "completion": 4.314566,
+        "cache_read": 0.247796,
+        "blended": 1.5495,
+        "blended_list": 2.0964,
         "cache_hit_rate": 0.7
       },
-      "intelligence_score": 43,
-      "speed": 175.0,
-      "ttft": 0.234,
-      "value_score": 27.5,
-      "created": 1776699402,
-      "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
+      "intelligence_score": 51,
+      "speed": 121.0,
+      "ttft": 0.346,
+      "value_score": 24.3,
+      "created": 1781631930,
+      "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
       "rank": 6,
-      "rank_change": 44,
+      "rank_change": 21,
       "rank_new": false
     },
     {
@@ -318,57 +155,22 @@
       "provider_display": "Minimax",
       "context_length": 204800,
       "pricing": {
-        "prompt": 0.538237,
-        "completion": 1.906207,
+        "prompt": 0.566466,
+        "completion": 1.983115,
         "cache_read": 0.057162,
-        "blended": 0.791,
-        "blended_list": 0.8802,
+        "blended": 0.8217,
+        "blended_list": 0.9206,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 38,
       "speed": 152.0,
-      "ttft": 0.561,
-      "value_score": 24.7,
+      "ttft": 0.568,
+      "value_score": 23.8,
       "created": 1773836697,
       "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "rank": 7,
       "rank_change": null,
       "rank_new": true
-=======
-      "intelligence_score": 30,
-      "speed": 80.0,
-      "ttft": 0.808,
-      "value_score": 21.8,
-      "created": 1779985069,
-      "description": "Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts model. It pairs a 196B-parameter language backbone with a vision encoder for native image and video understanding, activating roughly 11B parameters...",
-      "rank": 8,
-      "rank_change": 4,
-      "rank_new": false
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-    },
-    {
-      "id": "z-ai/glm-5.2",
-      "name": "Z.ai: GLM 5.2",
-      "provider": "z-ai",
-      "provider_display": "Z-Ai",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 1.361437,
-        "completion": 4.323348,
-        "cache_read": 0.271204,
-        "blended": 1.5295,
-        "blended_list": 2.1019,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 51,
-      "speed": 119.0,
-      "ttft": 0.339,
-      "value_score": 24.2,
-      "created": 1781631930,
-      "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
-      "rank": 8,
-      "rank_change": 19,
-      "rank_new": false
     },
     {
       "id": "minimax/minimax-m3",
@@ -386,12 +188,36 @@
       },
       "intelligence_score": 44,
       "speed": 42.0,
-      "ttft": 1.531,
+      "ttft": 1.611,
       "value_score": 21.0,
       "created": 1780245374,
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
+      "rank": 8,
+      "rank_change": 9,
+      "rank_new": false
+    },
+    {
+      "id": "moonshotai/kimi-k2.6",
+      "name": "MoonshotAI: Kimi K2.6",
+      "provider": "moonshotai",
+      "provider_display": "Moonshotai",
+      "context_length": 262144,
+      "pricing": {
+        "prompt": 0.808353,
+        "completion": 3.680373,
+        "cache_read": 0.191493,
+        "blended": 1.2275,
+        "blended_list": 1.5264,
+        "cache_hit_rate": 0.7
+      },
+      "intelligence_score": 43,
+      "speed": 105.0,
+      "ttft": 0.566,
+      "value_score": 16.0,
+      "created": 1776699402,
+      "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
       "rank": 9,
-      "rank_change": 8,
+      "rank_change": 41,
       "rank_new": false
     },
     {
@@ -458,7 +284,7 @@
       },
       "intelligence_score": 50,
       "speed": 124.0,
-      "ttft": 1.008,
+      "ttft": 1.002,
       "value_score": 13.6,
       "created": 1779193800,
       "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
@@ -473,16 +299,16 @@
       "provider_display": "Z-Ai",
       "context_length": 202752,
       "pricing": {
-        "prompt": 0.872826,
-        "completion": 2.823284,
-        "cache_read": 0.208152,
+        "prompt": 0.872822,
+        "completion": 2.823271,
+        "cache_read": 0.20815,
         "blended": 1.0115,
         "blended_list": 1.3604,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 51,
       "speed": 44.0,
-      "ttft": 0.649,
+      "ttft": 0.69,
       "value_score": 13.5,
       "created": 1770829182,
       "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
@@ -505,10 +331,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 38,
-      "speed": 105.0,
-      "ttft": 0.663,
-<<<<<<< HEAD
-      "value_score": 13.4,
+      "speed": 106.0,
+      "ttft": 0.672,
+      "value_score": 13.5,
       "created": 1777591821,
       "description": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
       "rank": 14,
@@ -522,17 +347,17 @@
       "provider_display": "Moonshotai",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.964538,
-        "completion": 4.233274,
-        "cache_read": 0.196715,
+        "prompt": 0.964536,
+        "completion": 4.233245,
+        "cache_read": 0.196714,
         "blended": 1.3786,
         "blended_list": 1.7817,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 42,
-      "speed": 104.0,
-      "ttft": 0.354,
-      "value_score": 13.1,
+      "speed": 99.0,
+      "ttft": 0.307,
+      "value_score": 12.5,
       "created": 1781266361,
       "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
       "rank": 15,
@@ -540,40 +365,6 @@
       "rank_new": false
     },
     {
-=======
-      "value_score": 20.3,
-      "created": 1777591821,
-      "description": "Grok 4.3 is a reasoning model from xAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
-      "rank": 9,
-      "rank_change": 26,
-      "rank_new": false
-    },
-    {
-      "id": "google/gemini-3.5-flash",
-      "name": "Google: Gemini 3.5 Flash",
-      "provider": "google",
-      "provider_display": "Google",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 1.5,
-        "completion": 9.0,
-        "cache_read": 0.15,
-        "blended": 2.6662,
-        "blended_list": 3.375,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 50,
-      "speed": 108.5,
-      "ttft": 1.007,
-      "value_score": 18.1,
-      "created": 1779193800,
-      "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
-      "rank": 10,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "id": "xiaomi/mimo-v2.5-pro",
       "name": "Xiaomi: MiMo-V2.5-Pro",
       "provider": "xiaomi",
@@ -588,15 +379,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 42,
-<<<<<<< HEAD
       "speed": 23.0,
       "ttft": 3.021,
       "value_score": 11.5,
-=======
-      "speed": 21.0,
-      "ttft": 3.021,
-      "value_score": 15.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "created": 1776874273,
       "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
       "rank": 16,
@@ -611,29 +396,19 @@
       "context_length": 262144,
       "pricing": {
         "prompt": 0.305016,
-        "completion": 2.440128,
+        "completion": 2.440126,
         "cache_read": 0.3,
         "blended": 0.8388,
         "blended_list": 0.8388,
         "cache_hit_rate": 0.7
       },
-<<<<<<< HEAD
       "intelligence_score": 32,
       "speed": 117.0,
-      "ttft": 0.585,
+      "ttft": 0.577,
       "value_score": 10.7,
       "created": 1772053789,
       "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
       "rank": 17,
-=======
-      "intelligence_score": 38,
-      "speed": 63.6,
-      "ttft": 0.565,
-      "value_score": 15.7,
-      "created": 1773836697,
-      "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
-      "rank": 12,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "rank_change": null,
       "rank_new": true
     },
@@ -644,7 +419,6 @@
       "provider_display": "Google",
       "context_length": 1048576,
       "pricing": {
-<<<<<<< HEAD
         "prompt": 0.25,
         "completion": 1.5,
         "cache_read": 0.025,
@@ -653,38 +427,14 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 25,
-      "speed": 122.0,
-      "ttft": 0.605,
-      "value_score": 10.1,
+      "speed": 120.0,
+      "ttft": 0.59,
+      "value_score": 9.9,
       "created": 1772512673,
       "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
       "rank": 18,
       "rank_change": -13,
       "rank_new": false
-    },
-    {
-      "id": "qwen/qwen3.5-397b-a17b",
-      "name": "Qwen: Qwen3.5 397B A17B",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 256000,
-      "pricing": {
-        "prompt": 0.543824,
-        "completion": 3.440184,
-        "cache_read": 0.288025,
-        "blended": 1.1847,
-        "blended_list": 1.2679,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 34,
-      "speed": 125.0,
-      "ttft": 1.141,
-      "value_score": 9.7,
-      "created": 1771223018,
-      "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
-      "rank": 19,
-      "rank_change": null,
-      "rank_new": true
     },
     {
       "id": "z-ai/glm-5.1",
@@ -706,8 +456,8 @@
       "value_score": 9.6,
       "created": 1775578025,
       "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
-      "rank": 20,
-      "rank_change": 24,
+      "rank": 19,
+      "rank_change": 25,
       "rank_new": false
     },
     {
@@ -717,39 +467,46 @@
       "provider_display": "DeepSeek",
       "context_length": 1048576,
       "pricing": {
-        "prompt": 1.349474,
-        "completion": 2.710855,
-        "cache_read": 0.118561,
-        "blended": 1.0953,
-        "blended_list": 1.6898,
+        "prompt": 1.34951,
+        "completion": 2.710942,
+        "cache_read": 0.118575,
+        "blended": 1.0954,
+        "blended_list": 1.6899,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 44,
       "speed": 50.0,
-      "ttft": 0.521,
+      "ttft": 0.514,
       "value_score": 9.1,
       "created": 1777000679,
       "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
-      "rank": 21,
-      "rank_change": -7,
-=======
-        "prompt": 1.361437,
-        "completion": 4.323348,
-        "cache_read": 0.271204,
-        "blended": 1.5295,
-        "blended_list": 2.1019,
+      "rank": 20,
+      "rank_change": -6,
+      "rank_new": false
+    },
+    {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen: Qwen3.5 397B A17B",
+      "provider": "qwen",
+      "provider_display": "Qwen",
+      "context_length": 256000,
+      "pricing": {
+        "prompt": 0.543817,
+        "completion": 3.440146,
+        "cache_read": 0.288038,
+        "blended": 1.1847,
+        "blended_list": 1.2679,
         "cache_hit_rate": 0.7
       },
-      "intelligence_score": 51,
-      "speed": 46.2,
-      "ttft": 0.339,
-      "value_score": 14.3,
-      "created": 1781631930,
-      "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
-      "rank": 13,
-      "rank_change": 14,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "rank_new": false
+      "intelligence_score": 34,
+      "speed": 117.0,
+      "ttft": 1.097,
+      "value_score": 9.1,
+      "created": 1771223018,
+      "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
+      "rank": 21,
+      "rank_change": null,
+      "rank_new": true
     },
     {
       "id": "openai/gpt-5.4-mini",
@@ -766,14 +523,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 40,
-      "speed": 77.0,
-<<<<<<< HEAD
-      "ttft": 0.609,
-      "value_score": 8.7,
-=======
-      "ttft": 0.608,
-      "value_score": 13.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 78.0,
+      "ttft": 0.603,
+      "value_score": 8.8,
       "created": 1773748178,
       "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
       "rank": 22,
@@ -794,11 +546,10 @@
         "blended_list": 3.4375,
         "cache_hit_rate": 0.7
       },
-<<<<<<< HEAD
       "intelligence_score": 55,
-      "speed": 59.0,
-      "ttft": 0.746,
-      "value_score": 8.1,
+      "speed": 58.0,
+      "ttft": 0.739,
+      "value_score": 8.0,
       "created": 1754587413,
       "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
       "rank": 23,
@@ -812,17 +563,17 @@
       "provider_display": "Qwen",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.363318,
-        "completion": 2.887686,
-        "cache_read": 0.139395,
+        "prompt": 0.363308,
+        "completion": 2.887613,
+        "cache_read": 0.13939,
         "blended": 0.942,
         "blended_list": 0.9944,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 37,
-      "speed": 57.0,
-      "ttft": 0.523,
-      "value_score": 7.2,
+      "speed": 58.0,
+      "ttft": 0.515,
+      "value_score": 7.3,
       "created": 1777255064,
       "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
       "rank": 24,
@@ -830,19 +581,6 @@
       "rank_new": true
     },
     {
-=======
-      "intelligence_score": 25,
-      "speed": 93.3,
-      "ttft": 0.605,
-      "value_score": 11.7,
-      "created": 1772512673,
-      "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
-      "rank": 15,
-      "rank_change": -10,
-      "rank_new": false
-    },
-    {
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "id": "qwen/qwen3.7-max",
       "name": "Qwen: Qwen3.7 Max",
       "provider": "qwen",
@@ -857,7 +595,6 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 46,
-<<<<<<< HEAD
       "speed": 39.0,
       "ttft": 1.648,
       "value_score": 6.6,
@@ -865,87 +602,6 @@
       "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
       "rank": 25,
       "rank_change": -3,
-=======
-      "speed": 38.0,
-      "ttft": 1.647,
-      "value_score": 9.8,
-      "created": 1779376861,
-      "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
-      "rank": 16,
-      "rank_change": 6,
-      "rank_new": false
-    },
-    {
-      "id": "moonshotai/kimi-k2.6",
-      "name": "MoonshotAI: Kimi K2.6",
-      "provider": "moonshotai",
-      "provider_display": "Moonshotai",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.819132,
-        "completion": 3.677587,
-        "cache_read": 0.177306,
-        "blended": 1.2223,
-        "blended_list": 1.5337,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 43,
-      "speed": 41.9,
-      "ttft": 0.578,
-      "value_score": 9.7,
-      "created": 1776699402,
-      "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
-      "rank": 17,
-      "rank_change": 33,
-      "rank_new": false
-    },
-    {
-      "id": "qwen/qwen3.7-plus",
-      "name": "Qwen: Qwen3.7 Plus",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 0.32,
-        "completion": 1.28,
-        "cache_read": 0.064,
-        "blended": 0.4256,
-        "blended_list": 0.56,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 39,
-      "speed": 19.0,
-      "ttft": 1.374,
-      "value_score": 9.4,
-      "created": 1780491783,
-      "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
-      "rank": 18,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "openai/gpt-5",
-      "name": "OpenAI: GPT-5",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 400000,
-      "pricing": {
-        "prompt": 1.25,
-        "completion": 10.0,
-        "cache_read": 0.125,
-        "blended": 2.8469,
-        "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 55,
-      "speed": 44.4,
-      "ttft": 0.746,
-      "value_score": 9.2,
-      "created": 1754587413,
-      "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
-      "rank": 19,
-      "rank_change": 49,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "rank_new": false
     },
     {
@@ -963,15 +619,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 25,
-<<<<<<< HEAD
-      "speed": 78.0,
-      "ttft": 0.668,
-      "value_score": 6.4,
-=======
-      "speed": 71.9,
-      "ttft": 0.668,
-      "value_score": 9.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 76.0,
+      "ttft": 0.661,
+      "value_score": 6.3,
       "created": 1778168828,
       "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
       "rank": 26,
@@ -992,7 +642,6 @@
         "blended_list": 0.56,
         "cache_hit_rate": 0.7
       },
-<<<<<<< HEAD
       "intelligence_score": 39,
       "speed": 19.0,
       "ttft": 1.374,
@@ -1002,41 +651,6 @@
       "rank": 27,
       "rank_change": null,
       "rank_new": true
-=======
-      "intelligence_score": 44,
-      "speed": 30.9,
-      "ttft": 0.515,
-      "value_score": 8.6,
-      "created": 1777000679,
-      "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
-      "rank": 21,
-      "rank_change": -7,
-      "rank_new": false
-    },
-    {
-      "id": "moonshotai/kimi-k2.7-code",
-      "name": "MoonshotAI: Kimi K2.7 Code",
-      "provider": "moonshotai",
-      "provider_display": "Moonshotai",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.964536,
-        "completion": 4.233245,
-        "cache_read": 0.196714,
-        "blended": 1.3786,
-        "blended_list": 1.7817,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 42,
-      "speed": 44.2,
-      "ttft": 0.307,
-      "value_score": 8.5,
-      "created": 1781266361,
-      "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
-      "rank": 22,
-      "rank_change": 33,
-      "rank_new": false
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
     },
     {
       "id": "google/gemini-3.1-pro-preview",
@@ -1053,15 +667,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 46,
-<<<<<<< HEAD
-      "speed": 86.0,
-      "ttft": 3.121,
-      "value_score": 5.5,
-=======
-      "speed": 85.0,
-      "ttft": 3.121,
-      "value_score": 8.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 87.0,
+      "ttft": 3.098,
+      "value_score": 5.6,
       "created": 1771509627,
       "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
       "rank": 28,
@@ -1069,81 +677,6 @@
       "rank_new": false
     },
     {
-<<<<<<< HEAD
-=======
-      "id": "z-ai/glm-5",
-      "name": "Z.ai: GLM 5",
-      "provider": "z-ai",
-      "provider_display": "Z-Ai",
-      "context_length": 202752,
-      "pricing": {
-        "prompt": 0.872826,
-        "completion": 2.823284,
-        "cache_read": 0.208152,
-        "blended": 1.0115,
-        "blended_list": 1.3604,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 51,
-      "speed": 17.0,
-      "ttft": 0.649,
-      "value_score": 7.9,
-      "created": 1770829182,
-      "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
-      "rank": 24,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "qwen/qwen3.6-27b",
-      "name": "Qwen: Qwen3.6 27B",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.363308,
-        "completion": 2.887613,
-        "cache_read": 0.13939,
-        "blended": 0.942,
-        "blended_list": 0.9944,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 37,
-      "speed": 39.5,
-      "ttft": 0.515,
-      "value_score": 7.6,
-      "created": 1777255064,
-      "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
-      "rank": 25,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
-      "id": "qwen/qwen3.5-122b-a10b",
-      "name": "Qwen: Qwen3.5-122B-A10B",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 262144,
-      "pricing": {
-        "prompt": 0.305013,
-        "completion": 2.440103,
-        "cache_read": 0.3,
-        "blended": 0.8388,
-        "blended_list": 0.8388,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 32,
-      "speed": 51.7,
-      "ttft": 0.676,
-      "value_score": 7.2,
-      "created": 1772053789,
-      "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
-      "rank": 26,
-      "rank_change": null,
-      "rank_new": true
-    },
-    {
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "id": "google/gemini-3.1-pro-preview-customtools",
       "name": "Google: Gemini 3.1 Pro Preview Custom Tools",
       "provider": "google",
@@ -1158,65 +691,11 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 46,
-      "speed": 73.0,
-      "ttft": 3.058,
-<<<<<<< HEAD
-      "value_score": 4.7,
+      "speed": 75.5,
+      "ttft": 3.104,
+      "value_score": 4.8,
       "created": 1772045923,
       "description": "Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that improves tool selection behavior by preventing overuse of a general bash tool when more efficient third-party...",
-=======
-      "value_score": 7.1,
-      "created": 1772045923,
-      "description": "Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that improves tool selection behavior by preventing overuse of a general bash tool when more efficient third-party...",
-      "rank": 27,
-      "rank_change": 29,
-      "rank_new": false
-    },
-    {
-      "id": "z-ai/glm-5.1",
-      "name": "Z.ai: GLM 5.1",
-      "provider": "z-ai",
-      "provider_display": "Z-Ai",
-      "context_length": 202752,
-      "pricing": {
-        "prompt": 1.261978,
-        "completion": 3.998297,
-        "cache_read": 0.247198,
-        "blended": 1.4455,
-        "blended_list": 1.9461,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 40,
-      "speed": 39.4,
-      "ttft": 0.402,
-      "value_score": 6.2,
-      "created": 1775578025,
-      "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
-      "rank": 28,
-      "rank_change": 16,
-      "rank_new": false
-    },
-    {
-      "id": "qwen/qwen3.5-397b-a17b",
-      "name": "Qwen: Qwen3.5 397B A17B",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 256000,
-      "pricing": {
-        "prompt": 0.543824,
-        "completion": 3.440184,
-        "cache_read": 0.288025,
-        "blended": 1.1847,
-        "blended_list": 1.2679,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 34,
-      "speed": 51.8,
-      "ttft": 1.141,
-      "value_score": 6.1,
-      "created": 1771223018,
-      "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "rank": 29,
       "rank_change": 27,
       "rank_new": false
@@ -1236,13 +715,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 51,
-      "speed": 58.0,
-      "ttft": 0.938,
-<<<<<<< HEAD
-      "value_score": 4.1,
-=======
-      "value_score": 4.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 57.0,
+      "ttft": 0.954,
+      "value_score": 4.0,
       "created": 1772734352,
       "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
       "rank": 30,
@@ -1264,13 +739,37 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 30,
-      "speed": 83.0,
-      "ttft": 0.543,
-      "value_score": 3.4,
+      "speed": 88.0,
+      "ttft": 0.515,
+      "value_score": 3.6,
       "created": 1760547638,
       "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
       "rank": 31,
       "rank_change": 49,
+      "rank_new": false
+    },
+    {
+      "id": "anthropic/claude-opus-4.7",
+      "name": "Anthropic: Claude Opus 4.7",
+      "provider": "anthropic",
+      "provider_display": "Anthropic",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 25.0,
+        "cache_read": 0.5,
+        "blended": 7.6375,
+        "blended_list": 10.0,
+        "cache_hit_rate": 0.7
+      },
+      "intelligence_score": 54,
+      "speed": 74.0,
+      "ttft": 1.349,
+      "value_score": 3.6,
+      "created": 1776351100,
+      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
+      "rank": 32,
+      "rank_change": 55,
       "rank_new": false
     },
     {
@@ -1289,52 +788,13 @@
       },
       "intelligence_score": 30,
       "speed": 31.0,
-      "ttft": 0.529,
-<<<<<<< HEAD
+      "ttft": 0.548,
       "value_score": 3.2,
-=======
-      "value_score": 4.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "created": 1746627341,
       "description": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8× lower cost...",
-      "rank": 32,
+      "rank": 33,
       "rank_change": null,
       "rank_new": true
-    },
-    {
-      "id": "anthropic/claude-opus-4.7",
-      "name": "Anthropic: Claude Opus 4.7",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "cache_read": 0.5,
-        "blended": 7.6375,
-        "blended_list": 10.0,
-        "cache_hit_rate": 0.7
-      },
-<<<<<<< HEAD
-      "intelligence_score": 54,
-      "speed": 64.0,
-      "ttft": 2.091,
-      "value_score": 3.1,
-      "created": 1776351100,
-      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
-      "rank": 33,
-      "rank_change": 54,
-=======
-      "intelligence_score": 30,
-      "speed": 69.7,
-      "ttft": 0.655,
-      "value_score": 4.4,
-      "created": 1760547638,
-      "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
-      "rank": 32,
-      "rank_change": 48,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "rank_new": false
     },
     {
       "id": "anthropic/claude-opus-4.8",
@@ -1351,15 +811,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 56,
-<<<<<<< HEAD
       "speed": 55.0,
-      "ttft": 1.468,
+      "ttft": 1.445,
       "value_score": 3.0,
-=======
-      "speed": 51.2,
-      "ttft": 1.462,
-      "value_score": 4.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "created": 1779905091,
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "rank": 34,
@@ -1381,7 +835,6 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 56,
-<<<<<<< HEAD
       "speed": 93.0,
       "ttft": 1.893,
       "value_score": 2.5,
@@ -1389,63 +842,6 @@
       "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "rank": 35,
       "rank_change": 63,
-=======
-      "speed": 100.0,
-      "ttft": 1.948,
-      "value_score": 4.1,
-      "created": 1779913703,
-      "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
-      "rank": 34,
-      "rank_change": 64,
-      "rank_new": false
-    },
-    {
-      "id": "anthropic/claude-opus-4.7",
-      "name": "Anthropic: Claude Opus 4.7",
-      "provider": "anthropic",
-      "provider_display": "Anthropic",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 5.0,
-        "completion": 25.0,
-        "cache_read": 0.5,
-        "blended": 7.6375,
-        "blended_list": 10.0,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 54,
-      "speed": 47.9,
-      "ttft": 2.091,
-      "value_score": 3.5,
-      "created": 1776351100,
-      "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
-      "rank": 35,
-      "rank_change": 52,
-      "rank_new": false
-    },
-    {
-      "id": "qwen/qwen3.6-plus",
-      "name": "Qwen: Qwen3.6 Plus",
-      "provider": "qwen",
-      "provider_display": "Qwen",
-      "context_length": 1000000,
-      "pricing": {
-        "prompt": 0.325,
-        "completion": 1.95,
-        "cache_read": null,
-        "blended": 0.7312,
-        "blended_list": 0.7312,
-        "cache_hit_rate": null
-      },
-      "intelligence_score": 40,
-      "speed": 11.0,
-      "ttft": 1.025,
-      "value_score": 3.4,
-      "created": 1775133557,
-      "description": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...",
-      "rank": 36,
-      "rank_change": 10,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "rank_new": false
     },
     {
@@ -1463,15 +859,9 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 47,
-<<<<<<< HEAD
       "speed": 47.0,
       "ttft": 1.309,
       "value_score": 2.5,
-=======
-      "speed": 41.6,
-      "ttft": 1.309,
-      "value_score": 3.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "created": 1771342990,
       "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
       "rank": 36,
@@ -1519,11 +909,7 @@
       "intelligence_score": 43,
       "speed": 9.0,
       "ttft": 1.522,
-<<<<<<< HEAD
       "value_score": 1.7,
-=======
-      "value_score": 2.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "created": 1752263252,
       "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for...",
       "rank": 38,
@@ -1531,23 +917,22 @@
       "rank_new": true
     },
     {
-<<<<<<< HEAD
       "id": "openai/gpt-5.5",
       "name": "OpenAI: GPT-5.5",
       "provider": "openai",
       "provider_display": "OpenAI",
       "context_length": 1050000,
       "pricing": {
-        "prompt": 5.168145,
-        "completion": 31.008868,
-        "cache_read": 0.516814,
+        "prompt": 5.168149,
+        "completion": 31.008893,
+        "cache_read": 0.516815,
         "blended": 9.1864,
         "blended_list": 11.6283,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 55,
       "speed": 36.0,
-      "ttft": 3.498,
+      "ttft": 3.441,
       "value_score": 1.5,
       "created": 1777051893,
       "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
@@ -1556,8 +941,6 @@
       "rank_new": false
     },
     {
-=======
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "id": "mistralai/mistral-medium-3-5",
       "name": "Mistral: Mistral Medium 3.5",
       "provider": "mistralai",
@@ -1572,49 +955,16 @@
         "cache_hit_rate": null
       },
       "intelligence_score": 30,
-<<<<<<< HEAD
-      "speed": 54.0,
-      "ttft": 1.008,
-      "value_score": 1.1,
-=======
       "speed": 55.0,
       "ttft": 0.964,
-      "value_score": 1.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "value_score": 1.2,
       "created": 1777570439,
       "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
-      "rank": 39,
+      "rank": 40,
       "rank_change": null,
       "rank_new": true
     },
     {
-<<<<<<< HEAD
-=======
-      "id": "openai/gpt-5.5",
-      "name": "OpenAI: GPT-5.5",
-      "provider": "openai",
-      "provider_display": "OpenAI",
-      "context_length": 1050000,
-      "pricing": {
-        "prompt": 5.168145,
-        "completion": 31.008868,
-        "cache_read": 0.516814,
-        "blended": 9.1864,
-        "blended_list": 11.6283,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 55,
-      "speed": 27.3,
-      "ttft": 3.498,
-      "value_score": 1.8,
-      "created": 1777051893,
-      "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
-      "rank": 40,
-      "rank_change": 45,
-      "rank_new": false
-    },
-    {
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "id": "openai/gpt-5.5-pro",
       "name": "OpenAI: GPT-5.5 Pro",
       "provider": "openai",
@@ -1677,13 +1027,9 @@
         "cache_hit_rate": null
       },
       "intelligence_score": 51,
-<<<<<<< HEAD
-      "speed": 17.5,
-=======
-      "speed": 10.7,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 5.33,
-      "value_score": 0.1,
+      "speed": 2.0,
+      "ttft": 5.159,
+      "value_score": 0.0,
       "created": 1772734366,
       "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
       "rank": 43,
@@ -1769,15 +1115,15 @@
       "provider_display": "Nex-Agi",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.375001,
-        "completion": 1.750005,
-        "cache_read": 0.137501,
+        "prompt": 0.375005,
+        "completion": 1.750028,
+        "cache_read": 0.137504,
         "blended": 0.5941,
         "blended_list": 0.7188,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 80.0,
+      "speed": 81.0,
       "ttft": 0.919,
       "value_score": null,
       "created": 1780937140,
@@ -1826,7 +1172,7 @@
       },
       "intelligence_score": null,
       "speed": 127.0,
-      "ttft": 0.629,
+      "ttft": 0.604,
       "value_score": null,
       "created": 1779298123,
       "description": "Grok Build 0.1 is xAI’s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding...",
@@ -1873,8 +1219,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 59.0,
-      "ttft": 1.368,
+      "speed": 57.5,
+      "ttft": 1.377,
       "value_score": null,
       "created": 1778000212,
       "description": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates...",
@@ -2161,8 +1507,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 76.0,
-      "ttft": 0.793,
+      "speed": 75.0,
+      "ttft": 0.789,
       "value_score": null,
       "created": 1777261362,
       "description": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in...",
@@ -2185,8 +1531,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 31.0,
-      "ttft": 1.69,
+      "speed": 30.0,
+      "ttft": 1.728,
       "value_score": null,
       "created": 1777260242,
       "description": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and...",
@@ -2209,8 +1555,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 73.5,
-      "ttft": 2.407,
+      "speed": 65.5,
+      "ttft": 2.503,
       "value_score": null,
       "created": 1776948238,
       "description": "Ling-2.6-1T is an instant (instruct) model from inclusionAI and the company’s trillion-parameter flagship, designed for real-world agents that require fast execution and high efficiency at scale. It uses a “fast...",
@@ -2233,11 +1579,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 41.0,
-=======
-      "speed": 40.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 3.306,
       "value_score": null,
       "created": 1776878150,
@@ -2429,8 +1771,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 546.0,
-      "ttft": 7.398,
+      "speed": 540.5,
+      "ttft": 7.258,
       "value_score": null,
       "created": 1774979158,
       "description": "Grok 4.20 Multi-Agent is a variant of xAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
@@ -2453,8 +1795,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 108.0,
-      "ttft": 0.572,
+      "speed": 113.0,
+      "ttft": 0.554,
       "value_score": null,
       "created": 1774979019,
       "description": "Grok 4.20 is a reasoning model from xAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering...",
@@ -2477,8 +1819,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 20.0,
-      "ttft": 0.637,
+      "speed": 44.0,
+      "ttft": 0.98,
       "value_score": null,
       "created": 1774649310,
       "description": "KAT-Coder-Pro V2 is the latest high-performance model in KwaiKAT’s KAT-Coder series, designed for complex enterprise-grade software engineering and SaaS integration. It builds on the agentic coding strengths of earlier versions,...",
@@ -2501,8 +1843,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 11.0,
-      "ttft": 1.232,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1774026965,
       "description": "Reka Edge is an extremely efficient 7B multimodal vision-language model that accepts image/video+text inputs and generates text outputs. This model is optimized specifically to deliver industry-leading performance in image understanding,...",
@@ -2525,11 +1867,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 104.0,
-=======
-      "speed": 76.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.418,
       "value_score": null,
       "created": 1773695685,
@@ -2553,12 +1891,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 19.0,
-=======
-      "speed": 10.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 2.929,
+      "ttft": 2.865,
       "value_score": null,
       "created": 1773583573,
       "description": "GLM-5 Turbo is a new model from Z.ai designed for fast inference and strong performance in agent-driven environments such as OpenClaw scenarios. It is deeply optimized for real-world agent workflows...",
@@ -2606,7 +1940,7 @@
       },
       "intelligence_score": null,
       "speed": 58.0,
-      "ttft": 1.274,
+      "ttft": 1.302,
       "value_score": null,
       "created": 1773157231,
       "description": "Seed-2.0-Lite is a versatile, cost‑efficient enterprise workhorse that delivers strong multimodal and agent capabilities while offering noticeably lower latency, making it a practical default choice for most production workloads across...",
@@ -2653,8 +1987,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 459.0,
-      "ttft": 0.339,
+      "speed": 462.0,
+      "ttft": 0.33,
       "value_score": null,
       "created": 1772636275,
       "description": "Mercury 2 is an extremely fast reasoning LLM, and the first reasoning diffusion LLM (dLLM). Instead of generating tokens sequentially, Mercury 2 produces and refines multiple tokens in parallel, achieving...",
@@ -2677,12 +2011,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 48.0,
-=======
-      "speed": 41.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 1.154,
+      "ttft": 1.155,
       "value_score": null,
       "created": 1772564061,
       "description": "GPT-5.3 Chat is an update to ChatGPT's most-used model that makes everyday conversations smoother, more useful, and more directly helpful. It delivers more accurate answers with better contextualization and significantly...",
@@ -2721,20 +2051,16 @@
       "provider_display": "Qwen",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.199891,
-        "completion": 1.340933,
-        "cache_read": 0.120972,
+        "prompt": 0.199893,
+        "completion": 1.340959,
+        "cache_read": 0.120973,
         "blended": 0.4622,
         "blended_list": 0.4852,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 110.0,
-=======
-      "speed": 63.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.472,
+      "speed": 112.0,
+      "ttft": 0.453,
       "value_score": null,
       "created": 1772053822,
       "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
@@ -2757,11 +2083,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 26.0,
-=======
-      "speed": 18.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 1.627,
       "value_score": null,
       "created": 1772053810,
@@ -2785,8 +2107,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 68.0,
-      "ttft": 0.619,
+      "speed": 67.0,
+      "ttft": 0.625,
       "value_score": null,
       "created": 1772053776,
       "description": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the...",
@@ -2833,8 +2155,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 56.0,
-      "ttft": 3.05,
+      "speed": 61.0,
+      "ttft": 2.964,
       "value_score": null,
       "created": 1771959164,
       "description": "GPT-5.3-Codex is OpenAI’s most advanced agentic coding model, combining the frontier software engineering performance of GPT-5.2-Codex with the broader reasoning and professional knowledge capabilities of GPT-5.2. It achieves state-of-the-art results...",
@@ -2897,20 +2219,16 @@
       "provider_display": "Minimax",
       "context_length": 204800,
       "pricing": {
-        "prompt": 0.270036,
-        "completion": 1.243618,
-        "cache_read": 0.092092,
+        "prompt": 0.27003,
+        "completion": 1.243583,
+        "cache_read": 0.092096,
         "blended": 0.4327,
         "blended_list": 0.5134,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 154.0,
-=======
-      "speed": 57.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.57,
+      "speed": 150.0,
+      "ttft": 0.626,
       "value_score": null,
       "created": 1770908502,
       "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
@@ -2957,11 +2275,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 41.0,
-=======
-      "speed": 37.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 2.167,
       "value_score": null,
       "created": 1770219050,
@@ -2977,20 +2291,16 @@
       "provider_display": "Qwen",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.169963,
-        "completion": 1.137142,
-        "cache_read": 0.095294,
-        "blended": 0.3863,
-        "blended_list": 0.4118,
+        "prompt": 0.158108,
+        "completion": 1.070488,
+        "cache_read": 0.089041,
+        "blended": 0.3616,
+        "blended_list": 0.3862,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 67.0,
-=======
-      "speed": 38.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.571,
+      "speed": 72.0,
+      "ttft": 0.52,
       "value_score": null,
       "created": 1770164101,
       "description": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per...",
@@ -3013,8 +2323,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 55.0,
-      "ttft": 0.343,
+      "speed": 52.0,
+      "ttft": 0.354,
       "value_score": null,
       "created": 1769728337,
       "description": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token....",
@@ -3029,21 +2339,16 @@
       "provider_display": "Moonshotai",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.496736,
-        "completion": 2.539178,
-        "cache_read": 0.134895,
+        "prompt": 0.496733,
+        "completion": 2.539165,
+        "cache_read": 0.134892,
         "blended": 0.8291,
         "blended_list": 1.0073,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 100.5,
-      "ttft": 0.345,
-=======
-      "speed": 35.1,
-      "ttft": 0.352,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 109.0,
+      "ttft": 0.349,
       "value_score": null,
       "created": 1769487076,
       "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
@@ -3091,7 +2396,7 @@
       },
       "intelligence_score": null,
       "speed": 23.0,
-      "ttft": 1.207,
+      "ttft": 1.224,
       "value_score": null,
       "created": 1769177239,
       "description": "MiniMax M2-her is a dialogue-first large language model built for immersive roleplay, character-driven chat, and expressive multi-turn conversations. Designed to stay consistent in tone and personality, it supports rich message...",
@@ -3138,8 +2443,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 70.0,
-      "ttft": 0.612,
+      "speed": 75.0,
+      "ttft": 0.575,
       "value_score": null,
       "created": 1768862569,
       "description": "The gpt-audio model is OpenAI's first generally available audio model. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Audio is priced...",
@@ -3162,8 +2467,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 88.0,
-      "ttft": 1.006,
+      "speed": 87.0,
+      "ttft": 1.03,
       "value_score": null,
       "created": 1768859419,
       "description": "A cost-efficient version of GPT Audio. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Input is priced at $0.60 per million...",
@@ -3186,13 +2491,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 45.0,
-      "ttft": 0.326,
-=======
-      "speed": 32.7,
+      "speed": 46.5,
       "ttft": 0.321,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "value_score": null,
       "created": 1768833913,
       "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
@@ -3215,12 +2515,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 70.0,
-=======
-      "speed": 69.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.292,
+      "speed": 57.0,
+      "ttft": 1.56,
       "value_score": null,
       "created": 1768409315,
       "description": "GPT-5.2-Codex is an upgraded version of GPT-5.1-Codex optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
@@ -3244,7 +2540,7 @@
       },
       "intelligence_score": null,
       "speed": 53.0,
-      "ttft": 0.837,
+      "ttft": 0.844,
       "value_score": null,
       "created": 1766505011,
       "description": "Seed 1.6 Flash is an ultra-fast multimodal deep thinking model by ByteDance Seed, supporting both text and visual understanding. It features a 256k context window and can generate outputs of...",
@@ -3268,7 +2564,7 @@
       },
       "intelligence_score": null,
       "speed": 45.0,
-      "ttft": 0.682,
+      "ttft": 0.679,
       "value_score": null,
       "created": 1766504997,
       "description": "Seed 1.6 is a general-purpose model released by the ByteDance Seed team. It incorporates multimodal capabilities and adaptive deep thinking with a 256K context window.",
@@ -3283,20 +2579,16 @@
       "provider_display": "Minimax",
       "context_length": 204800,
       "pricing": {
-        "prompt": 0.297527,
-        "completion": 1.437897,
+        "prompt": 0.297525,
+        "completion": 1.437762,
         "cache_read": 0.03,
-        "blended": 0.4422,
+        "blended": 0.4421,
         "blended_list": 0.5826,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 92.0,
-=======
-      "speed": 40.1,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 1.389,
+      "speed": 88.5,
+      "ttft": 1.394,
       "value_score": null,
       "created": 1766454997,
       "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world...",
@@ -3319,11 +2611,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 349.5,
-=======
-      "speed": 127.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.479,
       "value_score": null,
       "created": 1766378014,
@@ -3348,7 +2636,7 @@
       },
       "intelligence_score": null,
       "speed": 60.0,
-      "ttft": 1.198,
+      "ttft": 1.194,
       "value_score": null,
       "created": 1765987078,
       "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
@@ -3396,7 +2684,7 @@
       },
       "intelligence_score": null,
       "speed": 57.0,
-      "ttft": 1.14,
+      "ttft": 1.183,
       "value_score": null,
       "created": 1765389783,
       "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
@@ -3443,12 +2731,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 47.0,
-=======
-      "speed": 41.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 2.051,
+      "ttft": 2.038,
       "value_score": null,
       "created": 1765389775,
       "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
@@ -3471,8 +2755,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 39.0,
-      "ttft": 1.735,
+      "speed": 42.0,
+      "ttft": 1.458,
       "value_score": null,
       "created": 1765285419,
       "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
@@ -3519,8 +2803,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 9.0,
-      "ttft": 2.872,
+      "speed": 13.0,
+      "ttft": 2.659,
       "value_score": null,
       "created": 1765207462,
       "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts...",
@@ -3543,8 +2827,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 133.0,
-      "ttft": 6.524,
+      "speed": 165.0,
+      "ttft": 6.343,
       "value_score": null,
       "created": 1764878934,
       "description": "GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks. It is based on an updated version of the 5.1 reasoning stack and trained on agentic...",
@@ -3567,12 +2851,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 109.0,
-=======
-      "speed": 68.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.432,
+      "speed": 108.0,
+      "ttft": 0.499,
       "value_score": null,
       "created": 1764696672,
       "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text. Nova 2 Lite demonstrates standout capabilities in processing...",
@@ -3595,11 +2875,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 43.0,
-=======
-      "speed": 34.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.356,
       "value_score": null,
       "created": 1764681735,
@@ -3615,19 +2891,15 @@
       "provider_display": "Mistralai",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.224527,
-        "completion": 0.224527,
+        "prompt": 0.224526,
+        "completion": 0.224526,
         "cache_read": 0.015,
         "blended": 0.1889,
         "blended_list": 0.2245,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 37.0,
-=======
-      "speed": 31.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 34.0,
       "ttft": 0.317,
       "value_score": null,
       "created": 1764681654,
@@ -3651,12 +2923,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 150.0,
-=======
-      "speed": 118.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.263,
+      "speed": 139.0,
+      "ttft": 0.27,
       "value_score": null,
       "created": 1764681560,
       "description": "The smallest model in the Ministral 3 family, Ministral 3 3B is a powerful, efficient tiny language model with vision capabilities.",
@@ -3679,8 +2947,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 16,
-      "speed": 32.0,
-      "ttft": 1.161,
+      "speed": 34.0,
+      "ttft": 0.963,
       "value_score": null,
       "created": 1764624472,
       "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
@@ -3727,11 +2995,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 52.0,
-=======
-      "speed": 23.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.87,
       "value_score": null,
       "created": 1764594642,
@@ -3755,13 +3019,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 50.0,
-      "ttft": 0.755,
-=======
-      "speed": 43.8,
-      "ttft": 0.765,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "ttft": 0.776,
       "value_score": null,
       "created": 1764010580,
       "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
@@ -3832,12 +3091,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 59.0,
-=======
-      "speed": 47.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.776,
+      "speed": 54.0,
+      "ttft": 0.787,
       "value_score": null,
       "created": 1763060305,
       "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
@@ -3854,14 +3109,14 @@
       "pricing": {
         "prompt": 1.25,
         "completion": 10.0,
-        "cache_read": 0.127496,
+        "cache_read": 0.127495,
         "blended": 2.8482,
         "blended_list": 3.4375,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
       "speed": 66.0,
-      "ttft": 1.012,
+      "ttft": 1.008,
       "value_score": null,
       "created": 1763060302,
       "description": "GPT-5.1 Chat (AKA Instant is the fast, lightweight member of the 5.1 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
@@ -3884,11 +3139,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 80.0,
-=======
-      "speed": 79.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 2.967,
       "value_score": null,
       "created": 1763060298,
@@ -3906,14 +3157,14 @@
       "pricing": {
         "prompt": 0.25,
         "completion": 2.0,
-        "cache_read": 0.02745,
+        "cache_read": 0.027451,
         "blended": 0.5707,
         "blended_list": 0.6875,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 122.0,
-      "ttft": 1.88,
+      "speed": 123.0,
+      "ttft": 1.992,
       "value_score": null,
       "created": 1763057820,
       "description": "GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex",
@@ -3930,19 +3181,14 @@
       "pricing": {
         "prompt": 0.6,
         "completion": 2.5,
-        "cache_read": 0.377373,
+        "cache_read": 0.377387,
         "blended": 0.9982,
         "blended_list": 1.075,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 160.0,
-      "ttft": 0.414,
-=======
-      "speed": 77.9,
-      "ttft": 0.445,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "ttft": 0.441,
       "value_score": null,
       "created": 1762440622,
       "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
@@ -3966,7 +3212,7 @@
       },
       "intelligence_score": null,
       "speed": 36.0,
-      "ttft": 0.435,
+      "ttft": 0.441,
       "value_score": null,
       "created": 1761950332,
       "description": "Amazon Nova Premier is the most capable of Amazon’s multimodal models for complex reasoning tasks and for use as the best teacher for distilling custom models.",
@@ -4013,8 +3259,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 66.0,
-      "ttft": 0.39,
+      "speed": 71.0,
+      "ttft": 0.395,
       "value_score": null,
       "created": 1761835144,
       "description": "Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art audio input capabilities while retaining best-in-class text performance. It excels at speech transcription, translation and audio understanding. Input audio...",
@@ -4037,8 +3283,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 631.0,
-      "ttft": 0.208,
+      "speed": 628.0,
+      "ttft": 0.209,
       "value_score": null,
       "created": 1761752836,
       "description": "gpt-oss-safeguard-20b is a safety reasoning model from OpenAI built upon gpt-oss-20b. This open-weight, 21B-parameter Mixture-of-Experts (MoE) model offers lower latency for safety tasks like content classification, LLM filtering, and trust...",
@@ -4061,8 +3307,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 56.0,
-      "ttft": 0.619,
+      "speed": 55.0,
+      "ttft": 0.623,
       "value_score": null,
       "created": 1761231332,
       "description": "Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model designed for high-precision understanding and reasoning across text, images, and video. With 32 billion parameters, it combines deep visual perception with advanced text...",
@@ -4109,8 +3355,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 184.0,
-      "ttft": 0.411,
+      "speed": 191.0,
+      "ttft": 0.406,
       "value_score": null,
       "created": 1760726049,
       "description": "Phi-4-mini-instruct is a lightweight open model built upon synthetic data and filtered publicly available websites - with a focus on high-quality, reasoning dense data. The model belongs to the Phi-4...",
@@ -4150,19 +3396,15 @@
       "context_length": 256000,
       "pricing": {
         "prompt": 0.132005,
-        "completion": 0.551475,
+        "completion": 0.551474,
         "cache_read": 0.100019,
         "blended": 0.2197,
         "blended_list": 0.2369,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 66.0,
-=======
-      "speed": 32.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.467,
+      "speed": 63.0,
+      "ttft": 0.448,
       "value_score": null,
       "created": 1760463308,
       "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon...",
@@ -4233,8 +3475,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 49.0,
-      "ttft": 0.23,
+      "speed": 48.5,
+      "ttft": 0.224,
       "value_score": null,
       "created": 1760101395,
       "description": "Llama-3.3-Nemotron-Super-49B-v1.5 is a 49B-parameter, English-centric reasoning/chat model derived from Meta’s Llama-3.3-70B-Instruct with a 128K context. It’s post-trained for agentic workflows (RAG, tool calling) via SFT across math, code, science, and...",
@@ -4249,7 +3491,7 @@
       "provider_display": "Qwen",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.206517,
+        "prompt": 0.206516,
         "completion": 1.189791,
         "cache_read": null,
         "blended": 0.4523,
@@ -4257,12 +3499,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 123.0,
-=======
-      "speed": 75.7,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.535,
+      "speed": 124.0,
+      "ttft": 0.546,
       "value_score": null,
       "created": 1759794479,
       "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels...",
@@ -4285,11 +3523,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 52.0,
-=======
-      "speed": 27.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.457,
       "value_score": null,
       "created": 1759794476,
@@ -4313,8 +3547,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 4.0,
-      "ttft": 80.724,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1759776663,
       "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
@@ -4329,20 +3563,16 @@
       "provider_display": "Z-Ai",
       "context_length": 202752,
       "pricing": {
-        "prompt": 0.621188,
-        "completion": 2.223365,
-        "cache_read": 0.152919,
-        "blended": 0.7759,
-        "blended_list": 1.0217,
+        "prompt": 0.626188,
+        "completion": 2.228854,
+        "cache_read": 0.163076,
+        "blended": 0.7837,
+        "blended_list": 1.0269,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 40.0,
-=======
-      "speed": 23.8,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.714,
+      "ttft": 0.711,
       "value_score": null,
       "created": 1759235576,
       "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
@@ -4365,11 +3595,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 39.0,
-=======
-      "speed": 37.6,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.927,
       "value_score": null,
       "created": 1759161676,
@@ -4393,13 +3619,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 19.0,
-      "ttft": 1.473,
-=======
-      "speed": 10.7,
-      "ttft": 1.479,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "speed": 18.0,
+      "ttft": 1.483,
       "value_score": null,
       "created": 1759150481,
       "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
@@ -4422,8 +3643,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 41.0,
-      "ttft": 0.84,
+      "speed": 39.0,
+      "ttft": 0.88,
       "value_score": null,
       "created": 1758931878,
       "description": "Uncensored and creative writing model based on Mistral Small 3.2 24B with good recall, prompt adherence, and intelligence.",
@@ -4446,8 +3667,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 1325.0,
-      "ttft": 0.716,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1758891572,
       "description": "Relace Apply 3 is a specialized code-patching LLM that merges AI-suggested edits straight into your source files. It can apply updates from GPT-4o, Claude, and others into your files at...",
@@ -4494,11 +3715,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 58.0,
-=======
-      "speed": 41.6,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.661,
       "value_score": null,
       "created": 1758668690,
@@ -4514,20 +3731,16 @@
       "provider_display": "Qwen",
       "context_length": 262144,
       "pricing": {
-        "prompt": 0.23904,
-        "completion": 1.4765,
+        "prompt": 0.239054,
+        "completion": 1.476528,
         "cache_read": 0.1,
-        "blended": 0.5272,
+        "blended": 0.5273,
         "blended_list": 0.5484,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 37.0,
-=======
-      "speed": 31.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.912,
+      "ttft": 0.933,
       "value_score": null,
       "created": 1758668687,
       "description": "Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies strong text generation with visual understanding across images and video. The Instruct model targets general vision-language use (VQA, document parsing, chart/table...",
@@ -4550,8 +3763,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 41.5,
-      "ttft": 1.01,
+      "speed": 42.0,
+      "ttft": 0.995,
       "value_score": null,
       "created": 1758662808,
       "description": "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It...",
@@ -4574,8 +3787,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 27.0,
-      "ttft": 2.368,
+      "speed": 22.5,
+      "ttft": 2.232,
       "value_score": null,
       "created": 1758662707,
       "description": "Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in autonomous programming via tool calling and...",
@@ -4598,8 +3811,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 52.0,
-      "ttft": 2.102,
+      "speed": 53.0,
+      "ttft": 2.181,
       "value_score": null,
       "created": 1758643403,
       "description": "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
@@ -4614,20 +3827,16 @@
       "provider_display": "DeepSeek",
       "context_length": 163840,
       "pricing": {
-        "prompt": 0.290773,
-        "completion": 0.985504,
+        "prompt": 0.290774,
+        "completion": 0.985503,
         "cache_read": 0.131667,
         "blended": 0.4171,
         "blended_list": 0.4645,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 68.0,
-=======
-      "speed": 34.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.631,
+      "speed": 69.0,
+      "ttft": 0.626,
       "value_score": null,
       "created": 1758548275,
       "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
@@ -4667,19 +3876,15 @@
       "context_length": 262144,
       "pricing": {
         "prompt": 0.139539,
-        "completion": 1.236253,
+        "completion": 1.236249,
         "cache_read": 0.15,
         "blended": 0.4137,
         "blended_list": 0.4137,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 205.5,
-=======
-      "speed": 159.6,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.346,
+      "ttft": 0.496,
       "value_score": null,
       "created": 1757612284,
       "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
@@ -4726,8 +3931,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 59.0,
-      "ttft": 0.443,
+      "speed": 57.0,
+      "ttft": 0.583,
       "value_score": null,
       "created": 1757347599,
       "description": "Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context hybrid reasoning model with a balanced performance, speed, and cost combination.",
@@ -4774,8 +3979,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 118.5,
-      "ttft": 0.384,
+      "speed": 121.0,
+      "ttft": 0.376,
       "value_score": null,
       "created": 1756399192,
       "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated...",
@@ -4822,8 +4027,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 32.5,
-      "ttft": 0.404,
+      "speed": 33.0,
+      "ttft": 0.318,
       "value_score": null,
       "created": 1756235463,
       "description": "Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B and released by Nous Research. It introduces a hybrid reasoning mode, where the model can choose to deliberate internally with...",
@@ -4846,11 +4051,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 81.0,
-=======
-      "speed": 30.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.412,
       "value_score": null,
       "created": 1755779628,
@@ -4874,8 +4075,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 61.0,
-      "ttft": 0.442,
+      "speed": 60.0,
+      "ttft": 0.439,
       "value_score": null,
       "created": 1755095639,
       "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
@@ -4898,8 +4099,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 28.0,
-      "ttft": 4.994,
+      "speed": 31.0,
+      "ttft": 3.67,
       "value_score": null,
       "created": 1754922288,
       "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding,...",
@@ -4946,7 +4147,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 31.0,
+      "speed": 32.0,
       "ttft": 0.472,
       "value_score": null,
       "created": 1754587837,
@@ -4994,12 +4195,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 89.0,
-=======
-      "speed": 79.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 2.081,
+      "speed": 87.0,
+      "ttft": 2.123,
       "value_score": null,
       "created": 1754587402,
       "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
@@ -5070,8 +4267,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 22.0,
-      "ttft": 1.839,
+      "speed": 3.0,
+      "ttft": 3.196,
       "value_score": null,
       "created": 1754411591,
       "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
@@ -5110,20 +4307,16 @@
       "provider_display": "Qwen",
       "context_length": 160000,
       "pricing": {
-        "prompt": 0.270039,
-        "completion": 1.141114,
+        "prompt": 0.270042,
+        "completion": 1.141127,
         "cache_read": null,
         "blended": 0.4878,
         "blended_list": 0.4878,
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 58.0,
-=======
-      "speed": 55.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.488,
+      "speed": 64.0,
+      "ttft": 0.532,
       "value_score": null,
       "created": 1753972379,
       "description": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the...",
@@ -5146,11 +4339,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 100.0,
-=======
-      "speed": 53.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.375,
       "value_score": null,
       "created": 1753806965,
@@ -5175,7 +4364,7 @@
       },
       "intelligence_score": null,
       "speed": 22.0,
-      "ttft": 3.526,
+      "ttft": 3.232,
       "value_score": null,
       "created": 1753471347,
       "description": "GLM-4.5 is our latest flagship foundation model, purpose-built for agent-based applications. It leverages a Mixture-of-Experts (MoE) architecture and supports a context length of up to 128k tokens. GLM-4.5 delivers significantly...",
@@ -5190,20 +4379,16 @@
       "provider_display": "Z-Ai",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.16491,
-        "completion": 0.97468,
+        "prompt": 0.164912,
+        "completion": 0.974684,
         "cache_read": 0.027494,
         "blended": 0.2952,
         "blended_list": 0.3674,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 24.0,
-=======
-      "speed": 22.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 1.361,
+      "speed": 22.0,
+      "ttft": 1.387,
       "value_score": null,
       "created": 1753471258,
       "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter...",
@@ -5274,8 +4459,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 18.0,
-      "ttft": 0.84,
+      "speed": 20.0,
+      "ttft": 0.772,
       "value_score": null,
       "created": 1753205056,
       "description": "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement...",
@@ -5298,12 +4483,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 100.0,
-=======
-      "speed": 87.7,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.365,
+      "ttft": 0.366,
       "value_score": null,
       "created": 1753200276,
       "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
@@ -5350,8 +4531,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 5.0,
-      "ttft": 1.479,
+      "speed": 2.0,
+      "ttft": 1.574,
       "value_score": null,
       "created": 1752272899,
       "description": "Switchpoint AI's router instantly analyzes your request and directs it to the optimal AI from an ever-evolving library. As the world of LLMs advances, our router gets smarter, ensuring you...",
@@ -5398,7 +4579,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 2407.0,
+      "speed": 2380.0,
       "ttft": 0.487,
       "value_score": null,
       "created": 1751910858,
@@ -5422,8 +4603,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 173.0,
-      "ttft": 0.224,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1751910002,
       "description": "Morph's fastest apply model for code edits. ~10,500 tokens/sec with 96% accuracy for rapid code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code> <update>{edit_snippet}</update>...",
@@ -5446,8 +4627,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 9.0,
-      "ttft": 1.356,
+      "speed": 10.0,
+      "ttft": 1.437,
       "value_score": null,
       "created": 1751300903,
       "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data...",
@@ -5470,12 +4651,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 80.0,
-=======
-      "speed": 54.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.349,
+      "speed": 75.0,
+      "ttft": 0.351,
       "value_score": null,
       "created": 1750443016,
       "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on...",
@@ -5498,12 +4675,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 19.5,
-=======
-      "speed": 16.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.909,
+      "speed": 20.0,
+      "ttft": 0.744,
       "value_score": null,
       "created": 1750200414,
       "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it...",
@@ -5550,11 +4723,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 117.5,
-=======
-      "speed": 100.3,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 2.256,
       "value_score": null,
       "created": 1750169544,
@@ -5602,8 +4771,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 117.5,
-      "ttft": 2.256,
+      "speed": 124.0,
+      "ttft": 2.235,
       "value_score": null,
       "created": 1749137257,
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
@@ -5618,7 +4787,7 @@
       "provider_display": "DeepSeek",
       "context_length": 163840,
       "pricing": {
-        "prompt": 0.564641,
+        "prompt": 0.56464,
         "completion": 2.253695,
         "cache_read": 0.35,
         "blended": 0.9129,
@@ -5626,12 +4795,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 86.0,
-=======
-      "speed": 35.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.539,
+      "speed": 90.0,
+      "ttft": 0.54,
       "value_score": null,
       "created": 1748455170,
       "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active...",
@@ -5654,8 +4819,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 8.0,
-      "ttft": 1.812,
+      "speed": 16.0,
+      "ttft": 1.8,
       "value_score": null,
       "created": 1747931245,
       "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
@@ -5703,7 +4868,7 @@
       },
       "intelligence_score": null,
       "speed": 34.0,
-      "ttft": 0.347,
+      "ttft": 0.357,
       "value_score": null,
       "created": 1747776824,
       "description": "Gemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks...",
@@ -5726,13 +4891,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 110.0,
-      "ttft": 2.28,
-=======
-      "speed": 100.3,
+      "speed": 117.5,
       "ttft": 2.256,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "value_score": null,
       "created": 1746578513,
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
@@ -5803,11 +4963,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 19.0,
-=======
-      "speed": 14.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.119,
       "value_score": null,
       "created": 1745975193,
@@ -5823,16 +4979,16 @@
       "provider_display": "Qwen",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.129834,
-        "completion": 0.522889,
+        "prompt": 0.125006,
+        "completion": 0.510013,
         "cache_read": null,
-        "blended": 0.2281,
-        "blended_list": 0.2281,
+        "blended": 0.2213,
+        "blended_list": 0.2213,
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 60.5,
-      "ttft": 0.185,
+      "speed": 103.0,
+      "ttft": 0.196,
       "value_score": null,
       "created": 1745878604,
       "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
@@ -5855,12 +5011,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 50.0,
-=======
-      "speed": 33.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.791,
+      "ttft": 0.796,
       "value_score": null,
       "created": 1745876632,
       "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math,...",
@@ -5900,19 +5052,15 @@
       "context_length": 131072,
       "pricing": {
         "prompt": 0.135668,
-        "completion": 0.559159,
+        "completion": 0.559157,
         "cache_read": 0.122519,
         "blended": 0.2288,
         "blended_list": 0.2415,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 423.0,
-=======
-      "speed": 105.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.278,
+      "speed": 428.0,
+      "ttft": 0.297,
       "value_score": null,
       "created": 1745875945,
       "description": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
@@ -5935,8 +5083,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 62.0,
-      "ttft": 0.521,
+      "speed": 61.0,
+      "ttft": 0.528,
       "value_score": null,
       "created": 1745875757,
       "description": "Qwen3-235B-A22B is a 235B parameter mixture-of-experts (MoE) model developed by Qwen, activating 22B parameters per forward pass. It supports seamless switching between a \"thinking\" mode for complex reasoning, math, and...",
@@ -5959,7 +5107,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 90.0,
+      "speed": 86.0,
       "ttft": 2.336,
       "value_score": null,
       "created": 1744824212,
@@ -6008,7 +5156,7 @@
       },
       "intelligence_score": null,
       "speed": 110.0,
-      "ttft": 5.388,
+      "ttft": 4.955,
       "value_score": null,
       "created": 1744820942,
       "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
@@ -6031,12 +5179,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 48.0,
-=======
-      "speed": 47.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.652,
+      "speed": 49.0,
+      "ttft": 0.674,
       "value_score": null,
       "created": 1744651385,
       "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
@@ -6059,11 +5203,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 37.0,
-=======
-      "speed": 34.0,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.711,
       "value_score": null,
       "created": 1744651381,
@@ -6081,14 +5221,14 @@
       "pricing": {
         "prompt": 0.1,
         "completion": 0.4,
-        "cache_read": 0.027543,
-        "blended": 0.137,
+        "cache_read": 0.03,
+        "blended": 0.1383,
         "blended_list": 0.175,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 49.0,
-      "ttft": 0.65,
+      "speed": 28.0,
+      "ttft": 1.015,
       "value_score": null,
       "created": 1744651369,
       "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
@@ -6111,12 +5251,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 14,
-<<<<<<< HEAD
-      "speed": 77.0,
-=======
-      "speed": 53.4,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.224,
+      "speed": 75.0,
+      "ttft": 0.221,
       "value_score": null,
       "created": 1743881822,
       "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
@@ -6139,8 +5275,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 10,
-      "speed": 62.0,
-      "ttft": 0.418,
+      "speed": 73.5,
+      "ttft": 0.422,
       "value_score": null,
       "created": 1743881519,
       "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
@@ -6156,7 +5292,7 @@
       "context_length": 163840,
       "pricing": {
         "prompt": 0.256424,
-        "completion": 1.034727,
+        "completion": 1.034724,
         "cache_read": 0.141829,
         "blended": 0.4046,
         "blended_list": 0.451,
@@ -6164,7 +5300,7 @@
       },
       "intelligence_score": null,
       "speed": 23.0,
-      "ttft": 1.361,
+      "ttft": 1.365,
       "value_score": null,
       "created": 1742824755,
       "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
@@ -6187,8 +5323,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 50.0,
-      "ttft": 12.46,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1742423211,
       "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide...",
@@ -6211,8 +5347,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 37.0,
-      "ttft": 0.394,
+      "speed": 33.0,
+      "ttft": 0.375,
       "value_score": null,
       "created": 1742238937,
       "description": "Mistral Small 3.1 24B Instruct is an upgraded variant of Mistral Small 3 (2501), featuring 24 billion parameters with advanced multimodal capabilities. It provides state-of-the-art performance in text-based reasoning and...",
@@ -6235,8 +5371,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 12.0,
-      "ttft": 0.779,
+      "speed": 11.0,
+      "ttft": 0.878,
       "value_score": null,
       "created": 1741905510,
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
@@ -6283,8 +5419,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 46.0,
-      "ttft": 0.292,
+      "speed": 46.5,
+      "ttft": 0.294,
       "value_score": null,
       "created": 1741894342,
       "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary...",
@@ -6307,8 +5443,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 37.0,
-      "ttft": 1.869,
+      "speed": 35.0,
+      "ttft": 1.875,
       "value_score": null,
       "created": 1741818122,
       "description": "GPT-4o mini Search Preview is a specialized model for web search in Chat Completions. It is trained to understand and execute web search queries.",
@@ -6355,8 +5491,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 37.0,
-      "ttft": 1.217,
+      "speed": null,
+      "ttft": null,
       "value_score": null,
       "created": 1741812813,
       "description": "Reka Flash 3 is a general-purpose, instruction-tuned large language model with 21 billion parameters, developed by Reka. It excels at general chat, coding tasks, instruction-following, and function calling. Featuring a...",
@@ -6372,7 +5508,7 @@
       "context_length": 131072,
       "pricing": {
         "prompt": 0.08,
-        "completion": 0.303359,
+        "completion": 0.303366,
         "cache_read": 0.04,
         "blended": 0.1255,
         "blended_list": 0.1358,
@@ -6380,7 +5516,7 @@
       },
       "intelligence_score": null,
       "speed": 38.0,
-      "ttft": 0.591,
+      "ttft": 0.578,
       "value_score": null,
       "created": 1741756359,
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
@@ -6404,7 +5540,7 @@
       },
       "intelligence_score": null,
       "speed": 17.0,
-      "ttft": 5.172,
+      "ttft": 4.762,
       "value_score": null,
       "created": 1741636566,
       "description": "Skyfall 36B v2 is an enhanced iteration of Mistral Small 2501, specifically fine-tuned for improved creativity, nuanced writing, role-playing, and coherent storytelling.",
@@ -6428,7 +5564,7 @@
       },
       "intelligence_score": null,
       "speed": 12.0,
-      "ttft": 7.261,
+      "ttft": 7.78,
       "value_score": null,
       "created": 1741313308,
       "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro) Sonar Reasoning Pro is a premier reasoning model powered by DeepSeek R1 with Chain of Thought (CoT). Designed for...",
@@ -6499,8 +5635,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 33.0,
-      "ttft": 0.401,
+      "speed": 33.5,
+      "ttft": 0.386,
       "value_score": null,
       "created": 1739803239,
       "description": "Mistral Saba is a 24B-parameter language model specifically designed for the Middle East and South Asia, delivering accurate and contextually relevant responses while maintaining efficient performance. Trained on curated regional...",
@@ -6547,8 +5683,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 24.0,
-      "ttft": 0.911,
+      "speed": 20.0,
+      "ttft": 0.916,
       "value_score": null,
       "created": 1738697557,
       "description": "Aion-1.0 is a multi-model system designed for high performance across various tasks, including reasoning and coding. It is built on DeepSeek-R1, augmented with additional models and techniques such as Tree...",
@@ -6571,8 +5707,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 21.0,
-      "ttft": 1.126,
+      "speed": 23.0,
+      "ttft": 1.19,
       "value_score": null,
       "created": 1738697107,
       "description": "Aion-1.0-Mini 32B parameter model is a distilled version of the DeepSeek-R1 model, designed for strong performance in reasoning domains such as mathematics, coding, and logic. It is a modified variant...",
@@ -6619,8 +5755,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 24.0,
-      "ttft": 1.209,
+      "speed": 23.0,
+      "ttft": 1.192,
       "value_score": null,
       "created": 1738410311,
       "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
@@ -6667,8 +5803,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 181.0,
-      "ttft": 7.026,
+      "speed": 177.0,
+      "ttft": 7.338,
       "value_score": null,
       "created": 1738351721,
       "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
@@ -6691,8 +5827,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 65.0,
-      "ttft": 0.302,
+      "speed": 63.0,
+      "ttft": 0.303,
       "value_score": null,
       "created": 1738255409,
       "description": "Mistral Small 3 is a 24B-parameter language model optimized for low-latency performance across common AI tasks. Released under the Apache 2.0 license, it features both pre-trained and instruction-tuned versions designed...",
@@ -6739,8 +5875,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 72.5,
-      "ttft": 0.664,
+      "speed": 89.0,
+      "ttft": 0.651,
       "value_score": null,
       "created": 1737663169,
       "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
@@ -6755,20 +5891,16 @@
       "provider_display": "DeepSeek",
       "context_length": 163840,
       "pricing": {
-        "prompt": 1.091819,
-        "completion": 4.217014,
+        "prompt": 1.091815,
+        "completion": 4.216997,
         "cache_read": null,
         "blended": 1.8731,
         "blended_list": 1.8731,
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 66.0,
-=======
-      "speed": 46.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 1.139,
+      "speed": 65.5,
+      "ttft": 1.121,
       "value_score": null,
       "created": 1737381095,
       "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
@@ -6815,8 +5947,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 43.0,
-      "ttft": 0.252,
+      "speed": 45.0,
+      "ttft": 0.249,
       "value_score": null,
       "created": 1736489872,
       "description": "[Microsoft Research](/microsoft) Phi-4 is designed to perform well in complex reasoning tasks and can operate efficiently in situations with limited memory or where quick responses are needed. At 14 billion...",
@@ -6855,21 +5987,16 @@
       "provider_display": "DeepSeek",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.306605,
-        "completion": 0.996635,
+        "prompt": 0.306606,
+        "completion": 0.996636,
         "cache_read": null,
         "blended": 0.4791,
         "blended_list": 0.4791,
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 21.0,
-      "ttft": 0.448,
-=======
-      "speed": 18.0,
-      "ttft": 0.472,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
+      "ttft": 0.493,
       "value_score": null,
       "created": 1735241320,
       "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
@@ -6892,8 +6019,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 12.0,
-      "ttft": 1.666,
+      "speed": 12.5,
+      "ttft": 1.681,
       "value_score": null,
       "created": 1734535928,
       "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
@@ -6916,8 +6043,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 17.0,
-      "ttft": 0.285,
+      "speed": 24.5,
+      "ttft": 0.26,
       "value_score": null,
       "created": 1734459999,
       "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason...",
@@ -6941,7 +6068,7 @@
       },
       "intelligence_score": null,
       "speed": 53.0,
-      "ttft": 0.225,
+      "ttft": 0.226,
       "value_score": null,
       "created": 1734158152,
       "description": "Command R7B (12-2024) is a small, fast update of the Command R+ model, delivered in December 2024. It excels at RAG, tool use, agents, and similar tasks requiring complex reasoning...",
@@ -6988,11 +6115,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 124.0,
-=======
-      "speed": 120.9,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.46,
       "value_score": null,
       "created": 1733437363,
@@ -7016,8 +6139,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 145.0,
-      "ttft": 0.285,
+      "speed": 252.0,
+      "ttft": 0.275,
       "value_score": null,
       "created": 1733437237,
       "description": "Amazon Nova Micro 1.0 is a text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost. With a context length...",
@@ -7064,8 +6187,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 64.0,
-      "ttft": 0.6,
+      "speed": 75.0,
+      "ttft": 0.587,
       "value_score": null,
       "created": 1732127594,
       "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded...",
@@ -7088,8 +6211,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 35.0,
-      "ttft": 1.282,
+      "speed": 37.0,
+      "ttft": 0.959,
       "value_score": null,
       "created": 1731978415,
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
@@ -7112,8 +6235,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 15.5,
-      "ttft": 0.392,
+      "speed": 14.0,
+      "ttft": 0.409,
       "value_score": null,
       "created": 1731368400,
       "description": "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). Qwen2.5-Coder brings the following improvements upon CodeQwen1.5: - Significantly improvements in **code generation**, **code reasoning**...",
@@ -7160,8 +6283,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 24.0,
-      "ttft": 1.603,
+      "speed": 23.0,
+      "ttft": 1.521,
       "value_score": null,
       "created": 1729555200,
       "description": "This is a series of models designed to replicate the prose quality of the Claude 3 models, specifically Sonnet(https://openrouter.ai/anthropic/claude-3.5-sonnet) and Opus(https://openrouter.ai/anthropic/claude-3-opus).\n\nThe model is fine-tuned on top of [Qwen2.5 72B](https://openrouter.ai/qwen/qwen-2.5-72b-instruct).",
@@ -7257,7 +6380,7 @@
       },
       "intelligence_score": null,
       "speed": 82.0,
-      "ttft": 0.303,
+      "ttft": 0.297,
       "value_score": null,
       "created": 1727654400,
       "description": "Rocinante 12B is designed for engaging storytelling and rich prose. Early testers have reported: - Expanded vocabulary with unique and expressive word choices - Enhanced creativity for vivid narratives -...",
@@ -7304,8 +6427,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 118.0,
-      "ttft": 0.44,
+      "speed": 97.0,
+      "ttft": 0.447,
       "value_score": null,
       "created": 1727222400,
       "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
@@ -7328,8 +6451,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 38.0,
-      "ttft": 0.518,
+      "speed": 39.0,
+      "ttft": 0.495,
       "value_score": null,
       "created": 1727222400,
       "description": "Llama 3.2 11B Vision is a multimodal model with 11 billion parameters, designed to handle tasks combining visual and textual data. It excels in tasks such as image captioning and...",
@@ -7400,8 +6523,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 55.0,
-      "ttft": 0.23,
+      "speed": 56.0,
+      "ttft": 0.223,
       "value_score": null,
       "created": 1724976000,
       "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and...",
@@ -7425,7 +6548,7 @@
       },
       "intelligence_score": null,
       "speed": 52.0,
-      "ttft": 0.266,
+      "ttft": 0.287,
       "value_score": null,
       "created": 1724803200,
       "description": "Euryale L3.1 70B v2.2 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.1](/models/sao10k/l3-euryale-70b).",
@@ -7448,8 +6571,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 30.0,
-      "ttft": 0.479,
+      "speed": 31.0,
+      "ttft": 0.466,
       "value_score": null,
       "created": 1723939200,
       "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
@@ -7496,8 +6619,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 75.0,
-      "ttft": 0.141,
+      "speed": 76.0,
+      "ttft": 0.142,
       "value_score": null,
       "created": 1723507200,
       "description": "Lunaris 8B is a versatile generalist and roleplaying model based on Llama 3. It's a strategic merge of multiple models, designed to balance creativity with improved logic and general knowledge....",
@@ -7520,12 +6643,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 32.0,
-=======
-      "speed": 27.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.879,
+      "speed": 33.0,
+      "ttft": 0.878,
       "value_score": null,
       "created": 1722902400,
       "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/). GPT-4o (\"o\" for \"omni\") is...",
@@ -7548,11 +6667,7 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 127.0,
-=======
-      "speed": 62.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.195,
       "value_score": null,
       "created": 1721692800,
@@ -7576,13 +6691,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 21.0,
-      "ttft": 0.29,
-=======
-      "speed": 16.7,
       "ttft": 0.292,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "value_score": null,
       "created": 1721692800,
       "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
@@ -7597,20 +6707,16 @@
       "provider_display": "Mistralai",
       "context_length": 131072,
       "pricing": {
-        "prompt": 0.064209,
-        "completion": 0.074205,
+        "prompt": 0.06421,
+        "completion": 0.074206,
         "cache_read": 0.015,
         "blended": 0.0426,
         "blended_list": 0.0667,
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 68.0,
-=======
-      "speed": 48.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.346,
+      "ttft": 0.344,
       "value_score": null,
       "created": 1721347200,
       "description": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,...",
@@ -7657,12 +6763,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 28.0,
-=======
-      "speed": 25.5,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.606,
+      "speed": 29.0,
+      "ttft": 0.613,
       "value_score": null,
       "created": 1721260800,
       "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
@@ -7685,8 +6787,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 34.0,
-      "ttft": 0.824,
+      "speed": 35.0,
+      "ttft": 0.833,
       "value_score": null,
       "created": 1720828800,
       "description": "Gemma 2 27B by Google is an open model built from the same research and technology used to create the [Gemini models](/models?q=gemini). Gemma models are well-suited for a variety of...",
@@ -7709,12 +6811,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 163.0,
-=======
-      "speed": 132.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.556,
+      "speed": 209.0,
+      "ttft": 0.466,
       "value_score": null,
       "created": 1715558400,
       "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
@@ -7737,8 +6835,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 45.0,
-      "ttft": 0.611,
+      "speed": 46.0,
+      "ttft": 0.605,
       "value_score": null,
       "created": 1715558400,
       "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
@@ -7785,8 +6883,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": null,
-      "speed": 53.0,
-      "ttft": 0.4,
+      "speed": 50.5,
+      "ttft": 0.39,
       "value_score": null,
       "created": 1713312000,
       "description": "Mistral's official instruct fine-tuned version of [Mixtral 8x22B](/models/mistralai/mixtral-8x22b). It uses 39B active parameters out of 141B, offering unparalleled cost efficiency for its size. Its strengths include: - strong math, coding,...",
@@ -7833,8 +6931,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 11.0,
-      "ttft": 1.176,
+      "speed": 8.5,
+      "ttft": 0.993,
       "value_score": null,
       "created": 1712620800,
       "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
@@ -7881,8 +6979,8 @@
         "cache_hit_rate": 0.7
       },
       "intelligence_score": 16,
-      "speed": 33.0,
-      "ttft": 1.145,
+      "speed": 38.0,
+      "ttft": 1.046,
       "value_score": null,
       "created": 1708905600,
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version `mistral-large-2407`). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
@@ -7929,8 +7027,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 28.0,
-      "ttft": 0.808,
+      "speed": 31.5,
+      "ttft": 0.847,
       "value_score": null,
       "created": 1706140800,
       "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
@@ -7977,12 +7075,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
-      "speed": 18.5,
-=======
-      "speed": 16.2,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
-      "ttft": 0.521,
+      "speed": 14.0,
+      "ttft": 0.624,
       "value_score": null,
       "created": 1693180800,
       "description": "This model offers four times the context length of gpt-3.5-turbo, allowing it to support approximately 20 pages of text in a single request at a higher cost. Training data: up...",
@@ -8005,8 +7099,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 23.0,
-      "ttft": 1.067,
+      "speed": 19.5,
+      "ttft": 1.052,
       "value_score": null,
       "created": 1690934400,
       "description": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations.",
@@ -8029,11 +7123,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-<<<<<<< HEAD
       "speed": 28.0,
-=======
-      "speed": 23.6,
->>>>>>> 00f2385d74ca5d7c3a18f7373ca4f3a7040ec651
       "ttft": 0.765,
       "value_score": null,
       "created": 1689984000,
@@ -8081,7 +7171,7 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 68.0,
+      "speed": 73.0,
       "ttft": 0.677,
       "value_score": null,
       "created": 1685232000,
@@ -8105,8 +7195,8 @@
         "cache_hit_rate": null
       },
       "intelligence_score": null,
-      "speed": 74.0,
-      "ttft": 0.516,
+      "speed": 73.0,
+      "ttft": 0.522,
       "value_score": null,
       "created": 1685232000,
       "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
