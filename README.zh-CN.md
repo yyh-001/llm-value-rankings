@@ -116,6 +116,24 @@ git push
 
 ---
 
+## GitHub 仓库 About 配置
+
+在线演示地址：[https://yyh-001.github.io/llm-value-rankings/](https://yyh-001.github.io/llm-value-rankings/)
+
+仓库 About（网站链接、描述、Topics）由 [`.github/about.json`](.github/about.json) 定义，推送后由 **Sync Repository About** 工作流自动同步。
+
+若 Actions 无权限更新 About，可在本地登录 GitHub CLI 后执行：
+
+```bash
+gh repo edit yyh-001/llm-value-rankings \
+  --homepage "https://yyh-001.github.io/llm-value-rankings/" \
+  --description "Daily LLM value rankings — compare 300+ models by intelligence³×speed/price. 大模型性价比排行榜"
+```
+
+或在仓库 **Settings → Secrets → Actions** 添加 `REPO_SETTINGS_TOKEN`（需 `repo` 权限的 PAT），工作流将优先使用该 Token。
+
+---
+
 ## 项目结构
 
 ```
