@@ -1242,20 +1242,6 @@ body.modal-open {
     border-radius: inherit;
 }
 
-.modal-toolbar {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0.75rem 0.875rem 0;
-    position: relative;
-    z-index: 4;
-}
-
-.modal-drag-handle {
-    display: none;
-}
-
 .modal-body-scroll {
     flex: 1;
     min-height: 0;
@@ -1294,10 +1280,10 @@ body.modal-open {
 }
 
 .modal-close {
-    position: relative;
-    top: auto;
-    right: auto;
-    z-index: 1;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.875rem;
+    z-index: 5;
     width: 34px;
     height: 34px;
     display: flex;
@@ -1328,7 +1314,7 @@ body.modal-open {
 /* Model detail hero */
 .model-detail-hero {
     position: relative;
-    padding: 1rem 1.5rem 1.25rem;
+    padding: 2.75rem 1.5rem 1.25rem;
     border-bottom: 1px solid var(--border-color);
     overflow: hidden;
 }
