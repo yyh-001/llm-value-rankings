@@ -242,10 +242,10 @@ function updateResultsCount() {
 }
 
 function formatValueScore(score) {
-    if (!score) return '-';
-    if (score >= 1e6) return (score / 1e6).toFixed(1) + 'M';
-    if (score >= 1e3) return (score / 1e3).toFixed(1) + 'K';
-    return Math.round(score).toString();
+    if (score == null) return '-';
+    const n = Number(score);
+    if (Number.isNaN(n)) return '-';
+    return n.toFixed(1);
 }
 
 const PODIUM_MEDALS = ['🥇', '🥈', '🥉'];

@@ -21,10 +21,9 @@ OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
 HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
 
-# Scoring: value = intelligence³ × speed / price / VALUE_SCALE
+# Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
 MIN_INTELLIGENCE = 25
 INTELLIGENCE_EXPONENT = 3
-VALUE_SCALE = 40  # normalize display magnitude (40-intel models ≈ I²-era scores)
 
 # Provider logo mapping
 PROVIDER_LOGOS = {
@@ -346,9 +345,9 @@ def match_model_data(model_id, model_name, model_data):
 
 def calculate_value_scores(intelligence, price, speed):
     """
-    Calculate value score: intelligence³ × speed / price / VALUE_SCALE.
+    Calculate raw value score: intelligence³ × speed / price.
 
-    Models with intelligence below MIN_INTELLIGENCE are excluded (returns None).
+    Normalized to a 0–100 scale in rank_models(). Models below MIN_INTELLIGENCE are excluded.
     """
     if intelligence is None or price is None or price <= 0:
         return None
@@ -359,8 +358,7 @@ def calculate_value_scores(intelligence, price, speed):
     if speed is None:
         speed = 80
 
-    raw = (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
-    return round(raw / VALUE_SCALE, 2)
+    return (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
 
 
 def process_models(openrouter_models, model_data):
@@ -416,13 +414,17 @@ def process_models(openrouter_models, model_data):
 
 
 def rank_models(models):
-    """Rank models by value score, excluding distill models."""
+    """Rank models by value score, excluding distill models. Scores normalized to 0–100."""
     ranked = [m for m in models if m["value_score"] is not None and "distill" not in m["id"].lower()]
     unranked = [m for m in models if m["value_score"] is None or "distill" in m["id"].lower()]
 
     ranked.sort(key=lambda x: x["value_score"], reverse=True)
+
+    max_score = ranked[0]["value_score"] if ranked else 0
     for i, model in enumerate(ranked, 1):
         model["rank"] = i
+        if max_score > 0:
+            model["value_score"] = round(model["value_score"] / max_score * 100, 1)
 
     for model in unranked:
         model["rank"] = None

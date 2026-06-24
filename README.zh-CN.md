@@ -87,7 +87,7 @@ git push
 ### 性价比公式
 
 ```
-性价比 = 能力³ × 速度 / 价格 / 40
+性价比 = 能力³ × 速度 / 价格
 ```
 
 | 指标 | 来源 | 说明 |
@@ -95,6 +95,10 @@ git push
 | 能力评分 | Artificial Analysis | Intelligence Index，0–100 分 |
 | 速度 | Artificial Analysis | 输出速度 (tokens/s)，缺失时默认 80 |
 | 价格 | OpenRouter | 输入与输出 Token 价格的平均值 ($/1M tokens) |
+
+### 百分制换算
+
+先按上式计算原始分数，再**归一化到 0–100 分**：榜首模型固定为 **100 分**，其余模型按相对比例显示。
 
 ### 能力下限
 

@@ -87,7 +87,7 @@ Or trigger the **Update Model Data** workflow from the Actions tab.
 ### Value score
 
 ```
-Value = Intelligence³ × Speed / Price / 40
+Value = Intelligence³ × Speed / Price
 ```
 
 | Metric | Source | Notes |
@@ -95,6 +95,10 @@ Value = Intelligence³ × Speed / Price / 40
 | Intelligence | Artificial Analysis | Index score 0–100 |
 | Speed | Artificial Analysis | Output tokens/s (default 80 if missing) |
 | Price | OpenRouter | Average of input & output ($/1M tokens) |
+
+### Score scale (0–100)
+
+After computing the raw value above, scores are **normalized to a 0–100 scale**. The top-ranked model is always **100**; others are proportional.
 
 ### Minimum intelligence threshold
 

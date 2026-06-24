@@ -46,7 +46,8 @@ const translations = {
         // Methodology
         methodology_title: "计算方法",
         formula_label: "核心公式",
-        formula: "性价比 = 能力³ × 速度 / 价格 / 40",
+        formula: "性价比 = 能力³ × 速度 / 价格",
+        score_scale: "最终分数按百分制显示，榜首模型为 100 分",
         penalty_desc: "能力评分低于 25 分的模型不参与排名",
         method_1_title: "能力评分",
         method_1: "Artificial Analysis Intelligence Index",
@@ -130,7 +131,8 @@ const translations = {
         // Methodology
         methodology_title: "Methodology",
         formula_label: "Core Formula",
-        formula: "Value = Intelligence³ × Speed / Price / 40",
+        formula: "Value = Intelligence³ × Speed / Price",
+        score_scale: "Scores use a 0–100 scale; the top model is 100",
         penalty_desc: "Models scoring below 25 are excluded from ranking",
         method_1_title: "Intelligence",
         method_1: "Artificial Analysis Intelligence Index",
