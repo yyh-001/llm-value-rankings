@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <meta name="app-version" content="20250624">
-    <link rel="stylesheet" href="css/style.css?v=20250624">
+    <link rel="stylesheet" href="css/style.css?v=20250624b">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
 </head>
 <body>
@@ -164,13 +164,15 @@
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <button class="modal-close" aria-label="Close">&times;</button>
-            <div id="modal-body"></div>
-            <div class="comments-section">
-                <h3 data-i18n="comments_title">用户评论</h3>
-                <div id="comments-list"></div>
-                <div id="comment-form-container">
-                    <p class="login-hint" data-i18n="login_hint">登录 GitHub 后即可评论</p>
-                    <button id="github-login-btn" class="btn-primary" data-i18n="login_github">使用 GitHub 登录</button>
+            <div class="modal-body-scroll">
+                <div id="modal-body"></div>
+                <div class="comments-section">
+                    <h3 data-i18n="comments_title">用户评论</h3>
+                    <div id="comments-list"></div>
+                    <div id="comment-form-container">
+                        <p class="login-hint" data-i18n="login_hint">登录 GitHub 后即可评论</p>
+                        <button id="github-login-btn" class="btn-primary" data-i18n="login_github">使用 GitHub 登录</button>
+                    </div>
                 </div>
             </div>
         </div>

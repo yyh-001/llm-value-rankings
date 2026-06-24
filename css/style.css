@@ -1207,14 +1207,48 @@ tbody tr.top-row .col-detail {
     position: relative;
     background: var(--bg-secondary);
     border-radius: var(--radius-xl);
-    padding: 2rem;
     max-width: 680px;
     width: 100%;
     max-height: 85vh;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border-color);
     animation: modalIn 0.25s ease;
+}
+
+.modal-body-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 2rem;
+    padding-top: 3.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 116, 139, 0.35) transparent;
+}
+
+.modal-body-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0.75rem 0;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.35);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.modal-body-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.55);
+    background-clip: padding-box;
 }
 
 @keyframes modalIn {
@@ -1226,6 +1260,7 @@ tbody tr.top-row .col-detail {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    z-index: 2;
     width: 36px;
     height: 36px;
     display: flex;
@@ -1495,8 +1530,12 @@ tbody tr.top-row .col-detail {
     .modal-content {
         width: 100%;
         max-height: 90vh;
-        padding: 1.25rem;
         border-radius: var(--radius-lg);
+    }
+
+    .modal-body-scroll {
+        padding: 1.25rem;
+        padding-top: 3rem;
     }
 }
 
