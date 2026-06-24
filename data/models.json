@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T02:58:31.694375Z",
+  "updated_at": "2026-06-24T02:58:57.677792Z",
   "total_models": 299,
   "ranked_models": 109,
   "rank_compared_to": "2026-06-23",
@@ -5317,7 +5317,7 @@
       },
       "intelligence_score": 38,
       "speed": 87,
-      "value_score": null,
+      "value_score": 5967330.0,
       "created": 1737663169,
       "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
       "rank": null,
