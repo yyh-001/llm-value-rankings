@@ -21,9 +21,10 @@ OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
 HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
 
-# Scoring: value = intelligence³ × speed / price (models below MIN_INTELLIGENCE are excluded)
+# Scoring: value = intelligence³ × speed / price / VALUE_SCALE
 MIN_INTELLIGENCE = 25
 INTELLIGENCE_EXPONENT = 3
+VALUE_SCALE = 40  # normalize display magnitude (40-intel models ≈ I²-era scores)
 
 # Provider logo mapping
 PROVIDER_LOGOS = {
@@ -345,7 +346,7 @@ def match_model_data(model_id, model_name, model_data):
 
 def calculate_value_scores(intelligence, price, speed):
     """
-    Calculate value score: intelligence³ × speed / price.
+    Calculate value score: intelligence³ × speed / price / VALUE_SCALE.
 
     Models with intelligence below MIN_INTELLIGENCE are excluded (returns None).
     """
@@ -358,7 +359,8 @@ def calculate_value_scores(intelligence, price, speed):
     if speed is None:
         speed = 80
 
-    return round((intelligence ** INTELLIGENCE_EXPONENT) * speed / price, 2)
+    raw = (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
+    return round(raw / VALUE_SCALE, 2)
 
 
 def process_models(openrouter_models, model_data):

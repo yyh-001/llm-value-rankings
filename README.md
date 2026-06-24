@@ -87,7 +87,7 @@ Or trigger the **Update Model Data** workflow from the Actions tab.
 ### Value score
 
 ```
-Value = Intelligence³ × Speed / Price
+Value = Intelligence³ × Speed / Price / 40
 ```
 
 | Metric | Source | Notes |
