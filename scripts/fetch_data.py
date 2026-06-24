@@ -160,23 +160,6 @@ def parse_p50_stat(stat):
     return None
 
 
-def parse_peak_throughput(stat):
-    """Extract peak throughput (max percentile) from OpenRouter stats."""
-    if stat is None:
-        return None
-    if isinstance(stat, (int, float)):
-        value = float(stat)
-        return value if value > 0 else None
-    if isinstance(stat, dict):
-        values = [
-            float(value)
-            for value in stat.values()
-            if isinstance(value, (int, float)) and value > 0
-        ]
-        return max(values) if values else None
-    return None
-
-
 def normalize_latency_seconds(latency):
     """Normalize latency to seconds (API may return seconds or milliseconds)."""
     if latency is None:
@@ -339,9 +322,9 @@ def scrape_model_page_performance(model_id, session=None):
         payload,
     ):
         block = match.group(1)
-        values = [float(v) for v in re.findall(r'"p\d+"\s*:\s*([\d.]+)', block)]
-        if values:
-            throughputs.append(max(values))
+        p50_match = re.search(r'"p50"\s*:\s*([\d.]+)', block)
+        if p50_match:
+            throughputs.append(float(p50_match.group(1)))
 
     for match in re.finditer(
         r'"throughput_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
@@ -409,7 +392,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     """
     Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
 
-    Speed uses the best provider peak throughput (max percentile, last 30m).
+    Speed uses the best provider p50 throughput (matches OpenRouter "best across providers").
     TTFT uses the lowest provider latency.
     Effective input price uses cache_hit_rate when input_cache_read is available.
     """
@@ -458,7 +441,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
             completion_prices.append(completion)
             completion_weights.append(weight)
 
-        throughput = parse_peak_throughput(ep.get("throughput_last_30m"))
+        throughput = parse_p50_stat(ep.get("throughput_last_30m"))
         if throughput is not None and throughput > 0:
             throughputs.append(throughput)
 

@@ -104,7 +104,7 @@ f(x) = (均分 - (均分 - x)²)²          当 x < 均分（内层 ≤ 0 时排
 | 指标 | 来源 | 说明 |
 |------|------|------|
 | 能力评分 | OpenRouter 内嵌 AA `intelligence_index` | Artificial Analysis Intelligence Index，0–100 分 |
-| 速度 | OpenRouter Endpoints API + RSC 页面爬取 | 各 Provider 峰值吞吐（30 分钟 p99 最高，tokens/s） |
+| 速度 | OpenRouter Endpoints API + RSC 页面爬取 | 各 Provider 最高 p50 吞吐（与 OpenRouter 官网一致） |
 | 首字延迟 | OpenRouter Endpoints API | TTFT p50（秒），无数据时显示 — |
 | 价格 | OpenRouter | uptime 加权有效价：输入:输出按 3:1 混合，输入侧 70% 缓存命中 ($/1M tokens) |
 
