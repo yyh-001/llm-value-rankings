@@ -30,6 +30,8 @@ The result is a daily-updated leaderboard that answers one question: **how much 
 
 > Static site · zero backend · deploy with GitHub Pages in one minute.
 
+Social preview image: [`assets/og-preview.png`](assets/og-preview.png) (1280×640). Upload the same file under **Settings → General → Social preview** for GitHub link cards.
+
 ---
 
 ## Features
