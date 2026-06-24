@@ -15,17 +15,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check PAT
+        id: token
+        run: |
+          if [ -n "${{ secrets.REPO_SETTINGS_TOKEN }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::REPO_SETTINGS_TOKEN 未配置。内置 GITHUB_TOKEN 无法更新 description/topics，请添加 PAT 或本地运行 scripts/sync_repo_about.py"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Update homepage and description
+        if: steps.token.outputs.ready == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN }}
         run: |
           jq '{homepage: .homepage, description: .description}' .github/about.json > repo.json
           gh api --method PATCH "/repos/${GITHUB_REPOSITORY}" --input repo.json
 
       - name: Update topics
-        continue-on-error: true
+        if: steps.token.outputs.ready == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN }}
         run: |
           jq '{names: .topics}' .github/about.json | \
             gh api --method PUT "/repos/${GITHUB_REPOSITORY}/topics" \
