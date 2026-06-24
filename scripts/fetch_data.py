@@ -511,29 +511,6 @@ def is_text_llm(model):
     return True
 
 
-MODEL_SUFFIX_VARIANTS = frozenset({
-    "free", "fast", "preview", "reasoning", "max", "mini", "pro", "turbo",
-    "lite", "thinking", "sonnet", "haiku", "opus", "flash", "nano",
-})
-
-
-def is_valid_model_suffix(suffix):
-    """Allow date or named variant suffixes; reject version bumps like glm-5 -> glm-5-2."""
-    if not suffix:
-        return True
-    if re.match(r"^\d{4}-\d{2}-\d{2}$", suffix):
-        return True
-    if re.match(r"^\d{8}$", suffix):
-        return True
-
-    first_segment = suffix.split("-")[0]
-    if first_segment in MODEL_SUFFIX_VARIANTS:
-        return True
-    if re.match(r"^\d+(\.\d+)?$", first_segment) or re.match(r"^\d+$", suffix):
-        return False
-    return True
-
-
 def normalize_permaslug(slug):
     """Normalize OpenRouter permaslugs for benchmark lookup."""
     if not slug:
@@ -554,8 +531,18 @@ def slug_tokens(slug):
     return tuple(sorted(tokens))
 
 
+def extract_embedded_intelligence_index(model):
+    """Read AA intelligence_index attached to an OpenRouter model record."""
+    benchmarks = model.get("benchmarks") or {}
+    artificial_analysis = benchmarks.get("artificial_analysis") or {}
+    value = artificial_analysis.get("intelligence_index")
+    if value is None:
+        return None
+    return round(float(value))
+
+
 def benchmark_match_score(model_slug, benchmark_slug):
-    """Score how closely an OpenRouter slug matches a benchmark permaslug."""
+    """Score slug similarity for benchmark fallback (exact or token-reorder only)."""
     if not model_slug or not benchmark_slug:
         return 0
 
@@ -565,32 +552,33 @@ def benchmark_match_score(model_slug, benchmark_slug):
         return 100
     if slug_tokens(left) == slug_tokens(right):
         return 90
-
-    for shorter, longer in ((left, right), (right, left)):
-        if longer.startswith(f"{shorter}-"):
-            suffix = longer[len(shorter) + 1:]
-            if is_valid_model_suffix(suffix):
-                return 80
-        elif longer.startswith(shorter) and len(shorter) < len(longer):
-            suffix = longer[len(shorter):].lstrip("-")
-            if suffix and is_valid_model_suffix(suffix):
-                return 70
-
     return 0
 
 
 def build_intelligence_map(benchmark_rows, openrouter_models):
-    """Map OpenRouter model IDs to intelligence_index via permaslug matching."""
+    """Map OpenRouter model IDs to intelligence_index via embedded AA data + exact slug fallback."""
     scored_rows = [
         row
         for row in benchmark_rows
         if row.get("intelligence_index") is not None and row.get("model_permaslug")
     ]
     intelligence_map = {}
+    embedded_count = 0
+    slug_count = 0
 
     for model in openrouter_models:
         model_id = model.get("id")
         if not model_id:
+            continue
+
+        embedded = extract_embedded_intelligence_index(model)
+        if embedded is not None:
+            intelligence_map[model_id] = embedded
+            embedded_count += 1
+
+    for model in openrouter_models:
+        model_id = model.get("id")
+        if not model_id or model_id in intelligence_map:
             continue
 
         best_score = 0
@@ -605,18 +593,20 @@ def build_intelligence_map(benchmark_rows, openrouter_models):
                 best_score = score
                 best_intel = round(float(row["intelligence_index"]))
 
-        if best_score >= 70 and best_intel is not None:
+        if best_score >= 90 and best_intel is not None:
             intelligence_map[model_id] = best_intel
+            slug_count += 1
 
+    print(f"  Embedded AA scores: {embedded_count}, slug fallback: {slug_count}")
     return intelligence_map
 
 
 
 def fetch_openrouter_intelligence_scores(openrouter_models):
     """
-    Fetch intelligence scores from OpenRouter benchmarks API.
+    Build intelligence scores from OpenRouter model records and benchmarks API.
 
-    Requires OPENROUTER_API_KEY. Returns OpenRouter model id -> intelligence_index.
+    Prefers per-model embedded AA scores; falls back to exact slug matches only.
     """
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:

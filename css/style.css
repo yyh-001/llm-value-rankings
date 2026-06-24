@@ -1419,6 +1419,7 @@ body.modal-open {
 
 .model-detail-actions {
     margin: 0.75rem 0 1rem;
+    padding: 0 1.5rem;
 }
 
 .btn-openrouter {
@@ -1900,6 +1901,10 @@ body.modal-open {
     .model-detail-value-chip {
         padding: 0.75rem 0.875rem;
         gap: 0.35rem 0.625rem;
+    }
+
+    .model-detail-actions {
+        padding: 0 1rem;
     }
 
     .detail-chip-value {
