@@ -1576,7 +1576,7 @@ body.modal-open {
 }
 
 .model-detail-desc {
-    margin: 1.25rem 1.5rem 0;
+    margin: 1.25rem 1.5rem 1.5rem;
     padding: 1rem 1.125rem;
     background: var(--bg-tertiary);
     border-radius: var(--radius-md);
@@ -1865,7 +1865,7 @@ body.modal-open {
     }
 
     .model-detail-desc {
-        margin: 1rem 1rem 0;
+        margin: 1rem 1rem 1.25rem;
         padding: 0.875rem 1rem;
     }
 
