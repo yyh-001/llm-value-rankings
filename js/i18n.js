@@ -12,7 +12,7 @@ const translations = {
         // Hero
         hero_badge: "实时数据 · 每日自动更新",
         hero_title: "找到最具性价比的 AI 模型",
-        hero_desc: "基于综合能力评分、输出速度与价格，计算每美元获得的 AI 智能分数",
+        hero_desc: "基于综合能力评分、输出速度与价格，计算每单位价格获得的 AI 智能分数",
         total_models: "收录模型",
         ranked_models: "已排名",
         last_updated: "更新时间",
@@ -54,7 +54,7 @@ const translations = {
         method_2_title: "输出速度",
         method_2: "Artificial Analysis 输出速度 (tokens/s)",
         method_3_title: "Token 价格",
-        method_3: "OpenRouter 输入输出平均价 ($/1M tokens)",
+        method_3: "OpenRouter 输入输出平均价 (人民币/百万 tokens)",
         
         // Comments
         comments_title: "用户评论",

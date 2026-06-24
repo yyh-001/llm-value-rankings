@@ -7,6 +7,7 @@ const CONFIG = {
     ITEMS_PER_PAGE: 20,
     GITHUB_REPO: 'yyh-001/llm-value-rankings',
     MOBILE_BREAKPOINT: 768,
+    USD_TO_CNY: 7.25,
 };
 
 // State
@@ -176,6 +177,10 @@ function initI18n() {
         renderRankings();
         updateStats();
         updateResultsCount();
+        const modelId = elements.modelModal?.dataset?.currentModel;
+        if (modelId && !elements.modelModal?.classList.contains('hidden')) {
+            showModelDetail(modelId);
+        }
     });
 }
 
@@ -273,6 +278,18 @@ function formatValueScore(score) {
     return n.toFixed(1);
 }
 
+function formatPrice(usd) {
+    if (usd == null || Number.isNaN(Number(usd))) return '-';
+    const price = Number(usd);
+    if (window.i18n.currentLang === 'zh') {
+        const cny = price * CONFIG.USD_TO_CNY;
+        if (cny >= 100) return `¥${cny.toFixed(1)}`;
+        if (cny >= 1) return `¥${cny.toFixed(2)}`;
+        return `¥${cny.toFixed(3)}`;
+    }
+    return `$${price.toFixed(2)}`;
+}
+
 const PODIUM_MEDALS = ['🥇', '🥈', '🥉'];
 
 function renderPodium() {
@@ -309,7 +326,7 @@ function renderPodium() {
                         <span class="podium-metric-label">${window.i18n.t('podium_speed')}</span>
                     </div>
                     <div class="podium-metric">
-                        <span class="podium-metric-value">$${model.pricing.blended.toFixed(2)}</span>
+                        <span class="podium-metric-value">${formatPrice(model.pricing.blended)}</span>
                         <span class="podium-metric-label">${window.i18n.t('podium_price')}</span>
                     </div>
                 </div>
@@ -402,7 +419,7 @@ function renderMobileCards() {
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_price')}</em>
-                        <strong class="price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</strong>
+                        <strong class="price-display ${priceClass}">${formatPrice(model.pricing.blended)}</strong>
                     </span>
                 </div>
                 <p class="model-card-hint">${window.i18n.t('card_tap_hint')}</p>
@@ -480,7 +497,7 @@ function renderTable() {
                     <span class="speed-display">${speed}</span>
                 </td>
                 <td class="col-price">
-                    <span class="price-display ${priceClass}">$${price.toFixed(2)}</span>
+                    <span class="price-display ${priceClass}">${formatPrice(price)}</span>
                 </td>
                 <td class="col-value">
                     <span class="value-score">${formatValueScore(valueScore)}</span>
@@ -620,17 +637,17 @@ function showModelDetail(modelId) {
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">📥</span>
                     <span class="detail-label">${window.i18n.t('input_price')}</span>
-                    <span class="detail-value price-display ${priceClass}">$${model.pricing.prompt.toFixed(2)}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.prompt)}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">📤</span>
                     <span class="detail-label">${window.i18n.t('output_price')}</span>
-                    <span class="detail-value price-display ${priceClass}">$${model.pricing.completion.toFixed(2)}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.completion)}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">💰</span>
                     <span class="detail-label">${window.i18n.t('blended_price')}</span>
-                    <span class="detail-value price-display ${priceClass}">$${model.pricing.blended.toFixed(2)}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.blended)}</span>
                 </div>
                 <div class="detail-item detail-item-accent">
                     <span class="detail-item-icon" aria-hidden="true">📈</span>
