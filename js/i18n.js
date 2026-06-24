@@ -52,7 +52,7 @@ const translations = {
         score_scale: "最终分数按百分制显示，榜首模型为 100 分",
         penalty_desc: "能力评分低于 25 分的模型不参与排名",
         method_1_title: "能力评分",
-        method_1: "Artificial Analysis Intelligence Index",
+        method_1: "OpenRouter 能力指数",
         method_2_title: "输出速度",
         method_2: "OpenRouter 实测吞吐量 (tokens/s)，Endpoints API + RSC 爬取",
         method_3_title: "Token 价格",
@@ -68,7 +68,7 @@ const translations = {
         no_comments: "暂无评论，来发表第一条吧",
         
         // Footer
-        footer_text: "数据来源：OpenRouter & Artificial Analysis",
+        footer_text: "数据来源：OpenRouter",
         footer_auto: "本页面数据由GitHub Actions自动更新，无需人工维护",
         version_label: "版本",
         card_tap_hint: "点击查看详情",
@@ -144,7 +144,7 @@ const translations = {
         score_scale: "Scores use a 0–100 scale; the top model is 100",
         penalty_desc: "Models scoring below 25 are excluded from ranking",
         method_1_title: "Intelligence",
-        method_1: "Artificial Analysis Intelligence Index",
+        method_1: "OpenRouter Intelligence Index",
         method_2_title: "Output Speed",
         method_2: "OpenRouter measured throughput (tokens/s) via API + RSC scrape",
         method_3_title: "Token Price",
@@ -160,7 +160,7 @@ const translations = {
         no_comments: "No comments yet. Be the first!",
         
         // Footer
-        footer_text: "Data sources: OpenRouter & Artificial Analysis",
+        footer_text: "Data sources: OpenRouter",
         footer_auto: "This page is automatically updated by GitHub Actions",
         version_label: "Version",
         card_tap_hint: "Tap for details",

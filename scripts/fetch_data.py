@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetch LLM model data from OpenRouter and Artificial Analysis
-to calculate value rankings.
+Fetch LLM model data from OpenRouter to calculate value rankings.
 """
 
 import json
@@ -14,16 +13,33 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
-from bs4 import BeautifulSoup
 
 # Configuration
 OPENROUTER_API = "https://openrouter.ai/api/v1/models"
-ARTIFICIAL_ANALYSIS_URL = "https://artificialanalysis.ai/leaderboards/models"
+OPENROUTER_BENCHMARKS_API = "https://openrouter.ai/api/v1/benchmarks"
 OUTPUT_DIR = Path(__file__).parent.parent / "data"
 OUTPUT_FILE = OUTPUT_DIR / "models.json"
 HISTORY_FILE = OUTPUT_DIR / "rank_history.json"
 REPO_META_FILE = OUTPUT_DIR / "repo.json"
 GITHUB_REPO = "yyh-001/llm-value-rankings"
+
+
+def load_local_env():
+    """Load .env.local / .env into os.environ when keys are not already set."""
+    root = Path(__file__).parent.parent
+    for name in (".env.local", ".env"):
+        env_file = root / name
+        if not env_file.exists():
+            continue
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
 
 # Scoring: raw = intelligence³ × speed / price → normalized to 0–100 in rank_models()
 # Cubed intelligence deliberately prioritizes capability over marginal speed/price gains.
@@ -77,7 +93,7 @@ def fetch_openrouter_models():
     """Fetch model data from OpenRouter API."""
     print("Fetching models from OpenRouter...")
     try:
-        response = requests.get(OPENROUTER_API, timeout=30)
+        response = make_http_session().get(OPENROUTER_API, timeout=30)
         response.raise_for_status()
         data = response.json()
         models = data.get("data", [])
@@ -295,10 +311,17 @@ def scrape_model_page_performance(model_id, session=None):
         payload = response.text
     except Exception as exc:
         print(f"  Warning: page scrape for {model_id}: {exc}")
-        return {"throughput": None, "ttft": None}
+        return {"throughput": None, "ttft": None, "intelligence": None}
 
     throughputs = []
     latencies = []
+    benchmark_accuracies = []
+
+    for match in re.finditer(
+        r'"benchmark_type":"[^"]+"[^}]*?"accuracy":([\d.]+)',
+        payload,
+    ):
+        benchmark_accuracies.append(float(match.group(1)))
 
     for match in re.finditer(
         r'"throughput_last_30m"\s*:\s*(?:\{"p50"\s*:\s*([\d.]+)\}|([\d.]+))',
@@ -324,22 +347,30 @@ def scrape_model_page_performance(model_id, session=None):
 
     throughput = round(statistics.median(throughputs), 1) if throughputs else None
     ttft = round(min(latencies), 3) if latencies else None
-    return {"throughput": throughput, "ttft": ttft}
+    intelligence = round(max(benchmark_accuracies) * 100) if benchmark_accuracies else None
+    return {"throughput": throughput, "ttft": ttft, "intelligence": intelligence}
 
 
-def fetch_page_stats_batch(model_ids, endpoints_map):
-    """Scrape OpenRouter model pages for models missing endpoint throughput."""
-    need_scrape = [
-        model_id
-        for model_id in model_ids
-        if aggregate_endpoint_metrics(endpoints_map.get(model_id, [])).get("throughput") is None
-    ]
+def fetch_page_stats_batch(model_ids, endpoints_map, intelligence_map=None, model_meta=None):
+    """Scrape OpenRouter model pages for speed and/or missing intelligence scores."""
+    need_scrape = set()
+    for model_id in model_ids:
+        if aggregate_endpoint_metrics(endpoints_map.get(model_id, [])).get("throughput") is None:
+            need_scrape.add(model_id)
+            continue
+        if intelligence_map is None:
+            continue
+        canonical_slug = (model_meta or {}).get(model_id, {}).get("canonical_slug")
+        if lookup_intelligence_score(model_id, canonical_slug, intelligence_map, None) is None:
+            need_scrape.add(model_id)
+
+    need_scrape = sorted(need_scrape)
     results = {}
     if not need_scrape:
         return results
 
     session = make_http_session()
-    print(f"Scraping OpenRouter model pages for speed: {len(need_scrape)} models...")
+    print(f"Scraping OpenRouter model pages: {len(need_scrape)} models...")
     with ThreadPoolExecutor(max_workers=PAGE_FETCH_WORKERS) as executor:
         futures = {
             executor.submit(scrape_model_page_performance, model_id, session): model_id
@@ -352,13 +383,15 @@ def fetch_page_stats_batch(model_ids, endpoints_map):
                 results[model_id] = future.result()
             except Exception as exc:
                 print(f"  Warning: page stats for {model_id}: {exc}")
-                results[model_id] = {"throughput": None, "ttft": None}
+                results[model_id] = {"throughput": None, "ttft": None, "intelligence": None}
             done += 1
             if done % 50 == 0 or done == len(need_scrape):
                 print(f"  Page scrape progress: {done}/{len(need_scrape)}")
 
     with_stats = sum(1 for stats in results.values() if stats.get("throughput") is not None)
+    with_intel = sum(1 for stats in results.values() if stats.get("intelligence") is not None)
     print(f"  Models with scraped throughput: {with_stats}/{len(need_scrape)}")
+    print(f"  Models with scraped intelligence: {with_intel}/{len(need_scrape)}")
     return results
 
 
@@ -496,238 +529,91 @@ def is_text_llm(model):
     return True
 
 
+def normalize_permaslug(slug):
+    """Normalize OpenRouter permaslugs for benchmark lookup."""
+    if not slug:
+        return ""
+    normalized = slug.lower().split(":")[0]
+    normalized = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", normalized)
+    normalized = re.sub(r"-\d{8,}$", "", normalized)
+    return normalized
+
+
+def register_intelligence_score(scores, permaslug, intelligence):
+    """Store a benchmark score under common permaslug variants."""
+    if intelligence is None or not permaslug:
+        return
+    for key in {permaslug.lower(), normalize_permaslug(permaslug)}:
+        if key:
+            scores[key] = intelligence
+
+
+def fetch_openrouter_intelligence_scores():
+    """
+    Fetch intelligence scores from OpenRouter benchmarks API.
+
+    Requires OPENROUTER_API_KEY. Returns model_permaslug -> intelligence_index (0-100).
+    """
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        print("  Warning: OPENROUTER_API_KEY not set; skipping OpenRouter benchmark scores")
+        return {}
+
+    print("Fetching intelligence scores from OpenRouter benchmarks API...")
+    session = make_http_session()
+    try:
+        response = session.get(
+            OPENROUTER_BENCHMARKS_API,
+            params={
+                "source": "artificial-analysis",
+                "task_type": "intelligence",
+                "max_results": 100,
+            },
+            headers=get_openrouter_headers(),
+            timeout=ENDPOINT_FETCH_TIMEOUT,
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except Exception as exc:
+        print(f"  Error fetching OpenRouter benchmarks: {exc}")
+        return {}
+
+    scores = {}
+    rows = payload.get("data", [])
+    for row in rows:
+        index = row.get("intelligence_index")
+        permaslug = row.get("model_permaslug")
+        if index is None or not permaslug:
+            continue
+        register_intelligence_score(scores, permaslug, round(float(index)))
+
+    meta = payload.get("meta") or {}
+    as_of = meta.get("as_of")
+    print(f"  Loaded {len(rows)} benchmark rows ({len(scores)} lookup keys)")
+    if as_of:
+        print(f"  Benchmark snapshot: {as_of}")
+    return scores
+
+
 def fetch_intelligence_scores():
-    """
-    Load intelligence scores from Artificial Analysis.
-
-    Speed and TTFT come from OpenRouter endpoints API + model page scraping.
-    Source: https://artificialanalysis.ai/leaderboards/models (June 2026)
-    """
-    print("Loading intelligence scores from Artificial Analysis...")
-    
-    # Intelligence scores (0-100). Speed values below are legacy — stripped on return.
-    model_data = {
-        # ===== Anthropic =====
-        "claude-fable-5": {"intelligence": 60, "speed": 45},
-        "claude-opus-4.8": {"intelligence": 56, "speed": 48},
-        "claude-opus-4.7": {"intelligence": 54, "speed": 48},
-        "claude-opus-4.6": {"intelligence": 54, "speed": 48},
-        "claude-opus-4.5": {"intelligence": 54, "speed": 48},
-        "claude-opus-4": {"intelligence": 52, "speed": 48},
-        "claude-sonnet-4.6": {"intelligence": 47, "speed": 52},
-        "claude-sonnet-4.5": {"intelligence": 47, "speed": 52},
-        "claude-sonnet-4": {"intelligence": 45, "speed": 52},
-        "claude-3.5-sonnet": {"intelligence": 42, "speed": 55},
-        "claude-3-opus": {"intelligence": 40, "speed": 40},
-        "claude-4.5-haiku": {"intelligence": 30, "speed": 94},
-        "claude-3.5-haiku": {"intelligence": 28, "speed": 90},
-        "claude-3-haiku": {"intelligence": 25, "speed": 85},
-        
-        # ===== OpenAI =====
-        "gpt-5.5": {"intelligence": 55, "speed": 67},
-        "gpt-5.4": {"intelligence": 40, "speed": 183},
-        "gpt-5.3": {"intelligence": 40, "speed": 91},
-        "gpt-5.2": {"intelligence": 40, "speed": 80},
-        "gpt-5.1": {"intelligence": 52, "speed": 75},
-        "gpt-5": {"intelligence": 50, "speed": 70},
-        "o3": {"intelligence": 48, "speed": 170},
-        "o4-mini": {"intelligence": 44, "speed": 180},
-        "gpt-4.1": {"intelligence": 42, "speed": 85},
-        "gpt-4o": {"intelligence": 28, "speed": 90},
-        "gpt-4-turbo": {"intelligence": 30, "speed": 75},
-        "gpt-4o-mini": {"intelligence": 25, "speed": 150},
-        "gpt-4.1-mini": {"intelligence": 38, "speed": 160},
-        "gpt-4.1-nano": {"intelligence": 32, "speed": 180},
-        "gpt-5-mini": {"intelligence": 45, "speed": 120},
-        "gpt-5-nano": {"intelligence": 40, "speed": 174},
-        
-        # ===== Google =====
-        "gemini-2.5-pro": {"intelligence": 48, "speed": 125},
-        "gemini-3.1-pro": {"intelligence": 46, "speed": 132},
-        "gemini-3-flash": {"intelligence": 50, "speed": 167},
-        "gemini-2.5-flash": {"intelligence": 42, "speed": 150},
-        "gemini-2.0-flash": {"intelligence": 38, "speed": 160},
-        "gemini-1.5-pro": {"intelligence": 35, "speed": 100},
-        "gemini-2.5-flash-lite": {"intelligence": 28, "speed": 200},
-        "gemini-3.1-flash-lite": {"intelligence": 42, "speed": 331},
-        
-        # ===== DeepSeek =====
-        "deepseek-r1": {"intelligence": 38, "speed": 87},
-        "deepseek-v4-pro": {"intelligence": 44, "speed": 87},
-        "deepseek-v4-flash": {"intelligence": 40, "speed": 105},
-        "deepseek-v3": {"intelligence": 35, "speed": 80},
-        "deepseek-v3.2": {"intelligence": 36, "speed": 82},
-        "deepseek-chat": {"intelligence": 35, "speed": 80},
-        
-        # ===== xAI =====
-        "grok-4.3": {"intelligence": 38, "speed": 171},
-        "grok-4": {"intelligence": 38, "speed": 170},
-        "grok-3": {"intelligence": 35, "speed": 150},
-        "grok-2": {"intelligence": 30, "speed": 120},
-        
-        # ===== Meta =====
-        "llama-4-maverick": {"intelligence": 38, "speed": 140},
-        "llama-4-scout": {"intelligence": 35, "speed": 150},
-        "llama-3.1-405b": {"intelligence": 32, "speed": 40},
-        "llama-3.1-70b": {"intelligence": 28, "speed": 60},
-        "llama-3.3-70b": {"intelligence": 30, "speed": 65},
-        
-        # ===== Qwen / Alibaba =====
-        "qwen3.7-max": {"intelligence": 46, "speed": 198},
-        "qwen3.6-plus": {"intelligence": 40, "speed": 53},
-        "qwen-2.5-72b": {"intelligence": 32, "speed": 45},
-        "qwq-32b": {"intelligence": 35, "speed": 60},
-        
-        # ===== Mistral =====
-        "mistral-large": {"intelligence": 35, "speed": 137},
-        "codestral": {"intelligence": 33, "speed": 130},
-        
-        # ===== MiniMax =====
-        "minimax-m3": {"intelligence": 44, "speed": 85},
-        
-        # ===== GLM / Zhipu =====
-        "glm-5.2": {"intelligence": 51, "speed": 114},
-        "glm-5.1": {"intelligence": 40, "speed": 100},
-        
-        # ===== Kimi =====
-        "kimi-k2.7": {"intelligence": 42, "speed": 53},
-        "kimi-k2.6": {"intelligence": 40, "speed": 73},
-        
-        # ===== Xiaomi =====
-        "mimo-v2.5-pro": {"intelligence": 42, "speed": 46},
-        
-        # ===== NVIDIA =====
-        "nemotron-3-ultra": {"intelligence": 38, "speed": 138},
-        
-        # ===== Cohere =====
-        "command-r-plus": {"intelligence": 30, "speed": 90},
-        "command-a": {"intelligence": 35, "speed": 199},
-        
-        # ===== Amazon =====
-        "nova-pro": {"intelligence": 28, "speed": 80},
-        
-        # ===== Tencent =====
-        "hy3": {"intelligence": 34, "speed": 109},
-        
-        # ===== Step =====
-        "step-3.7-flash": {"intelligence": 30, "speed": 402},
-    }
-
-    intelligence_only = {
-        key: {"intelligence": entry["intelligence"]}
-        for key, entry in model_data.items()
-    }
-    print(f"  Loaded {len(intelligence_only)} models from Artificial Analysis")
-    return intelligence_only
+    """Fetch intelligence scores from OpenRouter."""
+    return fetch_openrouter_intelligence_scores()
 
 
-def match_model_data(model_id, model_name, model_data):
-    """
-    Try to match a model to its Artificial Analysis intelligence score.
-    Returns dict with intelligence, or None.
-    """
-    model_id_lower = model_id.lower()
-    model_name_lower = model_name.lower() if model_name else ""
-    model_part = model_id_lower.split("/")[-1] if "/" in model_id_lower else model_id_lower
-    
-    # Step 1: Exact match
-    for key, data in model_data.items():
-        if model_part == key:
-            return data
-    
-    # Step 2: Match with suffixes removed
-    clean_part = model_part
-    for suffix in ["-instruct", "-chat", "-preview", "-latest", "-0528", "-0324", "-v1", "-v2"]:
-        clean_part = clean_part.replace(suffix, "")
-    
-    for key, data in model_data.items():
-        if clean_part == key:
-            return data
-    
-    # Step 3: Pattern matching
-    import re
-    patterns = [
-        (r"claude.*fable.*5", "claude-fable-5"),
-        (r"claude.*opus.*4\.[78]", "claude-opus-4.7"),
-        (r"claude.*opus.*4\.[56]", "claude-opus-4.5"),
-        (r"claude.*opus.*4\.[1234]", "claude-opus-4"),
-        (r"claude.*opus.*4\b", "claude-opus-4"),
-        (r"claude.*sonnet.*4\.[56]", "claude-sonnet-4.5"),
-        (r"claude.*sonnet.*4\b", "claude-sonnet-4"),
-        (r"claude.*sonnet.*3\.5", "claude-3.5-sonnet"),
-        (r"claude.*opus.*3", "claude-3-opus"),
-        (r"claude.*haiku.*4\.5", "claude-4.5-haiku"),
-        (r"claude.*haiku.*3\.5", "claude-3.5-haiku"),
-        (r"claude.*haiku.*3", "claude-3-haiku"),
-        
-        (r"gpt-5\.5", "gpt-5.5"),
-        (r"gpt-5\.4", "gpt-5.4"),
-        (r"gpt-5\.3", "gpt-5.3"),
-        (r"gpt-5\.2", "gpt-5.2"),
-        (r"gpt-5\.1", "gpt-5.1"),
-        (r"gpt-5(?![-.])", "gpt-5"),
-        (r"gpt-4o-mini", "gpt-4o-mini"),
-        (r"gpt-4o(?!-mini)", "gpt-4o"),
-        (r"gpt-4\.1-nano", "gpt-4.1-nano"),
-        (r"gpt-4\.1-mini", "gpt-4.1-mini"),
-        (r"gpt-4\.1", "gpt-4.1"),
-        (r"gpt-4-turbo", "gpt-4-turbo"),
-        (r"o4-mini", "o4-mini"),
-        (r"o3-mini", "o3"),
-        (r"\bo3\b", "o3"),
-        
-        (r"gemini-2\.5-pro", "gemini-2.5-pro"),
-        (r"gemini-3\.1-pro", "gemini-3.1-pro"),
-        (r"gemini-3\.1-flash-lite", "gemini-3.1-flash-lite"),
-        (r"gemini-3-flash", "gemini-3-flash"),
-        (r"gemini-2\.5-flash-lite", "gemini-2.5-flash-lite"),
-        (r"gemini-2\.5-flash", "gemini-2.5-flash"),
-        (r"gemini-2\.0-flash", "gemini-2.0-flash"),
-        (r"gemini-1\.5-pro", "gemini-1.5-pro"),
-        
-        (r"deepseek.*r1", "deepseek-r1"),
-        (r"deepseek.*v4-pro", "deepseek-v4-pro"),
-        (r"deepseek.*v4-flash", "deepseek-v4-flash"),
-        (r"deepseek.*v3\.2", "deepseek-v3.2"),
-        (r"deepseek.*v3", "deepseek-v3"),
-        (r"deepseek.*chat", "deepseek-chat"),
-        
-        (r"grok.*4\.[23]", "grok-4.3"),
-        (r"grok.*4\b", "grok-4"),
-        (r"grok.*3", "grok-3"),
-        (r"grok.*2", "grok-2"),
-        
-        (r"llama.*4.*maverick", "llama-4-maverick"),
-        (r"llama.*4.*scout", "llama-4-scout"),
-        (r"llama.*3\.1.*405", "llama-3.1-405b"),
-        (r"llama.*3\.1.*70", "llama-3.1-70b"),
-        (r"llama.*3\.3.*70", "llama-3.3-70b"),
-        
-        (r"qwen.*3\.7.*max", "qwen3.7-max"),
-        (r"qwen.*3\.6.*plus", "qwen3.6-plus"),
-        (r"qwen.*2\.5.*72", "qwen-2.5-72b"),
-        (r"\bqwq\b", "qwq-32b"),
-        
-        (r"minimax.*m3", "minimax-m3"),
-        (r"glm.*5\.2", "glm-5.2"),
-        (r"glm.*5\.1", "glm-5.1"),
-        (r"kimi.*k2\.7", "kimi-k2.7"),
-        (r"kimi.*k2\.6", "kimi-k2.6"),
-        (r"mimo.*v2\.5.*pro", "mimo-v2.5-pro"),
-        (r"nemotron.*3.*ultra", "nemotron-3-ultra"),
-        (r"command.*r.*plus", "command-r-plus"),
-        (r"command.*a", "command-a"),
-        (r"nova.*pro", "nova-pro"),
-        (r"\bhy3\b", "hy3"),
-        (r"step.*3\.7", "step-3.7-flash"),
-    ]
-    
-    for pattern, key in patterns:
-        if re.search(pattern, model_id_lower) or re.search(pattern, model_name_lower):
-            if key in model_data:
-                return model_data[key]
-    
-    return None
+def lookup_intelligence_score(model_id, canonical_slug, intelligence_map, page_stats):
+    """Resolve intelligence for an OpenRouter model."""
+    candidates = []
+    for slug in (model_id, canonical_slug):
+        if not slug:
+            continue
+        candidates.extend([slug.lower(), normalize_permaslug(slug)])
+
+    for slug in candidates:
+        if slug in intelligence_map:
+            return intelligence_map[slug]
+
+    page_stats = page_stats or {}
+    return page_stats.get("intelligence")
 
 
 def calculate_value_scores(intelligence, price, speed):
@@ -749,8 +635,8 @@ def calculate_value_scores(intelligence, price, speed):
     return (intelligence ** INTELLIGENCE_EXPONENT) * speed / price
 
 
-def process_models(openrouter_models, model_data, endpoints_map, page_stats_map):
-    """Process and combine model data from OpenRouter + AA + endpoint stats."""
+def process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map):
+    """Process and combine model data from OpenRouter + endpoint/page stats."""
     processed = []
     seen = set()
 
@@ -772,16 +658,15 @@ def process_models(openrouter_models, model_data, endpoints_map, page_stats_map)
         if blended_price is None or blended_price <= 0:
             continue
 
-        data = match_model_data(model_id, model_name, model_data)
-        intelligence = data["intelligence"] if data else None
-        speed = endpoint_metrics.get("throughput")
-        ttft = endpoint_metrics.get("ttft")
-        if speed is None or ttft is None:
-            page_stats = page_stats_map.get(model_id) or {}
-            if speed is None:
-                speed = page_stats.get("throughput")
-            if ttft is None:
-                ttft = page_stats.get("ttft")
+        page_stats = page_stats_map.get(model_id) or {}
+        intelligence = lookup_intelligence_score(
+            model_id,
+            model.get("canonical_slug"),
+            intelligence_map,
+            page_stats,
+        )
+        speed = endpoint_metrics.get("throughput") or page_stats.get("throughput")
+        ttft = endpoint_metrics.get("ttft") or page_stats.get("ttft")
 
         if "distill" in model_id.lower():
             value_score = None
@@ -975,6 +860,7 @@ def fetch_repo_meta():
 
 def main():
     """Main entry point."""
+    load_local_env()
     print("=" * 60)
     print("LLM Value Rankings - Data Fetcher")
     print("=" * 60)
@@ -985,7 +871,7 @@ def main():
         print("Error: No models fetched from OpenRouter")
         sys.exit(1)
 
-    model_data = fetch_intelligence_scores()
+    intelligence_map = fetch_intelligence_scores()
 
     candidate_ids = []
     seen_ids = set()
@@ -1000,10 +886,20 @@ def main():
         candidate_ids.append(model_id)
 
     endpoints_map = fetch_endpoints_batch(candidate_ids)
-    page_stats_map = fetch_page_stats_batch(candidate_ids, endpoints_map)
+    model_meta = {
+        model["id"]: model
+        for model in openrouter_models
+        if model.get("id")
+    }
+    page_stats_map = fetch_page_stats_batch(
+        candidate_ids,
+        endpoints_map,
+        intelligence_map=intelligence_map,
+        model_meta=model_meta,
+    )
 
     # Process and rank
-    processed = process_models(openrouter_models, model_data, endpoints_map, page_stats_map)
+    processed = process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map)
     ranked = rank_models(processed)
 
     history = load_rank_history()

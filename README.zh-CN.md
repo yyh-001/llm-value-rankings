@@ -147,12 +147,6 @@ python scripts/sync_repo_about.py
 - **Description**：`Daily LLM value rankings - compare 300+ models by intelligence, speed and price. OpenRouter + Artificial Analysis. 大模型性价比排行榜`
 - **Topics**：`llm`, `large-language-models`, `ai-ranking`, `openrouter`, `artificial-intelligence`, `model-comparison`, `benchmark`, `token-pricing`, `price-comparison`, `generative-ai`, `machine-learning`, `github-pages`, `static-site`, `deepseek`, `gpt`, `claude`, `gemini`, `value-for-money`, `llm-benchmark`, `ai-tools`
 
-### 社交预览图
-
-分享链接时的 Open Graph / Twitter 卡片图位于 [`assets/og-preview.png`](assets/og-preview.png)（1280×640）。
-
-若希望 GitHub 仓库首页分享也显示配图，可在 **Settings → General → Social preview** 上传同一张图。
-
 ---
 
 ## 项目结构
