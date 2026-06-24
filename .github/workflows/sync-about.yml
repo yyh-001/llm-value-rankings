@@ -8,6 +8,9 @@ on:
       - '.github/about.json'
       - '.github/workflows/sync-about.yml'
 
+permissions:
+  contents: read
+
 jobs:
   sync-about:
     runs-on: ubuntu-latest
@@ -16,40 +19,28 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Sync homepage, description, and topics
-        env:
-          GH_TOKEN: ${{ secrets.REPO_SETTINGS_TOKEN || github.token }}
-        run: |
-          python3 <<'PY'
-          import json, os, subprocess, sys
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.REPO_SETTINGS_TOKEN || github.token }}
+          script: |
+            const fs = require('fs');
+            const about = JSON.parse(fs.readFileSync('.github/about.json', 'utf8'));
+            const { owner, repo } = context.repo;
 
-          with open(".github/about.json", encoding="utf-8") as f:
-              about = json.load(f)
+            await github.rest.repos.update({
+              owner,
+              repo,
+              homepage: about.homepage,
+              description: about.description,
+            });
 
-          repo = os.environ["GITHUB_REPOSITORY"]
-          token = os.environ["GH_TOKEN"]
-          env = {**os.environ, "GH_TOKEN": token}
+            await github.request('PUT /repos/{owner}/{repo}/topics', {
+              owner,
+              repo,
+              names: about.topics,
+              headers: {
+                accept: 'application/vnd.github.mercy-preview+json',
+              },
+            });
 
-          def run(args):
-              result = subprocess.run(args, env=env, text=True, capture_output=True)
-              if result.returncode != 0:
-                  print(result.stdout)
-                  print(result.stderr, file=sys.stderr)
-                  sys.exit(result.returncode)
-
-          run([
-              "gh", "api", "--method", "PATCH", f"/repos/{repo}",
-              "-f", f"homepage={about['homepage']}",
-              "-f", f"description={about['description']}",
-          ])
-
-          with open("topics.json", "w", encoding="utf-8") as f:
-              json.dump({"names": about["topics"]}, f)
-
-          run([
-              "gh", "api", "--method", "PUT", f"/repos/{repo}/topics",
-              "--input", "topics.json",
-              "-H", "Accept: application/vnd.github.mercy-preview+json",
-          ])
-
-          print("Repository About synced successfully.")
-          PY
+            core.info('Repository About synced successfully.');
