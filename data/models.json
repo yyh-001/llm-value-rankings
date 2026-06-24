@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-24T05:55:45.083663Z",
-  "total_models": 299,
+  "updated_at": "2026-06-24T05:55:57.130285Z",
+  "total_models": 300,
   "ranked_models": 109,
   "rank_compared_to": "2026-06-23",
   "models": [
@@ -2182,6 +2182,26 @@
       "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
       "rank": 109,
       "rank_change": 0,
+      "rank_new": false
+    },
+    {
+      "id": "sakana/fugu-ultra",
+      "name": "Sakana: Fugu Ultra",
+      "provider": "sakana",
+      "provider_display": "Sakana",
+      "context_length": 1000000,
+      "pricing": {
+        "prompt": 5.0,
+        "completion": 30.0,
+        "blended": 17.5
+      },
+      "intelligence_score": null,
+      "speed": null,
+      "value_score": null,
+      "created": 1782276303,
+      "description": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
+      "rank": null,
+      "rank_change": null,
       "rank_new": false
     },
     {
@@ -5317,7 +5337,7 @@
       },
       "intelligence_score": 38,
       "speed": 87,
-      "value_score": null,
+      "value_score": 5967330.0,
       "created": 1737663169,
       "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
       "rank": null,
