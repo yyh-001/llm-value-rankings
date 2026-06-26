@@ -52,6 +52,13 @@ OUTPUT_TOKEN_WEIGHT = 1
 USD_TO_CNY = 7.25
 # Official provider API prices (CNY / 1M tokens) when OpenRouter resell pricing differs.
 OFFICIAL_PRICING_CNY_PER_M = {
+    "deepseek/deepseek-v4-flash": {
+        "prompt": 1.0,
+        "cache_read": 0.02,
+        "completion": 2.0,
+        "source_label": "DeepSeek 官方 API",
+        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+    },
     "deepseek/deepseek-v4-pro": {
         "prompt": 3.0,
         "cache_read": 0.025,
