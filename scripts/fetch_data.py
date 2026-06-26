@@ -59,6 +59,13 @@ OFFICIAL_PRICING_CNY_PER_M = {
         "source_label": "DeepSeek 官方 API",
         "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
     },
+    "xiaomi/mimo-v2.5-pro": {
+        "prompt": 3.0,
+        "cache_read": 0.025,
+        "completion": 6.0,
+        "source_label": "Xiaomi MiMo 官方 API",
+        "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
+    },
 }
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
 OPENROUTER_MODEL_PAGE = "https://openrouter.ai/{model_id}"
