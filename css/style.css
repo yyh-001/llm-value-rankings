@@ -1674,6 +1674,34 @@ body.modal-open {
 
 .footer-inner p { margin-bottom: 0.375rem; }
 
+.footer-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.footer-stat-value {
+    margin-left: 0.25rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.footer-stat-sep {
+    opacity: 0.45;
+    user-select: none;
+}
+
+#busuanzi_container_site_pv,
+#busuanzi_container_site_uv {
+    display: inline-flex;
+    align-items: center;
+}
+
 /* ===== Animations ===== */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }

@@ -62,6 +62,8 @@ const translations = {
         // Footer
         footer_text: "数据来源：OpenRouter",
         footer_auto: "本页面数据由GitHub Actions自动更新，无需人工维护",
+        footer_site_pv: "总访问量",
+        footer_site_uv: "访客数",
         version_label: "版本",
         card_tap_hint: "点击查看详情",
         
@@ -145,6 +147,8 @@ const translations = {
         // Footer
         footer_text: "Data sources: OpenRouter",
         footer_auto: "This page is automatically updated by GitHub Actions",
+        footer_site_pv: "Total visits",
+        footer_site_uv: "Unique visitors",
         version_label: "Version",
         card_tap_hint: "Tap for details",
         
