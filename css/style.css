@@ -1696,8 +1696,7 @@ body.modal-open {
     user-select: none;
 }
 
-#busuanzi_container_site_pv,
-#busuanzi_container_site_uv {
+.footer-stat-item {
     display: inline-flex;
     align-items: center;
 }
