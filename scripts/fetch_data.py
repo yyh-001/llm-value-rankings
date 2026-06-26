@@ -272,6 +272,17 @@ def apply_official_pricing_override(model_id, pricing_payload):
     return updated
 
 
+def apply_pricing_channel_label(model_id, pricing_payload):
+    """Ensure every model has a visible pricing channel label."""
+    if not pricing_payload:
+        return pricing_payload
+
+    if not pricing_payload.get("pricing_source"):
+        pricing_payload["pricing_source"] = "OpenRouter"
+        pricing_payload["pricing_source_url"] = OPENROUTER_MODEL_PAGE.format(model_id=model_id)
+    return pricing_payload
+
+
 def fetch_model_endpoints(model_id, session=None):
     """Fetch per-provider endpoint stats for a model."""
     url = OPENROUTER_ENDPOINTS_API.format(model_id=model_id)
@@ -771,6 +782,7 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
         endpoint_metrics = aggregate_endpoint_metrics(endpoints_map.get(model_id, []))
         pricing_payload = build_pricing_payload(pricing, endpoint_metrics)
         pricing_payload = apply_official_pricing_override(model_id, pricing_payload)
+        pricing_payload = apply_pricing_channel_label(model_id, pricing_payload)
         blended_price = pricing_payload.get("blended")
         if blended_price is None or blended_price <= 0:
             continue

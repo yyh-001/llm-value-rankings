@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T03:52:39.318336Z",
+  "updated_at": "2026-06-26T03:55:23.825609Z",
   "total_models": 300,
   "ranked_models": 30,
   "rank_compared_to": "2026-06-25",
@@ -16,9 +16,11 @@
         "prompt": 1.406958,
         "completion": 4.5156,
         "cache_read": 0.252124,
-        "blended": 1.6283,
+        "blended": 1.5778,
         "blended_list": 2.1841,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-5.2"
       },
       "intelligence_score": 51,
       "speed": 124.0,
@@ -42,12 +44,14 @@
         "cache_read": 0.15,
         "blended": 2.6662,
         "blended_list": 3.375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3.5-flash"
       },
       "intelligence_score": 50,
       "speed": 137.0,
       "ttft": 1.591,
-      "value_score": 52.7,
+      "value_score": 51.0,
       "created": 1779193800,
       "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
       "rank": 2,
@@ -73,7 +77,7 @@
       "intelligence_score": 44,
       "speed": 61.0,
       "ttft": 0.476,
-      "value_score": 47.6,
+      "value_score": 46.1,
       "created": 1777000679,
       "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
       "rank": 3,
@@ -90,14 +94,16 @@
         "prompt": 0.12903,
         "completion": 0.259687,
         "cache_read": 0.029587,
-        "blended": 0.1183,
+        "blended": 0.1095,
         "blended_list": 0.1617,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-v4-flash"
       },
       "intelligence_score": 40,
       "speed": 81.0,
       "ttft": 0.57,
-      "value_score": 40.7,
+      "value_score": 42.6,
       "created": 1777000666,
       "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
       "rank": 4,
@@ -116,12 +122,14 @@
         "cache_read": 0.5,
         "blended": 7.6375,
         "blended_list": 10.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.8"
       },
       "intelligence_score": 56,
       "speed": 59.0,
       "ttft": 1.687,
-      "value_score": 31.8,
+      "value_score": 30.9,
       "created": 1779905091,
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "rank": 5,
@@ -138,14 +146,16 @@
         "prompt": 0.34012,
         "completion": 1.36048,
         "cache_read": 0.06,
-        "blended": 0.4861,
+        "blended": 0.4481,
         "blended_list": 0.5952,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m3"
       },
       "intelligence_score": 44,
       "speed": 58.0,
       "ttft": 0.845,
-      "value_score": 28.4,
+      "value_score": 29.8,
       "created": 1780245374,
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "rank": 6,
@@ -164,12 +174,14 @@
         "cache_read": 0.5,
         "blended": 7.6375,
         "blended_list": 10.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.7"
       },
       "intelligence_score": 54,
       "speed": 64.0,
       "ttft": 1.19,
-      "value_score": 23.4,
+      "value_score": 22.7,
       "created": 1776351100,
       "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
       "rank": 7,
@@ -188,12 +200,14 @@
         "cache_read": 0.25,
         "blended": 4.4437,
         "blended_list": 5.625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.4"
       },
       "intelligence_score": 51,
       "speed": 60.0,
       "ttft": 0.777,
-      "value_score": 20.5,
+      "value_score": 19.9,
       "created": 1772734352,
       "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
       "rank": 8,
@@ -210,14 +224,16 @@
         "prompt": 0.817897,
         "completion": 3.683129,
         "cache_read": 0.182332,
-        "blended": 1.2182,
+        "blended": 1.2005,
         "blended_list": 1.5342,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2.6"
       },
       "intelligence_score": 43,
       "speed": 137.0,
       "ttft": 0.158,
-      "value_score": 16.4,
+      "value_score": 16.1,
       "created": 1776699402,
       "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
       "rank": 9,
@@ -236,12 +252,14 @@
         "cache_read": 0.500258,
         "blended": 8.8921,
         "blended_list": 11.2558,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.5"
       },
       "intelligence_score": 55,
       "speed": 34.0,
       "ttft": 3.192,
-      "value_score": 14.7,
+      "value_score": 14.2,
       "created": 1777051893,
       "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
       "rank": 10,
@@ -260,16 +278,70 @@
         "cache_read": 0.25,
         "blended": 1.35,
         "blended_list": 1.875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.7-max"
       },
       "intelligence_score": 46,
       "speed": 42.0,
       "ttft": 1.711,
-      "value_score": 14.4,
+      "value_score": 13.9,
       "created": 1779376861,
       "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
       "rank": 11,
       "rank_change": -2,
+      "rank_new": false
+    },
+    {
+      "id": "minimax/minimax-m2.7",
+      "name": "MiniMax: MiniMax M2.7",
+      "provider": "minimax",
+      "provider_display": "Minimax",
+      "context_length": 204800,
+      "pricing": {
+        "prompt": 0.602162,
+        "completion": 2.116456,
+        "cache_read": 0.055741,
+        "blended": 0.6939,
+        "blended_list": 0.9807,
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m2.7"
+      },
+      "intelligence_score": 38,
+      "speed": 299.0,
+      "ttft": 0.78,
+      "value_score": 10.5,
+      "created": 1773836697,
+      "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
+      "rank": 12,
+      "rank_change": 4,
+      "rank_new": false
+    },
+    {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "name": "Xiaomi: MiMo-V2.5-Pro",
+      "provider": "xiaomi",
+      "provider_display": "Xiaomi",
+      "context_length": 1048576,
+      "pricing": {
+        "prompt": 0.518912,
+        "completion": 1.635891,
+        "cache_read": 0.003951,
+        "blended": 0.5278,
+        "blended_list": 0.7982,
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/xiaomi/mimo-v2.5-pro"
+      },
+      "intelligence_score": 42,
+      "speed": 42.0,
+      "ttft": 1.101,
+      "value_score": 10.2,
+      "created": 1776874273,
+      "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
+      "rank": 13,
+      "rank_change": 1,
       "rank_new": false
     },
     {
@@ -284,40 +356,18 @@
         "cache_read": 0.2,
         "blended": 3.555,
         "blended_list": 4.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3.1-pro-preview"
       },
       "intelligence_score": 46,
       "speed": 92.0,
       "ttft": 2.588,
-      "value_score": 10.2,
+      "value_score": 9.9,
       "created": 1771509627,
       "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
-      "rank": 12,
-      "rank_change": 0,
-      "rank_new": false
-    },
-    {
-      "id": "xiaomi/mimo-v2.5-pro",
-      "name": "Xiaomi: MiMo-V2.5-Pro",
-      "provider": "xiaomi",
-      "provider_display": "Xiaomi",
-      "context_length": 1048576,
-      "pricing": {
-        "prompt": 0.518912,
-        "completion": 1.635891,
-        "cache_read": 0.003951,
-        "blended": 0.6318,
-        "blended_list": 0.7982,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 42,
-      "speed": 42.0,
-      "ttft": 1.101,
-      "value_score": 8.8,
-      "created": 1776874273,
-      "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
-      "rank": 13,
-      "rank_change": 1,
+      "rank": 14,
+      "rank_change": -2,
       "rank_new": false
     },
     {
@@ -332,40 +382,18 @@
         "cache_read": 0.196847,
         "blended": 1.3796,
         "blended_list": 1.7829,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2.7-code"
       },
       "intelligence_score": 42,
       "speed": 109.0,
       "ttft": 0.451,
-      "value_score": 8.6,
+      "value_score": 8.4,
       "created": 1781266361,
       "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
-      "rank": 14,
-      "rank_change": -1,
-      "rank_new": false
-    },
-    {
-      "id": "minimax/minimax-m2.7",
-      "name": "MiniMax: MiniMax M2.7",
-      "provider": "minimax",
-      "provider_display": "Minimax",
-      "context_length": 204800,
-      "pricing": {
-        "prompt": 0.602162,
-        "completion": 2.116456,
-        "cache_read": 0.055741,
-        "blended": 0.9078,
-        "blended_list": 0.9807,
-        "cache_hit_rate": 0.7
-      },
-      "intelligence_score": 38,
-      "speed": 299.0,
-      "ttft": 0.78,
-      "value_score": 8.3,
-      "created": 1773836697,
-      "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "rank": 15,
-      "rank_change": 1,
+      "rank_change": -2,
       "rank_new": false
     },
     {
@@ -380,12 +408,14 @@
         "cache_read": 0.3,
         "blended": 4.5825,
         "blended_list": 6.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-sonnet-4.6"
       },
       "intelligence_score": 47,
       "speed": 56.0,
       "ttft": 0.849,
-      "value_score": 7.0,
+      "value_score": 6.8,
       "created": 1771342990,
       "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
       "rank": 16,
@@ -404,12 +434,14 @@
         "cache_read": 0.02,
         "blended": 0.368,
         "blended_list": 0.4625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.4-nano"
       },
       "intelligence_score": 38,
       "speed": 54.0,
       "ttft": 1.271,
-      "value_score": 5.2,
+      "value_score": 5.0,
       "created": 1773748187,
       "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
       "rank": 17,
@@ -426,14 +458,16 @@
         "prompt": 0.175366,
         "completion": 1.053964,
         "cache_read": 0.154009,
-        "blended": 0.382,
+        "blended": 0.3838,
         "blended_list": 0.395,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.6-35b-a3b"
       },
       "intelligence_score": 32,
       "speed": 195.0,
       "ttft": 0.331,
-      "value_score": 4.6,
+      "value_score": 4.5,
       "created": 1777260255,
       "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
       "rank": 18,
@@ -450,14 +484,16 @@
         "prompt": 1.265031,
         "completion": 4.034463,
         "cache_read": 0.271322,
-        "blended": 1.463,
+        "blended": 1.4357,
         "blended_list": 1.9574,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-5.1"
       },
       "intelligence_score": 40,
       "speed": 106.0,
       "ttft": 0.385,
-      "value_score": 4.1,
+      "value_score": 4.0,
       "created": 1775578025,
       "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
       "rank": 19,
@@ -476,12 +512,14 @@
         "cache_read": 0.075,
         "blended": 1.3331,
         "blended_list": 1.6875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.4-mini"
       },
       "intelligence_score": 40,
       "speed": 93.0,
       "ttft": 0.619,
-      "value_score": 4.0,
+      "value_score": 3.9,
       "created": 1773748178,
       "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
       "rank": 20,
@@ -498,14 +536,16 @@
         "prompt": 0.527242,
         "completion": 3.350839,
         "cache_read": 0.31054,
-        "blended": 1.1704,
+        "blended": 1.1194,
         "blended_list": 1.2331,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-397b-a17b"
       },
       "intelligence_score": 34,
       "speed": 179.0,
       "ttft": 0.78,
-      "value_score": 2.6,
+      "value_score": 2.7,
       "created": 1771223018,
       "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
       "rank": 21,
@@ -524,7 +564,9 @@
         "cache_read": 0.2,
         "blended": 1.0112,
         "blended_list": 1.5625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/x-ai/grok-4.3"
       },
       "intelligence_score": 38,
       "speed": 67.0,
@@ -548,7 +590,9 @@
         "cache_read": null,
         "blended": 0.7312,
         "blended_list": 0.7312,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.6-plus"
       },
       "intelligence_score": 40,
       "speed": 21.0,
@@ -570,14 +614,16 @@
         "prompt": 0.369705,
         "completion": 2.94356,
         "cache_read": 0.139732,
-        "blended": 0.9522,
+        "blended": 0.8924,
         "blended_list": 1.0132,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.6-27b"
       },
       "intelligence_score": 37,
       "speed": 58.0,
       "ttft": 0.773,
-      "value_score": 1.7,
+      "value_score": 1.8,
       "created": 1777255064,
       "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
       "rank": 24,
@@ -596,7 +642,9 @@
         "cache_read": 0.064,
         "blended": 0.4256,
         "blended_list": 0.56,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.7-plus"
       },
       "intelligence_score": 39,
       "speed": 8.0,
@@ -618,14 +666,16 @@
         "prompt": 0.306545,
         "completion": 2.452361,
         "cache_read": 0.3,
-        "blended": 0.843,
+        "blended": 0.8396,
         "blended_list": 0.843,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-122b-a10b"
       },
       "intelligence_score": 32,
       "speed": 105.0,
       "ttft": 0.688,
-      "value_score": 1.3,
+      "value_score": 1.2,
       "created": 1772053789,
       "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
       "rank": 26,
@@ -644,7 +694,9 @@
         "cache_read": 0.015,
         "blended": 0.181,
         "blended_list": 0.2125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inclusionai/ring-2.6-1t"
       },
       "intelligence_score": 31,
       "speed": 37.0,
@@ -668,7 +720,9 @@
         "cache_read": 0.04,
         "blended": 0.3535,
         "blended_list": 0.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/stepfun/step-3.7-flash"
       },
       "intelligence_score": 30,
       "speed": 38.0,
@@ -692,7 +746,9 @@
         "cache_read": 0.1,
         "blended": 1.5275,
         "blended_list": 2.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-haiku-4.5"
       },
       "intelligence_score": 30,
       "speed": 97.5,
@@ -716,7 +772,9 @@
         "cache_read": null,
         "blended": 3.0,
         "blended_list": 3.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-medium-3-5"
       },
       "intelligence_score": 30,
       "speed": 63.0,
@@ -740,7 +798,9 @@
         "cache_read": 0.5,
         "blended": 8.8875,
         "blended_list": 11.25,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/sakana/fugu-ultra"
       },
       "intelligence_score": null,
       "speed": 44.0,
@@ -762,9 +822,11 @@
         "prompt": 10.0,
         "completion": 50.0,
         "cache_read": 1.0,
-        "blended": 20.0,
+        "blended": 15.275,
         "blended_list": 20.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~anthropic/claude-fable-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -788,7 +850,9 @@
         "cache_read": 1.0,
         "blended": 15.275,
         "blended_list": 20.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-fable-5"
       },
       "intelligence_score": 60,
       "speed": null,
@@ -812,7 +876,9 @@
         "cache_read": 0.137952,
         "blended": 0.5952,
         "blended_list": 0.7199,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nex-agi/nex-n2-pro"
       },
       "intelligence_score": null,
       "speed": 89.0,
@@ -834,9 +900,11 @@
         "prompt": 0.5,
         "completion": 2.2,
         "cache_read": 0.1,
-        "blended": 0.925,
+        "blended": 0.715,
         "blended_list": 0.925,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nvidia/nemotron-3-ultra-550b-a55b"
       },
       "intelligence_score": 38,
       "speed": null,
@@ -860,7 +928,9 @@
         "cache_read": 1.0,
         "blended": 15.275,
         "blended_list": 20.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.8-fast"
       },
       "intelligence_score": null,
       "speed": 116.0,
@@ -884,7 +954,9 @@
         "cache_read": 0.2,
         "blended": 0.83,
         "blended_list": 1.25,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/x-ai/grok-build-0.1"
       },
       "intelligence_score": null,
       "speed": 123.0,
@@ -908,7 +980,9 @@
         "cache_read": 3.0,
         "blended": 45.825,
         "blended_list": 60.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.7-fast"
       },
       "intelligence_score": null,
       "speed": 53.5,
@@ -932,7 +1006,9 @@
         "cache_read": null,
         "blended": 0.4875,
         "blended_list": 0.4875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perceptron/perceptron-mk1"
       },
       "intelligence_score": null,
       "speed": 36.0,
@@ -956,7 +1032,9 @@
         "cache_read": 0.025,
         "blended": 0.4444,
         "blended_list": 0.5625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3.1-flash-lite"
       },
       "intelligence_score": null,
       "speed": 126.0,
@@ -980,7 +1058,9 @@
         "cache_read": 0.5,
         "blended": 8.8875,
         "blended_list": 11.25,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-chat-latest"
       },
       "intelligence_score": null,
       "speed": 52.0,
@@ -1004,7 +1084,9 @@
         "cache_read": 0.05,
         "blended": 0.0625,
         "blended_list": 0.0625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/ibm-granite/granite-4.1-8b"
       },
       "intelligence_score": null,
       "speed": 99.0,
@@ -1026,9 +1108,11 @@
         "prompt": 0.1,
         "completion": 0.2,
         "cache_read": 0.05,
-        "blended": 0.125,
+        "blended": 0.0988,
         "blended_list": 0.125,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/poolside/laguna-xs.2"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1050,9 +1134,11 @@
         "prompt": 0.2,
         "completion": 0.4,
         "cache_read": 0.1,
-        "blended": 0.25,
+        "blended": 0.1975,
         "blended_list": 0.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/poolside/laguna-m.1"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1074,9 +1160,11 @@
         "prompt": 1.0,
         "completion": 5.0,
         "cache_read": 0.1,
-        "blended": 2.0,
+        "blended": 1.5275,
         "blended_list": 2.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~anthropic/claude-haiku-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1098,9 +1186,11 @@
         "prompt": 0.75,
         "completion": 4.5,
         "cache_read": 0.075,
-        "blended": 1.6875,
+        "blended": 1.3331,
         "blended_list": 1.6875,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~openai/gpt-mini-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1122,9 +1212,11 @@
         "prompt": 2.0,
         "completion": 12.0,
         "cache_read": 0.2,
-        "blended": 4.5,
+        "blended": 3.555,
         "blended_list": 4.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~google/gemini-pro-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1146,9 +1238,11 @@
         "prompt": 0.66,
         "completion": 3.41,
         "cache_read": 0.144,
-        "blended": 1.3475,
+        "blended": 1.0766,
         "blended_list": 1.3475,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~moonshotai/kimi-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1170,9 +1264,11 @@
         "prompt": 1.5,
         "completion": 9.0,
         "cache_read": 0.15,
-        "blended": 3.375,
+        "blended": 2.6662,
         "blended_list": 3.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~google/gemini-flash-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1194,9 +1290,11 @@
         "prompt": 3.0,
         "completion": 15.0,
         "cache_read": 0.3,
-        "blended": 6.0,
+        "blended": 4.5825,
         "blended_list": 6.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~anthropic/claude-sonnet-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1218,9 +1316,11 @@
         "prompt": 5.0,
         "completion": 30.0,
         "cache_read": 0.5,
-        "blended": 11.25,
+        "blended": 8.8875,
         "blended_list": 11.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~openai/gpt-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1244,7 +1344,9 @@
         "cache_read": null,
         "blended": 0.675,
         "blended_list": 0.675,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-plus-20260420"
       },
       "intelligence_score": null,
       "speed": 12.0,
@@ -1268,7 +1370,9 @@
         "cache_read": null,
         "blended": 0.4219,
         "blended_list": 0.4219,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.6-flash"
       },
       "intelligence_score": null,
       "speed": 97.0,
@@ -1292,7 +1396,9 @@
         "cache_read": null,
         "blended": 2.34,
         "blended_list": 2.34,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.6-max-preview"
       },
       "intelligence_score": null,
       "speed": 32.0,
@@ -1316,7 +1422,9 @@
         "cache_read": null,
         "blended": 67.5,
         "blended_list": 67.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.5-pro"
       },
       "intelligence_score": null,
       "speed": 16.0,
@@ -1340,7 +1448,9 @@
         "cache_read": 0.015,
         "blended": 0.181,
         "blended_list": 0.2125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inclusionai/ling-2.6-1t"
       },
       "intelligence_score": null,
       "speed": 28.0,
@@ -1364,7 +1474,9 @@
         "cache_read": 0.025021,
         "blended": 0.0864,
         "blended_list": 0.1072,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/tencent/hy3-preview"
       },
       "intelligence_score": null,
       "speed": 37.0,
@@ -1386,9 +1498,11 @@
         "prompt": 0.140142,
         "completion": 0.303357,
         "cache_read": 0.032514,
-        "blended": 0.137,
+        "blended": 0.1244,
         "blended_list": 0.1809,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/xiaomi/mimo-v2.5"
       },
       "intelligence_score": null,
       "speed": 64.0,
@@ -1412,7 +1526,9 @@
         "cache_read": 0.002,
         "blended": 0.0108,
         "blended_list": 0.015,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inclusionai/ling-2.6-flash"
       },
       "intelligence_score": null,
       "speed": 144.0,
@@ -1434,9 +1550,11 @@
         "prompt": 5.0,
         "completion": 25.0,
         "cache_read": 0.5,
-        "blended": 10.0,
+        "blended": 7.6375,
         "blended_list": 10.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/~anthropic/claude-opus-latest"
       },
       "intelligence_score": null,
       "speed": null,
@@ -1460,7 +1578,9 @@
         "cache_read": 3.0,
         "blended": 45.825,
         "blended_list": 60.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.6-fast"
       },
       "intelligence_score": null,
       "speed": 66.0,
@@ -1484,7 +1604,9 @@
         "cache_read": null,
         "blended": 0.1275,
         "blended_list": 0.1275,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-4-26b-a4b-it"
       },
       "intelligence_score": 26,
       "speed": null,
@@ -1506,9 +1628,11 @@
         "prompt": 0.12,
         "completion": 0.35,
         "cache_read": 0.09,
-        "blended": 0.1775,
+        "blended": 0.1618,
         "blended_list": 0.1775,
-        "cache_hit_rate": null
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-4-31b-it"
       },
       "intelligence_score": 29,
       "speed": null,
@@ -1532,7 +1656,9 @@
         "cache_read": 0.24,
         "blended": 1.396,
         "blended_list": 1.9,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-5v-turbo"
       },
       "intelligence_score": null,
       "speed": 34.0,
@@ -1556,7 +1682,9 @@
         "cache_read": 0.06,
         "blended": 0.2878,
         "blended_list": 0.3875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/arcee-ai/trinity-large-thinking"
       },
       "intelligence_score": null,
       "speed": 113.5,
@@ -1580,7 +1708,9 @@
         "cache_read": 0.2,
         "blended": 1.0112,
         "blended_list": 1.5625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/x-ai/grok-4.20-multi-agent"
       },
       "intelligence_score": null,
       "speed": 725.0,
@@ -1604,7 +1734,9 @@
         "cache_read": 0.2,
         "blended": 1.0112,
         "blended_list": 1.5625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/x-ai/grok-4.20"
       },
       "intelligence_score": null,
       "speed": 180.0,
@@ -1628,7 +1760,9 @@
         "cache_read": 0.06,
         "blended": 0.399,
         "blended_list": 0.525,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/kwaipilot/kat-coder-pro-v2"
       },
       "intelligence_score": null,
       "speed": 66.0,
@@ -1652,7 +1786,9 @@
         "cache_read": null,
         "blended": 0.1,
         "blended_list": 0.1,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/rekaai/reka-edge"
       },
       "intelligence_score": null,
       "speed": 9.5,
@@ -1674,9 +1810,11 @@
         "prompt": 0.168704,
         "completion": 0.674816,
         "cache_read": 0.015,
-        "blended": 0.2597,
+        "blended": 0.2145,
         "blended_list": 0.2952,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-small-2603"
       },
       "intelligence_score": null,
       "speed": 122.0,
@@ -1700,7 +1838,9 @@
         "cache_read": 0.24,
         "blended": 1.396,
         "blended_list": 1.9,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-5-turbo"
       },
       "intelligence_score": null,
       "speed": 13.0,
@@ -1724,7 +1864,9 @@
         "cache_read": null,
         "blended": 0.1638,
         "blended_list": 0.1638,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nvidia/nemotron-3-super-120b-a12b"
       },
       "intelligence_score": 25,
       "speed": null,
@@ -1748,7 +1890,9 @@
         "cache_read": null,
         "blended": 0.6875,
         "blended_list": 0.6875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/bytedance-seed/seed-2.0-lite"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -1772,7 +1916,9 @@
         "cache_read": null,
         "blended": 0.1317,
         "blended_list": 0.1317,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-9b"
       },
       "intelligence_score": null,
       "speed": 37.0,
@@ -1796,7 +1942,9 @@
         "cache_read": null,
         "blended": 67.5,
         "blended_list": 67.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.4-pro"
       },
       "intelligence_score": null,
       "speed": 2.0,
@@ -1820,7 +1968,9 @@
         "cache_read": 0.025,
         "blended": 0.2569,
         "blended_list": 0.375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inception/mercury-2"
       },
       "intelligence_score": null,
       "speed": 473.0,
@@ -1844,7 +1994,9 @@
         "cache_read": 0.175,
         "blended": 3.9856,
         "blended_list": 4.8125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.3-chat"
       },
       "intelligence_score": null,
       "speed": 58.0,
@@ -1868,7 +2020,9 @@
         "cache_read": 0.025,
         "blended": 0.4444,
         "blended_list": 0.5625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3.1-flash-lite-preview"
       },
       "intelligence_score": 25,
       "speed": 111.0,
@@ -1892,7 +2046,9 @@
         "cache_read": null,
         "blended": 0.175,
         "blended_list": 0.175,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/bytedance-seed/seed-2.0-mini"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -1914,9 +2070,11 @@
         "prompt": 0.205134,
         "completion": 1.329825,
         "cache_read": 0.146275,
-        "blended": 0.4661,
+        "blended": 0.4554,
         "blended_list": 0.4863,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-35b-a3b"
       },
       "intelligence_score": null,
       "speed": 220.0,
@@ -1938,9 +2096,11 @@
         "prompt": 0.255007,
         "completion": 2.143974,
         "cache_read": 0.27,
-        "blended": 0.7272,
+        "blended": 0.7351,
         "blended_list": 0.7272,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-27b"
       },
       "intelligence_score": null,
       "speed": 42.0,
@@ -1964,7 +2124,9 @@
         "cache_read": null,
         "blended": 0.1138,
         "blended_list": 0.1138,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-flash-02-23"
       },
       "intelligence_score": null,
       "speed": 38.0,
@@ -1988,7 +2150,9 @@
         "cache_read": null,
         "blended": 0.0525,
         "blended_list": 0.0525,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/liquid/lfm-2-24b-a2b"
       },
       "intelligence_score": null,
       "speed": 65.0,
@@ -2012,7 +2176,9 @@
         "cache_read": 0.2,
         "blended": 3.555,
         "blended_list": 4.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3.1-pro-preview-customtools"
       },
       "intelligence_score": null,
       "speed": 88.0,
@@ -2036,7 +2202,9 @@
         "cache_read": 0.175,
         "blended": 3.9856,
         "blended_list": 4.8125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.3-codex"
       },
       "intelligence_score": null,
       "speed": 60.0,
@@ -2060,7 +2228,9 @@
         "cache_read": 0.2,
         "blended": 0.685,
         "blended_list": 1.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/aion-labs/aion-2.0"
       },
       "intelligence_score": null,
       "speed": 31.0,
@@ -2084,7 +2254,9 @@
         "cache_read": null,
         "blended": 0.585,
         "blended_list": 0.585,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3.5-plus-02-15"
       },
       "intelligence_score": null,
       "speed": 48.0,
@@ -2106,9 +2278,11 @@
         "prompt": 0.261988,
         "completion": 1.191142,
         "cache_read": 0.0866,
-        "blended": 0.4094,
+        "blended": 0.4022,
         "blended_list": 0.4943,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m2.5"
       },
       "intelligence_score": null,
       "speed": 184.0,
@@ -2132,7 +2306,9 @@
         "cache_read": 0.200721,
         "blended": 0.9679,
         "blended_list": 1.3072,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-5"
       },
       "intelligence_score": null,
       "speed": 84.0,
@@ -2156,7 +2332,9 @@
         "cache_read": null,
         "blended": 1.56,
         "blended_list": 1.56,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-max-thinking"
       },
       "intelligence_score": null,
       "speed": 41.0,
@@ -2180,7 +2358,9 @@
         "cache_read": 0.5,
         "blended": 7.6375,
         "blended_list": 10.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.6"
       },
       "intelligence_score": null,
       "speed": 38.0,
@@ -2202,9 +2382,11 @@
         "prompt": 0.158089,
         "completion": 1.070417,
         "cache_read": 0.089043,
-        "blended": 0.3616,
+        "blended": 0.3499,
         "blended_list": 0.3862,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-coder-next"
       },
       "intelligence_score": null,
       "speed": 113.0,
@@ -2226,9 +2408,11 @@
         "prompt": 0.094953,
         "completion": 0.3,
         "cache_read": 0.02,
-        "blended": 0.1277,
+        "blended": 0.1069,
         "blended_list": 0.1462,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/stepfun/step-3.5-flash"
       },
       "intelligence_score": null,
       "speed": 38.0,
@@ -2252,7 +2436,9 @@
         "cache_read": 0.12658,
         "blended": 0.8289,
         "blended_list": 1.0288,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2.5"
       },
       "intelligence_score": null,
       "speed": 65.0,
@@ -2276,7 +2462,9 @@
         "cache_read": 0.015,
         "blended": 0.1916,
         "blended_list": 0.2625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/upstage/solar-pro-3"
       },
       "intelligence_score": 14,
       "speed": 8.0,
@@ -2300,7 +2488,9 @@
         "cache_read": 0.03,
         "blended": 0.3832,
         "blended_list": 0.525,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m2-her"
       },
       "intelligence_score": null,
       "speed": 26.0,
@@ -2324,7 +2514,9 @@
         "cache_read": null,
         "blended": 1.95,
         "blended_list": 1.95,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/writer/palmyra-x5"
       },
       "intelligence_score": null,
       "speed": 60.5,
@@ -2348,7 +2540,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-audio"
       },
       "intelligence_score": null,
       "speed": 81.0,
@@ -2372,7 +2566,9 @@
         "cache_read": null,
         "blended": 1.05,
         "blended_list": 1.05,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-audio-mini"
       },
       "intelligence_score": null,
       "speed": 101.0,
@@ -2394,9 +2590,11 @@
         "prompt": 0.081647,
         "completion": 0.433048,
         "cache_read": 0.01,
-        "blended": 0.1606,
+        "blended": 0.1319,
         "blended_list": 0.1695,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.7-flash"
       },
       "intelligence_score": null,
       "speed": 29.0,
@@ -2420,7 +2618,9 @@
         "cache_read": 0.175,
         "blended": 3.9856,
         "blended_list": 4.8125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.2-codex"
       },
       "intelligence_score": null,
       "speed": 133.0,
@@ -2444,7 +2644,9 @@
         "cache_read": null,
         "blended": 0.1312,
         "blended_list": 0.1312,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/bytedance-seed/seed-1.6-flash"
       },
       "intelligence_score": null,
       "speed": 53.0,
@@ -2468,7 +2670,9 @@
         "cache_read": null,
         "blended": 0.6875,
         "blended_list": 0.6875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/bytedance-seed/seed-1.6"
       },
       "intelligence_score": null,
       "speed": 49.0,
@@ -2492,7 +2696,9 @@
         "cache_read": 0.03,
         "blended": 0.4431,
         "blended_list": 0.5836,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m2.1"
       },
       "intelligence_score": null,
       "speed": 72.0,
@@ -2514,9 +2720,11 @@
         "prompt": 0.865921,
         "completion": 2.241224,
         "cache_read": 0.643333,
-        "blended": 1.0883,
+        "blended": 1.0929,
         "blended_list": 1.2097,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.7"
       },
       "intelligence_score": null,
       "speed": 256.5,
@@ -2538,9 +2746,11 @@
         "prompt": 0.5,
         "completion": 3.0,
         "cache_read": 0.05,
-        "blended": 0.8887,
+        "blended": 0.8888,
         "blended_list": 1.125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-3-flash-preview"
       },
       "intelligence_score": null,
       "speed": 64.0,
@@ -2564,7 +2774,9 @@
         "cache_read": null,
         "blended": 0.0875,
         "blended_list": 0.0875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nvidia/nemotron-3-nano-30b-a3b"
       },
       "intelligence_score": null,
       "speed": null,
@@ -2588,7 +2800,9 @@
         "cache_read": 0.175,
         "blended": 3.9856,
         "blended_list": 4.8125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.2-chat"
       },
       "intelligence_score": null,
       "speed": 88.0,
@@ -2612,7 +2826,9 @@
         "cache_read": null,
         "blended": 57.75,
         "blended_list": 57.75,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.2-pro"
       },
       "intelligence_score": null,
       "speed": 4.0,
@@ -2636,7 +2852,9 @@
         "cache_read": 0.175,
         "blended": 3.9856,
         "blended_list": 4.8125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.2"
       },
       "intelligence_score": null,
       "speed": 43.0,
@@ -2660,7 +2878,9 @@
         "cache_read": 0.04,
         "blended": 0.611,
         "blended_list": 0.8,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/devstral-2512"
       },
       "intelligence_score": null,
       "speed": 10.0,
@@ -2684,7 +2904,9 @@
         "cache_read": null,
         "blended": 1.5,
         "blended_list": 1.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/relace/relace-search"
       },
       "intelligence_score": null,
       "speed": 12.0,
@@ -2708,7 +2930,9 @@
         "cache_read": 0.05,
         "blended": 0.3187,
         "blended_list": 0.45,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.6v"
       },
       "intelligence_score": null,
       "speed": 28.0,
@@ -2732,7 +2956,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.1-codex-max"
       },
       "intelligence_score": null,
       "speed": 85.0,
@@ -2756,7 +2982,9 @@
         "cache_read": null,
         "blended": 0.85,
         "blended_list": 0.85,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/amazon/nova-2-lite-v1"
       },
       "intelligence_score": null,
       "speed": 118.0,
@@ -2778,9 +3006,11 @@
         "prompt": 0.274893,
         "completion": 0.274893,
         "cache_read": 0.02,
-        "blended": 0.2276,
+        "blended": 0.1411,
         "blended_list": 0.2749,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/ministral-14b-2512"
       },
       "intelligence_score": null,
       "speed": 57.0,
@@ -2802,9 +3032,11 @@
         "prompt": 0.224654,
         "completion": 0.224654,
         "cache_read": 0.015,
-        "blended": 0.1891,
+        "blended": 0.1146,
         "blended_list": 0.2247,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/ministral-8b-2512"
       },
       "intelligence_score": null,
       "speed": 61.0,
@@ -2826,9 +3058,11 @@
         "prompt": 0.125056,
         "completion": 0.125056,
         "cache_read": 0.01,
-        "blended": 0.1015,
+        "blended": 0.0647,
         "blended_list": 0.1251,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/ministral-3b-2512"
       },
       "intelligence_score": null,
       "speed": 48.0,
@@ -2850,9 +3084,11 @@
         "prompt": 0.5,
         "completion": 1.5,
         "cache_read": 0.05,
-        "blended": 0.5137,
+        "blended": 0.5138,
         "blended_list": 0.75,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-large-2512"
       },
       "intelligence_score": 16,
       "speed": 40.0,
@@ -2876,7 +3112,9 @@
         "cache_read": null,
         "blended": 0.0713,
         "blended_list": 0.0713,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/arcee-ai/trinity-mini"
       },
       "intelligence_score": null,
       "speed": 73.5,
@@ -2898,9 +3136,11 @@
         "prompt": 0.570853,
         "completion": 0.987111,
         "cache_read": 0.129785,
-        "blended": 0.5979,
+        "blended": 0.4434,
         "blended_list": 0.6749,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-v3.2"
       },
       "intelligence_score": null,
       "speed": 31.5,
@@ -2924,7 +3164,9 @@
         "cache_read": 0.5,
         "blended": 7.6375,
         "blended_list": 10.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.5"
       },
       "intelligence_score": null,
       "speed": 55.5,
@@ -2948,7 +3190,9 @@
         "cache_read": null,
         "blended": 0.2375,
         "blended_list": 0.2375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/allenai/olmo-3-32b-think"
       },
       "intelligence_score": null,
       "speed": null,
@@ -2972,7 +3216,9 @@
         "cache_read": null,
         "blended": 1.25,
         "blended_list": 1.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepcogito/cogito-v2.1-671b"
       },
       "intelligence_score": null,
       "speed": 23.0,
@@ -2996,7 +3242,9 @@
         "cache_read": 0.127632,
         "blended": 2.8483,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.1"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -3020,7 +3268,9 @@
         "cache_read": 0.12748,
         "blended": 2.8482,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.1-chat"
       },
       "intelligence_score": null,
       "speed": 75.0,
@@ -3044,7 +3294,9 @@
         "cache_read": 0.127517,
         "blended": 2.8482,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.1-codex"
       },
       "intelligence_score": null,
       "speed": 72.0,
@@ -3068,7 +3320,9 @@
         "cache_read": 0.027399,
         "blended": 0.5706,
         "blended_list": 0.6875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5.1-codex-mini"
       },
       "intelligence_score": null,
       "speed": 117.5,
@@ -3090,9 +3344,11 @@
         "prompt": 0.6,
         "completion": 2.5,
         "cache_read": 0.376367,
-        "blended": 0.9979,
+        "blended": 0.9576,
         "blended_list": 1.075,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2-thinking"
       },
       "intelligence_score": null,
       "speed": 183.0,
@@ -3116,7 +3372,9 @@
         "cache_read": 0.625,
         "blended": 4.0156,
         "blended_list": 5.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/amazon/nova-premier-v1"
       },
       "intelligence_score": null,
       "speed": 34.0,
@@ -3140,7 +3398,9 @@
         "cache_read": null,
         "blended": 6.0,
         "blended_list": 6.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perplexity/sonar-pro-search"
       },
       "intelligence_score": null,
       "speed": 62.0,
@@ -3162,9 +3422,11 @@
         "prompt": 0.1,
         "completion": 0.3,
         "cache_read": 0.01,
-        "blended": 0.1027,
+        "blended": 0.1028,
         "blended_list": 0.15,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/voxtral-small-24b-2507"
       },
       "intelligence_score": null,
       "speed": 97.0,
@@ -3188,7 +3450,9 @@
         "cache_read": 0.0375,
         "blended": 0.1116,
         "blended_list": 0.1312,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-oss-safeguard-20b"
       },
       "intelligence_score": null,
       "speed": 618.0,
@@ -3210,9 +3474,11 @@
         "prompt": 0.277575,
         "completion": 1.105294,
         "cache_read": 0.03,
-        "blended": 0.4194,
+        "blended": 0.3545,
         "blended_list": 0.4845,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m2"
       },
       "intelligence_score": null,
       "speed": 124.5,
@@ -3236,7 +3502,9 @@
         "cache_read": null,
         "blended": 0.182,
         "blended_list": 0.182,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-32b-instruct"
       },
       "intelligence_score": null,
       "speed": 49.0,
@@ -3260,7 +3528,9 @@
         "cache_read": null,
         "blended": 0.0408,
         "blended_list": 0.0408,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/ibm-granite/granite-4.0-h-micro"
       },
       "intelligence_score": null,
       "speed": 29.0,
@@ -3284,7 +3554,9 @@
         "cache_read": 0.08,
         "blended": 0.1475,
         "blended_list": 0.1475,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/microsoft/phi-4-mini-instruct"
       },
       "intelligence_score": null,
       "speed": 49.0,
@@ -3308,7 +3580,9 @@
         "cache_read": null,
         "blended": 0.429,
         "blended_list": 0.429,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-8b-thinking"
       },
       "intelligence_score": null,
       "speed": 109.5,
@@ -3330,9 +3604,11 @@
         "prompt": 0.132664,
         "completion": 0.552142,
         "cache_read": 0.100241,
-        "blended": 0.2202,
+        "blended": 0.2205,
         "blended_list": 0.2375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-8b-instruct"
       },
       "intelligence_score": null,
       "speed": 60.0,
@@ -3356,7 +3632,9 @@
         "cache_read": 2.5,
         "blended": 13.5625,
         "blended_list": 17.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o3-deep-research"
       },
       "intelligence_score": null,
       "speed": null,
@@ -3380,7 +3658,9 @@
         "cache_read": 0.5,
         "blended": 2.7125,
         "blended_list": 3.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o4-mini-deep-research"
       },
       "intelligence_score": null,
       "speed": null,
@@ -3404,7 +3684,9 @@
         "cache_read": null,
         "blended": 0.4,
         "blended_list": 0.4,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nvidia/llama-3.3-nemotron-super-49b-v1.5"
       },
       "intelligence_score": null,
       "speed": 51.0,
@@ -3428,7 +3710,9 @@
         "cache_read": null,
         "blended": 0.4517,
         "blended_list": 0.4517,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-thinking"
       },
       "intelligence_score": null,
       "speed": 97.0,
@@ -3450,9 +3734,11 @@
         "prompt": 0.15709,
         "completion": 0.604027,
         "cache_read": 0.15,
-        "blended": 0.2688,
+        "blended": 0.2651,
         "blended_list": 0.2688,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-30b-a3b-instruct"
       },
       "intelligence_score": null,
       "speed": 11.0,
@@ -3476,7 +3762,9 @@
         "cache_read": null,
         "blended": 41.25,
         "blended_list": 41.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5-pro"
       },
       "intelligence_score": null,
       "speed": null,
@@ -3500,7 +3788,9 @@
         "cache_read": 0.099895,
         "blended": 0.6821,
         "blended_list": 0.9061,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.6"
       },
       "intelligence_score": null,
       "speed": 38.0,
@@ -3524,7 +3814,9 @@
         "cache_read": 0.3,
         "blended": 4.5825,
         "blended_list": 6.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-sonnet-4.5"
       },
       "intelligence_score": null,
       "speed": 55.0,
@@ -3548,7 +3840,9 @@
         "cache_read": null,
         "blended": 0.305,
         "blended_list": 0.305,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-v3.2-exp"
       },
       "intelligence_score": null,
       "speed": 21.0,
@@ -3572,7 +3866,9 @@
         "cache_read": 0.15,
         "blended": 0.2712,
         "blended_list": 0.35,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/thedrummer/cydonia-24b-v4.1"
       },
       "intelligence_score": null,
       "speed": 34.5,
@@ -3596,7 +3892,9 @@
         "cache_read": null,
         "blended": 0.95,
         "blended_list": 0.95,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/relace/relace-apply-3"
       },
       "intelligence_score": null,
       "speed": null,
@@ -3620,7 +3918,9 @@
         "cache_read": 0.01,
         "blended": 0.1278,
         "blended_list": 0.175,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-flash-lite-preview-09-2025"
       },
       "intelligence_score": null,
       "speed": 126.0,
@@ -3644,7 +3944,9 @@
         "cache_read": null,
         "blended": 1.3182,
         "blended_list": 1.3182,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-235b-a22b-thinking"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -3666,9 +3968,11 @@
         "prompt": 0.229949,
         "completion": 1.323757,
         "cache_read": 0.105013,
-        "blended": 0.477,
+        "blended": 0.4378,
         "blended_list": 0.5034,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-vl-235b-a22b-instruct"
       },
       "intelligence_score": null,
       "speed": 40.0,
@@ -3692,7 +3996,9 @@
         "cache_read": 0.156,
         "blended": 1.2324,
         "blended_list": 1.56,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-max"
       },
       "intelligence_score": null,
       "speed": 3.0,
@@ -3716,7 +4022,9 @@
         "cache_read": 0.13,
         "blended": 1.027,
         "blended_list": 1.3,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-coder-plus"
       },
       "intelligence_score": null,
       "speed": 31.0,
@@ -3740,7 +4048,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5-codex"
       },
       "intelligence_score": null,
       "speed": 53.0,
@@ -3762,9 +4072,11 @@
         "prompt": 0.290705,
         "completion": 0.985547,
         "cache_read": 0.131667,
-        "blended": 0.4173,
+        "blended": 0.3809,
         "blended_list": 0.4644,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-v3.1-terminus"
       },
       "intelligence_score": null,
       "speed": 71.0,
@@ -3788,7 +4100,9 @@
         "cache_read": 0.039,
         "blended": 0.3081,
         "blended_list": 0.39,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-coder-flash"
       },
       "intelligence_score": null,
       "speed": 34.0,
@@ -3810,9 +4124,11 @@
         "prompt": 0.13663,
         "completion": 1.245854,
         "cache_read": 0.15,
-        "blended": 0.4139,
+        "blended": 0.421,
         "blended_list": 0.4139,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-next-80b-a3b-thinking"
       },
       "intelligence_score": null,
       "speed": 184.0,
@@ -3836,7 +4152,9 @@
         "cache_read": null,
         "blended": 0.3425,
         "blended_list": 0.3425,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-next-80b-a3b-instruct"
       },
       "intelligence_score": null,
       "speed": null,
@@ -3860,7 +4178,9 @@
         "cache_read": null,
         "blended": 0.39,
         "blended_list": 0.39,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen-plus-2025-07-28:thinking"
       },
       "intelligence_score": null,
       "speed": 72.5,
@@ -3882,9 +4202,11 @@
         "prompt": 0.733733,
         "completion": 2.667166,
         "cache_read": 0.549851,
-        "blended": 1.1293,
+        "blended": 1.1206,
         "blended_list": 1.2171,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2-0905"
       },
       "intelligence_score": null,
       "speed": 110.0,
@@ -3906,9 +4228,11 @@
         "prompt": 0.105019,
         "completion": 0.98043,
         "cache_read": 0.08,
-        "blended": 0.3239,
+        "blended": 0.3107,
         "blended_list": 0.3239,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-thinking-2507"
       },
       "intelligence_score": null,
       "speed": 69.0,
@@ -3932,7 +4256,9 @@
         "cache_read": null,
         "blended": 0.1975,
         "blended_list": 0.1975,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nousresearch/hermes-4-70b"
       },
       "intelligence_score": null,
       "speed": 82.0,
@@ -3956,7 +4282,9 @@
         "cache_read": null,
         "blended": 1.5,
         "blended_list": 1.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nousresearch/hermes-4-405b"
       },
       "intelligence_score": null,
       "speed": 36.0,
@@ -3978,9 +4306,11 @@
         "prompt": 0.407975,
         "completion": 1.228536,
         "cache_read": 0.235503,
-        "blended": 0.5842,
+        "blended": 0.5226,
         "blended_list": 0.6131,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-chat-v3.1"
       },
       "intelligence_score": null,
       "speed": 66.0,
@@ -4004,7 +4334,9 @@
         "cache_read": 0.04,
         "blended": 0.611,
         "blended_list": 0.8,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-medium-3.1"
       },
       "intelligence_score": null,
       "speed": 63.0,
@@ -4028,7 +4360,9 @@
         "cache_read": 0.11,
         "blended": 0.6428,
         "blended_list": 0.9,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.5v"
       },
       "intelligence_score": null,
       "speed": 17.0,
@@ -4052,7 +4386,9 @@
         "cache_read": null,
         "blended": 3.5,
         "blended_list": 3.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/ai21/jamba-large-1.7"
       },
       "intelligence_score": null,
       "speed": 17.0,
@@ -4076,7 +4412,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5-chat"
       },
       "intelligence_score": null,
       "speed": 100.0,
@@ -4100,7 +4438,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5"
       },
       "intelligence_score": null,
       "speed": 63.0,
@@ -4124,7 +4464,9 @@
         "cache_read": 0.02748,
         "blended": 0.5707,
         "blended_list": 0.6875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5-mini"
       },
       "intelligence_score": null,
       "speed": 74.0,
@@ -4148,7 +4490,9 @@
         "cache_read": 0.008338,
         "blended": 0.1156,
         "blended_list": 0.1375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-5-nano"
       },
       "intelligence_score": null,
       "speed": 106.0,
@@ -4172,7 +4516,9 @@
         "cache_read": null,
         "blended": 0.06,
         "blended_list": 0.06,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-oss-120b"
       },
       "intelligence_score": 24,
       "speed": null,
@@ -4196,7 +4542,9 @@
         "cache_read": null,
         "blended": 0.0568,
         "blended_list": 0.0568,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-oss-20b"
       },
       "intelligence_score": 15,
       "speed": null,
@@ -4220,7 +4568,9 @@
         "cache_read": 1.5,
         "blended": 22.9125,
         "blended_list": 30.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4.1"
       },
       "intelligence_score": null,
       "speed": 22.5,
@@ -4244,7 +4594,9 @@
         "cache_read": 0.03,
         "blended": 0.3083,
         "blended_list": 0.45,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/codestral-2508"
       },
       "intelligence_score": null,
       "speed": 39.0,
@@ -4268,7 +4620,9 @@
         "cache_read": null,
         "blended": 0.3994,
         "blended_list": 0.3994,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-coder-30b-a3b-instruct"
       },
       "intelligence_score": null,
       "speed": 45.0,
@@ -4290,9 +4644,11 @@
         "prompt": 0.094789,
         "completion": 0.31957,
         "cache_read": 0.090025,
-        "blended": 0.1492,
+        "blended": 0.1485,
         "blended_list": 0.151,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-30b-a3b-instruct-2507"
       },
       "intelligence_score": null,
       "speed": 92.0,
@@ -4316,7 +4672,9 @@
         "cache_read": 0.11,
         "blended": 0.7428,
         "blended_list": 1.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.5"
       },
       "intelligence_score": null,
       "speed": 34.0,
@@ -4338,9 +4696,11 @@
         "prompt": 0.135006,
         "completion": 0.855006,
         "cache_read": 0.025,
-        "blended": 0.2875,
+        "blended": 0.2573,
         "blended_list": 0.315,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/z-ai/glm-4.5-air"
       },
       "intelligence_score": null,
       "speed": 30.0,
@@ -4362,9 +4722,11 @@
         "prompt": 0.212187,
         "completion": 1.843933,
         "cache_read": 0.192804,
-        "blended": 0.6169,
+        "blended": 0.6099,
         "blended_list": 0.6201,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-thinking-2507"
       },
       "intelligence_score": null,
       "speed": 71.0,
@@ -4388,7 +4750,9 @@
         "cache_read": null,
         "blended": 0.615,
         "blended_list": 0.615,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-coder"
       },
       "intelligence_score": null,
       "speed": null,
@@ -4412,7 +4776,9 @@
         "cache_read": 0.1,
         "blended": 0.125,
         "blended_list": 0.125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/bytedance/ui-tars-1.5-7b"
       },
       "intelligence_score": null,
       "speed": 12.0,
@@ -4436,7 +4802,9 @@
         "cache_read": 0.01,
         "blended": 0.1278,
         "blended_list": 0.175,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-flash-lite"
       },
       "intelligence_score": null,
       "speed": 98.0,
@@ -4458,9 +4826,11 @@
         "prompt": 0.159507,
         "completion": 0.633032,
         "cache_read": 0.116749,
-        "blended": 0.2739,
+        "blended": 0.2554,
         "blended_list": 0.2779,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-235b-a22b-2507"
       },
       "intelligence_score": null,
       "speed": 84.0,
@@ -4484,7 +4854,9 @@
         "cache_read": null,
         "blended": 1.4875,
         "blended_list": 1.4875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/switchpoint/router"
       },
       "intelligence_score": null,
       "speed": 6.0,
@@ -4508,7 +4880,9 @@
         "cache_read": null,
         "blended": 1.0025,
         "blended_list": 1.0025,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/moonshotai/kimi-k2"
       },
       "intelligence_score": null,
       "speed": 13.0,
@@ -4532,7 +4906,9 @@
         "cache_read": null,
         "blended": 0.2475,
         "blended_list": 0.2475,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/tencent/hunyuan-a13b-instruct"
       },
       "intelligence_score": null,
       "speed": 30.0,
@@ -4556,7 +4932,9 @@
         "cache_read": null,
         "blended": 1.15,
         "blended_list": 1.15,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/morph/morph-v3-large"
       },
       "intelligence_score": null,
       "speed": 273.5,
@@ -4580,7 +4958,9 @@
         "cache_read": null,
         "blended": 0.9,
         "blended_list": 0.9,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/morph/morph-v3-fast"
       },
       "intelligence_score": null,
       "speed": null,
@@ -4604,7 +4984,9 @@
         "cache_read": null,
         "blended": 0.6275,
         "blended_list": 0.6275,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/baidu/ernie-4.5-vl-424b-a47b"
       },
       "intelligence_score": null,
       "speed": 23.0,
@@ -4626,9 +5008,11 @@
         "prompt": 0.089719,
         "completion": 0.262514,
         "cache_read": 0.029497,
-        "blended": 0.1156,
+        "blended": 0.1013,
         "blended_list": 0.1329,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-small-3.2-24b-instruct"
       },
       "intelligence_score": null,
       "speed": 81.0,
@@ -4652,7 +5036,9 @@
         "cache_read": null,
         "blended": 0.9062,
         "blended_list": 0.9062,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-m1"
       },
       "intelligence_score": null,
       "speed": 10.0,
@@ -4676,7 +5062,9 @@
         "cache_read": 0.03,
         "blended": 0.7083,
         "blended_list": 0.85,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-flash"
       },
       "intelligence_score": null,
       "speed": 95.0,
@@ -4700,7 +5088,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-pro"
       },
       "intelligence_score": null,
       "speed": 88.0,
@@ -4724,7 +5114,9 @@
         "cache_read": null,
         "blended": 35.0,
         "blended_list": 35.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o3-pro"
       },
       "intelligence_score": null,
       "speed": null,
@@ -4748,7 +5140,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-pro-preview"
       },
       "intelligence_score": null,
       "speed": 93.0,
@@ -4770,9 +5164,11 @@
         "prompt": 0.564306,
         "completion": 2.253323,
         "cache_read": 0.35,
-        "blended": 0.9129,
+        "blended": 0.874,
         "blended_list": 0.9866,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-r1-0528"
       },
       "intelligence_score": null,
       "speed": 65.0,
@@ -4796,7 +5192,9 @@
         "cache_read": 1.5,
         "blended": 22.9125,
         "blended_list": 30.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-opus-4"
       },
       "intelligence_score": null,
       "speed": 22.0,
@@ -4820,7 +5218,9 @@
         "cache_read": 0.3,
         "blended": 4.5825,
         "blended_list": 6.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-sonnet-4"
       },
       "intelligence_score": null,
       "speed": 47.0,
@@ -4844,7 +5244,9 @@
         "cache_read": null,
         "blended": 0.075,
         "blended_list": 0.075,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-3n-e4b-it"
       },
       "intelligence_score": null,
       "speed": 22.0,
@@ -4868,7 +5270,9 @@
         "cache_read": 0.04,
         "blended": 0.611,
         "blended_list": 0.8,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-medium-3"
       },
       "intelligence_score": null,
       "speed": 41.0,
@@ -4892,7 +5296,9 @@
         "cache_read": 0.125,
         "blended": 2.8469,
         "blended_list": 3.4375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemini-2.5-pro-preview-05-06"
       },
       "intelligence_score": null,
       "speed": 88.0,
@@ -4916,7 +5322,9 @@
         "cache_read": null,
         "blended": 0.8625,
         "blended_list": 0.8625,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/arcee-ai/virtuoso-large"
       },
       "intelligence_score": null,
       "speed": null,
@@ -4940,7 +5348,9 @@
         "cache_read": null,
         "blended": 0.575,
         "blended_list": 0.575,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/arcee-ai/coder-large"
       },
       "intelligence_score": null,
       "speed": null,
@@ -4964,7 +5374,9 @@
         "cache_read": null,
         "blended": 0.19,
         "blended_list": 0.19,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-guard-4-12b"
       },
       "intelligence_score": null,
       "speed": 20.0,
@@ -4988,7 +5400,9 @@
         "cache_read": null,
         "blended": 0.2281,
         "blended_list": 0.2281,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-30b-a3b"
       },
       "intelligence_score": null,
       "speed": 89.0,
@@ -5010,9 +5424,11 @@
         "prompt": 0.083631,
         "completion": 0.427608,
         "cache_read": 0.05,
-        "blended": 0.1696,
+        "blended": 0.152,
         "blended_list": 0.1696,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-8b"
       },
       "intelligence_score": null,
       "speed": 56.0,
@@ -5036,7 +5452,9 @@
         "cache_read": null,
         "blended": 0.2745,
         "blended_list": 0.2745,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-14b"
       },
       "intelligence_score": null,
       "speed": 79.0,
@@ -5058,9 +5476,11 @@
         "prompt": 0.134837,
         "completion": 0.557099,
         "cache_read": 0.122523,
-        "blended": 0.2252,
+        "blended": 0.2339,
         "blended_list": 0.2404,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-32b"
       },
       "intelligence_score": null,
       "speed": 316.0,
@@ -5084,7 +5504,9 @@
         "cache_read": null,
         "blended": 0.7963,
         "blended_list": 0.7963,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen3-235b-a22b"
       },
       "intelligence_score": null,
       "speed": 67.0,
@@ -5108,7 +5530,9 @@
         "cache_read": 0.275,
         "blended": 1.4919,
         "blended_list": 1.925,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o4-mini-high"
       },
       "intelligence_score": null,
       "speed": 104.0,
@@ -5132,7 +5556,9 @@
         "cache_read": 0.5,
         "blended": 2.7125,
         "blended_list": 3.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o3"
       },
       "intelligence_score": null,
       "speed": 110.0,
@@ -5156,7 +5582,9 @@
         "cache_read": 0.275,
         "blended": 1.4919,
         "blended_list": 1.925,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o4-mini"
       },
       "intelligence_score": null,
       "speed": 130.0,
@@ -5180,7 +5608,9 @@
         "cache_read": 0.5,
         "blended": 2.7125,
         "blended_list": 3.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4.1"
       },
       "intelligence_score": null,
       "speed": 49.0,
@@ -5204,7 +5634,9 @@
         "cache_read": 0.1,
         "blended": 0.5425,
         "blended_list": 0.7,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4.1-mini"
       },
       "intelligence_score": null,
       "speed": 45.0,
@@ -5228,7 +5660,9 @@
         "cache_read": 0.027518,
         "blended": 0.1369,
         "blended_list": 0.175,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4.1-nano"
       },
       "intelligence_score": null,
       "speed": 94.0,
@@ -5250,9 +5684,11 @@
         "prompt": 0.274079,
         "completion": 0.894222,
         "cache_read": 0.17,
-        "blended": 0.4102,
+        "blended": 0.3745,
         "blended_list": 0.4291,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-4-maverick"
       },
       "intelligence_score": 14,
       "speed": 71.0,
@@ -5274,9 +5710,11 @@
         "prompt": 0.160009,
         "completion": 0.482494,
         "cache_read": 0.055,
-        "blended": 0.2334,
+        "blended": 0.1855,
         "blended_list": 0.2406,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-4-scout"
       },
       "intelligence_score": 10,
       "speed": 164.5,
@@ -5298,9 +5736,11 @@
         "prompt": 0.24556,
         "completion": 0.983948,
         "cache_read": 0.140381,
-        "blended": 0.3865,
+        "blended": 0.3749,
         "blended_list": 0.4302,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-chat-v3-0324"
       },
       "intelligence_score": null,
       "speed": 26.0,
@@ -5324,7 +5764,9 @@
         "cache_read": null,
         "blended": 262.5,
         "blended_list": 262.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o1-pro"
       },
       "intelligence_score": null,
       "speed": null,
@@ -5348,7 +5790,9 @@
         "cache_read": null,
         "blended": 0.402,
         "blended_list": 0.402,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-small-3.1-24b-instruct"
       },
       "intelligence_score": null,
       "speed": 30.0,
@@ -5372,7 +5816,9 @@
         "cache_read": null,
         "blended": 0.0625,
         "blended_list": 0.0625,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-3-4b-it"
       },
       "intelligence_score": null,
       "speed": 38.0,
@@ -5396,7 +5842,9 @@
         "cache_read": null,
         "blended": 0.075,
         "blended_list": 0.075,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-3-12b-it"
       },
       "intelligence_score": null,
       "speed": 17.0,
@@ -5420,7 +5868,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/cohere/command-a"
       },
       "intelligence_score": null,
       "speed": 16.0,
@@ -5444,7 +5894,9 @@
         "cache_read": null,
         "blended": 0.2625,
         "blended_list": 0.2625,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-mini-search-preview"
       },
       "intelligence_score": null,
       "speed": 46.0,
@@ -5468,7 +5920,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-search-preview"
       },
       "intelligence_score": null,
       "speed": null,
@@ -5492,7 +5946,9 @@
         "cache_read": null,
         "blended": 0.125,
         "blended_list": 0.125,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/rekaai/reka-flash-3"
       },
       "intelligence_score": null,
       "speed": null,
@@ -5514,9 +5970,11 @@
         "prompt": 0.08,
         "completion": 0.304942,
         "cache_read": 0.04,
-        "blended": 0.1257,
+        "blended": 0.1152,
         "blended_list": 0.1362,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-3-27b-it"
       },
       "intelligence_score": null,
       "speed": 35.0,
@@ -5540,7 +5998,9 @@
         "cache_read": 0.25,
         "blended": 0.455,
         "blended_list": 0.6125,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/thedrummer/skyfall-36b-v2"
       },
       "intelligence_score": null,
       "speed": 20.0,
@@ -5564,7 +6024,9 @@
         "cache_read": null,
         "blended": 3.5,
         "blended_list": 3.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perplexity/sonar-reasoning-pro"
       },
       "intelligence_score": null,
       "speed": 23.0,
@@ -5588,7 +6050,9 @@
         "cache_read": null,
         "blended": 6.0,
         "blended_list": 6.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perplexity/sonar-pro"
       },
       "intelligence_score": null,
       "speed": 72.0,
@@ -5612,7 +6076,9 @@
         "cache_read": null,
         "blended": 3.5,
         "blended_list": 3.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perplexity/sonar-deep-research"
       },
       "intelligence_score": null,
       "speed": null,
@@ -5636,7 +6102,9 @@
         "cache_read": 0.02,
         "blended": 0.2055,
         "blended_list": 0.3,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-saba"
       },
       "intelligence_score": null,
       "speed": null,
@@ -5658,9 +6126,11 @@
         "prompt": 1.1,
         "completion": 4.4,
         "cache_read": 0.55,
-        "blended": 1.6362,
+        "blended": 1.6363,
         "blended_list": 1.925,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o3-mini-high"
       },
       "intelligence_score": null,
       "speed": 17.0,
@@ -5684,7 +6154,9 @@
         "cache_read": null,
         "blended": 5.0,
         "blended_list": 5.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/aion-labs/aion-1.0"
       },
       "intelligence_score": null,
       "speed": 25.0,
@@ -5708,7 +6180,9 @@
         "cache_read": null,
         "blended": 0.875,
         "blended_list": 0.875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/aion-labs/aion-1.0-mini"
       },
       "intelligence_score": null,
       "speed": 21.5,
@@ -5732,7 +6206,9 @@
         "cache_read": null,
         "blended": 1.0,
         "blended_list": 1.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/aion-labs/aion-rp-llama-3.1-8b"
       },
       "intelligence_score": null,
       "speed": 24.5,
@@ -5756,7 +6232,9 @@
         "cache_read": 0.4,
         "blended": 0.64,
         "blended_list": 0.85,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen2.5-vl-72b-instruct"
       },
       "intelligence_score": null,
       "speed": 20.0,
@@ -5780,7 +6258,9 @@
         "cache_read": 0.052,
         "blended": 0.2808,
         "blended_list": 0.39,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen-plus"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -5802,9 +6282,11 @@
         "prompt": 1.1,
         "completion": 4.4,
         "cache_read": 0.55,
-        "blended": 1.6362,
+        "blended": 1.6363,
         "blended_list": 1.925,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o3-mini"
       },
       "intelligence_score": null,
       "speed": 164.0,
@@ -5828,7 +6310,9 @@
         "cache_read": null,
         "blended": 0.0575,
         "blended_list": 0.0575,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-small-24b-instruct-2501"
       },
       "intelligence_score": null,
       "speed": 59.0,
@@ -5852,7 +6336,9 @@
         "cache_read": null,
         "blended": 1.0,
         "blended_list": 1.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/perplexity/sonar"
       },
       "intelligence_score": null,
       "speed": 108.0,
@@ -5876,7 +6362,9 @@
         "cache_read": null,
         "blended": 0.8,
         "blended_list": 0.8,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-r1-distill-llama-70b"
       },
       "intelligence_score": null,
       "speed": 20.5,
@@ -5900,7 +6388,9 @@
         "cache_read": null,
         "blended": 1.8709,
         "blended_list": 1.8709,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-r1"
       },
       "intelligence_score": null,
       "speed": 65.0,
@@ -5924,7 +6414,9 @@
         "cache_read": null,
         "blended": 0.425,
         "blended_list": 0.425,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/minimax/minimax-01"
       },
       "intelligence_score": null,
       "speed": 28.0,
@@ -5948,7 +6440,9 @@
         "cache_read": null,
         "blended": 0.0875,
         "blended_list": 0.0875,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/microsoft/phi-4"
       },
       "intelligence_score": null,
       "speed": 50.0,
@@ -5972,7 +6466,9 @@
         "cache_read": null,
         "blended": 3.0,
         "blended_list": 3.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/sao10k/l3.1-70b-hanami-x1"
       },
       "intelligence_score": null,
       "speed": 9.0,
@@ -5996,7 +6492,9 @@
         "cache_read": null,
         "blended": 0.4793,
         "blended_list": 0.4793,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/deepseek/deepseek-chat"
       },
       "intelligence_score": null,
       "speed": 45.0,
@@ -6020,7 +6518,9 @@
         "cache_read": null,
         "blended": 0.675,
         "blended_list": 0.675,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/sao10k/l3.3-euryale-70b"
       },
       "intelligence_score": null,
       "speed": 7.0,
@@ -6044,7 +6544,9 @@
         "cache_read": 7.5,
         "blended": 22.3125,
         "blended_list": 26.25,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/o1"
       },
       "intelligence_score": null,
       "speed": 128.5,
@@ -6068,7 +6570,9 @@
         "cache_read": null,
         "blended": 0.0656,
         "blended_list": 0.0656,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/cohere/command-r7b-12-2024"
       },
       "intelligence_score": null,
       "speed": 55.0,
@@ -6092,7 +6596,9 @@
         "cache_read": null,
         "blended": 0.155,
         "blended_list": 0.155,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.3-70b-instruct"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6116,7 +6622,9 @@
         "cache_read": null,
         "blended": 0.105,
         "blended_list": 0.105,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/amazon/nova-lite-v1"
       },
       "intelligence_score": null,
       "speed": 105.0,
@@ -6140,7 +6648,9 @@
         "cache_read": null,
         "blended": 0.0613,
         "blended_list": 0.0613,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/amazon/nova-micro-v1"
       },
       "intelligence_score": null,
       "speed": 73.0,
@@ -6164,7 +6674,9 @@
         "cache_read": null,
         "blended": 1.4,
         "blended_list": 1.4,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/amazon/nova-pro-v1"
       },
       "intelligence_score": null,
       "speed": 14.0,
@@ -6188,7 +6700,9 @@
         "cache_read": 1.25,
         "blended": 3.7188,
         "blended_list": 4.375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-2024-11-20"
       },
       "intelligence_score": null,
       "speed": 106.5,
@@ -6212,7 +6726,9 @@
         "cache_read": 0.2,
         "blended": 2.055,
         "blended_list": 3.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-large-2407"
       },
       "intelligence_score": null,
       "speed": 24.0,
@@ -6236,7 +6752,9 @@
         "cache_read": null,
         "blended": 0.745,
         "blended_list": 0.745,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen-2.5-coder-32b-instruct"
       },
       "intelligence_score": null,
       "speed": 15.0,
@@ -6260,7 +6778,9 @@
         "cache_read": null,
         "blended": 0.4,
         "blended_list": 0.4,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/thedrummer/unslopnemo-12b"
       },
       "intelligence_score": null,
       "speed": 68.0,
@@ -6284,7 +6804,9 @@
         "cache_read": null,
         "blended": 3.5,
         "blended_list": 3.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthracite-org/magnum-v4-72b"
       },
       "intelligence_score": null,
       "speed": 17.0,
@@ -6308,7 +6830,9 @@
         "cache_read": null,
         "blended": 0.1792,
         "blended_list": 0.1792,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen-2.5-7b-instruct"
       },
       "intelligence_score": null,
       "speed": 72.0,
@@ -6332,7 +6856,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inflection/inflection-3-productivity"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6356,7 +6882,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/inflection/inflection-3-pi"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6380,7 +6908,9 @@
         "cache_read": null,
         "blended": 0.3125,
         "blended_list": 0.3125,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/thedrummer/rocinante-12b"
       },
       "intelligence_score": null,
       "speed": 71.0,
@@ -6404,7 +6934,9 @@
         "cache_read": null,
         "blended": 0.1219,
         "blended_list": 0.1219,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.2-3b-instruct"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6428,7 +6960,9 @@
         "cache_read": null,
         "blended": 0.0705,
         "blended_list": 0.0705,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.2-1b-instruct"
       },
       "intelligence_score": null,
       "speed": 67.5,
@@ -6452,7 +6986,9 @@
         "cache_read": null,
         "blended": 0.345,
         "blended_list": 0.345,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.2-11b-vision-instruct"
       },
       "intelligence_score": null,
       "speed": 30.0,
@@ -6476,7 +7012,9 @@
         "cache_read": null,
         "blended": 0.3758,
         "blended_list": 0.3758,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/qwen/qwen-2.5-72b-instruct"
       },
       "intelligence_score": null,
       "speed": 20.0,
@@ -6500,7 +7038,9 @@
         "cache_read": null,
         "blended": 0.2625,
         "blended_list": 0.2625,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/cohere/command-r-08-2024"
       },
       "intelligence_score": null,
       "speed": 54.0,
@@ -6524,7 +7064,9 @@
         "cache_read": null,
         "blended": 4.375,
         "blended_list": 4.375,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/cohere/command-r-plus-08-2024"
       },
       "intelligence_score": null,
       "speed": 33.5,
@@ -6548,7 +7090,9 @@
         "cache_read": null,
         "blended": 1.1647,
         "blended_list": 1.1647,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/sao10k/l3.1-euryale-70b"
       },
       "intelligence_score": null,
       "speed": 41.0,
@@ -6572,7 +7116,9 @@
         "cache_read": null,
         "blended": 0.7,
         "blended_list": 0.7,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-70b"
       },
       "intelligence_score": null,
       "speed": 30.0,
@@ -6596,7 +7142,9 @@
         "cache_read": null,
         "blended": 1.0,
         "blended_list": 1.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/nousresearch/hermes-3-llama-3.1-405b"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6620,7 +7168,9 @@
         "cache_read": null,
         "blended": 0.0463,
         "blended_list": 0.0463,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/sao10k/l3-lunaris-8b"
       },
       "intelligence_score": null,
       "speed": 79.0,
@@ -6644,7 +7194,9 @@
         "cache_read": 1.25,
         "blended": 3.7188,
         "blended_list": 4.375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-2024-08-06"
       },
       "intelligence_score": null,
       "speed": 74.0,
@@ -6666,9 +7218,11 @@
         "prompt": 0.080843,
         "completion": 0.120124,
         "cache_read": 0.122521,
-        "blended": 0.0885,
+        "blended": 0.1125,
         "blended_list": 0.0907,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.1-8b-instruct"
       },
       "intelligence_score": null,
       "speed": 126.0,
@@ -6690,9 +7244,11 @@
         "prompt": 0.640336,
         "completion": 0.640336,
         "cache_read": 0.8,
-        "blended": 0.6403,
+        "blended": 0.7242,
         "blended_list": 0.6403,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3.1-70b-instruct"
       },
       "intelligence_score": null,
       "speed": 22.0,
@@ -6714,9 +7270,11 @@
         "prompt": 0.08505,
         "completion": 0.095042,
         "cache_read": 0.015,
-        "blended": 0.0521,
+        "blended": 0.0508,
         "blended_list": 0.0875,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-nemo"
       },
       "intelligence_score": null,
       "speed": 75.0,
@@ -6740,7 +7298,9 @@
         "cache_read": 0.075,
         "blended": 0.2231,
         "blended_list": 0.2625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-mini"
       },
       "intelligence_score": null,
       "speed": 43.0,
@@ -6764,7 +7324,9 @@
         "cache_read": 0.075,
         "blended": 0.2231,
         "blended_list": 0.2625,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-mini-2024-07-18"
       },
       "intelligence_score": null,
       "speed": 65.0,
@@ -6788,7 +7350,9 @@
         "cache_read": null,
         "blended": 0.65,
         "blended_list": 0.65,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/google/gemma-2-27b-it"
       },
       "intelligence_score": null,
       "speed": 28.0,
@@ -6812,7 +7376,9 @@
         "cache_read": null,
         "blended": 7.5,
         "blended_list": 7.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o-2024-05-13"
       },
       "intelligence_score": null,
       "speed": null,
@@ -6834,9 +7400,11 @@
         "prompt": 2.5,
         "completion": 10.0,
         "cache_read": 1.25,
-        "blended": 4.0467,
+        "blended": 3.7188,
         "blended_list": 4.375,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4o"
       },
       "intelligence_score": null,
       "speed": 45.0,
@@ -6860,7 +7428,9 @@
         "cache_read": null,
         "blended": 0.14,
         "blended_list": 0.14,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/meta-llama/llama-3-8b-instruct"
       },
       "intelligence_score": null,
       "speed": 76.0,
@@ -6884,7 +7454,9 @@
         "cache_read": 0.2,
         "blended": 2.055,
         "blended_list": 3.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mixtral-8x22b-instruct"
       },
       "intelligence_score": null,
       "speed": 108.0,
@@ -6908,7 +7480,9 @@
         "cache_read": null,
         "blended": 0.62,
         "blended_list": 0.62,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/microsoft/wizardlm-2-8x22b"
       },
       "intelligence_score": null,
       "speed": 20.0,
@@ -6932,7 +7506,9 @@
         "cache_read": null,
         "blended": 15.0,
         "blended_list": 15.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4-turbo"
       },
       "intelligence_score": null,
       "speed": 34.0,
@@ -6956,7 +7532,9 @@
         "cache_read": 0.03,
         "blended": 0.3845,
         "blended_list": 0.5,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/anthropic/claude-3-haiku"
       },
       "intelligence_score": null,
       "speed": 68.0,
@@ -6980,7 +7558,9 @@
         "cache_read": 0.2,
         "blended": 2.055,
         "blended_list": 3.0,
-        "cache_hit_rate": 0.7
+        "cache_hit_rate": 0.7,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mistralai/mistral-large"
       },
       "intelligence_score": null,
       "speed": 39.0,
@@ -7004,7 +7584,9 @@
         "cache_read": null,
         "blended": 15.0,
         "blended_list": 15.0,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4-turbo-preview"
       },
       "intelligence_score": null,
       "speed": null,
@@ -7028,7 +7610,9 @@
         "cache_read": null,
         "blended": 1.25,
         "blended_list": 1.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-3.5-turbo-0613"
       },
       "intelligence_score": null,
       "speed": null,
@@ -7052,7 +7636,9 @@
         "cache_read": null,
         "blended": 1.625,
         "blended_list": 1.625,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-3.5-turbo-instruct"
       },
       "intelligence_score": null,
       "speed": 33.0,
@@ -7076,7 +7662,9 @@
         "cache_read": null,
         "blended": 3.25,
         "blended_list": 3.25,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-3.5-turbo-16k"
       },
       "intelligence_score": null,
       "speed": 14.0,
@@ -7100,7 +7688,9 @@
         "cache_read": null,
         "blended": 0.8125,
         "blended_list": 0.8125,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/mancer/weaver"
       },
       "intelligence_score": null,
       "speed": 78.0,
@@ -7124,7 +7714,9 @@
         "cache_read": null,
         "blended": 0.5313,
         "blended_list": 0.5313,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/undi95/remm-slerp-l2-13b"
       },
       "intelligence_score": null,
       "speed": 37.0,
@@ -7148,7 +7740,9 @@
         "cache_read": null,
         "blended": 0.3411,
         "blended_list": 0.3411,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/gryphe/mythomax-l2-13b"
       },
       "intelligence_score": null,
       "speed": 56.0,
@@ -7172,7 +7766,9 @@
         "cache_read": null,
         "blended": 0.75,
         "blended_list": 0.75,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-3.5-turbo"
       },
       "intelligence_score": null,
       "speed": 37.0,
@@ -7196,7 +7792,9 @@
         "cache_read": null,
         "blended": 37.5,
         "blended_list": 37.5,
-        "cache_hit_rate": null
+        "cache_hit_rate": null,
+        "pricing_source": "OpenRouter",
+        "pricing_source_url": "https://openrouter.ai/openai/gpt-4"
       },
       "intelligence_score": null,
       "speed": 15.0,

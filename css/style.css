@@ -1520,6 +1520,32 @@ body.modal-open {
     line-height: 1.5;
 }
 
+.detail-item-channel .detail-value {
+    min-height: 1.25rem;
+}
+
+.pricing-channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+.pricing-channel-link:hover {
+    text-decoration: underline;
+}
+
+.pricing-channel-openrouter {
+    color: var(--accent-primary);
+}
+
+.pricing-channel-official {
+    color: #10b981;
+}
+
 .latency-display {
     font-variant-numeric: tabular-nums;
 }

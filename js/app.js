@@ -690,6 +690,19 @@ function showModelDetail(modelId) {
     const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : '';
     const listBlended = model.pricing.blended_list;
     const showListPrice = listBlended != null && listBlended !== model.pricing.blended;
+    const openRouterUrl = getOpenRouterModelUrl(model.id);
+    const pricingChannel = model.pricing.pricing_source || 'OpenRouter';
+    const pricingChannelUrl = model.pricing.pricing_source_url || openRouterUrl;
+    const isOfficialChannel = pricingChannel !== 'OpenRouter';
+    const channelClass = isOfficialChannel ? 'pricing-channel-official' : 'pricing-channel-openrouter';
+    const pricingChannelHtml = `
+                <div class="detail-item detail-item-channel">
+                    <span class="detail-item-icon" aria-hidden="true">🔗</span>
+                    <span class="detail-label">${window.i18n.t('pricing_channel')}</span>
+                    <span class="detail-value">
+                        <a class="pricing-channel-link ${channelClass}" href="${escapeAttr(pricingChannelUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(pricingChannel)}</a>
+                    </span>
+                </div>`;
     const cacheReadHtml = model.pricing.cache_read != null ? `
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">💾</span>
@@ -704,12 +717,8 @@ function showModelDetail(modelId) {
                 </div>` : '';
     const cacheNoteHtml = model.pricing.cache_hit_rate != null ? `
             <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
-    const pricingSourceHtml = model.pricing.pricing_source ? `
-            <p class="detail-pricing-note">
-                ${window.i18n.t('pricing_source_note', { source: model.pricing.pricing_source })}
-                ${model.pricing.pricing_source_url ? `<a href="${escapeAttr(model.pricing.pricing_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(model.pricing.pricing_source_url)}</a>` : ''}
-            </p>` : '';
-    const openRouterUrl = getOpenRouterModelUrl(model.id);
+    const officialChannelNoteHtml = isOfficialChannel ? `
+            <p class="detail-pricing-note">${window.i18n.t('pricing_source_note', { source: pricingChannel })}</p>` : '';
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
@@ -765,6 +774,7 @@ function showModelDetail(modelId) {
                     <span class="detail-label">${window.i18n.t('context_window')}</span>
                     <span class="detail-value">${model.context_length ? (model.context_length / 1024) + 'K' : '-'}</span>
                 </div>
+                ${pricingChannelHtml}
                 <div class="detail-item">
                     <span class="detail-item-icon" aria-hidden="true">📥</span>
                     <span class="detail-label">${window.i18n.t('input_price')}</span>
@@ -794,7 +804,7 @@ function showModelDetail(modelId) {
                 </div>
             </div>
             ${cacheNoteHtml}
-            ${pricingSourceHtml}
+            ${officialChannelNoteHtml}
         </div>
 
         ${model.description ? `
