@@ -704,6 +704,11 @@ function showModelDetail(modelId) {
                 </div>` : '';
     const cacheNoteHtml = model.pricing.cache_hit_rate != null ? `
             <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
+    const pricingSourceHtml = model.pricing.pricing_source ? `
+            <p class="detail-pricing-note">
+                ${window.i18n.t('pricing_source_note', { source: model.pricing.pricing_source })}
+                ${model.pricing.pricing_source_url ? `<a href="${escapeAttr(model.pricing.pricing_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(model.pricing.pricing_source_url)}</a>` : ''}
+            </p>` : '';
     const openRouterUrl = getOpenRouterModelUrl(model.id);
 
     elements.modalBody.innerHTML = `
@@ -789,6 +794,7 @@ function showModelDetail(modelId) {
                 </div>
             </div>
             ${cacheNoteHtml}
+            ${pricingSourceHtml}
         </div>
 
         ${model.description ? `

@@ -49,6 +49,17 @@ SPEED_EXPONENT = 0.8
 DEFAULT_CACHE_HIT_RATE = 0.7
 INPUT_TOKEN_WEIGHT = 3
 OUTPUT_TOKEN_WEIGHT = 1
+USD_TO_CNY = 7.25
+# Official provider API prices (CNY / 1M tokens) when OpenRouter resell pricing differs.
+OFFICIAL_PRICING_CNY_PER_M = {
+    "deepseek/deepseek-v4-pro": {
+        "prompt": 3.0,
+        "cache_read": 0.025,
+        "completion": 6.0,
+        "source_label": "DeepSeek 官方 API",
+        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+    },
+}
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
 OPENROUTER_MODEL_PAGE = "https://openrouter.ai/{model_id}"
 ENDPOINT_FETCH_WORKERS = 8
@@ -236,6 +247,29 @@ def refresh_pricing_blended(pricing):
     pricing["blended_list"] = blend_token_price(prompt, completion)
     pricing["blended"] = blend_token_price(prompt_effective, completion)
     return pricing
+
+
+def cny_per_m_to_usd_per_m(cny):
+    """Convert CNY / 1M tokens to USD / 1M tokens."""
+    return round(float(cny) / USD_TO_CNY, 6)
+
+
+def apply_official_pricing_override(model_id, pricing_payload):
+    """Replace pricing with official provider API rates when configured."""
+    spec = OFFICIAL_PRICING_CNY_PER_M.get(model_id)
+    if not spec:
+        return pricing_payload
+
+    updated = refresh_pricing_blended(
+        {
+            "prompt": cny_per_m_to_usd_per_m(spec["prompt"]),
+            "completion": cny_per_m_to_usd_per_m(spec["completion"]),
+            "cache_read": cny_per_m_to_usd_per_m(spec["cache_read"]),
+        }
+    )
+    updated["pricing_source"] = spec.get("source_label")
+    updated["pricing_source_url"] = spec.get("source_url")
+    return updated
 
 
 def fetch_model_endpoints(model_id, session=None):
@@ -736,6 +770,7 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
 
         endpoint_metrics = aggregate_endpoint_metrics(endpoints_map.get(model_id, []))
         pricing_payload = build_pricing_payload(pricing, endpoint_metrics)
+        pricing_payload = apply_official_pricing_override(model_id, pricing_payload)
         blended_price = pricing_payload.get("blended")
         if blended_price is None or blended_price <= 0:
             continue

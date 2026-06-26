@@ -77,6 +77,7 @@ const translations = {
         list_price: "挂牌综合价",
         blended_price: "有效综合价",
         cache_hit_note: "缓存命中率按 70% 估算（Agent/RAG 典型场景）",
+        pricing_source_note: "价格来自 {source} 官方定价，非 OpenRouter 转售",
         value_rank: "性价比排名",
         detail_metrics: "核心指标",
         detail_about: "模型简介",
@@ -158,6 +159,7 @@ const translations = {
         list_price: "List Blended Price",
         blended_price: "Effective Blended Price",
         cache_hit_note: "Cache hit rate assumed at 70% (typical agent/RAG workload)",
+        pricing_source_note: "Pricing from {source} official API, not OpenRouter resell",
         value_rank: "Value Rank",
         detail_metrics: "Key Metrics",
         detail_about: "About",
@@ -174,9 +176,15 @@ class I18n {
         this.listeners = [];
     }
 
-    t(key) {
+    t(key, vars) {
         const lang = translations[this.currentLang];
-        return lang[key] || key;
+        let text = lang[key] || key;
+        if (vars) {
+            for (const [k, v] of Object.entries(vars)) {
+                text = text.replace(`{${k}}`, v);
+            }
+        }
+        return text;
     }
 
     setLang(lang) {

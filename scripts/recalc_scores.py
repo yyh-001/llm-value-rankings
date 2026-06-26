@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from fetch_data import (
     OUTPUT_FILE,
+    apply_official_pricing_override,
     apply_rank_changes,
     calculate_value_scores,
     compute_avg_intelligence,
@@ -37,6 +38,7 @@ def main():
 
     for model in models:
         pricing = refresh_pricing_blended(model.get("pricing") or {})
+        pricing = apply_official_pricing_override(model["id"], pricing)
         model["pricing"] = pricing
         blended = pricing.get("blended")
         if "distill" in model["id"].lower():
