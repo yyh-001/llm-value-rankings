@@ -669,11 +669,45 @@ button, input, select { font-family: inherit; color: inherit; }
     margin: 0 auto;
     padding: 1.5rem 1.25rem 2.5rem;
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.65rem;
     font-size: 0.75rem;
     color: var(--text-muted);
     border-top: 1px solid var(--border-subtle);
+}
+
+.min-footer-main {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.min-footer-stats {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.min-footer-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.min-footer-stat-value {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.min-footer-sep {
+    opacity: 0.4;
+    user-select: none;
 }
 
 /* Responsive */

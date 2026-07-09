@@ -61,6 +61,8 @@ const I18N = {
         open: '在 OpenRouter 打开',
         new: '新',
         footer: 'OpenRouter · Artificial Analysis',
+        footer_site_pv: '总访问量',
+        footer_site_uv: '访客数',
         lang_btn: 'EN',
     },
     en: {
@@ -107,6 +109,8 @@ const I18N = {
         open: 'Open on OpenRouter',
         new: 'NEW',
         footer: 'OpenRouter · Artificial Analysis',
+        footer_site_pv: 'Total visits',
+        footer_site_uv: 'Unique visitors',
         lang_btn: '中文',
     },
 };

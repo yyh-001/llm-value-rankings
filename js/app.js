@@ -189,7 +189,11 @@ function initStyle() {
         window.location.replace(STYLE_PAGES[saved]);
         return;
     }
-    const style = STYLE_OPTIONS.includes(saved) ? saved : 'classic';
+    const style = STYLE_OPTIONS.includes(saved) ? saved : 'editorial';
+    if (STYLE_PAGES[style]) {
+        window.location.replace(STYLE_PAGES[style]);
+        return;
+    }
     applyStyle(style);
 
     const select = document.getElementById('style-select');
@@ -209,7 +213,7 @@ function initStyle() {
 }
 
 function applyStyle(style) {
-    const next = STYLE_OPTIONS.includes(style) ? style : 'classic';
+    const next = STYLE_OPTIONS.includes(style) ? style : 'editorial';
     document.documentElement.setAttribute('data-style', next);
     const select = document.getElementById('style-select');
     if (select && select.value !== next) select.value = next;
@@ -218,7 +222,7 @@ function applyStyle(style) {
 function syncThemeColor() {
     const meta = document.querySelector('meta[name="theme-color"]');
     if (!meta) return;
-    const style = document.documentElement.getAttribute('data-style') || 'classic';
+    const style = document.documentElement.getAttribute('data-style') || 'editorial';
     const theme = document.documentElement.getAttribute('data-theme') || 'dark';
     const colors = {
         spacex: { dark: '#000000', light: '#f0f0fa' },
