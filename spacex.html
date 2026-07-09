@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM VALUE RANKINGS · SPACEX</title>
-    <meta name="description" content="SpaceX cinematic LLM value rankings — intelligence, speed, and price.">
+    <meta name="description" content="SpaceX cinematic scroll experience for LLM value rankings.">
     <meta name="theme-color" content="#000000">
-    <meta name="app-version" content="20250709sx">
+    <meta name="app-version" content="20250709sx4">
     <script>
         (function () {
             try {
@@ -20,15 +20,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/spacex.css?v=20250709sx">
+    <link rel="stylesheet" href="css/spacex.css?v=20250709sx4">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M16 4 L20 20 L16 28 L12 20 Z' fill='%23f0f0fa'/></svg>">
 </head>
 <body>
+    <canvas class="sx-canvas" id="sx-canvas" aria-hidden="true"></canvas>
+
     <div class="sx-space" aria-hidden="true">
-        <div class="sx-stars"></div>
-        <div class="sx-horizon"></div>
-        <div class="sx-glow"></div>
+        <div class="sx-stars" id="sx-stars"></div>
+        <div class="sx-stars sx-stars-far" id="sx-stars-far"></div>
+        <div class="sx-nebula" id="sx-nebula"></div>
+        <div class="sx-horizon" id="sx-horizon"></div>
+        <div class="sx-glow" id="sx-glow"></div>
+        <div class="sx-scanlines"></div>
+        <div class="sx-vignette"></div>
     </div>
+
+    <div class="sx-progress" aria-hidden="true"><i id="sx-progress-bar"></i></div>
 
     <header class="sx-nav">
         <div class="sx-nav-inner">
@@ -67,76 +75,159 @@
         </div>
     </header>
 
-    <main class="sx-main">
-        <section class="sx-hero">
-            <p class="sx-kicker" data-i18n="kicker">MISSION BRIEFING</p>
-            <h1 class="sx-title" data-i18n="title">VALUE LEADERBOARD</h1>
-            <p class="sx-lede" data-i18n="subtitle">INTEL × SPEED^0.8 / PRICE · OPENROUTER TELEMETRY</p>
+    <main class="sx-scroll">
+        <!-- 1 Hero -->
+        <section class="sx-screen sx-screen-hero is-inview" data-screen="hero">
+            <div class="sx-screen-inner">
+                <p class="sx-kicker sx-pulse-text" data-i18n="kicker">MISSION BRIEFING</p>
+                <h1 class="sx-title sx-title-split" data-i18n="title">VALUE LEADERBOARD</h1>
+                <p class="sx-lede" data-i18n="subtitle">INTEL × SPEED^0.8 / PRICE · OPENROUTER TELEMETRY</p>
+                <button type="button" class="sx-scroll-hint" id="scroll-hint" data-i18n="scroll">SCROLL</button>
+            </div>
+            <div class="sx-rocket" aria-hidden="true">
+                <div class="sx-rocket-body"></div>
+                <div class="sx-rocket-flame"></div>
+            </div>
+            <div class="sx-hero-trail" aria-hidden="true"></div>
+        </section>
 
-            <div class="sx-telemetry" id="stats-bar">
-                <div class="sx-tel">
-                    <span class="sx-tel-label" data-i18n="stat_total">MODELS</span>
-                    <span class="sx-tel-value" id="total-models">—</span>
+        <!-- 2 Sticky countdown scrub with model reveal -->
+        <section class="sx-pin" data-screen="countdown" id="pin-countdown">
+            <div class="sx-pin-sticky">
+                <p class="sx-kicker sx-countdown-kicker" data-i18n="fx_countdown">GO FOR LAUNCH</p>
+                <div class="sx-countdown-stage">
+                    <div class="sx-fx-countdown-num" id="countdown-num">T-10</div>
+                    <article class="sx-launch-vehicle" id="launch-vehicle" hidden>
+                        <div class="sx-launch-rank" id="launch-rank">#1</div>
+                        <h3 class="sx-launch-name" id="launch-name">—</h3>
+                        <p class="sx-launch-provider" id="launch-provider">—</p>
+                        <div class="sx-launch-metrics">
+                            <div><b id="launch-intel">—</b><span data-i18n="intel">INTEL</span></div>
+                            <div><b id="launch-speed">—</b><span data-i18n="speed">SPEED</span></div>
+                            <div><b id="launch-value">—</b><span data-i18n="value">VALUE</span></div>
+                        </div>
+                    </article>
                 </div>
-                <div class="sx-tel">
-                    <span class="sx-tel-label" data-i18n="stat_ranked">RANKED</span>
-                    <span class="sx-tel-value" id="ranked-models">—</span>
-                </div>
-                <div class="sx-tel">
-                    <span class="sx-tel-label" data-i18n="stat_avg">INTEL AVG</span>
-                    <span class="sx-tel-value" id="avg-intelligence">—</span>
-                </div>
-                <div class="sx-tel">
-                    <span class="sx-tel-label" data-i18n="stat_updated">UPDATED</span>
-                    <span class="sx-tel-value" id="last-updated">—</span>
+                <div class="sx-launch-queue" id="launch-queue" aria-hidden="true"></div>
+                <div class="sx-launch-bar"><i id="launch-bar-fill"></i></div>
+                <p class="sx-fx-caption" id="countdown-caption" data-i18n="fx_vehicle">NEXT VEHICLE ON PAD</p>
+            </div>
+        </section>
+
+        <!-- 3 Telemetry -->
+        <section class="sx-screen sx-screen-stats" data-screen="stats">
+            <div class="sx-screen-inner">
+                <p class="sx-kicker" data-i18n="telemetry">TELEMETRY</p>
+                <div class="sx-telemetry" id="stats-bar">
+                    <div class="sx-tel" data-stagger="0">
+                        <span class="sx-tel-label" data-i18n="stat_total">MODELS</span>
+                        <span class="sx-tel-value" id="total-models">—</span>
+                    </div>
+                    <div class="sx-tel" data-stagger="1">
+                        <span class="sx-tel-label" data-i18n="stat_ranked">RANKED</span>
+                        <span class="sx-tel-value" id="ranked-models">—</span>
+                    </div>
+                    <div class="sx-tel" data-stagger="2">
+                        <span class="sx-tel-label" data-i18n="stat_avg">INTEL AVG</span>
+                        <span class="sx-tel-value" id="avg-intelligence">—</span>
+                    </div>
+                    <div class="sx-tel" data-stagger="3">
+                        <span class="sx-tel-label" data-i18n="stat_updated">UPDATED</span>
+                        <span class="sx-tel-value" id="last-updated">—</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="sx-launch" id="podium-section" hidden>
-            <div class="sx-section-head">
-                <h2 data-i18n="top3">FLIGHT CREW</h2>
-                <span class="sx-section-line"></span>
+        <!-- 4 Glitch formula -->
+        <section class="sx-screen sx-screen-fx sx-fx-glitch" data-screen="formula">
+            <div class="sx-glitch-wrap">
+                <p class="sx-kicker" data-i18n="formula_label">CORE EQUATION</p>
+                <h2 class="sx-glitch-text" data-text="VALUE = f(INTEL) × SPEED^0.8 / PRICE">
+                    VALUE = f(INTEL) × SPEED^0.8 / PRICE
+                </h2>
+                <p class="sx-fx-caption" data-i18n="fx_formula">EVERY MODEL. ONE SCORE.</p>
             </div>
-            <div class="sx-podium" id="podium"></div>
         </section>
 
-        <section class="sx-manifest">
-            <div class="sx-manifest-bar">
-                <div class="sx-section-head">
-                    <h2 data-i18n="board">MANIFEST</h2>
-                    <span class="sx-count" id="results-count">—</span>
-                </div>
-                <div class="sx-controls">
-                    <input type="search" id="search-input" class="sx-input" data-i18n-placeholder="search_ph" placeholder="SEARCH VEHICLE…" autocomplete="off">
-                    <select id="sort-select" class="sx-select sx-select-wide">
-                        <option value="value" data-i18n="sort_value">VALUE</option>
-                        <option value="intelligence" data-i18n="sort_intel">INTEL</option>
-                        <option value="speed" data-i18n="sort_speed">SPEED</option>
-                        <option value="price" data-i18n="sort_price">PRICE</option>
-                    </select>
+        <!-- 5 Auto marquee -->
+        <section class="sx-screen sx-screen-fx sx-fx-marquee" data-screen="marquee">
+            <div class="sx-marquee" aria-hidden="true">
+                <div class="sx-marquee-track" id="sx-marquee-track">
+                    <span>LLM</span><span>VALUE</span><span>RANKINGS</span><span>OPENROUTER</span>
+                    <span>LLM</span><span>VALUE</span><span>RANKINGS</span><span>OPENROUTER</span>
                 </div>
             </div>
-
-            <div class="sx-cols" aria-hidden="true">
-                <span data-i18n="col_rank">#</span>
-                <span data-i18n="col_model">VEHICLE</span>
-                <span data-i18n="col_intel">INTEL</span>
-                <span data-i18n="col_speed">SPEED</span>
-                <span data-i18n="col_price">PRICE</span>
-                <span data-i18n="col_value">VALUE</span>
+            <div class="sx-marquee sx-marquee-reverse" aria-hidden="true">
+                <div class="sx-marquee-track" id="sx-marquee-track-2">
+                    <span>INTEL</span><span>SPEED</span><span>PRICE</span><span>VALUE</span>
+                    <span>INTEL</span><span>SPEED</span><span>PRICE</span><span>VALUE</span>
+                </div>
             </div>
-            <div class="sx-list" id="rankings-list">
-                <div class="sx-empty" data-i18n="loading">ACQUIRING SIGNAL…</div>
-            </div>
-            <div class="sx-pager" id="pagination"></div>
+            <p class="sx-fx-caption sx-fx-caption-overlay" data-i18n="fx_marquee">HUNDREDS OF VEHICLES IN ORBIT</p>
         </section>
+
+        <!-- 6 Crew -->
+        <section class="sx-screen sx-screen-crew" data-screen="crew" id="podium-section">
+            <div class="sx-screen-inner">
+                <p class="sx-kicker" data-i18n="top3">FLIGHT CREW</p>
+                <div class="sx-podium" id="podium">
+                    <div class="sx-empty" data-i18n="loading">ACQUIRING SIGNAL…</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7 Sticky warp scrub -->
+        <section class="sx-pin sx-pin-warp" data-screen="warp" id="pin-warp">
+            <div class="sx-pin-sticky">
+                <div class="sx-warp-lines" id="warp-lines" aria-hidden="true"></div>
+                <div class="sx-warp-copy">
+                    <h2 data-i18n="fx_warp_title">MAX Q</h2>
+                    <p data-i18n="fx_warp">SPEED MEETS PRICE. ONLY THE EFFICIENT SURVIVE.</p>
+                    <div class="sx-warp-meter"><i id="warp-meter-fill"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8 Manifest -->
+        <section class="sx-screen sx-screen-manifest" data-screen="manifest">
+            <div class="sx-manifest-wrap">
+                <div class="sx-manifest-bar">
+                    <div class="sx-section-head">
+                        <h2 data-i18n="board">MANIFEST</h2>
+                        <span class="sx-count" id="results-count">—</span>
+                    </div>
+                    <div class="sx-controls">
+                        <input type="search" id="search-input" class="sx-input" data-i18n-placeholder="search_ph" placeholder="SEARCH VEHICLE…" autocomplete="off">
+                        <select id="sort-select" class="sx-select sx-select-wide">
+                            <option value="value" data-i18n="sort_value">VALUE</option>
+                            <option value="intelligence" data-i18n="sort_intel">INTEL</option>
+                            <option value="speed" data-i18n="sort_speed">SPEED</option>
+                            <option value="price" data-i18n="sort_price">PRICE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sx-cols" aria-hidden="true">
+                    <span data-i18n="col_rank">#</span>
+                    <span data-i18n="col_model">VEHICLE</span>
+                    <span data-i18n="col_intel">INTEL</span>
+                    <span data-i18n="col_speed">SPEED</span>
+                    <span data-i18n="col_price">PRICE</span>
+                    <span data-i18n="col_value">VALUE</span>
+                </div>
+                <div class="sx-list" id="rankings-list">
+                    <div class="sx-empty" data-i18n="loading">ACQUIRING SIGNAL…</div>
+                </div>
+                <div class="sx-pager" id="pagination"></div>
+            </div>
+        </section>
+
+        <footer class="sx-footer">
+            <span data-i18n="footer">OCCUPY MARS · RANK MODELS</span>
+            <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GITHUB</a>
+        </footer>
     </main>
-
-    <footer class="sx-footer">
-        <span data-i18n="footer">OCCUPY MARS · RANK MODELS</span>
-        <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GITHUB</a>
-    </footer>
 
     <div class="sx-modal hidden" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="sx-modal-backdrop" id="modal-backdrop"></div>
@@ -146,6 +237,6 @@
         </div>
     </div>
 
-    <script src="js/spacex.js?v=20250709sx"></script>
+    <script src="js/spacex.js?v=20250709sx4"></script>
 </body>
 </html>

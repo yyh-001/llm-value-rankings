@@ -1,5 +1,5 @@
 /**
- * SpaceX cinematic standalone rankings UI
+ * SpaceX cinematic full-screen scroll rankings
  * Data: data/models.json
  */
 
@@ -22,6 +22,16 @@ const I18N = {
         kicker: '任务简报',
         title: '性价比排行榜',
         subtitle: '能力 × 速度^0.8 / 价格 · OpenRouter 遥测',
+        scroll: '向下滚动',
+        telemetry: '遥测数据',
+        formula_label: '核心方程',
+        fx_countdown: '准备发射',
+        fx_vehicle: '下一台载具就位',
+        fx_liftoff: '发射',
+        fx_formula: '每个模型 · 一个分数',
+        fx_marquee: '数百载具在轨',
+        fx_warp_title: 'MAX Q',
+        fx_warp: '速度遇见价格 · 只有高效者存活',
         style_label: '风格',
         style_classic: '经典',
         style_spacex: 'SpaceX',
@@ -69,6 +79,16 @@ const I18N = {
         kicker: 'MISSION BRIEFING',
         title: 'VALUE LEADERBOARD',
         subtitle: 'INTEL × SPEED^0.8 / PRICE · OPENROUTER TELEMETRY',
+        scroll: 'SCROLL',
+        telemetry: 'TELEMETRY',
+        formula_label: 'CORE EQUATION',
+        fx_countdown: 'GO FOR LAUNCH',
+        fx_vehicle: 'NEXT VEHICLE ON PAD',
+        fx_liftoff: 'LIFTOFF',
+        fx_formula: 'EVERY MODEL. ONE SCORE.',
+        fx_marquee: 'HUNDREDS OF VEHICLES IN ORBIT',
+        fx_warp_title: 'MAX Q',
+        fx_warp: 'SPEED MEETS PRICE. ONLY THE EFFICIENT SURVIVE.',
         style_label: 'STYLE',
         style_classic: 'Classic',
         style_spacex: 'SpaceX',
@@ -122,6 +142,9 @@ const state = {
     query: '',
     lang: localStorage.getItem('sx-lang') || localStorage.getItem('min-lang') || localStorage.getItem('eva-lang') || 'zh',
     meta: null,
+    reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    lastCountdownStep: -1,
+    launchModels: [],
 };
 
 const $ = (id) => document.getElementById(id);
@@ -142,6 +165,7 @@ function applyI18n() {
     const langBtn = $('lang-label');
     if (langBtn) langBtn.textContent = t('lang_btn');
     document.documentElement.lang = state.lang === 'zh' ? 'zh-CN' : 'en';
+    splitTitle();
 }
 
 function escapeHtml(str) {
@@ -204,6 +228,219 @@ function rankChangeHtml(model) {
     return `<span class="sx-change down">▼${Math.abs(change)}</span>`;
 }
 
+/* —— Scroll cinema —— */
+function splitTitle() {
+    const title = document.querySelector('.sx-title-split');
+    if (!title) return;
+    const text = t('title');
+    title.textContent = '';
+    [...text].forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'sx-char';
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        span.style.animationDelay = `${0.05 + i * 0.04}s`;
+        title.appendChild(span);
+    });
+}
+
+function pinProgress(el) {
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const total = Math.max(1, el.offsetHeight - window.innerHeight);
+    const scrolled = Math.min(total, Math.max(0, -rect.top));
+    return scrolled / total;
+}
+
+function initStarfield() {
+    const canvas = $('sx-canvas');
+    if (!canvas || state.reduceMotion) return;
+    const ctx = canvas.getContext('2d');
+    let w = 0;
+    let h = 0;
+    let stars = [];
+    let raf = 0;
+    let scrollBoost = 0;
+
+    const resize = () => {
+        w = canvas.width = window.innerWidth * devicePixelRatio;
+        h = canvas.height = window.innerHeight * devicePixelRatio;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        stars = Array.from({ length: 140 }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            z: Math.random() * 0.9 + 0.1,
+            r: Math.random() * 1.6 + 0.3,
+        }));
+    };
+
+    const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        const speed = 0.35 + scrollBoost * 8;
+        for (const s of stars) {
+            s.y += s.z * speed * devicePixelRatio;
+            if (s.y > h) {
+                s.y = 0;
+                s.x = Math.random() * w;
+            }
+            const alpha = 0.25 + s.z * 0.75;
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(240,240,250,${alpha})`;
+            ctx.arc(s.x, s.y, s.r * s.z * devicePixelRatio, 0, Math.PI * 2);
+            ctx.fill();
+            if (scrollBoost > 0.08) {
+                ctx.strokeStyle = `rgba(240,240,250,${alpha * 0.45})`;
+                ctx.beginPath();
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s.x, s.y - s.z * scrollBoost * 40 * devicePixelRatio);
+                ctx.stroke();
+            }
+        }
+        scrollBoost *= 0.92;
+        raf = requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+    window.addEventListener('resize', resize);
+    window.addEventListener(
+        'scroll',
+        () => {
+            scrollBoost = Math.min(1, scrollBoost + 0.12);
+        },
+        { passive: true }
+    );
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else raf = requestAnimationFrame(draw);
+    });
+}
+
+function initScrollCinema() {
+    const screens = [...document.querySelectorAll('.sx-screen, .sx-pin')];
+    const nav = document.querySelector('.sx-nav');
+    const progress = $('sx-progress-bar');
+    const stars = $('sx-stars');
+    const starsFar = $('sx-stars-far');
+    const nebula = $('sx-nebula');
+    const horizon = $('sx-horizon');
+    const glow = $('sx-glow');
+    const pinCountdown = $('pin-countdown');
+    const pinWarp = $('pin-warp');
+    const countdownEl = $('countdown-num');
+    const countdownCaption = $('countdown-caption');
+    const launchBar = $('launch-bar-fill');
+    const warpLines = $('warp-lines');
+    const warpMeter = $('warp-meter-fill');
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add('is-inview');
+            });
+        },
+        { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
+    screens.forEach((s) => observer.observe(s));
+    document.querySelector('.sx-screen-hero')?.classList.add('is-inview');
+
+    let ticking = false;
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            const p = scrollY / max;
+            const velocity = Math.min(1, Math.abs(scrollY - lastY) / 40);
+            lastY = scrollY;
+
+            if (progress) progress.style.width = `${(p * 100).toFixed(2)}%`;
+            if (nav) nav.classList.toggle('is-solid', scrollY > 24);
+
+            if (!state.reduceMotion) {
+                if (stars) stars.style.transform = `translate3d(0, ${scrollY * 0.22}px, 0)`;
+                if (starsFar) starsFar.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0) scale(1.2)`;
+                if (nebula) nebula.style.transform = `translate3d(${scrollY * 0.03}px, ${scrollY * 0.05}px, 0)`;
+                if (horizon) {
+                    horizon.style.transform = `translate3d(0, ${-scrollY * 0.08}px, 0) scale(${1 + p * 0.15})`;
+                    horizon.style.opacity = String(Math.max(0.2, 1 - p * 0.85));
+                }
+                if (glow) glow.style.opacity = String(Math.max(0.12, 0.9 - p * 1.1 + velocity * 0.3));
+            }
+
+            // Sticky countdown scrub: T-10 → LIFTOFF + model reveal
+            if (pinCountdown && countdownEl) {
+                const cp = pinProgress(pinCountdown);
+                const steps = ['T-10', 'T-8', 'T-6', 'T-4', 'T-3', 'T-2', 'T-1', 'LIFTOFF'];
+                const idx = Math.min(steps.length - 1, Math.floor(cp * steps.length));
+                if (idx !== state.lastCountdownStep) {
+                    state.lastCountdownStep = idx;
+                    countdownEl.textContent = steps[idx];
+                    countdownEl.style.transform = `scale(${1.1 - idx * 0.012})`;
+                    countdownEl.style.filter = idx === steps.length - 1 ? 'blur(0)' : `blur(${Math.max(0, 1.5 - cp * 2)}px)`;
+                    updateLaunchVehicle(idx, idx === steps.length - 1);
+                    if (countdownCaption) {
+                        countdownCaption.textContent =
+                            idx === steps.length - 1 ? t('fx_liftoff') : t('fx_vehicle');
+                    }
+                }
+                if (launchBar) launchBar.style.width = `${(cp * 100).toFixed(1)}%`;
+            }
+
+            // Sticky warp scrub
+            if (pinWarp && warpLines) {
+                const wp = pinProgress(pinWarp);
+                const scale = 1.3 + wp * 1.4;
+                const rot = 72 - wp * 18;
+                warpLines.style.opacity = String(0.25 + wp * 0.75);
+                warpLines.style.filter = `blur(${Math.max(0, 3 - wp * 3)}px)`;
+                warpLines.style.transform = `perspective(500px) rotateX(${rot}deg) scale(${scale}) translateY(${-wp * 8}%)`;
+                if (warpMeter) warpMeter.style.width = `${(wp * 100).toFixed(1)}%`;
+            }
+
+            ticking = false;
+        });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    initStarfield();
+
+    const hint = $('scroll-hint');
+    if (hint) {
+        hint.addEventListener('click', () => {
+            $('pin-countdown')?.scrollIntoView({ behavior: state.reduceMotion ? 'auto' : 'smooth' });
+        });
+    }
+}
+
+function buildMarquee() {
+    const tracks = [$('sx-marquee-track'), $('sx-marquee-track-2')].filter(Boolean);
+    if (!tracks.length) return;
+
+    const names = state.models
+        .filter((m) => m.rank != null)
+        .slice(0, 20)
+        .map((m) => m.name.replace(/^[^:]+:\s*/, ''));
+
+    const fallbackA = ['LLM', 'VALUE', 'RANKINGS', 'OPENROUTER', 'DEEPSEEK', 'GPT', 'CLAUDE', 'GEMINI'];
+    const fallbackB = ['INTEL', 'SPEED', 'PRICE', 'VALUE', 'TOKENS', 'LATENCY', 'CONTEXT', 'BLEND'];
+    const listA = names.length ? names : fallbackA;
+    const listB = names.length ? [...names].reverse() : fallbackB;
+
+    const html = (list) => {
+        const loop = [...list, ...list];
+        return loop.map((n) => `<span>${escapeHtml(n)}</span>`).join('');
+    };
+
+    if (tracks[0]) tracks[0].innerHTML = html(listA);
+    if (tracks[1]) tracks[1].innerHTML = html(listB);
+}
+
 function navigateStyle(style) {
     localStorage.setItem('ui-style', style);
     if (STYLE_PAGES[style]) {
@@ -239,7 +476,8 @@ function initTheme() {
 
 async function loadData() {
     const list = $('rankings-list');
-    list.innerHTML = `<div class="sx-empty">${t('loading')}</div>`;
+    const podium = $('podium');
+    if (list) list.innerHTML = `<div class="sx-empty">${t('loading')}</div>`;
 
     try {
         const cacheKey = document.querySelector('meta[name="app-version"]')?.content || Date.now();
@@ -256,23 +494,104 @@ async function loadData() {
         };
 
         updateStats();
+        prepareLaunchModels();
+        buildMarquee();
         renderPodium();
         filterAndSort();
+        // Refresh countdown vehicle if user is already in that section
+        if (state.lastCountdownStep >= 0) {
+            updateLaunchVehicle(state.lastCountdownStep, state.lastCountdownStep >= 7);
+        }
     } catch (err) {
         console.error(err);
-        list.innerHTML = `<div class="sx-empty">${t('error')}</div>`;
+        if (list) list.innerHTML = `<div class="sx-empty">${t('error')}</div>`;
+        if (podium) podium.innerHTML = `<div class="sx-empty">${t('error')}</div>`;
+    }
+}
+
+function prepareLaunchModels() {
+    state.launchModels = state.models
+        .filter((m) => m.rank != null && m.value_score != null)
+        .sort((a, b) => a.rank - b.rank)
+        .slice(0, 8);
+
+    const queue = $('launch-queue');
+    if (!queue) return;
+    if (!state.launchModels.length) {
+        queue.innerHTML = '';
+        return;
+    }
+    queue.innerHTML = state.launchModels
+        .map(
+            (m, i) => `
+        <button type="button" class="sx-queue-chip" data-idx="${i}" data-id="${escapeAttr(m.id)}" title="${escapeAttr(m.name)}">
+            <span class="sx-queue-rank">#${m.rank}</span>
+            <span class="sx-queue-name">${escapeHtml((m.name || '').replace(/^[^:]+:\s*/, ''))}</span>
+        </button>`
+        )
+        .join('');
+
+    queue.querySelectorAll('.sx-queue-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+            const id = chip.dataset.id;
+            if (id) showDetail(id);
+        });
+    });
+}
+
+function updateLaunchVehicle(stepIdx, isLiftoff) {
+    const card = $('launch-vehicle');
+    const queue = $('launch-queue');
+    if (!card) return;
+
+    const models = state.launchModels;
+    if (!models.length) {
+        card.hidden = true;
+        return;
+    }
+
+    const model = models[Math.min(stepIdx, models.length - 1)];
+    card.hidden = false;
+    card.classList.remove('is-swap');
+    void card.offsetWidth;
+    card.classList.add('is-swap');
+    card.classList.toggle('is-liftoff', !!isLiftoff);
+
+    const set = (id, text) => {
+        const el = $(id);
+        if (el) el.textContent = text;
+    };
+
+    set('launch-rank', `#${model.rank ?? '—'}`);
+    set('launch-name', model.name || '—');
+    set('launch-provider', model.provider_display || model.provider || '—');
+    set('launch-intel', model.intelligence_score ?? '—');
+    set('launch-speed', formatSpeed(model.speed));
+    set('launch-value', formatValue(model.value_score));
+
+    card.onclick = () => showDetail(model.id);
+
+    if (queue) {
+        queue.querySelectorAll('.sx-queue-chip').forEach((chip, i) => {
+            chip.classList.toggle('is-active', i === Math.min(stepIdx, models.length - 1));
+            chip.classList.toggle('is-done', i < stepIdx);
+        });
     }
 }
 
 function updateStats() {
     const meta = state.meta || {};
-    $('total-models').textContent = meta.total_models ?? state.models.length;
-    $('ranked-models').textContent = meta.ranked_models ?? state.models.filter((m) => m.rank).length;
+    const total = $('total-models');
+    const ranked = $('ranked-models');
+    const avgEl = $('avg-intelligence');
+    const updated = $('last-updated');
+    if (total) total.textContent = meta.total_models ?? state.models.length;
+    if (ranked) ranked.textContent = meta.ranked_models ?? state.models.filter((m) => m.rank).length;
     const avg = meta.avg_intelligence;
-    $('avg-intelligence').textContent = avg != null ? Number(avg).toFixed(1) : '—';
-    if (meta.updated_at) {
+    if (avgEl) avgEl.textContent = avg != null ? Number(avg).toFixed(1) : '—';
+    if (updated && meta.updated_at) {
         const date = new Date(meta.updated_at);
-        $('last-updated').textContent = date.toLocaleDateString(
+        updated.textContent = date.toLocaleDateString(
             state.lang === 'zh' ? 'zh-CN' : 'en-US',
             { month: 'short', day: 'numeric' }
         );
@@ -280,18 +599,17 @@ function updateStats() {
 }
 
 function renderPodium() {
-    const section = $('podium-section');
     const podium = $('podium');
+    if (!podium) return;
     const top3 = state.models
         .filter((m) => m.rank && m.rank <= 3 && m.value_score != null)
         .sort((a, b) => a.rank - b.rank);
 
     if (!top3.length) {
-        section.hidden = true;
+        podium.innerHTML = `<div class="sx-empty">${t('empty')}</div>`;
         return;
     }
 
-    section.hidden = false;
     podium.innerHTML = top3
         .map(
             (m) => `
@@ -349,8 +667,10 @@ function filterAndSort() {
 
 function renderList() {
     const root = $('rankings-list');
+    if (!root) return;
     const count = state.filtered.length;
-    $('results-count').textContent = t('results').replace('{count}', count);
+    const results = $('results-count');
+    if (results) results.textContent = t('results').replace('{count}', count);
 
     if (!count) {
         root.innerHTML = `<div class="sx-empty">${t('empty')}</div>`;
@@ -401,6 +721,7 @@ function renderList() {
 function renderPagination() {
     const total = Math.ceil(state.filtered.length / CONFIG.ITEMS_PER_PAGE);
     const pager = $('pagination');
+    if (!pager) return;
     if (total <= 1) {
         pager.innerHTML = '';
         return;
@@ -443,7 +764,6 @@ function renderPagination() {
             if (p >= 1 && p <= total) {
                 state.page = p;
                 renderList();
-                $('rankings-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -525,34 +845,49 @@ async function loadStars() {
 
 function initEvents() {
     let searchTimer;
-    $('search-input').addEventListener('input', (e) => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => {
-            state.query = e.target.value.trim();
+    const search = $('search-input');
+    if (search) {
+        search.addEventListener('input', (e) => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
+                state.query = e.target.value.trim();
+                filterAndSort();
+            }, 180);
+        });
+    }
+
+    const sort = $('sort-select');
+    if (sort) {
+        sort.addEventListener('change', (e) => {
+            state.sort = e.target.value;
             filterAndSort();
-        }, 180);
-    });
+        });
+    }
 
-    $('sort-select').addEventListener('change', (e) => {
-        state.sort = e.target.value;
-        filterAndSort();
-    });
-
-    $('lang-toggle').addEventListener('click', () => {
+    $('lang-toggle')?.addEventListener('click', () => {
         state.lang = state.lang === 'zh' ? 'en' : 'zh';
         localStorage.setItem('sx-lang', state.lang);
         applyI18n();
         updateStats();
+        prepareLaunchModels();
         renderPodium();
         renderList();
+        if (state.lastCountdownStep >= 0) {
+            updateLaunchVehicle(state.lastCountdownStep, state.lastCountdownStep >= 7);
+            const caption = $('countdown-caption');
+            if (caption) {
+                caption.textContent =
+                    state.lastCountdownStep >= 7 ? t('fx_liftoff') : t('fx_vehicle');
+            }
+        }
         const modal = $('detail-modal');
-        if (!modal.classList.contains('hidden') && modal.dataset.currentModel) {
+        if (modal && !modal.classList.contains('hidden') && modal.dataset.currentModel) {
             showDetail(modal.dataset.currentModel);
         }
     });
 
-    $('modal-close').addEventListener('click', closeDetail);
-    $('modal-backdrop').addEventListener('click', closeDetail);
+    $('modal-close')?.addEventListener('click', closeDetail);
+    $('modal-backdrop')?.addEventListener('click', closeDetail);
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeDetail();
     });
@@ -562,6 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyI18n();
     initTheme();
     initStyleSwitcher();
+    initScrollCinema();
     initEvents();
     loadStars();
     loadData();
