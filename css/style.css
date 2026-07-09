@@ -40,6 +40,11 @@
     --radius-xl: 24px;
 
     --header-height: 64px;
+    --row-top-bg: #f9f9fe;
+    --sticky-bg: var(--bg-secondary);
+    --sticky-bg-header: var(--bg-tertiary);
+    --sticky-bg-hover: var(--bg-tertiary);
+    --sticky-bg-top: var(--row-top-bg);
 }
 
 [data-theme="dark"] {
@@ -67,6 +72,11 @@
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
     --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.08);
+    --row-top-bg: #181e37;
+    --sticky-bg: var(--bg-secondary);
+    --sticky-bg-header: var(--bg-tertiary);
+    --sticky-bg-hover: var(--bg-tertiary);
+    --sticky-bg-top: var(--row-top-bg);
 }
 
 /* ===== Reset & Base ===== */
@@ -593,9 +603,10 @@ a:hover {
 
 #rankings-table {
     width: 100%;
-    min-width: 860px;
+    min-width: 980px;
     table-layout: fixed;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 table {
@@ -639,77 +650,76 @@ tbody tr:hover {
 }
 
 tbody tr.top-row {
-    background: rgba(99, 102, 241, 0.04);
-}
-
-[data-theme="dark"] tbody tr.top-row {
-    background: rgba(99, 102, 241, 0.08);
+    background: var(--row-top-bg);
 }
 
 .col-rank { width: 56px; text-align: center; }
 .col-change { width: 64px; text-align: center; }
-.col-model { width: 24%; }
-.col-provider { width: 11%; }
-.col-intelligence { width: 7%; text-align: center; }
-.col-speed { width: 9%; text-align: center; }
-.col-ttft { width: 8%; text-align: center; }
-.col-price { width: 8%; text-align: center; }
+.col-model { width: 22%; }
+.col-provider { width: 10%; }
+.col-intelligence { width: 72px; text-align: center; }
+.col-speed { width: 96px; text-align: center; }
+.col-ttft { width: 88px; text-align: center; }
+.col-price { width: 88px; text-align: center; }
 .col-value {
-    width: 11%;
+    width: 100px;
+    min-width: 100px;
     text-align: center;
     position: sticky;
-    right: 72px;
+    right: 76px;
     z-index: 2;
-    background: var(--bg-secondary);
+    background: var(--sticky-bg);
     box-shadow: -4px 0 10px rgba(15, 23, 42, 0.03);
 }
 
 thead .col-value {
-    background: var(--bg-tertiary);
+    background: var(--sticky-bg-header);
     z-index: 3;
 }
 
 tbody tr:hover .col-value {
-    background: var(--bg-tertiary);
+    background: var(--sticky-bg-hover);
 }
 
 tbody tr.top-row .col-value {
-    background: rgba(99, 102, 241, 0.04);
+    background: var(--sticky-bg-top);
 }
 
-[data-theme="dark"] tbody tr.top-row .col-value {
-    background: rgba(99, 102, 241, 0.08);
+tbody tr.top-row:hover .col-value {
+    background: var(--sticky-bg-hover);
 }
+
 .col-detail {
-    width: 72px;
-    min-width: 72px;
+    width: 76px;
+    min-width: 76px;
     text-align: center;
     position: sticky;
     right: 0;
     z-index: 2;
-    background: var(--bg-secondary);
+    background: var(--sticky-bg);
     box-shadow: -6px 0 12px rgba(15, 23, 42, 0.04);
 }
 
 thead .col-detail {
-    background: var(--bg-tertiary);
+    background: var(--sticky-bg-header);
     z-index: 3;
 }
 
 tbody tr:hover .col-detail {
-    background: var(--bg-tertiary);
+    background: var(--sticky-bg-hover);
 }
 
 tbody tr.top-row .col-detail {
-    background: rgba(99, 102, 241, 0.04);
+    background: var(--sticky-bg-top);
 }
 
-[data-theme="dark"] tbody tr.top-row .col-detail {
-    background: rgba(99, 102, 241, 0.08);
+tbody tr.top-row:hover .col-detail {
+    background: var(--sticky-bg-hover);
 }
 
+[data-theme="dark"] .col-value,
 [data-theme="dark"] .col-detail {
-    box-shadow: -6px 0 12px rgba(0, 0, 0, 0.2);
+    box-shadow: -6px 0 12px rgba(0, 0, 0, 0.25);
 }
 
 /* Rank badges */
@@ -799,6 +809,18 @@ tbody tr.top-row .col-detail {
     color: var(--text-secondary);
 }
 
+.col-value,
+.col-detail {
+    overflow: hidden;
+}
+
+.col-value .value-score,
+.col-value .value-bar,
+.col-detail .btn-detail {
+    position: relative;
+    z-index: 1;
+}
+
 /* Scores */
 .intelligence-score {
     font-weight: 700;
@@ -829,14 +851,17 @@ tbody tr.top-row .col-detail {
     font-weight: 800;
     font-size: 0.95rem;
     color: var(--accent-primary);
+    display: block;
+    line-height: 1.2;
 }
 
 .value-bar {
     width: 100%;
+    max-width: 72px;
     height: 4px;
     background: var(--bg-tertiary);
     border-radius: 100px;
-    margin-top: 0.4rem;
+    margin: 0.4rem auto 0;
     overflow: hidden;
 }
 
@@ -1721,6 +1746,70 @@ body.modal-open {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ===== Responsive ===== */
+@media (max-width: 1100px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    #rankings-table {
+        min-width: 920px;
+    }
+
+    th, td {
+        padding: 0.75rem 0.65rem;
+    }
+
+    .col-provider { width: 9%; }
+    .col-model { width: 20%; }
+    .col-intelligence { width: 64px; }
+    .col-speed { width: 88px; }
+    .col-ttft { width: 80px; }
+    .col-price { width: 80px; }
+    .col-value {
+        width: 92px;
+        min-width: 92px;
+        right: 72px;
+    }
+    .col-detail {
+        width: 72px;
+        min-width: 72px;
+    }
+
+    .provider-badge {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-detail {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 900px) {
+    #rankings-table {
+        min-width: 780px;
+    }
+
+    .col-ttft,
+    th.col-ttft {
+        display: none;
+    }
+
+    .col-value {
+        right: 72px;
+    }
+
+    .logo-sub {
+        max-width: 220px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
 @media (max-width: 768px) {
     .header-content {
         height: auto;
