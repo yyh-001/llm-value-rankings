@@ -37,6 +37,10 @@ const translations = {
         th_detail: "详情",
         loading: "加载中...",
         github_star: "Star",
+        style_label: "风格",
+        style_spacex: "SpaceX",
+        style_editorial: "极简",
+        style_classic: "经典",
         rank_new: "新",
         rank_change_hint: "较昨日排名变化",
         
@@ -122,6 +126,10 @@ const translations = {
         th_detail: "Detail",
         loading: "Loading...",
         github_star: "Star",
+        style_label: "Style",
+        style_spacex: "SpaceX",
+        style_editorial: "Minimal",
+        style_classic: "Classic",
         rank_new: "NEW",
         rank_change_hint: "Rank change vs yesterday",
         

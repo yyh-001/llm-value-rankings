@@ -54,6 +54,7 @@ const elements = {};
 document.addEventListener('DOMContentLoaded', async () => {
     initElements();
     initTheme();
+    initStyle();
     initI18n();
     initGitHubStar();
     initResponsive();
@@ -161,8 +162,7 @@ function formatStarCount(count) {
 // Theme Management
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const theme = savedTheme || 'dark';
     document.documentElement.setAttribute('data-theme', theme);
     
     document.getElementById('theme-toggle').addEventListener('click', () => {
@@ -170,7 +170,46 @@ function initTheme() {
         const next = current === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        syncThemeColor();
     });
+    syncThemeColor();
+}
+
+const STYLE_OPTIONS = ['spacex', 'editorial', 'classic'];
+
+function initStyle() {
+    const saved = localStorage.getItem('ui-style');
+    const style = STYLE_OPTIONS.includes(saved) ? saved : 'spacex';
+    applyStyle(style);
+
+    const select = document.getElementById('style-select');
+    if (!select) return;
+    select.value = style;
+    select.addEventListener('change', () => {
+        applyStyle(select.value);
+        localStorage.setItem('ui-style', select.value);
+        syncThemeColor();
+    });
+}
+
+function applyStyle(style) {
+    const next = STYLE_OPTIONS.includes(style) ? style : 'spacex';
+    document.documentElement.setAttribute('data-style', next);
+    const select = document.getElementById('style-select');
+    if (select && select.value !== next) select.value = next;
+}
+
+function syncThemeColor() {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) return;
+    const style = document.documentElement.getAttribute('data-style') || 'spacex';
+    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const colors = {
+        spacex: { dark: '#000000', light: '#f0f0fa' },
+        editorial: { dark: '#0a0a0b', light: '#f7f7f8' },
+        classic: { dark: '#0b0f19', light: '#f8fafc' },
+    };
+    meta.content = colors[style]?.[theme] || '#000000';
 }
 
 // i18n

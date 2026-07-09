@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark" data-style="spacex">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Value Rankings | 大模型性价比排行榜</title>
     <meta name="description" content="Compare 300+ LLM models by value — intelligence, speed, and price from OpenRouter. Daily updated AI model rankings. 大模型性价比排行榜，OpenRouter 价格与能力评分。">
     <meta name="keywords" content="LLM,大模型,性价比,AI ranking,model comparison,OpenRouter,token price,Artificial Analysis,DeepSeek,GPT,Claude,Gemini,LLM benchmark,AI tools,GitHub Pages">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#000000">
+    <script>
+        (function () {
+            try {
+                var style = localStorage.getItem('ui-style');
+                if (style === 'spacex' || style === 'editorial' || style === 'classic') {
+                    document.documentElement.setAttribute('data-style', style);
+                }
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link rel="canonical" href="https://yyh-001.github.io/llm-value-rankings/">
     <link rel="alternate" type="text/plain" href="https://yyh-001.github.io/llm-value-rankings/llms.txt" title="LLMs.txt">
     <link rel="sitemap" type="application/xml" href="https://yyh-001.github.io/llm-value-rankings/sitemap.xml">
@@ -66,24 +80,21 @@
     <meta name="twitter:description" content="Compare 300+ LLMs by value. OpenRouter pricing + Artificial Analysis scores.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="app-version" content="20250709b">
-    <link rel="stylesheet" href="css/style.css?v=20250709b">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'><rect x='4' y='4' width='24' height='24' rx='6' stroke='%232563eb' stroke-width='2'/><path d='M10 20l4-8 4 5 4-9' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="app-version" content="20250709d">
+    <link rel="stylesheet" href="css/style.css?v=20250709d">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'><circle cx='16' cy='16' r='10' stroke='%23f0f0fa' stroke-width='1.5'/><circle cx='16' cy='16' r='2' fill='%23f0f0fa'/></svg>">
 </head>
 <body>
-    <div class="bg-decoration" aria-hidden="true"></div>
+    <div class="bg-decoration" aria-hidden="true">
+        <div class="bg-stars"></div>
+        <div class="bg-horizon"></div>
+    </div>
 
     <!-- Header -->
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <span class="logo-mark" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="4"/>
-                        <path d="M7 15l3-6 3 4 4-7"/>
-                    </svg>
-                </span>
                 <div class="logo-text-group">
                     <h1 class="logo-text" data-i18n="title">大模型性价比排行榜</h1>
                     <span class="logo-sub" data-i18n="logo_sub">Intel f(x) × Speed^0.8 / Price</span>
@@ -97,6 +108,14 @@
                     <span class="btn-github-text" data-i18n="github_star">Star</span>
                     <span id="star-count" class="star-count">—</span>
                 </a>
+                <div class="style-switcher">
+                    <label class="style-switcher-label" for="style-select" data-i18n="style_label">风格</label>
+                    <select id="style-select" class="style-select" aria-label="Switch visual style">
+                        <option value="spacex" data-i18n="style_spacex">SpaceX</option>
+                        <option value="editorial" data-i18n="style_editorial">极简</option>
+                        <option value="classic" data-i18n="style_classic">经典</option>
+                    </select>
+                </div>
                 <button id="theme-toggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
                     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"/>
@@ -115,6 +134,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-atmosphere" aria-hidden="true"></div>
         <div class="container hero-inner">
             <p class="hero-badge" data-i18n="hero_badge">实时数据 · 每日自动更新</p>
             <h2 class="hero-title" data-i18n="hero_title">找到最具性价比的 AI 模型</h2>
@@ -270,7 +290,7 @@
     </footer>
 
     <script defer src="https://events.vercount.one/js"></script>
-    <script src="js/i18n.js?v=20250709b"></script>
-    <script src="js/app.js?v=20250709b"></script>
+    <script src="js/i18n.js?v=20250709d"></script>
+    <script src="js/app.js?v=20250709d"></script>
 </body>
 </html>
