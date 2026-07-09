@@ -156,7 +156,6 @@ const state = {
     lastCountdownStep: -1,
     launchModels: [],
     duel: { speed: null, price: null, value: null },
-    lastWarpPhase: -1,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -935,7 +934,6 @@ function initEvents() {
                     state.lastCountdownStep >= 7 ? t('fx_liftoff') : t('fx_vehicle');
             }
         }
-        state.lastWarpPhase = -1;
         fillDuelCards();
         const modal = $('detail-modal');
         if (modal && !modal.classList.contains('hidden') && modal.dataset.currentModel) {
