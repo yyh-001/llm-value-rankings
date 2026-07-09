@@ -11,7 +11,7 @@
         (function () {
             try {
                 var style = localStorage.getItem('ui-style');
-                // Default: Minimal (editorial). Only stay on index for classic/apple.
+                // Default: Minimal (editorial). Only stay on index for classic.
                 if (!style || style === 'editorial' || style === 'aurora') {
                     try { localStorage.setItem('ui-style', 'editorial'); } catch (e) {}
                     location.replace('minimal.html');
@@ -25,7 +25,11 @@
                     location.replace('spacex.html');
                     return;
                 }
-                if (style === 'classic' || style === 'apple') {
+                if (style === 'apple') {
+                    location.replace('apple.html');
+                    return;
+                }
+                if (style === 'classic') {
                     document.documentElement.setAttribute('data-style', style);
                 } else {
                     try { localStorage.setItem('ui-style', 'editorial'); } catch (e) {}
@@ -312,6 +316,6 @@
 
     <script defer src="https://events.vercount.one/js"></script>
     <script src="js/i18n.js?v=20250709r"></script>
-    <script src="js/app.js?v=20250709r"></script>
+    <script src="js/app.js?v=20250709s"></script>
 </body>
 </html>

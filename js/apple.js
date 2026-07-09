@@ -1,5 +1,5 @@
 /**
- * Minimal / Editorial standalone rankings UI
+ * Apple standalone rankings UI
  * Data: data/models.json
  */
 
@@ -120,7 +120,7 @@ const state = {
     page: 1,
     sort: 'value',
     query: '',
-    lang: localStorage.getItem('min-lang') || localStorage.getItem('eva-lang') || 'zh',
+    lang: localStorage.getItem('apple-lang') || localStorage.getItem('eva-lang') || 'zh',
     meta: null,
 };
 
@@ -197,11 +197,11 @@ function formatStarCount(count) {
 }
 
 function rankChangeHtml(model) {
-    if (model.rank_new) return `<span class="min-change new">${t('new')}</span>`;
+    if (model.rank_new) return `<span class="apl-change new">${t('new')}</span>`;
     const change = model.rank_change;
-    if (change == null || change === 0) return `<span class="min-change same">—</span>`;
-    if (change > 0) return `<span class="min-change up">▲${change}</span>`;
-    return `<span class="min-change down">▼${Math.abs(change)}</span>`;
+    if (change == null || change === 0) return `<span class="apl-change same">—</span>`;
+    if (change > 0) return `<span class="apl-change up">▲${change}</span>`;
+    return `<span class="apl-change down">▼${Math.abs(change)}</span>`;
 }
 
 function navigateStyle(style) {
@@ -216,10 +216,10 @@ function navigateStyle(style) {
 function initStyleSwitcher() {
     const select = $('style-select');
     if (!select) return;
-    select.value = 'editorial';
+    select.value = 'apple';
     select.addEventListener('change', () => {
         const next = select.value;
-        if (next === 'editorial') return;
+        if (next === 'apple') return;
         navigateStyle(next);
     });
 }
@@ -233,13 +233,13 @@ function initTheme() {
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.content = next === 'light' ? '#f7f7f8' : '#0a0a0b';
+        if (meta) meta.content = next === 'light' ? '#f5f5f7' : '#000000';
     });
 }
 
 async function loadData() {
     const body = $('rankings-body');
-    body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('loading')}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="6" class="apl-empty">${t('loading')}</td></tr>`;
     $('rankings-cards').innerHTML = '';
 
     try {
@@ -261,7 +261,7 @@ async function loadData() {
         filterAndSort();
     } catch (err) {
         console.error(err);
-        body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('error')}</td></tr>`;
+        body.innerHTML = `<tr><td colspan="6" class="apl-empty">${t('error')}</td></tr>`;
     }
 }
 
@@ -296,11 +296,11 @@ function renderPodium() {
     podium.innerHTML = top3
         .map(
             (m) => `
-        <article class="min-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
-            <div class="min-card-rank">#${m.rank} ${rankChangeHtml(m)}</div>
-            <div class="min-card-name">${escapeHtml(m.name)}</div>
-            <div class="min-card-provider">${escapeHtml(m.provider_display || m.provider)}</div>
-            <div class="min-card-row">
+        <article class="apl-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
+            <div class="apl-card-rank">#${m.rank} ${rankChangeHtml(m)}</div>
+            <div class="apl-card-name">${escapeHtml(m.name)}</div>
+            <div class="apl-card-provider">${escapeHtml(m.provider_display || m.provider)}</div>
+            <div class="apl-card-row">
                 <span>${t('intel')} <b>${m.intelligence_score ?? '—'}</b></span>
                 <span>${t('speed')} <b>${formatSpeed(m.speed)}</b></span>
                 <span>${t('value')} <b>${formatValue(m.value_score)}</b></span>
@@ -309,7 +309,7 @@ function renderPodium() {
         )
         .join('');
 
-    podium.querySelectorAll('.min-card').forEach((el) => {
+    podium.querySelectorAll('.apl-card').forEach((el) => {
         const open = () => showDetail(el.dataset.id);
         el.addEventListener('click', open);
         el.addEventListener('keydown', (e) => {
@@ -355,8 +355,8 @@ function renderList() {
     $('results-count').textContent = t('results').replace('{count}', count);
 
     if (!count) {
-        body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('empty')}</td></tr>`;
-        cards.innerHTML = `<div class="min-empty">${t('empty')}</div>`;
+        body.innerHTML = `<tr><td colspan="6" class="apl-empty">${t('empty')}</td></tr>`;
+        cards.innerHTML = `<div class="apl-empty">${t('empty')}</div>`;
         $('pagination').innerHTML = '';
         return;
     }
@@ -370,17 +370,17 @@ function renderList() {
             return `
             <tr data-id="${escapeAttr(m.id)}" tabindex="0">
                 <td>
-                    <span class="min-rank ${topClass}">${m.rank ?? '—'}</span>
+                    <span class="apl-rank ${topClass}">${m.rank ?? '—'}</span>
                     ${rankChangeHtml(m)}
                 </td>
                 <td>
-                    <div class="min-model-name">${escapeHtml(m.name)}</div>
-                    <div class="min-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
+                    <div class="apl-model-name">${escapeHtml(m.name)}</div>
+                    <div class="apl-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
                 </td>
-                <td class="min-num">${m.intelligence_score ?? '—'}</td>
-                <td class="min-num">${formatSpeed(m.speed)} t/s</td>
-                <td class="min-num">${formatPrice(m.pricing?.blended)}</td>
-                <td class="min-num value">${formatValue(m.value_score)}</td>
+                <td class="apl-num">${m.intelligence_score ?? '—'}</td>
+                <td class="apl-num">${formatSpeed(m.speed)} t/s</td>
+                <td class="apl-num">${formatPrice(m.pricing?.blended)}</td>
+                <td class="apl-num value">${formatValue(m.value_score)}</td>
             </tr>`;
         })
         .join('');
@@ -389,17 +389,17 @@ function renderList() {
         .map((m) => {
             const topClass = m.rank <= 3 ? 'top' : '';
             return `
-            <div class="min-list-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
-                <div class="min-list-top">
+            <div class="apl-list-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
+                <div class="apl-list-top">
                     <div>
-                        <span class="min-rank ${topClass}">#${m.rank ?? '—'}</span>
+                        <span class="apl-rank ${topClass}">#${m.rank ?? '—'}</span>
                         ${rankChangeHtml(m)}
-                        <div class="min-model-name" style="margin-top:0.25rem">${escapeHtml(m.name)}</div>
-                        <div class="min-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
+                        <div class="apl-model-name" style="margin-top:0.25rem">${escapeHtml(m.name)}</div>
+                        <div class="apl-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
                     </div>
-                    <div class="min-num value" style="font-size:1.1rem">${formatValue(m.value_score)}</div>
+                    <div class="apl-num value" style="font-size:1.1rem">${formatValue(m.value_score)}</div>
                 </div>
-                <div class="min-list-metrics">
+                <div class="apl-list-metrics">
                     <div><b>${m.intelligence_score ?? '—'}</b>${t('intel')}</div>
                     <div><b>${formatSpeed(m.speed)}</b>${t('speed')}</div>
                     <div><b>${formatPrice(m.pricing?.blended)}</b>${t('price')}</div>
@@ -420,7 +420,7 @@ function renderList() {
         });
     };
     body.querySelectorAll('tr[data-id]').forEach(bind);
-    cards.querySelectorAll('.min-list-card').forEach(bind);
+    cards.querySelectorAll('.apl-list-card').forEach(bind);
 
     renderPagination();
 }
@@ -435,7 +435,7 @@ function renderPagination() {
 
     const buttons = [];
     buttons.push(
-        `<button type="button" class="min-page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>‹</button>`
+        `<button type="button" class="apl-page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>‹</button>`
     );
 
     const windowSize = 5;
@@ -444,23 +444,23 @@ function renderPagination() {
     from = Math.max(1, to - windowSize + 1);
 
     if (from > 1) {
-        buttons.push(`<button type="button" class="min-page-btn" data-page="1">1</button>`);
-        if (from > 2) buttons.push(`<span class="min-page-btn" style="border:none;opacity:.4">…</span>`);
+        buttons.push(`<button type="button" class="apl-page-btn" data-page="1">1</button>`);
+        if (from > 2) buttons.push(`<span class="apl-page-btn" style="border:none;opacity:.4">…</span>`);
     }
 
     for (let i = from; i <= to; i++) {
         buttons.push(
-            `<button type="button" class="min-page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`
+            `<button type="button" class="apl-page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`
         );
     }
 
     if (to < total) {
-        if (to < total - 1) buttons.push(`<span class="min-page-btn" style="border:none;opacity:.4">…</span>`);
-        buttons.push(`<button type="button" class="min-page-btn" data-page="${total}">${total}</button>`);
+        if (to < total - 1) buttons.push(`<span class="apl-page-btn" style="border:none;opacity:.4">…</span>`);
+        buttons.push(`<button type="button" class="apl-page-btn" data-page="${total}">${total}</button>`);
     }
 
     buttons.push(
-        `<button type="button" class="min-page-btn" data-page="${state.page + 1}" ${state.page === total ? 'disabled' : ''}>›</button>`
+        `<button type="button" class="apl-page-btn" data-page="${state.page + 1}" ${state.page === total ? 'disabled' : ''}>›</button>`
     );
 
     pager.innerHTML = buttons.join('');
@@ -489,30 +489,30 @@ function showDetail(modelId) {
     const channelUrl = pricing.pricing_source_url || openUrl;
 
     $('modal-body').innerHTML = `
-        <div class="min-detail-rank">#${model.rank ?? '—'} ${rankChangeHtml(model)}</div>
-        <h2 class="min-detail-title" id="modal-title">${escapeHtml(model.name)}</h2>
-        <a class="min-detail-id" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${escapeHtml(model.id)}</a>
-        <span class="min-detail-provider">${escapeHtml(model.provider_display || model.provider)}</span>
+        <div class="apl-detail-rank">#${model.rank ?? '—'} ${rankChangeHtml(model)}</div>
+        <h2 class="apl-detail-title" id="modal-title">${escapeHtml(model.name)}</h2>
+        <a class="apl-detail-id" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${escapeHtml(model.id)}</a>
+        <span class="apl-detail-provider">${escapeHtml(model.provider_display || model.provider)}</span>
 
-        <div class="min-detail-value">
+        <div class="apl-detail-value">
             <span>${t('value')}</span>
             <strong>${formatValue(model.value_score)}</strong>
         </div>
 
-        <div class="min-detail-grid">
-            <div class="min-detail-cell"><span>${t('intel')}</span><b>${model.intelligence_score ?? '—'}</b></div>
-            <div class="min-detail-cell"><span>${t('speed')}</span><b>${formatSpeed(model.speed)} t/s</b></div>
-            <div class="min-detail-cell"><span>${t('ttft')}</span><b>${formatLatency(model.ttft)}</b></div>
-            <div class="min-detail-cell"><span>${t('context')}</span><b>${formatContext(model.context_length)}</b></div>
-            <div class="min-detail-cell"><span>${t('input')}</span><b>${formatPrice(pricing.prompt)}</b></div>
-            <div class="min-detail-cell"><span>${t('output')}</span><b>${formatPrice(pricing.completion)}</b></div>
-            <div class="min-detail-cell"><span>${t('blended')}</span><b>${formatPrice(pricing.blended)}</b></div>
-            <div class="min-detail-cell"><span>${t('channel')}</span><b><a href="${escapeAttr(channelUrl)}" target="_blank" rel="noopener">${escapeHtml(channel)}</a></b></div>
+        <div class="apl-detail-grid">
+            <div class="apl-detail-cell"><span>${t('intel')}</span><b>${model.intelligence_score ?? '—'}</b></div>
+            <div class="apl-detail-cell"><span>${t('speed')}</span><b>${formatSpeed(model.speed)} t/s</b></div>
+            <div class="apl-detail-cell"><span>${t('ttft')}</span><b>${formatLatency(model.ttft)}</b></div>
+            <div class="apl-detail-cell"><span>${t('context')}</span><b>${formatContext(model.context_length)}</b></div>
+            <div class="apl-detail-cell"><span>${t('input')}</span><b>${formatPrice(pricing.prompt)}</b></div>
+            <div class="apl-detail-cell"><span>${t('output')}</span><b>${formatPrice(pricing.completion)}</b></div>
+            <div class="apl-detail-cell"><span>${t('blended')}</span><b>${formatPrice(pricing.blended)}</b></div>
+            <div class="apl-detail-cell"><span>${t('channel')}</span><b><a href="${escapeAttr(channelUrl)}" target="_blank" rel="noopener">${escapeHtml(channel)}</a></b></div>
         </div>
 
-        ${model.description ? `<p class="min-detail-desc">${escapeHtml(model.description)}</p>` : ''}
+        ${model.description ? `<p class="apl-detail-desc">${escapeHtml(model.description)}</p>` : ''}
 
-        <a class="min-cta" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${t('open')}</a>
+        <a class="apl-cta" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${t('open')}</a>
     `;
 
     modal.classList.remove('hidden');
@@ -567,7 +567,7 @@ function initEvents() {
 
     $('lang-toggle').addEventListener('click', () => {
         state.lang = state.lang === 'zh' ? 'en' : 'zh';
-        localStorage.setItem('min-lang', state.lang);
+        localStorage.setItem('apple-lang', state.lang);
         applyI18n();
         updateStats();
         renderPodium();

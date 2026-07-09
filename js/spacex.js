@@ -15,6 +15,7 @@ const STYLE_PAGES = {
     spacex: 'spacex.html',
     editorial: 'minimal.html',
     eva: 'eva.html',
+    apple: 'apple.html',
 };
 
 const I18N = {

@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://yyh-001.github.io/llm-value-rankings/minimal.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://yyh-001.github.io/llm-value-rankings/apple.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://yyh-001.github.io/llm-value-rankings/data/models.json</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>

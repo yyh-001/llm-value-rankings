@@ -148,6 +148,10 @@ function initStyleSwitcher() {
             window.location.href = 'spacex.html';
             return;
         }
+        if (next === 'apple') {
+            window.location.href = 'apple.html';
+            return;
+        }
         window.location.href = 'index.html';
     });
 }

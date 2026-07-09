@@ -181,6 +181,7 @@ const STYLE_PAGES = {
     spacex: 'spacex.html',
     eva: 'eva.html',
     editorial: 'minimal.html',
+    apple: 'apple.html',
 };
 
 function initStyle() {
