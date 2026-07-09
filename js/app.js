@@ -175,7 +175,7 @@ function initTheme() {
     syncThemeColor();
 }
 
-const STYLE_OPTIONS = ['spacex', 'editorial', 'classic'];
+const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora'];
 
 function initStyle() {
     const saved = localStorage.getItem('ui-style');
@@ -208,6 +208,8 @@ function syncThemeColor() {
         spacex: { dark: '#000000', light: '#f0f0fa' },
         editorial: { dark: '#0a0a0b', light: '#f7f7f8' },
         classic: { dark: '#0b0f19', light: '#f8fafc' },
+        apple: { dark: '#000000', light: '#f5f5f7' },
+        aurora: { dark: '#070b14', light: '#f4f7fb' },
     };
     meta.content = colors[style]?.[theme] || '#000000';
 }

@@ -41,6 +41,8 @@ const translations = {
         style_spacex: "SpaceX",
         style_editorial: "极简",
         style_classic: "经典",
+        style_apple: "Apple",
+        style_aurora: "Aurora",
         rank_new: "新",
         rank_change_hint: "较昨日排名变化",
         
@@ -130,6 +132,8 @@ const translations = {
         style_spacex: "SpaceX",
         style_editorial: "Minimal",
         style_classic: "Classic",
+        style_apple: "Apple",
+        style_aurora: "Aurora",
         rank_new: "NEW",
         rank_change_hint: "Rank change vs yesterday",
         
