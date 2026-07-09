@@ -339,12 +339,9 @@ function initScrollCinema() {
     const horizon = $('sx-horizon');
     const glow = $('sx-glow');
     const pinCountdown = $('pin-countdown');
-    const pinWarp = $('pin-warp');
     const countdownEl = $('countdown-num');
     const countdownCaption = $('countdown-caption');
     const launchBar = $('launch-bar-fill');
-    const warpLines = $('warp-lines');
-    const warpMeter = $('warp-meter-fill');
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -399,18 +396,6 @@ function initScrollCinema() {
                     }
                 }
                 if (launchBar) launchBar.style.width = `${(cp * 100).toFixed(1)}%`;
-            }
-
-            // Sticky warp scrub → efficiency duel
-            if (pinWarp && warpLines) {
-                const wp = pinProgress(pinWarp);
-                const scale = 1.3 + wp * 1.4;
-                const rot = 72 - wp * 18;
-                warpLines.style.opacity = String(0.2 + wp * 0.55);
-                warpLines.style.filter = `blur(${Math.max(0, 3 - wp * 3)}px)`;
-                warpLines.style.transform = `perspective(500px) rotateX(${rot}deg) scale(${scale}) translateY(${-wp * 8}%)`;
-                if (warpMeter) warpMeter.style.width = `${(wp * 100).toFixed(1)}%`;
-                updateWarpDuel(wp);
             }
 
             ticking = false;
@@ -606,7 +591,6 @@ function prepareDuelModels() {
 
     state.duel = { speed: bySpeed || null, price: byPrice || null, value: byValue || null };
     fillDuelCards();
-    state.lastWarpPhase = -1;
 }
 
 function shortName(model) {
@@ -644,30 +628,9 @@ function fillDuelCards() {
         const card = $('duel-winner');
         if (card) card.onclick = () => showDetail(value.id);
     }
-}
 
-function updateWarpDuel(progress) {
-    const duel = $('warp-duel');
-    const winner = $('duel-winner');
     const caption = $('warp-caption');
-    if (!duel) return;
-
-    // 0–0.35: show duel cards, 0.35–0.7: highlight, 0.7+: reveal winner
-    let phase = 0;
-    if (progress >= 0.7) phase = 2;
-    else if (progress >= 0.35) phase = 1;
-
-    if (phase === state.lastWarpPhase) return;
-    state.lastWarpPhase = phase;
-
-    duel.classList.toggle('is-clash', phase >= 1);
-    if (winner) {
-        winner.hidden = phase < 2;
-        winner.classList.toggle('is-show', phase >= 2);
-    }
-    if (caption) {
-        caption.textContent = phase >= 2 ? t('duel_hint_done') : t('duel_hint');
-    }
+    if (caption) caption.textContent = t('duel_hint_done');
 }
 
 function updateStats() {
@@ -973,7 +936,7 @@ function initEvents() {
             }
         }
         state.lastWarpPhase = -1;
-        updateWarpDuel(pinProgress($('pin-warp')));
+        fillDuelCards();
         const modal = $('detail-modal');
         if (modal && !modal.classList.contains('hidden') && modal.dataset.currentModel) {
             showDetail(modal.dataset.currentModel);
