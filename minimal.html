@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Value Rankings · Minimal</title>
+    <meta name="description" content="极简风格大模型性价比排行榜 — OpenRouter 价格与能力评分。">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="app-version" content="20250709min">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/minimal.css?v=20250709min">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0b'/><circle cx='16' cy='16' r='6' fill='none' stroke='%2360a5fa' stroke-width='2'/></svg>">
+</head>
+<body>
+    <header class="min-header">
+        <div class="min-header-inner">
+            <a class="min-logo" href="minimal.html">
+                <span class="min-logo-mark"></span>
+                <span class="min-logo-text">LLM Value Rankings</span>
+            </a>
+            <div class="min-header-actions">
+                <a class="min-ghost" id="github-star" href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">
+                    ★ <span id="star-count">—</span>
+                </a>
+                <div class="min-style-switcher">
+                    <label class="min-style-label" for="style-select" data-i18n="style_label">风格</label>
+                    <select id="style-select" class="min-select" aria-label="Switch visual style">
+                        <option value="classic" data-i18n="style_classic">经典</option>
+                        <option value="spacex" data-i18n="style_spacex">SpaceX</option>
+                        <option value="editorial" data-i18n="style_editorial" selected>极简</option>
+                        <option value="apple" data-i18n="style_apple">Apple</option>
+                        <option value="aurora" data-i18n="style_aurora">Aurora</option>
+                        <option value="eva" data-i18n="style_eva">EVA</option>
+                    </select>
+                </div>
+                <button type="button" class="min-icon-btn" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+                    </svg>
+                </button>
+                <button type="button" class="min-icon-btn" id="lang-toggle" aria-label="Switch language">
+                    <span id="lang-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="min-main">
+        <section class="min-hero">
+            <p class="min-eyebrow" data-i18n="eyebrow">Daily rankings</p>
+            <h1 class="min-title" data-i18n="title">大模型性价比</h1>
+            <p class="min-desc" data-i18n="subtitle">能力 × 速度^0.8 / 价格 · OpenRouter</p>
+
+            <div class="min-metrics">
+                <div class="min-metric">
+                    <span class="min-metric-value" id="total-models">—</span>
+                    <span class="min-metric-label" data-i18n="stat_total">模型</span>
+                </div>
+                <div class="min-metric">
+                    <span class="min-metric-value" id="ranked-models">—</span>
+                    <span class="min-metric-label" data-i18n="stat_ranked">已排名</span>
+                </div>
+                <div class="min-metric">
+                    <span class="min-metric-value" id="avg-intelligence">—</span>
+                    <span class="min-metric-label" data-i18n="stat_avg">能力均分</span>
+                </div>
+                <div class="min-metric">
+                    <span class="min-metric-value" id="last-updated">—</span>
+                    <span class="min-metric-label" data-i18n="stat_updated">更新</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-top" id="podium-section" hidden>
+            <div class="min-section-label" data-i18n="top3">Top 3</div>
+            <div class="min-podium" id="podium"></div>
+        </section>
+
+        <section class="min-board">
+            <div class="min-board-bar">
+                <div class="min-section-label" id="results-count">—</div>
+                <div class="min-controls">
+                    <input type="search" id="search-input" class="min-input" data-i18n-placeholder="search_ph" placeholder="搜索模型…" autocomplete="off">
+                    <select id="sort-select" class="min-select">
+                        <option value="value" data-i18n="sort_value">性价比</option>
+                        <option value="intelligence" data-i18n="sort_intel">能力</option>
+                        <option value="speed" data-i18n="sort_speed">速度</option>
+                        <option value="price" data-i18n="sort_price">价格</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="min-table-wrap">
+                <table class="min-table">
+                    <thead>
+                        <tr>
+                            <th data-i18n="col_rank">#</th>
+                            <th data-i18n="col_model">模型</th>
+                            <th data-i18n="col_intel">能力</th>
+                            <th data-i18n="col_speed">速度</th>
+                            <th data-i18n="col_price">价格</th>
+                            <th data-i18n="col_value">性价比</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankings-body">
+                        <tr><td colspan="6" class="min-empty" data-i18n="loading">加载中…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="min-cards" id="rankings-cards"></div>
+            <div class="min-pager" id="pagination"></div>
+        </section>
+    </main>
+
+    <footer class="min-footer">
+        <span data-i18n="footer">OpenRouter · Artificial Analysis</span>
+        <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+
+    <div class="min-modal hidden" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="min-modal-backdrop" id="modal-backdrop"></div>
+        <div class="min-modal-panel">
+            <button type="button" class="min-modal-close" id="modal-close" aria-label="Close">×</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="js/minimal.js?v=20250709min"></script>
+</body>
+</html>

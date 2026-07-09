@@ -142,6 +142,10 @@ function initStyleSwitcher() {
         const next = select.value;
         if (next === 'eva') return;
         localStorage.setItem('ui-style', next);
+        if (next === 'editorial') {
+            window.location.href = 'minimal.html';
+            return;
+        }
         window.location.href = 'index.html';
     });
 }

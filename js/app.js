@@ -177,10 +177,15 @@ function initTheme() {
 
 const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora', 'eva'];
 
+const STYLE_PAGES = {
+    eva: 'eva.html',
+    editorial: 'minimal.html',
+};
+
 function initStyle() {
     const saved = localStorage.getItem('ui-style');
-    if (saved === 'eva') {
-        window.location.replace('eva.html');
+    if (STYLE_PAGES[saved]) {
+        window.location.replace(STYLE_PAGES[saved]);
         return;
     }
     const style = STYLE_OPTIONS.includes(saved) ? saved : 'classic';
@@ -190,13 +195,14 @@ function initStyle() {
     if (!select) return;
     select.value = style;
     select.addEventListener('change', () => {
-        if (select.value === 'eva') {
-            localStorage.setItem('ui-style', 'eva');
-            window.location.href = 'eva.html';
+        const next = select.value;
+        if (STYLE_PAGES[next]) {
+            localStorage.setItem('ui-style', next);
+            window.location.href = STYLE_PAGES[next];
             return;
         }
-        applyStyle(select.value);
-        localStorage.setItem('ui-style', select.value);
+        applyStyle(next);
+        localStorage.setItem('ui-style', next);
         syncThemeColor();
     });
 }
