@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NERV // LLM Value Command | EVA</title>
+    <meta name="description" content="EVA / NERV 风格大模型性价比指挥台 — OpenRouter 价格与能力排行。">
+    <meta name="theme-color" content="#0a0612">
+    <meta name="app-version" content="20250709eva">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/eva.css?v=20250709eva">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0612'/><path d='M4 28 L16 4 L28 28 Z' fill='none' stroke='%23ff5c1c' stroke-width='2'/><circle cx='16' cy='20' r='3' fill='%2339ff14'/></svg>">
+</head>
+<body>
+    <div class="eva-bg" aria-hidden="true">
+        <div class="eva-scan"></div>
+        <div class="eva-grid"></div>
+        <div class="eva-hazard"></div>
+    </div>
+
+    <header class="eva-topbar">
+        <div class="eva-brand">
+            <span class="eva-mark">NERV</span>
+            <div class="eva-brand-text">
+                <strong>LLM VALUE COMMAND</strong>
+                <span>MAGI · MELCHIOR / BALTHASAR / CASPER</span>
+            </div>
+        </div>
+        <div class="eva-topbar-actions">
+            <a class="eva-link" href="index.html">← CLASSIC UI</a>
+            <a class="eva-link" id="github-star" href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">★ <span id="star-count">—</span></a>
+            <button type="button" class="eva-btn-ghost" id="lang-toggle" aria-label="Switch language">EN</button>
+        </div>
+    </header>
+
+    <main class="eva-main">
+        <section class="eva-hero">
+            <div class="eva-status">
+                <span class="eva-pulse"></span>
+                <span id="status-text">SYSTEM ONLINE</span>
+            </div>
+            <h1 class="eva-title" data-i18n="title">性价比作战指挥台</h1>
+            <p class="eva-sub" data-i18n="subtitle">能力 × 速度^0.8 / 价格 · OpenRouter 实时数据</p>
+
+            <div class="eva-stats" id="stats-bar">
+                <div class="eva-stat">
+                    <span class="eva-stat-label" data-i18n="stat_units">UNITS</span>
+                    <span class="eva-stat-value" id="total-models">—</span>
+                </div>
+                <div class="eva-stat">
+                    <span class="eva-stat-label" data-i18n="stat_ranked">RANKED</span>
+                    <span class="eva-stat-value" id="ranked-models">—</span>
+                </div>
+                <div class="eva-stat">
+                    <span class="eva-stat-label" data-i18n="stat_avg">INTEL AVG</span>
+                    <span class="eva-stat-value accent-green" id="avg-intelligence">—</span>
+                </div>
+                <div class="eva-stat">
+                    <span class="eva-stat-label" data-i18n="stat_updated">UPDATED</span>
+                    <span class="eva-stat-value" id="last-updated">—</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="eva-pilots" id="podium-section" hidden>
+            <div class="eva-section-head">
+                <h2 data-i18n="pilots">TOP PILOTS</h2>
+                <span class="eva-section-tag">PRIORITY TARGETS</span>
+            </div>
+            <div class="eva-podium" id="podium"></div>
+        </section>
+
+        <section class="eva-board">
+            <div class="eva-board-head">
+                <div class="eva-section-head">
+                    <h2 data-i18n="board">RANKING BOARD</h2>
+                    <span class="eva-section-tag" id="results-count">—</span>
+                </div>
+                <div class="eva-controls">
+                    <label class="eva-search">
+                        <span data-i18n="search">SEARCH</span>
+                        <input type="search" id="search-input" placeholder="model / id / provider" autocomplete="off">
+                    </label>
+                    <label class="eva-select">
+                        <span data-i18n="sort">SORT</span>
+                        <select id="sort-select">
+                            <option value="value" data-i18n="sort_value">VALUE</option>
+                            <option value="intelligence" data-i18n="sort_intel">INTEL</option>
+                            <option value="speed" data-i18n="sort_speed">SPEED</option>
+                            <option value="price" data-i18n="sort_price">PRICE</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="eva-list-head" aria-hidden="true">
+                <span>#</span>
+                <span data-i18n="col_unit">UNIT</span>
+                <span data-i18n="col_intel">INTEL</span>
+                <span data-i18n="col_speed">SPD</span>
+                <span data-i18n="col_price">PRICE</span>
+                <span data-i18n="col_value">VALUE</span>
+            </div>
+            <div class="eva-list" id="rankings-list">
+                <div class="eva-loading" data-i18n="loading">SYNCING MAGI…</div>
+            </div>
+            <div class="eva-pager" id="pagination"></div>
+        </section>
+    </main>
+
+    <footer class="eva-footer">
+        <span>THE FATE OF VALUE IS IN YOUR HANDS</span>
+        <a href="index.html">Classic Rankings</a>
+        <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+
+    <div class="eva-drawer hidden" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="eva-drawer-backdrop" id="drawer-backdrop"></div>
+        <aside class="eva-drawer-panel">
+            <button type="button" class="eva-drawer-close" id="drawer-close" aria-label="Close">×</button>
+            <div id="drawer-body"></div>
+        </aside>
+    </div>
+
+    <script src="js/eva.js?v=20250709eva"></script>
+</body>
+</html>

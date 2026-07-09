@@ -1,0 +1,895 @@
+/* EVA / NERV Command UI — standalone */
+
+:root {
+    --bg: #0a0612;
+    --bg-panel: #120c1c;
+    --bg-elevated: #1a1228;
+    --bg-row: #0e0a16;
+    --orange: #ff5c1c;
+    --purple: #9b30ff;
+    --green: #39ff14;
+    --cream: #f2ebe3;
+    --muted: #8a7a8e;
+    --border: rgba(255, 92, 28, 0.35);
+    --border-dim: rgba(155, 48, 255, 0.22);
+    --font: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+    --glow-orange: 0 0 24px rgba(255, 92, 28, 0.35);
+    --glow-green: 0 0 16px rgba(57, 255, 20, 0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--cream);
+    min-height: 100vh;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+a { color: var(--orange); text-decoration: none; }
+a:hover { color: var(--green); }
+
+button, input, select { font-family: inherit; }
+
+/* —— Background —— */
+.eva-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 50% 40% at 10% 15%, rgba(155, 48, 255, 0.2), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 90% 10%, rgba(255, 92, 28, 0.16), transparent 55%),
+        radial-gradient(ellipse 40% 30% at 70% 90%, rgba(57, 255, 20, 0.05), transparent 60%);
+}
+
+.eva-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 92, 28, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 92, 28, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 75%);
+}
+
+.eva-hazard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--orange) 0 14px,
+        transparent 14px 22px,
+        var(--purple) 22px 36px,
+        transparent 36px 44px
+    );
+}
+
+.eva-scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 92, 28, 0.06) 50%,
+        transparent 100%
+    );
+    background-size: 100% 8px;
+    animation: scanMove 7s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes scanMove {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100vh); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.5); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(57, 255, 20, 0); }
+}
+
+@keyframes flicker {
+    0%, 100%, 92%, 94%, 97% { opacity: 1; }
+    93% { opacity: 0.65; }
+    96% { opacity: 0.8; }
+}
+
+/* —— Topbar —— */
+.eva-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.5rem;
+    background: rgba(10, 6, 18, 0.92);
+    border-bottom: 2px solid var(--orange);
+    backdrop-filter: blur(8px);
+}
+
+.eva-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+}
+
+.eva-mark {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: #0a0612;
+    background: var(--orange);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    animation: flicker 8s ease-in-out infinite;
+}
+
+.eva-brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.eva-brand-text strong {
+    font-size: 0.95rem;
+    letter-spacing: 0.14em;
+    color: var(--orange);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eva-brand-text span {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: var(--green);
+    text-transform: uppercase;
+}
+
+.eva-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+}
+
+.eva-link,
+.eva-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 0.75rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.eva-link:hover,
+.eva-btn-ghost:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    box-shadow: var(--glow-orange);
+}
+
+/* —— Main —— */
+.eva-main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+}
+
+.eva-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.eva-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    border: 1px solid rgba(57, 255, 20, 0.4);
+    background: rgba(57, 255, 20, 0.06);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+}
+
+.eva-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+.eva-title {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 0 0 28px rgba(255, 92, 28, 0.4), 3px 3px 0 rgba(155, 48, 255, 0.3);
+    margin-bottom: 0.65rem;
+}
+
+.eva-sub {
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.75rem;
+}
+
+.eva-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.65rem;
+}
+
+.eva-stat {
+    position: relative;
+    padding: 1rem 0.75rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    text-align: left;
+}
+
+.eva-stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, transparent 50%, var(--orange) 50%);
+    opacity: 0.8;
+}
+
+.eva-stat-label {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+}
+
+.eva-stat-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+}
+
+.eva-stat-value.accent-green {
+    color: var(--green);
+    text-shadow: var(--glow-green);
+}
+
+/* —— Sections —— */
+.eva-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.eva-section-head h2 {
+    font-size: 1rem;
+    letter-spacing: 0.16em;
+    color: var(--orange);
+    border-left: 3px solid var(--orange);
+    padding-left: 0.65rem;
+}
+
+.eva-section-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--green);
+    opacity: 0.85;
+}
+
+.eva-pilots {
+    margin-bottom: 2.5rem;
+}
+
+.eva-podium {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.eva-pilot {
+    position: relative;
+    padding: 1.25rem 1rem 1.1rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.eva-pilot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--purple));
+}
+
+.eva-pilot:hover {
+    transform: translateY(-3px);
+    border-color: var(--orange);
+    box-shadow: var(--glow-orange);
+}
+
+.eva-pilot.place-1 {
+    border-color: var(--orange);
+    box-shadow: var(--glow-orange);
+}
+
+.eva-pilot-rank {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+}
+
+.eva-pilot-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+    line-height: 1.25;
+}
+
+.eva-pilot-provider {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+}
+
+.eva-pilot-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+}
+
+.eva-pilot-metric {
+    text-align: center;
+}
+
+.eva-pilot-metric b {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--green);
+}
+
+.eva-pilot-metric span {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+}
+
+/* —— Board —— */
+.eva-board {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.eva-board::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--orange) 0 16px,
+        transparent 16px 24px,
+        var(--purple) 24px 40px,
+        transparent 40px 48px
+    );
+}
+
+.eva-board-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.15rem 1rem;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.eva-board-head .eva-section-head {
+    margin-bottom: 0;
+}
+
+.eva-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.eva-search,
+.eva-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+}
+
+.eva-search input,
+.eva-select select {
+    height: 38px;
+    min-width: 180px;
+    padding: 0 0.85rem;
+    color: var(--cream);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    outline: none;
+    letter-spacing: 0.04em;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.eva-search input:focus,
+.eva-select select:focus {
+    border-color: var(--orange);
+    box-shadow: var(--glow-orange);
+}
+
+.eva-select select option {
+    background: #120c1c;
+    color: #f2ebe3;
+}
+
+.eva-list-head {
+    display: grid;
+    grid-template-columns: 52px 1fr 72px 88px 80px 72px;
+    gap: 0.5rem;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: var(--orange);
+    background: rgba(255, 92, 28, 0.06);
+    border-bottom: 1px solid var(--border);
+}
+
+.eva-list {
+    min-height: 200px;
+}
+
+.eva-loading,
+.eva-empty,
+.eva-error {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+}
+
+.eva-error { color: #ff2d55; }
+
+.eva-row {
+    display: grid;
+    grid-template-columns: 52px 1fr 72px 88px 80px 72px;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.85rem 1.15rem;
+    border-bottom: 1px solid var(--border-dim);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.eva-row:hover {
+    background: rgba(255, 92, 28, 0.07);
+}
+
+.eva-row-rank {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--cream);
+}
+
+.eva-row-rank.top {
+    color: var(--orange);
+    text-shadow: var(--glow-orange);
+}
+
+.eva-row-change {
+    display: block;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    margin-top: 0.15rem;
+}
+
+.eva-row-change.up { color: var(--green); }
+.eva-row-change.down { color: #ff2d55; }
+.eva-row-change.same { color: var(--muted); }
+.eva-row-change.new {
+    color: var(--purple);
+    font-weight: 700;
+}
+
+.eva-row-unit {
+    min-width: 0;
+}
+
+.eva-row-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eva-row-meta {
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+}
+
+.eva-row-num {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.88rem;
+}
+
+.eva-row-num.green {
+    color: var(--green);
+    text-shadow: var(--glow-green);
+}
+
+.eva-row-num.orange { color: var(--orange); }
+
+.eva-pager {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem 1.15rem 1.25rem;
+}
+
+.eva-page-btn {
+    min-width: 36px;
+    height: 34px;
+    padding: 0 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.eva-page-btn:hover:not(:disabled) {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.eva-page-btn.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #0a0612;
+    box-shadow: var(--glow-orange);
+}
+
+.eva-page-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* —— Drawer —— */
+.eva-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.eva-drawer.hidden { display: none; }
+
+.eva-drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 6, 18, 0.75);
+}
+
+.eva-drawer-panel {
+    position: relative;
+    z-index: 1;
+    width: min(440px, 100%);
+    height: 100%;
+    overflow-y: auto;
+    background: var(--bg-elevated);
+    border-left: 2px solid var(--orange);
+    padding: 1.5rem 1.25rem 2rem;
+    animation: drawerIn 0.28s ease;
+}
+
+@keyframes drawerIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.eva-drawer-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.85rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.eva-drawer-close:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.eva-detail-rank {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #0a0612;
+    background: var(--orange);
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+}
+
+.eva-detail-title {
+    font-size: 1.35rem;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+    padding-right: 2rem;
+}
+
+.eva-detail-id {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    word-break: break-all;
+}
+
+.eva-detail-provider {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-dim);
+    color: var(--muted);
+}
+
+.eva-detail-value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding: 0.85rem 1rem;
+    background: rgba(57, 255, 20, 0.06);
+    border: 1px solid rgba(57, 255, 20, 0.35);
+}
+
+.eva-detail-value span {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+}
+
+.eva-detail-value strong {
+    font-size: 1.8rem;
+    color: var(--green);
+    text-shadow: var(--glow-green);
+}
+
+.eva-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    margin-bottom: 1.25rem;
+}
+
+.eva-detail-cell {
+    padding: 0.7rem 0.75rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.eva-detail-cell span {
+    display: block;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+}
+
+.eva-detail-cell b {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.eva-detail-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+.eva-detail-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.eva-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0a0612;
+    background: var(--orange);
+    border: 1px solid var(--orange);
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.eva-cta:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--cream);
+    box-shadow: 0 0 24px rgba(155, 48, 255, 0.4);
+}
+
+/* —— Footer —— */
+.eva-footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+    padding: 1.5rem 1.25rem 2rem;
+    border-top: 2px solid var(--orange);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* —— Responsive —— */
+@media (max-width: 860px) {
+    .eva-list-head { display: none; }
+
+    .eva-row {
+        grid-template-columns: 44px 1fr auto;
+        grid-template-areas:
+            "rank unit value"
+            "rank metrics metrics";
+        gap: 0.35rem 0.65rem;
+        padding: 0.9rem 1rem;
+    }
+
+    .eva-row > :nth-child(1) { grid-area: rank; }
+    .eva-row > :nth-child(2) { grid-area: unit; }
+    .eva-row > :nth-child(3),
+    .eva-row > :nth-child(4),
+    .eva-row > :nth-child(5) {
+        display: none;
+    }
+    .eva-row > :nth-child(6) { grid-area: value; text-align: right; }
+
+    .eva-row::after {
+        content: attr(data-metrics);
+        grid-area: metrics;
+        font-size: 0.65rem;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+    }
+
+    .eva-podium {
+        grid-template-columns: 1fr;
+    }
+
+    .eva-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .eva-topbar {
+        padding: 0.7rem 0.85rem;
+    }
+
+    .eva-brand-text span { display: none; }
+
+    .eva-mark {
+        width: 40px;
+        height: 40px;
+        font-size: 0.6rem;
+    }
+
+    .eva-search input,
+    .eva-select select {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .eva-controls {
+        width: 100%;
+    }
+
+    .eva-search,
+    .eva-select {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eva-scan,
+    .eva-pulse,
+    .eva-mark,
+    .eva-drawer-panel {
+        animation: none !important;
+    }
+}

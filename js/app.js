@@ -175,17 +175,26 @@ function initTheme() {
     syncThemeColor();
 }
 
-const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora'];
+const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora', 'eva'];
 
 function initStyle() {
     const saved = localStorage.getItem('ui-style');
-    const style = STYLE_OPTIONS.includes(saved) ? saved : 'spacex';
+    if (saved === 'eva') {
+        window.location.replace('eva.html');
+        return;
+    }
+    const style = STYLE_OPTIONS.includes(saved) ? saved : 'classic';
     applyStyle(style);
 
     const select = document.getElementById('style-select');
     if (!select) return;
     select.value = style;
     select.addEventListener('change', () => {
+        if (select.value === 'eva') {
+            localStorage.setItem('ui-style', 'eva');
+            window.location.href = 'eva.html';
+            return;
+        }
         applyStyle(select.value);
         localStorage.setItem('ui-style', select.value);
         syncThemeColor();
@@ -193,7 +202,7 @@ function initStyle() {
 }
 
 function applyStyle(style) {
-    const next = STYLE_OPTIONS.includes(style) ? style : 'spacex';
+    const next = STYLE_OPTIONS.includes(style) ? style : 'classic';
     document.documentElement.setAttribute('data-style', next);
     const select = document.getElementById('style-select');
     if (select && select.value !== next) select.value = next;
@@ -202,7 +211,7 @@ function applyStyle(style) {
 function syncThemeColor() {
     const meta = document.querySelector('meta[name="theme-color"]');
     if (!meta) return;
-    const style = document.documentElement.getAttribute('data-style') || 'spacex';
+    const style = document.documentElement.getAttribute('data-style') || 'classic';
     const theme = document.documentElement.getAttribute('data-theme') || 'dark';
     const colors = {
         spacex: { dark: '#000000', light: '#f0f0fa' },
@@ -210,8 +219,9 @@ function syncThemeColor() {
         classic: { dark: '#0b0f19', light: '#f8fafc' },
         apple: { dark: '#000000', light: '#f5f5f7' },
         aurora: { dark: '#070b14', light: '#f4f7fb' },
+        eva: { dark: '#0a0612', light: '#f2ebe3' },
     };
-    meta.content = colors[style]?.[theme] || '#000000';
+    meta.content = colors[style]?.[theme] || '#0b0f19';
 }
 
 // i18n

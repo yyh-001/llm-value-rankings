@@ -166,6 +166,10 @@ a:hover {
     display: none;
 }
 
+.bg-eva {
+    display: none;
+}
+
 [data-theme="light"] .bg-decoration {
     background: #f0f0fa;
 }
@@ -4760,5 +4764,747 @@ body.modal-open {
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
+    }
+}
+
+/* =========================================================
+   STYLE: EVA (Neon Genesis Evangelion / NERV UI)
+   ========================================================= */
+[data-style="eva"] {
+    --font-display: 'Chakra Petch', 'Oswald', 'Noto Sans SC', sans-serif;
+    --font-sans: 'Chakra Petch', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Chakra Petch', 'SF Mono', ui-monospace, monospace;
+
+    --bg-primary: #0a0612;
+    --bg-secondary: #120c1c;
+    --bg-tertiary: #1c1428;
+    --bg-elevated: #181022;
+    --text-primary: #f2ebe3;
+    --text-secondary: #b8a99a;
+    --text-muted: #6e5f72;
+    --border-color: rgba(255, 92, 28, 0.35);
+    --border-subtle: rgba(140, 60, 180, 0.22);
+
+    --accent-primary: #ff5c1c;
+    --accent-secondary: #9b30ff;
+    --accent-tertiary: #39ff14;
+    --accent-gradient: linear-gradient(135deg, #ff5c1c 0%, #c41e6a 45%, #9b30ff 100%);
+    --accent-glow: rgba(255, 92, 28, 0.2);
+
+    --success: #39ff14;
+    --warning: #ffcc00;
+    --danger: #ff2d55;
+
+    --gold: #ff5c1c;
+    --silver: #c8b8d8;
+    --bronze: #9b30ff;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 8px 28px rgba(0, 0, 0, 0.55);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 32px rgba(255, 92, 28, 0.28);
+
+    --radius-sm: 2px;
+    --radius-md: 3px;
+    --radius-lg: 4px;
+    --radius-xl: 6px;
+    --radius-pill: 2px;
+
+    --header-height: 58px;
+    --row-top-bg: rgba(255, 92, 28, 0.07);
+    --sticky-bg: #120c1c;
+    --sticky-bg-header: #0e0a16;
+    --sticky-bg-hover: #1c1428;
+    --sticky-bg-top: rgba(255, 92, 28, 0.09);
+}
+
+[data-style="eva"][data-theme="light"] {
+    --bg-primary: #f2ebe3;
+    --bg-secondary: #fffaf5;
+    --bg-tertiary: #ebe0d4;
+    --bg-elevated: #ffffff;
+    --text-primary: #1a0f24;
+    --text-secondary: #5c4a58;
+    --text-muted: #8a7888;
+    --border-color: rgba(200, 60, 20, 0.35);
+    --border-subtle: rgba(120, 40, 160, 0.15);
+
+    --accent-primary: #d94300;
+    --accent-secondary: #7a1fd4;
+    --accent-tertiary: #1a9e0a;
+    --accent-gradient: linear-gradient(135deg, #d94300 0%, #a01858 45%, #7a1fd4 100%);
+    --accent-glow: rgba(217, 67, 0, 0.12);
+
+    --success: #1a9e0a;
+    --warning: #c49000;
+    --danger: #d42040;
+
+    --shadow-sm: 0 2px 8px rgba(26, 15, 36, 0.06);
+    --shadow-md: 0 8px 28px rgba(26, 15, 36, 0.1);
+    --shadow-lg: 0 20px 60px rgba(26, 15, 36, 0.14);
+    --shadow-glow: 0 0 28px rgba(217, 67, 0, 0.15);
+
+    --row-top-bg: rgba(217, 67, 0, 0.06);
+    --sticky-bg: #fffaf5;
+    --sticky-bg-header: #f2ebe3;
+    --sticky-bg-hover: #ebe0d4;
+    --sticky-bg-top: rgba(217, 67, 0, 0.08);
+}
+
+[data-style="eva"] body {
+    letter-spacing: 0.04em;
+}
+
+[data-style="eva"] .bg-stars,
+[data-style="eva"] .bg-horizon,
+[data-style="eva"] .bg-aurora {
+    display: none;
+}
+
+[data-style="eva"] .bg-eva {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 18px,
+            rgba(255, 92, 28, 0.035) 18px,
+            rgba(255, 92, 28, 0.035) 36px
+        ),
+        radial-gradient(ellipse 55% 40% at 12% 18%, rgba(155, 48, 255, 0.22), transparent 60%),
+        radial-gradient(ellipse 50% 45% at 88% 8%, rgba(255, 92, 28, 0.18), transparent 55%),
+        radial-gradient(ellipse 40% 35% at 70% 85%, rgba(57, 255, 20, 0.06), transparent 60%);
+    opacity: 1;
+}
+
+[data-style="eva"] .bg-eva::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, transparent 0%, transparent 49.5%, rgba(255, 92, 28, 0.08) 50%, transparent 50.5%, transparent 100%);
+    background-size: 100% 4px;
+    opacity: 0.35;
+    animation: evaScan 8s linear infinite;
+    pointer-events: none;
+}
+
+[data-style="eva"] .bg-eva::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--accent-primary) 0 12px,
+        transparent 12px 20px,
+        var(--accent-secondary) 20px 32px,
+        transparent 32px 40px
+    );
+    opacity: 0.85;
+}
+
+[data-style="eva"][data-theme="light"] .bg-eva {
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 18px,
+            rgba(217, 67, 0, 0.04) 18px,
+            rgba(217, 67, 0, 0.04) 36px
+        ),
+        radial-gradient(ellipse 55% 40% at 12% 18%, rgba(122, 31, 212, 0.1), transparent 60%),
+        radial-gradient(ellipse 50% 45% at 88% 8%, rgba(217, 67, 0, 0.1), transparent 55%);
+}
+
+[data-style="eva"] .bg-decoration {
+    background: transparent;
+    overflow: hidden;
+}
+
+@keyframes evaScan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes evaPulse {
+    0%, 100% { box-shadow: 0 0 0 1px rgba(255, 92, 28, 0.35), 0 0 18px rgba(255, 92, 28, 0.12); }
+    50% { box-shadow: 0 0 0 1px rgba(155, 48, 255, 0.45), 0 0 28px rgba(155, 48, 255, 0.18); }
+}
+
+@keyframes evaFlicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.7; }
+    94% { opacity: 1; }
+    96% { opacity: 0.85; }
+    97% { opacity: 1; }
+}
+
+[data-style="eva"] .header {
+    background: rgba(10, 6, 18, 0.92);
+    border-bottom: 2px solid var(--accent-primary);
+    backdrop-filter: none;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 18px) 100%, 0 100%);
+}
+
+[data-style="eva"][data-theme="light"] .header {
+    background: rgba(242, 235, 227, 0.95);
+}
+
+[data-style="eva"] .logo-text,
+[data-style="eva"] .hero-title,
+[data-style="eva"] .section-title,
+[data-style="eva"] .podium-name,
+[data-style="eva"] .model-card-name,
+[data-style="eva"] .model-detail-name,
+[data-style="eva"] .formula,
+[data-style="eva"] .stat-value,
+[data-style="eva"] .value-score,
+[data-style="eva"] .detail-chip-value,
+[data-style="eva"] .detail-value {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+[data-style="eva"] .logo-text {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: none;
+    -webkit-text-fill-color: unset;
+    text-shadow: 0 0 18px rgba(255, 92, 28, 0.45);
+    animation: evaFlicker 6s ease-in-out infinite;
+}
+
+[data-style="eva"] .logo-sub {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.58rem;
+    color: var(--accent-tertiary);
+    font-family: var(--font-mono);
+}
+
+[data-style="eva"] .style-switcher-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    color: var(--accent-primary);
+}
+
+[data-style="eva"] .style-select,
+[data-style="eva"] .btn-github,
+[data-style="eva"] .btn-detail,
+[data-style="eva"] .btn-openrouter,
+[data-style="eva"] .btn-primary,
+[data-style="eva"] .page-btn {
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    font-family: var(--font-display);
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+[data-style="eva"] .btn-icon {
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+    clip-path: none;
+}
+
+[data-style="eva"] .btn-icon:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+[data-style="eva"] .style-select {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ff5c1c' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    clip-path: none;
+}
+
+[data-style="eva"] .style-select option {
+    background: #120c1c;
+    color: #f2ebe3;
+}
+
+[data-style="eva"] .btn-github {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+[data-style="eva"] .btn-github:hover {
+    background: var(--accent-primary);
+    color: #0a0612;
+    box-shadow: var(--shadow-glow);
+    opacity: 1;
+}
+
+[data-style="eva"] .hero {
+    min-height: auto;
+    padding: 4rem 0 2.75rem;
+    position: relative;
+}
+
+[data-style="eva"] .hero-atmosphere {
+    background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 92, 28, 0.15), transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 40%, rgba(155, 48, 255, 0.1), transparent 60%);
+}
+
+[data-style="eva"] .hero-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 92, 28, 0.12);
+    border: 1px solid var(--accent-primary);
+    border-radius: 0;
+    color: var(--accent-primary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    font-weight: 700;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%);
+}
+
+[data-style="eva"] .hero-title {
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    font-weight: 700;
+    max-width: 16ch;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.05;
+    color: var(--text-primary);
+    background: none;
+    -webkit-text-fill-color: unset;
+    text-shadow:
+        0 0 24px rgba(255, 92, 28, 0.35),
+        2px 2px 0 rgba(155, 48, 255, 0.35);
+}
+
+[data-style="eva"] .hero-desc {
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    max-width: 42ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[data-style="eva"] .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    border: none;
+    background: transparent;
+    overflow: visible;
+}
+
+[data-style="eva"] .stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: 1.15rem 0.9rem;
+    min-width: 0;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+[data-style="eva"] .stat-card + .stat-card::before {
+    display: none;
+}
+
+[data-style="eva"] .stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, transparent 50%, var(--accent-primary) 50%);
+    opacity: 0.7;
+}
+
+[data-style="eva"] .stat-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+    background: var(--bg-secondary);
+}
+
+[data-style="eva"] .stat-value {
+    font-weight: 700;
+    color: var(--accent-tertiary);
+    text-shadow: 0 0 12px rgba(57, 255, 20, 0.35);
+}
+
+[data-style="eva"] .stat-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+}
+
+[data-style="eva"] .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 0.75rem;
+}
+
+[data-style="eva"] .podium {
+    gap: 0.85rem;
+    background: transparent;
+    border: none;
+}
+
+[data-style="eva"] .podium-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    padding: 1.5rem 1.2rem;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-style="eva"] .podium-card::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent-gradient);
+    border-radius: 0;
+    opacity: 1;
+}
+
+[data-style="eva"] .podium-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+    background: var(--bg-secondary);
+}
+
+[data-style="eva"] .podium-card.podium-place-1 {
+    animation: evaPulse 3.5s ease-in-out infinite;
+    border-color: var(--accent-primary);
+}
+
+[data-style="eva"] .podium-medal {
+    color: var(--accent-primary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+[data-style="eva"] .podium-name,
+[data-style="eva"] .podium-provider,
+[data-style="eva"] .provider-badge,
+[data-style="eva"] .footer-inner {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+[data-style="eva"] .search-box input {
+    border-radius: 0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    letter-spacing: 0.04em;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-style="eva"] .search-box input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px var(--accent-glow), var(--shadow-glow);
+    background: var(--bg-elevated);
+    outline: none;
+}
+
+[data-style="eva"] .table-container,
+[data-style="eva"] .methodology,
+[data-style="eva"] .model-card {
+    border-radius: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+[data-style="eva"] .table-container::before,
+[data-style="eva"] .methodology::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--accent-primary) 0 16px,
+        transparent 16px 24px,
+        var(--accent-secondary) 24px 40px,
+        transparent 40px 48px
+    );
+    z-index: 2;
+    pointer-events: none;
+}
+
+[data-style="eva"] .modal-content {
+    border-radius: 0;
+    border: 1px solid var(--accent-primary);
+    background: var(--bg-elevated);
+    box-shadow: var(--shadow-glow), var(--shadow-lg);
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+
+[data-style="eva"] .modal {
+    background: rgba(10, 6, 18, 0.82);
+}
+
+[data-style="eva"][data-theme="light"] .modal {
+    background: rgba(26, 15, 36, 0.45);
+}
+
+[data-style="eva"] .table-container {
+    overflow: hidden;
+}
+
+[data-style="eva"] th {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    color: var(--accent-primary);
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 92, 28, 0.06);
+}
+
+[data-style="eva"] td {
+    border-bottom-color: var(--border-subtle);
+}
+
+[data-style="eva"] tbody tr {
+    transition: background 0.2s ease;
+}
+
+[data-style="eva"] tbody tr:hover {
+    background: rgba(255, 92, 28, 0.07);
+}
+
+[data-style="eva"] .method-cards {
+    gap: 0.75rem;
+    background: transparent;
+    border: none;
+}
+
+[data-style="eva"] .method-card {
+    background: rgba(255, 92, 28, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+[data-style="eva"] .method-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 24px rgba(155, 48, 255, 0.15);
+}
+
+[data-style="eva"] .method-card strong {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-primary);
+}
+
+[data-style="eva"] .formula {
+    color: var(--accent-tertiary);
+    background: none;
+    -webkit-text-fill-color: unset;
+    text-shadow: 0 0 16px rgba(57, 255, 20, 0.35);
+    letter-spacing: 0.06em;
+}
+
+[data-style="eva"] .btn-detail {
+    border: 1px solid var(--accent-primary);
+    background: rgba(255, 92, 28, 0.1);
+    color: var(--accent-primary);
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-style="eva"] .btn-detail:hover {
+    background: var(--accent-primary);
+    color: #0a0612;
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+[data-style="eva"] .page-btn {
+    border: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+    clip-path: none;
+}
+
+[data-style="eva"] .page-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+[data-style="eva"] .page-btn.active {
+    background: var(--accent-primary);
+    color: #0a0612;
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+[data-style="eva"] .rank-badge {
+    border-radius: 0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+    font-family: var(--font-display);
+    clip-path: polygon(20% 0, 80% 0, 100% 50%, 80% 100%, 20% 100%, 0 50%);
+}
+
+[data-style="eva"] .rank-badge.rank-1 {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: #0a0612;
+    box-shadow: var(--shadow-glow);
+}
+
+[data-style="eva"] .rank-badge.rank-2,
+[data-style="eva"] .rank-badge.rank-3 {
+    background: rgba(155, 48, 255, 0.2);
+    border-color: var(--accent-secondary);
+    color: var(--accent-tertiary);
+}
+
+[data-style="eva"] .value-score {
+    color: var(--accent-tertiary);
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+[data-style="eva"] .value-bar-fill {
+    background: var(--accent-gradient);
+    box-shadow: 0 0 8px rgba(255, 92, 28, 0.4);
+}
+
+[data-style="eva"] .provider-badge {
+    border-radius: 0;
+    border: 1px solid var(--border-subtle);
+    background: rgba(155, 48, 255, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.65rem;
+}
+
+[data-style="eva"] .footer {
+    border-top: 2px solid var(--accent-primary);
+    background: var(--bg-secondary);
+}
+
+[data-style="eva"] .footer-inner {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+}
+
+[data-style="eva"] .model-detail-name {
+    color: var(--accent-primary);
+}
+
+[data-style="eva"] .detail-chip-value {
+    color: var(--accent-tertiary);
+}
+
+[data-style="eva"] .detail-section-title {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.35rem;
+}
+
+[data-style="eva"] .detail-item {
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 92, 28, 0.03);
+    border-radius: 0;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+[data-style="eva"] .btn-openrouter,
+[data-style="eva"] .btn-primary {
+    background: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    color: #0a0612;
+}
+
+[data-style="eva"] .btn-openrouter:hover,
+[data-style="eva"] .btn-primary:hover {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+    color: #f2ebe3;
+    box-shadow: 0 0 28px rgba(155, 48, 255, 0.35);
+}
+
+[data-style="eva"] .filter-chip,
+[data-style="eva"] .sort-btn {
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-color: var(--border-color);
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+[data-style="eva"] .filter-chip.active,
+[data-style="eva"] .sort-btn.active {
+    background: rgba(255, 92, 28, 0.15);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+    [data-style="eva"] .stats-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
+        width: 100%;
+    }
+
+    [data-style="eva"] .stat-card {
+        border-right: none;
+        border-bottom: none;
+    }
+
+    [data-style="eva"] .modal-content {
+        border-radius: 0;
+        clip-path: none;
+    }
+
+    [data-style="eva"] .header {
+        clip-path: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-style="eva"] .bg-eva::before,
+    [data-style="eva"] .logo-text,
+    [data-style="eva"] .podium-card.podium-place-1 {
+        animation: none !important;
     }
 }

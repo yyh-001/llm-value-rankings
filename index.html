@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark" data-style="spacex">
+<html lang="zh-CN" data-theme="dark" data-style="classic">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM Value Rankings | 大模型性价比排行榜</title>
     <meta name="description" content="Compare 300+ LLM models by value — intelligence, speed, and price from OpenRouter. Daily updated AI model rankings. 大模型性价比排行榜，OpenRouter 价格与能力评分。">
     <meta name="keywords" content="LLM,大模型,性价比,AI ranking,model comparison,OpenRouter,token price,Artificial Analysis,DeepSeek,GPT,Claude,Gemini,LLM benchmark,AI tools,GitHub Pages">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#0b0f19">
     <script>
         (function () {
             try {
                 var style = localStorage.getItem('ui-style');
-                if (style === 'spacex' || style === 'editorial' || style === 'classic' || style === 'apple' || style === 'aurora') {
+                if (style === 'spacex' || style === 'editorial' || style === 'classic' || style === 'apple' || style === 'aurora' || style === 'eva') {
                     document.documentElement.setAttribute('data-style', style);
                 }
                 var theme = localStorage.getItem('theme');
@@ -80,9 +80,9 @@
     <meta name="twitter:description" content="Compare 300+ LLMs by value. OpenRouter pricing + Artificial Analysis scores.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="app-version" content="20250709l">
-    <link rel="stylesheet" href="css/style.css?v=20250709l">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="app-version" content="20250709m">
+    <link rel="stylesheet" href="css/style.css?v=20250709n">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%2322d3ee'/><stop offset='1' stop-color='%23a78bfa'/></linearGradient></defs><circle cx='16' cy='16' r='10' stroke='url(%23g)' stroke-width='1.5'/><circle cx='16' cy='16' r='2.5' fill='url(%23g)'/></svg>">
 </head>
 <body>
@@ -90,6 +90,7 @@
         <div class="bg-stars"></div>
         <div class="bg-horizon"></div>
         <div class="bg-aurora"></div>
+        <div class="bg-eva"></div>
     </div>
 
     <!-- Header -->
@@ -112,11 +113,12 @@
                 <div class="style-switcher">
                     <label class="style-switcher-label" for="style-select" data-i18n="style_label">风格</label>
                     <select id="style-select" class="style-select" aria-label="Switch visual style">
+                        <option value="classic" data-i18n="style_classic" selected>经典</option>
                         <option value="spacex" data-i18n="style_spacex">SpaceX</option>
                         <option value="editorial" data-i18n="style_editorial">极简</option>
-                        <option value="classic" data-i18n="style_classic">经典</option>
                         <option value="apple" data-i18n="style_apple">Apple</option>
                         <option value="aurora" data-i18n="style_aurora">Aurora</option>
+                        <option value="eva" data-i18n="style_eva">EVA</option>
                     </select>
                 </div>
                 <button id="theme-toggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
@@ -293,7 +295,7 @@
     </footer>
 
     <script defer src="https://events.vercount.one/js"></script>
-    <script src="js/i18n.js?v=20250709l"></script>
-    <script src="js/app.js?v=20250709l"></script>
+    <script src="js/i18n.js?v=20250709n"></script>
+    <script src="js/app.js?v=20250709n"></script>
 </body>
 </html>

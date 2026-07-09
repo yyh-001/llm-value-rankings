@@ -43,6 +43,7 @@ const translations = {
         style_classic: "经典",
         style_apple: "Apple",
         style_aurora: "Aurora",
+        style_eva: "EVA",
         rank_new: "新",
         rank_change_hint: "较昨日排名变化",
         
@@ -134,6 +135,7 @@ const translations = {
         style_classic: "Classic",
         style_apple: "Apple",
         style_aurora: "Aurora",
+        style_eva: "EVA",
         rank_new: "NEW",
         rank_change_hint: "Rank change vs yesterday",
         
