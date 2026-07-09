@@ -807,12 +807,12 @@ button, input, select {
     letter-spacing: 0.08em;
     white-space: nowrap;
     opacity: 0.4;
-    animation: sxMarquee 28s linear infinite;
+    animation: sxMarquee 70s linear infinite;
 }
 
 .sx-marquee-reverse .sx-marquee-track {
     animation-direction: reverse;
-    animation-duration: 36s;
+    animation-duration: 90s;
     opacity: 0.25;
     font-size: clamp(1.4rem, 4vw, 2.8rem);
 }
