@@ -1,5 +1,5 @@
 /**
- * Minimal / Editorial standalone rankings UI
+ * SpaceX cinematic standalone rankings UI
  * Data: data/models.json
  */
 
@@ -9,18 +9,19 @@ const CONFIG = {
     GITHUB_REPO: 'yyh-001/llm-value-rankings',
     ITEMS_PER_PAGE: 20,
     USD_TO_CNY: 7.25,
-    STYLE_PAGES: {
-        spacex: 'spacex.html',
-        eva: 'eva.html',
-        editorial: 'minimal.html',
-    },
+};
+
+const STYLE_PAGES = {
+    spacex: 'spacex.html',
+    editorial: 'minimal.html',
+    eva: 'eva.html',
 };
 
 const I18N = {
     zh: {
-        eyebrow: '每日更新',
-        title: '大模型性价比',
-        subtitle: '能力 × 速度^0.8 / 价格 · OpenRouter',
+        kicker: '任务简报',
+        title: '性价比排行榜',
+        subtitle: '能力 × 速度^0.8 / 价格 · OpenRouter 遥测',
         style_label: '风格',
         style_classic: '经典',
         style_spacex: 'SpaceX',
@@ -32,22 +33,23 @@ const I18N = {
         stat_ranked: '已排名',
         stat_avg: '能力均分',
         stat_updated: '更新',
-        top3: 'Top 3',
-        search_ph: '搜索模型…',
+        top3: '飞行机组',
+        board: '任务清单',
+        search_ph: '搜索载具…',
         sort_value: '性价比',
         sort_intel: '能力',
         sort_speed: '速度',
         sort_price: '价格',
         col_rank: '#',
-        col_model: '模型',
+        col_model: '载具',
         col_intel: '能力',
         col_speed: '速度',
         col_price: '价格',
         col_value: '性价比',
-        loading: '加载中…',
-        empty: '没有匹配的模型',
-        error: '数据加载失败',
-        results: '{count} 个模型',
+        loading: '正在获取信号…',
+        empty: '无匹配载具',
+        error: '链路中断',
+        results: '{count} 台',
         intel: '能力',
         speed: '速度',
         ttft: '首字延迟',
@@ -60,53 +62,54 @@ const I18N = {
         channel: '渠道',
         open: '在 OpenRouter 打开',
         new: '新',
-        footer: 'OpenRouter · Artificial Analysis',
+        footer: '占领火星 · 排名模型',
         lang_btn: 'EN',
     },
     en: {
-        eyebrow: 'Daily rankings',
-        title: 'LLM Value Rankings',
-        subtitle: 'Intel × Speed^0.8 / Price · OpenRouter',
-        style_label: 'Style',
+        kicker: 'MISSION BRIEFING',
+        title: 'VALUE LEADERBOARD',
+        subtitle: 'INTEL × SPEED^0.8 / PRICE · OPENROUTER TELEMETRY',
+        style_label: 'STYLE',
         style_classic: 'Classic',
         style_spacex: 'SpaceX',
         style_editorial: 'Minimal',
         style_apple: 'Apple',
         style_aurora: 'Aurora',
         style_eva: 'EVA',
-        stat_total: 'Models',
-        stat_ranked: 'Ranked',
-        stat_avg: 'Intel avg',
-        stat_updated: 'Updated',
-        top3: 'Top 3',
-        search_ph: 'Search models…',
-        sort_value: 'Value',
-        sort_intel: 'Intel',
-        sort_speed: 'Speed',
-        sort_price: 'Price',
+        stat_total: 'MODELS',
+        stat_ranked: 'RANKED',
+        stat_avg: 'INTEL AVG',
+        stat_updated: 'UPDATED',
+        top3: 'FLIGHT CREW',
+        board: 'MANIFEST',
+        search_ph: 'SEARCH VEHICLE…',
+        sort_value: 'VALUE',
+        sort_intel: 'INTEL',
+        sort_speed: 'SPEED',
+        sort_price: 'PRICE',
         col_rank: '#',
-        col_model: 'Model',
-        col_intel: 'Intel',
-        col_speed: 'Speed',
-        col_price: 'Price',
-        col_value: 'Value',
-        loading: 'Loading…',
-        empty: 'No matching models',
-        error: 'Failed to load data',
-        results: '{count} models',
-        intel: 'Intel',
-        speed: 'Speed',
+        col_model: 'VEHICLE',
+        col_intel: 'INTEL',
+        col_speed: 'SPEED',
+        col_price: 'PRICE',
+        col_value: 'VALUE',
+        loading: 'ACQUIRING SIGNAL…',
+        empty: 'NO MATCHING VEHICLES',
+        error: 'LINK FAILED',
+        results: '{count} UNITS',
+        intel: 'INTEL',
+        speed: 'SPEED',
         ttft: 'TTFT',
-        price: 'Price',
-        value: 'Value',
-        context: 'Context',
-        input: 'Input',
-        output: 'Output',
-        blended: 'Blended',
-        channel: 'Channel',
-        open: 'Open on OpenRouter',
+        price: 'PRICE',
+        value: 'VALUE',
+        context: 'CONTEXT',
+        input: 'INPUT',
+        output: 'OUTPUT',
+        blended: 'BLENDED',
+        channel: 'CHANNEL',
+        open: 'OPEN ON OPENROUTER',
         new: 'NEW',
-        footer: 'OpenRouter · Artificial Analysis',
+        footer: 'OCCUPY MARS · RANK MODELS',
         lang_btn: '中文',
     },
 };
@@ -117,7 +120,7 @@ const state = {
     page: 1,
     sort: 'value',
     query: '',
-    lang: localStorage.getItem('min-lang') || localStorage.getItem('eva-lang') || 'zh',
+    lang: localStorage.getItem('sx-lang') || localStorage.getItem('min-lang') || localStorage.getItem('eva-lang') || 'zh',
     meta: null,
 };
 
@@ -194,17 +197,17 @@ function formatStarCount(count) {
 }
 
 function rankChangeHtml(model) {
-    if (model.rank_new) return `<span class="min-change new">${t('new')}</span>`;
+    if (model.rank_new) return `<span class="sx-change new">${t('new')}</span>`;
     const change = model.rank_change;
-    if (change == null || change === 0) return `<span class="min-change same">—</span>`;
-    if (change > 0) return `<span class="min-change up">▲${change}</span>`;
-    return `<span class="min-change down">▼${Math.abs(change)}</span>`;
+    if (change == null || change === 0) return `<span class="sx-change same">—</span>`;
+    if (change > 0) return `<span class="sx-change up">▲${change}</span>`;
+    return `<span class="sx-change down">▼${Math.abs(change)}</span>`;
 }
 
 function navigateStyle(style) {
     localStorage.setItem('ui-style', style);
-    if (CONFIG.STYLE_PAGES[style]) {
-        window.location.href = CONFIG.STYLE_PAGES[style];
+    if (STYLE_PAGES[style]) {
+        window.location.href = STYLE_PAGES[style];
         return;
     }
     window.location.href = 'index.html';
@@ -213,10 +216,10 @@ function navigateStyle(style) {
 function initStyleSwitcher() {
     const select = $('style-select');
     if (!select) return;
-    select.value = 'editorial';
+    select.value = 'spacex';
     select.addEventListener('change', () => {
         const next = select.value;
-        if (next === 'editorial') return;
+        if (next === 'spacex') return;
         navigateStyle(next);
     });
 }
@@ -230,14 +233,13 @@ function initTheme() {
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.content = next === 'light' ? '#f7f7f8' : '#0a0a0b';
+        if (meta) meta.content = next === 'light' ? '#f0f0fa' : '#000000';
     });
 }
 
 async function loadData() {
-    const body = $('rankings-body');
-    body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('loading')}</td></tr>`;
-    $('rankings-cards').innerHTML = '';
+    const list = $('rankings-list');
+    list.innerHTML = `<div class="sx-empty">${t('loading')}</div>`;
 
     try {
         const cacheKey = document.querySelector('meta[name="app-version"]')?.content || Date.now();
@@ -258,7 +260,7 @@ async function loadData() {
         filterAndSort();
     } catch (err) {
         console.error(err);
-        body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('error')}</td></tr>`;
+        list.innerHTML = `<div class="sx-empty">${t('error')}</div>`;
     }
 }
 
@@ -293,20 +295,20 @@ function renderPodium() {
     podium.innerHTML = top3
         .map(
             (m) => `
-        <article class="min-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
-            <div class="min-card-rank">#${m.rank} ${rankChangeHtml(m)}</div>
-            <div class="min-card-name">${escapeHtml(m.name)}</div>
-            <div class="min-card-provider">${escapeHtml(m.provider_display || m.provider)}</div>
-            <div class="min-card-row">
-                <span>${t('intel')} <b>${m.intelligence_score ?? '—'}</b></span>
-                <span>${t('speed')} <b>${formatSpeed(m.speed)}</b></span>
-                <span>${t('value')} <b>${formatValue(m.value_score)}</b></span>
+        <article class="sx-crew place-${m.rank}" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
+            <div class="sx-crew-rank">#${m.rank} ${rankChangeHtml(m)}</div>
+            <div class="sx-crew-name">${escapeHtml(m.name)}</div>
+            <div class="sx-crew-provider">${escapeHtml(m.provider_display || m.provider)}</div>
+            <div class="sx-crew-metrics">
+                <div class="sx-crew-metric"><b>${m.intelligence_score ?? '—'}</b><span>${t('intel')}</span></div>
+                <div class="sx-crew-metric"><b>${formatSpeed(m.speed)}</b><span>${t('speed')}</span></div>
+                <div class="sx-crew-metric"><b>${formatValue(m.value_score)}</b><span>${t('value')}</span></div>
             </div>
         </article>`
         )
         .join('');
 
-    podium.querySelectorAll('.min-card').forEach((el) => {
+    podium.querySelectorAll('.sx-crew').forEach((el) => {
         const open = () => showDetail(el.dataset.id);
         el.addEventListener('click', open);
         el.addEventListener('keydown', (e) => {
@@ -346,14 +348,12 @@ function filterAndSort() {
 }
 
 function renderList() {
-    const body = $('rankings-body');
-    const cards = $('rankings-cards');
+    const root = $('rankings-list');
     const count = state.filtered.length;
     $('results-count').textContent = t('results').replace('{count}', count);
 
     if (!count) {
-        body.innerHTML = `<tr><td colspan="6" class="min-empty">${t('empty')}</td></tr>`;
-        cards.innerHTML = `<div class="min-empty">${t('empty')}</div>`;
+        root.innerHTML = `<div class="sx-empty">${t('empty')}</div>`;
         $('pagination').innerHTML = '';
         return;
     }
@@ -361,52 +361,30 @@ function renderList() {
     const start = (state.page - 1) * CONFIG.ITEMS_PER_PAGE;
     const pageItems = state.filtered.slice(start, start + CONFIG.ITEMS_PER_PAGE);
 
-    body.innerHTML = pageItems
+    root.innerHTML = pageItems
         .map((m) => {
+            const price = formatPrice(m.pricing?.blended);
+            const metrics = `${t('intel')} ${m.intelligence_score ?? '—'} · ${t('speed')} ${formatSpeed(m.speed)} · ${price}`;
             const topClass = m.rank <= 3 ? 'top' : '';
             return `
-            <tr data-id="${escapeAttr(m.id)}" tabindex="0">
-                <td>
-                    <span class="min-rank ${topClass}">${m.rank ?? '—'}</span>
+            <div class="sx-row" data-id="${escapeAttr(m.id)}" data-metrics="${escapeAttr(metrics)}" tabindex="0" role="button">
+                <div class="sx-row-rank ${topClass}">
+                    ${m.rank ?? '—'}
                     ${rankChangeHtml(m)}
-                </td>
-                <td>
-                    <div class="min-model-name">${escapeHtml(m.name)}</div>
-                    <div class="min-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
-                </td>
-                <td class="min-num">${m.intelligence_score ?? '—'}</td>
-                <td class="min-num">${formatSpeed(m.speed)} t/s</td>
-                <td class="min-num">${formatPrice(m.pricing?.blended)}</td>
-                <td class="min-num value">${formatValue(m.value_score)}</td>
-            </tr>`;
-        })
-        .join('');
-
-    cards.innerHTML = pageItems
-        .map((m) => {
-            const topClass = m.rank <= 3 ? 'top' : '';
-            return `
-            <div class="min-list-card" data-id="${escapeAttr(m.id)}" tabindex="0" role="button">
-                <div class="min-list-top">
-                    <div>
-                        <span class="min-rank ${topClass}">#${m.rank ?? '—'}</span>
-                        ${rankChangeHtml(m)}
-                        <div class="min-model-name" style="margin-top:0.25rem">${escapeHtml(m.name)}</div>
-                        <div class="min-model-meta">${escapeHtml(m.provider_display || m.provider)}</div>
-                    </div>
-                    <div class="min-num value" style="font-size:1.1rem">${formatValue(m.value_score)}</div>
                 </div>
-                <div class="min-list-metrics">
-                    <div><b>${m.intelligence_score ?? '—'}</b>${t('intel')}</div>
-                    <div><b>${formatSpeed(m.speed)}</b>${t('speed')}</div>
-                    <div><b>${formatPrice(m.pricing?.blended)}</b>${t('price')}</div>
-                    <div><b>${formatValue(m.value_score)}</b>${t('value')}</div>
+                <div>
+                    <div class="sx-row-name">${escapeHtml(m.name)}</div>
+                    <div class="sx-row-meta">${escapeHtml(m.provider_display || m.provider)}</div>
                 </div>
+                <div class="sx-row-num">${m.intelligence_score ?? '—'}</div>
+                <div class="sx-row-num">${formatSpeed(m.speed)} T/S</div>
+                <div class="sx-row-num">${price}</div>
+                <div class="sx-row-num value">${formatValue(m.value_score)}</div>
             </div>`;
         })
         .join('');
 
-    const bind = (el) => {
+    root.querySelectorAll('.sx-row').forEach((el) => {
         const open = () => showDetail(el.dataset.id);
         el.addEventListener('click', open);
         el.addEventListener('keydown', (e) => {
@@ -415,9 +393,7 @@ function renderList() {
                 open();
             }
         });
-    };
-    body.querySelectorAll('tr[data-id]').forEach(bind);
-    cards.querySelectorAll('.min-list-card').forEach(bind);
+    });
 
     renderPagination();
 }
@@ -432,7 +408,7 @@ function renderPagination() {
 
     const buttons = [];
     buttons.push(
-        `<button type="button" class="min-page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>‹</button>`
+        `<button type="button" class="sx-page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>‹</button>`
     );
 
     const windowSize = 5;
@@ -441,23 +417,23 @@ function renderPagination() {
     from = Math.max(1, to - windowSize + 1);
 
     if (from > 1) {
-        buttons.push(`<button type="button" class="min-page-btn" data-page="1">1</button>`);
-        if (from > 2) buttons.push(`<span class="min-page-btn" style="border:none;opacity:.4">…</span>`);
+        buttons.push(`<button type="button" class="sx-page-btn" data-page="1">1</button>`);
+        if (from > 2) buttons.push(`<span class="sx-page-btn" style="border:none;opacity:.4">…</span>`);
     }
 
     for (let i = from; i <= to; i++) {
         buttons.push(
-            `<button type="button" class="min-page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`
+            `<button type="button" class="sx-page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`
         );
     }
 
     if (to < total) {
-        if (to < total - 1) buttons.push(`<span class="min-page-btn" style="border:none;opacity:.4">…</span>`);
-        buttons.push(`<button type="button" class="min-page-btn" data-page="${total}">${total}</button>`);
+        if (to < total - 1) buttons.push(`<span class="sx-page-btn" style="border:none;opacity:.4">…</span>`);
+        buttons.push(`<button type="button" class="sx-page-btn" data-page="${total}">${total}</button>`);
     }
 
     buttons.push(
-        `<button type="button" class="min-page-btn" data-page="${state.page + 1}" ${state.page === total ? 'disabled' : ''}>›</button>`
+        `<button type="button" class="sx-page-btn" data-page="${state.page + 1}" ${state.page === total ? 'disabled' : ''}>›</button>`
     );
 
     pager.innerHTML = buttons.join('');
@@ -467,7 +443,7 @@ function renderPagination() {
             if (p >= 1 && p <= total) {
                 state.page = p;
                 renderList();
-                $('rankings-body').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                $('rankings-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -486,30 +462,30 @@ function showDetail(modelId) {
     const channelUrl = pricing.pricing_source_url || openUrl;
 
     $('modal-body').innerHTML = `
-        <div class="min-detail-rank">#${model.rank ?? '—'} ${rankChangeHtml(model)}</div>
-        <h2 class="min-detail-title" id="modal-title">${escapeHtml(model.name)}</h2>
-        <a class="min-detail-id" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${escapeHtml(model.id)}</a>
-        <span class="min-detail-provider">${escapeHtml(model.provider_display || model.provider)}</span>
+        <div class="sx-detail-rank">#${model.rank ?? '—'} ${rankChangeHtml(model)}</div>
+        <h2 class="sx-detail-title" id="modal-title">${escapeHtml(model.name)}</h2>
+        <a class="sx-detail-id" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${escapeHtml(model.id)}</a>
+        <span class="sx-detail-provider">${escapeHtml(model.provider_display || model.provider)}</span>
 
-        <div class="min-detail-value">
+        <div class="sx-detail-value">
             <span>${t('value')}</span>
             <strong>${formatValue(model.value_score)}</strong>
         </div>
 
-        <div class="min-detail-grid">
-            <div class="min-detail-cell"><span>${t('intel')}</span><b>${model.intelligence_score ?? '—'}</b></div>
-            <div class="min-detail-cell"><span>${t('speed')}</span><b>${formatSpeed(model.speed)} t/s</b></div>
-            <div class="min-detail-cell"><span>${t('ttft')}</span><b>${formatLatency(model.ttft)}</b></div>
-            <div class="min-detail-cell"><span>${t('context')}</span><b>${formatContext(model.context_length)}</b></div>
-            <div class="min-detail-cell"><span>${t('input')}</span><b>${formatPrice(pricing.prompt)}</b></div>
-            <div class="min-detail-cell"><span>${t('output')}</span><b>${formatPrice(pricing.completion)}</b></div>
-            <div class="min-detail-cell"><span>${t('blended')}</span><b>${formatPrice(pricing.blended)}</b></div>
-            <div class="min-detail-cell"><span>${t('channel')}</span><b><a href="${escapeAttr(channelUrl)}" target="_blank" rel="noopener">${escapeHtml(channel)}</a></b></div>
+        <div class="sx-detail-grid">
+            <div class="sx-detail-cell"><span>${t('intel')}</span><b>${model.intelligence_score ?? '—'}</b></div>
+            <div class="sx-detail-cell"><span>${t('speed')}</span><b>${formatSpeed(model.speed)} T/S</b></div>
+            <div class="sx-detail-cell"><span>${t('ttft')}</span><b>${formatLatency(model.ttft)}</b></div>
+            <div class="sx-detail-cell"><span>${t('context')}</span><b>${formatContext(model.context_length)}</b></div>
+            <div class="sx-detail-cell"><span>${t('input')}</span><b>${formatPrice(pricing.prompt)}</b></div>
+            <div class="sx-detail-cell"><span>${t('output')}</span><b>${formatPrice(pricing.completion)}</b></div>
+            <div class="sx-detail-cell"><span>${t('blended')}</span><b>${formatPrice(pricing.blended)}</b></div>
+            <div class="sx-detail-cell"><span>${t('channel')}</span><b><a href="${escapeAttr(channelUrl)}" target="_blank" rel="noopener">${escapeHtml(channel)}</a></b></div>
         </div>
 
-        ${model.description ? `<p class="min-detail-desc">${escapeHtml(model.description)}</p>` : ''}
+        ${model.description ? `<p class="sx-detail-desc">${escapeHtml(model.description)}</p>` : ''}
 
-        <a class="min-cta" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${t('open')}</a>
+        <a class="sx-cta" href="${escapeAttr(openUrl)}" target="_blank" rel="noopener">${t('open')}</a>
     `;
 
     modal.classList.remove('hidden');
@@ -564,7 +540,7 @@ function initEvents() {
 
     $('lang-toggle').addEventListener('click', () => {
         state.lang = state.lang === 'zh' ? 'en' : 'zh';
-        localStorage.setItem('min-lang', state.lang);
+        localStorage.setItem('sx-lang', state.lang);
         applyI18n();
         updateStats();
         renderPodium();

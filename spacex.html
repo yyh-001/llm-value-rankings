@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM VALUE RANKINGS · SPACEX</title>
+    <meta name="description" content="SpaceX cinematic LLM value rankings — intelligence, speed, and price.">
+    <meta name="theme-color" content="#000000">
+    <meta name="app-version" content="20250709sx">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/spacex.css?v=20250709sx">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M16 4 L20 20 L16 28 L12 20 Z' fill='%23f0f0fa'/></svg>">
+</head>
+<body>
+    <div class="sx-space" aria-hidden="true">
+        <div class="sx-stars"></div>
+        <div class="sx-horizon"></div>
+        <div class="sx-glow"></div>
+    </div>
+
+    <header class="sx-nav">
+        <div class="sx-nav-inner">
+            <a class="sx-brand" href="spacex.html">
+                <span class="sx-brand-mark">◆</span>
+                <span class="sx-brand-text">LLM VALUE RANKINGS</span>
+            </a>
+            <div class="sx-nav-actions">
+                <a class="sx-pill" id="github-star" href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">
+                    STAR <span id="star-count">—</span>
+                </a>
+                <div class="sx-style">
+                    <label class="sx-style-label" for="style-select" data-i18n="style_label">STYLE</label>
+                    <select id="style-select" class="sx-select" aria-label="Switch visual style">
+                        <option value="classic" data-i18n="style_classic">经典</option>
+                        <option value="spacex" data-i18n="style_spacex" selected>SpaceX</option>
+                        <option value="editorial" data-i18n="style_editorial">极简</option>
+                        <option value="apple" data-i18n="style_apple">Apple</option>
+                        <option value="aurora" data-i18n="style_aurora">Aurora</option>
+                        <option value="eva" data-i18n="style_eva">EVA</option>
+                    </select>
+                </div>
+                <button type="button" class="sx-icon" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+                    </svg>
+                </button>
+                <button type="button" class="sx-icon" id="lang-toggle" aria-label="Switch language">
+                    <span id="lang-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="sx-main">
+        <section class="sx-hero">
+            <p class="sx-kicker" data-i18n="kicker">MISSION BRIEFING</p>
+            <h1 class="sx-title" data-i18n="title">VALUE LEADERBOARD</h1>
+            <p class="sx-lede" data-i18n="subtitle">INTEL × SPEED^0.8 / PRICE · OPENROUTER TELEMETRY</p>
+
+            <div class="sx-telemetry" id="stats-bar">
+                <div class="sx-tel">
+                    <span class="sx-tel-label" data-i18n="stat_total">MODELS</span>
+                    <span class="sx-tel-value" id="total-models">—</span>
+                </div>
+                <div class="sx-tel">
+                    <span class="sx-tel-label" data-i18n="stat_ranked">RANKED</span>
+                    <span class="sx-tel-value" id="ranked-models">—</span>
+                </div>
+                <div class="sx-tel">
+                    <span class="sx-tel-label" data-i18n="stat_avg">INTEL AVG</span>
+                    <span class="sx-tel-value" id="avg-intelligence">—</span>
+                </div>
+                <div class="sx-tel">
+                    <span class="sx-tel-label" data-i18n="stat_updated">UPDATED</span>
+                    <span class="sx-tel-value" id="last-updated">—</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="sx-launch" id="podium-section" hidden>
+            <div class="sx-section-head">
+                <h2 data-i18n="top3">FLIGHT CREW</h2>
+                <span class="sx-section-line"></span>
+            </div>
+            <div class="sx-podium" id="podium"></div>
+        </section>
+
+        <section class="sx-manifest">
+            <div class="sx-manifest-bar">
+                <div class="sx-section-head">
+                    <h2 data-i18n="board">MANIFEST</h2>
+                    <span class="sx-count" id="results-count">—</span>
+                </div>
+                <div class="sx-controls">
+                    <input type="search" id="search-input" class="sx-input" data-i18n-placeholder="search_ph" placeholder="SEARCH VEHICLE…" autocomplete="off">
+                    <select id="sort-select" class="sx-select sx-select-wide">
+                        <option value="value" data-i18n="sort_value">VALUE</option>
+                        <option value="intelligence" data-i18n="sort_intel">INTEL</option>
+                        <option value="speed" data-i18n="sort_speed">SPEED</option>
+                        <option value="price" data-i18n="sort_price">PRICE</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sx-cols" aria-hidden="true">
+                <span data-i18n="col_rank">#</span>
+                <span data-i18n="col_model">VEHICLE</span>
+                <span data-i18n="col_intel">INTEL</span>
+                <span data-i18n="col_speed">SPEED</span>
+                <span data-i18n="col_price">PRICE</span>
+                <span data-i18n="col_value">VALUE</span>
+            </div>
+            <div class="sx-list" id="rankings-list">
+                <div class="sx-empty" data-i18n="loading">ACQUIRING SIGNAL…</div>
+            </div>
+            <div class="sx-pager" id="pagination"></div>
+        </section>
+    </main>
+
+    <footer class="sx-footer">
+        <span data-i18n="footer">OCCUPY MARS · RANK MODELS</span>
+        <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GITHUB</a>
+    </footer>
+
+    <div class="sx-modal hidden" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="sx-modal-backdrop" id="modal-backdrop"></div>
+        <div class="sx-modal-panel">
+            <button type="button" class="sx-modal-close" id="modal-close" aria-label="Close">×</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="js/spacex.js?v=20250709sx"></script>
+</body>
+</html>

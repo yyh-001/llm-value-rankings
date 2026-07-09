@@ -146,6 +146,10 @@ function initStyleSwitcher() {
             window.location.href = 'minimal.html';
             return;
         }
+        if (next === 'spacex') {
+            window.location.href = 'spacex.html';
+            return;
+        }
         window.location.href = 'index.html';
     });
 }

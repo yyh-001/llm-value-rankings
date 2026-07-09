@@ -178,6 +178,7 @@ function initTheme() {
 const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora', 'eva'];
 
 const STYLE_PAGES = {
+    spacex: 'spacex.html',
     eva: 'eva.html',
     editorial: 'minimal.html',
 };
