@@ -15,6 +15,13 @@ const I18N = {
     zh: {
         title: '性价比作战指挥台',
         subtitle: '能力 × 速度^0.8 / 价格 · OpenRouter 实时数据',
+        style_label: '风格',
+        style_classic: '经典',
+        style_spacex: 'SpaceX',
+        style_editorial: '极简',
+        style_apple: 'Apple',
+        style_aurora: 'Aurora',
+        style_eva: 'EVA',
         stat_units: 'UNITS',
         stat_ranked: 'RANKED',
         stat_avg: 'INTEL AVG',
@@ -54,6 +61,13 @@ const I18N = {
     en: {
         title: 'VALUE COMMAND DECK',
         subtitle: 'Intel × Speed^0.8 / Price · OpenRouter live feed',
+        style_label: 'Style',
+        style_classic: 'Classic',
+        style_spacex: 'SpaceX',
+        style_editorial: 'Minimal',
+        style_apple: 'Apple',
+        style_aurora: 'Aurora',
+        style_eva: 'EVA',
         stat_units: 'UNITS',
         stat_ranked: 'RANKED',
         stat_avg: 'INTEL AVG',
@@ -118,6 +132,18 @@ function applyI18n() {
     const status = $('status-text');
     if (status) status.textContent = t('online');
     document.documentElement.lang = state.lang === 'zh' ? 'zh-CN' : 'en';
+}
+
+function initStyleSwitcher() {
+    const select = $('style-select');
+    if (!select) return;
+    select.value = 'eva';
+    select.addEventListener('change', () => {
+        const next = select.value;
+        if (next === 'eva') return;
+        localStorage.setItem('ui-style', next);
+        window.location.href = 'index.html';
+    });
 }
 
 function escapeHtml(str) {
@@ -517,6 +543,7 @@ function initEvents() {
 
 document.addEventListener('DOMContentLoaded', () => {
     applyI18n();
+    initStyleSwitcher();
     initEvents();
     loadStars();
     loadData();

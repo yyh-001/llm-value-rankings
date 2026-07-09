@@ -169,6 +169,53 @@ button, input, select { font-family: inherit; }
     flex-shrink: 0;
 }
 
+.eva-style-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.eva-style-label {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+}
+
+.eva-style-select {
+    height: 34px;
+    max-width: 110px;
+    padding: 0 1.6rem 0 0.65rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background-color: var(--bg-panel);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ff5c1c' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.55rem center;
+    border: 1px solid var(--border);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.eva-style-select:hover,
+.eva-style-select:focus {
+    border-color: var(--orange);
+    box-shadow: var(--glow-orange);
+}
+
+.eva-style-select option {
+    background: #120c1c;
+    color: #f2ebe3;
+}
+
 .eva-link,
 .eva-btn-ghost {
     display: inline-flex;
@@ -861,6 +908,14 @@ button, input, select { font-family: inherit; }
     }
 
     .eva-brand-text span { display: none; }
+
+    .eva-style-label { display: none; }
+
+    .eva-style-select {
+        max-width: 88px;
+        font-size: 0.62rem;
+        padding: 0 1.4rem 0 0.5rem;
+    }
 
     .eva-mark {
         width: 40px;
