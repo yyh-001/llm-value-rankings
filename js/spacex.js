@@ -32,6 +32,11 @@ const I18N = {
         fx_marquee: '数百载具在轨',
         fx_warp_title: 'MAX Q',
         fx_warp: '速度遇见价格 · 只有高效者存活',
+        duel_speed: '最快',
+        duel_price: '最便宜',
+        duel_value: '性价比胜出',
+        duel_hint: '继续滚动 · 揭晓胜者',
+        duel_hint_done: '点击卡片查看详情',
         style_label: '风格',
         style_classic: '经典',
         style_spacex: 'SpaceX',
@@ -89,6 +94,11 @@ const I18N = {
         fx_marquee: 'HUNDREDS OF VEHICLES IN ORBIT',
         fx_warp_title: 'MAX Q',
         fx_warp: 'SPEED MEETS PRICE. ONLY THE EFFICIENT SURVIVE.',
+        duel_speed: 'FASTEST',
+        duel_price: 'CHEAPEST',
+        duel_value: 'BEST VALUE',
+        duel_hint: 'KEEP SCROLLING · REVEAL WINNER',
+        duel_hint_done: 'TAP A CARD FOR DETAILS',
         style_label: 'STYLE',
         style_classic: 'Classic',
         style_spacex: 'SpaceX',
@@ -145,6 +155,8 @@ const state = {
     reduceMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     lastCountdownStep: -1,
     launchModels: [],
+    duel: { speed: null, price: null, value: null },
+    lastWarpPhase: -1,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -362,14 +374,12 @@ function initScrollCinema() {
             if (nav) nav.classList.toggle('is-solid', scrollY > 24);
 
             if (!state.reduceMotion) {
-                if (stars) stars.style.transform = `translate3d(0, ${scrollY * 0.22}px, 0)`;
-                if (starsFar) starsFar.style.transform = `translate3d(0, ${scrollY * 0.1}px, 0) scale(1.2)`;
-                if (nebula) nebula.style.transform = `translate3d(${scrollY * 0.03}px, ${scrollY * 0.05}px, 0)`;
-                if (horizon) {
-                    horizon.style.transform = `translate3d(0, ${-scrollY * 0.08}px, 0) scale(${1 + p * 0.15})`;
-                    horizon.style.opacity = String(Math.max(0.2, 1 - p * 0.85));
-                }
-                if (glow) glow.style.opacity = String(Math.max(0.12, 0.9 - p * 1.1 + velocity * 0.3));
+                if (stars) stars.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+                if (starsFar) starsFar.style.transform = `translate3d(0, ${scrollY * 0.05}px, 0) scale(1.2)`;
+                if (nebula) nebula.style.transform = `translate3d(${scrollY * 0.02}px, ${scrollY * 0.03}px, 0)`;
+                // Keep horizon soft and fixed — translating it caused a hard color seam
+                if (horizon) horizon.style.opacity = String(Math.max(0.35, 0.85 - p * 0.4));
+                if (glow) glow.style.opacity = String(Math.max(0.2, 0.85 - p * 0.7 + velocity * 0.2));
             }
 
             // Sticky countdown scrub: T-10 → LIFTOFF + model reveal
@@ -391,15 +401,16 @@ function initScrollCinema() {
                 if (launchBar) launchBar.style.width = `${(cp * 100).toFixed(1)}%`;
             }
 
-            // Sticky warp scrub
+            // Sticky warp scrub → efficiency duel
             if (pinWarp && warpLines) {
                 const wp = pinProgress(pinWarp);
                 const scale = 1.3 + wp * 1.4;
                 const rot = 72 - wp * 18;
-                warpLines.style.opacity = String(0.25 + wp * 0.75);
+                warpLines.style.opacity = String(0.2 + wp * 0.55);
                 warpLines.style.filter = `blur(${Math.max(0, 3 - wp * 3)}px)`;
                 warpLines.style.transform = `perspective(500px) rotateX(${rot}deg) scale(${scale}) translateY(${-wp * 8}%)`;
                 if (warpMeter) warpMeter.style.width = `${(wp * 100).toFixed(1)}%`;
+                updateWarpDuel(wp);
             }
 
             ticking = false;
@@ -462,16 +473,10 @@ function initStyleSwitcher() {
 }
 
 function initTheme() {
-    const btn = $('theme-toggle');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
-        const next = current === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.content = next === 'light' ? '#f0f0fa' : '#000000';
-    });
+    // SpaceX page is always black — no light theme
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = '#000000';
 }
 
 async function loadData() {
@@ -495,6 +500,7 @@ async function loadData() {
 
         updateStats();
         prepareLaunchModels();
+        prepareDuelModels();
         buildMarquee();
         renderPodium();
         filterAndSort();
@@ -510,10 +516,12 @@ async function loadData() {
 }
 
 function prepareLaunchModels() {
+    // Ascend from lower ranks to #1 during countdown (pad → liftoff)
     state.launchModels = state.models
         .filter((m) => m.rank != null && m.value_score != null)
         .sort((a, b) => a.rank - b.rank)
-        .slice(0, 8);
+        .slice(0, 8)
+        .reverse();
 
     const queue = $('launch-queue');
     if (!queue) return;
@@ -576,6 +584,89 @@ function updateLaunchVehicle(stepIdx, isLiftoff) {
             chip.classList.toggle('is-active', i === Math.min(stepIdx, models.length - 1));
             chip.classList.toggle('is-done', i < stepIdx);
         });
+    }
+}
+
+function prepareDuelModels() {
+    const ranked = state.models.filter((m) => m.rank != null && m.pricing);
+    if (!ranked.length) {
+        state.duel = { speed: null, price: null, value: null };
+        return;
+    }
+
+    const bySpeed = [...ranked]
+        .filter((m) => m.speed != null)
+        .sort((a, b) => (b.speed || 0) - (a.speed || 0))[0];
+    const byPrice = [...ranked]
+        .filter((m) => m.pricing?.blended != null)
+        .sort((a, b) => (a.pricing.blended || Infinity) - (b.pricing.blended || Infinity))[0];
+    const byValue = [...ranked]
+        .filter((m) => m.value_score != null)
+        .sort((a, b) => (b.value_score || 0) - (a.value_score || 0))[0];
+
+    state.duel = { speed: bySpeed || null, price: byPrice || null, value: byValue || null };
+    fillDuelCards();
+    state.lastWarpPhase = -1;
+}
+
+function shortName(model) {
+    return (model?.name || '—').replace(/^[^:]+:\s*/, '');
+}
+
+function fillDuelCards() {
+    const { speed, price, value } = state.duel;
+    const set = (id, text) => {
+        const el = $(id);
+        if (el) el.textContent = text;
+    };
+
+    if (speed) {
+        set('duel-speed-name', shortName(speed));
+        set('duel-speed-meta', speed.provider_display || speed.provider || '—');
+        set('duel-speed-val', formatSpeed(speed.speed));
+        const card = $('duel-speed');
+        if (card) card.onclick = () => showDetail(speed.id);
+    }
+    if (price) {
+        set('duel-price-name', shortName(price));
+        set('duel-price-meta', price.provider_display || price.provider || '—');
+        set('duel-price-val', formatPrice(price.pricing?.blended));
+        const card = $('duel-price');
+        if (card) card.onclick = () => showDetail(price.id);
+    }
+    if (value) {
+        set('duel-value-name', shortName(value));
+        set('duel-value-meta', value.provider_display || value.provider || '—');
+        set('duel-value-val', formatValue(value.value_score));
+        set('duel-value-intel', value.intelligence_score ?? '—');
+        set('duel-value-speed', formatSpeed(value.speed));
+        set('duel-value-price', formatPrice(value.pricing?.blended));
+        const card = $('duel-winner');
+        if (card) card.onclick = () => showDetail(value.id);
+    }
+}
+
+function updateWarpDuel(progress) {
+    const duel = $('warp-duel');
+    const winner = $('duel-winner');
+    const caption = $('warp-caption');
+    if (!duel) return;
+
+    // 0–0.35: show duel cards, 0.35–0.7: highlight, 0.7+: reveal winner
+    let phase = 0;
+    if (progress >= 0.7) phase = 2;
+    else if (progress >= 0.35) phase = 1;
+
+    if (phase === state.lastWarpPhase) return;
+    state.lastWarpPhase = phase;
+
+    duel.classList.toggle('is-clash', phase >= 1);
+    if (winner) {
+        winner.hidden = phase < 2;
+        winner.classList.toggle('is-show', phase >= 2);
+    }
+    if (caption) {
+        caption.textContent = phase >= 2 ? t('duel_hint_done') : t('duel_hint');
     }
 }
 
@@ -870,6 +961,7 @@ function initEvents() {
         applyI18n();
         updateStats();
         prepareLaunchModels();
+        prepareDuelModels();
         renderPodium();
         renderList();
         if (state.lastCountdownStep >= 0) {
@@ -880,6 +972,8 @@ function initEvents() {
                     state.lastCountdownStep >= 7 ? t('fx_liftoff') : t('fx_vehicle');
             }
         }
+        state.lastWarpPhase = -1;
+        updateWarpDuel(pinProgress($('pin-warp')));
         const modal = $('detail-modal');
         if (modal && !modal.classList.contains('hidden') && modal.dataset.currentModel) {
             showDetail(modal.dataset.currentModel);

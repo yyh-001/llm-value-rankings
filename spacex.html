@@ -6,21 +6,11 @@
     <title>LLM VALUE RANKINGS · SPACEX</title>
     <meta name="description" content="SpaceX cinematic scroll experience for LLM value rankings.">
     <meta name="theme-color" content="#000000">
-    <meta name="app-version" content="20250709sx4">
-    <script>
-        (function () {
-            try {
-                var theme = localStorage.getItem('theme');
-                if (theme === 'light' || theme === 'dark') {
-                    document.documentElement.setAttribute('data-theme', theme);
-                }
-            } catch (e) {}
-        })();
-    </script>
+    <meta name="app-version" content="20250709sx7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/spacex.css?v=20250709sx4">
+    <link rel="stylesheet" href="css/spacex.css?v=20250709sx7">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M16 4 L20 20 L16 28 L12 20 Z' fill='%23f0f0fa'/></svg>">
 </head>
 <body>
@@ -59,15 +49,6 @@
                         <option value="eva" data-i18n="style_eva">EVA</option>
                     </select>
                 </div>
-                <button type="button" class="sx-icon" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-                    </svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
-                    </svg>
-                </button>
                 <button type="button" class="sx-icon" id="lang-toggle" aria-label="Switch language">
                     <span id="lang-label">EN</span>
                 </button>
@@ -177,14 +158,48 @@
             </div>
         </section>
 
-        <!-- 7 Sticky warp scrub -->
+        <!-- 7 Sticky efficiency duel -->
         <section class="sx-pin sx-pin-warp" data-screen="warp" id="pin-warp">
             <div class="sx-pin-sticky">
                 <div class="sx-warp-lines" id="warp-lines" aria-hidden="true"></div>
-                <div class="sx-warp-copy">
-                    <h2 data-i18n="fx_warp_title">MAX Q</h2>
-                    <p data-i18n="fx_warp">SPEED MEETS PRICE. ONLY THE EFFICIENT SURVIVE.</p>
+                <div class="sx-warp-panel">
+                    <p class="sx-kicker" data-i18n="fx_warp_title">MAX Q</p>
+                    <p class="sx-warp-sub" id="warp-sub" data-i18n="fx_warp">速度遇见价格 · 只有高效者存活</p>
+
+                    <div class="sx-duel" id="warp-duel">
+                        <article class="sx-duel-card" id="duel-speed" data-side="speed">
+                            <span class="sx-duel-tag" data-i18n="duel_speed">最快</span>
+                            <h3 class="sx-duel-name" id="duel-speed-name">—</h3>
+                            <p class="sx-duel-meta" id="duel-speed-meta">—</p>
+                            <div class="sx-duel-stat"><b id="duel-speed-val">—</b><span>TOK/S</span></div>
+                        </article>
+                        <div class="sx-duel-vs" aria-hidden="true">VS</div>
+                        <article class="sx-duel-card" id="duel-price" data-side="price">
+                            <span class="sx-duel-tag" data-i18n="duel_price">最便宜</span>
+                            <h3 class="sx-duel-name" id="duel-price-name">—</h3>
+                            <p class="sx-duel-meta" id="duel-price-meta">—</p>
+                            <div class="sx-duel-stat"><b id="duel-price-val">—</b><span data-i18n="blended">综合价</span></div>
+                        </article>
+                    </div>
+
+                    <article class="sx-duel-winner" id="duel-winner" hidden>
+                        <span class="sx-duel-tag" data-i18n="duel_value">性价比胜出</span>
+                        <div class="sx-duel-winner-main">
+                            <div>
+                                <h3 class="sx-duel-name" id="duel-value-name">—</h3>
+                                <p class="sx-duel-meta" id="duel-value-meta">—</p>
+                            </div>
+                            <div class="sx-duel-stat accent"><b id="duel-value-val">—</b><span data-i18n="value">性价比</span></div>
+                        </div>
+                        <div class="sx-duel-winner-grid">
+                            <div><b id="duel-value-intel">—</b><span data-i18n="intel">能力</span></div>
+                            <div><b id="duel-value-speed">—</b><span data-i18n="speed">速度</span></div>
+                            <div><b id="duel-value-price">—</b><span data-i18n="price">价格</span></div>
+                        </div>
+                    </article>
+
                     <div class="sx-warp-meter"><i id="warp-meter-fill"></i></div>
+                    <p class="sx-fx-caption" id="warp-caption" data-i18n="duel_hint">继续滚动 · 揭晓胜者</p>
                 </div>
             </div>
         </section>
@@ -237,6 +252,6 @@
         </div>
     </div>
 
-    <script src="js/spacex.js?v=20250709sx4"></script>
+    <script src="js/spacex.js?v=20250709sx7"></script>
 </body>
 </html>
