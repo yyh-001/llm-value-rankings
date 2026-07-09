@@ -375,7 +375,7 @@ function formatSpeed(speed) {
     return `${Math.round(Number(speed))} tok/s`;
 }
 
-const PODIUM_MEDALS = ['🥇', '🥈', '🥉'];
+const PODIUM_MEDALS = ['#1', '#2', '#3'];
 
 function renderPodium() {
     if (!elements.podium || !elements.podiumSection) return;
@@ -392,13 +392,13 @@ function renderPodium() {
     elements.podiumSection.hidden = false;
     elements.podium.innerHTML = top3.map(model => {
         const rankClass = `podium-place-${model.rank}`;
-        const medal = PODIUM_MEDALS[model.rank - 1] || '';
+        const medal = PODIUM_MEDALS[model.rank - 1] || `#${model.rank}`;
         return `
             <div class="podium-card ${rankClass} fade-in" data-model-id="${escapeAttr(model.id)}">
                 <div class="podium-medal-wrap">
                     <span class="podium-medal">${medal}</span>
                 </div>
-                <div class="podium-rank">#${model.rank} ${formatRankChangeHtml(model, true)}</div>
+                <div class="podium-rank">${formatRankChangeHtml(model, true)}</div>
                 <div class="podium-name">${escapeHtml(model.name)}</div>
                 <div class="podium-provider">${escapeHtml(model.provider_display || model.provider)}</div>
                 <div class="podium-metrics">
@@ -687,7 +687,7 @@ function showModelDetail(modelId) {
     const rankClass = rank <= 3 ? `detail-rank-${rank}` : '';
     const intelClass = getIntelligenceClass(model.intelligence_score);
     const priceClass = getPriceClass(model.pricing.blended);
-    const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : '';
+    const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : `#${rank}`;
     const listBlended = model.pricing.blended_list;
     const showListPrice = listBlended != null && listBlended !== model.pricing.blended;
     const openRouterUrl = getOpenRouterModelUrl(model.id);
@@ -697,7 +697,6 @@ function showModelDetail(modelId) {
     const channelClass = isOfficialChannel ? 'pricing-channel-official' : 'pricing-channel-openrouter';
     const pricingChannelHtml = `
                 <div class="detail-item detail-item-channel">
-                    <span class="detail-item-icon" aria-hidden="true">🔗</span>
                     <span class="detail-label">${window.i18n.t('pricing_channel')}</span>
                     <span class="detail-value">
                         <a class="pricing-channel-link ${channelClass}" href="${escapeAttr(pricingChannelUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(pricingChannel)}</a>
@@ -705,13 +704,11 @@ function showModelDetail(modelId) {
                 </div>`;
     const cacheReadHtml = model.pricing.cache_read != null ? `
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">💾</span>
                     <span class="detail-label">${window.i18n.t('cache_read_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.cache_read)}</span>
                 </div>` : '';
     const listPriceHtml = showListPrice ? `
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">🏷️</span>
                     <span class="detail-label">${window.i18n.t('list_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(listBlended)}</span>
                 </div>` : '';
@@ -722,9 +719,8 @@ function showModelDetail(modelId) {
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
-            <div class="model-detail-hero-bg" aria-hidden="true"></div>
             <div class="model-detail-hero-main">
-                <div class="model-detail-rank-badge">${medal}<span>#${rank}</span></div>
+                <div class="model-detail-rank-badge"><span>${medal}</span></div>
                 <div class="model-detail-identity">
                     <div class="model-detail-titles">
                         <h2 class="model-detail-name">${escapeHtml(model.name)}</h2>
@@ -755,50 +751,41 @@ function showModelDetail(modelId) {
             <h3 class="detail-section-title">${window.i18n.t('detail_metrics')}</h3>
             <div class="detail-grid">
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">🧠</span>
                     <span class="detail-label">${window.i18n.t('th_intelligence')}</span>
                     <span class="detail-value ${intelClass}">${model.intelligence_score || '-'}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">⚡</span>
                     <span class="detail-label">${window.i18n.t('th_speed')}</span>
                     <span class="detail-value speed-display">${formatSpeed(model.speed)}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">⏱️</span>
                     <span class="detail-label">${window.i18n.t('th_ttft')}</span>
                     <span class="detail-value latency-display">${formatLatency(model.ttft)}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">📄</span>
                     <span class="detail-label">${window.i18n.t('context_window')}</span>
                     <span class="detail-value">${model.context_length ? (model.context_length / 1024) + 'K' : '-'}</span>
                 </div>
                 ${pricingChannelHtml}
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">📥</span>
                     <span class="detail-label">${window.i18n.t('input_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.prompt)}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">📤</span>
                     <span class="detail-label">${window.i18n.t('output_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.completion)}</span>
                 </div>
                 ${cacheReadHtml}
                 ${listPriceHtml}
                 <div class="detail-item">
-                    <span class="detail-item-icon" aria-hidden="true">💰</span>
                     <span class="detail-label">${window.i18n.t('blended_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.blended)}</span>
                 </div>
                 <div class="detail-item detail-item-accent">
-                    <span class="detail-item-icon" aria-hidden="true">📈</span>
                     <span class="detail-label">${window.i18n.t('th_change')}</span>
                     <span class="detail-value">${formatRankChangeHtml(model)}</span>
                 </div>
                 <div class="detail-item detail-item-accent">
-                    <span class="detail-item-icon" aria-hidden="true">🏆</span>
                     <span class="detail-label">${window.i18n.t('value_rank')}</span>
                     <span class="detail-value detail-rank-value">#${rank}</span>
                 </div>

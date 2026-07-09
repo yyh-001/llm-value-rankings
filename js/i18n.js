@@ -17,7 +17,7 @@ const translations = {
         ranked_models: "已排名",
         avg_intelligence: "能力均分",
         last_updated: "更新时间",
-        top_models: "🏅 性价比 Top 3",
+        top_models: "性价比 Top 3",
         
         // Filters
         search_placeholder: "搜索模型...",
@@ -102,7 +102,7 @@ const translations = {
         ranked_models: "Ranked",
         avg_intelligence: "Intel Avg",
         last_updated: "Last Updated",
-        top_models: "🏅 Top 3 Value Models",
+        top_models: "Top 3 Value Models",
         
         // Filters
         search_placeholder: "Search models...",

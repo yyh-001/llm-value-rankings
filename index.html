@@ -6,7 +6,7 @@
     <title>LLM Value Rankings | 大模型性价比排行榜</title>
     <meta name="description" content="Compare 300+ LLM models by value — intelligence, speed, and price from OpenRouter. Daily updated AI model rankings. 大模型性价比排行榜，OpenRouter 价格与能力评分。">
     <meta name="keywords" content="LLM,大模型,性价比,AI ranking,model comparison,OpenRouter,token price,Artificial Analysis,DeepSeek,GPT,Claude,Gemini,LLM benchmark,AI tools,GitHub Pages">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#2563eb">
     <link rel="canonical" href="https://yyh-001.github.io/llm-value-rankings/">
     <link rel="alternate" type="text/plain" href="https://yyh-001.github.io/llm-value-rankings/llms.txt" title="LLMs.txt">
     <link rel="sitemap" type="application/xml" href="https://yyh-001.github.io/llm-value-rankings/sitemap.xml">
@@ -66,22 +66,24 @@
     <meta name="twitter:description" content="Compare 300+ LLMs by value. OpenRouter pricing + Artificial Analysis scores.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="app-version" content="20250709a">
-    <link rel="stylesheet" href="css/style.css?v=20250709a">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="app-version" content="20250709b">
+    <link rel="stylesheet" href="css/style.css?v=20250709b">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'><rect x='4' y='4' width='24' height='24' rx='6' stroke='%232563eb' stroke-width='2'/><path d='M10 20l4-8 4 5 4-9' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 </head>
 <body>
-    <div class="bg-decoration" aria-hidden="true">
-        <div class="bg-orb bg-orb-1"></div>
-        <div class="bg-orb bg-orb-2"></div>
-    </div>
+    <div class="bg-decoration" aria-hidden="true"></div>
 
     <!-- Header -->
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <span class="logo-icon">🏆</span>
+                <span class="logo-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="4"/>
+                        <path d="M7 15l3-6 3 4 4-7"/>
+                    </svg>
+                </span>
                 <div class="logo-text-group">
                     <h1 class="logo-text" data-i18n="title">大模型性价比排行榜</h1>
                     <span class="logo-sub" data-i18n="logo_sub">Intel f(x) × Speed^0.8 / Price</span>
@@ -96,8 +98,13 @@
                     <span id="star-count" class="star-count">—</span>
                 </a>
                 <button id="theme-toggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
-                    <span class="icon-sun">☀️</span>
-                    <span class="icon-moon">🌙</span>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+                    </svg>
                 </button>
                 <button id="lang-toggle" class="btn-icon btn-lang" title="切换语言" aria-label="Switch language">
                     <span id="lang-label">EN</span>
@@ -109,7 +116,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-inner">
-            <div class="hero-badge" data-i18n="hero_badge">实时数据 · 每日自动更新</div>
+            <p class="hero-badge" data-i18n="hero_badge">实时数据 · 每日自动更新</p>
             <h2 class="hero-title" data-i18n="hero_title">找到最具性价比的 AI 模型</h2>
             <p class="hero-desc" data-i18n="hero_desc">基于 AA 综合能力指数、输出速度与价格，计算每美元获得的 AI 性价比</p>
             <div class="stats-bar" id="stats-bar">
@@ -135,7 +142,7 @@
 
     <!-- Top 3 Podium -->
     <section class="podium-section container" id="podium-section" hidden>
-        <h3 class="section-title" data-i18n="top_models">🏅 性价比 Top 3</h3>
+        <h3 class="section-title" data-i18n="top_models">性价比 Top 3</h3>
         <div class="podium" id="podium"></div>
     </section>
 
@@ -200,21 +207,21 @@
                 </div>
                 <div class="method-cards">
                     <div class="method-card">
-                        <span class="method-icon">🧠</span>
+                        <span class="method-icon" aria-hidden="true">01</span>
                         <div>
                             <strong data-i18n="method_1_title">能力评分</strong>
                             <p data-i18n="method_1">Artificial Analysis Intelligence Index（OpenRouter）</p>
                         </div>
                     </div>
                     <div class="method-card">
-                        <span class="method-icon">⚡</span>
+                        <span class="method-icon" aria-hidden="true">02</span>
                         <div>
                             <strong data-i18n="method_2_title">输出速度</strong>
                             <p data-i18n="method_2">OpenRouter 各 Provider 最高 p50 吞吐 (tokens/s，与官网 best across providers 一致)</p>
                         </div>
                     </div>
                     <div class="method-card">
-                        <span class="method-icon">💰</span>
+                        <span class="method-icon" aria-hidden="true">03</span>
                         <div>
                             <strong data-i18n="method_3_title">Token 价格</strong>
                             <p data-i18n="method_3">OpenRouter 输入输出平均价 ($/1M tokens)</p>
@@ -263,7 +270,7 @@
     </footer>
 
     <script defer src="https://events.vercount.one/js"></script>
-    <script src="js/i18n.js?v=20250709a"></script>
-    <script src="js/app.js?v=20250709a"></script>
+    <script src="js/i18n.js?v=20250709b"></script>
+    <script src="js/app.js?v=20250709b"></script>
 </body>
 </html>
