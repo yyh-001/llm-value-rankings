@@ -175,7 +175,7 @@ function initTheme() {
     syncThemeColor();
 }
 
-const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'aurora', 'eva'];
+const STYLE_OPTIONS = ['spacex', 'editorial', 'classic', 'apple', 'eva'];
 
 const STYLE_PAGES = {
     spacex: 'spacex.html',
@@ -229,7 +229,6 @@ function syncThemeColor() {
         editorial: { dark: '#0a0a0b', light: '#f7f7f8' },
         classic: { dark: '#0b0f19', light: '#f8fafc' },
         apple: { dark: '#000000', light: '#f5f5f7' },
-        aurora: { dark: '#070b14', light: '#f4f7fb' },
         eva: { dark: '#0a0612', light: '#f2ebe3' },
     };
     meta.content = colors[style]?.[theme] || '#0b0f19';
