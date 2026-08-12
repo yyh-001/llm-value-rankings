@@ -1,3 +1,5 @@
+
+
 <div align="center">
 
 # LLM Value Rankings
@@ -75,7 +77,7 @@ Open [http://localhost:8080](http://localhost:8080).
 ```bash
 pip install -r scripts/requirements.txt
 python scripts/fetch_data.py
-git add data/models.json data/rank_history.json
+git add data/models.json data/rank_history.json data/repo.json
 git commit -m "chore: update model data"
 git push
 ```
