@@ -50,19 +50,24 @@ DEFAULT_CACHE_HIT_RATE = 0.7
 INPUT_TOKEN_WEIGHT = 3
 OUTPUT_TOKEN_WEIGHT = 1
 USD_TO_CNY = 7.25
+# DeepSeek peak: CST 09:00-12:00 (3h) + 14:00-18:00 (4h). Off-peak is half of peak.
+DEEPSEEK_PEAK_HOURS = 7
+DEEPSEEK_OFF_PEAK_HOURS = 17
 # Official provider API prices (CNY / 1M tokens) when OpenRouter resell pricing differs.
 OFFICIAL_PRICING_CNY_PER_M = {
     "deepseek/deepseek-v4-flash": {
-        "prompt": 1.0,
-        "cache_read": 0.02,
-        "completion": 2.0,
+        "peak": {"prompt": 3.0, "cache_read": 0.10, "completion": 9.0},
+        "off_peak": {"prompt": 1.5, "cache_read": 0.05, "completion": 4.5},
+        "peak_hours": DEEPSEEK_PEAK_HOURS,
+        "off_peak_hours": DEEPSEEK_OFF_PEAK_HOURS,
         "source_label": "DeepSeek 官方 API",
         "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
     },
     "deepseek/deepseek-v4-pro": {
-        "prompt": 3.0,
-        "cache_read": 0.025,
-        "completion": 6.0,
+        "peak": {"prompt": 9.0, "cache_read": 0.30, "completion": 27.0},
+        "off_peak": {"prompt": 4.5, "cache_read": 0.15, "completion": 13.5},
+        "peak_hours": DEEPSEEK_PEAK_HOURS,
+        "off_peak_hours": DEEPSEEK_OFF_PEAK_HOURS,
         "source_label": "DeepSeek 官方 API",
         "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
     },
@@ -268,19 +273,58 @@ def cny_per_m_to_usd_per_m(cny):
     return round(float(cny) / USD_TO_CNY, 6)
 
 
+def usd_pricing_from_cny(prompt, cache_read, completion):
+    """Build USD pricing fields from CNY / 1M token rates."""
+    return refresh_pricing_blended(
+        {
+            "prompt": cny_per_m_to_usd_per_m(prompt),
+            "completion": cny_per_m_to_usd_per_m(completion),
+            "cache_read": cny_per_m_to_usd_per_m(cache_read),
+        }
+    )
+
+
+def time_weighted_cny_rates(spec):
+    """Average peak/off-peak CNY rates by clock hours in a day."""
+    peak = spec["peak"]
+    off_peak = spec["off_peak"]
+    peak_hours = spec.get("peak_hours", DEEPSEEK_PEAK_HOURS)
+    off_peak_hours = spec.get("off_peak_hours", DEEPSEEK_OFF_PEAK_HOURS)
+    total_hours = peak_hours + off_peak_hours
+    return {
+        key: (peak[key] * peak_hours + off_peak[key] * off_peak_hours) / total_hours
+        for key in ("prompt", "cache_read", "completion")
+    }
+
+
 def apply_official_pricing_override(model_id, pricing_payload):
     """Replace pricing with official provider API rates when configured."""
     spec = OFFICIAL_PRICING_CNY_PER_M.get(model_id)
     if not spec:
         return pricing_payload
 
-    updated = refresh_pricing_blended(
-        {
-            "prompt": cny_per_m_to_usd_per_m(spec["prompt"]),
-            "completion": cny_per_m_to_usd_per_m(spec["completion"]),
-            "cache_read": cny_per_m_to_usd_per_m(spec["cache_read"]),
+    if "peak" in spec and "off_peak" in spec:
+        weighted = time_weighted_cny_rates(spec)
+        updated = usd_pricing_from_cny(
+            weighted["prompt"], weighted["cache_read"], weighted["completion"]
+        )
+        updated["tod"] = {
+            "scheme": "peak_off_peak",
+            "peak": usd_pricing_from_cny(
+                spec["peak"]["prompt"],
+                spec["peak"]["cache_read"],
+                spec["peak"]["completion"],
+            ),
+            "off_peak": usd_pricing_from_cny(
+                spec["off_peak"]["prompt"],
+                spec["off_peak"]["cache_read"],
+                spec["off_peak"]["completion"],
+            ),
         }
-    )
+    else:
+        updated = usd_pricing_from_cny(
+            spec["prompt"], spec["cache_read"], spec["completion"]
+        )
     updated["pricing_source"] = spec.get("source_label")
     updated["pricing_source_url"] = spec.get("source_url")
     return updated

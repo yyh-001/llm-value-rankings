@@ -778,6 +778,19 @@ function showModelDetail(modelId) {
             <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
     const officialChannelNoteHtml = isOfficialChannel ? `
             <p class="detail-pricing-note">${window.i18n.t('pricing_source_note', { source: pricingChannel })}</p>` : '';
+    const tod = model.pricing.tod;
+    const hasTodPricing = tod && tod.scheme === 'peak_off_peak';
+    const todPriceHtml = hasTodPricing ? `
+                <div class="detail-item">
+                    <span class="detail-label">${window.i18n.t('peak_blended_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(tod.peak && tod.peak.blended)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">${window.i18n.t('off_peak_blended_price')}</span>
+                    <span class="detail-value price-display ${priceClass}">${formatPrice(tod.off_peak && tod.off_peak.blended)}</span>
+                </div>` : '';
+    const todNoteHtml = hasTodPricing ? `
+            <p class="detail-pricing-note">${window.i18n.t('pricing_tod_note')}</p>` : '';
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
@@ -843,6 +856,7 @@ function showModelDetail(modelId) {
                     <span class="detail-label">${window.i18n.t('blended_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(model.pricing.blended)}</span>
                 </div>
+                ${todPriceHtml}
                 <div class="detail-item detail-item-accent">
                     <span class="detail-label">${window.i18n.t('th_change')}</span>
                     <span class="detail-value">${formatRankChangeHtml(model)}</span>
@@ -854,6 +868,7 @@ function showModelDetail(modelId) {
             </div>
             ${cacheNoteHtml}
             ${officialChannelNoteHtml}
+            ${todNoteHtml}
         </div>
 
         ${model.description ? `
