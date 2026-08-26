@@ -35,7 +35,24 @@ jobs:
       env:
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       run: python scripts/fetch_data.py
-      
+
+    - name: Validate generated data
+      run: |
+        python - <<'PY'
+        import json
+        from pathlib import Path
+
+        data = json.loads(Path("data/models.json").read_text(encoding="utf-8"))
+        ranked = int(data.get("ranked_models") or 0)
+        scored = int(data.get("avg_intelligence_count") or 0)
+        if ranked <= 0 or scored <= 0:
+            raise SystemExit(
+                f"Refusing to publish invalid data: ranked_models={ranked}, "
+                f"avg_intelligence_count={scored}"
+            )
+        print(f"Validated generated data: ranked_models={ranked}, scores={scored}")
+        PY
+
     - name: Check for changes
       id: check_changes
       run: |
