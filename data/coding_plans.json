@@ -1,0 +1,859 @@
+{
+  "updated_at": "2026-08-26T09:59:20.605247Z",
+  "methodology": {
+    "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
+    "cache_hit_rate": 0.95,
+    "token_mix": "3:1 input:output for API; subscription uses vendor quota",
+    "sort_by": "peak cost ascending (flat-rate plans use off-peak only)",
+    "usd_to_cny": 7.25,
+    "weeks_per_month": 4.333
+  },
+  "sources": {
+    "opencode_go": "https://opencode.ai/docs/go.md",
+    "glm_overview": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
+    "glm_pricing": "https://www.bigmodel.cn/glm-coding",
+    "kimi_k3_api": "https://platform.kimi.com/docs/pricing/chat-k3.md",
+    "kimi_membership": "https://www.kimi.com/en/help/membership/membership-pricing",
+    "commandcode_goat": "https://commandcode.ai/docs/plans/goat",
+    "codex_pricing": "https://developers.openai.com/codex/pricing.md"
+  },
+  "total_plans": 15,
+  "by_model": {
+    "deepseek/deepseek-v4-flash-0731": [
+      {
+        "id": "commandcode-goat-ds-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost_off_peak": 1.6,
+        "cost_peak": 3.1,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-ds-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost_off_peak": 2.7,
+        "cost_peak": 5.3,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "deepseek-v4-flash-0731",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Flash 0731",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 16.8,
+        "cost_peak": 33.6,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 官方 API",
+        "rank": 3
+      }
+    ],
+    "deepseek/deepseek-v4-flash": [
+      {
+        "id": "commandcode-goat-ds-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost_off_peak": 1.6,
+        "cost_peak": 3.1,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-ds-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost_off_peak": 2.7,
+        "cost_peak": 5.3,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "deepseek-v4-flash-0731",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Flash 0731",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 16.8,
+        "cost_peak": 33.6,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 官方 API",
+        "rank": 3
+      }
+    ],
+    "~deepseek/deepseek-v4-flash-latest": [
+      {
+        "id": "commandcode-goat-ds-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost_off_peak": 1.6,
+        "cost_peak": 3.1,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-ds-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DS V4 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost_off_peak": 2.7,
+        "cost_peak": 5.3,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "deepseek-v4-flash-0731",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Flash 0731",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 16.8,
+        "cost_peak": 33.6,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 官方 API",
+        "rank": 3
+      }
+    ],
+    "moonshotai/kimi-k3": [
+      {
+        "id": "kimi-k3-allegretto-256k",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "Allegretto 256K",
+        "type": "subscription",
+        "badge": "¥199",
+        "cost_off_peak": 26.6,
+        "cost_peak": null,
+        "url": "https://www.kimi.com/code",
+        "pricing_source": "Kimi 会员定价 + 官方 API 价",
+        "rank": 1
+      },
+      {
+        "id": "kimi-k3-allegro-256k",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "Allegro 256K",
+        "type": "subscription",
+        "badge": "¥699",
+        "cost_off_peak": 31.3,
+        "cost_peak": null,
+        "url": "https://www.kimi.com/code",
+        "pricing_source": "Kimi 会员定价 + 官方 API 价",
+        "rank": 2
+      },
+      {
+        "id": "kimi-k3-allegretto-1m",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "Allegretto 1M",
+        "type": "subscription",
+        "badge": "¥199",
+        "cost_off_peak": 53.2,
+        "cost_peak": null,
+        "url": "https://www.kimi.com/code",
+        "pricing_source": "Kimi 会员定价 + 官方 API 价",
+        "rank": 3
+      },
+      {
+        "id": "kimi-k3-allegro-1m",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "Allegro 1M",
+        "type": "subscription",
+        "badge": "¥699",
+        "cost_off_peak": 62.5,
+        "cost_peak": null,
+        "url": "https://www.kimi.com/code",
+        "pricing_source": "Kimi 会员定价 + 官方 API 价",
+        "rank": 4
+      },
+      {
+        "id": "kimi-k3-moderato-256k",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "Moderato 256K",
+        "type": "subscription",
+        "badge": "¥99",
+        "cost_off_peak": 66.2,
+        "cost_peak": null,
+        "url": "https://www.kimi.com/code",
+        "pricing_source": "Kimi 会员定价 + 官方 API 价",
+        "rank": 5
+      },
+      {
+        "id": "kimi-k3-api",
+        "provider": "moonshot",
+        "provider_display": "Kimi K3",
+        "plan": "API",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 374.8,
+        "cost_peak": null,
+        "url": "https://platform.moonshot.cn/docs/pricing/chat",
+        "pricing_source": "Moonshot Kimi K3 官方 API",
+        "rank": 6
+      }
+    ],
+    "z-ai/glm-5.2": [
+      {
+        "id": "glm-5-3-max",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Max",
+        "type": "subscription",
+        "badge": "¥1078",
+        "cost_off_peak": 18.4,
+        "cost_peak": 36.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "glm-5-3-pro",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Pro",
+        "type": "subscription",
+        "badge": "¥538",
+        "cost_off_peak": 21.4,
+        "cost_peak": 42.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "glm-5-3-lite",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Lite",
+        "type": "subscription",
+        "badge": "¥118",
+        "cost_off_peak": 28.1,
+        "cost_peak": 56.7,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 3
+      }
+    ],
+    "z-ai/glm-5.1": [
+      {
+        "id": "glm-5-3-max",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Max",
+        "type": "subscription",
+        "badge": "¥1078",
+        "cost_off_peak": 18.4,
+        "cost_peak": 36.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "glm-5-3-pro",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Pro",
+        "type": "subscription",
+        "badge": "¥538",
+        "cost_off_peak": 21.4,
+        "cost_peak": 42.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "glm-5-3-lite",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Lite",
+        "type": "subscription",
+        "badge": "¥118",
+        "cost_off_peak": 28.1,
+        "cost_peak": 56.7,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 3
+      }
+    ],
+    "z-ai/glm-5": [
+      {
+        "id": "glm-5-3-max",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Max",
+        "type": "subscription",
+        "badge": "¥1078",
+        "cost_off_peak": 18.4,
+        "cost_peak": 36.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "glm-5-3-pro",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Pro",
+        "type": "subscription",
+        "badge": "¥538",
+        "cost_off_peak": 21.4,
+        "cost_peak": 42.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "glm-5-3-lite",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Lite",
+        "type": "subscription",
+        "badge": "¥118",
+        "cost_off_peak": 28.1,
+        "cost_peak": 56.7,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 3
+      }
+    ],
+    "deepseek/deepseek-v4-pro": [
+      {
+        "id": "deepseek-v4-pro-0813",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Pro 0813",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 50.3,
+        "cost_peak": 100.7,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 官方 API",
+        "rank": 1
+      }
+    ],
+    "deepseek/deepseek-v4-pro-0813": [
+      {
+        "id": "deepseek-v4-pro-0813",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Pro 0813",
+        "type": "api",
+        "badge": null,
+        "cost_off_peak": 50.3,
+        "cost_peak": 100.7,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 官方 API",
+        "rank": 1
+      }
+    ],
+    "openai/gpt-5.6-luna": [
+      {
+        "id": "gpt-plus-luna",
+        "provider": "openai",
+        "provider_display": "GPT Plus",
+        "plan": "Luna Max",
+        "type": "subscription",
+        "badge": null,
+        "cost_off_peak": [
+          57.5,
+          805.6
+        ],
+        "cost_peak": null,
+        "url": "https://chatgpt.com/codex/pricing",
+        "pricing_source": "OpenAI Codex 官方定价",
+        "rank": 1
+      }
+    ],
+    "openai/gpt-5.6-sol": [
+      {
+        "id": "gpt-plus-sol",
+        "provider": "openai",
+        "provider_display": "GPT Plus",
+        "plan": "Sol",
+        "type": "subscription",
+        "badge": null,
+        "cost_off_peak": [
+          179.0,
+          2685.2
+        ],
+        "cost_peak": null,
+        "url": "https://chatgpt.com/codex/pricing",
+        "pricing_source": "OpenAI Codex 官方定价",
+        "rank": 1
+      }
+    ]
+  },
+  "plans": [
+    {
+      "id": "commandcode-goat-ds-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · DS V4 Flash",
+      "badge": "$10",
+      "cost_off_peak": 1.6,
+      "cost_peak": 3.1,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 4651200000,
+      "monthly_requests": 91200,
+      "tokens_per_request": 51000,
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、DS V4 Flash 官方月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, DS V4 Flash monthly requests, and typical token pattern",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-flash",
+        "exclude_slug_patterns": [
+          "vision"
+        ]
+      },
+      "rank": 1,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash",
+        "~deepseek/deepseek-v4-flash-latest"
+      ]
+    },
+    {
+      "id": "opencode-go-ds-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DS V4 Flash",
+      "badge": "$10/月",
+      "cost_off_peak": 2.7,
+      "cost_peak": 5.3,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2722356000,
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 DS V4 Flash 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and DS V4 Flash monthly requests",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-flash",
+        "exclude_slug_patterns": [
+          "vision"
+        ]
+      },
+      "rank": 2,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash",
+        "~deepseek/deepseek-v4-flash-latest"
+      ]
+    },
+    {
+      "id": "kimi-k3-allegretto-256k",
+      "type": "subscription",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "Allegretto 256K",
+      "badge": "¥199",
+      "cost_off_peak": 26.6,
+      "cost_peak": null,
+      "monthly_cny": 199.0,
+      "quota_tokens": 748240000,
+      "url": "https://www.kimi.com/code",
+      "pricing_source": "Kimi 会员定价 + 官方 API 价",
+      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
+      "api_reference_cost_per_100m": 374.8,
+      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
+      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 3,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "kimi-k3-allegro-256k",
+      "type": "subscription",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "Allegro 256K",
+      "badge": "¥699",
+      "cost_off_peak": 31.3,
+      "cost_peak": null,
+      "monthly_cny": 699.0,
+      "quota_tokens": 2236800000,
+      "url": "https://www.kimi.com/code",
+      "pricing_source": "Kimi 会员定价 + 官方 API 价",
+      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
+      "api_reference_cost_per_100m": 374.8,
+      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
+      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 4,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "deepseek-v4-flash-0731",
+      "type": "api",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "plan": "V4 Flash 0731",
+      "model_id": "deepseek/deepseek-v4-flash",
+      "cost_off_peak": 16.8,
+      "cost_peak": 33.6,
+      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "pricing_source": "DeepSeek 官方 API",
+      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-flash"
+      },
+      "rank": 5,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash",
+        "~deepseek/deepseek-v4-flash-latest"
+      ]
+    },
+    {
+      "id": "glm-5-3-max",
+      "type": "subscription",
+      "provider": "zhipu",
+      "provider_display": "GLM",
+      "plan": "5.3 Max",
+      "badge": "¥1078",
+      "cost_off_peak": 18.4,
+      "cost_peak": 36.8,
+      "monthly_cny": 1078.0,
+      "quota_tokens": {
+        "weekly_min": 676000000,
+        "weekly_max": 1352000000,
+        "monthly_min": 2929333333,
+        "monthly_max": 5858666666
+      },
+      "url": "https://www.bigmodel.cn/glm-coding",
+      "pricing_source": "智谱 GLM Coding Plan 官方文档",
+      "source_url": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
+      "match": {
+        "providers": [
+          "z-ai",
+          "zhipu"
+        ],
+        "slug_patterns": [
+          "glm-5(?:\\.\\d+)?$",
+          "^glm-5$"
+        ],
+        "exclude_slug_patterns": [
+          "5v",
+          "turbo"
+        ]
+      },
+      "rank": 6,
+      "target_models": [
+        "z-ai/glm-5.2",
+        "z-ai/glm-5.1",
+        "z-ai/glm-5"
+      ]
+    },
+    {
+      "id": "glm-5-3-pro",
+      "type": "subscription",
+      "provider": "zhipu",
+      "provider_display": "GLM",
+      "plan": "5.3 Pro",
+      "badge": "¥538",
+      "cost_off_peak": 21.4,
+      "cost_peak": 42.8,
+      "monthly_cny": 538.0,
+      "quota_tokens": {
+        "weekly_min": 290000000,
+        "weekly_max": 580000000,
+        "monthly_min": 1256666666,
+        "monthly_max": 2513333333
+      },
+      "url": "https://www.bigmodel.cn/glm-coding",
+      "pricing_source": "智谱 GLM Coding Plan 官方文档",
+      "source_url": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
+      "match": {
+        "providers": [
+          "z-ai",
+          "zhipu"
+        ],
+        "slug_patterns": [
+          "glm-5(?:\\.\\d+)?$",
+          "^glm-5$"
+        ],
+        "exclude_slug_patterns": [
+          "5v",
+          "turbo"
+        ]
+      },
+      "rank": 7,
+      "target_models": [
+        "z-ai/glm-5.2",
+        "z-ai/glm-5.1",
+        "z-ai/glm-5"
+      ]
+    },
+    {
+      "id": "kimi-k3-allegretto-1m",
+      "type": "subscription",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "Allegretto 1M",
+      "badge": "¥199",
+      "cost_off_peak": 53.2,
+      "cost_peak": null,
+      "monthly_cny": 199.0,
+      "quota_tokens": 374120000,
+      "url": "https://www.kimi.com/code",
+      "pricing_source": "Kimi 会员定价 + 官方 API 价",
+      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
+      "api_reference_cost_per_100m": 374.8,
+      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
+      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 8,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "glm-5-3-lite",
+      "type": "subscription",
+      "provider": "zhipu",
+      "provider_display": "GLM",
+      "plan": "5.3 Lite",
+      "badge": "¥118",
+      "cost_off_peak": 28.1,
+      "cost_peak": 56.7,
+      "monthly_cny": 118.0,
+      "quota_tokens": {
+        "weekly_min": 48000000,
+        "weekly_max": 97000000,
+        "monthly_min": 208000000,
+        "monthly_max": 420333333
+      },
+      "url": "https://www.bigmodel.cn/glm-coding",
+      "pricing_source": "智谱 GLM Coding Plan 官方文档",
+      "source_url": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
+      "match": {
+        "providers": [
+          "z-ai",
+          "zhipu"
+        ],
+        "slug_patterns": [
+          "glm-5(?:\\.\\d+)?$",
+          "^glm-5$"
+        ],
+        "exclude_slug_patterns": [
+          "5v",
+          "turbo"
+        ]
+      },
+      "rank": 9,
+      "target_models": [
+        "z-ai/glm-5.2",
+        "z-ai/glm-5.1",
+        "z-ai/glm-5"
+      ]
+    },
+    {
+      "id": "kimi-k3-allegro-1m",
+      "type": "subscription",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "Allegro 1M",
+      "badge": "¥699",
+      "cost_off_peak": 62.5,
+      "cost_peak": null,
+      "monthly_cny": 699.0,
+      "quota_tokens": 1118400000,
+      "url": "https://www.kimi.com/code",
+      "pricing_source": "Kimi 会员定价 + 官方 API 价",
+      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
+      "api_reference_cost_per_100m": 374.8,
+      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
+      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 10,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "kimi-k3-moderato-256k",
+      "type": "subscription",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "Moderato 256K",
+      "badge": "¥99",
+      "cost_off_peak": 66.2,
+      "cost_peak": null,
+      "monthly_cny": 99.0,
+      "quota_tokens": 149490000,
+      "url": "https://www.kimi.com/code",
+      "pricing_source": "Kimi 会员定价 + 官方 API 价",
+      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
+      "api_reference_cost_per_100m": 374.8,
+      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
+      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 11,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "deepseek-v4-pro-0813",
+      "type": "api",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "plan": "V4 Pro 0813",
+      "model_id": "deepseek/deepseek-v4-pro",
+      "cost_off_peak": 50.3,
+      "cost_peak": 100.7,
+      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "pricing_source": "DeepSeek 官方 API",
+      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-pro"
+      },
+      "rank": 12,
+      "target_models": [
+        "deepseek/deepseek-v4-pro",
+        "deepseek/deepseek-v4-pro-0813"
+      ]
+    },
+    {
+      "id": "kimi-k3-api",
+      "type": "api",
+      "provider": "moonshot",
+      "provider_display": "Kimi K3",
+      "plan": "API",
+      "cost_off_peak": 374.8,
+      "cost_peak": null,
+      "url": "https://platform.moonshot.cn/docs/pricing/chat",
+      "pricing_source": "Moonshot Kimi K3 官方 API",
+      "source_url": "https://platform.kimi.com/docs/pricing/chat-k3.md",
+      "rates_cny_per_m": {
+        "cache_read": 2.0,
+        "prompt": 20.0,
+        "completion": 100.0
+      },
+      "match": {
+        "model_family": "moonshotai/kimi-k3"
+      },
+      "rank": 13,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "gpt-plus-luna",
+      "type": "subscription",
+      "provider": "openai",
+      "provider_display": "GPT Plus",
+      "plan": "Luna Max",
+      "cost_off_peak": [
+        57.5,
+        805.6
+      ],
+      "cost_peak": null,
+      "monthly_cny": 145.0,
+      "monthly_usd": 20.0,
+      "quota_tokens": {
+        "monthly_min": 18000000,
+        "monthly_max": 252000000
+      },
+      "url": "https://chatgpt.com/codex/pricing",
+      "pricing_source": "OpenAI Codex 官方定价",
+      "source_url": "https://developers.openai.com/codex/pricing.md",
+      "api_reference_cost_per_100m": 27.6,
+      "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
+      "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
+      "match": {
+        "model_family": "openai/gpt-5.6-luna",
+        "exclude_slug_patterns": [
+          "-pro"
+        ]
+      },
+      "rank": 14,
+      "target_models": [
+        "openai/gpt-5.6-luna"
+      ]
+    },
+    {
+      "id": "gpt-plus-sol",
+      "type": "subscription",
+      "provider": "openai",
+      "provider_display": "GPT Plus",
+      "plan": "Sol",
+      "cost_off_peak": [
+        179.0,
+        2685.2
+      ],
+      "cost_peak": null,
+      "monthly_cny": 145.0,
+      "monthly_usd": 20.0,
+      "quota_tokens": {
+        "monthly_min": 5400000,
+        "monthly_max": 81000000
+      },
+      "url": "https://chatgpt.com/codex/pricing",
+      "pricing_source": "OpenAI Codex 官方定价",
+      "source_url": "https://developers.openai.com/codex/pricing.md",
+      "api_reference_cost_per_100m": 898.3,
+      "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
+      "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
+      "match": {
+        "model_family": "openai/gpt-5.6-sol",
+        "exclude_slug_patterns": [
+          "-pro"
+        ]
+      },
+      "rank": 15,
+      "target_models": [
+        "openai/gpt-5.6-sol"
+      ]
+    }
+  ]
+}

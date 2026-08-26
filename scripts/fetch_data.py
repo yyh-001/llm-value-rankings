@@ -1097,6 +1097,13 @@ def main():
     save_data(ranked, compare_day, avg_intelligence, avg_intelligence_count)
     fetch_repo_meta()
 
+    try:
+        from fetch_coding_plans import main as fetch_coding_plans_main
+
+        fetch_coding_plans_main(ranked)
+    except Exception as exc:
+        print(f"  Warning: coding plan update failed: {exc}")
+
     # Print top 10
     print("\n" + "=" * 60)
     print("Top 10 Best Value Models:")

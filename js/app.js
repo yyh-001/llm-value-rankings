@@ -4,6 +4,7 @@
 
 const CONFIG = {
     DATA_URL: 'data/models.json',
+    SUPPLIER_PLANS_URL: 'data/coding_plans.json',
     ITEMS_PER_PAGE: 20,
     GITHUB_REPO: 'yyh-001/llm-value-rankings',
     MOBILE_BREAKPOINT: 768,
@@ -22,6 +23,8 @@ const state = {
     rankComparedTo: null,
     isMobile: false,
     scoringMeta: null,
+    supplierPlansByModel: {},
+    supplierMethodology: null,
 };
 
 // Provider display names
@@ -255,10 +258,13 @@ function initI18n() {
 async function loadData() {
     try {
         const cacheKey = document.querySelector('meta[name="app-version"]')?.content || Date.now();
-        const response = await fetch(`${CONFIG.DATA_URL}?v=${cacheKey}`);
-        if (!response.ok) throw new Error('Data fetch failed');
-        const data = await response.json();
-        
+        const [modelsRes, plansRes] = await Promise.all([
+            fetch(`${CONFIG.DATA_URL}?v=${cacheKey}`),
+            fetch(`${CONFIG.SUPPLIER_PLANS_URL}?v=${cacheKey}`),
+        ]);
+        if (!modelsRes.ok) throw new Error('Data fetch failed');
+        const data = await modelsRes.json();
+
         state.models = data.models || [];
         state.filteredModels = [...state.models];
         state.rankComparedTo = data.rank_compared_to || null;
@@ -269,7 +275,16 @@ async function loadData() {
             avg_intelligence: data.avg_intelligence,
             avg_intelligence_count: data.avg_intelligence_count,
         };
-        
+
+        if (plansRes.ok) {
+            const plansData = await plansRes.json();
+            state.supplierPlansByModel = plansData.by_model || {};
+            state.supplierMethodology = plansData.methodology || null;
+        } else {
+            state.supplierPlansByModel = {};
+            state.supplierMethodology = null;
+        }
+
         updateStats();
         updateScoringDisplay();
         populateProviders();
@@ -509,6 +524,100 @@ function formatRankChangeText(model) {
     return `↓${Math.abs(model.rank_change)}`;
 }
 
+function getSuppliersForModel(modelId) {
+    return state.supplierPlansByModel[modelId] || [];
+}
+
+function formatSupplierCost(value) {
+    if (value == null) return '<span class="supplier-cost-dash">—</span>';
+    if (Array.isArray(value)) {
+        return `<span class="supplier-cost">≈¥${value[0]}–${value[1]}</span>`;
+    }
+    return `<span class="supplier-cost">≈¥${value}</span>`;
+}
+
+function renderSupplierRowsHtml(suppliers) {
+    if (!suppliers.length) return '';
+
+    const rows = suppliers.map((entry) => {
+        const rankClass = entry.rank === 1 ? 'supplier-rank-best' : '';
+        const label = [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
+        const badge = entry.badge ? `<span class="supplier-badge">${escapeHtml(entry.badge)}</span>` : '';
+        const link = entry.url
+            ? `<a class="supplier-pricing-link" href="${escapeAttr(entry.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(window.i18n.t('supplier_visit'))}</a>`
+            : '';
+        return `
+            <tr class="supplier-pricing-row ${rankClass}">
+                <td class="supplier-col-rank">${entry.rank}</td>
+                <td class="supplier-col-channel">
+                    <span class="supplier-channel-name">${escapeHtml(label)}</span>
+                    ${badge}
+                </td>
+                <td class="supplier-col-off">${formatSupplierCost(entry.cost_off_peak)}</td>
+                <td class="supplier-col-peak">${formatSupplierCost(entry.cost_peak)}</td>
+                <td class="supplier-col-link">${link}</td>
+            </tr>
+        `;
+    }).join('');
+
+    return `
+        <tr class="supplier-section-row">
+            <td colspan="10">
+                <div class="supplier-pricing-block">
+                    <div class="supplier-pricing-header">
+                        <span class="supplier-pricing-title">${window.i18n.t('supplier_pricing_title')}</span>
+                        <span class="supplier-pricing-meta">${window.i18n.t('supplier_pricing_unit')}</span>
+                    </div>
+                    <table class="supplier-pricing-table">
+                        <thead>
+                            <tr>
+                                <th>${window.i18n.t('supplier_th_rank')}</th>
+                                <th>${window.i18n.t('supplier_th_channel')}</th>
+                                <th>${window.i18n.t('supplier_th_off')}</th>
+                                <th>${window.i18n.t('supplier_th_peak')}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>${rows}</tbody>
+                    </table>
+                    <p class="supplier-pricing-note">${window.i18n.t('supplier_pricing_note')}</p>
+                </div>
+            </td>
+        </tr>
+    `;
+}
+
+function renderSupplierCardHtml(suppliers) {
+    if (!suppliers.length) return '';
+
+    const items = suppliers.map((entry) => {
+        const label = [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
+        const badge = entry.badge ? ` <span class="supplier-badge">${escapeHtml(entry.badge)}</span>` : '';
+        return `
+            <li class="supplier-card-item${entry.rank === 1 ? ' supplier-rank-best' : ''}">
+                <span class="supplier-card-rank">#${entry.rank}</span>
+                <div class="supplier-card-main">
+                    <span class="supplier-card-label">${escapeHtml(label)}${badge}</span>
+                    <span class="supplier-card-prices">
+                        ${formatSupplierCost(entry.cost_off_peak)}
+                        <span class="supplier-card-sep">/</span>
+                        ${formatSupplierCost(entry.cost_peak)}
+                    </span>
+                </div>
+            </li>
+        `;
+    }).join('');
+
+    return `
+        <div class="supplier-pricing-block supplier-pricing-card">
+            <div class="supplier-pricing-header">
+                <span class="supplier-pricing-title">${window.i18n.t('supplier_pricing_title')}</span>
+            </div>
+            <ul class="supplier-card-list">${items}</ul>
+        </div>
+    `;
+}
+
 function getPageModels() {
     const start = (state.currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
     const end = start + CONFIG.ITEMS_PER_PAGE;
@@ -539,6 +648,7 @@ function renderMobileCards() {
         const intelClass = getIntelligenceClass(model.intelligence_score);
         const priceClass = getPriceClass(model.pricing.blended);
         const valueScore = model.value_score || 0;
+        const suppliers = getSuppliersForModel(model.id);
 
         return `
             <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
@@ -573,6 +683,7 @@ function renderMobileCards() {
                         <strong class="price-display ${priceClass}">${formatPrice(model.pricing.blended)}</strong>
                     </span>
                 </div>
+                ${renderSupplierCardHtml(suppliers)}
                 <p class="model-card-hint">${window.i18n.t('card_tap_hint')}</p>
             </article>
         `;
@@ -624,9 +735,10 @@ function renderTable() {
         const valueScore = model.value_score || 0;
         const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
         const topRowClass = rank <= 3 ? 'top-row' : '';
+        const suppliers = getSuppliersForModel(model.id);
         
-        return `
-            <tr class="fade-in ${topRowClass}" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
+        const mainRow = `
+            <tr class="fade-in model-main-row ${topRowClass}" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
                 <td class="col-rank">
                     <span class="rank-badge ${rankClass}">${rank}</span>
                 </td>
@@ -665,6 +777,8 @@ function renderTable() {
                 </td>
             </tr>
         `;
+
+        return mainRow + renderSupplierRowsHtml(suppliers);
     }).join('');
     
     renderPagination();
@@ -791,6 +905,43 @@ function showModelDetail(modelId) {
                 </div>` : '';
     const todNoteHtml = hasTodPricing ? `
             <p class="detail-pricing-note">${window.i18n.t('pricing_tod_note')}</p>` : '';
+    const suppliers = getSuppliersForModel(modelId);
+    const supplierSectionHtml = suppliers.length ? `
+        <div class="detail-section">
+            <h3 class="detail-section-title">${window.i18n.t('supplier_pricing_title')}</h3>
+            <p class="detail-pricing-note">${window.i18n.t('supplier_pricing_note')}</p>
+            <div class="supplier-pricing-block supplier-pricing-modal">
+                <table class="supplier-pricing-table">
+                    <thead>
+                        <tr>
+                            <th>${window.i18n.t('supplier_th_rank')}</th>
+                            <th>${window.i18n.t('supplier_th_channel')}</th>
+                            <th>${window.i18n.t('supplier_th_off')}</th>
+                            <th>${window.i18n.t('supplier_th_peak')}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${suppliers.map((entry) => {
+                            const label = [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
+                            const badge = entry.badge ? `<span class="supplier-badge">${escapeHtml(entry.badge)}</span>` : '';
+                            const link = entry.url
+                                ? `<a class="supplier-pricing-link" href="${escapeAttr(entry.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(window.i18n.t('supplier_visit'))}</a>`
+                                : '';
+                            return `
+                                <tr class="supplier-pricing-row${entry.rank === 1 ? ' supplier-rank-best' : ''}">
+                                    <td class="supplier-col-rank">${entry.rank}</td>
+                                    <td class="supplier-col-channel"><span class="supplier-channel-name">${escapeHtml(label)}</span>${badge}</td>
+                                    <td class="supplier-col-off">${formatSupplierCost(entry.cost_off_peak)}</td>
+                                    <td class="supplier-col-peak">${formatSupplierCost(entry.cost_peak)}</td>
+                                    <td class="supplier-col-link">${link}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>` : '';
 
     elements.modalBody.innerHTML = `
         <div class="model-detail-hero ${rankClass}">
@@ -871,6 +1022,8 @@ function showModelDetail(modelId) {
             ${todNoteHtml}
         </div>
 
+        ${supplierSectionHtml}
+
         ${model.description ? `
         <div class="model-detail-desc">
             <h3 class="detail-section-title">${window.i18n.t('detail_about')}</h3>
@@ -906,6 +1059,9 @@ function initEventListeners() {
 
     // Model detail clicks via event delegation
     document.addEventListener('click', (e) => {
+        if (e.target.closest('.supplier-pricing-block, .supplier-pricing-link')) {
+            return;
+        }
         const trigger = e.target.closest('.btn-detail, .model-card, .podium-card');
         if (!trigger?.dataset.modelId) return;
         showModelDetail(trigger.dataset.modelId);

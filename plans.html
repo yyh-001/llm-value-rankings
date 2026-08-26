@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Plan 成本排行榜 | LLM Value Rankings</title>
+    <meta name="description" content="AI 编程套餐 Token 成本排行榜 — 对比 OpenCode、GPT Plus、Kimi、DeepSeek、GLM 等方案每亿 Token 成本。">
+    <meta name="theme-color" content="#0c1222">
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light' || theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="canonical" href="https://yyh-001.github.io/llm-value-rankings/plans.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/plans.css?v=20250826a">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'><rect width='32' height='32' rx='8' fill='%230c1222'/><path d='M8 20l4-8 4 5 4-9 4 12' stroke='%2360a5fa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+    <div class="plans-bg" aria-hidden="true"></div>
+
+    <header class="plans-header">
+        <div class="plans-header-inner">
+            <a class="plans-logo" href="index.html">
+                <span class="plans-logo-dot"></span>
+                <span>LLM Rankings</span>
+            </a>
+            <nav class="plans-nav">
+                <a href="index.html" data-i18n="nav_models">模型性价比</a>
+                <a href="plans.html" class="active" aria-current="page" data-i18n="nav_plans">Coding Plan</a>
+            </nav>
+            <div class="plans-actions">
+                <button type="button" class="plans-icon-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z"/>
+                    </svg>
+                </button>
+                <button type="button" class="plans-icon-btn" id="lang-toggle" aria-label="Switch language">
+                    <span id="lang-label">EN</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="plans-main">
+        <section class="plans-hero">
+            <p class="plans-eyebrow" data-i18n="eyebrow">Coding Token 成本排行榜</p>
+            <h1 class="plans-title" data-i18n="title">AI 编程套餐<br>每亿 Token 要花多少钱？</h1>
+            <div class="plans-meta">
+                <span data-i18n="meta_unit">单位：人民币 / 每 1 亿 Token</span>
+                <span class="plans-meta-sep" aria-hidden="true">·</span>
+                <span data-i18n="meta_cache">统一折算：Cache 命中率 95%</span>
+                <span class="plans-meta-sep" aria-hidden="true">·</span>
+                <span data-i18n="meta_sort">按高峰价格从低到高排序</span>
+            </div>
+            <p class="plans-updated" id="last-updated">—</p>
+        </section>
+
+        <section class="plans-board" aria-labelledby="board-title">
+            <h2 id="board-title" class="visually-hidden" data-i18n="board_title">排行榜</h2>
+            <div class="plans-table-wrap">
+                <table class="plans-table">
+                    <thead>
+                        <tr>
+                            <th class="col-rank" data-i18n="th_rank">排名</th>
+                            <th class="col-plan" data-i18n="th_plan">方案</th>
+                            <th class="col-off" data-i18n="th_off">低峰 / 最省</th>
+                            <th class="col-peak" data-i18n="th_peak">高峰 / 常规</th>
+                        </tr>
+                    </thead>
+                    <tbody id="plans-body">
+                        <tr>
+                            <td colspan="4" class="plans-loading" data-i18n="loading">加载中…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="plans-cards" id="plans-cards" aria-live="polite"></div>
+        </section>
+
+        <section class="plans-summary" id="plans-summary" hidden>
+            <div class="plans-summary-card">
+                <span class="plans-summary-label" data-i18n="cheapest">最便宜</span>
+                <strong id="summary-cheapest">—</strong>
+            </div>
+            <div class="plans-summary-card">
+                <span class="plans-summary-label" data-i18n="runner_up">次低</span>
+                <strong id="summary-runner-up">—</strong>
+            </div>
+        </section>
+
+        <section class="plans-notes">
+            <h3 data-i18n="notes_title">说明</h3>
+            <ul>
+                <li data-i18n="note_dash">「—」表示该方案无单独高峰定价</li>
+                <li data-i18n="note_kimi">Kimi 256K 与 1M 上下文版本分开列出</li>
+                <li data-i18n="note_flat">GPT Plus、Kimi 等订阅制方案按套餐额度折算有效单价</li>
+                <li data-i18n="note_api">DeepSeek API 使用官方高峰/低峰刊例价</li>
+                <li data-i18n="note_models">想看模型综合能力排名？<a href="index.html">前往模型性价比榜 →</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="plans-footer">
+        <p>
+            <a href="https://github.com/yyh-001/llm-value-rankings" target="_blank" rel="noopener">GitHub</a>
+            <span aria-hidden="true">·</span>
+            <span data-i18n="footer_data">数据可审计 · 开源可复现</span>
+        </p>
+    </footer>
+
+    <script src="js/plans.js?v=20250826a"></script>
+</body>
+</html>

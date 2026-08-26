@@ -206,6 +206,30 @@ a:hover {
     align-items: center;
     justify-content: space-between;
     height: var(--header-height);
+    gap: 1rem;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-right: auto;
+    margin-left: 1.25rem;
+}
+
+.site-nav-link {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    padding: 0.35rem 0.7rem;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+}
+
+.site-nav-link:hover,
+.site-nav-link.active {
+    color: var(--text-primary);
+    background: var(--accent-glow);
+    opacity: 1;
 }
 
 .logo {
@@ -930,6 +954,175 @@ tbody tr.top-row .col-detail {
 
 tbody tr.top-row:hover .col-detail {
     background: var(--sticky-bg-hover);
+}
+
+/* Supplier / coding-plan pricing nested under model rows */
+.supplier-section-row td {
+    padding: 0 !important;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elevated);
+}
+
+.supplier-pricing-block {
+    padding: 0.75rem 1rem 0.85rem 3.25rem;
+    border-left: 3px solid var(--accent);
+}
+
+.supplier-pricing-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.supplier-pricing-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.supplier-pricing-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.supplier-pricing-note {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+.supplier-pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.supplier-pricing-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.supplier-pricing-table td {
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+    vertical-align: middle;
+}
+
+.supplier-pricing-row:last-child td {
+    border-bottom: none;
+}
+
+.supplier-pricing-row.supplier-rank-best {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.supplier-col-rank {
+    width: 2rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.supplier-channel-name {
+    font-weight: 500;
+}
+
+.supplier-badge {
+    display: inline-block;
+    margin-left: 0.35rem;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.68rem;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.supplier-cost {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+.supplier-cost-dash {
+    color: var(--text-muted);
+}
+
+.supplier-pricing-link {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.supplier-pricing-link:hover {
+    text-decoration: underline;
+}
+
+.supplier-pricing-card {
+    margin-top: 0.75rem;
+    padding-left: 0.75rem;
+    border-left-width: 2px;
+}
+
+.supplier-card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.supplier-card-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.supplier-card-item:last-child {
+    border-bottom: none;
+}
+
+.supplier-card-rank {
+    flex-shrink: 0;
+    width: 1.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.supplier-card-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.supplier-card-label {
+    font-size: 0.8rem;
+    line-height: 1.35;
+}
+
+.supplier-card-prices {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.supplier-card-sep {
+    margin: 0 0.2rem;
+    color: var(--text-muted);
+}
+
+.supplier-pricing-modal {
+    padding-left: 0;
+    border-left: none;
 }
 
 [data-theme="dark"] .col-value,
@@ -2105,6 +2298,8 @@ body.modal-open {
         padding: 0.75rem 0;
         gap: 0.75rem;
     }
+
+    .site-nav { display: none; }
 
     .logo-text {
         font-size: 0.8rem;
