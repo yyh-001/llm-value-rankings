@@ -720,11 +720,17 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
     Build capability scores from OpenRouter model records and benchmarks API.
 
     Uses AA intelligence_index; prefers per-model embedded scores, exact slug fallback only.
+    The model catalog already contains embedded scores for many models, so those
+    scores remain usable when the authenticated benchmarks endpoint is unavailable.
     """
+    embedded_map = build_intelligence_map([], openrouter_models)
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        print("  Warning: OPENROUTER_API_KEY not set; skipping OpenRouter benchmark scores")
-        return {}
+        print(
+            "  Warning: OPENROUTER_API_KEY not set; "
+            f"using {len(embedded_map)} embedded benchmark scores"
+        )
+        return embedded_map
 
     print(f"Fetching AA {AA_CAPABILITY_FIELD} from OpenRouter...")
     session = make_http_session()
@@ -742,7 +748,12 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
         payload = response.json()
     except Exception as exc:
         print(f"  Error fetching OpenRouter benchmarks: {exc}")
-        return {}
+        if embedded_map:
+            print(
+                "  Falling back to "
+                f"{len(embedded_map)} embedded benchmark scores"
+            )
+        return embedded_map
 
     rows = payload.get("data", [])
     intelligence_map = build_intelligence_map(rows, openrouter_models)
@@ -1069,6 +1080,12 @@ def main():
     intelligence_map = fetch_intelligence_scores(openrouter_models)
     avg_intelligence = compute_avg_intelligence(intelligence_map)
     avg_intelligence_count = len(intelligence_map)
+    if avg_intelligence_count == 0:
+        raise RuntimeError(
+            "No Artificial Analysis intelligence scores were available; "
+            "refusing to overwrite the published data. Check "
+            "OPENROUTER_API_KEY and the OpenRouter benchmarks endpoint."
+        )
 
     candidate_ids = []
     seen_ids = set()
@@ -1088,6 +1105,12 @@ def main():
     # Process and rank
     processed = process_models(openrouter_models, intelligence_map, endpoints_map, page_stats_map)
     ranked = rank_models(processed)
+    ranked_count = sum(1 for model in ranked if model.get("rank") is not None)
+    if ranked_count == 0:
+        raise RuntimeError(
+            "No models were ranked; refusing to overwrite the published data. "
+            "Check pricing, throughput, and intelligence-score inputs."
+        )
 
     history = load_rank_history()
     seed_yesterday_from_previous_output(history)
