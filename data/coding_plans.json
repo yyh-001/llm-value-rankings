@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-26T09:59:20.605247Z",
+  "updated_at": "2026-08-26T10:03:29.923004Z",
   "methodology": {
     "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
     "cache_hit_rate": 0.95,
@@ -263,6 +263,47 @@
         "rank": 3
       }
     ],
+    "z-ai/glm-5.3": [
+      {
+        "id": "glm-5-3-max",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Max",
+        "type": "subscription",
+        "badge": "¥1078",
+        "cost_off_peak": 18.4,
+        "cost_peak": 36.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "glm-5-3-pro",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Pro",
+        "type": "subscription",
+        "badge": "¥538",
+        "cost_off_peak": 21.4,
+        "cost_peak": 42.8,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "glm-5-3-lite",
+        "provider": "zhipu",
+        "provider_display": "GLM",
+        "plan": "5.3 Lite",
+        "type": "subscription",
+        "badge": "¥118",
+        "cost_off_peak": 28.1,
+        "cost_peak": 56.7,
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "pricing_source": "智谱 GLM Coding Plan 官方文档",
+        "rank": 3
+      }
+    ],
     "z-ai/glm-5.1": [
       {
         "id": "glm-5-3-max",
@@ -345,7 +386,7 @@
         "rank": 3
       }
     ],
-    "deepseek/deepseek-v4-pro": [
+    "deepseek/deepseek-v4-pro-0813": [
       {
         "id": "deepseek-v4-pro-0813",
         "provider": "deepseek",
@@ -360,7 +401,7 @@
         "rank": 1
       }
     ],
-    "deepseek/deepseek-v4-pro-0813": [
+    "deepseek/deepseek-v4-pro": [
       {
         "id": "deepseek-v4-pro-0813",
         "provider": "deepseek",
@@ -583,6 +624,7 @@
       "rank": 6,
       "target_models": [
         "z-ai/glm-5.2",
+        "z-ai/glm-5.3",
         "z-ai/glm-5.1",
         "z-ai/glm-5"
       ]
@@ -623,6 +665,7 @@
       "rank": 7,
       "target_models": [
         "z-ai/glm-5.2",
+        "z-ai/glm-5.3",
         "z-ai/glm-5.1",
         "z-ai/glm-5"
       ]
@@ -688,6 +731,7 @@
       "rank": 9,
       "target_models": [
         "z-ai/glm-5.2",
+        "z-ai/glm-5.3",
         "z-ai/glm-5.1",
         "z-ai/glm-5"
       ]
@@ -759,8 +803,8 @@
       },
       "rank": 12,
       "target_models": [
-        "deepseek/deepseek-v4-pro",
-        "deepseek/deepseek-v4-pro-0813"
+        "deepseek/deepseek-v4-pro-0813",
+        "deepseek/deepseek-v4-pro"
       ]
     },
     {
@@ -807,7 +851,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_cost_per_100m": 27.6,
+      "api_reference_cost_per_100m": 36.7,
       "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
       "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
       "match": {
@@ -841,7 +885,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_cost_per_100m": 898.3,
+      "api_reference_cost_per_100m": 629.6,
       "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
       "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
       "match": {
