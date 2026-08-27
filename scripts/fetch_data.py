@@ -55,22 +55,6 @@ DEEPSEEK_PEAK_HOURS = 7
 DEEPSEEK_OFF_PEAK_HOURS = 17
 # Official provider API prices (CNY / 1M tokens) when OpenRouter resell pricing differs.
 OFFICIAL_PRICING_CNY_PER_M = {
-    "deepseek/deepseek-v4-flash": {
-        "peak": {"prompt": 3.0, "cache_read": 0.10, "completion": 9.0},
-        "off_peak": {"prompt": 1.5, "cache_read": 0.05, "completion": 4.5},
-        "peak_hours": DEEPSEEK_PEAK_HOURS,
-        "off_peak_hours": DEEPSEEK_OFF_PEAK_HOURS,
-        "source_label": "DeepSeek 官方 API",
-        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-    },
-    "deepseek/deepseek-v4-pro": {
-        "peak": {"prompt": 9.0, "cache_read": 0.30, "completion": 27.0},
-        "off_peak": {"prompt": 4.5, "cache_read": 0.15, "completion": 13.5},
-        "peak_hours": DEEPSEEK_PEAK_HOURS,
-        "off_peak_hours": DEEPSEEK_OFF_PEAK_HOURS,
-        "source_label": "DeepSeek 官方 API",
-        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-    },
     "xiaomi/mimo-v2.5-pro": {
         "prompt": 3.0,
         "cache_read": 0.025,
@@ -79,12 +63,6 @@ OFFICIAL_PRICING_CNY_PER_M = {
         "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
     },
 }
-
-# Versioned OpenRouter slugs that share official API pricing with a base model id.
-OFFICIAL_PRICING_FAMILY_PREFIXES = (
-    ("deepseek/deepseek-v4-flash", "deepseek/deepseek-v4-flash"),
-    ("deepseek/deepseek-v4-pro", "deepseek/deepseek-v4-pro"),
-)
 
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
 OPENROUTER_MODEL_PAGE = "https://openrouter.ai/{model_id}"
@@ -304,26 +282,9 @@ def time_weighted_cny_rates(spec):
     }
 
 
-def resolve_official_pricing_key(model_id):
-    """Map versioned provider slugs to configured official pricing keys."""
-    if model_id in OFFICIAL_PRICING_CNY_PER_M:
-        return model_id
-
-    normalized = model_id.lstrip("~")
-    if normalized in OFFICIAL_PRICING_CNY_PER_M:
-        return normalized
-
-    for prefix, key in OFFICIAL_PRICING_FAMILY_PREFIXES:
-        if normalized == prefix or normalized.startswith(f"{prefix}-"):
-            if key in OFFICIAL_PRICING_CNY_PER_M:
-                return key
-    return None
-
-
 def apply_official_pricing_override(model_id, pricing_payload):
     """Replace pricing with official provider API rates when configured."""
-    spec_key = resolve_official_pricing_key(model_id)
-    spec = OFFICIAL_PRICING_CNY_PER_M.get(spec_key) if spec_key else None
+    spec = OFFICIAL_PRICING_CNY_PER_M.get(model_id)
     if not spec:
         return pricing_payload
 

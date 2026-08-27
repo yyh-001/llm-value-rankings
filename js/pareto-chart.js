@@ -6,7 +6,6 @@
     const PADDING = { top: 36, right: 32, bottom: 58, left: 62 };
     const PADDING_MOBILE = { top: 40, right: 28, bottom: 72, left: 54 };
     const MOBILE_BREAKPOINT = 768;
-    const MOBILE_CHART_MIN_WIDTH = 720;
     const TOP_RANK_COLORS = { 1: '#f0c14b', 2: '#c8c8d4', 3: '#cd7f32' };
     const USD_TO_CNY = 7.25;
 
@@ -62,13 +61,13 @@
 
     function getChartSize() {
         const wrapW = getContainerWidth();
+        const width = Math.max(320, wrapW);
         if (isMobile()) {
             return {
-                width: Math.max(MOBILE_CHART_MIN_WIDTH, wrapW),
-                height: 520,
+                width,
+                height: Math.max(400, Math.min(520, width * 0.92)),
             };
         }
-        const width = Math.max(480, wrapW);
         return {
             width,
             height: Math.max(380, Math.min(500, width * 0.42)),
@@ -131,6 +130,37 @@
     function shortName(name) {
         const cleaned = (name || '').replace(/^[^:]+:\s*/, '');
         return cleaned.length > 22 ? `${cleaned.slice(0, 20)}…` : cleaned;
+    }
+
+    function chartLabel(name, mobile) {
+        const cleaned = (name || '').replace(/^[^:]+:\s*/, '');
+        const max = mobile ? 11 : 15;
+        return cleaned.length > max ? `${cleaned.slice(0, max - 1)}…` : cleaned;
+    }
+
+    function frontierLabelPosition(cx, cy, index, isTop3, pad, innerW, dotScale) {
+        const rightZone = pad.left + innerW * 0.62;
+        const anchor = cx >= rightZone ? 'end' : 'start';
+        const x = cx >= rightZone ? cx - 7 : cx + 7;
+        let y = cy - 10 * dotScale;
+        if (isTop3) {
+            y = cy + 18 * dotScale;
+        } else if (index % 2 === 1) {
+            y = cy + 14 * dotScale;
+        }
+        return { x, y, anchor };
+    }
+
+    function renderFrontierLabels(frontier, layout, xScale, yScale, pad, innerW, dotScale) {
+        return frontier.map((p, index) => {
+            const cx = xScale(p.x);
+            const cy = yScale(p.y);
+            const rank = p.model.rank;
+            const isTop3 = rank <= 3;
+            const { x, y, anchor } = frontierLabelPosition(cx, cy, index, isTop3, pad, innerW, dotScale);
+            const name = chartLabel(p.model.name, layout.mobile);
+            return `<text class="pareto-frontier-label" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}">${escapeHtml(name)}</text>`;
+        }).join('');
     }
 
     function rankColor(rank) {
@@ -250,13 +280,14 @@
             `;
         }).join('');
 
+        const frontierLabels = renderFrontierLabels(frontier, layout, xScale, yScale, pad, innerW, dotScale);
+
         const xAxisLabel = layout.mobile
             ? (isZh() ? t('pareto_axis_price_short') : t('pareto_axis_price_short'))
             : t('pareto_axis_price');
         const svgClass = layout.mobile ? 'pareto-svg pareto-svg-mobile' : 'pareto-svg';
-        const svgSize = layout.mobile
-            ? `width="${width}" height="${height}"`
-            : `width="100%" height="auto" preserveAspectRatio="xMidYMid meet"`;
+        const svgSize = 'width="100%" height="auto" preserveAspectRatio="xMidYMid meet"';
+        const frontierFilter = layout.mobile ? '' : ' filter="url(#pareto-glow)"';
 
         return `
             <svg class="${svgClass}" viewBox="0 0 ${width} ${height}" ${svgSize} role="img" aria-label="${escapeHtml(t('pareto_title'))}">
@@ -280,8 +311,9 @@
                 <line class="pareto-axis" x1="${pad.left}" y1="${baseY}" x2="${pad.left + innerW}" y2="${baseY}" />
                 <line class="pareto-axis" x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${baseY}" />
                 ${frontierArea ? `<path class="pareto-frontier-area" d="${frontierArea}" />` : ''}
-                ${frontierPath ? `<path class="pareto-frontier" d="${frontierPath}" filter="url(#pareto-glow)" />` : ''}
+                ${frontierPath ? `<path class="pareto-frontier" d="${frontierPath}"${frontierFilter} />` : ''}
                 ${dots}
+                <g class="pareto-frontier-labels" aria-hidden="true">${frontierLabels}</g>
                 <text class="pareto-axis-title" x="${pad.left + innerW / 2}" y="${height - 8}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
                 <text class="pareto-axis-title pareto-axis-title-y" x="18" y="${pad.top + innerH / 2}" text-anchor="middle" transform="rotate(-90 18 ${pad.top + innerH / 2})">${escapeHtml(t('pareto_axis_intelligence'))}</text>
                 <text class="pareto-hint-corner" x="${pad.left + 10}" y="${pad.top + 16}" text-anchor="start">${escapeHtml(t('pareto_better_corner_price'))}</text>
@@ -328,9 +360,9 @@
 
         elements.wrap.classList.toggle('is-mobile', layout.mobile);
         if (elements.scrollHint) {
-            elements.scrollHint.hidden = !layout.mobile;
+            elements.scrollHint.hidden = true;
         }
-        elements.canvas.style.minWidth = layout.mobile ? `${width}px` : '';
+        elements.canvas.style.minWidth = '';
         elements.canvas.innerHTML = renderSvg(points, frontier, layout);
         bindPointEvents();
     }
@@ -345,6 +377,15 @@
         if (!elements.section) return;
 
         elements.wrap?.addEventListener('mouseleave', hideTooltip);
+        let resizeFrame = 0;
+        if (elements.wrap && typeof ResizeObserver !== 'undefined') {
+            const observer = new ResizeObserver(() => {
+                if (!chartModels.length) return;
+                cancelAnimationFrame(resizeFrame);
+                resizeFrame = requestAnimationFrame(() => paint());
+            });
+            observer.observe(elements.wrap);
+        }
         window.addEventListener('resize', () => {
             if (chartModels.length) paint();
         });

@@ -16,7 +16,6 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from fetch_data import (  # noqa: E402
     DEFAULT_CACHE_HIT_RATE,
-    OFFICIAL_PRICING_CNY_PER_M,
     USD_TO_CNY,
     blend_token_price,
     cny_per_m_to_usd_per_m,
@@ -27,6 +26,22 @@ from fetch_data import (  # noqa: E402
 OUTPUT_FILE = Path(__file__).parent.parent / "data" / "coding_plans.json"
 CACHE_DIR = Path(__file__).parent / "_vendor_cache"
 WEEKS_PER_MONTH = 52 / 12
+
+# DeepSeek official API (shown in channel pricing, not main OpenRouter leaderboard price).
+DEEPSEEK_OFFICIAL_CNY_PER_M = {
+    "deepseek/deepseek-v4-flash": {
+        "peak": {"prompt": 3.0, "cache_read": 0.10, "completion": 9.0},
+        "off_peak": {"prompt": 1.5, "cache_read": 0.05, "completion": 4.5},
+        "source_label": "DeepSeek 官方 API",
+        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+    },
+    "deepseek/deepseek-v4-pro": {
+        "peak": {"prompt": 9.0, "cache_read": 0.30, "completion": 27.0},
+        "off_peak": {"prompt": 4.5, "cache_read": 0.15, "completion": 13.5},
+        "source_label": "DeepSeek 官方 API",
+        "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+    },
+}
 USER_AGENT = (
     "LLM-Value-Rankings/1.0 (+https://yyh-001.github.io/llm-value-rankings/)"
 )
@@ -734,7 +749,7 @@ def build_deepseek_api_plans() -> List[Dict[str, Any]]:
     ]
     plans = []
     for plan_id, model_id, label in specs:
-        pricing = OFFICIAL_PRICING_CNY_PER_M.get(model_id)
+        pricing = DEEPSEEK_OFFICIAL_CNY_PER_M.get(model_id)
         if not pricing or "peak" not in pricing:
             continue
         off = pricing["off_peak"]

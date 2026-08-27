@@ -1,615 +1,2337 @@
-{
-  "updated_at": "2026-08-27T03:28:49.975931Z",
+﻿{
+  "updated_at": "2026-08-27T04:29:19.528931Z",
   "methodology": {
-    "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
+    "unit": "effective blended price (楼/M tokens, 95% cache, 3:1 in/out)",
     "cache_hit_rate": 0.95,
     "token_mix": "3:1 input:output for API; subscription uses vendor quota",
-    "sort_by": "peak cost ascending (flat-rate plans use off-peak only)",
+    "sort_by": "effective blended cost ascending",
+    "deepseek_api": "24h time-weighted peak/off-peak average (7h peak + 17h off-peak CST)",
+    "codex_plus": "5h rolling window max msgs 脳 (168h/5h windows per week) 脳 weeks/month; additional weekly caps per OpenAI docs are not public",
+    "target_scope": "all ranked leaderboard models",
+    "match_strategy": "vendor plan model slugs/labels matched to live ranked model ids",
+    "excluded_plans": "Zhipu GLM Coding Plan; Kimi membership/API official plans (not comparable on this leaderboard)",
     "usd_to_cny": 7.25,
     "weeks_per_month": 4.333
   },
   "sources": {
     "opencode_go": "https://opencode.ai/docs/go.md",
-    "glm_overview": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
-    "glm_pricing": "https://www.bigmodel.cn/glm-coding",
-    "kimi_k3_api": "https://platform.kimi.com/docs/pricing/chat-k3.md",
-    "kimi_membership": "https://www.kimi.com/en/help/membership/membership-pricing",
     "commandcode_goat": "https://commandcode.ai/docs/plans/goat",
     "codex_pricing": "https://developers.openai.com/codex/pricing.md"
   },
-  "total_plans": 12,
+  "total_plans": 59,
   "by_model": {
-    "deepseek/deepseek-v4-flash-0731": [
+    "xiaomi/mimo-v2.5": [
       {
-        "id": "commandcode-goat-ds-flash",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · DS V4 Flash",
+        "id": "opencode-go-mimo-v2.5",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.5",
         "type": "subscription",
-        "badge": "$10",
-        "cost_off_peak": 1.6,
-        "cost_peak": 3.1,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
+        "badge": "$10/鏈?,
+        "cost": 0.0066,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
         "rank": 1
       },
       {
-        "id": "opencode-go-ds-flash",
+        "id": "commandcode-goat-mimo-v2.5",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 MiMo V2.5",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0102,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "deepseek/deepseek-v4-flash-0731": [
+      {
+        "id": "commandcode-goat-deepseek-v4-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 DeepSeek V4 Flash (latest)",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.011,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-deepseek-v4-flash",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
-        "plan": "DS V4 Flash",
+        "plan": "DeepSeek V4 Flash",
         "type": "subscription",
-        "badge": "$10/月",
-        "cost_off_peak": 2.7,
-        "cost_peak": 5.3,
+        "badge": "$10/鏈?,
+        "cost": 0.0266,
         "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
         "rank": 2
       },
       {
-        "id": "deepseek-v4-flash-0731",
+        "id": "deepseek-api-deepseek-v4-flash",
         "provider": "deepseek",
         "provider_display": "DeepSeek",
-        "plan": "V4 Flash 0731",
+        "plan": "V4 Flash",
         "type": "api",
         "badge": null,
-        "cost_off_peak": 16.8,
-        "cost_peak": 33.6,
+        "cost": 1.5718,
         "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
+        "pricing_source": "DeepSeek 瀹樻柟 API",
         "rank": 3
       }
     ],
     "deepseek/deepseek-v4-flash": [
       {
-        "id": "commandcode-goat-ds-flash",
+        "id": "commandcode-goat-deepseek-v4-flash",
         "provider": "commandcode",
         "provider_display": "Command Code",
-        "plan": "GOAT · DS V4 Flash",
+        "plan": "GOAT 路 DeepSeek V4 Flash (latest)",
         "type": "subscription",
         "badge": "$10",
-        "cost_off_peak": 1.6,
-        "cost_peak": 3.1,
+        "cost": 0.011,
         "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
         "rank": 1
       },
       {
-        "id": "opencode-go-ds-flash",
+        "id": "opencode-go-deepseek-v4-flash",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
-        "plan": "DS V4 Flash",
+        "plan": "DeepSeek V4 Flash",
         "type": "subscription",
-        "badge": "$10/月",
-        "cost_off_peak": 2.7,
-        "cost_peak": 5.3,
+        "badge": "$10/鏈?,
+        "cost": 0.0266,
         "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
         "rank": 2
       },
       {
-        "id": "deepseek-v4-flash-0731",
+        "id": "deepseek-api-deepseek-v4-flash",
         "provider": "deepseek",
         "provider_display": "DeepSeek",
-        "plan": "V4 Flash 0731",
+        "plan": "V4 Flash",
         "type": "api",
         "badge": null,
-        "cost_off_peak": 16.8,
-        "cost_peak": 33.6,
+        "cost": 1.5718,
         "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
+        "pricing_source": "DeepSeek 瀹樻柟 API",
         "rank": 3
       }
     ],
-    "~deepseek/deepseek-v4-flash-latest": [
+    "meituan/longcat-2.0": [
       {
-        "id": "commandcode-goat-ds-flash",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · DS V4 Flash",
-        "type": "subscription",
-        "badge": "$10",
-        "cost_off_peak": 1.6,
-        "cost_peak": 3.1,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-ds-flash",
+        "id": "opencode-go-longcat-2.0",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
-        "plan": "DS V4 Flash",
+        "plan": "LongCat-2.0",
         "type": "subscription",
-        "badge": "$10/月",
-        "cost_off_peak": 2.7,
-        "cost_peak": 5.3,
+        "badge": "$10/鏈?,
+        "cost": 0.0141,
         "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "deepseek-v4-flash-0731",
-        "provider": "deepseek",
-        "provider_display": "DeepSeek",
-        "plan": "V4 Flash 0731",
-        "type": "api",
-        "badge": null,
-        "cost_off_peak": 16.8,
-        "cost_peak": 33.6,
-        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
-        "rank": 3
-      }
-    ],
-    "moonshotai/kimi-k3": [
-      {
-        "id": "kimi-k3-allegretto-256k",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "Allegretto 256K",
-        "type": "subscription",
-        "badge": "¥199",
-        "cost_off_peak": 26.6,
-        "cost_peak": null,
-        "url": "https://www.kimi.com/code",
-        "pricing_source": "Kimi 会员定价 + 官方 API 价",
-        "rank": 1
-      },
-      {
-        "id": "kimi-k3-allegro-256k",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "Allegro 256K",
-        "type": "subscription",
-        "badge": "¥699",
-        "cost_off_peak": 31.3,
-        "cost_peak": null,
-        "url": "https://www.kimi.com/code",
-        "pricing_source": "Kimi 会员定价 + 官方 API 价",
-        "rank": 2
-      },
-      {
-        "id": "kimi-k3-allegretto-1m",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "Allegretto 1M",
-        "type": "subscription",
-        "badge": "¥199",
-        "cost_off_peak": 53.2,
-        "cost_peak": null,
-        "url": "https://www.kimi.com/code",
-        "pricing_source": "Kimi 会员定价 + 官方 API 价",
-        "rank": 3
-      },
-      {
-        "id": "kimi-k3-allegro-1m",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "Allegro 1M",
-        "type": "subscription",
-        "badge": "¥699",
-        "cost_off_peak": 62.5,
-        "cost_peak": null,
-        "url": "https://www.kimi.com/code",
-        "pricing_source": "Kimi 会员定价 + 官方 API 价",
-        "rank": 4
-      },
-      {
-        "id": "kimi-k3-moderato-256k",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "Moderato 256K",
-        "type": "subscription",
-        "badge": "¥99",
-        "cost_off_peak": 66.2,
-        "cost_peak": null,
-        "url": "https://www.kimi.com/code",
-        "pricing_source": "Kimi 会员定价 + 官方 API 价",
-        "rank": 5
-      },
-      {
-        "id": "kimi-k3-api",
-        "provider": "moonshot",
-        "provider_display": "Kimi K3",
-        "plan": "API",
-        "type": "api",
-        "badge": null,
-        "cost_off_peak": 374.8,
-        "cost_peak": null,
-        "url": "https://platform.moonshot.cn/docs/pricing/chat",
-        "pricing_source": "Moonshot Kimi K3 官方 API",
-        "rank": 6
-      }
-    ],
-    "deepseek/deepseek-v4-pro-0813": [
-      {
-        "id": "deepseek-v4-pro-0813",
-        "provider": "deepseek",
-        "provider_display": "DeepSeek",
-        "plan": "V4 Pro 0813",
-        "type": "api",
-        "badge": null,
-        "cost_off_peak": 50.3,
-        "cost_peak": 100.7,
-        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
-        "rank": 1
-      }
-    ],
-    "deepseek/deepseek-v4-pro": [
-      {
-        "id": "deepseek-v4-pro-0813",
-        "provider": "deepseek",
-        "provider_display": "DeepSeek",
-        "plan": "V4 Pro 0813",
-        "type": "api",
-        "badge": null,
-        "cost_off_peak": 50.3,
-        "cost_peak": 100.7,
-        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
         "rank": 1
       }
     ],
     "openai/gpt-5.6-luna": [
       {
-        "id": "gpt-plus-luna",
+        "id": "gpt-plus-gpt-5.6-luna",
         "provider": "openai",
         "provider_display": "GPT Plus",
-        "plan": "Luna Max",
+        "plan": "GPT-5.6 Luna",
         "type": "subscription",
         "badge": null,
-        "cost_off_peak": [
-          57.5,
-          805.6
-        ],
-        "cost_peak": null,
+        "cost": 0.0199,
         "url": "https://chatgpt.com/codex/pricing",
-        "pricing_source": "OpenAI Codex 官方定价",
+        "pricing_source": "OpenAI Codex 瀹樻柟瀹氫环",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-gpt-5.6-luna",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 GPT-5.6 Luna",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0956,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      },
+      {
+        "id": "opencode-go-gpt-5.6-luna",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GPT 5.6 Luna",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.1381,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 3
+      }
+    ],
+    "xiaomi/mimo-v2.5-pro": [
+      {
+        "id": "commandcode-goat-mimo-v2.5-pro",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 MiMo V2.5 Pro",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0292,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-mimo-v2.5-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.5-Pro",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.0511,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "z-ai/glm-5.3-flash": [
+      {
+        "id": "commandcode-goat-glm-5.3-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 GLM-5.3 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0547,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-glm-5.3-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GLM-5.3-Flash",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.1633,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "qwen/qwen3.7-plus": [
+      {
+        "id": "opencode-go-qwen3.7-plus",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.7 Plus",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.0582,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-qwen-3.7-plus",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Qwen 3.7 Plus",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.1768,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "qwen/qwen3.8-27b": [
+      {
+        "id": "commandcode-goat-qwen-3.8-27b",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Qwen 3.8 27B",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0592,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "minimax/minimax-m2.7": [
+      {
+        "id": "opencode-go-minimax-m2.7",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiniMax M2.7",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.0769,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "qwen/qwen3.6-plus": [
+      {
+        "id": "opencode-go-qwen3.6-plus",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.6 Plus",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.0771,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-qwen-3.6-plus",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Qwen 3.6 Plus",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.2285,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "minimax/minimax-m3": [
+      {
+        "id": "opencode-go-minimax-m3",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiniMax M3",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.0799,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-minimax-m3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 MiniMax M3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.092,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "deepseek/deepseek-v4-pro-0813": [
+      {
+        "id": "commandcode-goat-deepseek-v4-pro",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 DeepSeek V4 Pro (latest)",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0884,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-deepseek-v4-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4 Pro",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.1679,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      },
+      {
+        "id": "deepseek-api-deepseek-v4-pro",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Pro",
+        "type": "api",
+        "badge": null,
+        "cost": 4.7154,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 瀹樻柟 API",
+        "rank": 3
+      }
+    ],
+    "deepseek/deepseek-v4-pro": [
+      {
+        "id": "commandcode-goat-deepseek-v4-pro",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 DeepSeek V4 Pro (latest)",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0884,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-deepseek-v4-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4 Pro",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.1679,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      },
+      {
+        "id": "deepseek-api-deepseek-v4-pro",
+        "provider": "deepseek",
+        "provider_display": "DeepSeek",
+        "plan": "V4 Pro",
+        "type": "api",
+        "badge": null,
+        "cost": 4.7154,
+        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "pricing_source": "DeepSeek 瀹樻柟 API",
+        "rank": 3
+      }
+    ],
+    "stepfun/step-3.7-flash": [
+      {
+        "id": "commandcode-goat-step-3.7-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Step 3.7 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.1698,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "google/gemini-3.7-flash": [
+      {
+        "id": "commandcode-goat-gemini-3.7-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Gemini 3.7 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.1813,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "moonshotai/kimi-k2.7-code": [
+      {
+        "id": "opencode-go-kimi-k2.7-code",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K2.7 Code",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.1916,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-kimi-k2.7-code",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Kimi K2.7 Code",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.2386,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "moonshotai/kimi-k2.6": [
+      {
+        "id": "opencode-go-kimi-k2.6",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K2.6",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.2249,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "z-ai/glm-5.2": [
+      {
+        "id": "commandcode-goat-glm-5.2",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 GLM-5.2",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.2894,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-glm-5.2",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GLM-5.2",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.319,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "z-ai/glm-5.1": [
+      {
+        "id": "opencode-go-glm-5.1",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GLM-5.1",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.319,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
         "rank": 1
       }
     ],
     "openai/gpt-5.6-sol": [
       {
-        "id": "gpt-plus-sol",
+        "id": "gpt-plus-gpt-5.6-sol",
         "provider": "openai",
         "provider_display": "GPT Plus",
-        "plan": "Sol",
+        "plan": "GPT-5.6 Sol",
         "type": "subscription",
         "badge": null,
-        "cost_off_peak": [
-          179.0,
-          2685.2
-        ],
-        "cost_peak": null,
+        "cost": 0.3984,
         "url": "https://chatgpt.com/codex/pricing",
-        "pricing_source": "OpenAI Codex 官方定价",
+        "pricing_source": "OpenAI Codex 瀹樻柟瀹氫环",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-gpt-5.6-sol",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 GPT-5.6 Sol",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.6867,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "thinkingmachines/inkling-small": [
+      {
+        "id": "commandcode-goat-inkling-small",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Inkling Small",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.4004,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "meta/muse-spark-1.2": [
+      {
+        "id": "commandcode-goat-muse-spark-1.2",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Muse Spark 1.2",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.4685,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "qwen/qwen3.7-max": [
+      {
+        "id": "opencode-go-qwen3.7-max",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.7 Max",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 0.6439,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-qwen-3.7-max",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Qwen 3.7 Max",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.9382,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "thinkingmachines/inkling": [
+      {
+        "id": "commandcode-goat-inkling",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Inkling",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.718,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      }
+    ],
+    "qwen/qwen3.8-max": [
+      {
+        "id": "commandcode-goat-qwen-3.8-max",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Qwen 3.8 Max",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.8307,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-qwen3.8-max",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.8 Max",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 1.3435,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "moonshotai/kimi-k3": [
+      {
+        "id": "commandcode-goat-kimi-k3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Kimi K3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.9503,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-kimi-k3",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K3",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 1.9006,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "z-ai/glm-5.3": [
+      {
+        "id": "commandcode-goat-glm-5.3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 GLM-5.3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.0162,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-glm-5.3",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GLM-5.3",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 1.2702,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "x-ai/grok-4.6": [
+      {
+        "id": "opencode-go-grok-4.6",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Grok 4.6",
+        "type": "subscription",
+        "badge": "$10/鏈?,
+        "cost": 2.5992,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-grok-4.6",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Grok 4.6",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 3.0547,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+        "rank": 2
+      }
+    ],
+    "x-ai/grok-4.5": [
+      {
+        "id": "commandcode-goat-grok-4.5",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT 路 Grok 4.5",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 3.0547,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
         "rank": 1
       }
     ]
   },
   "plans": [
     {
-      "id": "commandcode-goat-ds-flash",
-      "type": "subscription",
-      "provider": "commandcode",
-      "provider_display": "Command Code",
-      "plan": "GOAT · DS V4 Flash",
-      "badge": "$10",
-      "cost_off_peak": 1.6,
-      "cost_peak": 3.1,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 4651200000,
-      "monthly_requests": 91200,
-      "tokens_per_request": 51000,
-      "url": "https://commandcode.ai/docs/plans/goat",
-      "pricing_source": "Command Code GOAT 官方文档",
-      "source_url": "https://commandcode.ai/docs/plans/goat",
-      "note_zh": "按 GOAT $10/月、DS V4 Flash 官方月请求量与典型 Token 模式估算",
-      "note_en": "From GOAT $10/mo, DS V4 Flash monthly requests, and typical token pattern",
-      "match": {
-        "model_family": "deepseek/deepseek-v4-flash",
-        "exclude_slug_patterns": [
-          "vision"
-        ]
-      },
-      "rank": 1,
-      "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash",
-        "~deepseek/deepseek-v4-flash-latest"
-      ]
-    },
-    {
-      "id": "opencode-go-ds-flash",
+      "id": "opencode-go-muse-spark-1.2-contributor",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "DS V4 Flash",
-      "badge": "$10/月",
-      "cost_off_peak": 2.7,
-      "cost_peak": 5.3,
+      "plan": "Muse Spark 1.2 Contributor",
+      "badge": "$10/鏈?,
+      "cost": 0.0044,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 2722356000,
+      "quota_tokens": 16387712000,
+      "monthly_requests": 226600,
+      "vendor_slug": "muse-spark-1.2-contributor",
       "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 DS V4 Flash 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and DS V4 Flash monthly requests",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Muse Spark 1.2 Contributor 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Muse Spark 1.2 Contributor monthly requests",
       "match": {
-        "model_family": "deepseek/deepseek-v4-flash",
-        "exclude_slug_patterns": [
-          "vision"
-        ]
+        "vendor_slug": "muse-spark-1.2-contributor"
+      },
+      "rank": 1,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-mimo-v2.5",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiMo-V2.5",
+      "badge": "$10/鏈?,
+      "cost": 0.0066,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 10922800000,
+      "monthly_requests": 150400,
+      "vendor_slug": "mimo-v2.5",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 MiMo-V2.5 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and MiMo-V2.5 monthly requests",
+      "match": {
+        "vendor_slug": "mimo-v2.5"
       },
       "rank": 2,
       "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash",
-        "~deepseek/deepseek-v4-flash-latest"
+        "xiaomi/mimo-v2.5"
       ]
     },
     {
-      "id": "kimi-k3-allegretto-256k",
+      "id": "commandcode-goat-mimo-v2.5",
       "type": "subscription",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "Allegretto 256K",
-      "badge": "¥199",
-      "cost_off_peak": 26.6,
-      "cost_peak": null,
-      "monthly_cny": 199.0,
-      "quota_tokens": 748240000,
-      "url": "https://www.kimi.com/code",
-      "pricing_source": "Kimi 会员定价 + 官方 API 价",
-      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-      "api_reference_cost_per_100m": 374.8,
-      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 MiMo V2.5",
+      "badge": "$10",
+      "cost": 0.0102,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 7073675000,
+      "monthly_requests": 97400,
+      "tokens_per_request": 72625,
+      "vendor_slug": "mimo-v2.5",
+      "vendor_label": "MiMo V2.5",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丮iMo V2.5 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, MiMo V2.5 monthly requests, and typical token pattern",
       "match": {
-        "model_family": "moonshotai/kimi-k3"
+        "vendor_slug": "mimo-v2.5",
+        "vendor_label": "MiMo V2.5"
       },
       "rank": 3,
       "target_models": [
-        "moonshotai/kimi-k3"
+        "xiaomi/mimo-v2.5"
       ]
     },
     {
-      "id": "kimi-k3-allegro-256k",
+      "id": "commandcode-goat-deepseek-v4-flash",
       "type": "subscription",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "Allegro 256K",
-      "badge": "¥699",
-      "cost_off_peak": 31.3,
-      "cost_peak": null,
-      "monthly_cny": 699.0,
-      "quota_tokens": 2236800000,
-      "url": "https://www.kimi.com/code",
-      "pricing_source": "Kimi 会员定价 + 官方 API 价",
-      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-      "api_reference_cost_per_100m": 374.8,
-      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 DeepSeek V4 Flash (latest)",
+      "badge": "$10",
+      "cost": 0.011,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 6568224000,
+      "monthly_requests": 91200,
+      "tokens_per_request": 72020,
+      "vendor_slug": "deepseek-v4-flash",
+      "vendor_label": "DeepSeek V4 Flash (latest)",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丏eepSeek V4 Flash (latest) 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, DeepSeek V4 Flash (latest) monthly requests, and typical token pattern",
       "match": {
-        "model_family": "moonshotai/kimi-k3"
+        "vendor_slug": "deepseek-v4-flash",
+        "vendor_label": "DeepSeek V4 Flash (latest)"
       },
       "rank": 4,
       "target_models": [
-        "moonshotai/kimi-k3"
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash"
       ]
     },
     {
-      "id": "deepseek-v4-flash-0731",
-      "type": "api",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "plan": "V4 Flash 0731",
-      "model_id": "deepseek/deepseek-v4-flash",
-      "cost_off_peak": 16.8,
-      "cost_peak": 33.6,
-      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-      "pricing_source": "DeepSeek 官方 API",
-      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "id": "commandcode-goat-muse-spark-1.2-contributor",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Muse Spark 1.2 Contributor",
+      "badge": "$10",
+      "cost": 0.011,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 6573888000,
+      "monthly_requests": 90900,
+      "tokens_per_request": 72320,
+      "vendor_slug": "muse-spark-1.2-contributor",
+      "vendor_label": "Muse Spark 1.2 Contributor",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丮use Spark 1.2 Contributor 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Muse Spark 1.2 Contributor monthly requests, and typical token pattern",
       "match": {
-        "model_family": "deepseek/deepseek-v4-flash"
+        "vendor_slug": "muse-spark-1.2-contributor",
+        "vendor_label": "Muse Spark 1.2 Contributor"
       },
       "rank": 5,
-      "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash",
-        "~deepseek/deepseek-v4-flash-latest"
-      ]
+      "target_models": []
     },
     {
-      "id": "kimi-k3-allegretto-1m",
+      "id": "opencode-go-longcat-2.0",
       "type": "subscription",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "Allegretto 1M",
-      "badge": "¥199",
-      "cost_off_peak": 53.2,
-      "cost_peak": null,
-      "monthly_cny": 199.0,
-      "quota_tokens": 374120000,
-      "url": "https://www.kimi.com/code",
-      "pricing_source": "Kimi 会员定价 + 官方 API 价",
-      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-      "api_reference_cost_per_100m": 374.8,
-      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-      "note_en": "Membership quota estimated; monthly price fetched when available",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "LongCat-2.0",
+      "badge": "$10/鏈?,
+      "cost": 0.0141,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 5149144000,
+      "monthly_requests": 57200,
+      "vendor_slug": "longcat-2.0",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 LongCat-2.0 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and LongCat-2.0 monthly requests",
       "match": {
-        "model_family": "moonshotai/kimi-k3"
+        "vendor_slug": "longcat-2.0"
       },
       "rank": 6,
       "target_models": [
-        "moonshotai/kimi-k3"
+        "meituan/longcat-2.0"
       ]
     },
     {
-      "id": "kimi-k3-allegro-1m",
-      "type": "subscription",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "Allegro 1M",
-      "badge": "¥699",
-      "cost_off_peak": 62.5,
-      "cost_peak": null,
-      "monthly_cny": 699.0,
-      "quota_tokens": 1118400000,
-      "url": "https://www.kimi.com/code",
-      "pricing_source": "Kimi 会员定价 + 官方 API 价",
-      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-      "api_reference_cost_per_100m": 374.8,
-      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-      "note_en": "Membership quota estimated; monthly price fetched when available",
-      "match": {
-        "model_family": "moonshotai/kimi-k3"
-      },
-      "rank": 7,
-      "target_models": [
-        "moonshotai/kimi-k3"
-      ]
-    },
-    {
-      "id": "kimi-k3-moderato-256k",
-      "type": "subscription",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "Moderato 256K",
-      "badge": "¥99",
-      "cost_off_peak": 66.2,
-      "cost_peak": null,
-      "monthly_cny": 99.0,
-      "quota_tokens": 149490000,
-      "url": "https://www.kimi.com/code",
-      "pricing_source": "Kimi 会员定价 + 官方 API 价",
-      "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-      "api_reference_cost_per_100m": 374.8,
-      "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-      "note_en": "Membership quota estimated; monthly price fetched when available",
-      "match": {
-        "model_family": "moonshotai/kimi-k3"
-      },
-      "rank": 8,
-      "target_models": [
-        "moonshotai/kimi-k3"
-      ]
-    },
-    {
-      "id": "deepseek-v4-pro-0813",
-      "type": "api",
-      "provider": "deepseek",
-      "provider_display": "DeepSeek",
-      "plan": "V4 Pro 0813",
-      "model_id": "deepseek/deepseek-v4-pro",
-      "cost_off_peak": 50.3,
-      "cost_peak": 100.7,
-      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-      "pricing_source": "DeepSeek 官方 API",
-      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-      "match": {
-        "model_family": "deepseek/deepseek-v4-pro"
-      },
-      "rank": 9,
-      "target_models": [
-        "deepseek/deepseek-v4-pro-0813",
-        "deepseek/deepseek-v4-pro"
-      ]
-    },
-    {
-      "id": "kimi-k3-api",
-      "type": "api",
-      "provider": "moonshot",
-      "provider_display": "Kimi K3",
-      "plan": "API",
-      "cost_off_peak": 374.8,
-      "cost_peak": null,
-      "url": "https://platform.moonshot.cn/docs/pricing/chat",
-      "pricing_source": "Moonshot Kimi K3 官方 API",
-      "source_url": "https://platform.kimi.com/docs/pricing/chat-k3.md",
-      "rates_cny_per_m": {
-        "cache_read": 2.0,
-        "prompt": 20.0,
-        "completion": 100.0
-      },
-      "match": {
-        "model_family": "moonshotai/kimi-k3"
-      },
-      "rank": 10,
-      "target_models": [
-        "moonshotai/kimi-k3"
-      ]
-    },
-    {
-      "id": "gpt-plus-luna",
+      "id": "gpt-plus-gpt-5.6-luna",
       "type": "subscription",
       "provider": "openai",
       "provider_display": "GPT Plus",
-      "plan": "Luna Max",
-      "cost_off_peak": [
-        57.5,
-        805.6
-      ],
-      "cost_peak": null,
+      "plan": "GPT-5.6 Luna",
+      "cost": 0.0199,
       "monthly_cny": 145.0,
       "monthly_usd": 20.0,
-      "quota_tokens": {
-        "monthly_min": 18000000,
-        "monthly_max": 252000000
-      },
+      "quota_tokens": 7280000000,
+      "quota_windows_per_week": 33.6,
+      "quota_msgs_per_5h": 2000,
       "url": "https://chatgpt.com/codex/pricing",
-      "pricing_source": "OpenAI Codex 官方定价",
+      "pricing_source": "OpenAI Codex 瀹樻柟瀹氫环",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_cost_per_100m": 36.7,
-      "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
-      "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
+      "api_reference_blended_cny_per_m": 2.6078,
+      "note_zh": "鎸?Plus $20/鏈堬細姣?5h 娑堟伅涓婇檺 脳 鍛ㄦ粴鍔ㄧ獥鍙ｆ暟 脳 鏈堝懆鏁帮紱鏈撼鍏ュ畼鏂规湭鍏紑鐨勫懆鎬婚噺涓婇檺",
+      "note_en": "Plus $20/mo: max msgs per 5h 脳 rolling windows/week 脳 weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
         "model_family": "openai/gpt-5.6-luna",
         "exclude_slug_patterns": [
           "-pro"
         ]
       },
-      "rank": 11,
+      "rank": 7,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
     },
     {
-      "id": "gpt-plus-sol",
+      "id": "opencode-go-deepseek-v4-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4 Flash",
+      "badge": "$10/鏈?,
+      "cost": 0.0266,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2722356000,
+      "monthly_requests": 37800,
+      "vendor_slug": "deepseek-v4-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 DeepSeek V4 Flash 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash monthly requests",
+      "match": {
+        "vendor_slug": "deepseek-v4-flash"
+      },
+      "rank": 8,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash"
+      ]
+    },
+    {
+      "id": "commandcode-goat-tencent-hy3",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Tencent Hy3",
+      "badge": "$10",
+      "cost": 0.0282,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2570925000,
+      "monthly_requests": 35400,
+      "tokens_per_request": 72625,
+      "vendor_slug": "hy3",
+      "vendor_label": "Tencent Hy3",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€乀encent Hy3 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Tencent Hy3 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "hy3",
+        "vendor_label": "Tencent Hy3"
+      },
+      "rank": 9,
+      "target_models": []
+    },
+    {
+      "id": "commandcode-goat-mimo-v2.5-pro",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 MiMo V2.5 Pro",
+      "badge": "$10",
+      "cost": 0.0292,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2482207500,
+      "monthly_requests": 28500,
+      "tokens_per_request": 87095,
+      "vendor_slug": "mimo-v2.5-pro",
+      "vendor_label": "MiMo V2.5 Pro",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丮iMo V2.5 Pro 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, MiMo V2.5 Pro monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "mimo-v2.5-pro",
+        "vendor_label": "MiMo V2.5 Pro"
+      },
+      "rank": 10,
+      "target_models": [
+        "xiaomi/mimo-v2.5-pro"
+      ]
+    },
+    {
+      "id": "commandcode-goat-deepseek-v4-flash-vision",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 DeepSeek V4 Flash Vision (exp)",
+      "badge": "$10",
+      "cost": 0.0331,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2189408000,
+      "monthly_requests": 30400,
+      "tokens_per_request": 72020,
+      "vendor_slug": "deepseek-v4-flash-vision",
+      "vendor_label": "DeepSeek V4 Flash Vision (exp)",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丏eepSeek V4 Flash Vision (exp) 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, DeepSeek V4 Flash Vision (exp) monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "deepseek-v4-flash-vision",
+        "vendor_label": "DeepSeek V4 Flash Vision (exp)"
+      },
+      "rank": 11,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-hy3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Hy3",
+      "badge": "$10/鏈?,
+      "cost": 0.0464,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1561437500,
+      "monthly_requests": 21500,
+      "vendor_slug": "hy3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Hy3 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Hy3 monthly requests",
+      "match": {
+        "vendor_slug": "hy3"
+      },
+      "rank": 12,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-mimo-v2.5-pro",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiMo-V2.5-Pro",
+      "badge": "$10/鏈?,
+      "cost": 0.0511,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1419648500,
+      "monthly_requests": 16300,
+      "vendor_slug": "mimo-v2.5-pro",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 MiMo-V2.5-Pro 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and MiMo-V2.5-Pro monthly requests",
+      "match": {
+        "vendor_slug": "mimo-v2.5-pro"
+      },
+      "rank": 13,
+      "target_models": [
+        "xiaomi/mimo-v2.5-pro"
+      ]
+    },
+    {
+      "id": "opencode-go-deepseek-v4-flash-vision-exp",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4 Flash Vision Exp",
+      "badge": "$10/鏈?,
+      "cost": 0.0533,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1361178000,
+      "monthly_requests": 18900,
+      "vendor_slug": "deepseek-v4-flash-vision-exp",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 DeepSeek V4 Flash Vision Exp 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash Vision Exp monthly requests",
+      "match": {
+        "vendor_slug": "deepseek-v4-flash-vision-exp"
+      },
+      "rank": 14,
+      "target_models": []
+    },
+    {
+      "id": "commandcode-goat-glm-5.3-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GLM-5.3 Flash",
+      "badge": "$10",
+      "cost": 0.0547,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1326320000,
+      "monthly_requests": 23600,
+      "tokens_per_request": 56200,
+      "vendor_slug": "glm-5.3-flash",
+      "vendor_label": "GLM-5.3 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟LM-5.3 Flash 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GLM-5.3 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "glm-5.3-flash",
+        "vendor_label": "GLM-5.3 Flash"
+      },
+      "rank": 15,
+      "target_models": [
+        "z-ai/glm-5.3-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-qwen3.7-plus",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.7 Plus",
+      "badge": "$10/鏈?,
+      "cost": 0.0582,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1246104000,
+      "monthly_requests": 21600,
+      "vendor_slug": "qwen3.7-plus",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Qwen3.7 Plus 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Plus monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.7-plus"
+      },
+      "rank": 16,
+      "target_models": [
+        "qwen/qwen3.7-plus"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.8-27b",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.8 27B",
+      "badge": "$10",
+      "cost": 0.0592,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1224000000,
+      "monthly_requests": 24000,
+      "tokens_per_request": 51000,
+      "vendor_slug": "qwen-3.8-27b",
+      "vendor_label": "Qwen 3.8 27B",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.8 27B 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.8 27B monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.8-27b",
+        "vendor_label": "Qwen 3.8 27B"
+      },
+      "rank": 17,
+      "target_models": [
+        "qwen/qwen3.8-27b"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.8-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.8 Flash",
+      "badge": "$10",
+      "cost": 0.0725,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 999600000,
+      "monthly_requests": 19600,
+      "tokens_per_request": 51000,
+      "vendor_slug": "qwen-3.8-flash",
+      "vendor_label": "Qwen 3.8 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.8 Flash 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.8 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.8-flash",
+        "vendor_label": "Qwen 3.8 Flash"
+      },
+      "rank": 18,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-minimax-m2.7",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiniMax M2.7",
+      "badge": "$10/鏈?,
+      "cost": 0.0769,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 942225000,
+      "monthly_requests": 17000,
+      "vendor_slug": "minimax-m2.7",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 MiniMax M2.7 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and MiniMax M2.7 monthly requests",
+      "match": {
+        "vendor_slug": "minimax-m2.7"
+      },
+      "rank": 19,
+      "target_models": [
+        "minimax/minimax-m2.7"
+      ]
+    },
+    {
+      "id": "opencode-go-qwen3.6-plus",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.6 Plus",
+      "badge": "$10/鏈?,
+      "cost": 0.0771,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 940347000,
+      "monthly_requests": 16300,
+      "vendor_slug": "qwen3.6-plus",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Qwen3.6 Plus 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Qwen3.6 Plus monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.6-plus"
+      },
+      "rank": 20,
+      "target_models": [
+        "qwen/qwen3.6-plus"
+      ]
+    },
+    {
+      "id": "opencode-go-minimax-m3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiniMax M3",
+      "badge": "$10/鏈?,
+      "cost": 0.0799,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 907200000,
+      "monthly_requests": 16000,
+      "vendor_slug": "minimax-m3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 MiniMax M3 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and MiniMax M3 monthly requests",
+      "match": {
+        "vendor_slug": "minimax-m3"
+      },
+      "rank": 21,
+      "target_models": [
+        "minimax/minimax-m3"
+      ]
+    },
+    {
+      "id": "commandcode-goat-step-3.5-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Step 3.5 Flash",
+      "badge": "$10",
+      "cost": 0.0812,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 892500000,
+      "monthly_requests": 17500,
+      "tokens_per_request": 51000,
+      "vendor_slug": "step-3.5-flash",
+      "vendor_label": "Step 3.5 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丼tep 3.5 Flash 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Step 3.5 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "step-3.5-flash",
+        "vendor_label": "Step 3.5 Flash"
+      },
+      "rank": 22,
+      "target_models": []
+    },
+    {
+      "id": "commandcode-goat-deepseek-v4-pro",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 DeepSeek V4 Pro (latest)",
+      "badge": "$10",
+      "cost": 0.0884,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 820435200,
+      "monthly_requests": 9880,
+      "tokens_per_request": 83040,
+      "vendor_slug": "deepseek-v4-pro",
+      "vendor_label": "DeepSeek V4 Pro (latest)",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丏eepSeek V4 Pro (latest) 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, DeepSeek V4 Pro (latest) monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "deepseek-v4-pro",
+        "vendor_label": "DeepSeek V4 Pro (latest)"
+      },
+      "rank": 23,
+      "target_models": [
+        "deepseek/deepseek-v4-pro-0813",
+        "deepseek/deepseek-v4-pro"
+      ]
+    },
+    {
+      "id": "commandcode-goat-minimax-m3",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 MiniMax M3",
+      "badge": "$10",
+      "cost": 0.092,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 788130000,
+      "monthly_requests": 13900,
+      "tokens_per_request": 56700,
+      "vendor_slug": "minimax-m3",
+      "vendor_label": "MiniMax M3",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丮iniMax M3 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, MiniMax M3 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "minimax-m3",
+        "vendor_label": "MiniMax M3"
+      },
+      "rank": 24,
+      "target_models": [
+        "minimax/minimax-m3"
+      ]
+    },
+    {
+      "id": "commandcode-goat-gpt-5.6-luna",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GPT-5.6 Luna",
+      "badge": "$10",
+      "cost": 0.0956,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 758056000,
+      "monthly_requests": 14800,
+      "tokens_per_request": 51220,
+      "vendor_slug": "gpt-5.6-luna",
+      "vendor_label": "GPT-5.6 Luna",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟PT-5.6 Luna 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GPT-5.6 Luna monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "gpt-5.6-luna",
+        "vendor_label": "GPT-5.6 Luna"
+      },
+      "rank": 25,
+      "target_models": [
+        "openai/gpt-5.6-luna"
+      ]
+    },
+    {
+      "id": "opencode-go-gpt-5.6-luna",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GPT 5.6 Luna",
+      "badge": "$10/鏈?,
+      "cost": 0.1381,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 525005000,
+      "monthly_requests": 10250,
+      "vendor_slug": "gpt-5.6-luna",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 GPT 5.6 Luna 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and GPT 5.6 Luna monthly requests",
+      "match": {
+        "vendor_slug": "gpt-5.6-luna"
+      },
+      "rank": 26,
+      "target_models": [
+        "openai/gpt-5.6-luna"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.3-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.3-Flash",
+      "badge": "$10/鏈?,
+      "cost": 0.1633,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 443980000,
+      "monthly_requests": 7900,
+      "vendor_slug": "glm-5.3-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 GLM-5.3-Flash 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and GLM-5.3-Flash monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.3-flash"
+      },
+      "rank": 27,
+      "target_models": [
+        "z-ai/glm-5.3-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-deepseek-v4-pro",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4 Pro",
+      "badge": "$10/鏈?,
+      "cost": 0.1679,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 431808000,
+      "monthly_requests": 5200,
+      "vendor_slug": "deepseek-v4-pro",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 DeepSeek V4 Pro 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Pro monthly requests",
+      "match": {
+        "vendor_slug": "deepseek-v4-pro"
+      },
+      "rank": 28,
+      "target_models": [
+        "deepseek/deepseek-v4-pro-0813",
+        "deepseek/deepseek-v4-pro"
+      ]
+    },
+    {
+      "id": "commandcode-goat-step-3.7-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Step 3.7 Flash",
+      "badge": "$10",
+      "cost": 0.1698,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 426870000,
+      "monthly_requests": 8370,
+      "tokens_per_request": 51000,
+      "vendor_slug": "step-3.7-flash",
+      "vendor_label": "Step 3.7 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丼tep 3.7 Flash 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Step 3.7 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "step-3.7-flash",
+        "vendor_label": "Step 3.7 Flash"
+      },
+      "rank": 29,
+      "target_models": [
+        "stepfun/step-3.7-flash"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.7-plus",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.7 Plus",
+      "badge": "$10",
+      "cost": 0.1768,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 410175900,
+      "monthly_requests": 7110,
+      "tokens_per_request": 57690,
+      "vendor_slug": "qwen-3.7-plus",
+      "vendor_label": "Qwen 3.7 Plus",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.7 Plus 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.7 Plus monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.7-plus",
+        "vendor_label": "Qwen 3.7 Plus"
+      },
+      "rank": 30,
+      "target_models": [
+        "qwen/qwen3.7-plus"
+      ]
+    },
+    {
+      "id": "commandcode-goat-gemini-3.7-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Gemini 3.7 Flash",
+      "badge": "$10",
+      "cost": 0.1813,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 399840000,
+      "monthly_requests": 7840,
+      "tokens_per_request": 51000,
+      "vendor_slug": "gemini-3.7-flash",
+      "vendor_label": "Gemini 3.7 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟emini 3.7 Flash 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Gemini 3.7 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "gemini-3.7-flash",
+        "vendor_label": "Gemini 3.7 Flash"
+      },
+      "rank": 31,
+      "target_models": [
+        "google/gemini-3.7-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-kimi-k2.7-code",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Kimi K2.7 Code",
+      "badge": "$10/鏈?,
+      "cost": 0.1916,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 378472500,
+      "monthly_requests": 6750,
+      "vendor_slug": "kimi-k2.7-code",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Kimi K2.7 Code 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Kimi K2.7 Code monthly requests",
+      "match": {
+        "vendor_slug": "kimi-k2.7-code"
+      },
+      "rank": 32,
+      "target_models": [
+        "moonshotai/kimi-k2.7-code"
+      ]
+    },
+    {
+      "id": "opencode-go-kimi-k2.6",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Kimi K2.6",
+      "badge": "$10/鏈?,
+      "cost": 0.2249,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 322402500,
+      "monthly_requests": 5750,
+      "vendor_slug": "kimi-k2.6",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Kimi K2.6 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Kimi K2.6 monthly requests",
+      "match": {
+        "vendor_slug": "kimi-k2.6"
+      },
+      "rank": 33,
+      "target_models": [
+        "moonshotai/kimi-k2.6"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.6-plus",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.6 Plus",
+      "badge": "$10",
+      "cost": 0.2285,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 317295000,
+      "monthly_requests": 5500,
+      "tokens_per_request": 57690,
+      "vendor_slug": "qwen-3.6-plus",
+      "vendor_label": "Qwen 3.6 Plus",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.6 Plus 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.6 Plus monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.6-plus",
+        "vendor_label": "Qwen 3.6 Plus"
+      },
+      "rank": 34,
+      "target_models": [
+        "qwen/qwen3.6-plus"
+      ]
+    },
+    {
+      "id": "commandcode-goat-kimi-k2.7-code",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Kimi K2.7 Code",
+      "badge": "$10",
+      "cost": 0.2386,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 303899400,
+      "monthly_requests": 5420,
+      "tokens_per_request": 56070,
+      "vendor_slug": "kimi-k2.7-code",
+      "vendor_label": "Kimi K2.7 Code",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€並imi K2.7 Code 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Kimi K2.7 Code monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "kimi-k2.7-code",
+        "vendor_label": "Kimi K2.7 Code"
+      },
+      "rank": 35,
+      "target_models": [
+        "moonshotai/kimi-k2.7-code"
+      ]
+    },
+    {
+      "id": "commandcode-goat-glm-5.2",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GLM-5.2",
+      "badge": "$10",
+      "cost": 0.2894,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 250509000,
+      "monthly_requests": 4740,
+      "tokens_per_request": 52850,
+      "vendor_slug": "glm-5.2",
+      "vendor_label": "GLM-5.2",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟LM-5.2 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GLM-5.2 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "glm-5.2",
+        "vendor_label": "GLM-5.2"
+      },
+      "rank": 36,
+      "target_models": [
+        "z-ai/glm-5.2"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.2",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.2",
+      "badge": "$10/鏈?,
+      "cost": 0.319,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 227255000,
+      "monthly_requests": 4300,
+      "vendor_slug": "glm-5.2",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 GLM-5.2 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and GLM-5.2 monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.2"
+      },
+      "rank": 37,
+      "target_models": [
+        "z-ai/glm-5.2"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.1",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.1",
+      "badge": "$10/鏈?,
+      "cost": 0.319,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 227255000,
+      "monthly_requests": 4300,
+      "vendor_slug": "glm-5.1",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 GLM-5.1 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and GLM-5.1 monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.1"
+      },
+      "rank": 38,
+      "target_models": [
+        "z-ai/glm-5.1"
+      ]
+    },
+    {
+      "id": "gpt-plus-gpt-5.6-sol",
       "type": "subscription",
       "provider": "openai",
       "provider_display": "GPT Plus",
-      "plan": "Sol",
-      "cost_off_peak": [
-        179.0,
-        2685.2
-      ],
-      "cost_peak": null,
+      "plan": "GPT-5.6 Sol",
+      "cost": 0.3984,
       "monthly_cny": 145.0,
       "monthly_usd": 20.0,
-      "quota_tokens": {
-        "monthly_min": 5400000,
-        "monthly_max": 81000000
-      },
+      "quota_tokens": 364000000,
+      "quota_windows_per_week": 33.6,
+      "quota_msgs_per_5h": 100,
       "url": "https://chatgpt.com/codex/pricing",
-      "pricing_source": "OpenAI Codex 官方定价",
+      "pricing_source": "OpenAI Codex 瀹樻柟瀹氫环",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_cost_per_100m": 628.6,
-      "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
-      "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
+      "api_reference_blended_cny_per_m": 45.5771,
+      "note_zh": "鎸?Plus $20/鏈堬細姣?5h 娑堟伅涓婇檺 脳 鍛ㄦ粴鍔ㄧ獥鍙ｆ暟 脳 鏈堝懆鏁帮紱鏈撼鍏ュ畼鏂规湭鍏紑鐨勫懆鎬婚噺涓婇檺",
+      "note_en": "Plus $20/mo: max msgs per 5h 脳 rolling windows/week 脳 weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
         "model_family": "openai/gpt-5.6-sol",
         "exclude_slug_patterns": [
           "-pro"
         ]
       },
-      "rank": 12,
+      "rank": 39,
       "target_models": [
         "openai/gpt-5.6-sol"
+      ]
+    },
+    {
+      "id": "commandcode-goat-inkling-small",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Inkling Small",
+      "badge": "$10",
+      "cost": 0.4004,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 181050000,
+      "monthly_requests": 3550,
+      "tokens_per_request": 51000,
+      "vendor_slug": "inkling-small",
+      "vendor_label": "Inkling Small",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€両nkling Small 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Inkling Small monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "inkling-small",
+        "vendor_label": "Inkling Small"
+      },
+      "rank": 40,
+      "target_models": [
+        "thinkingmachines/inkling-small"
+      ]
+    },
+    {
+      "id": "commandcode-goat-muse-spark-1.2",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Muse Spark 1.2",
+      "badge": "$10",
+      "cost": 0.4685,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 154764800,
+      "monthly_requests": 2140,
+      "tokens_per_request": 72320,
+      "vendor_slug": "muse-spark-1.2",
+      "vendor_label": "Muse Spark 1.2",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丮use Spark 1.2 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Muse Spark 1.2 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "muse-spark-1.2",
+        "vendor_label": "Muse Spark 1.2"
+      },
+      "rank": 41,
+      "target_models": [
+        "meta/muse-spark-1.2"
+      ]
+    },
+    {
+      "id": "commandcode-goat-nemotron-3-ultra",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Nemotron 3 Ultra",
+      "badge": "$10",
+      "cost": 0.4953,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 146370000,
+      "monthly_requests": 2870,
+      "tokens_per_request": 51000,
+      "vendor_slug": "nemotron-3-ultra",
+      "vendor_label": "Nemotron 3 Ultra",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丯emotron 3 Ultra 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Nemotron 3 Ultra monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "nemotron-3-ultra",
+        "vendor_label": "Nemotron 3 Ultra"
+      },
+      "rank": 42,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-qwen3.7-max",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.7 Max",
+      "badge": "$10/鏈?,
+      "cost": 0.6439,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 112587800,
+      "monthly_requests": 1690,
+      "vendor_slug": "qwen3.7-max",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Qwen3.7 Max 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Max monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.7-max"
+      },
+      "rank": 43,
+      "target_models": [
+        "qwen/qwen3.7-max"
+      ]
+    },
+    {
+      "id": "commandcode-goat-gpt-5.6-sol",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GPT-5.6 Sol",
+      "badge": "$10",
+      "cost": 0.6867,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 105570000,
+      "monthly_requests": 2070,
+      "tokens_per_request": 51000,
+      "vendor_slug": "gpt-5.6-sol",
+      "vendor_label": "GPT-5.6 Sol",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟PT-5.6 Sol 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GPT-5.6 Sol monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "gpt-5.6-sol",
+        "vendor_label": "GPT-5.6 Sol"
+      },
+      "rank": 44,
+      "target_models": [
+        "openai/gpt-5.6-sol"
+      ]
+    },
+    {
+      "id": "commandcode-goat-inkling",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Inkling",
+      "badge": "$10",
+      "cost": 0.718,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 100980000,
+      "monthly_requests": 1980,
+      "tokens_per_request": 51000,
+      "vendor_slug": "inkling",
+      "vendor_label": "Inkling",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€両nkling 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Inkling monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "inkling",
+        "vendor_label": "Inkling"
+      },
+      "rank": 45,
+      "target_models": [
+        "thinkingmachines/inkling"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.8-max",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.8 Max",
+      "badge": "$10",
+      "cost": 0.8307,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 87272200,
+      "monthly_requests": 1310,
+      "tokens_per_request": 66620,
+      "vendor_slug": "qwen-3.8-max",
+      "vendor_label": "Qwen 3.8 Max",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.8 Max 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.8 Max monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.8-max",
+        "vendor_label": "Qwen 3.8 Max"
+      },
+      "rank": 46,
+      "target_models": [
+        "qwen/qwen3.8-max"
+      ]
+    },
+    {
+      "id": "commandcode-goat-qwen-3.7-max",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Qwen 3.7 Max",
+      "badge": "$10",
+      "cost": 0.9382,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 77279200,
+      "monthly_requests": 1160,
+      "tokens_per_request": 66620,
+      "vendor_slug": "qwen-3.7-max",
+      "vendor_label": "Qwen 3.7 Max",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丵wen 3.7 Max 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Qwen 3.7 Max monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "qwen-3.7-max",
+        "vendor_label": "Qwen 3.7 Max"
+      },
+      "rank": 47,
+      "target_models": [
+        "qwen/qwen3.7-max"
+      ]
+    },
+    {
+      "id": "commandcode-goat-kimi-k3",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Kimi K3",
+      "badge": "$10",
+      "cost": 0.9503,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 76293000,
+      "monthly_requests": 980,
+      "tokens_per_request": 77850,
+      "vendor_slug": "kimi-k3",
+      "vendor_label": "Kimi K3",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€並imi K3 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Kimi K3 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "kimi-k3",
+        "vendor_label": "Kimi K3"
+      },
+      "rank": 48,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "commandcode-goat-glm-5.3",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GLM-5.3",
+      "badge": "$10",
+      "cost": 1.0162,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 71347500,
+      "monthly_requests": 1350,
+      "tokens_per_request": 52850,
+      "vendor_slug": "glm-5.3",
+      "vendor_label": "GLM-5.3",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟LM-5.3 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GLM-5.3 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "glm-5.3",
+        "vendor_label": "GLM-5.3"
+      },
+      "rank": 49,
+      "target_models": [
+        "z-ai/glm-5.3"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.3",
+      "badge": "$10/鏈?,
+      "cost": 1.2702,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 57078000,
+      "monthly_requests": 1080,
+      "vendor_slug": "glm-5.3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 GLM-5.3 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and GLM-5.3 monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.3"
+      },
+      "rank": 50,
+      "target_models": [
+        "z-ai/glm-5.3"
+      ]
+    },
+    {
+      "id": "opencode-go-qwen3.8-max",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.8 Max",
+      "badge": "$10/鏈?,
+      "cost": 1.3435,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 53962200,
+      "monthly_requests": 810,
+      "vendor_slug": "qwen3.8-max",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Qwen3.8 Max 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Qwen3.8 Max monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.8-max"
+      },
+      "rank": 51,
+      "target_models": [
+        "qwen/qwen3.8-max"
+      ]
+    },
+    {
+      "id": "deepseek-api-deepseek-v4-flash",
+      "type": "api",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "plan": "V4 Flash",
+      "cost": 1.5718,
+      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "pricing_source": "DeepSeek 瀹樻柟 API",
+      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-flash"
+      },
+      "rank": 52,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731",
+        "deepseek/deepseek-v4-flash"
+      ]
+    },
+    {
+      "id": "commandcode-goat-kimi-k2.7-code-highspeed",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Kimi K2.7 Code HighSpeed",
+      "badge": "$10",
+      "cost": 1.5725,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 46104000,
+      "monthly_requests": 904,
+      "tokens_per_request": 51000,
+      "vendor_slug": "kimi-k2.7-code-highspeed",
+      "vendor_label": "Kimi K2.7 Code HighSpeed",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€並imi K2.7 Code HighSpeed 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Kimi K2.7 Code HighSpeed monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "kimi-k2.7-code-highspeed",
+        "vendor_label": "Kimi K2.7 Code HighSpeed"
+      },
+      "rank": 53,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-kimi-k3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Kimi K3",
+      "badge": "$10/鏈?,
+      "cost": 1.9006,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 38146500,
+      "monthly_requests": 490,
+      "vendor_slug": "kimi-k3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Kimi K3 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Kimi K3 monthly requests",
+      "match": {
+        "vendor_slug": "kimi-k3"
+      },
+      "rank": 54,
+      "target_models": [
+        "moonshotai/kimi-k3"
+      ]
+    },
+    {
+      "id": "commandcode-goat-glm-5.2-fast",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 GLM-5.2 Fast",
+      "badge": "$10",
+      "cost": 2.0573,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 35241000,
+      "monthly_requests": 691,
+      "tokens_per_request": 51000,
+      "vendor_slug": "glm-5.2-fast",
+      "vendor_label": "GLM-5.2 Fast",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟LM-5.2 Fast 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, GLM-5.2 Fast monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "glm-5.2-fast",
+        "vendor_label": "GLM-5.2 Fast"
+      },
+      "rank": 55,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-grok-4.6",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Grok 4.6",
+      "badge": "$10/鏈?,
+      "cost": 2.5992,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 27893450,
+      "monthly_requests": 845,
+      "vendor_slug": "grok-4.6",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 瀹樻柟鏂囨。",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "鎸夊畼鏂?$10/鏈?璁㈤槄浠蜂笌 Grok 4.6 鏈堝害璇锋眰閲忎及绠?,
+      "note_en": "Estimated from $10/mo subscription and Grok 4.6 monthly requests",
+      "match": {
+        "vendor_slug": "grok-4.6"
+      },
+      "rank": 56,
+      "target_models": [
+        "x-ai/grok-4.6"
+      ]
+    },
+    {
+      "id": "commandcode-goat-grok-4.5",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Grok 4.5",
+      "badge": "$10",
+      "cost": 3.0547,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 23734190,
+      "monthly_requests": 719,
+      "tokens_per_request": 33010,
+      "vendor_slug": "grok-4.5",
+      "vendor_label": "Grok 4.5",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟rok 4.5 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Grok 4.5 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "grok-4.5",
+        "vendor_label": "Grok 4.5"
+      },
+      "rank": 57,
+      "target_models": [
+        "x-ai/grok-4.5"
+      ]
+    },
+    {
+      "id": "commandcode-goat-grok-4.6",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT 路 Grok 4.6",
+      "badge": "$10",
+      "cost": 3.0547,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 23734190,
+      "monthly_requests": 719,
+      "tokens_per_request": 33010,
+      "vendor_slug": "grok-4.6",
+      "vendor_label": "Grok 4.6",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 瀹樻柟鏂囨。",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "鎸?GOAT $10/鏈堛€丟rok 4.6 鏈堣姹傞噺涓庡吀鍨?Token 妯″紡浼扮畻",
+      "note_en": "From GOAT $10/mo, Grok 4.6 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "grok-4.6",
+        "vendor_label": "Grok 4.6"
+      },
+      "rank": 58,
+      "target_models": [
+        "x-ai/grok-4.6"
+      ]
+    },
+    {
+      "id": "deepseek-api-deepseek-v4-pro",
+      "type": "api",
+      "provider": "deepseek",
+      "provider_display": "DeepSeek",
+      "plan": "V4 Pro",
+      "cost": 4.7154,
+      "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "pricing_source": "DeepSeek 瀹樻柟 API",
+      "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "match": {
+        "model_family": "deepseek/deepseek-v4-pro"
+      },
+      "rank": 59,
+      "target_models": [
+        "deepseek/deepseek-v4-pro-0813",
+        "deepseek/deepseek-v4-pro"
       ]
     }
   ]
