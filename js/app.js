@@ -1187,7 +1187,7 @@ function showModelDetail(modelId) {
                     <span class="detail-label">${window.i18n.t('list_price')}</span>
                     <span class="detail-value price-display ${priceClass}">${formatPrice(listBlended)}</span>
                 </div>` : '';
-    const cacheNoteHtml = model.pricing.cache_hit_rate != null ? `
+    const cacheNoteHtml = model.pricing.agent_token_mix ? `
             <p class="detail-pricing-note">${window.i18n.t('cache_hit_note')}</p>` : '';
     const officialChannelNoteHtml = isOfficialChannel ? `
             <p class="detail-pricing-note">${window.i18n.t('pricing_source_note', { source: pricingChannel })}</p>` : '';

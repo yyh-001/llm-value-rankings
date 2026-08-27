@@ -38,7 +38,7 @@ def main():
         avg_intelligence_count = len(intelligence_map)
 
     for model in models:
-        pricing = refresh_pricing_blended(model.get("pricing") or {})
+        pricing = refresh_pricing_blended(model.get("pricing") or {}, model["id"])
         pricing = apply_official_pricing_override(model["id"], pricing)
         pricing = apply_pricing_channel_label(model["id"], pricing)
         model["pricing"] = pricing

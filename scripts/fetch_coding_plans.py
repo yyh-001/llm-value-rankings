@@ -17,8 +17,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 from fetch_data import (  # noqa: E402
     DEFAULT_CACHE_HIT_RATE,
     USD_TO_CNY,
-    blend_token_price,
-    effective_input_price,
+    agent_blended_price,
+    get_agent_token_pattern,
     make_http_session,
     time_weighted_cny_rates,
 )
@@ -316,9 +316,10 @@ def blended_cost_cny_per_m_from_usd_rates(
     prompt_usd: float,
     cache_usd: Optional[float],
     completion_usd: float,
+    model_id: Optional[str] = None,
 ) -> float:
-    prompt_eff = effective_input_price(prompt_usd, cache_usd, DEFAULT_CACHE_HIT_RATE)
-    blended_usd = blend_token_price(prompt_eff, completion_usd)
+    pattern = get_agent_token_pattern(model_id)
+    blended_usd = agent_blended_price(prompt_usd, cache_usd, completion_usd, pattern)
     return round(blended_usd * USD_TO_CNY, 4)
 
 
@@ -326,9 +327,10 @@ def blended_cost_cny_per_m_from_cny_rates(
     prompt_cny: float,
     cache_cny: float,
     completion_cny: float,
+    model_id: Optional[str] = None,
 ) -> float:
-    prompt_eff = effective_input_price(prompt_cny, cache_cny, DEFAULT_CACHE_HIT_RATE)
-    blended_cny = blend_token_price(prompt_eff, completion_cny)
+    pattern = get_agent_token_pattern(model_id)
+    blended_cny = agent_blended_price(prompt_cny, cache_cny, completion_cny, pattern)
     return round(blended_cny, 4)
 
 
@@ -694,6 +696,7 @@ def build_codex_plus_plans(
                 pricing.get("prompt", 0),
                 pricing.get("cache_read"),
                 pricing.get("completion", 0),
+                model_id,
             )
         else:
             api_cost = None
@@ -739,7 +742,7 @@ def build_deepseek_api_plans() -> List[Dict[str, Any]]:
                 "provider_display": "DeepSeek",
                 "plan": pricing.get("plan_label") or family_core,
                 "cost": blended_cost_cny_per_m_from_cny_rates(
-                    weighted["prompt"], weighted["cache_read"], weighted["completion"]
+                    weighted["prompt"], weighted["cache_read"], weighted["completion"], model_family
                 ),
                 "url": pricing.get("source_url"),
                 "pricing_source": pricing.get("source_label"),
@@ -839,9 +842,9 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
     return {
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "methodology": {
-            "unit": "effective blended price (¥/M tokens, 95% cache, 3:1 in/out)",
+            "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
             "cache_hit_rate": DEFAULT_CACHE_HIT_RATE,
-            "token_mix": "3:1 input:output for API; subscription uses vendor quota",
+            "token_mix": "OpenCode-observed agent mix (fresh input / cache / output); subscription uses vendor quota",
             "sort_by": "effective blended cost ascending",
             "deepseek_api": "24h time-weighted peak/off-peak average (7h peak + 17h off-peak CST)",
             "codex_plus": "5h rolling window max msgs × (168h/5h windows per week) × weeks/month; additional weekly caps per OpenAI docs are not public",

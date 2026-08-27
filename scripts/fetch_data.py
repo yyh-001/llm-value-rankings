@@ -50,6 +50,33 @@ DEFAULT_CACHE_HIT_RATE = 0.95
 INPUT_TOKEN_WEIGHT = 3
 OUTPUT_TOKEN_WEIGHT = 1
 USD_TO_CNY = 7.25
+
+# Observed coding-agent token mix per request (OpenCode Go docs).
+DEFAULT_AGENT_TOKEN_PATTERN = {"input": 800, "cached": 50_000, "output": 200}
+AGENT_TOKEN_PATTERNS = [
+    ("deepseek/deepseek-v4-flash-vision", {"input": 410, "cached": 71_300, "output": 310}),
+    ("deepseek/deepseek-v4-flash", {"input": 410, "cached": 71_300, "output": 310}),
+    ("deepseek/deepseek-v4-pro", {"input": 750, "cached": 82_000, "output": 290}),
+    ("z-ai/glm-5.3-flash", {"input": 1_000, "cached": 55_000, "output": 200}),
+    ("z-ai/glm-5.3", {"input": 700, "cached": 52_000, "output": 150}),
+    ("z-ai/glm-5.2", {"input": 700, "cached": 52_000, "output": 150}),
+    ("z-ai/glm-5.1", {"input": 700, "cached": 52_000, "output": 150}),
+    ("openai/gpt-5.6-luna", {"input": 1_000, "cached": 50_000, "output": 220}),
+    ("moonshotai/kimi-k3", {"input": 1_050, "cached": 76_500, "output": 300}),
+    ("moonshotai/kimi-k2.7", {"input": 870, "cached": 55_000, "output": 200}),
+    ("moonshotai/kimi-k2.6", {"input": 870, "cached": 55_000, "output": 200}),
+    ("meituan/longcat-2.0", {"input": 920, "cached": 88_900, "output": 200}),
+    ("minimax/minimax-m3", {"input": 510, "cached": 56_000, "output": 190}),
+    ("minimax/minimax-m2.7", {"input": 300, "cached": 55_000, "output": 125}),
+    ("meta/muse-spark", {"input": 620, "cached": 71_400, "output": 300}),
+    ("xiaomi/mimo-v2.5-pro", {"input": 790, "cached": 86_000, "output": 305}),
+    ("xiaomi/mimo-v2.5", {"input": 830, "cached": 71_500, "output": 295}),
+    ("qwen/qwen3.8", {"input": 420, "cached": 66_000, "output": 200}),
+    ("qwen/qwen3.7", {"input": 420, "cached": 66_000, "output": 200}),
+    ("qwen/qwen3.6", {"input": 500, "cached": 57_000, "output": 190}),
+    ("x-ai/grok-4.6", {"input": 390, "cached": 32_500, "output": 120}),
+    ("tencent/hy3", {"input": 830, "cached": 71_500, "output": 295}),
+]
 # DeepSeek peak: CST 09:00-12:00 (3h) + 14:00-18:00 (4h). Off-peak is half of peak.
 DEEPSEEK_PEAK_HOURS = 7
 DEEPSEEK_OFF_PEAK_HOURS = 17
@@ -207,6 +234,60 @@ def blend_token_price(input_price, output_price):
     )
 
 
+def get_agent_token_pattern(model_id=None):
+    """Return coding-agent token counts per request for a model (or default)."""
+    if not model_id:
+        return dict(DEFAULT_AGENT_TOKEN_PATTERN)
+    normalized = model_id.lower()
+    for prefix, pattern in AGENT_TOKEN_PATTERNS:
+        if normalized == prefix or normalized.startswith(prefix + "/") or normalized.startswith(prefix):
+            return dict(pattern)
+    return dict(DEFAULT_AGENT_TOKEN_PATTERN)
+
+
+def agent_token_weights(pattern=None):
+    pattern = pattern or DEFAULT_AGENT_TOKEN_PATTERN
+    total = pattern["input"] + pattern["cached"] + pattern["output"]
+    if total <= 0:
+        return 0.0, 0.0, 0.0
+    return (
+        pattern["input"] / total,
+        pattern["cached"] / total,
+        pattern["output"] / total,
+    )
+
+
+def agent_blended_price(prompt, cache_read, completion, pattern=None):
+    """Blend $/1M rates using observed agent token mix (fresh in / cache / out)."""
+    if prompt is None or completion is None:
+        return None
+    w_in, w_cache, w_out = agent_token_weights(pattern)
+    if cache_read is None:
+        return round((w_in + w_cache) * prompt + w_out * completion, 4)
+    return round(w_in * prompt + w_cache * cache_read + w_out * completion, 4)
+
+
+def agent_list_blended_price(prompt, completion, pattern=None):
+    """Agent-mix list price: all input-side tokens billed at prompt rate."""
+    if prompt is None or completion is None:
+        return None
+    w_in, w_cache, w_out = agent_token_weights(pattern)
+    return round((w_in + w_cache) * prompt + w_out * completion, 4)
+
+
+def attach_agent_token_mix(pricing, model_id=None):
+    if not pricing:
+        return pricing
+    pattern = get_agent_token_pattern(model_id)
+    w_in, w_cache, w_out = agent_token_weights(pattern)
+    pricing["agent_token_mix"] = {
+        "fresh_input": round(w_in, 4),
+        "cached": round(w_cache, 4),
+        "output": round(w_out, 4),
+    }
+    return pricing
+
+
 def effective_input_price(prompt, cache_read, cache_hit_rate):
     """Apply cache-hit discount to input price when cache read pricing exists."""
     if prompt is None:
@@ -216,7 +297,7 @@ def effective_input_price(prompt, cache_read, cache_hit_rate):
     return prompt
 
 
-def get_list_blended_price(pricing):
+def get_list_blended_price(pricing, model_id=None):
     """List-price blended rate from catalog pricing ($/1M tokens)."""
     if not pricing:
         return None
@@ -229,10 +310,11 @@ def get_list_blended_price(pricing):
     if prompt_price == 0 and completion_price == 0:
         return None
 
-    return blend_token_price(prompt_price, completion_price)
+    pattern = get_agent_token_pattern(model_id)
+    return agent_list_blended_price(prompt_price, completion_price, pattern)
 
 
-def refresh_pricing_blended(pricing):
+def refresh_pricing_blended(pricing, model_id=None):
     """Recompute blended prices from stored prompt/completion/cache fields."""
     if not pricing:
         return pricing
@@ -243,14 +325,11 @@ def refresh_pricing_blended(pricing):
         return pricing
 
     cache_read = pricing.get("cache_read")
-    cache_hit_rate = DEFAULT_CACHE_HIT_RATE if cache_read is not None else None
-    if cache_hit_rate is not None:
-        pricing["cache_hit_rate"] = cache_hit_rate
-
-    prompt_effective = effective_input_price(prompt, cache_read, cache_hit_rate)
-    pricing["blended_list"] = blend_token_price(prompt, completion)
-    pricing["blended"] = blend_token_price(prompt_effective, completion)
-    return pricing
+    pattern = get_agent_token_pattern(model_id)
+    pricing.pop("cache_hit_rate", None)
+    pricing["blended_list"] = agent_list_blended_price(prompt, completion, pattern)
+    pricing["blended"] = agent_blended_price(prompt, cache_read, completion, pattern)
+    return attach_agent_token_mix(pricing, model_id)
 
 
 def cny_per_m_to_usd_per_m(cny):
@@ -258,14 +337,15 @@ def cny_per_m_to_usd_per_m(cny):
     return round(float(cny) / USD_TO_CNY, 6)
 
 
-def usd_pricing_from_cny(prompt, cache_read, completion):
+def usd_pricing_from_cny(prompt, cache_read, completion, model_id=None):
     """Build USD pricing fields from CNY / 1M token rates."""
     return refresh_pricing_blended(
         {
             "prompt": cny_per_m_to_usd_per_m(prompt),
             "completion": cny_per_m_to_usd_per_m(completion),
             "cache_read": cny_per_m_to_usd_per_m(cache_read),
-        }
+        },
+        model_id=model_id,
     )
 
 
@@ -291,7 +371,7 @@ def apply_official_pricing_override(model_id, pricing_payload):
     if "peak" in spec and "off_peak" in spec:
         weighted = time_weighted_cny_rates(spec)
         updated = usd_pricing_from_cny(
-            weighted["prompt"], weighted["cache_read"], weighted["completion"]
+            weighted["prompt"], weighted["cache_read"], weighted["completion"], model_id
         )
         updated["tod"] = {
             "scheme": "peak_off_peak",
@@ -299,16 +379,18 @@ def apply_official_pricing_override(model_id, pricing_payload):
                 spec["peak"]["prompt"],
                 spec["peak"]["cache_read"],
                 spec["peak"]["completion"],
+                model_id,
             ),
             "off_peak": usd_pricing_from_cny(
                 spec["off_peak"]["prompt"],
                 spec["off_peak"]["cache_read"],
                 spec["off_peak"]["completion"],
+                model_id,
             ),
         }
     else:
         updated = usd_pricing_from_cny(
-            spec["prompt"], spec["cache_read"], spec["completion"]
+            spec["prompt"], spec["cache_read"], spec["completion"], model_id
         )
     updated["pricing_source"] = spec.get("source_label")
     updated["pricing_source_url"] = spec.get("source_url")
@@ -476,13 +558,13 @@ def fetch_page_stats_batch(model_ids, endpoints_map):
     return results
 
 
-def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE):
+def aggregate_endpoint_metrics(endpoints, model_id=None):
     """
     Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
 
     Speed uses uptime-weighted average of provider p50 throughput.
     TTFT uses the lowest provider latency.
-    Effective input price uses cache_hit_rate when input_cache_read is available.
+    Blended price uses observed coding-agent token mix per model.
     """
     healthy = [ep for ep in endpoints if ep.get("status") == 0]
     if not healthy:
@@ -495,8 +577,6 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     prompt_weights = []
     completion_prices = []
     completion_weights = []
-    effective_inputs = []
-    effective_weights = []
     cache_reads = []
     cache_weights = []
     has_cache = False
@@ -519,12 +599,6 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
                 has_cache = True
                 cache_reads.append(cache_read)
                 cache_weights.append(weight)
-                effective_inputs.append(
-                    prompt * (1 - cache_hit_rate) + cache_read * cache_hit_rate
-                )
-            else:
-                effective_inputs.append(prompt)
-            effective_weights.append(weight)
 
         if completion is not None:
             completion_prices.append(completion)
@@ -541,15 +615,16 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
 
     prompt_list = weighted_average(prompt_prices, prompt_weights)
     completion_list = weighted_average(completion_prices, completion_weights)
-    prompt_effective = weighted_average(effective_inputs, effective_weights)
     cache_read_avg = weighted_average(cache_reads, cache_weights)
+    pattern = get_agent_token_pattern(model_id)
 
     blended_list = None
     blended_effective = None
     if prompt_list is not None and completion_list is not None:
-        blended_list = blend_token_price(prompt_list, completion_list)
-    if prompt_effective is not None and completion_list is not None:
-        blended_effective = blend_token_price(prompt_effective, completion_list)
+        blended_list = agent_list_blended_price(prompt_list, completion_list, pattern)
+        blended_effective = agent_blended_price(
+            prompt_list, cache_read_avg, completion_list, pattern
+        )
 
     throughput_weighted = weighted_average(throughputs, throughput_weights)
 
@@ -558,16 +633,15 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         "ttft": min(latencies) if latencies else None,
         "prompt_list": prompt_list,
         "completion_list": completion_list,
-        "prompt_effective": prompt_effective,
         "cache_read": cache_read_avg,
-        "cache_hit_rate": cache_hit_rate if has_cache else None,
+        "cache_hit_rate": round(agent_token_weights(pattern)[1], 4) if has_cache else None,
         "blended_list": blended_list,
         "blended_effective": blended_effective,
         "endpoint_count": len(healthy),
     }
 
 
-def build_pricing_payload(catalog_pricing, endpoint_metrics):
+def build_pricing_payload(catalog_pricing, endpoint_metrics, model_id=None):
     """Merge catalog list prices with endpoint-derived effective prices."""
     prompt_list = endpoint_metrics.get("prompt_list")
     completion_list = endpoint_metrics.get("completion_list")
@@ -583,20 +657,25 @@ def build_pricing_payload(catalog_pricing, endpoint_metrics):
 
     blended_effective = endpoint_metrics.get("blended_effective")
     blended_list = endpoint_metrics.get("blended_list")
+    pattern = get_agent_token_pattern(model_id)
     if blended_list is None and prompt_list is not None and completion_list is not None:
-        blended_list = blend_token_price(prompt_list, completion_list)
+        blended_list = agent_list_blended_price(prompt_list, completion_list, pattern)
+    if blended_effective is None and prompt_list is not None and completion_list is not None:
+        blended_effective = agent_blended_price(
+            prompt_list, cache_read, completion_list, pattern
+        )
     if blended_list is None:
-        blended_list = get_list_blended_price(catalog_pricing)
+        blended_list = get_list_blended_price(catalog_pricing, model_id)
     blended = blended_effective or blended_list
 
-    return {
+    payload = {
         "prompt": prompt_list,
         "completion": completion_list,
         "cache_read": cache_read,
         "blended": blended,
         "blended_list": blended_list,
-        "cache_hit_rate": endpoint_metrics.get("cache_hit_rate"),
     }
+    return attach_agent_token_mix(payload, model_id)
 
 
 def is_text_llm(model):
@@ -835,8 +914,8 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
         if not pricing:
             continue
 
-        endpoint_metrics = aggregate_endpoint_metrics(endpoints_map.get(model_id, []))
-        pricing_payload = build_pricing_payload(pricing, endpoint_metrics)
+        endpoint_metrics = aggregate_endpoint_metrics(endpoints_map.get(model_id, []), model_id)
+        pricing_payload = build_pricing_payload(pricing, endpoint_metrics, model_id)
         pricing_payload = apply_official_pricing_override(model_id, pricing_payload)
         pricing_payload = apply_pricing_channel_label(model_id, pricing_payload)
         blended_price = pricing_payload.get("blended")

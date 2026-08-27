@@ -88,7 +88,7 @@ const translations = {
         method_2_title: "输出速度",
         method_2: "OpenRouter 各 Provider p50 吞吐 (tokens/s)，按 uptime 加权平均",
         method_3_title: "Token 价格",
-        method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 95%",
+        method_3: "OpenRouter 有效价：uptime 加权，按 Coding Agent 典型 token 结构（新输入 / 缓存 / 输出）加权",
         
         // Footer
         footer_text: "数据来源：OpenRouter",
@@ -111,7 +111,7 @@ const translations = {
         blended_price: "有效综合价",
         peak_blended_price: "高峰综合价",
         off_peak_blended_price: "空闲综合价",
-        cache_hit_note: "缓存命中率按 95% 估算（Coding Plan / 长上下文 Agent 典型场景）",
+        cache_hit_note: "综合价按 OpenCode 观测的 Agent 典型 token 比例加权（新输入 / 缓存命中 / 输出）",
         pricing_channel: "价格渠道",
         pricing_source_note: "价格来自 {source} 官方定价，非 OpenRouter 转售",
         pricing_tod_note: "DeepSeek 官方 API 为峰谷定价（北京时间 9:00–12:00、14:00–18:00 为高峰，其余为空闲，空闲价为高峰半价）。排行采用 24 小时按时长加权均价。",
@@ -121,7 +121,7 @@ const translations = {
 
         // Supplier / coding plan pricing under each model
         supplier_pricing_title: "接入渠道价格排行",
-        supplier_pricing_unit: "¥ / 百万 tokens · 95% Cache · 与有效综合价一致",
+        supplier_pricing_unit: "¥ / 百万 tokens · Agent token 结构 · 与有效综合价一致",
         supplier_pricing_note: "含 OpenRouter 按量价、官方 API 与 Coding Plan 订阅折算价（均为有效综合价）；DeepSeek 官方 API 按全天峰谷时段加权",
         supplier_openrouter_plan: "API 按量",
         supplier_th_rank: "#",
@@ -217,7 +217,7 @@ const translations = {
         method_2_title: "Output Speed",
         method_2: "OpenRouter provider p50 throughput (tokens/s), uptime-weighted average",
         method_3_title: "Token Price",
-        method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 95% cache hit",
+        method_3: "OpenRouter effective price: uptime-weighted, coding-agent token mix (fresh in / cache / out)",
         
         // Footer
         footer_text: "Data sources: OpenRouter",
@@ -240,7 +240,7 @@ const translations = {
         blended_price: "Effective Blended Price",
         peak_blended_price: "Peak Blended Price",
         off_peak_blended_price: "Off-Peak Blended Price",
-        cache_hit_note: "Cache hit rate assumed at 95% (typical coding-plan / long-context agent workload)",
+        cache_hit_note: "Blended price uses OpenCode-observed agent token mix (fresh input / cache / output)",
         pricing_channel: "Pricing Channel",
         pricing_source_note: "Pricing from {source} official API, not OpenRouter resell",
         pricing_tod_note: "DeepSeek official API uses peak/off-peak pricing (peak 09:00–12:00 and 14:00–18:00 Beijing time; off-peak is half of peak). Rankings use a 24-hour time-weighted average.",
@@ -249,7 +249,7 @@ const translations = {
         detail_about: "About",
 
         supplier_pricing_title: "Channel pricing",
-        supplier_pricing_unit: "¥ / M tokens · 95% cache · effective blended price",
+        supplier_pricing_unit: "¥ / M tokens · agent token mix · effective blended price",
         supplier_pricing_note: "OpenRouter pay-as-you-go, official API, and coding-plan rates (effective blended price); DeepSeek API uses 24h peak/off-peak weighting",
         supplier_openrouter_plan: "Pay-as-you-go API",
         supplier_th_rank: "#",
