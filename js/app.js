@@ -27,7 +27,7 @@ const state = {
     supplierMethodology: null,
     channelStats: null,
     useMinChannelPrice: false,
-    priceUnit: 'M',
+    priceUnit: '100M',
 };
 
 const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
