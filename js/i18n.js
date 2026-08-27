@@ -18,6 +18,20 @@ const translations = {
         avg_intelligence: "能力均分",
         last_updated: "更新时间",
         top_models: "性价比 Top 3",
+
+        // Pareto chart
+        pareto_eyebrow: "性价比 Top 10 · 帕累托前沿",
+        pareto_title: "能力与价格 / 速度对比",
+        pareto_desc: "基于 Artificial Analysis 能力指数与 OpenRouter 价格；蓝线为帕累托前沿（同维度下更优配置）",
+        pareto_tab_price: "能力 vs 价格",
+        pareto_tab_speed: "能力 vs 速度",
+        pareto_aa_link: "在 AA 查看完整对比 →",
+        pareto_axis_intelligence: "AA 能力指数",
+        pareto_axis_price: "混合价格 ($/M tokens)",
+        pareto_axis_speed: "输出速度 (tok/s)",
+        pareto_better_corner_price: "左上更优 ↑",
+        pareto_better_corner_speed: "右上更优 ↑",
+        pareto_click_detail: "点击查看详情",
         
         // Filters
         search_placeholder: "搜索模型...",
@@ -122,6 +136,20 @@ const translations = {
         avg_intelligence: "Intel Avg",
         last_updated: "Last Updated",
         top_models: "Top 3 Value Models",
+
+        // Pareto chart
+        pareto_eyebrow: "Top 10 Value · Pareto Frontier",
+        pareto_title: "Intelligence vs Price / Speed",
+        pareto_desc: "AA Intelligence Index vs OpenRouter pricing; blue line = Pareto frontier (non-dominated configs)",
+        pareto_tab_price: "Intel vs Price",
+        pareto_tab_speed: "Intel vs Speed",
+        pareto_aa_link: "Full comparison on AA →",
+        pareto_axis_intelligence: "AA Intelligence Index",
+        pareto_axis_price: "Blended price ($/M tokens)",
+        pareto_axis_speed: "Output speed (tok/s)",
+        pareto_better_corner_price: "Better ↑ left",
+        pareto_better_corner_speed: "Better ↑ right",
+        pareto_click_detail: "Click for details",
         
         // Filters
         search_placeholder: "Search models...",
@@ -141,8 +169,6 @@ const translations = {
         th_detail: "Detail",
         loading: "Loading...",
         github_star: "Star",
-        nav_models: "Model Rankings",
-        nav_plans: "Coding Plans",
         style_label: "Style",
         style_spacex: "SpaceX",
         style_editorial: "Minimal",

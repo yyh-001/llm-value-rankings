@@ -4803,3 +4803,219 @@ body.modal-open {
         animation: none !important;
     }
 }
+
+/* ===== Pareto chart (top 10) ===== */
+.pareto-section {
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.pareto-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pareto-eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.pareto-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.pareto-desc {
+    margin: 0.45rem 0 0;
+    max-width: 52rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.pareto-header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.65rem;
+}
+
+.pareto-tabs {
+    display: inline-flex;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.pareto-tab {
+    padding: 0.45rem 0.85rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+}
+
+.pareto-tab:hover {
+    color: var(--text-primary);
+}
+
+.pareto-tab.active {
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: inset 0 -2px 0 var(--accent-primary);
+}
+
+.pareto-aa-link {
+    font-size: 0.8rem;
+    color: #22d3ee;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.pareto-aa-link:hover {
+    text-decoration: underline;
+}
+
+.pareto-chart-wrap {
+    position: relative;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-secondary);
+    padding: 0.75rem 0.5rem 0.25rem;
+}
+
+.pareto-chart-canvas {
+    width: 100%;
+    min-height: 320px;
+}
+
+.pareto-svg {
+    display: block;
+    overflow: visible;
+}
+
+.pareto-bg {
+    fill: var(--bg-tertiary);
+    stroke: var(--border-subtle);
+    stroke-width: 1;
+}
+
+.pareto-grid-line {
+    stroke: var(--border-subtle);
+    stroke-width: 1;
+    stroke-dasharray: 4 6;
+}
+
+.pareto-axis {
+    stroke: var(--border-color);
+    stroke-width: 1.5;
+}
+
+.pareto-axis-tick {
+    fill: var(--text-muted);
+    font-size: 10px;
+    font-family: var(--font-mono);
+}
+
+.pareto-axis-title {
+    fill: var(--text-secondary);
+    font-size: 11px;
+    font-family: var(--font-sans);
+}
+
+.pareto-hint-corner {
+    fill: var(--text-muted);
+    font-size: 10px;
+    font-family: var(--font-sans);
+}
+
+.pareto-frontier {
+    stroke: #38bdf8;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.85;
+}
+
+.pareto-point {
+    cursor: pointer;
+}
+
+.pareto-point-dot {
+    transition: r 0.15s ease, filter 0.15s ease;
+}
+
+.pareto-point:hover .pareto-point-dot,
+.pareto-point:focus-visible .pareto-point-dot {
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.55));
+}
+
+.pareto-point-label {
+    fill: var(--text-secondary);
+    font-size: 9px;
+    font-family: var(--font-mono);
+    pointer-events: none;
+}
+
+.pareto-tooltip {
+    position: absolute;
+    z-index: 5;
+    min-width: 160px;
+    max-width: 220px;
+    padding: 0.55rem 0.65rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    pointer-events: none;
+    box-shadow: var(--shadow-lg);
+}
+
+.pareto-tooltip strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.82rem;
+}
+
+.pareto-tooltip span {
+    display: block;
+    color: var(--text-secondary);
+}
+
+.pareto-tooltip-hint {
+    margin-top: 0.25rem !important;
+    font-size: 0.7rem !important;
+    color: var(--text-muted) !important;
+}
+
+@media (max-width: 720px) {
+    .pareto-header-actions {
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .pareto-tabs {
+        width: 100%;
+    }
+
+    .pareto-tab {
+        flex: 1;
+        text-align: center;
+    }
+
+    .pareto-aa-link {
+        text-align: center;
+    }
+}

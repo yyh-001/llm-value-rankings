@@ -247,6 +247,7 @@ function initI18n() {
         updateStats();
         updateScoringDisplay();
         updateResultsCount();
+        window.ParetoChart?.refreshI18n?.();
         const modelId = elements.modelModal?.dataset?.currentModel;
         if (modelId && !elements.modelModal?.classList.contains('hidden')) {
             showModelDetail(modelId);
@@ -289,6 +290,7 @@ async function loadData() {
         updateScoringDisplay();
         populateProviders();
         renderPodium();
+        window.ParetoChart?.render?.(state.models);
         filterAndSort();
     } catch (error) {
         console.error('Error loading data:', error);
@@ -975,6 +977,10 @@ function initEventListeners() {
         const trigger = e.target.closest('.btn-detail, .model-card, .podium-card');
         if (!trigger?.dataset.modelId) return;
         showModelDetail(trigger.dataset.modelId);
+    });
+
+    document.addEventListener('pareto-model-select', (e) => {
+        if (e.detail?.modelId) showModelDetail(e.detail.modelId);
     });
 }
 
