@@ -290,7 +290,11 @@ async function loadData() {
         updateScoringDisplay();
         populateProviders();
         renderPodium();
-        window.ParetoChart?.render?.(state.models);
+        try {
+            window.ParetoChart?.render?.(state.models);
+        } catch (err) {
+            console.error('Pareto chart render failed:', err);
+        }
         filterAndSort();
     } catch (error) {
         console.error('Error loading data:', error);

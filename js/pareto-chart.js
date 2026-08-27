@@ -147,7 +147,8 @@
             : (v) => scaleLinear(v, xMin, xMax, PADDING.left, PADDING.left + innerW);
         const yScale = (v) => scaleLinear(v, yLo, yHi, PADDING.top + innerH, PADDING.top);
 
-        const cornerHint = mode === 'price' ? t('pareto_better_corner_price') : t('pareto_better_corner_speed');
+        const xAxisLabel = mode === 'price' ? t('pareto_axis_price') : t('pareto_axis_speed');
+        const yAxisLabel = t('pareto_axis_intelligence');
 
         const gridY = 4;
         const gridLines = Array.from({ length: gridY + 1 }, (_, i) => {
