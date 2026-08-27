@@ -43,6 +43,9 @@ const translations = {
         channel_summary_toggle: "渠道",
         channel_summary_stats: "共 {channels} 个渠道 · {plans} 个套餐 · 覆盖 {models} 个上榜模型",
         channel_plan_count: "{count} 个套餐",
+        price_unit_m: "/M",
+        price_unit_100m: "/亿",
+        price_unit_group_label: "价格单位",
         
         // Table
         th_rank: "排名",
@@ -167,6 +170,9 @@ const translations = {
         channel_summary_toggle: "Channels",
         channel_summary_stats: "{channels} channels · {plans} plans · {models} ranked models covered",
         channel_plan_count: "{count} plans",
+        price_unit_m: "/M",
+        price_unit_100m: "/100M",
+        price_unit_group_label: "Price unit",
         
         // Table
         th_rank: "Rank",

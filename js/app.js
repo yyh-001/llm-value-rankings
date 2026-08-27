@@ -27,9 +27,11 @@ const state = {
     supplierMethodology: null,
     channelStats: null,
     useMinChannelPrice: false,
+    priceUnit: 'M',
 };
 
 const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
+const PRICE_UNIT_KEY = 'ui-price-unit';
 
 const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai'];
 
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initResponsive();
     initVersion();
     initMinChannelPriceToggle();
+    initPriceUnitToggle();
     await loadData();
     initEventListeners();
 });
@@ -91,6 +94,8 @@ function initElements() {
     elements.minChannelPriceToggle = document.getElementById('min-channel-price-toggle');
     elements.channelSummaryCount = document.getElementById('channel-summary-count');
     elements.channelSummaryBody = document.getElementById('channel-summary-body');
+    elements.priceUnitToggle = document.getElementById('price-unit-toggle');
+    elements.priceColumnHeader = document.querySelector('.col-price');
     elements.rankingsCards = document.getElementById('rankings-cards');
     elements.tableContainer = document.querySelector('.table-container');
 }
@@ -271,6 +276,76 @@ function initMinChannelPriceToggle() {
     });
 }
 
+function initPriceUnitToggle() {
+    const group = elements.priceUnitToggle;
+    if (!group) return;
+
+    const saved = localStorage.getItem(PRICE_UNIT_KEY);
+    state.priceUnit = saved === 'M' ? 'M' : '100M';
+
+    group.querySelectorAll('.price-unit-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const unit = btn.dataset.unit;
+            if (!unit || unit === state.priceUnit) return;
+            state.priceUnit = unit;
+            localStorage.setItem(PRICE_UNIT_KEY, unit);
+            refreshPriceUnitUI();
+        });
+    });
+
+    updatePriceUnitButtons();
+    updatePriceColumnHeader();
+}
+
+function getPriceUnitScale() {
+    return state.priceUnit === 'M' ? 1 : 100;
+}
+
+function getPriceUnitSuffix() {
+    const key = state.priceUnit === 'M' ? 'price_unit_m' : 'price_unit_100m';
+    return window.i18n?.t(key) || (state.priceUnit === 'M' ? '/M' : '/100M');
+}
+
+function formatScaledMoney(amount, currency) {
+    const value = Number(amount);
+    if (Number.isNaN(value)) return '-';
+    if (currency === 'cny') {
+        if (value >= 100) return `¥${value.toFixed(1)}`;
+        if (value >= 1) return `¥${value.toFixed(2)}`;
+        return `¥${value.toFixed(3)}`;
+    }
+    if (value < 1) return `$${value.toFixed(2)}`;
+    if (value < 10) return `$${value.toFixed(1)}`;
+    return `$${Math.round(value)}`;
+}
+
+function updatePriceUnitButtons() {
+    if (!elements.priceUnitToggle) return;
+    elements.priceUnitToggle.setAttribute('aria-label', window.i18n.t('price_unit_group_label'));
+    elements.priceUnitToggle.querySelectorAll('.price-unit-btn').forEach((btn) => {
+        btn.classList.toggle('is-active', btn.dataset.unit === state.priceUnit);
+    });
+}
+
+function updatePriceColumnHeader() {
+    if (!elements.priceColumnHeader) return;
+    const label = window.i18n.t('th_price');
+    const unit = getPriceUnitSuffix();
+    elements.priceColumnHeader.textContent = `${label} (${unit.replace(/^\//, '')})`;
+}
+
+function refreshPriceUnitUI() {
+    updatePriceUnitButtons();
+    updatePriceColumnHeader();
+    renderRankings();
+    renderPodium();
+    refreshParetoChart();
+    const modelId = elements.modelModal?.dataset?.currentModel;
+    if (modelId && !elements.modelModal?.classList.contains('hidden')) {
+        showModelDetail(modelId);
+    }
+}
+
 // i18n
 function initI18n() {
     window.i18n.init();
@@ -281,6 +356,8 @@ function initI18n() {
         updateScoringDisplay();
         updateResultsCount();
         renderChannelSummary();
+        updatePriceUnitButtons();
+        updatePriceColumnHeader();
         window.ParetoChart?.refreshI18n?.();
         const modelId = elements.modelModal?.dataset?.currentModel;
         if (modelId && !elements.modelModal?.classList.contains('hidden')) {
@@ -582,14 +659,13 @@ function formatValueScore(score) {
 
 function formatPrice(usd) {
     if (usd == null || Number.isNaN(Number(usd))) return '-';
-    const price = Number(usd);
+    const suffix = getPriceUnitSuffix();
     if (window.i18n.currentLang === 'zh') {
-        const cny = price * CONFIG.USD_TO_CNY;
-        if (cny >= 100) return `¥${cny.toFixed(1)}`;
-        if (cny >= 1) return `¥${cny.toFixed(2)}`;
-        return `¥${cny.toFixed(3)}`;
+        const cny = Number(usd) * CONFIG.USD_TO_CNY * getPriceUnitScale();
+        return `${formatScaledMoney(cny, 'cny')}${suffix}`;
     }
-    return `$${price.toFixed(2)}`;
+    const price = Number(usd) * getPriceUnitScale();
+    return `${formatScaledMoney(price, 'usd')}${suffix}`;
 }
 
 function getOpenRouterModelUrl(modelId) {
@@ -811,19 +887,18 @@ function getSuppliersForModel(modelId, model) {
 
 function formatCnyPerM(cny) {
     if (cny == null || Number.isNaN(Number(cny))) return '-';
-    const price = Number(cny);
-    if (price >= 100) return `¥${price.toFixed(1)}`;
-    if (price >= 1) return `¥${price.toFixed(2)}`;
-    return `¥${price.toFixed(3)}`;
+    const suffix = getPriceUnitSuffix();
+    return `${formatScaledMoney(Number(cny) * getPriceUnitScale(), 'cny')}${suffix}`;
 }
 
 function formatSupplierCost(value) {
     if (value == null) return '<span class="supplier-cost-dash">—</span>';
     if (window.i18n.currentLang !== 'zh') {
+        const suffix = getPriceUnitSuffix();
         const formatUsd = (cny) => {
-            const usd = Number(cny) / CONFIG.USD_TO_CNY;
+            const usd = (Number(cny) / CONFIG.USD_TO_CNY) * getPriceUnitScale();
             if (Number.isNaN(usd)) return '-';
-            return `$${usd.toFixed(2)}`;
+            return `${formatScaledMoney(usd, 'usd')}${suffix}`;
         };
         if (Array.isArray(value)) {
             return `<span class="supplier-cost">≈${formatUsd(value[0])}–${formatUsd(value[1])}</span>`;
@@ -1320,3 +1395,5 @@ window.showModelDetail = showModelDetail;
 window.getMinChannelPriceUsd = getMinChannelPriceUsd;
 window.getAdjustedRawValueScore = getAdjustedRawValueScore;
 window.getChartPriceSupplierLabel = getChartPriceSupplierLabel;
+window.getPriceUnitScale = getPriceUnitScale;
+window.getPriceUnitSuffix = getPriceUnitSuffix;

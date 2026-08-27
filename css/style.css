@@ -1028,6 +1028,53 @@ a:hover {
     font-weight: 600;
 }
 
+.price-unit-toggle {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid rgba(240, 240, 250, 0.28);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.price-unit-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+    padding: 0.55rem 0.7rem;
+    min-height: 2.75rem;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+}
+
+.price-unit-btn + .price-unit-btn {
+    border-left: 1px solid rgba(240, 240, 250, 0.18);
+}
+
+.price-unit-btn.is-active {
+    color: var(--text-primary);
+    background: rgba(99, 102, 241, 0.18);
+}
+
+.price-unit-btn:hover:not(.is-active) {
+    color: var(--text-secondary);
+    background: rgba(240, 240, 250, 0.06);
+}
+
+[data-theme="light"] .price-unit-toggle {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.22);
+}
+
+[data-theme="light"] .price-unit-btn + .price-unit-btn {
+    border-left-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .price-unit-btn.is-active {
+    background: rgba(99, 102, 241, 0.12);
+}
+
 /* ===== Rankings Table ===== */
 .rankings {
     margin-bottom: 2.5rem;
@@ -3535,6 +3582,19 @@ body.modal-open {
     background: var(--bg-secondary);
     box-shadow: var(--shadow-lg);
     backdrop-filter: none;
+}
+
+[data-style="classic"] .price-unit-toggle {
+    border-radius: var(--radius-md);
+    border-color: var(--border-color);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+[data-style="classic"] .price-unit-btn.is-active {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--accent-primary);
 }
 
 [data-style="classic"] .table-container {

@@ -104,7 +104,9 @@
     }
 
     function formatChartPrice(usd, withUnit) {
-        const price = Number(usd);
+        const scale = typeof window.getPriceUnitScale === 'function' ? window.getPriceUnitScale() : 1;
+        const suffix = typeof window.getPriceUnitSuffix === 'function' ? window.getPriceUnitSuffix() : '/M';
+        const price = Number(usd) * scale;
         if (Number.isNaN(price)) return '—';
         if (isZh()) {
             const cny = price * USD_TO_CNY;
@@ -112,12 +114,12 @@
             if (cny >= 100) text = `¥${cny.toFixed(1)}`;
             else if (cny >= 1) text = `¥${cny.toFixed(2)}`;
             else text = `¥${cny.toFixed(3)}`;
-            return withUnit ? `${text}/M` : text;
+            return withUnit ? `${text}${suffix}` : text;
         }
-        if (price < 1) return withUnit ? `$${price.toFixed(2)}/M` : `$${price.toFixed(2)}`;
-        if (price < 10) return withUnit ? `$${price.toFixed(1)}/M` : `$${price.toFixed(1)}`;
+        if (price < 1) return withUnit ? `$${price.toFixed(2)}${suffix}` : `$${price.toFixed(2)}`;
+        if (price < 10) return withUnit ? `$${price.toFixed(1)}${suffix}` : `$${price.toFixed(1)}`;
         const rounded = `$${Math.round(price)}`;
-        return withUnit ? `${rounded}/M` : rounded;
+        return withUnit ? `${rounded}${suffix}` : rounded;
     }
 
     function getPoint(model, index) {
