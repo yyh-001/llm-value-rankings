@@ -436,7 +436,7 @@ def scrape_model_page_performance(model_id, session=None):
     for value in re.findall(r'p50_latency(?:_last_30m)?":(\d+(?:\.\d+)?)', payload):
         latencies.append(normalize_latency_seconds(float(value)))
 
-    throughput = round(max(throughputs), 1) if throughputs else None
+    throughput = round(sum(throughputs) / len(throughputs), 1) if throughputs else None
     ttft = round(min(latencies), 3) if latencies else None
     return {"throughput": throughput, "ttft": ttft}
 
@@ -480,7 +480,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     """
     Aggregate provider endpoint stats into model-level speed, TTFT, and effective price.
 
-    Speed uses the best provider p50 throughput (matches OpenRouter "best across providers").
+    Speed uses uptime-weighted average of provider p50 throughput.
     TTFT uses the lowest provider latency.
     Effective input price uses cache_hit_rate when input_cache_read is available.
     """
@@ -489,6 +489,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         healthy = list(endpoints)
 
     throughputs = []
+    throughput_weights = []
     latencies = []
     prompt_prices = []
     prompt_weights = []
@@ -532,6 +533,7 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
         throughput = parse_p50_stat(ep.get("throughput_last_30m"))
         if throughput is not None and throughput > 0:
             throughputs.append(throughput)
+            throughput_weights.append(weight)
 
         latency = normalize_latency_seconds(parse_p50_stat(ep.get("latency_last_30m")))
         if latency is not None and latency > 0:
@@ -549,10 +551,10 @@ def aggregate_endpoint_metrics(endpoints, cache_hit_rate=DEFAULT_CACHE_HIT_RATE)
     if prompt_effective is not None and completion_list is not None:
         blended_effective = blend_token_price(prompt_effective, completion_list)
 
-    throughput_best = max(throughputs) if throughputs else None
+    throughput_weighted = weighted_average(throughputs, throughput_weights)
 
     return {
-        "throughput": round(throughput_best, 1) if throughput_best is not None else None,
+        "throughput": round(throughput_weighted, 1) if throughput_weighted is not None else None,
         "ttft": min(latencies) if latencies else None,
         "prompt_list": prompt_list,
         "completion_list": completion_list,
@@ -843,12 +845,7 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
 
         page_stats = page_stats_map.get(model_id) or {}
         intelligence = lookup_intelligence_score(model_id, intelligence_map)
-        speed_candidates = [
-            endpoint_metrics.get("throughput"),
-            page_stats.get("throughput"),
-        ]
-        speed_values = [value for value in speed_candidates if value is not None and value > 0]
-        speed = max(speed_values) if speed_values else None
+        speed = endpoint_metrics.get("throughput") or page_stats.get("throughput")
         ttft = endpoint_metrics.get("ttft") or page_stats.get("ttft")
 
         if "distill" in model_id.lower():
