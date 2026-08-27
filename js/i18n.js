@@ -37,8 +37,6 @@ const translations = {
         th_detail: "详情",
         loading: "加载中...",
         github_star: "Star",
-        nav_models: "模型性价比",
-        nav_plans: "Coding Plan",
         style_label: "风格",
         style_spacex: "SpaceX",
         style_editorial: "极简",
