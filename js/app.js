@@ -306,6 +306,14 @@ function getPriceUnitSuffix() {
     return window.i18n?.t(key) || (state.priceUnit === 'M' ? '/M' : '/100M');
 }
 
+function getPriceUnitChartAxisLabel(short = false) {
+    const isLarge = state.priceUnit !== 'M';
+    const key = short
+        ? (isLarge ? 'pareto_axis_price_short_100m' : 'pareto_axis_price_short_m')
+        : (isLarge ? 'pareto_axis_price_100m' : 'pareto_axis_price_m');
+    return window.i18n?.t(key) || (short ? 'Price' : 'Blended price');
+}
+
 function formatScaledMoney(amount, currency) {
     const value = Number(amount);
     if (Number.isNaN(value)) return '-';
@@ -1397,3 +1405,4 @@ window.getAdjustedRawValueScore = getAdjustedRawValueScore;
 window.getChartPriceSupplierLabel = getChartPriceSupplierLabel;
 window.getPriceUnitScale = getPriceUnitScale;
 window.getPriceUnitSuffix = getPriceUnitSuffix;
+window.getPriceUnitChartAxisLabel = getPriceUnitChartAxisLabel;

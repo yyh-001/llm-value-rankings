@@ -226,7 +226,14 @@
     }
 
     function formatXTick(price) {
-        return formatChartPrice(price, false);
+        return formatChartPrice(price, true);
+    }
+
+    function getXAxisLabel(mobile) {
+        if (typeof window.getPriceUnitChartAxisLabel === 'function') {
+            return window.getPriceUnitChartAxisLabel(mobile);
+        }
+        return t(mobile ? 'pareto_axis_price_short_m' : 'pareto_axis_price_m');
     }
 
     function logTicks(min, max, count) {
@@ -347,9 +354,7 @@
 
         const pointLabels = renderPointLabels(points, frontier, layout, xScale, yScale, pad, innerW, dotScale);
 
-        const xAxisLabel = layout.mobile
-            ? (isZh() ? t('pareto_axis_price_short') : t('pareto_axis_price_short'))
-            : t('pareto_axis_price');
+        const xAxisLabel = getXAxisLabel(layout.mobile);
         const svgClass = layout.mobile ? 'pareto-svg pareto-svg-mobile' : 'pareto-svg';
         const svgSize = 'width="100%" height="auto" preserveAspectRatio="xMidYMid meet"';
         const frontierFilter = layout.mobile ? '' : ' filter="url(#pareto-glow)"';

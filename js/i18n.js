@@ -27,11 +27,13 @@ const translations = {
         pareto_legend_top3: "Top 3",
         pareto_legend_rest: "#4–30",
         pareto_axis_intelligence: "AA 能力指数",
-        pareto_axis_price: "混合价格 (¥/百万 tokens)",
+        pareto_axis_price_m: "混合价格 (¥/百万 tokens)",
+        pareto_axis_price_100m: "混合价格 (¥/亿 tokens)",
         pareto_axis_speed: "输出速度 (tok/s)",
         pareto_better_corner_price: "左上更优 ↑",
         pareto_scroll_hint: "左右滑动查看完整图表 · 点击圆点看详情",
-        pareto_axis_price_short: "价格 (¥/百万)",
+        pareto_axis_price_short_m: "价格 (¥/百万)",
+        pareto_axis_price_short_100m: "价格 (¥/亿)",
         pareto_click_detail: "点击查看详情",
         
         // Filters
@@ -154,11 +156,13 @@ const translations = {
         pareto_legend_top3: "Top 3",
         pareto_legend_rest: "#4–30",
         pareto_axis_intelligence: "AA Intelligence Index",
-        pareto_axis_price: "Blended price ($/M tokens)",
+        pareto_axis_price_m: "Blended price ($/M tokens)",
+        pareto_axis_price_100m: "Blended price ($/100M tokens)",
         pareto_axis_speed: "Output speed (tok/s)",
         pareto_better_corner_price: "Better ↑ left",
         pareto_scroll_hint: "Swipe to explore · tap a dot for details",
-        pareto_axis_price_short: "Price ($/M)",
+        pareto_axis_price_short_m: "Price ($/M)",
+        pareto_axis_price_short_100m: "Price ($/100M)",
         pareto_click_detail: "Click for details",
         
         // Filters
