@@ -536,88 +536,6 @@ function formatSupplierCost(value) {
     return `<span class="supplier-cost">≈¥${value}</span>`;
 }
 
-function renderSupplierRowsHtml(suppliers) {
-    if (!suppliers.length) return '';
-
-    const rows = suppliers.map((entry) => {
-        const rankClass = entry.rank === 1 ? 'supplier-rank-best' : '';
-        const label = [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
-        const badge = entry.badge ? `<span class="supplier-badge">${escapeHtml(entry.badge)}</span>` : '';
-        const link = entry.url
-            ? `<a class="supplier-pricing-link" href="${escapeAttr(entry.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(window.i18n.t('supplier_visit'))}</a>`
-            : '';
-        return `
-            <tr class="supplier-pricing-row ${rankClass}">
-                <td class="supplier-col-rank">${entry.rank}</td>
-                <td class="supplier-col-channel">
-                    <span class="supplier-channel-name">${escapeHtml(label)}</span>
-                    ${badge}
-                </td>
-                <td class="supplier-col-off">${formatSupplierCost(entry.cost_off_peak)}</td>
-                <td class="supplier-col-peak">${formatSupplierCost(entry.cost_peak)}</td>
-                <td class="supplier-col-link">${link}</td>
-            </tr>
-        `;
-    }).join('');
-
-    return `
-        <tr class="supplier-section-row">
-            <td colspan="10">
-                <div class="supplier-pricing-block">
-                    <div class="supplier-pricing-header">
-                        <span class="supplier-pricing-title">${window.i18n.t('supplier_pricing_title')}</span>
-                        <span class="supplier-pricing-meta">${window.i18n.t('supplier_pricing_unit')}</span>
-                    </div>
-                    <table class="supplier-pricing-table">
-                        <thead>
-                            <tr>
-                                <th>${window.i18n.t('supplier_th_rank')}</th>
-                                <th>${window.i18n.t('supplier_th_channel')}</th>
-                                <th>${window.i18n.t('supplier_th_off')}</th>
-                                <th>${window.i18n.t('supplier_th_peak')}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>${rows}</tbody>
-                    </table>
-                    <p class="supplier-pricing-note">${window.i18n.t('supplier_pricing_note')}</p>
-                </div>
-            </td>
-        </tr>
-    `;
-}
-
-function renderSupplierCardHtml(suppliers) {
-    if (!suppliers.length) return '';
-
-    const items = suppliers.map((entry) => {
-        const label = [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
-        const badge = entry.badge ? ` <span class="supplier-badge">${escapeHtml(entry.badge)}</span>` : '';
-        return `
-            <li class="supplier-card-item${entry.rank === 1 ? ' supplier-rank-best' : ''}">
-                <span class="supplier-card-rank">#${entry.rank}</span>
-                <div class="supplier-card-main">
-                    <span class="supplier-card-label">${escapeHtml(label)}${badge}</span>
-                    <span class="supplier-card-prices">
-                        ${formatSupplierCost(entry.cost_off_peak)}
-                        <span class="supplier-card-sep">/</span>
-                        ${formatSupplierCost(entry.cost_peak)}
-                    </span>
-                </div>
-            </li>
-        `;
-    }).join('');
-
-    return `
-        <div class="supplier-pricing-block supplier-pricing-card">
-            <div class="supplier-pricing-header">
-                <span class="supplier-pricing-title">${window.i18n.t('supplier_pricing_title')}</span>
-            </div>
-            <ul class="supplier-card-list">${items}</ul>
-        </div>
-    `;
-}
-
 function getPageModels() {
     const start = (state.currentPage - 1) * CONFIG.ITEMS_PER_PAGE;
     const end = start + CONFIG.ITEMS_PER_PAGE;
@@ -648,7 +566,6 @@ function renderMobileCards() {
         const intelClass = getIntelligenceClass(model.intelligence_score);
         const priceClass = getPriceClass(model.pricing.blended);
         const valueScore = model.value_score || 0;
-        const suppliers = getSuppliersForModel(model.id);
 
         return `
             <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
@@ -683,7 +600,6 @@ function renderMobileCards() {
                         <strong class="price-display ${priceClass}">${formatPrice(model.pricing.blended)}</strong>
                     </span>
                 </div>
-                ${renderSupplierCardHtml(suppliers)}
                 <p class="model-card-hint">${window.i18n.t('card_tap_hint')}</p>
             </article>
         `;
@@ -735,9 +651,8 @@ function renderTable() {
         const valueScore = model.value_score || 0;
         const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
         const topRowClass = rank <= 3 ? 'top-row' : '';
-        const suppliers = getSuppliersForModel(model.id);
-        
-        const mainRow = `
+
+        return `
             <tr class="fade-in model-main-row ${topRowClass}" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
                 <td class="col-rank">
                     <span class="rank-badge ${rankClass}">${rank}</span>
@@ -777,8 +692,6 @@ function renderTable() {
                 </td>
             </tr>
         `;
-
-        return mainRow + renderSupplierRowsHtml(suppliers);
     }).join('');
     
     renderPagination();
@@ -1059,9 +972,6 @@ function initEventListeners() {
 
     // Model detail clicks via event delegation
     document.addEventListener('click', (e) => {
-        if (e.target.closest('.supplier-pricing-block, .supplier-pricing-link')) {
-            return;
-        }
         const trigger = e.target.closest('.btn-detail, .model-card, .podium-card');
         if (!trigger?.dataset.modelId) return;
         showModelDetail(trigger.dataset.modelId);
