@@ -9,6 +9,7 @@ on:
     branches: [ main ]
     paths:
       - 'scripts/**'
+      - '.github/workflows/update-data.yml'
 
 permissions:
   contents: write
