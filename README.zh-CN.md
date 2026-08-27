@@ -23,8 +23,10 @@
 LLM Value Rankings 综合以下三项指标，对 **300+ 大模型** 进行性价比排名：
 
 - **能力** — [Artificial Analysis](https://artificialanalysis.ai) Intelligence Index（OpenRouter 内嵌基准）
-- **速度** — 输出 Token 速度（tokens/s）
-- **价格** — [OpenRouter](https://openrouter.ai) 输入/输出混合均价
+- **速度** — 输出 Token 速度（tokens/s，各 Provider 按 uptime 加权平均）
+- **价格** — [OpenRouter](https://openrouter.ai) 输入/输出混合均价，并支持 **5 个渠道** 的套餐/API 比价
+
+除 OpenRouter 按量价外，站点还会爬取 **OpenCode Go**、**Command Code GOAT**、**DeepSeek 官方 API**、**GPT Plus** 等渠道价，在模型详情中并排展示；默认开启 **「按最低渠道价排名」**，用各模型可获得的最低价重算性价比与排序。
 
 每日自动更新，帮你快速找到**每美元能买到最多 AI 能力**的模型。
 
@@ -37,11 +39,16 @@ LLM Value Rankings 综合以下三项指标，对 **300+ 大模型** 进行性�
 | | 功能 | 说明 |
 |:---:|------|------|
 | 📊 | **智能排名** | `f(能力) × 速度^0.8 / 价格`，低于 25 分或变换后 ≤0 不参与排名 |
+| 💰 | **多渠道比价** | OpenCode Go、Command Code、DeepSeek 官方 API、GPT Plus + OpenRouter，详情弹窗按最低价排序 |
+| 🔄 | **最低渠道价排名** | 默认开启：用各模型最低渠道价重算性价比、价格列与排序（可关闭，偏好会记住） |
+| 📋 | **渠道一览** | 搜索栏旁可折叠查看当前收录的渠道数、套餐数与覆盖模型数 |
+| 📉 | **帕累托前沿图** | Top 30 能力 vs 价格散点图；悬停显示该价格对应的渠道商 |
 | 📈 | **较昨日变化** | 显示排名升降（`↑2` / `↓1` / `新`） |
 | 🏅 | **Top 3 展示** | 首页突出性价比最高的三个模型 |
 | 🔍 | **实时搜索** | 按模型名称或 ID 过滤 |
 | 🌍 | **中英双语** | 界面一键切换中文 / English |
 | 🌙 | **暗色模式** | 跟随系统偏好，支持手动切换 |
+| 🎨 | **多套主题** | 经典 / SpaceX / Apple / EVA / 极简等风格页 |
 | ⭐ | **GitHub Star** | 右上角一键 Star |
 | 📱 | **响应式布局** | 移动端卡片视图，桌面端表格视图 |
 | 🤖 | **自动更新** | GitHub Actions 每日抓取最新数据 |
@@ -75,7 +82,7 @@ python -m http.server 8080
 ```bash
 pip install -r scripts/requirements.txt
 python scripts/fetch_data.py
-git add data/models.json data/rank_history.json
+git add data/models.json data/rank_history.json data/coding_plans.json
 git commit -m "chore: update model data"
 git push
 ```
@@ -129,20 +136,49 @@ f(x) = (均分 - (均分 - x)²)²          当 x < 均分（内层 ≤ 0 时排
 
 ---
 
+## 多渠道比价
+
+主榜默认使用 **各模型最低渠道价** 参与性价比计算（可在搜索栏旁关闭，恢复 OpenRouter 混合价排名）。
+
+### 收录渠道（5 个）
+
+| 渠道 | 类型 | 说明 |
+|------|------|------|
+| **OpenRouter** | 按量 API | 来自 `models.json` 的 uptime 加权混合价 |
+| **OpenCode Go** | $10/月 订阅 | 解析官方文档全量套餐，按 slug 匹配上榜模型 |
+| **Command Code GOAT** | $10/月 订阅 | 解析 GOAT 套餐表，按模型名/slug 匹配 |
+| **DeepSeek 官方 API** | 按量 API | 峰谷加权均价（7h 高峰 + 17h 低谷，CST） |
+| **GPT Plus** | Codex 订阅 | 按 OpenAI Codex 定价与周额度估算等效 $/M |
+
+渠道价统一折算为 **¥/M tokens**（95% 缓存命中、输入:输出 3:1），在模型详情中与 OpenRouter 价一并展示，**按最低价排序**。
+
+### 匹配与范围
+
+- 仅对 **已上榜**（有 `rank`）的模型挂载渠道价；套餐内模型通过 vendor slug / 名称与 OpenRouter 模型 ID 严格匹配
+- 智谱 GLM Coding Plan、Kimi 官方会员/API 等积分制或会员制套餐**未纳入**渠道比价（与主榜按量计价口径不一致）
+- 数据由 `scripts/fetch_coding_plans.py` 生成，写入 `data/coding_plans.json`
+
+---
+
 ## 项目结构
 
 ```
 llm-value-rankings/
-├── index.html                  # 主页面
-├── css/style.css               # 样式（含暗色模式）
+├── index.html                  # 主页面（经典主题）
+├── spacex.html / apple.html …  # 其他主题入口
+├── css/style.css               # 样式（含暗色模式、多主题）
 ├── js/
-│   ├── app.js                  # 主逻辑
+│   ├── app.js                  # 主逻辑（排名、渠道价、详情弹窗）
+│   ├── pareto-chart.js         # 帕累托前沿图
 │   └── i18n.js                 # 国际化
 ├── data/
 │   ├── models.json             # 模型数据（自动更新）
+│   ├── coding_plans.json       # 渠道套餐与按模型索引（自动更新）
 │   └── rank_history.json       # 每日排名快照
 ├── scripts/
-│   ├── fetch_data.py           # 数据抓取与排名计算
+│   ├── fetch_data.py           # 模型数据抓取与排名计算
+│   ├── fetch_coding_plans.py   # 渠道套餐爬取与匹配
+│   ├── recalc_scores.py        # 离线重算性价比（不改速度）
 │   └── requirements.txt
 └── .github/workflows/
     └── update-data.yml         # 每日自动更新
@@ -157,6 +193,7 @@ llm-value-rankings/
 | 模型列表 & 价格 | [OpenRouter API](https://openrouter.ai/docs/api-reference/models/list-models) | REST API |
 | 能力评分 | OpenRouter 内嵌 AA 基准 | 模型对象中的 `intelligence_index` 字段 |
 | 速度 & 首字延迟 | [OpenRouter](https://openrouter.ai) | Endpoints API + RSC 页面爬取 |
+| 渠道套餐价 | OpenCode / Command Code / OpenAI / DeepSeek 官方文档 | `fetch_coding_plans.py` 爬取与估算 |
 
 ---
 
