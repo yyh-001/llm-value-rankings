@@ -2,8 +2,8 @@ name: Update Model Data
 
 on:
   schedule:
-    # Run daily at 00:00 UTC
-    - cron: '0 0 * * *'
+    # 每天北京时间 01:00（UTC 17:00）
+    - cron: '0 17 * * *'
   workflow_dispatch: # Allow manual trigger
   push:
     branches: [ main ]
