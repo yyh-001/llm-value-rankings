@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-27T02:28:17.807975Z",
+  "updated_at": "2026-08-27T03:23:48.817484Z",
   "methodology": {
     "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
     "cache_hit_rate": 0.95,
@@ -598,7 +598,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_cost_per_100m": 628.7,
+      "api_reference_cost_per_100m": 628.6,
       "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
       "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
       "match": {
