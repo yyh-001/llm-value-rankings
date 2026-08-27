@@ -40,6 +40,9 @@ const translations = {
         no_results: "没有找到匹配的模型",
         min_channel_price_toggle: "按最低渠道价排名",
         min_channel_price_note: "性价比与价格列按各模型最低渠道价（含 OpenRouter）重算",
+        channel_summary_toggle: "渠道",
+        channel_summary_stats: "共 {channels} 个渠道 · {plans} 个套餐 · 覆盖 {models} 个上榜模型",
+        channel_plan_count: "{count} 个套餐",
         
         // Table
         th_rank: "排名",
@@ -161,6 +164,9 @@ const translations = {
         no_results: "No matching models found",
         min_channel_price_toggle: "Rank by lowest channel price",
         min_channel_price_note: "Value score and price use each model's lowest channel rate (incl. OpenRouter)",
+        channel_summary_toggle: "Channels",
+        channel_summary_stats: "{channels} channels · {plans} plans · {models} ranked models covered",
+        channel_plan_count: "{count} plans",
         
         // Table
         th_rank: "Rank",

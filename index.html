@@ -219,11 +219,23 @@
                 </svg>
                 <input type="text" id="search-input" placeholder="搜索模型..." data-i18n-placeholder="search_placeholder">
             </div>
-            <label class="filter-toggle" for="min-channel-price-toggle">
-                <input type="checkbox" id="min-channel-price-toggle">
-                <span class="filter-toggle-track" aria-hidden="true"><span class="filter-toggle-thumb"></span></span>
-                <span class="filter-toggle-label" data-i18n="min_channel_price_toggle">按最低渠道价排名</span>
-            </label>
+            <div class="filter-controls">
+                <label class="filter-toggle" for="min-channel-price-toggle">
+                    <input type="checkbox" id="min-channel-price-toggle">
+                    <span class="filter-toggle-track" aria-hidden="true"><span class="filter-toggle-thumb"></span></span>
+                    <span class="filter-toggle-label" data-i18n="min_channel_price_toggle">按最低渠道价排名</span>
+                </label>
+                <details class="channel-summary" id="channel-summary">
+                    <summary class="channel-summary-toggle">
+                        <span data-i18n="channel_summary_toggle">渠道</span>
+                        <span class="channel-summary-count" id="channel-summary-count"></span>
+                        <svg class="channel-summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </summary>
+                    <div class="channel-summary-panel" id="channel-summary-body"></div>
+                </details>
+            </div>
             <div class="results-count" id="results-count"></div>
         </section>
 
@@ -340,6 +352,6 @@
     <script defer src="https://events.vercount.one/js"></script>
     <script src="js/i18n.js?v=20250827p"></script>
     <script src="js/pareto-chart.js?v=20250827t"></script>
-    <script src="js/app.js?v=20250827t"></script>
+    <script src="js/app.js?v=20250827x"></script>
 </body>
 </html>

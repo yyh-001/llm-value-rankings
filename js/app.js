@@ -25,10 +25,13 @@ const state = {
     scoringMeta: null,
     supplierPlansByModel: {},
     supplierMethodology: null,
+    channelStats: null,
     useMinChannelPrice: false,
 };
 
 const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
+
+const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai'];
 
 // Provider display names
 const PROVIDER_NAMES = {
@@ -86,6 +89,8 @@ function initElements() {
     elements.podiumSection = document.getElementById('podium-section');
     elements.resultsCount = document.getElementById('results-count');
     elements.minChannelPriceToggle = document.getElementById('min-channel-price-toggle');
+    elements.channelSummaryCount = document.getElementById('channel-summary-count');
+    elements.channelSummaryBody = document.getElementById('channel-summary-body');
     elements.rankingsCards = document.getElementById('rankings-cards');
     elements.tableContainer = document.querySelector('.table-container');
 }
@@ -93,8 +98,18 @@ function initElements() {
 function initResponsive() {
     const mq = window.matchMedia(`(max-width: ${CONFIG.MOBILE_BREAKPOINT}px)`);
     state.isMobile = mq.matches;
+    if (elements.lastUpdated && state.scoringMeta?.updated_at) {
+        const formatted = formatStatUpdatedAt(new Date(state.scoringMeta.updated_at), window.i18n?.currentLang || 'zh');
+        elements.lastUpdated.textContent = formatted.text;
+        elements.lastUpdated.title = formatted.title;
+    }
     mq.addEventListener('change', (e) => {
         state.isMobile = e.matches;
+        if (elements.lastUpdated && state.scoringMeta?.updated_at) {
+            const formatted = formatStatUpdatedAt(new Date(state.scoringMeta.updated_at), window.i18n?.currentLang || 'zh');
+            elements.lastUpdated.textContent = formatted.text;
+            elements.lastUpdated.title = formatted.title;
+        }
         renderRankings();
     });
 }
@@ -265,6 +280,7 @@ function initI18n() {
         updateStats();
         updateScoringDisplay();
         updateResultsCount();
+        renderChannelSummary();
         window.ParetoChart?.refreshI18n?.();
         const modelId = elements.modelModal?.dataset?.currentModel;
         if (modelId && !elements.modelModal?.classList.contains('hidden')) {
@@ -299,14 +315,17 @@ async function loadData() {
             const plansData = await plansRes.json();
             state.supplierPlansByModel = plansData.by_model || {};
             state.supplierMethodology = plansData.methodology || null;
+            state.channelStats = buildChannelStats(plansData);
         } else {
             state.supplierPlansByModel = {};
             state.supplierMethodology = null;
+            state.channelStats = null;
         }
 
         updateStats();
         updateScoringDisplay();
         populateProviders();
+        renderChannelSummary();
         filterAndSort();
     } catch (error) {
         console.error('Error loading data:', error);
@@ -332,9 +351,26 @@ function updateStats(data) {
     }
     if (elements.lastUpdated && meta.updated_at) {
         const date = new Date(meta.updated_at);
-        const lang = window.i18n.currentLang;
-        elements.lastUpdated.textContent = date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US');
+        const formatted = formatStatUpdatedAt(date, window.i18n.currentLang);
+        elements.lastUpdated.textContent = formatted.text;
+        elements.lastUpdated.title = formatted.title;
     }
+}
+
+function formatStatUpdatedAt(date, lang) {
+    const isZh = lang === 'zh';
+    const locale = isZh ? 'zh-CN' : 'en-US';
+    const full = date.toLocaleDateString(locale);
+    const compact = window.matchMedia(`(max-width: ${CONFIG.MOBILE_BREAKPOINT}px)`).matches;
+
+    if (compact) {
+        return {
+            text: date.toLocaleDateString(locale, { month: 'numeric', day: 'numeric' }),
+            title: full,
+        };
+    }
+
+    return { text: full, title: '' };
 }
 
 function resolveAvgIntelligence(meta) {
@@ -455,6 +491,86 @@ function updateResultsCount() {
     if (!elements.resultsCount) return;
     const count = state.filteredModels.length;
     elements.resultsCount.textContent = window.i18n.t('results_count').replace('{count}', count);
+}
+
+function buildChannelStats(plansData) {
+    const plans = plansData?.plans || [];
+    const byProvider = new Map();
+
+    for (const plan of plans) {
+        const key = plan.provider;
+        if (!byProvider.has(key)) {
+            byProvider.set(key, {
+                provider: key,
+                display: plan.provider_display || key,
+                count: 1,
+                url: plan.url || null,
+            });
+        } else {
+            byProvider.get(key).count += 1;
+        }
+    }
+
+    const providers = CHANNEL_PROVIDER_ORDER
+        .filter((key) => byProvider.has(key))
+        .map((key) => byProvider.get(key));
+
+    providers.push({
+        provider: 'openrouter',
+        display: 'OpenRouter',
+        count: null,
+        url: 'https://openrouter.ai',
+    });
+
+    return {
+        providers,
+        totalChannels: providers.length,
+        totalPlans: plansData?.total_plans ?? plans.length,
+        modelsCovered: Object.keys(plansData?.by_model || {}).length,
+    };
+}
+
+function renderChannelSummary() {
+    if (!elements.channelSummaryBody) return;
+
+    const stats = state.channelStats;
+    if (!stats) {
+        if (elements.channelSummaryCount) elements.channelSummaryCount.textContent = '';
+        elements.channelSummaryBody.innerHTML = '';
+        return;
+    }
+
+    if (elements.channelSummaryCount) {
+        elements.channelSummaryCount.textContent = `(${stats.totalChannels})`;
+    }
+
+    const statsLine = window.i18n.t('channel_summary_stats')
+        .replace('{channels}', stats.totalChannels)
+        .replace('{plans}', stats.totalPlans)
+        .replace('{models}', stats.modelsCovered);
+
+    const listHtml = stats.providers.map((entry) => {
+        const meta = entry.count == null
+            ? ''
+            : window.i18n.t('channel_plan_count').replace('{count}', entry.count);
+        const nameHtml = entry.url
+            ? `<a href="${escapeAttr(entry.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(entry.display)}</a>`
+            : escapeHtml(entry.display);
+        const metaHtml = meta
+            ? `<span class="channel-summary-meta">${escapeHtml(meta)}</span>`
+            : '';
+        return `
+            <li class="channel-summary-item">
+                <span class="channel-summary-name">${nameHtml}</span>
+                ${metaHtml}
+            </li>
+        `;
+    }).join('');
+
+    elements.channelSummaryBody.innerHTML = `
+        <p class="channel-summary-stats">${escapeHtml(statsLine)}</p>
+        <ul class="channel-summary-list">${listHtml}</ul>
+    `;
 }
 
 function formatValueScore(score) {
