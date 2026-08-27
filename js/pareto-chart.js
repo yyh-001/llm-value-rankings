@@ -1,29 +1,20 @@
 /**
- * Pareto frontier chart for top-ranked models (intelligence vs price / speed).
- * Inspired by Artificial Analysis intelligence comparison; data from local models.json.
+ * Pareto frontier chart for top-ranked models (intelligence vs price).
  */
 (function () {
-    const TOP_N = 10;
-    const PADDING = { top: 28, right: 28, bottom: 52, left: 56 };
-    const RANK_COLORS = ['#f0c14b', '#c8c8d4', '#cd7f32', '#22d3ee', '#a78bfa', '#34d399', '#f472b6', '#fb923c', '#60a5fa', '#94a3b8'];
+    const TOP_N = 30;
+    const PADDING = { top: 36, right: 32, bottom: 58, left: 62 };
+    const PADDING_MOBILE = { top: 40, right: 28, bottom: 72, left: 54 };
+    const MOBILE_BREAKPOINT = 768;
+    const MOBILE_CHART_MIN_WIDTH = 720;
+    const TOP_RANK_COLORS = { 1: '#f0c14b', 2: '#c8c8d4', 3: '#cd7f32' };
+    const USD_TO_CNY = 7.25;
 
-    let activeMode = 'price';
     let chartModels = [];
     let elements = {};
 
     function t(key) {
         return window.i18n?.t(key) || key;
-    }
-
-    function toAaSlug(modelId) {
-        const part = (modelId || '').split('/').pop() || modelId;
-        return part.toLowerCase().replace(/\./g, '-');
-    }
-
-    function buildAaUrl(models) {
-        const slugs = models.map((m) => toAaSlug(m.id)).join(',');
-        const lang = window.i18n?.currentLang === 'zh' ? '/zh' : '';
-        return `https://artificialanalysis.ai${lang}?models=${encodeURIComponent(slugs)}#intelligence-comparison-tabs`;
     }
 
     function getTopModels(allModels) {
@@ -33,41 +24,86 @@
             .slice(0, TOP_N);
     }
 
-    function getPoint(model, mode) {
-        if (mode === 'speed') {
+    function isMobile() {
+        return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+    }
+
+    function isZh() {
+        return window.i18n?.currentLang === 'zh';
+    }
+
+    function getLayout(width, height) {
+        const mobile = isMobile();
+        return {
+            mobile,
+            width,
+            height,
+            padding: mobile ? PADDING_MOBILE : PADDING,
+            xTickCount: mobile ? 4 : 5,
+            yTickCount: mobile ? 4 : 5,
+            dotScale: mobile ? 1.55 : 1,
+            hitScale: mobile ? 1.65 : 1,
+        };
+    }
+
+    function getContainerWidth() {
+        if (!elements.wrap) return 720;
+        const panel = elements.wrap.closest('.pareto-panel');
+        const candidates = [
+            elements.wrap.clientWidth,
+            panel?.clientWidth ? panel.clientWidth - 48 : 0,
+            elements.section?.clientWidth ? elements.section.clientWidth - 56 : 0,
+        ];
+        for (const w of candidates) {
+            if (w > 0) return w;
+        }
+        return Math.min(1140, Math.max(480, window.innerWidth - 56));
+    }
+
+    function getChartSize() {
+        const wrapW = getContainerWidth();
+        if (isMobile()) {
             return {
-                model,
-                x: model.speed || 0,
-                y: model.intelligence_score,
-                xLabel: `${model.speed ?? '—'} tok/s`,
+                width: Math.max(MOBILE_CHART_MIN_WIDTH, wrapW),
+                height: 520,
             };
         }
+        const width = Math.max(480, wrapW);
+        return {
+            width,
+            height: Math.max(380, Math.min(500, width * 0.42)),
+        };
+    }
+
+    function formatChartPrice(usd, withUnit) {
+        const price = Number(usd);
+        if (Number.isNaN(price)) return '—';
+        if (isZh()) {
+            const cny = price * USD_TO_CNY;
+            let text;
+            if (cny >= 100) text = `¥${cny.toFixed(1)}`;
+            else if (cny >= 1) text = `¥${cny.toFixed(2)}`;
+            else text = `¥${cny.toFixed(3)}`;
+            return withUnit ? `${text}/M` : text;
+        }
+        if (price < 1) return withUnit ? `$${price.toFixed(2)}/M` : `$${price.toFixed(2)}`;
+        if (price < 10) return withUnit ? `$${price.toFixed(1)}/M` : `$${price.toFixed(1)}`;
+        const rounded = `$${Math.round(price)}`;
+        return withUnit ? `${rounded}/M` : rounded;
+    }
+
+    function getPoint(model) {
         const price = model.pricing?.blended ?? 0;
         return {
             model,
             x: Math.max(price, 0.001),
             y: model.intelligence_score,
-            xLabel: `$${price.toFixed(2)}/M`,
+            xLabel: formatChartPrice(price, true),
         };
     }
 
-    function computeFrontier(points, mode) {
-        if (!points.length) return [];
-
-        if (mode === 'price') {
-            const sorted = [...points].sort((a, b) => a.x - b.x);
-            const frontier = [];
-            let maxY = -Infinity;
-            for (const p of sorted) {
-                if (p.y > maxY) {
-                    frontier.push(p);
-                    maxY = p.y;
-                }
-            }
-            return frontier;
-        }
-
-        const sorted = [...points].sort((a, b) => b.x - a.x);
+    function computeFrontier(points) {
+        const sorted = [...points].sort((a, b) => a.x - b.x);
         const frontier = [];
         let maxY = -Infinity;
         for (const p of sorted) {
@@ -76,12 +112,7 @@
                 maxY = p.y;
             }
         }
-        return frontier.sort((a, b) => a.x - b.x);
-    }
-
-    function scaleLinear(value, min, max, rangeMin, rangeMax) {
-        if (max === min) return (rangeMin + rangeMax) / 2;
-        return rangeMin + ((value - min) / (max - min)) * (rangeMax - rangeMin);
+        return frontier;
     }
 
     function scaleLog(value, min, max, rangeMin, rangeMax) {
@@ -92,15 +123,36 @@
         return rangeMin + ((logVal - logMin) / (logMax - logMin)) * (rangeMax - rangeMin);
     }
 
+    function scaleLinear(value, min, max, rangeMin, rangeMax) {
+        if (max === min) return (rangeMin + rangeMax) / 2;
+        return rangeMin + ((value - min) / (max - min)) * (rangeMax - rangeMin);
+    }
+
     function shortName(name) {
         const cleaned = (name || '').replace(/^[^:]+:\s*/, '');
         return cleaned.length > 22 ? `${cleaned.slice(0, 20)}…` : cleaned;
     }
 
+    function rankColor(rank) {
+        return TOP_RANK_COLORS[rank] || 'rgba(148, 163, 184, 0.75)';
+    }
+
+    function formatXTick(price) {
+        return formatChartPrice(price, false);
+    }
+
+    function logTicks(min, max, count) {
+        const logMin = Math.log10(Math.max(min, 0.001));
+        const logMax = Math.log10(Math.max(max, 0.001));
+        if (logMax === logMin) return [min];
+        return Array.from({ length: count }, (_, i) => {
+            const t = i / (count - 1);
+            return 10 ** (logMin + t * (logMax - logMin));
+        });
+    }
+
     function hideTooltip() {
-        if (elements.tooltip) {
-            elements.tooltip.hidden = true;
-        }
+        if (elements.tooltip) elements.tooltip.hidden = true;
     }
 
     function showTooltip(event, point) {
@@ -110,14 +162,16 @@
         elements.tooltip.innerHTML = `
             <strong>#${rank} ${escapeHtml(shortName(m.name))}</strong>
             <span>${t('th_intelligence')}: ${m.intelligence_score}</span>
-            <span>${activeMode === 'price' ? t('th_price') : t('th_speed')}: ${escapeHtml(point.xLabel)}</span>
+            <span>${t('th_price')}: ${escapeHtml(point.xLabel)}</span>
             <span class="pareto-tooltip-hint">${t('pareto_click_detail')}</span>
         `;
         elements.tooltip.hidden = false;
-        const wrap = elements.wrap.getBoundingClientRect();
-        const x = event.clientX - wrap.left + 12;
-        const y = event.clientY - wrap.top - 8;
-        elements.tooltip.style.left = `${Math.min(x, wrap.width - 200)}px`;
+        const wrap = elements.wrap;
+        const rect = wrap.getBoundingClientRect();
+        const scrollLeft = wrap.scrollLeft || 0;
+        const x = event.clientX - rect.left + scrollLeft + 12;
+        const y = event.clientY - rect.top - 8;
+        elements.tooltip.style.left = `${Math.min(x, wrap.scrollWidth - 200)}px`;
         elements.tooltip.style.top = `${Math.max(y, 8)}px`;
     }
 
@@ -129,64 +183,108 @@
             .replace(/"/g, '&quot;');
     }
 
-    function renderSvg(points, frontier, width, height, mode) {
-        const innerW = width - PADDING.left - PADDING.right;
-        const innerH = height - PADDING.top - PADDING.bottom;
+    function renderSvg(points, frontier, layout) {
+        const { width, height, padding: pad, xTickCount, yTickCount, dotScale, hitScale } = layout;
+        const innerW = width - pad.left - pad.right;
+        const innerH = height - pad.top - pad.bottom;
         const xs = points.map((p) => p.x);
         const ys = points.map((p) => p.y);
         const xMin = Math.min(...xs);
         const xMax = Math.max(...xs);
         const yMin = Math.min(...ys);
         const yMax = Math.max(...ys);
-        const yPad = Math.max((yMax - yMin) * 0.12, 2);
+        const yPad = Math.max((yMax - yMin) * 0.1, 2);
         const yLo = yMin - yPad;
         const yHi = yMax + yPad;
 
-        const xScale = mode === 'price'
-            ? (v) => scaleLog(v, xMin, xMax, PADDING.left, PADDING.left + innerW)
-            : (v) => scaleLinear(v, xMin, xMax, PADDING.left, PADDING.left + innerW);
-        const yScale = (v) => scaleLinear(v, yLo, yHi, PADDING.top + innerH, PADDING.top);
+        const xScale = (v) => scaleLog(v, xMin, xMax, pad.left, pad.left + innerW);
+        const yScale = (v) => scaleLinear(v, yLo, yHi, pad.top + innerH, pad.top);
+        const baseY = pad.top + innerH;
 
-        const xAxisLabel = mode === 'price' ? t('pareto_axis_price') : t('pareto_axis_speed');
-        const yAxisLabel = t('pareto_axis_intelligence');
-
-        const gridY = 4;
+        const gridY = yTickCount;
         const gridLines = Array.from({ length: gridY + 1 }, (_, i) => {
             const yVal = yLo + ((yHi - yLo) * i) / gridY;
             const y = yScale(yVal);
-            return `<line class="pareto-grid-line" x1="${PADDING.left}" y1="${y}" x2="${PADDING.left + innerW}" y2="${y}" />
-                <text class="pareto-axis-tick" x="${PADDING.left - 8}" y="${y + 4}" text-anchor="end">${Math.round(yVal)}</text>`;
+            return `<line class="pareto-grid-line" x1="${pad.left}" y1="${y}" x2="${pad.left + innerW}" y2="${y}" />
+                <text class="pareto-axis-tick" x="${pad.left - 10}" y="${y + 4}" text-anchor="end">${Math.round(yVal)}</text>`;
+        }).join('');
+
+        const xTicks = logTicks(xMin, xMax, xTickCount);
+        const xLabelY = height - (layout.mobile ? 34 : 28);
+        const xTickLines = xTicks.map((val) => {
+            const x = xScale(val);
+            return `<line class="pareto-grid-line pareto-grid-line-v" x1="${x}" y1="${pad.top}" x2="${x}" y2="${baseY}" />
+                <text class="pareto-axis-tick pareto-axis-tick-x" x="${x}" y="${xLabelY}" text-anchor="middle">${formatXTick(val)}</text>`;
         }).join('');
 
         const frontierPath = frontier.length >= 2
             ? frontier.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xScale(p.x).toFixed(1)} ${yScale(p.y).toFixed(1)}`).join(' ')
             : '';
 
-        const dots = points.map((p, i) => {
+        const frontierArea = frontier.length >= 2
+            ? `${frontierPath} L ${xScale(frontier[frontier.length - 1].x).toFixed(1)} ${baseY} L ${xScale(frontier[0].x).toFixed(1)} ${baseY} Z`
+            : '';
+
+        const dots = points.map((p) => {
             const cx = xScale(p.x);
             const cy = yScale(p.y);
-            const color = RANK_COLORS[i] || RANK_COLORS[RANK_COLORS.length - 1];
+            const rank = p.model.rank;
             const onFrontier = frontier.includes(p);
+            const isTop3 = rank <= 3;
+            const color = isTop3 ? rankColor(rank) : (onFrontier ? '#38bdf8' : 'rgba(148, 163, 184, 0.55)');
+            const baseDot = isTop3 ? 6.5 : (onFrontier ? 5 : (layout.mobile ? 4.5 : 3.5));
+            const dotR = baseDot * dotScale;
+            const hitR = 12 * hitScale;
+            const badgeR = 8 * dotScale;
+            const opacity = isTop3 || onFrontier ? 1 : (layout.mobile ? 0.82 : 0.72);
+            const label = isTop3
+                ? `<g class="pareto-rank-badge"><circle cx="${cx}" cy="${cy - 14 * dotScale}" r="${badgeR}" class="pareto-rank-badge-bg" /><text class="pareto-point-label" x="${cx}" y="${cy - 11 * dotScale}" text-anchor="middle">${rank}</text></g>`
+                : '';
             return `
-                <g class="pareto-point${onFrontier ? ' pareto-point-frontier' : ''}" data-model-id="${escapeHtml(p.model.id)}" tabindex="0" role="button" aria-label="${escapeHtml(shortName(p.model.name))}">
-                    <circle class="pareto-point-hit" cx="${cx}" cy="${cy}" r="14" fill="transparent" />
-                    <circle class="pareto-point-dot" cx="${cx}" cy="${cy}" r="${onFrontier ? 7 : 5.5}" fill="${color}" stroke="var(--bg-primary)" stroke-width="2" />
-                    <text class="pareto-point-label" x="${cx}" y="${cy - 12}" text-anchor="middle">${p.model.rank}</text>
+                <g class="pareto-point${onFrontier ? ' pareto-point-frontier' : ''}${isTop3 ? ' pareto-point-top3' : ''}" data-model-id="${escapeHtml(p.model.id)}" tabindex="0" role="button" aria-label="#${rank} ${escapeHtml(shortName(p.model.name))}" opacity="${opacity}">
+                    <circle class="pareto-point-hit" cx="${cx}" cy="${cy}" r="${hitR}" fill="transparent" />
+                    ${isTop3 ? `<circle class="pareto-point-glow" cx="${cx}" cy="${cy}" r="${dotR + 5}" fill="${color}" opacity="0.22" />` : ''}
+                    <circle class="pareto-point-dot" cx="${cx}" cy="${cy}" r="${dotR}" fill="${color}" />
+                    ${label}
                 </g>
             `;
         }).join('');
 
+        const xAxisLabel = layout.mobile
+            ? (isZh() ? t('pareto_axis_price_short') : t('pareto_axis_price_short'))
+            : t('pareto_axis_price');
+        const svgClass = layout.mobile ? 'pareto-svg pareto-svg-mobile' : 'pareto-svg';
+        const svgSize = layout.mobile
+            ? `width="${width}" height="${height}"`
+            : `width="100%" height="auto" preserveAspectRatio="xMidYMid meet"`;
+
         return `
-            <svg class="pareto-svg" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img" aria-label="${escapeHtml(t('pareto_title'))}">
-                <rect class="pareto-bg" x="${PADDING.left}" y="${PADDING.top}" width="${innerW}" height="${innerH}" rx="2" />
+            <svg class="${svgClass}" viewBox="0 0 ${width} ${height}" ${svgSize} role="img" aria-label="${escapeHtml(t('pareto_title'))}">
+                <defs>
+                    <linearGradient id="pareto-frontier-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#22d3ee" />
+                        <stop offset="100%" stop-color="#818cf8" />
+                    </linearGradient>
+                    <linearGradient id="pareto-area-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(56, 189, 248, 0.14)" />
+                        <stop offset="100%" stop-color="rgba(56, 189, 248, 0)" />
+                    </linearGradient>
+                    <filter id="pareto-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                    </filter>
+                </defs>
+                <rect class="pareto-bg" x="${pad.left}" y="${pad.top}" width="${innerW}" height="${innerH}" rx="8" />
                 ${gridLines}
-                <line class="pareto-axis" x1="${PADDING.left}" y1="${PADDING.top + innerH}" x2="${PADDING.left + innerW}" y2="${PADDING.top + innerH}" />
-                <line class="pareto-axis" x1="${PADDING.left}" y1="${PADDING.top}" x2="${PADDING.left}" y2="${PADDING.top + innerH}" />
-                ${frontierPath ? `<path class="pareto-frontier" d="${frontierPath}" fill="none" />` : ''}
+                ${xTickLines}
+                <line class="pareto-axis" x1="${pad.left}" y1="${baseY}" x2="${pad.left + innerW}" y2="${baseY}" />
+                <line class="pareto-axis" x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${baseY}" />
+                ${frontierArea ? `<path class="pareto-frontier-area" d="${frontierArea}" />` : ''}
+                ${frontierPath ? `<path class="pareto-frontier" d="${frontierPath}" filter="url(#pareto-glow)" />` : ''}
                 ${dots}
-                <text class="pareto-axis-title" x="${PADDING.left + innerW / 2}" y="${height - 12}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
-                <text class="pareto-axis-title pareto-axis-title-y" x="16" y="${PADDING.top + innerH / 2}" text-anchor="middle" transform="rotate(-90 16 ${PADDING.top + innerH / 2})">${escapeHtml(yAxisLabel)}</text>
-                <text class="pareto-hint-corner" x="${mode === 'price' ? PADDING.left + 4 : PADDING.left + innerW - 4}" y="${PADDING.top + 14}" text-anchor="${mode === 'price' ? 'start' : 'end'}">${escapeHtml(mode === 'price' ? t('pareto_better_corner_price') : t('pareto_better_corner_speed'))}</text>
+                <text class="pareto-axis-title" x="${pad.left + innerW / 2}" y="${height - 8}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
+                <text class="pareto-axis-title pareto-axis-title-y" x="18" y="${pad.top + innerH / 2}" text-anchor="middle" transform="rotate(-90 18 ${pad.top + innerH / 2})">${escapeHtml(t('pareto_axis_intelligence'))}</text>
+                <text class="pareto-hint-corner" x="${pad.left + 10}" y="${pad.top + 16}" text-anchor="start">${escapeHtml(t('pareto_better_corner_price'))}</text>
             </svg>
         `;
     }
@@ -197,11 +295,14 @@
             const modelId = node.dataset.modelId;
             const model = chartModels.find((m) => m.id === modelId);
             if (!model) return;
-            const point = getPoint(model, activeMode);
+            const point = getPoint(model);
 
             node.addEventListener('mouseenter', (e) => showTooltip(e, point));
             node.addEventListener('mousemove', (e) => showTooltip(e, point));
             node.addEventListener('mouseleave', hideTooltip);
+            node.addEventListener('touchstart', (e) => {
+                if (e.touches[0]) showTooltip(e.touches[0], point);
+            }, { passive: true });
             node.addEventListener('click', () => {
                 hideTooltip();
                 document.dispatchEvent(new CustomEvent('pareto-model-select', { detail: { modelId } }));
@@ -218,29 +319,20 @@
     function paint() {
         if (!elements.section || !chartModels.length || !elements.wrap || !elements.canvas) return;
 
-        const points = chartModels.map((m) => getPoint(m, activeMode));
-        const frontier = computeFrontier(points, activeMode);
-        const width = Math.min(920, elements.wrap.clientWidth || 920);
-        const height = Math.max(320, Math.min(400, width * 0.45));
-
-        elements.canvas.innerHTML = renderSvg(points, frontier, width, height, activeMode);
-        bindPointEvents();
-
-        if (elements.aaLink) {
-            elements.aaLink.href = buildAaUrl(chartModels);
-        }
-
         elements.section.hidden = false;
-    }
 
-    function setMode(mode) {
-        activeMode = mode;
-        elements.tabs?.querySelectorAll('[data-pareto-mode]').forEach((btn) => {
-            const isActive = btn.dataset.paretoMode === mode;
-            btn.classList.toggle('active', isActive);
-            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-        paint();
+        const points = chartModels.map((m) => getPoint(m));
+        const frontier = computeFrontier(points);
+        const { width, height } = getChartSize();
+        const layout = getLayout(width, height);
+
+        elements.wrap.classList.toggle('is-mobile', layout.mobile);
+        if (elements.scrollHint) {
+            elements.scrollHint.hidden = !layout.mobile;
+        }
+        elements.canvas.style.minWidth = layout.mobile ? `${width}px` : '';
+        elements.canvas.innerHTML = renderSvg(points, frontier, layout);
+        bindPointEvents();
     }
 
     function init() {
@@ -248,16 +340,9 @@
         elements.wrap = document.getElementById('pareto-chart-wrap');
         elements.canvas = document.getElementById('pareto-chart');
         elements.tooltip = document.getElementById('pareto-tooltip');
-        elements.tabs = document.getElementById('pareto-tabs');
-        elements.aaLink = document.getElementById('pareto-aa-link');
+        elements.scrollHint = document.getElementById('pareto-scroll-hint');
 
         if (!elements.section) return;
-
-        elements.tabs?.addEventListener('click', (e) => {
-            const btn = e.target.closest('[data-pareto-mode]');
-            if (!btn) return;
-            setMode(btn.dataset.paretoMode);
-        });
 
         elements.wrap?.addEventListener('mouseleave', hideTooltip);
         window.addEventListener('resize', () => {

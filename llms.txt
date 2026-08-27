@@ -15,7 +15,7 @@ LLM Value Rankings helps developers and teams choose cost-effective AI models on
 
 1. **Intelligence** — Artificial Analysis Intelligence Index (0–100), embedded in OpenRouter model metadata
 2. **Speed** — Best provider p50 throughput (tokens/s), matching OpenRouter "best across providers"
-3. **Price** — OpenRouter effective blended price ($/1M tokens), uptime-weighted, 3:1 input/output mix, 70% cache hit
+3. **Price** — OpenRouter effective blended price ($/1M tokens), uptime-weighted, 3:1 input/output mix, 95% cache hit
 
 ## Value formula
 

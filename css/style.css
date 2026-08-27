@@ -4804,128 +4804,223 @@ body.modal-open {
     }
 }
 
-/* ===== Pareto chart (top 10) ===== */
+/* ===== Pareto chart ===== */
 .pareto-section {
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2.5rem;
 }
 
-.pareto-header {
+.pareto-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.35rem 1.35rem 1rem;
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .pareto-panel {
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+}
+
+.pareto-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem 1.5rem;
     margin-bottom: 1rem;
 }
 
-.pareto-eyebrow {
-    margin: 0 0 0.35rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
+.pareto-head-main {
+    flex: 1;
+    min-width: min(100%, 18rem);
 }
 
-.pareto-title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+.pareto-badge {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(167, 139, 250, 0.16));
+    border: 1px solid rgba(34, 211, 238, 0.28);
+    color: #67e8f9;
+    font-size: 0.68rem;
     font-weight: 600;
-    color: var(--text-primary);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+[data-theme="light"] .pareto-badge {
+    color: #0e7490;
+    border-color: rgba(14, 116, 144, 0.25);
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(167, 139, 250, 0.1));
+}
+
+.pareto-heading.section-title {
+    margin-bottom: 0.45rem;
 }
 
 .pareto-desc {
-    margin: 0.45rem 0 0;
-    max-width: 52rem;
-    font-size: 0.85rem;
+    margin: 0;
+    max-width: 40rem;
+    font-size: 0.88rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
-.pareto-header-actions {
+.pareto-legend {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.65rem;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.25rem;
+    margin: 0 0 0.85rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--text-muted);
 }
 
-.pareto-tabs {
+.pareto-legend li {
     display: inline-flex;
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary);
+    align-items: center;
+    gap: 0.4rem;
 }
 
-.pareto-tab {
-    padding: 0.45rem 0.85rem;
-    border: none;
-    background: transparent;
-    color: var(--text-secondary);
-    font: inherit;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: color 0.15s, background 0.15s;
+.pareto-leg-line {
+    display: inline-block;
+    width: 1.25rem;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #22d3ee, #818cf8);
 }
 
-.pareto-tab:hover {
-    color: var(--text-primary);
+.pareto-leg-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
 }
 
-.pareto-tab.active {
-    background: var(--bg-elevated);
-    color: var(--text-primary);
-    box-shadow: inset 0 -2px 0 var(--accent-primary);
+.pareto-leg-gold {
+    background: linear-gradient(135deg, #f0c14b, #cd7f32);
 }
 
-.pareto-aa-link {
-    font-size: 0.8rem;
-    color: #22d3ee;
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.pareto-aa-link:hover {
-    text-decoration: underline;
+.pareto-leg-other {
+    background: rgba(148, 163, 184, 0.65);
 }
 
 .pareto-chart-wrap {
     position: relative;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-secondary);
-    padding: 0.75rem 0.5rem 0.25rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.35) 0%, rgba(15, 23, 42, 0.12) 100%);
+    padding: 0.35rem 0.25rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.pareto-chart-wrap.is-mobile {
+    margin-left: -0.35rem;
+    margin-right: -0.35rem;
+    padding-bottom: 0.35rem;
+    border-radius: var(--radius-md);
+    scroll-snap-type: x proximity;
+}
+
+.pareto-scroll-hint {
+    margin: 0 0 0.45rem;
+    padding: 0 0.15rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.pareto-scroll-hint[hidden] {
+    display: none;
 }
 
 .pareto-chart-canvas {
     width: 100%;
-    min-height: 320px;
+    min-height: 420px;
+}
+
+.pareto-chart-wrap.is-mobile .pareto-chart-canvas {
+    width: max-content;
+    min-height: 520px;
+}
+
+.pareto-svg-mobile {
+    display: block;
+    width: auto;
+    max-width: none;
+    height: auto;
+}
+
+.pareto-svg-mobile .pareto-axis-tick {
+    font-size: 11px;
+}
+
+.pareto-svg-mobile .pareto-axis-tick-x {
+    font-size: 10px;
+}
+
+.pareto-svg-mobile .pareto-axis-title {
+    font-size: 12px;
+}
+
+.pareto-svg-mobile .pareto-point-label {
+    font-size: 9px;
+}
+
+.pareto-svg-mobile .pareto-frontier {
+    stroke-width: 3;
+}
+
+[data-theme="light"] .pareto-chart-wrap {
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.6) 100%);
 }
 
 .pareto-svg {
     display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
     overflow: visible;
 }
 
 .pareto-bg {
-    fill: var(--bg-tertiary);
-    stroke: var(--border-subtle);
+    fill: rgba(0, 0, 0, 0.22);
+    stroke: rgba(148, 163, 184, 0.12);
     stroke-width: 1;
+}
+
+[data-theme="light"] .pareto-bg {
+    fill: rgba(255, 255, 255, 0.65);
+    stroke: rgba(148, 163, 184, 0.25);
 }
 
 .pareto-grid-line {
-    stroke: var(--border-subtle);
+    stroke: rgba(148, 163, 184, 0.1);
     stroke-width: 1;
-    stroke-dasharray: 4 6;
+}
+
+.pareto-grid-line-v {
+    stroke-dasharray: 3 8;
 }
 
 .pareto-axis {
-    stroke: var(--border-color);
-    stroke-width: 1.5;
+    stroke: rgba(148, 163, 184, 0.35);
+    stroke-width: 1;
 }
 
 .pareto-axis-tick {
     fill: var(--text-muted);
     font-size: 10px;
     font-family: var(--font-mono);
+}
+
+.pareto-axis-tick-x {
+    font-size: 9px;
 }
 
 .pareto-axis-title {
@@ -4938,32 +5033,61 @@ body.modal-open {
     fill: var(--text-muted);
     font-size: 10px;
     font-family: var(--font-sans);
+    opacity: 0.85;
+}
+
+.pareto-frontier-area {
+    fill: url(#pareto-area-grad);
 }
 
 .pareto-frontier {
-    stroke: #38bdf8;
+    stroke: url(#pareto-frontier-grad);
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: 0.85;
+    fill: none;
 }
 
 .pareto-point {
     cursor: pointer;
+    transition: opacity 0.15s ease;
 }
 
 .pareto-point-dot {
-    transition: r 0.15s ease, filter 0.15s ease;
+    stroke: rgba(15, 23, 42, 0.85);
+    stroke-width: 1.5;
+    transition: transform 0.15s ease;
+}
+
+[data-theme="light"] .pareto-point-dot {
+    stroke: rgba(255, 255, 255, 0.9);
+}
+
+.pareto-point:hover,
+.pareto-point:focus-visible {
+    opacity: 1 !important;
 }
 
 .pareto-point:hover .pareto-point-dot,
 .pareto-point:focus-visible .pareto-point-dot {
-    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.55));
+    stroke-width: 2;
+}
+
+.pareto-rank-badge-bg {
+    fill: rgba(15, 23, 42, 0.88);
+    stroke: rgba(255, 255, 255, 0.15);
+    stroke-width: 1;
+}
+
+[data-theme="light"] .pareto-rank-badge-bg {
+    fill: rgba(255, 255, 255, 0.95);
+    stroke: rgba(0, 0, 0, 0.08);
 }
 
 .pareto-point-label {
-    fill: var(--text-secondary);
-    font-size: 9px;
+    fill: var(--text-primary);
+    font-size: 8px;
+    font-weight: 700;
     font-family: var(--font-mono);
     pointer-events: none;
 }
@@ -4971,16 +5095,18 @@ body.modal-open {
 .pareto-tooltip {
     position: absolute;
     z-index: 5;
-    min-width: 160px;
-    max-width: 220px;
-    padding: 0.55rem 0.65rem;
-    border: 1px solid var(--border-color);
+    min-width: 168px;
+    max-width: 240px;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid rgba(34, 211, 238, 0.25);
+    border-radius: var(--radius-md);
     background: var(--bg-elevated);
     color: var(--text-primary);
     font-size: 0.78rem;
     line-height: 1.45;
     pointer-events: none;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
 }
 
 .pareto-tooltip strong {
@@ -5000,22 +5126,27 @@ body.modal-open {
     color: var(--text-muted) !important;
 }
 
+[data-style="classic"] .pareto-panel {
+    border-radius: 16px;
+}
+
+[data-style="classic"] .pareto-heading.section-title {
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    text-transform: none;
+}
+
 @media (max-width: 720px) {
-    .pareto-header-actions {
-        align-items: stretch;
-        width: 100%;
+    .pareto-panel {
+        padding: 1rem 0.65rem 0.75rem;
     }
 
-    .pareto-tabs {
-        width: 100%;
+    .pareto-legend {
+        gap: 0.5rem 0.85rem;
+        font-size: 0.72rem;
     }
 
-    .pareto-tab {
-        flex: 1;
-        text-align: center;
-    }
-
-    .pareto-aa-link {
-        text-align: center;
+    .pareto-desc {
+        font-size: 0.82rem;
     }
 }

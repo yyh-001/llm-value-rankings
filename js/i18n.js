@@ -20,17 +20,18 @@ const translations = {
         top_models: "性价比 Top 3",
 
         // Pareto chart
-        pareto_eyebrow: "性价比 Top 10 · 帕累托前沿",
-        pareto_title: "能力与价格 / 速度对比",
-        pareto_desc: "基于 Artificial Analysis 能力指数与 OpenRouter 价格；蓝线为帕累托前沿（同维度下更优配置）",
-        pareto_tab_price: "能力 vs 价格",
-        pareto_tab_speed: "能力 vs 速度",
-        pareto_aa_link: "在 AA 查看完整对比 →",
+        pareto_badge: "Top 30",
+        pareto_title: "能力与价格帕累托前沿",
+        pareto_desc: "AA 能力指数 × OpenRouter 混合价；蓝线为帕累托前沿，左上更优",
+        pareto_legend_frontier: "帕累托前沿",
+        pareto_legend_top3: "Top 3",
+        pareto_legend_rest: "#4–30",
         pareto_axis_intelligence: "AA 能力指数",
-        pareto_axis_price: "混合价格 ($/M tokens)",
+        pareto_axis_price: "混合价格 (¥/百万 tokens)",
         pareto_axis_speed: "输出速度 (tok/s)",
         pareto_better_corner_price: "左上更优 ↑",
-        pareto_better_corner_speed: "右上更优 ↑",
+        pareto_scroll_hint: "左右滑动查看完整图表 · 点击圆点看详情",
+        pareto_axis_price_short: "价格 (¥/百万)",
         pareto_click_detail: "点击查看详情",
         
         // Filters
@@ -77,7 +78,7 @@ const translations = {
         method_2_title: "输出速度",
         method_2: "OpenRouter 各 Provider 最高 p50 吞吐 (tokens/s，与官网 best across providers 一致)",
         method_3_title: "Token 价格",
-        method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 70%",
+        method_3: "OpenRouter 有效价：uptime 加权，输入:输出 3:1，缓存命中 95%",
         
         // Footer
         footer_text: "数据来源：OpenRouter",
@@ -100,7 +101,7 @@ const translations = {
         blended_price: "有效综合价",
         peak_blended_price: "高峰综合价",
         off_peak_blended_price: "空闲综合价",
-        cache_hit_note: "缓存命中率按 70% 估算（Agent/RAG 典型场景）",
+        cache_hit_note: "缓存命中率按 95% 估算（Coding Plan / 长上下文 Agent 典型场景）",
         pricing_channel: "价格渠道",
         pricing_source_note: "价格来自 {source} 官方定价，非 OpenRouter 转售",
         pricing_tod_note: "DeepSeek 官方 API 为峰谷定价（北京时间 9:00–12:00、14:00–18:00 为高峰，其余为空闲，空闲价为高峰半价）。排行采用 24 小时按时长加权均价。",
@@ -138,17 +139,18 @@ const translations = {
         top_models: "Top 3 Value Models",
 
         // Pareto chart
-        pareto_eyebrow: "Top 10 Value · Pareto Frontier",
-        pareto_title: "Intelligence vs Price / Speed",
-        pareto_desc: "AA Intelligence Index vs OpenRouter pricing; blue line = Pareto frontier (non-dominated configs)",
-        pareto_tab_price: "Intel vs Price",
-        pareto_tab_speed: "Intel vs Speed",
-        pareto_aa_link: "Full comparison on AA →",
+        pareto_badge: "Top 30",
+        pareto_title: "Intelligence vs Price Frontier",
+        pareto_desc: "AA Intelligence Index × OpenRouter blended price; blue line = Pareto frontier, better ↑ left",
+        pareto_legend_frontier: "Pareto frontier",
+        pareto_legend_top3: "Top 3",
+        pareto_legend_rest: "#4–30",
         pareto_axis_intelligence: "AA Intelligence Index",
         pareto_axis_price: "Blended price ($/M tokens)",
         pareto_axis_speed: "Output speed (tok/s)",
         pareto_better_corner_price: "Better ↑ left",
-        pareto_better_corner_speed: "Better ↑ right",
+        pareto_scroll_hint: "Swipe to explore · tap a dot for details",
+        pareto_axis_price_short: "Price ($/M)",
         pareto_click_detail: "Click for details",
         
         // Filters
@@ -195,7 +197,7 @@ const translations = {
         method_2_title: "Output Speed",
         method_2: "OpenRouter best provider p50 throughput (tokens/s, matches site header)",
         method_3_title: "Token Price",
-        method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 70% cache hit",
+        method_3: "OpenRouter effective price: uptime-weighted, 3:1 in/out, 95% cache hit",
         
         // Footer
         footer_text: "Data sources: OpenRouter",
@@ -218,7 +220,7 @@ const translations = {
         blended_price: "Effective Blended Price",
         peak_blended_price: "Peak Blended Price",
         off_peak_blended_price: "Off-Peak Blended Price",
-        cache_hit_note: "Cache hit rate assumed at 70% (typical agent/RAG workload)",
+        cache_hit_note: "Cache hit rate assumed at 95% (typical coding-plan / long-context agent workload)",
         pricing_channel: "Pricing Channel",
         pricing_source_note: "Pricing from {source} official API, not OpenRouter resell",
         pricing_tod_note: "DeepSeek official API uses peak/off-peak pricing (peak 09:00–12:00 and 14:00–18:00 Beijing time; off-peak is half of peak). Rankings use a 24-hour time-weighted average.",

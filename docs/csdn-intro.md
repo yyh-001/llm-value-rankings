@@ -44,7 +44,7 @@
 
 - **能力**：Artificial Analysis Intelligence Index（0–100），来自 OpenRouter 内嵌 benchmark  
 - **速度**：OpenRouter 各 Provider 的 p50 吞吐（tok/s），取最高值  
-- **价格**：有效混合价（$/百万 tokens），输入:输出按 3:1，缓存命中按 70% 估算  
+- **价格**：有效混合价（$/百万 tokens），输入:输出按 3:1，缓存命中按 95% 估算  
 
 部分模型已接入**官方 API 定价**（比 OpenRouter 转售便宜时自动覆盖）：
 

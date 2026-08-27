@@ -15,6 +15,7 @@ import requests
 sys.path.insert(0, str(Path(__file__).parent))
 
 from fetch_data import (  # noqa: E402
+    DEFAULT_CACHE_HIT_RATE,
     OFFICIAL_PRICING_CNY_PER_M,
     USD_TO_CNY,
     blend_token_price,
@@ -25,7 +26,6 @@ from fetch_data import (  # noqa: E402
 
 OUTPUT_FILE = Path(__file__).parent.parent / "data" / "coding_plans.json"
 CACHE_DIR = Path(__file__).parent / "_vendor_cache"
-CACHE_HIT_RATE = 0.95
 WEEKS_PER_MONTH = 52 / 12
 USER_AGENT = (
     "LLM-Value-Rankings/1.0 (+https://yyh-001.github.io/llm-value-rankings/)"
@@ -235,7 +235,7 @@ def cost_per_100m_from_usd_rates(
     cache_usd: Optional[float],
     completion_usd: float,
 ) -> float:
-    prompt_eff = effective_input_price(prompt_usd, cache_usd, CACHE_HIT_RATE)
+    prompt_eff = effective_input_price(prompt_usd, cache_usd, DEFAULT_CACHE_HIT_RATE)
     blended = blend_token_price(prompt_eff, completion_usd)
     return round(blended * 100, 1)
 
@@ -569,7 +569,7 @@ def build_commandcode_goat_plan(html: str) -> List[Dict[str, Any]]:
 
 
 def credits_per_million(credit_rates: Dict[str, float]) -> float:
-    input_eff = credit_rates["input"] * (1 - CACHE_HIT_RATE) + credit_rates["cache"] * CACHE_HIT_RATE
+    input_eff = credit_rates["input"] * (1 - DEFAULT_CACHE_HIT_RATE) + credit_rates["cache"] * DEFAULT_CACHE_HIT_RATE
     return (3 * input_eff + credit_rates["output"]) / 4
 
 
@@ -866,7 +866,7 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "methodology": {
             "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
-            "cache_hit_rate": CACHE_HIT_RATE,
+            "cache_hit_rate": DEFAULT_CACHE_HIT_RATE,
             "token_mix": "3:1 input:output for API; subscription uses vendor quota",
             "sort_by": "peak cost ascending (flat-rate plans use off-peak only)",
             "usd_to_cny": USD_TO_CNY,
