@@ -192,10 +192,12 @@
     }
 
     function bindPointEvents() {
+        if (!elements.wrap) return;
         elements.wrap.querySelectorAll('.pareto-point').forEach((node) => {
             const modelId = node.dataset.modelId;
-            const point = chartModels.find((p) => p.model.id === modelId);
-            if (!point) return;
+            const model = chartModels.find((m) => m.id === modelId);
+            if (!model) return;
+            const point = getPoint(model, activeMode);
 
             node.addEventListener('mouseenter', (e) => showTooltip(e, point));
             node.addEventListener('mousemove', (e) => showTooltip(e, point));
@@ -214,7 +216,7 @@
     }
 
     function paint() {
-        if (!elements.section || !chartModels.length) return;
+        if (!elements.section || !chartModels.length || !elements.wrap || !elements.canvas) return;
 
         const points = chartModels.map((m) => getPoint(m, activeMode));
         const frontier = computeFrontier(points, activeMode);
