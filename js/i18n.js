@@ -22,7 +22,7 @@ const translations = {
         // Pareto chart
         pareto_badge: "Top 30",
         pareto_title: "能力与价格帕累托前沿",
-        pareto_desc: "AA 能力指数 × OpenRouter 混合价；蓝线为帕累托前沿，左上更优",
+        pareto_desc: "AA 能力指数 ≥ 30 × OpenRouter 混合价；蓝线为帕累托前沿，左上更优",
         pareto_legend_frontier: "帕累托前沿",
         pareto_legend_top3: "Top 3",
         pareto_legend_rest: "#4–30",
@@ -38,6 +38,8 @@ const translations = {
         search_placeholder: "搜索模型...",
         results_count: "共 {count} 个模型",
         no_results: "没有找到匹配的模型",
+        min_channel_price_toggle: "按最低渠道价排名",
+        min_channel_price_note: "性价比与价格列按各模型最低渠道价（含 OpenRouter）重算",
         
         // Table
         th_rank: "排名",
@@ -111,12 +113,12 @@ const translations = {
 
         // Supplier / coding plan pricing under each model
         supplier_pricing_title: "接入渠道价格排行",
-        supplier_pricing_unit: "¥ / 每 1 亿 Token · 95% Cache · 按高峰价排序",
-        supplier_pricing_note: "含官方 API 与 Coding Plan 订阅折算价；无高峰定价显示「—」",
+        supplier_pricing_unit: "¥ / 百万 tokens · 95% Cache · 与有效综合价一致",
+        supplier_pricing_note: "含 OpenRouter 按量价、官方 API 与 Coding Plan 订阅折算价（均为有效综合价）；DeepSeek 官方 API 按全天峰谷时段加权",
+        supplier_openrouter_plan: "API 按量",
         supplier_th_rank: "#",
         supplier_th_channel: "渠道 / 方案",
-        supplier_th_off: "低峰",
-        supplier_th_peak: "高峰",
+        supplier_th_price: "综合价",
         supplier_visit: "前往",
         openrouter_link: "在 OpenRouter 查看",
         openrouter_link_aria: "在 OpenRouter 打开此模型页面",
@@ -141,7 +143,7 @@ const translations = {
         // Pareto chart
         pareto_badge: "Top 30",
         pareto_title: "Intelligence vs Price Frontier",
-        pareto_desc: "AA Intelligence Index × OpenRouter blended price; blue line = Pareto frontier, better ↑ left",
+        pareto_desc: "AA Intelligence ≥ 30 × OpenRouter blended price; blue line = Pareto frontier, better ↑ left",
         pareto_legend_frontier: "Pareto frontier",
         pareto_legend_top3: "Top 3",
         pareto_legend_rest: "#4–30",
@@ -157,6 +159,8 @@ const translations = {
         search_placeholder: "Search models...",
         results_count: "{count} models found",
         no_results: "No matching models found",
+        min_channel_price_toggle: "Rank by lowest channel price",
+        min_channel_price_note: "Value score and price use each model's lowest channel rate (incl. OpenRouter)",
         
         // Table
         th_rank: "Rank",
@@ -229,12 +233,12 @@ const translations = {
         detail_about: "About",
 
         supplier_pricing_title: "Channel pricing",
-        supplier_pricing_unit: "¥ / 100M tokens · 95% cache · sorted by peak",
-        supplier_pricing_note: "Official API and coding-plan subscription rates;「—」= no peak tier",
+        supplier_pricing_unit: "¥ / M tokens · 95% cache · effective blended price",
+        supplier_pricing_note: "OpenRouter pay-as-you-go, official API, and coding-plan rates (effective blended price); DeepSeek API uses 24h peak/off-peak weighting",
+        supplier_openrouter_plan: "Pay-as-you-go API",
         supplier_th_rank: "#",
         supplier_th_channel: "Channel / plan",
-        supplier_th_off: "Off-peak",
-        supplier_th_peak: "Peak",
+        supplier_th_price: "Blended",
         supplier_visit: "Visit",
         openrouter_link: "View on OpenRouter",
         openrouter_link_aria: "Open this model on OpenRouter",

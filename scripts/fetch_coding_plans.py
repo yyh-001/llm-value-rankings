@@ -18,14 +18,15 @@ from fetch_data import (  # noqa: E402
     DEFAULT_CACHE_HIT_RATE,
     USD_TO_CNY,
     blend_token_price,
-    cny_per_m_to_usd_per_m,
     effective_input_price,
     make_http_session,
+    time_weighted_cny_rates,
 )
 
 OUTPUT_FILE = Path(__file__).parent.parent / "data" / "coding_plans.json"
 CACHE_DIR = Path(__file__).parent / "_vendor_cache"
 WEEKS_PER_MONTH = 52 / 12
+DEFAULT_TOKEN_PATTERN = {"input": 800, "cached": 50_000, "output": 200}
 
 # DeepSeek official API (shown in channel pricing, not main OpenRouter leaderboard price).
 DEEPSEEK_OFFICIAL_CNY_PER_M = {
@@ -34,12 +35,14 @@ DEEPSEEK_OFFICIAL_CNY_PER_M = {
         "off_peak": {"prompt": 1.5, "cache_read": 0.05, "completion": 4.5},
         "source_label": "DeepSeek 官方 API",
         "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "plan_label": "V4 Flash",
     },
     "deepseek/deepseek-v4-pro": {
         "peak": {"prompt": 9.0, "cache_read": 0.30, "completion": 27.0},
         "off_peak": {"prompt": 4.5, "cache_read": 0.15, "completion": 13.5},
         "source_label": "DeepSeek 官方 API",
         "source_url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+        "plan_label": "V4 Pro",
     },
 }
 USER_AGENT = (
@@ -49,41 +52,24 @@ USER_AGENT = (
 # Fallback when a vendor page is temporarily unreachable (GitHub Actions).
 VENDOR_SOURCES = {
     "opencode_go": "https://opencode.ai/docs/go.md",
-    "glm_overview": "https://docs.bigmodel.cn/cn/coding-plan/overview.md",
-    "glm_pricing": "https://www.bigmodel.cn/glm-coding",
-    "kimi_k3_api": "https://platform.kimi.com/docs/pricing/chat-k3.md",
     "codex_pricing": "https://developers.openai.com/codex/pricing.md",
     "commandcode_goat": "https://commandcode.ai/docs/plans/goat",
 }
 
 # GPT Plus / Codex — credit rates per 1M tokens (OpenAI Codex rate card).
 CODEX_CREDIT_RATES = {
-    "gpt-5.6-sol": {"input": 125, "cache": 12.5, "output": 750},
-    "gpt-5.6-luna": {"input": 25, "cache": 2.5, "output": 150},
+    "gpt-5.6-sol": {"input": 100, "cache": 10, "output": 500},
+    "gpt-5.6-luna": {"input": 5, "cache": 0.5, "output": 30},
 }
 
-# Plus plan local-message ranges per 5h (chatgpt.com/codex/pricing).
+# Plus plan local messages per rolling 5h window (developers.openai.com/codex/pricing).
 CODEX_PLUS_MSG_RANGE = {
-    "gpt-5.6-sol": (15, 90),
-    "gpt-5.6-luna": (50, 280),
+    "gpt-5.6-sol": (10, 100),
+    "gpt-5.6-luna": (250, 2000),
 }
 
-# Kimi membership — tokens per CNY efficiency by tier (until Kimi publishes quotas).
-KIMI_TOKENS_PER_CNY = {
-    "kimi-k3-moderato-256k": 1_510_000,
-    "kimi-k3-allegretto-256k": 3_760_000,
-    "kimi-k3-allegro-256k": 3_200_000,
-    "kimi-k3-allegretto-1m": 3_760_000,
-    "kimi-k3-allegro-1m": 3_200_000,
-}
-
-KIMI_MEMBERSHIP_TIERS = [
-    {"id": "kimi-k3-moderato-256k", "plan": "Moderato 256K", "monthly_cny": 99, "context_factor": 1.0},
-    {"id": "kimi-k3-allegretto-256k", "plan": "Allegretto 256K", "monthly_cny": 199, "context_factor": 1.0},
-    {"id": "kimi-k3-allegro-256k", "plan": "Allegro 256K", "monthly_cny": 699, "context_factor": 1.0},
-    {"id": "kimi-k3-allegretto-1m", "plan": "Allegretto 1M", "monthly_cny": 199, "context_factor": 0.5},
-    {"id": "kimi-k3-allegro-1m", "plan": "Allegro 1M", "monthly_cny": 699, "context_factor": 0.5},
-]
+# Rolling 5h windows in one week (168h); scaled to month via WEEKS_PER_MONTH.
+CODEX_PLUS_WINDOWS_PER_WEEK = 7 * 24 / 5
 
 PROVIDER_EQUIV = {
     "deepseek": {"deepseek"},
@@ -91,6 +77,87 @@ PROVIDER_EQUIV = {
     "zhipu": {"zhipu", "z-ai", "zai"},
     "openai": {"openai"},
 }
+
+
+def get_ranked_models(models: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    ranked = [m for m in models if m.get("rank") is not None]
+    ranked.sort(key=lambda m: m["rank"])
+    return ranked
+
+
+def normalize_match_key(text: str) -> str:
+    text = re.sub(r"\([^)]*\)", "", text)
+    text = text.lower()
+    return re.sub(r"[\s_\-‑–—./]", "", text)
+
+
+def slugify_plan_id(text: str) -> str:
+    text = re.sub(r"\([^)]*\)", "", text).strip().lower()
+    text = re.sub(r"[\s/]+", "-", text)
+    return re.sub(r"[^a-z0-9.-]+", "", text)
+
+
+def slug_matches_vendor(model_id: str, vendor_slug: str) -> bool:
+    slug = model_slug(model_id)
+    ms = normalize_match_key(slug)
+    vs = normalize_match_key(vendor_slug)
+
+    if "vision" in slug and "vision" not in vendor_slug.lower():
+        return False
+    if "vision" in vendor_slug.lower() and "vision" not in slug:
+        return False
+
+    if ms == vs:
+        return True
+    if ms.startswith(vs):
+        suffix = ms[len(vs) :]
+        if suffix.isdigit() and len(suffix) == 4:
+            return True
+    return False
+
+
+def find_ranked_models_for_vendor_slug(
+    vendor_slug: str,
+    models: List[Dict[str, Any]],
+) -> List[str]:
+    matched = [
+        model["id"]
+        for model in get_ranked_models(models)
+        if slug_matches_vendor(model["id"], vendor_slug)
+    ]
+    rank_by_id = {m["id"]: m["rank"] for m in models}
+    return sorted(set(matched), key=lambda mid: (rank_by_id.get(mid, 9999), mid))
+
+
+def vendor_label_to_slug_guess(label: str) -> str:
+    label = re.sub(r"\([^)]*\)", "", label).strip()
+    label = re.sub(r"^tencent\s+", "", label, flags=re.I)
+    label = label.lower().replace(" ", "-")
+    return label
+
+
+def find_ranked_models_for_vendor_label(
+    vendor_label: str,
+    models: List[Dict[str, Any]],
+) -> List[str]:
+    slug_guess = vendor_label_to_slug_guess(vendor_label)
+    matched = find_ranked_models_for_vendor_slug(slug_guess, models)
+    if matched:
+        return matched
+
+    target = normalize_match_key(vendor_label)
+    fallback: List[str] = []
+    for model in get_ranked_models(models):
+        model_id = model["id"]
+        keys = {
+            normalize_match_key(model_slug(model_id)),
+            normalize_match_key(core_slug(model_id)),
+            normalize_match_key(model.get("name") or ""),
+        }
+        if target in keys:
+            fallback.append(model_id)
+    rank_by_id = {m["id"]: m["rank"] for m in models}
+    return sorted(set(fallback), key=lambda mid: (rank_by_id.get(mid, 9999), mid))
 
 
 def make_match(**kwargs: Any) -> Dict[str, Any]:
@@ -111,6 +178,15 @@ def core_slug(model_id: str) -> str:
     slug = re.sub(r"-latest$", "", slug)
     slug = re.sub(r"-\d{4}$", "", slug)
     return slug
+
+
+def codex_rate_key_for_model(model_id: str) -> Optional[str]:
+    """Map a live OpenAI model id to Codex credit-card slug when supported."""
+    slug = model_slug(model_id)
+    for key in sorted(CODEX_CREDIT_RATES, key=len, reverse=True):
+        if key in slug:
+            return key
+    return None
 
 
 def provider_matches(model_prov: str, allowed: Optional[List[str]]) -> bool:
@@ -166,43 +242,26 @@ def resolve_target_models(plan: Dict[str, Any], models: List[Dict[str, Any]]) ->
                 continue
             matched.append(model_id)
 
+    vendor_slug = match.get("vendor_slug")
+    if vendor_slug:
+        matched.extend(find_ranked_models_for_vendor_slug(vendor_slug, models))
+
+    vendor_label = match.get("vendor_label")
+    if vendor_label:
+        matched.extend(find_ranked_models_for_vendor_label(vendor_label, models))
+
     rank_by_id = {m["id"]: m.get("rank") or 9999 for m in models}
-    return sorted(set(matched), key=lambda mid: (rank_by_id.get(mid, 9999), mid))
+    ranked_ids = {m["id"] for m in models if m.get("rank") is not None}
+    return sorted(
+        {model_id for model_id in matched if model_id in ranked_ids},
+        key=lambda mid: (rank_by_id.get(mid, 9999), mid),
+    )
 
 
 MATCH_DS_V4_FLASH = make_match(
     model_family="deepseek/deepseek-v4-flash",
     exclude_slug_patterns=[r"vision"],
 )
-
-MATCH_KIMI_K3 = make_match(model_family="moonshotai/kimi-k3")
-
-MATCH_GLM_5_CODING = make_match(
-    providers=["z-ai", "zhipu"],
-    slug_patterns=[r"glm-5(?:\.\d+)?$", r"^glm-5$"],
-    exclude_slug_patterns=[r"5v", r"turbo"],
-)
-
-
-def fetch_kimi_membership_prices(html: str) -> Dict[str, float]:
-    """Best-effort parse of Kimi membership monthly prices from help HTML."""
-    defaults = {tier["id"]: tier["monthly_cny"] for tier in KIMI_MEMBERSHIP_TIERS}
-    patterns = {
-        "kimi-k3-moderato-256k": r"Moderato[^¥$]{0,80}¥\s*(\d+)",
-        "kimi-k3-allegretto-256k": r"Allegretto[^¥$]{0,80}¥\s*(\d+)",
-        "kimi-k3-allegro-256k": r"Allegro[^¥$]{0,80}¥\s*(\d+)",
-    }
-    prices = dict(defaults)
-    for tier_id, pattern in patterns.items():
-        match = re.search(pattern, html, re.I)
-        if match:
-            prices[tier_id] = float(match.group(1))
-    for tier in KIMI_MEMBERSHIP_TIERS:
-        if tier["plan"].endswith("1M"):
-            base_id = tier["id"].replace("-1m", "-256k")
-            if base_id in prices:
-                prices[tier["id"]] = prices[base_id]
-    return prices
 
 
 def fetch_text(url: str, session: Optional[requests.Session] = None) -> Tuple[str, str]:
@@ -239,32 +298,38 @@ def cost_range(low: Optional[float], high: Optional[float]) -> Any:
     return [round_cost(low), round_cost(high)]
 
 
-def subscription_cost_per_100m(monthly_cny: float, monthly_tokens: float) -> Optional[float]:
+def cost_sort_value(cost: Any) -> float:
+    if cost is None:
+        return float("inf")
+    if isinstance(cost, list):
+        return cost[-1] if cost else float("inf")
+    return cost
+
+
+def subscription_cost_cny_per_m(monthly_cny: float, monthly_tokens: float) -> Optional[float]:
     if not monthly_cny or not monthly_tokens:
         return None
-    return round(monthly_cny / (monthly_tokens / 1e8), 1)
+    return round(monthly_cny / (monthly_tokens / 1e6), 4)
 
 
-def cost_per_100m_from_usd_rates(
+def blended_cost_cny_per_m_from_usd_rates(
     prompt_usd: float,
     cache_usd: Optional[float],
     completion_usd: float,
 ) -> float:
     prompt_eff = effective_input_price(prompt_usd, cache_usd, DEFAULT_CACHE_HIT_RATE)
-    blended = blend_token_price(prompt_eff, completion_usd)
-    return round(blended * 100, 1)
+    blended_usd = blend_token_price(prompt_eff, completion_usd)
+    return round(blended_usd * USD_TO_CNY, 4)
 
 
-def cost_per_100m_from_cny_rates(
+def blended_cost_cny_per_m_from_cny_rates(
     prompt_cny: float,
     cache_cny: float,
     completion_cny: float,
 ) -> float:
-    return cost_per_100m_from_usd_rates(
-        cny_per_m_to_usd_per_m(prompt_cny),
-        cny_per_m_to_usd_per_m(cache_cny),
-        cny_per_m_to_usd_per_m(completion_cny),
-    )
+    prompt_eff = effective_input_price(prompt_cny, cache_cny, DEFAULT_CACHE_HIT_RATE)
+    blended_cny = blend_token_price(prompt_eff, completion_cny)
+    return round(blended_cny, 4)
 
 
 def parse_markdown_table_rows(markdown: str) -> List[List[str]]:
@@ -279,110 +344,94 @@ def parse_markdown_table_rows(markdown: str) -> List[List[str]]:
     return rows
 
 
-def parse_billion_token_range(text: str) -> Optional[Tuple[float, float]]:
-    match = re.search(
-        r"([\d.]+)\s*\\?~\s*([\d.]+)\s*亿",
-        text.replace(",", ""),
-    )
-    if not match:
-        return None
-    return float(match.group(1)), float(match.group(2))
+def expand_grouped_doc_label(label: str) -> List[str]:
+    label = label.strip()
+    glm_match = re.match(r"^GLM-([\d./]+)$", label)
+    if glm_match:
+        return [f"GLM-{part}" for part in glm_match.group(1).split("/")]
+    if label == "Kimi K2.7/K2.6":
+        return ["Kimi K2.7 Code", "Kimi K2.6"]
+    return [label]
 
 
-def parse_glm_plans(markdown: str, pricing_html: str) -> List[Dict[str, Any]]:
-    tier_map = {
-        "Lite": {"id": "glm-5-3-lite", "plan": "5.3 Lite"},
-        "Pro": {"id": "glm-5-3-pro", "plan": "5.3 Pro"},
-        "Max": {"id": "glm-5-3-max", "plan": "5.3 Max"},
-    }
-    prices = {}
-    for tier in tier_map:
-        match = re.search(rf"¥\s*(\d+)\s*/月", pricing_html)
-        patterns = [
-            rf"{tier}[^¥]{{0,80}}¥\s*(\d+)\s*/月",
-            rf"¥\s*(\d+)\s*/月[^<]{{0,80}}{tier}",
-            rf"{tier}[^0-9]{{0,40}}(\d{{3,4}})\s*/月",
-        ]
-        for pattern in patterns:
-            match = re.search(pattern, pricing_html, re.I)
-            if match:
-                prices[tier] = float(match.group(1))
-                break
+DOC_LABEL_SEPARATOR = r"(?:\u2014|\u2013|\u2011|[-–—])"
 
-    for amount, tier in ((118, "Lite"), (538, "Pro"), (1078, "Max")):
-        if tier not in prices and str(amount) in pricing_html:
-            prices[tier] = float(amount)
 
-    if len(prices) < 3:
-        prices = {"Lite": 118.0, "Pro": 538.0, "Max": 1078.0}
+def parse_opencode_token_patterns(markdown: str) -> Dict[str, Dict[str, int]]:
+    patterns: Dict[str, Dict[str, int]] = {}
+    for match in re.finditer(
+        rf"-\s*(.+?)\s+{DOC_LABEL_SEPARATOR}\s*([\d,]+)\s+input,\s*([\d,]+)\s+cached,\s*([\d,]+)\s+output",
+        markdown,
+        re.I,
+    ):
+        pattern = {
+            "input": int(match.group(2).replace(",", "")),
+            "cached": int(match.group(3).replace(",", "")),
+            "output": int(match.group(4).replace(",", "")),
+        }
+        for key in expand_grouped_doc_label(match.group(1).strip()):
+            patterns[key] = pattern
+    return patterns
 
-    cache_col = 2
+
+def parse_opencode_slug_map(markdown: str) -> Dict[str, str]:
+    slugs: Dict[str, str] = {}
     for row in parse_markdown_table_rows(markdown):
-        if row and ("命中率" in row[0] or row[0] == "套餐"):
-            for idx, cell in enumerate(row):
-                if "95%" in cell:
-                    cache_col = idx
-            break
+        if len(row) >= 3 and "opencode.ai" in row[2]:
+            slugs[row[0].strip()] = row[1].strip()
+    return slugs
 
-    token_rows = {}
+
+def parse_opencode_monthly_request_map(markdown: str) -> Dict[str, int]:
+    requests: Dict[str, int] = {}
     for row in parse_markdown_table_rows(markdown):
-        if len(row) <= cache_col:
+        if len(row) < 4:
             continue
-        tier = row[0].strip()
-        if tier not in tier_map:
+        try:
+            int(row[1].replace(",", ""))
+            requests[row[0].strip()] = int(row[3].replace(",", ""))
+        except ValueError:
             continue
-        parsed = parse_billion_token_range(row[cache_col])
-        if parsed:
-            token_rows[tier] = parsed
+    return requests
 
-    plans = []
-    for tier, meta in tier_map.items():
-        weekly = token_rows.get(tier)
-        monthly_cny = prices.get(tier)
-        if not weekly or not monthly_cny:
+
+def lookup_opencode_token_pattern(
+    patterns: Dict[str, Dict[str, int]],
+    doc_label: str,
+) -> Optional[Dict[str, int]]:
+    if doc_label in patterns:
+        return patterns[doc_label]
+    target = normalize_match_key(doc_label)
+    for key, pattern in patterns.items():
+        if normalize_match_key(key) == target:
+            return pattern
+    return None
+
+
+def parse_opencode_go_catalog(markdown: str) -> List[Dict[str, Any]]:
+    slug_map = parse_opencode_slug_map(markdown)
+    request_map = parse_opencode_monthly_request_map(markdown)
+    token_patterns = parse_opencode_token_patterns(markdown)
+    catalog: List[Dict[str, Any]] = []
+
+    for doc_label, vendor_slug in slug_map.items():
+        monthly_requests = request_map.get(doc_label)
+        pattern = lookup_opencode_token_pattern(token_patterns, doc_label)
+        if not monthly_requests or not pattern:
             continue
-        weekly_min_b, weekly_max_b = weekly
-        monthly_min = weekly_min_b * 1e8 * WEEKS_PER_MONTH
-        monthly_max = weekly_max_b * 1e8 * WEEKS_PER_MONTH
-        plans.append(
+        catalog.append(
             {
-                "id": meta["id"],
-                "type": "subscription",
-                "provider": "zhipu",
-                "provider_display": "GLM",
-                "plan": meta["plan"],
-                "badge": f"¥{int(monthly_cny)}",
-                "cost_off_peak": subscription_cost_per_100m(monthly_cny, monthly_max),
-                "cost_peak": subscription_cost_per_100m(monthly_cny, monthly_min),
-                "monthly_cny": monthly_cny,
-                "quota_tokens": {
-                    "weekly_min": int(weekly_min_b * 1e8),
-                    "weekly_max": int(weekly_max_b * 1e8),
-                    "monthly_min": int(monthly_min),
-                    "monthly_max": int(monthly_max),
-                },
-                "url": "https://www.bigmodel.cn/glm-coding",
-                "pricing_source": "智谱 GLM Coding Plan 官方文档",
-                "source_url": VENDOR_SOURCES["glm_overview"],
-                "match": dict(MATCH_GLM_5_CODING),
+                "doc_label": doc_label,
+                "vendor_slug": vendor_slug,
+                "monthly_requests": monthly_requests,
+                "token_pattern": pattern,
             }
         )
-    return plans
+    return catalog
 
 
 def parse_opencode_token_pattern(markdown: str, model_key: str) -> Optional[Dict[str, int]]:
-    match = re.search(
-        rf"-\s*{re.escape(model_key)}[^\n]*?(\d+)\s+input,\s*([\d,]+)\s+cached,\s*(\d+)\s+output",
-        markdown,
-        re.I,
-    )
-    if not match:
-        return None
-    return {
-        "input": int(match.group(1)),
-        "cached": int(match.group(2).replace(",", "")),
-        "output": int(match.group(3)),
-    }
+    return lookup_opencode_token_pattern(parse_opencode_token_patterns(markdown), model_key)
 
 
 def parse_opencode_model_row(markdown: str, model_label: str) -> Optional[Dict[str, Any]]:
@@ -434,43 +483,37 @@ def parse_opencode_monthly_sub_usd(markdown: str) -> float:
 def build_opencode_plans(markdown: str) -> List[Dict[str, Any]]:
     monthly_sub_usd = parse_opencode_monthly_sub_usd(markdown)
     monthly_cny = round(monthly_sub_usd * USD_TO_CNY, 2)
-    plans = []
+    plans: List[Dict[str, Any]] = []
 
-    flash_rates = parse_opencode_model_row(markdown, "DeepSeek V4 Flash (Off-Peak)")
-    flash_peak = parse_opencode_model_row(markdown, "DeepSeek V4 Flash (Peak)")
-    pattern = parse_opencode_token_pattern(markdown, "DeepSeek V4 Flash")
-    monthly_requests = parse_opencode_monthly_requests(markdown, "DeepSeek V4 Flash")
-
-    if flash_rates and pattern and monthly_requests:
+    for entry in parse_opencode_go_catalog(markdown):
+        doc_label = entry["doc_label"]
+        vendor_slug = entry["vendor_slug"]
+        pattern = entry["token_pattern"]
+        monthly_requests = entry["monthly_requests"]
         tokens_per_request = pattern["input"] + pattern["cached"] + pattern["output"]
         monthly_tokens = monthly_requests * tokens_per_request
-
-        def plan_cost(request_scale: float = 1.0) -> Optional[float]:
-            effective_tokens = monthly_requests * request_scale * tokens_per_request
-            return subscription_cost_per_100m(monthly_cny, effective_tokens)
-
         plans.append(
             {
-                "id": "opencode-go-ds-flash",
+                "id": f"opencode-go-{slugify_plan_id(vendor_slug)}",
                 "type": "subscription",
                 "provider": "opencode",
                 "provider_display": "OpenCode Go",
-                "plan": "DS V4 Flash",
+                "plan": doc_label,
                 "badge": f"${int(monthly_sub_usd)}/月",
-                "cost_off_peak": plan_cost(1.0),
-                "cost_peak": plan_cost(0.5) if flash_peak else None,
+                "cost": subscription_cost_cny_per_m(monthly_cny, monthly_tokens),
                 "monthly_cny": monthly_cny,
                 "monthly_usd": monthly_sub_usd,
                 "quota_tokens": int(monthly_tokens),
+                "monthly_requests": monthly_requests,
+                "vendor_slug": vendor_slug,
                 "url": "https://opencode.ai/go",
                 "pricing_source": "OpenCode Go 官方文档",
                 "source_url": VENDOR_SOURCES["opencode_go"],
-                "note_zh": f"按官方 ${int(monthly_sub_usd)}/月 订阅价与 DS V4 Flash 月度请求量估算",
-                "note_en": f"Estimated from ${int(monthly_sub_usd)}/mo subscription and DS V4 Flash monthly requests",
-                "match": dict(MATCH_DS_V4_FLASH),
+                "note_zh": f"按官方 ${int(monthly_sub_usd)}/月 订阅价与 {doc_label} 月度请求量估算",
+                "note_en": f"Estimated from ${int(monthly_sub_usd)}/mo subscription and {doc_label} monthly requests",
+                "match": make_match(vendor_slug=vendor_slug),
             }
         )
-
     return plans
 
 
@@ -500,87 +543,111 @@ def parse_commandcode_goat_token_pattern(html: str) -> Dict[str, int]:
     return {"input": 800, "cached": 50_000, "output": 200}
 
 
-def parse_commandcode_goat_monthly_requests(html: str, model_label: str) -> Optional[int]:
-    pattern = (
-        rf"<tr><td>{re.escape(model_label)}</td>"
-        r"<td>[\d,]+</td><td>[\d,]+</td><td>([\d,]+)</td></tr>"
-    )
-    match = re.search(pattern, html)
-    if match:
-        return int(match.group(1).replace(",", ""))
-    return None
-
-
-def parse_commandcode_goat_ds_flash_rates(html: str) -> Optional[Dict[str, Dict[str, float]]]:
-    label = "DeepSeek V4 Flash (latest)"
-    row_match = re.search(
-        rf"{re.escape(label)}</td><td>\$([0-9.]+)</td><td>\$([0-9.]+)</td><td>\$([0-9.]+)</td>",
+def parse_commandcode_goat_request_map(html: str) -> Dict[str, int]:
+    requests: Dict[str, int] = {}
+    for match in re.finditer(
+        r"<tr><td>([^<]+)</td><td>[\d,]+</td><td>[\d,]+</td><td>([\d,]+)</td></tr>",
         html,
-    )
-    if row_match:
-        off_peak = {
-            "prompt": float(row_match.group(1)),
-            "completion": float(row_match.group(2)),
-            "cache_read": float(row_match.group(3)),
-        }
-    else:
-        idx = html.find(label)
-        if idx < 0:
-            return None
-        prices = re.findall(r"\$([0-9.]+)", html[idx : idx + 1200])
-        if len(prices) < 3:
-            return None
-        off_peak = {
-            "prompt": float(prices[0]),
-            "completion": float(prices[1]),
-            "cache_read": float(prices[2]),
-        }
-
-    peak = {key: value * 2 for key, value in off_peak.items()}
-    return {"off_peak": off_peak, "peak": peak}
+    ):
+        label = match.group(1).strip()
+        requests[label] = int(match.group(2).replace(",", ""))
+    return requests
 
 
-def build_commandcode_goat_plan(html: str) -> List[Dict[str, Any]]:
-    model_label = "DeepSeek V4 Flash (latest)"
+def parse_commandcode_goat_monthly_requests(html: str, model_label: str) -> Optional[int]:
+    return parse_commandcode_goat_request_map(html).get(model_label)
+
+
+def lookup_commandcode_token_pattern(
+    vendor_label: str,
+    opencode_patterns: Dict[str, Dict[str, int]],
+) -> Dict[str, int]:
+    if vendor_label in opencode_patterns:
+        return opencode_patterns[vendor_label]
+
+    target = normalize_match_key(vendor_label)
+    for key, pattern in opencode_patterns.items():
+        if normalize_match_key(key) == target:
+            return pattern
+
+    slug_guess = vendor_label_to_slug_guess(vendor_label)
+    for key, pattern in opencode_patterns.items():
+        if normalize_match_key(key) == normalize_match_key(slug_guess):
+            return pattern
+
+    aliases = {
+        "deepseek v4 flash (latest)": "DeepSeek V4 Flash",
+        "deepseek v4 pro (latest)": "DeepSeek V4 Pro",
+        "deepseek v4 flash vision (exp)": "DeepSeek V4 Flash Vision Exp",
+        "glm-5.3 flash": "GLM-5.3-Flash",
+        "glm-5.3": "GLM-5.3",
+        "gpt-5.6 luna": "GPT 5.6 Luna",
+        "gpt-5.6 sol": "GPT 5.6 Sol",
+        "tencent hy3": "Hy3",
+        "mimo v2.5": "MiMo-V2.5",
+        "mimo v2.5 pro": "MiMo-V2.5-Pro",
+        "qwen 3.8 max": "Qwen3.8 Max",
+        "qwen 3.7 max": "Qwen3.7 Max",
+        "qwen 3.7 plus": "Qwen3.7 Plus",
+        "qwen 3.6 plus": "Qwen3.6 Plus",
+        "kimi k2.7 code": "Kimi K2.7 Code",
+        "kimi k3": "Kimi K3",
+        "minimax m3": "MiniMax M3",
+        "minimax m2.7": "MiniMax M2.7",
+        "muse spark 1.2 contributor": "Muse Spark 1.2 Contributor",
+        "muse spark 1.2": "Muse Spark 1.2 Contributor",
+        "grok 4.6": "Grok 4.6",
+        "grok 4.5": "Grok 4.6",
+    }
+    alias = aliases.get(vendor_label.lower().strip())
+    if alias and alias in opencode_patterns:
+        return opencode_patterns[alias]
+
+    return dict(DEFAULT_TOKEN_PATTERN)
+
+
+def build_commandcode_goat_plan(html: str, opencode_markdown: str = "") -> List[Dict[str, Any]]:
     monthly_usd = parse_commandcode_goat_monthly_price(html)
-    monthly_requests = parse_commandcode_goat_monthly_requests(html, model_label)
-    pattern = parse_commandcode_goat_token_pattern(html)
-    rates = parse_commandcode_goat_ds_flash_rates(html)
-
-    if not monthly_requests or not rates:
-        return []
-
-    tokens_per_request = pattern["input"] + pattern["cached"] + pattern["output"]
-    monthly_tokens = monthly_requests * tokens_per_request
     monthly_cny = round(monthly_usd * USD_TO_CNY, 2)
+    opencode_patterns = (
+        parse_opencode_token_patterns(opencode_markdown) if opencode_markdown else {}
+    )
+    plans: List[Dict[str, Any]] = []
 
-    off_cost = subscription_cost_per_100m(monthly_cny, monthly_tokens)
-    peak_requests = monthly_requests // 2
-    peak_cost = subscription_cost_per_100m(monthly_cny, peak_requests * tokens_per_request)
+    for vendor_label, monthly_requests in parse_commandcode_goat_request_map(html).items():
+        pattern = lookup_commandcode_token_pattern(vendor_label, opencode_patterns)
+        tokens_per_request = pattern["input"] + pattern["cached"] + pattern["output"]
+        monthly_tokens = monthly_requests * tokens_per_request
+        vendor_slug = vendor_label_to_slug_guess(vendor_label)
+        plans.append(
+            {
+                "id": f"commandcode-goat-{slugify_plan_id(vendor_label)}",
+                "type": "subscription",
+                "provider": "commandcode",
+                "provider_display": "Command Code",
+                "plan": f"GOAT · {vendor_label}",
+                "badge": f"${int(monthly_usd)}",
+                "cost": subscription_cost_cny_per_m(monthly_cny, monthly_tokens),
+                "monthly_cny": monthly_cny,
+                "monthly_usd": monthly_usd,
+                "quota_tokens": int(monthly_tokens),
+                "monthly_requests": monthly_requests,
+                "tokens_per_request": tokens_per_request,
+                "vendor_slug": vendor_slug,
+                "vendor_label": vendor_label,
+                "url": "https://commandcode.ai/docs/plans/goat",
+                "pricing_source": "Command Code GOAT 官方文档",
+                "source_url": VENDOR_SOURCES["commandcode_goat"],
+                "note_zh": f"按 GOAT ${int(monthly_usd)}/月、{vendor_label} 月请求量与典型 Token 模式估算",
+                "note_en": f"From GOAT ${int(monthly_usd)}/mo, {vendor_label} monthly requests, and typical token pattern",
+                "match": make_match(
+                    vendor_slug=vendor_slug,
+                    vendor_label=vendor_label,
+                ),
+            }
+        )
 
-    return [
-        {
-            "id": "commandcode-goat-ds-flash",
-            "type": "subscription",
-            "provider": "commandcode",
-            "provider_display": "Command Code",
-            "plan": "GOAT · DS V4 Flash",
-            "badge": f"${int(monthly_usd)}",
-            "cost_off_peak": off_cost,
-            "cost_peak": peak_cost,
-            "monthly_cny": monthly_cny,
-            "monthly_usd": monthly_usd,
-            "quota_tokens": int(monthly_tokens),
-            "monthly_requests": monthly_requests,
-            "tokens_per_request": tokens_per_request,
-            "url": "https://commandcode.ai/docs/plans/goat",
-            "pricing_source": "Command Code GOAT 官方文档",
-            "source_url": VENDOR_SOURCES["commandcode_goat"],
-            "note_zh": "按 GOAT $10/月、DS V4 Flash 官方月请求量与典型 Token 模式估算",
-            "note_en": "From GOAT $10/mo, DS V4 Flash monthly requests, and typical token pattern",
-            "match": dict(MATCH_DS_V4_FLASH),
-        }
-    ]
+    return plans
 
 
 def credits_per_million(credit_rates: Dict[str, float]) -> float:
@@ -588,32 +655,42 @@ def credits_per_million(credit_rates: Dict[str, float]) -> float:
     return (3 * input_eff + credit_rates["output"]) / 4
 
 
-def build_codex_plus_plans(markdown: str, models_index: Dict[str, Any]) -> List[Dict[str, Any]]:
+def build_codex_plus_plans(
+    markdown: str,
+    models_index: Dict[str, Any],
+    ranked_models: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
     plus_usd = 20.0
     plus_cny = plus_usd * USD_TO_CNY
     plans = []
+    seen_rate_keys = set()
 
-    for model_slug, (msg_low, msg_high) in CODEX_PLUS_MSG_RANGE.items():
-        rates = CODEX_CREDIT_RATES[model_slug]
-        credits_per_msg_low = credits_per_million(rates) * 0.01
+    for model in ranked_models:
+        if model_provider_key(model["id"]) != "openai":
+            continue
+        rate_key = codex_rate_key_for_model(model["id"])
+        if not rate_key or rate_key in seen_rate_keys:
+            continue
+        msg_range = CODEX_PLUS_MSG_RANGE.get(rate_key)
+        if not msg_range:
+            continue
+        seen_rate_keys.add(rate_key)
+
+        msg_low, msg_high = msg_range
+        rates = CODEX_CREDIT_RATES[rate_key]
         credits_per_msg_high = credits_per_million(rates) * 0.025
-        windows_per_month = (24 / 5) * 30 / 4
-        monthly_msgs_low = msg_low * windows_per_month
+        windows_per_month = CODEX_PLUS_WINDOWS_PER_WEEK * WEEKS_PER_MONTH
         monthly_msgs_high = msg_high * windows_per_month
 
         tokens_per_credit = 1e6 / credits_per_million(rates)
-        monthly_tokens_low = monthly_msgs_low * credits_per_msg_low * tokens_per_credit
         monthly_tokens_high = monthly_msgs_high * credits_per_msg_high * tokens_per_credit
 
-        model_name = "Luna Max" if "luna" in model_slug else "Sol"
-        codex_match = make_match(
-            model_family=f"openai/{model_slug}",
-            exclude_slug_patterns=[r"-pro"],
-        )
-        openrouter = models_index.get(f"openai/{model_slug}")
+        model_id = model["id"]
+        display_name = re.sub(r"^[^:]+:\s*", "", model.get("name") or model_slug(model_id))
+        openrouter = models_index.get(model_id)
         if openrouter:
             pricing = openrouter.get("pricing") or {}
-            api_cost = cost_per_100m_from_usd_rates(
+            api_cost = blended_cost_cny_per_m_from_usd_rates(
                 pricing.get("prompt", 0),
                 pricing.get("cache_read"),
                 pricing.get("completion", 0),
@@ -623,170 +700,58 @@ def build_codex_plus_plans(markdown: str, models_index: Dict[str, Any]) -> List[
 
         plans.append(
             {
-                "id": f"gpt-plus-{model_slug.split('-')[-1]}",
+                "id": f"gpt-plus-{core_slug(model_id)}",
                 "type": "subscription",
                 "provider": "openai",
                 "provider_display": "GPT Plus",
-                "plan": model_name,
-                "cost_off_peak": cost_range(
-                    subscription_cost_per_100m(plus_cny, monthly_tokens_high),
-                    subscription_cost_per_100m(plus_cny, monthly_tokens_low),
-                ),
-                "cost_peak": None,
+                "plan": display_name,
+                "cost": subscription_cost_cny_per_m(plus_cny, monthly_tokens_high),
                 "monthly_cny": round(plus_cny, 2),
                 "monthly_usd": plus_usd,
-                "quota_tokens": {
-                    "monthly_min": int(monthly_tokens_low),
-                    "monthly_max": int(monthly_tokens_high),
-                },
+                "quota_tokens": int(monthly_tokens_high),
+                "quota_windows_per_week": round(CODEX_PLUS_WINDOWS_PER_WEEK, 2),
+                "quota_msgs_per_5h": msg_high,
                 "url": "https://chatgpt.com/codex/pricing",
                 "pricing_source": "OpenAI Codex 官方定价",
                 "source_url": VENDOR_SOURCES["codex_pricing"],
-                "api_reference_cost_per_100m": api_cost,
-                "note_zh": "按 Plus $20/月与 Codex 5 小时消息额度估算",
-                "note_en": "Estimated from Plus $20/mo and Codex 5-hour message limits",
-                "match": dict(codex_match),
+                "api_reference_blended_cny_per_m": api_cost,
+                "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
+                "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
+                "match": make_match(model_family=model_id, exclude_slug_patterns=[r"-pro"]),
             }
         )
-
-    return plans
-
-
-def parse_kimi_k3_api_rates(markdown: str) -> Optional[Dict[str, float]]:
-    match = re.search(
-        r'kimi-k3".*?¥([\d.]+)".*?¥([\d.]+)".*?¥([\d.]+)"',
-        markdown,
-        re.S,
-    )
-    if match:
-        return {
-            "cache_read": float(match.group(1)),
-            "prompt": float(match.group(2)),
-            "completion": float(match.group(3)),
-        }
-    for row in parse_markdown_table_rows(markdown):
-        if row and "kimi-k3" in row[0].lower():
-            prices = re.findall(r"¥\s*([\d.]+)", " ".join(row))
-            if len(prices) >= 3:
-                return {
-                    "cache_read": float(prices[0]),
-                    "prompt": float(prices[1]),
-                    "completion": float(prices[2]),
-                }
-    return None
-
-
-def estimate_kimi_membership_tokens(tier_id: str, monthly_cny: float, context_factor: float) -> int:
-    tokens_per_cny = KIMI_TOKENS_PER_CNY.get(tier_id)
-    if not tokens_per_cny:
-        return 0
-    return int(monthly_cny * tokens_per_cny * context_factor)
-
-
-def build_kimi_plans(kimi_api_md: str, kimi_pricing_html: str) -> List[Dict[str, Any]]:
-    rates = parse_kimi_k3_api_rates(kimi_api_md)
-    plans = []
-
-    if rates:
-        api_cost = cost_per_100m_from_cny_rates(
-            rates["prompt"], rates["cache_read"], rates["completion"]
-        )
-        plans.append(
-            {
-                "id": "kimi-k3-api",
-                "type": "api",
-                "provider": "moonshot",
-                "provider_display": "Kimi K3",
-                "plan": "API",
-                "cost_off_peak": api_cost,
-                "cost_peak": None,
-                "url": "https://platform.moonshot.cn/docs/pricing/chat",
-                "pricing_source": "Moonshot Kimi K3 官方 API",
-                "source_url": VENDOR_SOURCES["kimi_k3_api"],
-                "rates_cny_per_m": rates,
-                "match": dict(MATCH_KIMI_K3),
-            }
-        )
-
-        api_cost_per_token = api_cost / 1e8
-        membership_prices = fetch_kimi_membership_prices(kimi_pricing_html)
-        for tier in KIMI_MEMBERSHIP_TIERS:
-            monthly_cny = membership_prices.get(tier["id"], tier["monthly_cny"])
-            monthly_tokens = estimate_kimi_membership_tokens(
-                tier["id"], monthly_cny, tier["context_factor"]
-            )
-            if not monthly_tokens:
-                continue
-            plans.append(
-                {
-                    "id": tier["id"],
-                    "type": "subscription",
-                    "provider": "moonshot",
-                    "provider_display": "Kimi K3",
-                    "plan": tier["plan"],
-                    "badge": f"¥{int(monthly_cny)}",
-                    "cost_off_peak": subscription_cost_per_100m(monthly_cny, monthly_tokens),
-                    "cost_peak": None,
-                    "monthly_cny": monthly_cny,
-                    "quota_tokens": monthly_tokens,
-                    "url": "https://www.kimi.com/code",
-                    "pricing_source": "Kimi 会员定价 + 官方 API 价",
-                    "source_url": "https://www.kimi.com/en/help/membership/membership-pricing",
-                    "api_reference_cost_per_100m": api_cost,
-                    "note_zh": "会员 Token 池未公开，按各档历史用量效率折算；月费尝试从帮助中心抓取",
-                    "note_en": "Membership quota estimated; monthly price fetched when available",
-                    "match": dict(MATCH_KIMI_K3),
-                }
-            )
 
     return plans
 
 
 def build_deepseek_api_plans() -> List[Dict[str, Any]]:
-    specs = [
-        ("deepseek-v4-flash-0731", "deepseek/deepseek-v4-flash", "V4 Flash 0731"),
-        ("deepseek-v4-pro-0813", "deepseek/deepseek-v4-pro", "V4 Pro 0813"),
-    ]
     plans = []
-    for plan_id, model_id, label in specs:
-        pricing = DEEPSEEK_OFFICIAL_CNY_PER_M.get(model_id)
-        if not pricing or "peak" not in pricing:
+    for model_family, pricing in DEEPSEEK_OFFICIAL_CNY_PER_M.items():
+        if "peak" not in pricing:
             continue
-        off = pricing["off_peak"]
-        peak = pricing["peak"]
+        weighted = time_weighted_cny_rates(pricing)
+        family_core = core_slug(model_family)
         plans.append(
             {
-                "id": plan_id,
+                "id": f"deepseek-api-{family_core}",
                 "type": "api",
                 "provider": "deepseek",
                 "provider_display": "DeepSeek",
-                "plan": label,
-                "model_id": model_id,
-                "cost_off_peak": cost_per_100m_from_cny_rates(
-                    off["prompt"], off["cache_read"], off["completion"]
-                ),
-                "cost_peak": cost_per_100m_from_cny_rates(
-                    peak["prompt"], peak["cache_read"], peak["completion"]
+                "plan": pricing.get("plan_label") or family_core,
+                "cost": blended_cost_cny_per_m_from_cny_rates(
+                    weighted["prompt"], weighted["cache_read"], weighted["completion"]
                 ),
                 "url": pricing.get("source_url"),
                 "pricing_source": pricing.get("source_label"),
                 "source_url": pricing.get("source_url"),
-                "match": make_match(model_family=model_id),
+                "match": make_match(model_family=model_family),
             }
         )
     return plans
 
 
 def sort_key(plan: Dict[str, Any]) -> float:
-    peak = plan.get("cost_peak")
-    off = plan.get("cost_off_peak")
-    if peak is None:
-        if isinstance(off, list):
-            return off[1]
-        return off or float("inf")
-    if isinstance(peak, list):
-        return peak[1]
-    return peak
+    return cost_sort_value(plan.get("cost"))
 
 
 def index_models(models: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
@@ -798,26 +763,22 @@ def plan_target_models(plan: Dict[str, Any], models: List[Dict[str, Any]]) -> Li
 
 
 def supplier_sort_key(entry: Dict[str, Any]) -> float:
-    peak = entry.get("cost_peak")
-    off = entry.get("cost_off_peak")
-    if peak is None:
-        if isinstance(off, list):
-            return off[1]
-        return off or float("inf")
-    if isinstance(peak, list):
-        return peak[1]
-    return peak
+    return cost_sort_value(entry.get("cost"))
 
 
 def build_by_model_index(
     plans: List[Dict[str, Any]],
     models: List[Dict[str, Any]],
 ) -> Dict[str, List[Dict[str, Any]]]:
+    ranked_ids = {m["id"] for m in models if m.get("rank") is not None}
     index: Dict[str, List[Dict[str, Any]]] = {}
+    matched_plan_count = 0
     for plan in plans:
-        plan["target_models"] = plan_target_models(plan, models)
+        matched = plan_target_models(plan, models)
+        plan["target_models"] = [model_id for model_id in matched if model_id in ranked_ids]
         if not plan["target_models"]:
-            print(f"  Warning: no models matched for plan {plan['id']}")
+            continue
+        matched_plan_count += 1
         entry = {
             "id": plan["id"],
             "provider": plan.get("provider"),
@@ -825,8 +786,7 @@ def build_by_model_index(
             "plan": plan.get("plan"),
             "type": plan.get("type"),
             "badge": plan.get("badge"),
-            "cost_off_peak": plan.get("cost_off_peak"),
-            "cost_peak": plan.get("cost_peak"),
+            "cost": plan.get("cost"),
             "url": plan.get("url"),
             "pricing_source": plan.get("pricing_source"),
         }
@@ -837,6 +797,12 @@ def build_by_model_index(
         entries.sort(key=supplier_sort_key)
         for idx, entry in enumerate(entries, start=1):
             entry["rank"] = idx
+
+    unmatched = ranked_ids - set(index)
+    print(
+        f"  Ranked models: {len(index)} with channel pricing, "
+        f"{len(unmatched)} without ({matched_plan_count} plan entries matched)"
+    )
     return index
 
 
@@ -845,12 +811,6 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
     sources = {}
 
     opencode_md, sources["opencode_go"] = fetch_text(VENDOR_SOURCES["opencode_go"], session)
-    glm_md, sources["glm_overview"] = fetch_text(VENDOR_SOURCES["glm_overview"], session)
-    glm_html, sources["glm_pricing"] = fetch_text(VENDOR_SOURCES["glm_pricing"], session)
-    kimi_api_md, sources["kimi_k3_api"] = fetch_text(VENDOR_SOURCES["kimi_k3_api"], session)
-    kimi_pricing_html, sources["kimi_membership"] = fetch_text(
-        "https://www.kimi.com/en/help/membership/membership-pricing", session
-    )
     commandcode_goat_html, sources["commandcode_goat"] = fetch_text(
         VENDOR_SOURCES["commandcode_goat"], session
     )
@@ -863,12 +823,11 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
         sources["codex_pricing"] = "fallback:openrouter"
 
     models_index = index_models(models or [])
+    ranked_models = get_ranked_models(models or [])
     plans: List[Dict[str, Any]] = []
     plans.extend(build_opencode_plans(opencode_md))
-    plans.extend(build_commandcode_goat_plan(commandcode_goat_html))
-    plans.extend(build_codex_plus_plans(codex_md, models_index))
-    plans.extend(build_kimi_plans(kimi_api_md, kimi_pricing_html))
-    plans.extend(parse_glm_plans(glm_md, glm_html))
+    plans.extend(build_commandcode_goat_plan(commandcode_goat_html, opencode_md))
+    plans.extend(build_codex_plus_plans(codex_md, models_index, ranked_models))
     plans.extend(build_deepseek_api_plans())
 
     plans.sort(key=sort_key)
@@ -880,10 +839,15 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
     return {
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "methodology": {
-            "unit": "display value per 100M tokens (≈ USD/M × 100, shown as ¥)",
+            "unit": "effective blended price (¥/M tokens, 95% cache, 3:1 in/out)",
             "cache_hit_rate": DEFAULT_CACHE_HIT_RATE,
             "token_mix": "3:1 input:output for API; subscription uses vendor quota",
-            "sort_by": "peak cost ascending (flat-rate plans use off-peak only)",
+            "sort_by": "effective blended cost ascending",
+            "deepseek_api": "24h time-weighted peak/off-peak average (7h peak + 17h off-peak CST)",
+            "codex_plus": "5h rolling window max msgs × (168h/5h windows per week) × weeks/month; additional weekly caps per OpenAI docs are not public",
+            "target_scope": "all ranked leaderboard models",
+            "match_strategy": "vendor plan model slugs/labels matched to live ranked model ids",
+            "excluded_plans": "Zhipu GLM Coding Plan; Kimi membership/API official plans (not comparable on this leaderboard)",
             "usd_to_cny": USD_TO_CNY,
             "weeks_per_month": round(WEEKS_PER_MONTH, 3),
         },

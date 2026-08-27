@@ -3,6 +3,8 @@
  */
 (function () {
     const TOP_N = 30;
+    const LABEL_TOP_N = 10;
+    const MIN_CHART_INTELLIGENCE = 30;
     const PADDING = { top: 36, right: 32, bottom: 58, left: 62 };
     const PADDING_MOBILE = { top: 40, right: 28, bottom: 72, left: 54 };
     const MOBILE_BREAKPOINT = 768;
@@ -10,15 +12,42 @@
     const USD_TO_CNY = 7.25;
 
     let chartModels = [];
+    let chartOptions = {};
     let elements = {};
 
     function t(key) {
         return window.i18n?.t(key) || key;
     }
 
+    function getModelChartPrice(model) {
+        if (chartOptions.useMinChannelPrice && typeof window.getMinChannelPriceUsd === 'function') {
+            return window.getMinChannelPriceUsd(model) ?? model.pricing?.blended ?? 0;
+        }
+        return model.pricing?.blended ?? 0;
+    }
+
+    function getModelChartRank(model, index) {
+        if (chartOptions.useMinChannelPrice && typeof window.getAdjustedRawValueScore === 'function') {
+            return index + 1;
+        }
+        return model.rank;
+    }
+
     function getTopModels(allModels) {
-        return allModels
-            .filter((m) => m.rank != null && m.intelligence_score != null)
+        const pool = allModels
+            .filter((m) => (
+                m.rank != null
+                && m.intelligence_score != null
+                && m.intelligence_score >= MIN_CHART_INTELLIGENCE
+            ));
+
+        if (chartOptions.useMinChannelPrice && typeof window.getAdjustedRawValueScore === 'function') {
+            return [...pool]
+                .sort((a, b) => window.getAdjustedRawValueScore(b) - window.getAdjustedRawValueScore(a))
+                .slice(0, TOP_N);
+        }
+
+        return pool
             .sort((a, b) => a.rank - b.rank)
             .slice(0, TOP_N);
     }
@@ -91,10 +120,11 @@
         return withUnit ? `${rounded}/M` : rounded;
     }
 
-    function getPoint(model) {
-        const price = model.pricing?.blended ?? 0;
+    function getPoint(model, index) {
+        const price = getModelChartPrice(model);
         return {
             model,
+            chartRank: getModelChartRank(model, index),
             x: Math.max(price, 0.001),
             y: model.intelligence_score,
             xLabel: formatChartPrice(price, true),
@@ -138,28 +168,54 @@
         return cleaned.length > max ? `${cleaned.slice(0, max - 1)}…` : cleaned;
     }
 
-    function frontierLabelPosition(cx, cy, index, isTop3, pad, innerW, dotScale) {
+    function pointLabelPosition(cx, cy, rank, onFrontier, index, pad, innerW, dotScale) {
+        const isTop3 = rank <= 3;
         const rightZone = pad.left + innerW * 0.62;
         const anchor = cx >= rightZone ? 'end' : 'start';
         const x = cx >= rightZone ? cx - 7 : cx + 7;
         let y = cy - 10 * dotScale;
+
         if (isTop3) {
             y = cy + 18 * dotScale;
-        } else if (index % 2 === 1) {
-            y = cy + 14 * dotScale;
+        } else if (onFrontier) {
+            y = index % 2 === 1 ? cy + 14 * dotScale : cy - 10 * dotScale;
+        } else {
+            y = rank % 2 === 0 ? cy - 11 * dotScale : cy + 15 * dotScale;
         }
+
         return { x, y, anchor };
     }
 
-    function renderFrontierLabels(frontier, layout, xScale, yScale, pad, innerW, dotScale) {
-        return frontier.map((p, index) => {
-            const cx = xScale(p.x);
-            const cy = yScale(p.y);
-            const rank = p.model.rank;
-            const isTop3 = rank <= 3;
-            const { x, y, anchor } = frontierLabelPosition(cx, cy, index, isTop3, pad, innerW, dotScale);
-            const name = chartLabel(p.model.name, layout.mobile);
-            return `<text class="pareto-frontier-label" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}">${escapeHtml(name)}</text>`;
+    function collectLabeledPoints(points, frontier) {
+        const entries = [];
+        const seen = new Set();
+
+        frontier.forEach((point, index) => {
+            seen.add(point.model.id);
+            entries.push({ point, onFrontier: true, index });
+        });
+
+        points
+            .filter((p) => p.chartRank != null && p.chartRank <= LABEL_TOP_N)
+            .sort((a, b) => a.chartRank - b.chartRank)
+            .forEach((point) => {
+                if (seen.has(point.model.id)) return;
+                seen.add(point.model.id);
+                entries.push({ point, onFrontier: false, index: point.chartRank });
+            });
+
+        return entries;
+    }
+
+    function renderPointLabels(points, frontier, layout, xScale, yScale, pad, innerW, dotScale) {
+        return collectLabeledPoints(points, frontier).map(({ point, onFrontier, index }) => {
+            const cx = xScale(point.x);
+            const cy = yScale(point.y);
+            const rank = point.chartRank;
+            const { x, y, anchor } = pointLabelPosition(cx, cy, rank, onFrontier, index, pad, innerW, dotScale);
+            const name = chartLabel(point.model.name, layout.mobile);
+            const cls = onFrontier ? 'pareto-frontier-label' : 'pareto-frontier-label pareto-top-label';
+            return `<text class="${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}">${escapeHtml(name)}</text>`;
         }).join('');
     }
 
@@ -188,11 +244,18 @@
     function showTooltip(event, point) {
         if (!elements.tooltip) return;
         const m = point.model;
-        const rank = m.rank ?? '—';
+        const rank = point.chartRank ?? m.rank ?? '—';
+        const supplierLabel = typeof window.getChartPriceSupplierLabel === 'function'
+            ? window.getChartPriceSupplierLabel(m, chartOptions.useMinChannelPrice)
+            : null;
+        const supplierHtml = supplierLabel
+            ? `<span class="pareto-tooltip-channel">${t('pricing_channel')}: ${escapeHtml(supplierLabel)}</span>`
+            : '';
         elements.tooltip.innerHTML = `
             <strong>#${rank} ${escapeHtml(shortName(m.name))}</strong>
             <span>${t('th_intelligence')}: ${m.intelligence_score}</span>
             <span>${t('th_price')}: ${escapeHtml(point.xLabel)}</span>
+            ${supplierHtml}
             <span class="pareto-tooltip-hint">${t('pareto_click_detail')}</span>
         `;
         elements.tooltip.hidden = false;
@@ -258,7 +321,7 @@
         const dots = points.map((p) => {
             const cx = xScale(p.x);
             const cy = yScale(p.y);
-            const rank = p.model.rank;
+            const rank = p.chartRank;
             const onFrontier = frontier.includes(p);
             const isTop3 = rank <= 3;
             const color = isTop3 ? rankColor(rank) : (onFrontier ? '#38bdf8' : 'rgba(148, 163, 184, 0.55)');
@@ -280,7 +343,7 @@
             `;
         }).join('');
 
-        const frontierLabels = renderFrontierLabels(frontier, layout, xScale, yScale, pad, innerW, dotScale);
+        const pointLabels = renderPointLabels(points, frontier, layout, xScale, yScale, pad, innerW, dotScale);
 
         const xAxisLabel = layout.mobile
             ? (isZh() ? t('pareto_axis_price_short') : t('pareto_axis_price_short'))
@@ -313,7 +376,7 @@
                 ${frontierArea ? `<path class="pareto-frontier-area" d="${frontierArea}" />` : ''}
                 ${frontierPath ? `<path class="pareto-frontier" d="${frontierPath}"${frontierFilter} />` : ''}
                 ${dots}
-                <g class="pareto-frontier-labels" aria-hidden="true">${frontierLabels}</g>
+                <g class="pareto-point-labels" aria-hidden="true">${pointLabels}</g>
                 <text class="pareto-axis-title" x="${pad.left + innerW / 2}" y="${height - 8}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
                 <text class="pareto-axis-title pareto-axis-title-y" x="18" y="${pad.top + innerH / 2}" text-anchor="middle" transform="rotate(-90 18 ${pad.top + innerH / 2})">${escapeHtml(t('pareto_axis_intelligence'))}</text>
                 <text class="pareto-hint-corner" x="${pad.left + 10}" y="${pad.top + 16}" text-anchor="start">${escapeHtml(t('pareto_better_corner_price'))}</text>
@@ -327,7 +390,7 @@
             const modelId = node.dataset.modelId;
             const model = chartModels.find((m) => m.id === modelId);
             if (!model) return;
-            const point = getPoint(model);
+            const point = getPoint(model, chartModels.indexOf(model));
 
             node.addEventListener('mouseenter', (e) => showTooltip(e, point));
             node.addEventListener('mousemove', (e) => showTooltip(e, point));
@@ -353,7 +416,7 @@
 
         elements.section.hidden = false;
 
-        const points = chartModels.map((m) => getPoint(m));
+        const points = chartModels.map((m, index) => getPoint(m, index));
         const frontier = computeFrontier(points);
         const { width, height } = getChartSize();
         const layout = getLayout(width, height);
@@ -391,8 +454,9 @@
         });
     }
 
-    function render(allModels) {
+    function render(allModels, options = {}) {
         if (!elements.section) init();
+        chartOptions = options;
         chartModels = getTopModels(allModels || []);
         if (!chartModels.length) {
             if (elements.section) elements.section.hidden = true;

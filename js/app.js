@@ -25,7 +25,10 @@ const state = {
     scoringMeta: null,
     supplierPlansByModel: {},
     supplierMethodology: null,
+    useMinChannelPrice: false,
 };
+
+const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
 
 // Provider display names
 const PROVIDER_NAMES = {
@@ -62,6 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initGitHubStar();
     initResponsive();
     initVersion();
+    initMinChannelPriceToggle();
     await loadData();
     initEventListeners();
 });
@@ -81,6 +85,7 @@ function initElements() {
     elements.podium = document.getElementById('podium');
     elements.podiumSection = document.getElementById('podium-section');
     elements.resultsCount = document.getElementById('results-count');
+    elements.minChannelPriceToggle = document.getElementById('min-channel-price-toggle');
     elements.rankingsCards = document.getElementById('rankings-cards');
     elements.tableContainer = document.querySelector('.table-container');
 }
@@ -238,6 +243,19 @@ function syncThemeColor() {
     meta.content = colors[style]?.[theme] || '#0b0f19';
 }
 
+function initMinChannelPriceToggle() {
+    const toggle = elements.minChannelPriceToggle;
+    if (!toggle) return;
+
+    state.useMinChannelPrice = localStorage.getItem(MIN_CHANNEL_PRICE_KEY) !== '0';
+    toggle.checked = state.useMinChannelPrice;
+    toggle.addEventListener('change', () => {
+        state.useMinChannelPrice = toggle.checked;
+        localStorage.setItem(MIN_CHANNEL_PRICE_KEY, toggle.checked ? '1' : '0');
+        filterAndSort();
+    });
+}
+
 // i18n
 function initI18n() {
     window.i18n.init();
@@ -289,12 +307,6 @@ async function loadData() {
         updateStats();
         updateScoringDisplay();
         populateProviders();
-        renderPodium();
-        try {
-            window.ParetoChart?.render?.(state.models);
-        } catch (err) {
-            console.error('Pareto chart render failed:', err);
-        }
         filterAndSort();
     } catch (error) {
         console.error('Error loading data:', error);
@@ -408,13 +420,35 @@ function filterAndSort() {
         );
     }
     
-    // Sort by value score (capability²/price)
-    filtered.sort((a, b) => (b.value_score || 0) - (a.value_score || 0));
+    // Sort by value score (OpenRouter) or lowest channel price
+    if (state.useMinChannelPrice) {
+        filtered.sort((a, b) => getAdjustedRawValueScore(b) - getAdjustedRawValueScore(a));
+        const maxScore = Math.max(...filtered.map(getAdjustedRawValueScore), 0);
+        filtered.forEach((model, index) => {
+            model.displayRank = index + 1;
+            const raw = getAdjustedRawValueScore(model);
+            model.displayValueScore = maxScore > 0
+                ? Math.round((raw / maxScore * 100) * 10) / 10
+                : null;
+        });
+    } else {
+        filtered.sort((a, b) => (b.value_score || 0) - (a.value_score || 0));
+    }
     
     state.filteredModels = filtered;
     state.currentPage = 1;
     updateResultsCount();
     renderRankings();
+    renderPodium();
+    refreshParetoChart();
+}
+
+function refreshParetoChart() {
+    try {
+        window.ParetoChart?.render?.(state.models, { useMinChannelPrice: state.useMinChannelPrice });
+    } catch (err) {
+        console.error('Pareto chart render failed:', err);
+    }
 }
 
 function updateResultsCount() {
@@ -463,9 +497,11 @@ const PODIUM_MEDALS = ['#1', '#2', '#3'];
 function renderPodium() {
     if (!elements.podium || !elements.podiumSection) return;
 
-    const top3 = state.models
-        .filter(m => m.rank && m.rank <= 3 && m.value_score != null)
-        .sort((a, b) => a.rank - b.rank);
+    const top3 = state.useMinChannelPrice
+        ? state.filteredModels.filter((m) => m.displayRank && m.displayRank <= 3)
+        : state.models
+            .filter((m) => m.rank && m.rank <= 3 && m.value_score != null)
+            .sort((a, b) => a.rank - b.rank);
 
     if (top3.length === 0) {
         elements.podiumSection.hidden = true;
@@ -473,9 +509,11 @@ function renderPodium() {
     }
 
     elements.podiumSection.hidden = false;
-    elements.podium.innerHTML = top3.map(model => {
-        const rankClass = `podium-place-${model.rank}`;
-        const medal = PODIUM_MEDALS[model.rank - 1] || `#${model.rank}`;
+    elements.podium.innerHTML = top3.map((model) => {
+        const rank = getDisplayRank(model);
+        const rankClass = `podium-place-${rank}`;
+        const medal = PODIUM_MEDALS[rank - 1] || `#${rank}`;
+        const displayPrice = getDisplayPriceUsd(model);
         return `
             <div class="podium-card ${rankClass} fade-in" data-model-id="${escapeAttr(model.id)}">
                 <div class="podium-medal-wrap">
@@ -494,7 +532,7 @@ function renderPodium() {
                         <span class="podium-metric-label">${window.i18n.t('podium_speed')}</span>
                     </div>
                     <div class="podium-metric">
-                        <span class="podium-metric-value">${formatPrice(model.pricing.blended)}</span>
+                        <span class="podium-metric-value">${formatPrice(displayPrice)}</span>
                         <span class="podium-metric-label">${window.i18n.t('podium_price')}</span>
                     </div>
                 </div>
@@ -530,16 +568,156 @@ function formatRankChangeText(model) {
     return `↓${Math.abs(model.rank_change)}`;
 }
 
-function getSuppliersForModel(modelId) {
-    return state.supplierPlansByModel[modelId] || [];
+function supplierCostMinValue(cost) {
+    if (cost == null || Number.isNaN(Number(cost))) return Infinity;
+    if (Array.isArray(cost)) {
+        const low = Number(cost[0]);
+        const high = Number(cost[1]);
+        if (Number.isNaN(low)) return high;
+        if (Number.isNaN(high)) return low;
+        return Math.min(low, high);
+    }
+    return Number(cost);
+}
+
+function supplierCostSortValue(cost) {
+    return supplierCostMinValue(cost);
+}
+
+function buildSupplierEntries(modelId, model) {
+    const modelObj = model || state.models.find((m) => m.id === modelId);
+    const entries = [...(state.supplierPlansByModel[modelId] || [])];
+    const openRouter = modelObj ? buildOpenRouterSupplierEntry(modelObj) : null;
+    if (openRouter && !entries.some((e) => e.provider === 'openrouter')) {
+        entries.push(openRouter);
+    }
+    return entries;
+}
+
+function getMinChannelPriceCny(model) {
+    if (!model) return null;
+    const costs = buildSupplierEntries(model.id, model)
+        .map((entry) => supplierCostMinValue(entry.cost))
+        .filter((cost) => Number.isFinite(cost));
+    return costs.length ? Math.min(...costs) : null;
+}
+
+function getMinChannelPriceUsd(model) {
+    const cny = getMinChannelPriceCny(model);
+    if (cny == null) return model?.pricing?.blended ?? null;
+    return cny / CONFIG.USD_TO_CNY;
+}
+
+function getDisplayPriceUsd(model) {
+    if (!state.useMinChannelPrice) return model.pricing?.blended;
+    return getMinChannelPriceUsd(model);
+}
+
+function formatSupplierChannelLabel(entry) {
+    if (!entry) return null;
+    return [entry.provider_display, entry.plan].filter(Boolean).join(' · ');
+}
+
+function getCheapestSupplierEntry(model) {
+    if (!model) return null;
+    const entries = buildSupplierEntries(model.id, model);
+    if (!entries.length) return null;
+
+    let best = null;
+    let bestCost = Infinity;
+    for (const entry of entries) {
+        const cost = supplierCostMinValue(entry.cost);
+        if (cost < bestCost) {
+            best = entry;
+            bestCost = cost;
+        }
+    }
+    return best;
+}
+
+function getChartPriceSupplierLabel(model, useMinChannelPrice = state.useMinChannelPrice) {
+    if (!model) return null;
+
+    if (useMinChannelPrice) {
+        const cheapest = getCheapestSupplierEntry(model);
+        if (cheapest) return formatSupplierChannelLabel(cheapest);
+    }
+
+    const openRouter = buildOpenRouterSupplierEntry(model);
+    if (openRouter) return formatSupplierChannelLabel(openRouter);
+
+    return model.pricing?.pricing_source || 'OpenRouter';
+}
+
+function getAdjustedRawValueScore(model) {
+    if (!model?.value_score) return 0;
+    if (!state.useMinChannelPrice) return model.value_score;
+
+    const blended = model.pricing?.blended;
+    const minUsd = getMinChannelPriceUsd(model);
+    if (!blended || !minUsd || minUsd <= 0) return model.value_score;
+    return model.value_score * (blended / minUsd);
+}
+
+function getDisplayRank(model) {
+    if (state.useMinChannelPrice) return model.displayRank ?? model.rank;
+    return model.rank;
+}
+
+function getDisplayValueScore(model) {
+    if (!state.useMinChannelPrice) return model.value_score || 0;
+    return model.displayValueScore ?? model.value_score ?? 0;
+}
+
+function buildOpenRouterSupplierEntry(model) {
+    const blendedUsd = model?.pricing?.blended;
+    if (blendedUsd == null || Number.isNaN(Number(blendedUsd))) return null;
+    const cost = Math.round(Number(blendedUsd) * CONFIG.USD_TO_CNY * 10000) / 10000;
+    const sourceUrl = model.pricing.pricing_source_url || getOpenRouterModelUrl(model.id);
+    return {
+        id: 'openrouter-api',
+        provider: 'openrouter',
+        provider_display: 'OpenRouter',
+        plan: window.i18n.t('supplier_openrouter_plan'),
+        type: 'api',
+        badge: null,
+        cost,
+        url: sourceUrl,
+        pricing_source: 'OpenRouter',
+    };
+}
+
+function getSuppliersForModel(modelId, model) {
+    const entries = buildSupplierEntries(modelId, model);
+    entries.sort((a, b) => supplierCostSortValue(a.cost) - supplierCostSortValue(b.cost));
+    return entries.map((entry, index) => ({ ...entry, rank: index + 1 }));
+}
+
+function formatCnyPerM(cny) {
+    if (cny == null || Number.isNaN(Number(cny))) return '-';
+    const price = Number(cny);
+    if (price >= 100) return `¥${price.toFixed(1)}`;
+    if (price >= 1) return `¥${price.toFixed(2)}`;
+    return `¥${price.toFixed(3)}`;
 }
 
 function formatSupplierCost(value) {
     if (value == null) return '<span class="supplier-cost-dash">—</span>';
-    if (Array.isArray(value)) {
-        return `<span class="supplier-cost">≈¥${value[0]}–${value[1]}</span>`;
+    if (window.i18n.currentLang !== 'zh') {
+        const formatUsd = (cny) => {
+            const usd = Number(cny) / CONFIG.USD_TO_CNY;
+            if (Number.isNaN(usd)) return '-';
+            return `$${usd.toFixed(2)}`;
+        };
+        if (Array.isArray(value)) {
+            return `<span class="supplier-cost">≈${formatUsd(value[0])}–${formatUsd(value[1])}</span>`;
+        }
+        return `<span class="supplier-cost">≈${formatUsd(value)}</span>`;
     }
-    return `<span class="supplier-cost">≈¥${value}</span>`;
+    if (Array.isArray(value)) {
+        return `<span class="supplier-cost">≈${formatCnyPerM(value[0])}–${formatCnyPerM(value[1])}</span>`;
+    }
+    return `<span class="supplier-cost">≈${formatCnyPerM(value)}</span>`;
 }
 
 function getPageModels() {
@@ -567,11 +745,12 @@ function renderMobileCards() {
     }
 
     elements.rankingsCards.innerHTML = pageModels.map((model, idx) => {
-        const rank = model.rank || '-';
+        const rank = getDisplayRank(model) || '-';
         const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
         const intelClass = getIntelligenceClass(model.intelligence_score);
-        const priceClass = getPriceClass(model.pricing.blended);
-        const valueScore = model.value_score || 0;
+        const displayPrice = getDisplayPriceUsd(model);
+        const priceClass = getPriceClass(displayPrice);
+        const valueScore = getDisplayValueScore(model);
 
         return `
             <article class="model-card fade-in" style="animation-delay: ${idx * 30}ms" data-model-id="${escapeAttr(model.id)}">
@@ -603,7 +782,7 @@ function renderMobileCards() {
                     </span>
                     <span class="model-card-stat">
                         <em>${window.i18n.t('th_price')}</em>
-                        <strong class="price-display ${priceClass}">${formatPrice(model.pricing.blended)}</strong>
+                        <strong class="price-display ${priceClass}">${formatPrice(displayPrice)}</strong>
                     </span>
                 </div>
                 <p class="model-card-hint">${window.i18n.t('card_tap_hint')}</p>
@@ -638,10 +817,10 @@ function renderTable() {
     }
     
     // Find max value for bar scaling
-    const maxValue = Math.max(...state.filteredModels.map(m => m.value_score || 0));
+    const maxValue = Math.max(...state.filteredModels.map((m) => getDisplayValueScore(m) || 0));
     
     elements.rankingsBody.innerHTML = pageModels.map((model, idx) => {
-        const rank = model.rank || '-';
+        const rank = getDisplayRank(model) || '-';
         const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
         const providerName = model.provider_display || model.provider;
         
@@ -651,10 +830,10 @@ function renderTable() {
         const speed = formatSpeed(model.speed);
         const ttft = formatLatency(model.ttft);
         
-        const price = model.pricing.blended;
+        const price = getDisplayPriceUsd(model);
         const priceClass = getPriceClass(price);
         
-        const valueScore = model.value_score || 0;
+        const valueScore = getDisplayValueScore(model);
         const valueBarWidth = maxValue > 0 ? (valueScore / maxValue * 100) : 0;
         const topRowClass = rank <= 3 ? 'top-row' : '';
 
@@ -778,11 +957,13 @@ function showModelDetail(modelId) {
     const lang = window.i18n.currentLang;
     const providerName = PROVIDER_NAMES[model.provider]?.[lang] || model.provider;
     const providerDisplay = model.provider_display || providerName;
-    const rank = model.rank || '-';
+    const rank = getDisplayRank(model) || '-';
     const rankClass = rank <= 3 ? `detail-rank-${rank}` : '';
     const intelClass = getIntelligenceClass(model.intelligence_score);
-    const priceClass = getPriceClass(model.pricing.blended);
+    const displayPrice = getDisplayPriceUsd(model);
+    const priceClass = getPriceClass(displayPrice);
     const medal = rank <= 3 ? PODIUM_MEDALS[rank - 1] : `#${rank}`;
+    const displayValueScore = getDisplayValueScore(model);
     const listBlended = model.pricing.blended_list;
     const showListPrice = listBlended != null && listBlended !== model.pricing.blended;
     const openRouterUrl = getOpenRouterModelUrl(model.id);
@@ -824,19 +1005,21 @@ function showModelDetail(modelId) {
                 </div>` : '';
     const todNoteHtml = hasTodPricing ? `
             <p class="detail-pricing-note">${window.i18n.t('pricing_tod_note')}</p>` : '';
-    const suppliers = getSuppliersForModel(modelId);
+    const suppliers = getSuppliersForModel(modelId, model);
+    const minChannelNoteHtml = state.useMinChannelPrice ? `
+            <p class="detail-pricing-note">${window.i18n.t('min_channel_price_note')}</p>` : '';
     const supplierSectionHtml = suppliers.length ? `
         <div class="detail-section">
             <h3 class="detail-section-title">${window.i18n.t('supplier_pricing_title')}</h3>
             <p class="detail-pricing-note">${window.i18n.t('supplier_pricing_note')}</p>
+            ${minChannelNoteHtml}
             <div class="supplier-pricing-block supplier-pricing-modal">
                 <table class="supplier-pricing-table">
                     <thead>
                         <tr>
                             <th>${window.i18n.t('supplier_th_rank')}</th>
                             <th>${window.i18n.t('supplier_th_channel')}</th>
-                            <th>${window.i18n.t('supplier_th_off')}</th>
-                            <th>${window.i18n.t('supplier_th_peak')}</th>
+                            <th>${window.i18n.t('supplier_th_price')}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -851,8 +1034,7 @@ function showModelDetail(modelId) {
                                 <tr class="supplier-pricing-row${entry.rank === 1 ? ' supplier-rank-best' : ''}">
                                     <td class="supplier-col-rank">${entry.rank}</td>
                                     <td class="supplier-col-channel"><span class="supplier-channel-name">${escapeHtml(label)}</span>${badge}</td>
-                                    <td class="supplier-col-off">${formatSupplierCost(entry.cost_off_peak)}</td>
-                                    <td class="supplier-col-peak">${formatSupplierCost(entry.cost_peak)}</td>
+                                    <td class="supplier-col-price">${formatSupplierCost(entry.cost)}</td>
                                     <td class="supplier-col-link">${link}</td>
                                 </tr>
                             `;
@@ -876,7 +1058,7 @@ function showModelDetail(modelId) {
             </div>
             <div class="model-detail-value-chip">
                 <span class="detail-chip-label">${window.i18n.t('th_value')}</span>
-                <span class="detail-chip-value">${formatValueScore(model.value_score)}</span>
+                <span class="detail-chip-value">${formatValueScore(displayValueScore)}</span>
                 ${formatRankChangeHtml(model, true)}
             </div>
         </div>
@@ -1019,3 +1201,6 @@ function escapeAttr(text) {
 // Make goToPage and showModelDetail global
 window.goToPage = goToPage;
 window.showModelDetail = showModelDetail;
+window.getMinChannelPriceUsd = getMinChannelPriceUsd;
+window.getAdjustedRawValueScore = getAdjustedRawValueScore;
+window.getChartPriceSupplierLabel = getChartPriceSupplierLabel;
