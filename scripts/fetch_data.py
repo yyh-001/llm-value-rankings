@@ -79,6 +79,13 @@ OFFICIAL_PRICING_CNY_PER_M = {
         "source_url": "https://mimo.mi.com/docs/zh-CN/price/pay-as-you-go",
     },
 }
+
+# Versioned OpenRouter slugs that share official API pricing with a base model id.
+OFFICIAL_PRICING_FAMILY_PREFIXES = (
+    ("deepseek/deepseek-v4-flash", "deepseek/deepseek-v4-flash"),
+    ("deepseek/deepseek-v4-pro", "deepseek/deepseek-v4-pro"),
+)
+
 OPENROUTER_ENDPOINTS_API = "https://openrouter.ai/api/v1/models/{model_id}/endpoints"
 OPENROUTER_MODEL_PAGE = "https://openrouter.ai/{model_id}"
 ENDPOINT_FETCH_WORKERS = 8
@@ -297,9 +304,26 @@ def time_weighted_cny_rates(spec):
     }
 
 
+def resolve_official_pricing_key(model_id):
+    """Map versioned provider slugs to configured official pricing keys."""
+    if model_id in OFFICIAL_PRICING_CNY_PER_M:
+        return model_id
+
+    normalized = model_id.lstrip("~")
+    if normalized in OFFICIAL_PRICING_CNY_PER_M:
+        return normalized
+
+    for prefix, key in OFFICIAL_PRICING_FAMILY_PREFIXES:
+        if normalized == prefix or normalized.startswith(f"{prefix}-"):
+            if key in OFFICIAL_PRICING_CNY_PER_M:
+                return key
+    return None
+
+
 def apply_official_pricing_override(model_id, pricing_payload):
     """Replace pricing with official provider API rates when configured."""
-    spec = OFFICIAL_PRICING_CNY_PER_M.get(model_id)
+    spec_key = resolve_official_pricing_key(model_id)
+    spec = OFFICIAL_PRICING_CNY_PER_M.get(spec_key) if spec_key else None
     if not spec:
         return pricing_payload
 
