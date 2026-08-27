@@ -122,7 +122,7 @@ const translations = {
         // Supplier / coding plan pricing under each model
         supplier_pricing_title: "接入渠道价格排行",
         supplier_pricing_unit: "¥ / 百万 tokens · Agent token 结构 · 与有效综合价一致",
-        supplier_pricing_note: "含 OpenRouter 按量价、官方 API 与 Coding Plan 订阅折算价（均为有效综合价）；DeepSeek 官方 API 按全天峰谷时段加权",
+        supplier_pricing_note: "含 OpenRouter 按量价、官方 API 与 Coding Plan 订阅折算价；DeepSeek 官方 API 按全天峰谷加权；OpenCode Go / Command Code 订阅摊薄价 ×1.5",
         supplier_openrouter_plan: "API 按量",
         supplier_th_rank: "#",
         supplier_th_channel: "渠道 / 方案",
@@ -250,7 +250,7 @@ const translations = {
 
         supplier_pricing_title: "Channel pricing",
         supplier_pricing_unit: "¥ / M tokens · agent token mix · effective blended price",
-        supplier_pricing_note: "OpenRouter pay-as-you-go, official API, and coding-plan rates (effective blended price); DeepSeek API uses 24h peak/off-peak weighting",
+        supplier_pricing_note: "OpenRouter pay-as-you-go, official API, and coding-plan rates; DeepSeek API uses 24h peak/off-peak weighting; OpenCode Go / Command Code subscription ×1.5",
         supplier_openrouter_plan: "Pay-as-you-go API",
         supplier_th_rank: "#",
         supplier_th_channel: "Channel / plan",

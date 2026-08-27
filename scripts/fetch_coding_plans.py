@@ -27,6 +27,9 @@ OUTPUT_FILE = Path(__file__).parent.parent / "data" / "coding_plans.json"
 CACHE_DIR = Path(__file__).parent / "_vendor_cache"
 WEEKS_PER_MONTH = 52 / 12
 DEFAULT_TOKEN_PATTERN = {"input": 800, "cached": 50_000, "output": 200}
+# Subscription amortization ignores peak/off-peak; apply a flat uplift for coding plans.
+SUBSCRIPTION_COST_BUFFER = 1.5
+OPENCODE_GO_COST_BUFFER = SUBSCRIPTION_COST_BUFFER
 
 # DeepSeek official API (shown in channel pricing, not main OpenRouter leaderboard price).
 DEEPSEEK_OFFICIAL_CNY_PER_M = {
@@ -494,6 +497,12 @@ def build_opencode_plans(markdown: str) -> List[Dict[str, Any]]:
         monthly_requests = entry["monthly_requests"]
         tokens_per_request = pattern["input"] + pattern["cached"] + pattern["output"]
         monthly_tokens = monthly_requests * tokens_per_request
+        base_cost = subscription_cost_cny_per_m(monthly_cny, monthly_tokens)
+        cost = (
+            round(base_cost * OPENCODE_GO_COST_BUFFER, 4)
+            if base_cost is not None
+            else None
+        )
         plans.append(
             {
                 "id": f"opencode-go-{slugify_plan_id(vendor_slug)}",
@@ -502,7 +511,9 @@ def build_opencode_plans(markdown: str) -> List[Dict[str, Any]]:
                 "provider_display": "OpenCode Go",
                 "plan": doc_label,
                 "badge": f"${int(monthly_sub_usd)}/月",
-                "cost": subscription_cost_cny_per_m(monthly_cny, monthly_tokens),
+                "cost": cost,
+                "subscription_base_cost": base_cost,
+                "cost_buffer": OPENCODE_GO_COST_BUFFER,
                 "monthly_cny": monthly_cny,
                 "monthly_usd": monthly_sub_usd,
                 "quota_tokens": int(monthly_tokens),
@@ -511,8 +522,8 @@ def build_opencode_plans(markdown: str) -> List[Dict[str, Any]]:
                 "url": "https://opencode.ai/go",
                 "pricing_source": "OpenCode Go 官方文档",
                 "source_url": VENDOR_SOURCES["opencode_go"],
-                "note_zh": f"按官方 ${int(monthly_sub_usd)}/月 订阅价与 {doc_label} 月度请求量估算",
-                "note_en": f"Estimated from ${int(monthly_sub_usd)}/mo subscription and {doc_label} monthly requests",
+                "note_zh": f"按官方 ${int(monthly_sub_usd)}/月 与 {doc_label} 月度请求量估算，并 ×{OPENCODE_GO_COST_BUFFER:.1f} 计入峰谷等因素",
+                "note_en": f"From ${int(monthly_sub_usd)}/mo and {doc_label} monthly requests, ×{OPENCODE_GO_COST_BUFFER:.1f} for peak/off-peak exposure",
                 "match": make_match(vendor_slug=vendor_slug),
             }
         )
@@ -620,6 +631,12 @@ def build_commandcode_goat_plan(html: str, opencode_markdown: str = "") -> List[
         pattern = lookup_commandcode_token_pattern(vendor_label, opencode_patterns)
         tokens_per_request = pattern["input"] + pattern["cached"] + pattern["output"]
         monthly_tokens = monthly_requests * tokens_per_request
+        base_cost = subscription_cost_cny_per_m(monthly_cny, monthly_tokens)
+        cost = (
+            round(base_cost * SUBSCRIPTION_COST_BUFFER, 4)
+            if base_cost is not None
+            else None
+        )
         vendor_slug = vendor_label_to_slug_guess(vendor_label)
         plans.append(
             {
@@ -629,7 +646,9 @@ def build_commandcode_goat_plan(html: str, opencode_markdown: str = "") -> List[
                 "provider_display": "Command Code",
                 "plan": f"GOAT · {vendor_label}",
                 "badge": f"${int(monthly_usd)}",
-                "cost": subscription_cost_cny_per_m(monthly_cny, monthly_tokens),
+                "cost": cost,
+                "subscription_base_cost": base_cost,
+                "cost_buffer": SUBSCRIPTION_COST_BUFFER,
                 "monthly_cny": monthly_cny,
                 "monthly_usd": monthly_usd,
                 "quota_tokens": int(monthly_tokens),
@@ -640,8 +659,8 @@ def build_commandcode_goat_plan(html: str, opencode_markdown: str = "") -> List[
                 "url": "https://commandcode.ai/docs/plans/goat",
                 "pricing_source": "Command Code GOAT 官方文档",
                 "source_url": VENDOR_SOURCES["commandcode_goat"],
-                "note_zh": f"按 GOAT ${int(monthly_usd)}/月、{vendor_label} 月请求量与典型 Token 模式估算",
-                "note_en": f"From GOAT ${int(monthly_usd)}/mo, {vendor_label} monthly requests, and typical token pattern",
+                "note_zh": f"按 GOAT ${int(monthly_usd)}/月、{vendor_label} 月请求量估算，并 ×{SUBSCRIPTION_COST_BUFFER:.1f} 计入峰谷等因素",
+                "note_en": f"From GOAT ${int(monthly_usd)}/mo and {vendor_label} monthly requests, ×{SUBSCRIPTION_COST_BUFFER:.1f} for peak/off-peak exposure",
                 "match": make_match(
                     vendor_slug=vendor_slug,
                     vendor_label=vendor_label,
@@ -847,6 +866,8 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
             "token_mix": "OpenCode-observed agent mix (fresh input / cache / output); subscription uses vendor quota",
             "sort_by": "effective blended cost ascending",
             "deepseek_api": "24h time-weighted peak/off-peak average (7h peak + 17h off-peak CST)",
+            "opencode_go": f"subscription amortization × {SUBSCRIPTION_COST_BUFFER} (50% uplift; peak/off-peak not in quota math)",
+            "commandcode_goat": f"subscription amortization × {SUBSCRIPTION_COST_BUFFER} (50% uplift; peak/off-peak not in quota math)",
             "codex_plus": "5h rolling window max msgs × (168h/5h windows per week) × weeks/month; additional weekly caps per OpenAI docs are not public",
             "target_scope": "all ranked leaderboard models",
             "match_strategy": "vendor plan model slugs/labels matched to live ranked model ids",
