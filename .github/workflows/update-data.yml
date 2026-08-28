@@ -4,7 +4,7 @@ on:
   schedule:
     # 每天北京时间 01:00（UTC 17:00）
     - cron: '0 17 * * *'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch: # 可在 Actions 页手动 Run workflow
   push:
     branches: [ main ]
     paths:
