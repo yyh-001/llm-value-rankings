@@ -18,6 +18,7 @@ from fetch_data import (  # noqa: E402
     DEFAULT_CACHE_HIT_RATE,
     USD_TO_CNY,
     agent_blended_price,
+    agent_token_weights,
     get_agent_token_pattern,
     make_http_session,
     time_weighted_cny_rates,
@@ -57,6 +58,8 @@ VENDOR_SOURCES = {
     "codex_pricing": "https://developers.openai.com/codex/pricing.md",
     "commandcode_goat": "https://commandcode.ai/docs/plans/goat",
     "minimax_token_plan": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
+    "mimo_token_plan": "https://platform.xiaomimimo.com/token-plan",
+    "mimo_token_plan_docs": "https://mimo.mi.com/docs/zh-CN/price/token-plan",
 }
 
 # MiniMax Token Plan (individual monthly). Official M3 token pool; coding ~50K tokens/call.
@@ -65,6 +68,18 @@ MINIMAX_TOKEN_PLAN_TIERS = [
     {"id": "max", "label": "Max", "monthly_cny": 119, "monthly_tokens": 1_800_000_000, "monthly_requests": 36_000},
     {"id": "ultra", "label": "Ultra", "monthly_cny": 469, "monthly_tokens": 7_100_000_000, "monthly_requests": 140_000},
 ]
+
+# Xiaomi MiMo Token Plan (monthly list CNY). Credits are per token, not 1:1 with tokens.
+MIMO_TOKEN_PLAN_TIERS = [
+    {"id": "lite", "label": "Lite", "monthly_cny": 39, "monthly_credits": 4_100_000_000},
+    {"id": "standard", "label": "Standard", "monthly_cny": 99, "monthly_credits": 11_000_000_000},
+    {"id": "pro", "label": "Pro", "monthly_cny": 329, "monthly_credits": 38_000_000_000},
+    {"id": "max", "label": "Max", "monthly_cny": 659, "monthly_credits": 82_000_000_000},
+]
+MIMO_TOKEN_PLAN_CREDIT_RATES = {
+    "xiaomi/mimo-v2.5-pro": {"prompt": 300.0, "cache_read": 2.5, "completion": 600.0, "label": "V2.5-Pro"},
+    "xiaomi/mimo-v2.5": {"prompt": 100.0, "cache_read": 2.0, "completion": 200.0, "label": "V2.5"},
+}
 
 # GPT Plus / Codex — credit rates per 1M tokens (OpenAI Codex rate card).
 CODEX_CREDIT_RATES = {
@@ -811,6 +826,72 @@ def build_minimax_token_plans() -> List[Dict[str, Any]]:
     return plans
 
 
+def mimo_credits_per_m_tokens(model_id: str) -> Optional[float]:
+    """Agent-mix credits charged per 1M tokens (official per-token Credit table)."""
+    rates = MIMO_TOKEN_PLAN_CREDIT_RATES.get(model_id)
+    if not rates:
+        return None
+    w_in, w_cache, w_out = agent_token_weights(get_agent_token_pattern(model_id))
+    credits_per_token = (
+        w_in * rates["prompt"] + w_cache * rates["cache_read"] + w_out * rates["completion"]
+    )
+    if credits_per_token <= 0:
+        return None
+    return credits_per_token * 1e6
+
+
+def build_mimo_token_plans() -> List[Dict[str, Any]]:
+    """MiMo Token Plan: monthly CNY / Credit quota converted via per-token Credit rates."""
+    plans = []
+    for model_id, rates in MIMO_TOKEN_PLAN_CREDIT_RATES.items():
+        credits_per_m = mimo_credits_per_m_tokens(model_id)
+        if not credits_per_m:
+            continue
+        model_label = rates["label"]
+        for tier in MIMO_TOKEN_PLAN_TIERS:
+            monthly_cny = float(tier["monthly_cny"])
+            monthly_credits = float(tier["monthly_credits"])
+            monthly_tokens = monthly_credits / credits_per_m * 1e6
+            cost = subscription_cost_cny_per_m(monthly_cny, monthly_tokens)
+            plans.append(
+                {
+                    "id": f"mimo-token-plan-{tier['id']}-{core_slug(model_id)}",
+                    "type": "subscription",
+                    "provider": "xiaomi",
+                    "provider_display": "MiMo Token Plan",
+                    "plan": f"{tier['label']} · {model_label}",
+                    "badge": f"¥{tier['monthly_cny']:.0f}/月",
+                    "cost": cost,
+                    "monthly_cny": round(monthly_cny, 2),
+                    "quota_credits": int(monthly_credits),
+                    "quota_tokens": int(monthly_tokens),
+                    "credits_per_m": round(credits_per_m, 2),
+                    "url": VENDOR_SOURCES["mimo_token_plan"],
+                    "pricing_source": "MiMo Token Plan 官方 Credit 额度",
+                    "source_url": VENDOR_SOURCES["mimo_token_plan_docs"],
+                    "note_zh": (
+                        f"个人月付 {tier['label']} ¥{tier['monthly_cny']:.0f} / "
+                        f"{monthly_credits / 1_000_000_000:.1f}B Credits；"
+                        f"{model_label} 按官方 Credits/token（缓存 {rates['cache_read']:g} / "
+                        f"未命中 {rates['prompt']:g} / 输出 {rates['completion']:g}）"
+                        f"与 Agent mix 折成约 {monthly_tokens / 1_000_000:.0f}M token 后摊薄。"
+                        f"未计入夜间 0.8x、首购/包年折扣"
+                    ),
+                    "note_en": (
+                        f"Individual monthly {tier['label']} ¥{tier['monthly_cny']:.0f} / "
+                        f"{monthly_credits / 1_000_000_000:.1f}B Credits; "
+                        f"{model_label} converts official Credits/token "
+                        f"(cache {rates['cache_read']:g} / miss {rates['prompt']:g} / "
+                        f"out {rates['completion']:g}) with agent mix to "
+                        f"~{monthly_tokens / 1_000_000:.0f}M tokens. "
+                        f"Night 0.8x and first-purchase/annual discounts not applied"
+                    ),
+                    "match": make_match(model_family=model_id),
+                }
+            )
+    return plans
+
+
 def build_deepseek_api_plans() -> List[Dict[str, Any]]:
     plans = []
     for model_family, pricing in DEEPSEEK_OFFICIAL_CNY_PER_M.items():
@@ -918,6 +999,9 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
     plans.extend(build_deepseek_api_plans())
     plans.extend(build_minimax_token_plans())
     sources["minimax_token_plan"] = VENDOR_SOURCES["minimax_token_plan"]
+    plans.extend(build_mimo_token_plans())
+    sources["mimo_token_plan"] = VENDOR_SOURCES["mimo_token_plan"]
+    sources["mimo_token_plan_docs"] = VENDOR_SOURCES["mimo_token_plan_docs"]
 
     plans.sort(key=sort_key)
     for idx, plan in enumerate(plans, start=1):
@@ -937,6 +1021,7 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
             "commandcode_goat": "subscription amortization; DeepSeek plans ×1.5 for unmodeled peak/off-peak",
             "codex_plus": "5h rolling window max msgs × (168h/5h windows per week) × weeks/month; additional weekly caps per OpenAI docs are not public",
             "minimax_token_plan": "individual monthly Plus ¥49 / Max ¥119 / Ultra ¥469 amortized over official M3 token pool; M3 and M2.7 share quota",
+            "mimo_token_plan": "individual monthly Lite/Standard/Pro/Max CNY amortized over Credit quota; Credits/token differ by model and cache/output, converted with agent mix; night 0.8x and promo discounts excluded",
             "target_scope": "all ranked leaderboard models",
             "match_strategy": "vendor plan model slugs/labels matched to live ranked model ids",
             "excluded_plans": "Zhipu GLM Coding Plan; Kimi membership/API official plans (not comparable on this leaderboard)",

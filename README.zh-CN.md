@@ -24,9 +24,9 @@ LLM Value Rankings 综合以下三项指标，对 **300+ 大模型** 进行性�
 
 - **能力** — [Artificial Analysis](https://artificialanalysis.ai) Intelligence Index（OpenRouter 内嵌基准）
 - **速度** — 输出 Token 速度（tokens/s，各 Provider 按 uptime 加权平均）
-- **价格** — [OpenRouter](https://openrouter.ai) 输入/输出混合均价，并支持 **6 个渠道** 的套餐/API 比价
+- **价格** — [OpenRouter](https://openrouter.ai) 输入/输出混合均价，并支持 **7 个渠道** 的套餐/API 比价
 
-除 OpenRouter 按量价外，站点还会爬取 **OpenCode Go**、**Command Code GOAT**、**DeepSeek 官方 API**、**GPT Plus**、**MiniMax Token Plan** 等渠道价，在模型详情中并排展示；可开启 **「按最低渠道价排名」**，用各模型可获得的最低价重算性价比与排序。
+除 OpenRouter 按量价外，站点还会爬取 **OpenCode Go**、**Command Code GOAT**、**DeepSeek 官方 API**、**GPT Plus**、**MiniMax Token Plan**、**MiMo Token Plan** 等渠道价，在模型详情中并排展示；可开启 **「按最低渠道价排名」**，用各模型可获得的最低价重算性价比与排序。
 
 每日自动更新，帮你快速找到**每美元能买到最多 AI 能力**的模型。
 
@@ -39,7 +39,7 @@ LLM Value Rankings 综合以下三项指标，对 **300+ 大模型** 进行性�
 | | 功能 | 说明 |
 |:---:|------|------|
 | 📊 | **智能排名** | `f(能力) × 速度^0.8 / 价格`，低于 25 分或变换后 ≤0 不参与排名 |
-| 💰 | **多渠道比价** | OpenCode Go、Command Code、DeepSeek 官方 API、GPT Plus、MiniMax Token Plan + OpenRouter，详情弹窗按最低价排序 |
+| 💰 | **多渠道比价** | OpenCode Go、Command Code、DeepSeek 官方 API、GPT Plus、MiniMax Token Plan、MiMo Token Plan + OpenRouter，详情弹窗按最低价排序 |
 | 🔄 | **最低渠道价排名** | 默认关闭：开启后用各模型最低渠道价重算性价比、价格列与排序（偏好会记住） |
 | 📋 | **渠道一览** | 搜索栏旁可折叠查看当前收录的渠道数、套餐数与覆盖模型数 |
 | 📉 | **帕累托前沿图** | Top 30 能力 vs 价格散点图；悬停显示该价格对应的渠道商 |
@@ -140,7 +140,7 @@ f(x) = (均分 - (均分 - x)²)²          当 x < 均分（内层 ≤ 0 时排
 
 主榜默认按 **OpenRouter 混合价** 计算性价比（可在搜索栏旁开启「按最低渠道价排名」）。
 
-### 收录渠道（6 个）
+### 收录渠道（7 个）
 
 | 渠道 | 类型 | 说明 |
 |------|------|------|
@@ -150,6 +150,7 @@ f(x) = (均分 - (均分 - x)²)²          当 x < 均分（内层 ≤ 0 时排
 | **DeepSeek 官方 API** | 按量 API | 峰谷加权均价（7h 高峰 + 17h 低谷，CST） |
 | **GPT Plus** | Codex 订阅 | 按 OpenAI Codex 定价与周额度估算等效 $/M |
 | **MiniMax Token Plan** | MiniMax 订阅摊薄 | 个人月付 Plus ¥49 / Max ¥119 / Ultra ¥469，按官方 M3 token 池摊薄；M3 与 M2.7 共用额度 |
+| **MiMo Token Plan** | 小米订阅摊薄 | 月付 Lite ¥39 / Standard ¥99 / Pro ¥329 / Max ¥659；按官方 Credits/token 与 Agent mix 折算（Credit ≠ token） |
 
 渠道价统一折算为 **¥/M tokens**（95% 缓存命中、输入:输出 3:1），在模型详情中与 OpenRouter 价一并展示，**按最低价排序**。
 

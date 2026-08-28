@@ -24,9 +24,9 @@ LLM Value Rankings compares **300+ LLMs** by combining:
 
 - **Intelligence** — [Artificial Analysis](https://artificialanalysis.ai) Intelligence Index (OpenRouter embedded benchmarks)
 - **Speed** — output tokens per second (uptime-weighted average across providers)
-- **Price** — blended input/output cost from [OpenRouter](https://openrouter.ai), plus **6 channel** price sources for comparison
+- **Price** — blended input/output cost from [OpenRouter](https://openrouter.ai), plus **7 channel** price sources for comparison
 
-Beyond OpenRouter pay-as-you-go rates, the site ingests **OpenCode Go**, **Command Code GOAT**, **DeepSeek official API**, **GPT Plus**, and **MiniMax Token Plan** pricing. Model detail pages show all channels side by side. **Rank by lowest channel price** is off by default; turn it on to recompute value scores and sort order from each model’s best available rate.
+Beyond OpenRouter pay-as-you-go rates, the site ingests **OpenCode Go**, **Command Code GOAT**, **DeepSeek official API**, **GPT Plus**, **MiniMax Token Plan**, and **MiMo Token Plan** pricing. Model detail pages show all channels side by side. **Rank by lowest channel price** is off by default; turn it on to recompute value scores and sort order from each model’s best available rate.
 
 The result is a daily-updated leaderboard that answers one question: **how much AI capability do you get per dollar?**
 
@@ -39,7 +39,7 @@ The result is a daily-updated leaderboard that answers one question: **how much 
 | | Feature | Description |
 |:---:|---------|-------------|
 | 📊 | **Smart ranking** | `f(Intelligence) × Speed^0.8 / Price`, min score 25 |
-| 💰 | **Multi-channel pricing** | OpenCode, Command Code, DeepSeek API, GPT Plus, MiniMax Token Plan + OpenRouter; detail modal sorted by lowest price |
+| 💰 | **Multi-channel pricing** | OpenCode, Command Code, DeepSeek API, GPT Plus, MiniMax Token Plan, MiMo Token Plan + OpenRouter; detail modal sorted by lowest price |
 | 🔄 | **Lowest-channel ranking** | Off by default: turn on to recompute value score, price column, and sort from each model’s cheapest channel (toggle persists) |
 | 📋 | **Channel summary** | Collapsible panel next to filters: channel count, plan count, models covered |
 | 📉 | **Pareto chart** | Top 30 intelligence vs price; hover shows which channel supplied the displayed price |
@@ -140,7 +140,7 @@ Models are excluded from ranking when:
 
 By default the leaderboard ranks by **OpenRouter blended price**. Turn on **Rank by lowest channel price** beside the search bar to use each model’s cheapest channel.
 
-### Channels (6)
+### Channels (7)
 
 | Channel | Type | Notes |
 |---------|------|-------|
@@ -150,6 +150,7 @@ By default the leaderboard ranks by **OpenRouter blended price**. Turn on **Rank
 | **DeepSeek official API** | Pay-as-you-go | 24h peak/off-peak weighted average (7h peak + 17h off-peak CST) |
 | **GPT Plus** | Codex subscription | Estimated $/M from OpenAI Codex pricing and weekly quotas |
 | **MiniMax Token Plan** | MiniMax subscription | Individual monthly Plus ¥49 / Max ¥119 / Ultra ¥469, official M3 token pool; M3 and M2.7 share quota |
+| **MiMo Token Plan** | Xiaomi subscription | Monthly Lite ¥39 / Standard ¥99 / Pro ¥329 / Max ¥659; Credits/token converted with agent mix (not 1:1) |
 
 All channel rates are normalized to **¥/M tokens** (95% cache hit, 3:1 input/output) and shown in the model detail modal, **sorted cheapest first**.
 

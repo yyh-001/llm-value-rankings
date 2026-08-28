@@ -33,7 +33,7 @@ const state = {
 const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
 const PRICE_UNIT_KEY = 'ui-price-unit';
 
-const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai', 'minimax'];
+const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai', 'minimax', 'xiaomi'];
 
 // Provider display names
 const PROVIDER_NAMES = {
@@ -52,6 +52,7 @@ const PROVIDER_NAMES = {
     baidu: { zh: '百度', en: 'Baidu' },
     zhipu: { zh: '智谱', en: 'Zhipu' },
     minimax: { zh: 'MiniMax', en: 'MiniMax' },
+    xiaomi: { zh: '小米', en: 'Xiaomi' },
     moonshot: { zh: '月之暗面', en: 'Moonshot' },
     yi: { zh: '零一万物', en: 'Yi' },
     stepfun: { zh: '阶跃星辰', en: 'StepFun' },
