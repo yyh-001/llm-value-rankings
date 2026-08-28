@@ -33,7 +33,7 @@ const state = {
 const MIN_CHANNEL_PRICE_KEY = 'ui-min-channel-price';
 const PRICE_UNIT_KEY = 'ui-price-unit';
 
-const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai'];
+const CHANNEL_PROVIDER_ORDER = ['opencode', 'commandcode', 'deepseek', 'openai', 'minimax'];
 
 // Provider display names
 const PROVIDER_NAMES = {

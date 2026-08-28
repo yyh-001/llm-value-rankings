@@ -56,7 +56,15 @@ VENDOR_SOURCES = {
     "opencode_go": "https://opencode.ai/docs/go.md",
     "codex_pricing": "https://developers.openai.com/codex/pricing.md",
     "commandcode_goat": "https://commandcode.ai/docs/plans/goat",
+    "minimax_token_plan": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
 }
+
+# MiniMax Token Plan (individual monthly). Official M3 token pool; coding ~50K tokens/call.
+MINIMAX_TOKEN_PLAN_TIERS = [
+    {"id": "plus", "label": "Plus", "monthly_cny": 49, "monthly_tokens": 600_000_000, "monthly_requests": 12_000},
+    {"id": "max", "label": "Max", "monthly_cny": 119, "monthly_tokens": 1_800_000_000, "monthly_requests": 36_000},
+    {"id": "ultra", "label": "Ultra", "monthly_cny": 469, "monthly_tokens": 7_100_000_000, "monthly_requests": 140_000},
+]
 
 # GPT Plus / Codex — credit rates per 1M tokens (OpenAI Codex rate card).
 CODEX_CREDIT_RATES = {
@@ -759,6 +767,50 @@ def build_codex_plus_plans(
     return plans
 
 
+def build_minimax_token_plans() -> List[Dict[str, Any]]:
+    """MiniMax Token Plan: official monthly M3 token pool / CNY subscription."""
+    match = make_match(
+        providers=["minimax"],
+        slug_patterns=[r"^minimax-m3", r"^minimax-m2\.7"],
+    )
+    plans = []
+    for tier in MINIMAX_TOKEN_PLAN_TIERS:
+        monthly_cny = float(tier["monthly_cny"])
+        monthly_tokens = int(tier["monthly_tokens"])
+        cost = subscription_cost_cny_per_m(monthly_cny, monthly_tokens)
+        plans.append(
+            {
+                "id": f"minimax-token-plan-{tier['id']}",
+                "type": "subscription",
+                "provider": "minimax",
+                "provider_display": "MiniMax Token Plan",
+                "plan": tier["label"],
+                "badge": f"¥{tier['monthly_cny']:.0f}/月",
+                "cost": cost,
+                "monthly_cny": round(monthly_cny, 2),
+                "quota_tokens": monthly_tokens,
+                "monthly_requests": int(tier["monthly_requests"]),
+                "url": VENDOR_SOURCES["minimax_token_plan"],
+                "pricing_source": "MiniMax Token Plan 官方额度",
+                "source_url": VENDOR_SOURCES["minimax_token_plan"],
+                "note_zh": (
+                    f"个人月付 {tier['label']} ¥{tier['monthly_cny']:.0f}，"
+                    f"官方约 {monthly_tokens / 100_000_000:.0f} 亿 token / "
+                    f"{int(tier['monthly_requests']):,} 次（按 M3 单次 ~50K token）；"
+                    f"M3 与 M2.7 共用额度"
+                ),
+                "note_en": (
+                    f"Individual monthly {tier['label']} ¥{tier['monthly_cny']:.0f}; "
+                    f"official ~{monthly_tokens / 1_000_000:.0f}M tokens / "
+                    f"{int(tier['monthly_requests']):,} calls (M3 ~50K tokens/call); "
+                    f"M3 and M2.7 share the quota"
+                ),
+                "match": match,
+            }
+        )
+    return plans
+
+
 def build_deepseek_api_plans() -> List[Dict[str, Any]]:
     plans = []
     for model_family, pricing in DEEPSEEK_OFFICIAL_CNY_PER_M.items():
@@ -864,6 +916,8 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
     plans.extend(build_commandcode_goat_plan(commandcode_goat_html, opencode_md))
     plans.extend(build_codex_plus_plans(codex_md, models_index, ranked_models))
     plans.extend(build_deepseek_api_plans())
+    plans.extend(build_minimax_token_plans())
+    sources["minimax_token_plan"] = VENDOR_SOURCES["minimax_token_plan"]
 
     plans.sort(key=sort_key)
     for idx, plan in enumerate(plans, start=1):
@@ -882,6 +936,7 @@ def build_coding_plans(models: Optional[List[Dict[str, Any]]] = None) -> Dict[st
             "opencode_go": "subscription amortization; DeepSeek plans ×1.5 for unmodeled peak/off-peak",
             "commandcode_goat": "subscription amortization; DeepSeek plans ×1.5 for unmodeled peak/off-peak",
             "codex_plus": "5h rolling window max msgs × (168h/5h windows per week) × weeks/month; additional weekly caps per OpenAI docs are not public",
+            "minimax_token_plan": "individual monthly Plus ¥49 / Max ¥119 / Ultra ¥469 amortized over official M3 token pool; M3 and M2.7 share quota",
             "target_scope": "all ranked leaderboard models",
             "match_strategy": "vendor plan model slugs/labels matched to live ranked model ids",
             "excluded_plans": "Zhipu GLM Coding Plan; Kimi membership/API official plans (not comparable on this leaderboard)",
