@@ -26,7 +26,7 @@ LLM Value Rankings compares **300+ LLMs** by combining:
 - **Speed** — output tokens per second (uptime-weighted average across providers)
 - **Price** — blended input/output cost from [OpenRouter](https://openrouter.ai), plus **5 channel** price sources for comparison
 
-Beyond OpenRouter pay-as-you-go rates, the site ingests **OpenCode Go**, **Command Code GOAT**, **DeepSeek official API**, and **GPT Plus** pricing. Model detail pages show all channels side by side. **Rank by lowest channel price** is on by default, recomputing value scores and sort order from each model’s best available rate.
+Beyond OpenRouter pay-as-you-go rates, the site ingests **OpenCode Go**, **Command Code GOAT**, **DeepSeek official API**, and **GPT Plus** pricing. Model detail pages show all channels side by side. **Rank by lowest channel price** is off by default; turn it on to recompute value scores and sort order from each model’s best available rate.
 
 The result is a daily-updated leaderboard that answers one question: **how much AI capability do you get per dollar?**
 
@@ -40,7 +40,7 @@ The result is a daily-updated leaderboard that answers one question: **how much 
 |:---:|---------|-------------|
 | 📊 | **Smart ranking** | `f(Intelligence) × Speed^0.8 / Price`, min score 25 |
 | 💰 | **Multi-channel pricing** | OpenCode, Command Code, DeepSeek API, GPT Plus + OpenRouter; detail modal sorted by lowest price |
-| 🔄 | **Lowest-channel ranking** | On by default: recompute value score, price column, and sort from each model’s cheapest channel (toggle off to use OpenRouter blended price) |
+| 🔄 | **Lowest-channel ranking** | Off by default: turn on to recompute value score, price column, and sort from each model’s cheapest channel (toggle persists) |
 | 📋 | **Channel summary** | Collapsible panel next to filters: channel count, plan count, models covered |
 | 📉 | **Pareto chart** | Top 30 intelligence vs price; hover shows which channel supplied the displayed price |
 | 📈 | **Day-over-day delta** | See rank changes vs yesterday (`↑2` / `↓1` / `NEW`) |
@@ -138,7 +138,7 @@ Models are excluded from ranking when:
 
 ## Channel pricing
 
-By default the leaderboard uses each model’s **lowest channel price** for value scoring (toggle off beside the search bar to rank by OpenRouter blended price only).
+By default the leaderboard ranks by **OpenRouter blended price**. Turn on **Rank by lowest channel price** beside the search bar to use each model’s cheapest channel.
 
 ### Channels (5)
 

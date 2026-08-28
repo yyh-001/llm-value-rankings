@@ -267,7 +267,7 @@ function initMinChannelPriceToggle() {
     const toggle = elements.minChannelPriceToggle;
     if (!toggle) return;
 
-    state.useMinChannelPrice = localStorage.getItem(MIN_CHANNEL_PRICE_KEY) !== '0';
+    state.useMinChannelPrice = localStorage.getItem(MIN_CHANNEL_PRICE_KEY) === '1';
     toggle.checked = state.useMinChannelPrice;
     toggle.addEventListener('change', () => {
         state.useMinChannelPrice = toggle.checked;
@@ -1210,7 +1210,6 @@ function showModelDetail(modelId) {
     const supplierSectionHtml = suppliers.length ? `
         <div class="detail-section">
             <h3 class="detail-section-title">${window.i18n.t('supplier_pricing_title')}</h3>
-            <p class="detail-pricing-note">${window.i18n.t('supplier_pricing_note')}</p>
             ${minChannelNoteHtml}
             <div class="supplier-pricing-block supplier-pricing-modal">
                 <table class="supplier-pricing-table">
