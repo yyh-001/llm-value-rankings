@@ -5254,6 +5254,19 @@ body.modal-open {
     background: rgba(148, 163, 184, 0.65);
 }
 
+.pareto-leg-mode {
+    color: var(--accent-primary);
+}
+
+.pareto-leg-badge {
+    display: inline-block;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 2px;
+    background: rgba(99, 102, 241, 0.85);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+
 .pareto-chart-wrap {
     position: relative;
     border-radius: var(--radius-md);
@@ -5375,6 +5388,36 @@ body.modal-open {
     font-size: 10px;
     font-family: var(--font-sans);
     opacity: 0.85;
+}
+
+.pareto-mode-badge {
+    fill: #a5b4fc;
+    font-size: 11px;
+    font-weight: 650;
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+}
+
+[data-theme="light"] .pareto-mode-badge {
+    fill: #4f46e5;
+}
+
+.pareto-channel-label {
+    fill: #a5b4fc;
+    font-size: 9px;
+    font-weight: 500;
+}
+
+[data-theme="light"] .pareto-channel-label {
+    fill: #4f46e5;
+}
+
+.pareto-svg-mobile .pareto-channel-label {
+    font-size: 8px;
+}
+
+.pareto-svg-mobile .pareto-mode-badge {
+    font-size: 10px;
 }
 
 .pareto-frontier-label {

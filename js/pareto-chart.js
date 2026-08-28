@@ -209,6 +209,14 @@
         return entries;
     }
 
+    function shortChannelLabel(model) {
+        if (!chartOptions.useMinChannelPrice) return '';
+        if (typeof window.getChartPriceSupplierShortLabel === 'function') {
+            return window.getChartPriceSupplierShortLabel(model, true) || '';
+        }
+        return '';
+    }
+
     function renderPointLabels(points, frontier, layout, xScale, yScale, pad, innerW, dotScale) {
         return collectLabeledPoints(points, frontier).map(({ point, onFrontier, index }) => {
             const cx = xScale(point.x);
@@ -216,8 +224,13 @@
             const rank = point.chartRank;
             const { x, y, anchor } = pointLabelPosition(cx, cy, rank, onFrontier, index, pad, innerW, dotScale);
             const name = chartLabel(point.model.name, layout.mobile);
+            const channel = shortChannelLabel(point.model);
+            const nameY = channel && y < cy ? y - 9 * dotScale : y;
             const cls = onFrontier ? 'pareto-frontier-label' : 'pareto-frontier-label pareto-top-label';
-            return `<text class="${cls}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}">${escapeHtml(name)}</text>`;
+            const channelTspan = channel
+                ? `<tspan class="pareto-channel-label" x="${x.toFixed(1)}" dy="${(11 * dotScale).toFixed(1)}">${escapeHtml(channel)}</tspan>`
+                : '';
+            return `<text class="${cls}" x="${x.toFixed(1)}" y="${nameY.toFixed(1)}" text-anchor="${anchor}">${escapeHtml(name)}${channelTspan}</text>`;
         }).join('');
     }
 
@@ -353,6 +366,9 @@
         }).join('');
 
         const pointLabels = renderPointLabels(points, frontier, layout, xScale, yScale, pad, innerW, dotScale);
+        const modeBadge = chartOptions.useMinChannelPrice
+            ? `<text class="pareto-mode-badge" x="${pad.left + innerW - 10}" y="${pad.top + 16}" text-anchor="end">${escapeHtml(t('pareto_min_channel_badge'))}</text>`
+            : '';
 
         const xAxisLabel = getXAxisLabel(layout.mobile);
         const svgClass = layout.mobile ? 'pareto-svg pareto-svg-mobile' : 'pareto-svg';
@@ -387,6 +403,7 @@
                 <text class="pareto-axis-title" x="${pad.left + innerW / 2}" y="${height - 8}" text-anchor="middle">${escapeHtml(xAxisLabel)}</text>
                 <text class="pareto-axis-title pareto-axis-title-y" x="18" y="${pad.top + innerH / 2}" text-anchor="middle" transform="rotate(-90 18 ${pad.top + innerH / 2})">${escapeHtml(t('pareto_axis_intelligence'))}</text>
                 <text class="pareto-hint-corner" x="${pad.left + 10}" y="${pad.top + 16}" text-anchor="start">${escapeHtml(t('pareto_better_corner_price'))}</text>
+                ${modeBadge}
             </svg>
         `;
     }
@@ -435,6 +452,9 @@
         elements.canvas.style.minWidth = '';
         elements.canvas.innerHTML = renderSvg(points, frontier, layout);
         bindPointEvents();
+        if (elements.minChannelLegend) {
+            elements.minChannelLegend.hidden = !chartOptions.useMinChannelPrice;
+        }
     }
 
     function init() {
@@ -443,6 +463,7 @@
         elements.canvas = document.getElementById('pareto-chart');
         elements.tooltip = document.getElementById('pareto-tooltip');
         elements.scrollHint = document.getElementById('pareto-scroll-hint');
+        elements.minChannelLegend = document.getElementById('pareto-min-channel-legend');
 
         if (!elements.section) return;
 

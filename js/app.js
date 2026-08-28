@@ -308,9 +308,17 @@ function getPriceUnitSuffix() {
 
 function getPriceUnitChartAxisLabel(short = false) {
     const isLarge = state.priceUnit !== 'M';
-    const key = short
-        ? (isLarge ? 'pareto_axis_price_short_100m' : 'pareto_axis_price_short_m')
-        : (isLarge ? 'pareto_axis_price_100m' : 'pareto_axis_price_m');
+    const minChannel = state.useMinChannelPrice;
+    let key;
+    if (minChannel) {
+        key = short
+            ? (isLarge ? 'pareto_axis_price_min_short_100m' : 'pareto_axis_price_min_short_m')
+            : (isLarge ? 'pareto_axis_price_min_100m' : 'pareto_axis_price_min_m');
+    } else {
+        key = short
+            ? (isLarge ? 'pareto_axis_price_short_100m' : 'pareto_axis_price_short_m')
+            : (isLarge ? 'pareto_axis_price_100m' : 'pareto_axis_price_m');
+    }
     return window.i18n?.t(key) || (short ? 'Price' : 'Blended price');
 }
 
@@ -833,6 +841,12 @@ function getCheapestSupplierEntry(model) {
         }
     }
     return best;
+}
+
+function getChartPriceSupplierShortLabel(model, useMinChannelPrice = state.useMinChannelPrice) {
+    if (!useMinChannelPrice || !model) return null;
+    const cheapest = getCheapestSupplierEntry(model);
+    return cheapest?.provider_display || formatSupplierChannelLabel(cheapest);
 }
 
 function getChartPriceSupplierLabel(model, useMinChannelPrice = state.useMinChannelPrice) {
@@ -1402,6 +1416,7 @@ window.showModelDetail = showModelDetail;
 window.getMinChannelPriceUsd = getMinChannelPriceUsd;
 window.getAdjustedRawValueScore = getAdjustedRawValueScore;
 window.getChartPriceSupplierLabel = getChartPriceSupplierLabel;
+window.getChartPriceSupplierShortLabel = getChartPriceSupplierShortLabel;
 window.getPriceUnitScale = getPriceUnitScale;
 window.getPriceUnitSuffix = getPriceUnitSuffix;
 window.getPriceUnitChartAxisLabel = getPriceUnitChartAxisLabel;

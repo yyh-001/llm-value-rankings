@@ -34,6 +34,11 @@ const translations = {
         pareto_scroll_hint: "左右滑动查看完整图表 · 点击圆点看详情",
         pareto_axis_price_short_m: "价格 (¥/百万)",
         pareto_axis_price_short_100m: "价格 (¥/亿)",
+        pareto_axis_price_min_m: "最低渠道价 (¥/百万 tokens)",
+        pareto_axis_price_min_100m: "最低渠道价 (¥/亿 tokens)",
+        pareto_axis_price_min_short_m: "最低渠道价 (¥/百万)",
+        pareto_axis_price_min_short_100m: "最低渠道价 (¥/亿)",
+        pareto_min_channel_badge: "最低渠道价",
         pareto_click_detail: "点击查看详情",
         
         // Filters
@@ -163,6 +168,11 @@ const translations = {
         pareto_scroll_hint: "Swipe to explore · tap a dot for details",
         pareto_axis_price_short_m: "Price ($/M)",
         pareto_axis_price_short_100m: "Price ($/100M)",
+        pareto_axis_price_min_m: "Lowest channel price ($/M tokens)",
+        pareto_axis_price_min_100m: "Lowest channel price ($/100M tokens)",
+        pareto_axis_price_min_short_m: "Lowest channel ($/M)",
+        pareto_axis_price_min_short_100m: "Lowest channel ($/100M)",
+        pareto_min_channel_badge: "Lowest channel price",
         pareto_click_detail: "Click for details",
         
         // Filters
