@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30T19:41:22.910773Z",
+  "updated_at": "2026-08-31T21:50:28.527929Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -25,7 +25,7 @@
     "mimo_token_plan": "https://platform.xiaomimimo.com/token-plan",
     "mimo_token_plan_docs": "https://mimo.mi.com/docs/zh-CN/price/token-plan"
   },
-  "total_plans": 73,
+  "total_plans": 74,
   "by_model": {
     "xiaomi/mimo-v2.5": [
       {
@@ -1094,7 +1094,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2313,
+      "api_reference_blended_cny_per_m": 0.2363,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2442,7 +2442,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.7664,
+      "api_reference_blended_cny_per_m": 3.8236,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2488,6 +2488,35 @@
       ]
     },
     {
+      "id": "commandcode-goat-deepseek-v4-flash-fast",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · DeepSeek V4 Flash Fast",
+      "badge": "$10",
+      "cost": 0.4093,
+      "subscription_base_cost": 0.2729,
+      "cost_buffer": 1.5,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 265710000,
+      "monthly_requests": 5210,
+      "tokens_per_request": 51000,
+      "vendor_slug": "deepseek-v4-flash-fast",
+      "vendor_label": "DeepSeek V4 Flash Fast",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、DeepSeek V4 Flash Fast 月请求量与典型 Token 模式估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "From GOAT $10/mo, DeepSeek V4 Flash Fast monthly requests, and typical token pattern, ×1.5 for peak/off-peak exposure",
+      "match": {
+        "vendor_slug": "deepseek-v4-flash-fast",
+        "vendor_label": "DeepSeek V4 Flash Fast"
+      },
+      "rank": 57,
+      "target_models": []
+    },
+    {
       "id": "commandcode-goat-muse-spark-1.2",
       "type": "subscription",
       "provider": "commandcode",
@@ -2513,7 +2542,7 @@
         "vendor_slug": "muse-spark-1.2",
         "vendor_label": "Muse Spark 1.2"
       },
-      "rank": 57,
+      "rank": 58,
       "target_models": [
         "meta/muse-spark-1.2"
       ]
@@ -2544,7 +2573,7 @@
         "vendor_slug": "nemotron-3-ultra",
         "vendor_label": "Nemotron 3 Ultra"
       },
-      "rank": 58,
+      "rank": 59,
       "target_models": []
     },
     {
@@ -2570,7 +2599,7 @@
       "match": {
         "vendor_slug": "qwen3.7-max"
       },
-      "rank": 59,
+      "rank": 60,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -2601,7 +2630,7 @@
         "vendor_slug": "gpt-5.6-sol",
         "vendor_label": "GPT-5.6 Sol"
       },
-      "rank": 60,
+      "rank": 61,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2632,7 +2661,7 @@
         "vendor_slug": "inkling",
         "vendor_label": "Inkling"
       },
-      "rank": 61,
+      "rank": 62,
       "target_models": [
         "thinkingmachines/inkling"
       ]
@@ -2663,7 +2692,7 @@
         "vendor_slug": "qwen-3.8-max",
         "vendor_label": "Qwen 3.8 Max"
       },
-      "rank": 62,
+      "rank": 63,
       "target_models": [
         "qwen/qwen3.8-max"
       ]
@@ -2694,7 +2723,7 @@
         "vendor_slug": "qwen-3.7-max",
         "vendor_label": "Qwen 3.7 Max"
       },
-      "rank": 63,
+      "rank": 64,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -2725,7 +2754,7 @@
         "vendor_slug": "kimi-k3",
         "vendor_label": "Kimi K3"
       },
-      "rank": 64,
+      "rank": 65,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -2756,7 +2785,7 @@
         "vendor_slug": "glm-5.3",
         "vendor_label": "GLM-5.3"
       },
-      "rank": 65,
+      "rank": 66,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -2784,7 +2813,7 @@
       "match": {
         "vendor_slug": "glm-5.3"
       },
-      "rank": 66,
+      "rank": 67,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -2812,7 +2841,7 @@
       "match": {
         "vendor_slug": "qwen3.8-max"
       },
-      "rank": 67,
+      "rank": 68,
       "target_models": [
         "qwen/qwen3.8-max"
       ]
@@ -2843,7 +2872,7 @@
         "vendor_slug": "kimi-k2.7-code-highspeed",
         "vendor_label": "Kimi K2.7 Code HighSpeed"
       },
-      "rank": 68,
+      "rank": 69,
       "target_models": []
     },
     {
@@ -2869,7 +2898,7 @@
       "match": {
         "vendor_slug": "kimi-k3"
       },
-      "rank": 69,
+      "rank": 70,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -2900,7 +2929,7 @@
         "vendor_slug": "glm-5.2-fast",
         "vendor_label": "GLM-5.2 Fast"
       },
-      "rank": 70,
+      "rank": 71,
       "target_models": []
     },
     {
@@ -2926,7 +2955,7 @@
       "match": {
         "vendor_slug": "grok-4.6"
       },
-      "rank": 71,
+      "rank": 72,
       "target_models": [
         "x-ai/grok-4.6"
       ]
@@ -2957,7 +2986,7 @@
         "vendor_slug": "grok-4.5",
         "vendor_label": "Grok 4.5"
       },
-      "rank": 72,
+      "rank": 73,
       "target_models": [
         "x-ai/grok-4.5"
       ]
@@ -2988,7 +3017,7 @@
         "vendor_slug": "grok-4.6",
         "vendor_label": "Grok 4.6"
       },
-      "rank": 73,
+      "rank": 74,
       "target_models": [
         "x-ai/grok-4.6"
       ]
