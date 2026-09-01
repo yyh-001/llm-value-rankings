@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T21:50:28.527929Z",
+  "updated_at": "2026-09-01T19:48:48.680363Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -745,32 +745,6 @@
         "rank": 1
       }
     ],
-    "qwen/qwen3.7-max": [
-      {
-        "id": "opencode-go-qwen3.7-max",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.7 Max",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.6439,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-qwen-3.7-max",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.7 Max",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.9382,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 2
-      }
-    ],
     "thinkingmachines/inkling": [
       {
         "id": "commandcode-goat-inkling",
@@ -806,6 +780,32 @@
         "type": "subscription",
         "badge": "$10/月",
         "cost": 1.3435,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
+      }
+    ],
+    "qwen/qwen3.7-max": [
+      {
+        "id": "commandcode-goat-qwen-3.7-max",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.7 Max",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.9382,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-qwen3.7-max",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.7 Max",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 1.2955,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
@@ -1094,7 +1094,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2363,
+      "api_reference_blended_cny_per_m": 0.2349,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2442,7 +2442,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.8236,
+      "api_reference_blended_cny_per_m": 3.8251,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2577,34 +2577,6 @@
       "target_models": []
     },
     {
-      "id": "opencode-go-qwen3.7-max",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Qwen3.7 Max",
-      "badge": "$10/月",
-      "cost": 0.6439,
-      "subscription_base_cost": 0.6439,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 112587800,
-      "monthly_requests": 1690,
-      "vendor_slug": "qwen3.7-max",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.7 Max 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Max monthly requests",
-      "match": {
-        "vendor_slug": "qwen3.7-max"
-      },
-      "rank": 60,
-      "target_models": [
-        "qwen/qwen3.7-max"
-      ]
-    },
-    {
       "id": "commandcode-goat-gpt-5.6-sol",
       "type": "subscription",
       "provider": "commandcode",
@@ -2630,7 +2602,7 @@
         "vendor_slug": "gpt-5.6-sol",
         "vendor_label": "GPT-5.6 Sol"
       },
-      "rank": 61,
+      "rank": 60,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2661,7 +2633,7 @@
         "vendor_slug": "inkling",
         "vendor_label": "Inkling"
       },
-      "rank": 62,
+      "rank": 61,
       "target_models": [
         "thinkingmachines/inkling"
       ]
@@ -2692,7 +2664,7 @@
         "vendor_slug": "qwen-3.8-max",
         "vendor_label": "Qwen 3.8 Max"
       },
-      "rank": 63,
+      "rank": 62,
       "target_models": [
         "qwen/qwen3.8-max"
       ]
@@ -2723,7 +2695,7 @@
         "vendor_slug": "qwen-3.7-max",
         "vendor_label": "Qwen 3.7 Max"
       },
-      "rank": 64,
+      "rank": 63,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -2754,7 +2726,7 @@
         "vendor_slug": "kimi-k3",
         "vendor_label": "Kimi K3"
       },
-      "rank": 65,
+      "rank": 64,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -2785,7 +2757,7 @@
         "vendor_slug": "glm-5.3",
         "vendor_label": "GLM-5.3"
       },
-      "rank": 66,
+      "rank": 65,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -2813,9 +2785,37 @@
       "match": {
         "vendor_slug": "glm-5.3"
       },
-      "rank": 67,
+      "rank": 66,
       "target_models": [
         "z-ai/glm-5.3"
+      ]
+    },
+    {
+      "id": "opencode-go-qwen3.7-max",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.7 Max",
+      "badge": "$10/月",
+      "cost": 1.2955,
+      "subscription_base_cost": 1.2955,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 55960800,
+      "monthly_requests": 840,
+      "vendor_slug": "qwen3.7-max",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Qwen3.7 Max 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Max monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.7-max"
+      },
+      "rank": 67,
+      "target_models": [
+        "qwen/qwen3.7-max"
       ]
     },
     {
