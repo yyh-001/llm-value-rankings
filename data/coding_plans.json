@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-04T19:21:53.940960Z",
+  "updated_at": "2026-09-05T18:55:28.709382Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -27,94 +27,6 @@
   },
   "total_plans": 80,
   "by_model": {
-    "xiaomi/mimo-v2.5": [
-      {
-        "id": "opencode-go-mimo-v2.5",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiMo-V2.5",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0066,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-mimo-v2.5",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · MiMo V2.5",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.0102,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "mimo-token-plan-max-mimo-v2.5",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Max · V2.5",
-        "type": "subscription",
-        "badge": "¥659/月",
-        "cost": 0.0315,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 3
-      },
-      {
-        "id": "mimo-token-plan-pro-mimo-v2.5",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Pro · V2.5",
-        "type": "subscription",
-        "badge": "¥329/月",
-        "cost": 0.034,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 4
-      },
-      {
-        "id": "mimo-token-plan-standard-mimo-v2.5",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Standard · V2.5",
-        "type": "subscription",
-        "badge": "¥99/月",
-        "cost": 0.0353,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 5
-      },
-      {
-        "id": "mimo-token-plan-lite-mimo-v2.5",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Lite · V2.5",
-        "type": "subscription",
-        "badge": "¥39/月",
-        "cost": 0.0373,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 6
-      }
-    ],
-    "meituan/longcat-2.0": [
-      {
-        "id": "opencode-go-longcat-2.0",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "LongCat-2.0",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0141,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      }
-    ],
     "deepseek/deepseek-v4-flash-0731": [
       {
         "id": "commandcode-goat-deepseek-v4-flash",
@@ -229,80 +141,6 @@
         "rank": 3
       }
     ],
-    "xiaomi/mimo-v2.5-pro": [
-      {
-        "id": "commandcode-goat-mimo-v2.5-pro",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · MiMo V2.5 Pro",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.0292,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-mimo-v2.5-pro",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiMo-V2.5-Pro",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0511,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "mimo-token-plan-max-mimo-v2.5-pro",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Max · V2.5-Pro",
-        "type": "subscription",
-        "badge": "¥659/月",
-        "cost": 0.0586,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 3
-      },
-      {
-        "id": "mimo-token-plan-pro-mimo-v2.5-pro",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Pro · V2.5-Pro",
-        "type": "subscription",
-        "badge": "¥329/月",
-        "cost": 0.0631,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 4
-      },
-      {
-        "id": "mimo-token-plan-standard-mimo-v2.5-pro",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Standard · V2.5-Pro",
-        "type": "subscription",
-        "badge": "¥99/月",
-        "cost": 0.0656,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 5
-      },
-      {
-        "id": "mimo-token-plan-lite-mimo-v2.5-pro",
-        "provider": "xiaomi",
-        "provider_display": "MiMo Token Plan",
-        "plan": "Lite · V2.5-Pro",
-        "type": "subscription",
-        "badge": "¥39/月",
-        "cost": 0.0694,
-        "url": "https://platform.xiaomimimo.com/token-plan",
-        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
-        "rank": 6
-      }
-    ],
     "z-ai/glm-5.3-flash": [
       {
         "id": "commandcode-goat-glm-5.3-flash",
@@ -326,32 +164,6 @@
         "cost": 0.1633,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "qwen/qwen3.7-plus": [
-      {
-        "id": "opencode-go-qwen3.7-plus",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.7 Plus",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0582,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-qwen-3.7-plus",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.7 Plus",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.1768,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
         "rank": 2
       }
     ],
@@ -431,82 +243,6 @@
         "rank": 5
       }
     ],
-    "minimax/minimax-m2.7": [
-      {
-        "id": "minimax-token-plan-max",
-        "provider": "minimax",
-        "provider_display": "MiniMax Token Plan",
-        "plan": "Max",
-        "type": "subscription",
-        "badge": "¥119/月",
-        "cost": 0.0661,
-        "url": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
-        "pricing_source": "MiniMax Token Plan 官方额度",
-        "rank": 1
-      },
-      {
-        "id": "minimax-token-plan-ultra",
-        "provider": "minimax",
-        "provider_display": "MiniMax Token Plan",
-        "plan": "Ultra",
-        "type": "subscription",
-        "badge": "¥469/月",
-        "cost": 0.0661,
-        "url": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
-        "pricing_source": "MiniMax Token Plan 官方额度",
-        "rank": 2
-      },
-      {
-        "id": "opencode-go-minimax-m2.7",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiniMax M2.7",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0769,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 3
-      },
-      {
-        "id": "minimax-token-plan-plus",
-        "provider": "minimax",
-        "provider_display": "MiniMax Token Plan",
-        "plan": "Plus",
-        "type": "subscription",
-        "badge": "¥49/月",
-        "cost": 0.0817,
-        "url": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
-        "pricing_source": "MiniMax Token Plan 官方额度",
-        "rank": 4
-      }
-    ],
-    "qwen/qwen3.6-plus": [
-      {
-        "id": "opencode-go-qwen3.6-plus",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.6 Plus",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0771,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-qwen-3.6-plus",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.6 Plus",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.2285,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 2
-      }
-    ],
     "deepseek/deepseek-v4-pro-0813": [
       {
         "id": "commandcode-goat-deepseek-v4-pro",
@@ -583,86 +319,6 @@
         "rank": 3
       }
     ],
-    "moonshotai/kimi-k2.7-code": [
-      {
-        "id": "opencode-go-kimi-k2.7-code",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Kimi K2.7 Code",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.1916,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-kimi-k2.7-code",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Kimi K2.7 Code",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.2386,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 2
-      }
-    ],
-    "moonshotai/kimi-k2.6": [
-      {
-        "id": "opencode-go-kimi-k2.6",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Kimi K2.6",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.2249,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      }
-    ],
-    "z-ai/glm-5.2": [
-      {
-        "id": "commandcode-goat-glm-5.2",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · GLM-5.2",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.2894,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-glm-5.2",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GLM-5.2",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.319,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "z-ai/glm-5.1": [
-      {
-        "id": "opencode-go-glm-5.1",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GLM-5.1",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.319,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 1
-      }
-    ],
     "google/gemini-3.8-flash": [
       {
         "id": "commandcode-goat-gemini-3.8-flash",
@@ -717,20 +373,6 @@
         "rank": 2
       }
     ],
-    "thinkingmachines/inkling-small": [
-      {
-        "id": "commandcode-goat-inkling-small",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Inkling Small",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.4004,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      }
-    ],
     "meta/muse-spark-1.2": [
       {
         "id": "commandcode-goat-muse-spark-1.2",
@@ -745,21 +387,7 @@
         "rank": 1
       }
     ],
-    "thinkingmachines/inkling": [
-      {
-        "id": "commandcode-goat-inkling",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Inkling",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.718,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      }
-    ],
-    "qwen/qwen3.8-max": [
+    "qwen/qwen3.8-max-0902": [
       {
         "id": "commandcode-goat-qwen-3.8-max",
         "provider": "commandcode",
@@ -773,6 +401,18 @@
         "rank": 1
       },
       {
+        "id": "commandcode-goat-qwen-3.8-max-0902",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.8 Max 0902",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.0852,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      },
+      {
         "id": "opencode-go-qwen3.8-max",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
@@ -782,33 +422,7 @@
         "cost": 1.3435,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "qwen/qwen3.7-max": [
-      {
-        "id": "commandcode-goat-qwen-3.7-max",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.7 Max",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.9382,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-qwen3.7-max",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.7 Max",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 1.2955,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
+        "rank": 3
       }
     ],
     "moonshotai/kimi-k3": [
@@ -981,9 +595,7 @@
         "vendor_slug": "mimo-v2.5"
       },
       "rank": 3,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-mimo-v2.5",
@@ -1012,9 +624,7 @@
         "vendor_label": "MiMo V2.5"
       },
       "rank": 4,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-muse-spark-1.3-contributor",
@@ -1098,9 +708,7 @@
         "vendor_slug": "longcat-2.0"
       },
       "rank": 7,
-      "target_models": [
-        "meituan/longcat-2.0"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-deepseek-v4-flash",
@@ -1219,9 +827,7 @@
         "vendor_label": "MiMo V2.5 Pro"
       },
       "rank": 11,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-omen-alpha",
@@ -1270,9 +876,7 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 13,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "mimo-token-plan-pro-mimo-v2.5",
@@ -1295,9 +899,7 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 14,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "mimo-token-plan-standard-mimo-v2.5",
@@ -1320,9 +922,7 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 15,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "mimo-token-plan-lite-mimo-v2.5",
@@ -1345,9 +945,7 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 16,
-      "target_models": [
-        "xiaomi/mimo-v2.5"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-deepseek-v4-flash",
@@ -1483,9 +1081,7 @@
         "vendor_slug": "mimo-v2.5-pro"
       },
       "rank": 21,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-glm-5.3-flash",
@@ -1542,9 +1138,7 @@
         "vendor_slug": "qwen3.7-plus"
       },
       "rank": 23,
-      "target_models": [
-        "qwen/qwen3.7-plus"
-      ]
+      "target_models": []
     },
     {
       "id": "mimo-token-plan-max-mimo-v2.5-pro",
@@ -1567,9 +1161,7 @@
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
       "rank": 24,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-qwen-3.8-27b",
@@ -1652,9 +1244,7 @@
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
       "rank": 27,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "mimo-token-plan-standard-mimo-v2.5-pro",
@@ -1677,9 +1267,7 @@
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
       "rank": 28,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "minimax-token-plan-max",
@@ -1708,8 +1296,7 @@
       },
       "rank": 29,
       "target_models": [
-        "minimax/minimax-m3",
-        "minimax/minimax-m2.7"
+        "minimax/minimax-m3"
       ]
     },
     {
@@ -1739,8 +1326,7 @@
       },
       "rank": 30,
       "target_models": [
-        "minimax/minimax-m3",
-        "minimax/minimax-m2.7"
+        "minimax/minimax-m3"
       ]
     },
     {
@@ -1764,9 +1350,7 @@
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
       "rank": 31,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-minimax-m2.7",
@@ -1792,9 +1376,7 @@
         "vendor_slug": "minimax-m2.7"
       },
       "rank": 32,
-      "target_models": [
-        "minimax/minimax-m2.7"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-qwen3.6-plus",
@@ -1820,9 +1402,7 @@
         "vendor_slug": "qwen3.6-plus"
       },
       "rank": 33,
-      "target_models": [
-        "qwen/qwen3.6-plus"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-deepseek-v4-flash-vision-exp",
@@ -1934,8 +1514,7 @@
       },
       "rank": 37,
       "target_models": [
-        "minimax/minimax-m3",
-        "minimax/minimax-m2.7"
+        "minimax/minimax-m3"
       ]
     },
     {
@@ -2218,9 +1797,7 @@
         "vendor_label": "Qwen 3.7 Plus"
       },
       "rank": 47,
-      "target_models": [
-        "qwen/qwen3.7-plus"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-kimi-k2.7-code",
@@ -2246,9 +1823,7 @@
         "vendor_slug": "kimi-k2.7-code"
       },
       "rank": 48,
-      "target_models": [
-        "moonshotai/kimi-k2.7-code"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-kimi-k2.6",
@@ -2274,9 +1849,7 @@
         "vendor_slug": "kimi-k2.6"
       },
       "rank": 49,
-      "target_models": [
-        "moonshotai/kimi-k2.6"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-qwen-3.6-plus",
@@ -2305,9 +1878,7 @@
         "vendor_label": "Qwen 3.6 Plus"
       },
       "rank": 50,
-      "target_models": [
-        "qwen/qwen3.6-plus"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-kimi-k2.7-code",
@@ -2336,9 +1907,7 @@
         "vendor_label": "Kimi K2.7 Code"
       },
       "rank": 51,
-      "target_models": [
-        "moonshotai/kimi-k2.7-code"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-deepseek-v4-pro",
@@ -2396,9 +1965,7 @@
         "vendor_label": "GLM-5.2"
       },
       "rank": 53,
-      "target_models": [
-        "z-ai/glm-5.2"
-      ]
+      "target_models": []
     },
     {
       "id": "deepseek-api-deepseek-v4-pro",
@@ -2443,9 +2010,7 @@
         "vendor_slug": "glm-5.2"
       },
       "rank": 55,
-      "target_models": [
-        "z-ai/glm-5.2"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-glm-5.1",
@@ -2471,9 +2036,7 @@
         "vendor_slug": "glm-5.1"
       },
       "rank": 56,
-      "target_models": [
-        "z-ai/glm-5.1"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-gemini-3.8-flash",
@@ -2552,7 +2115,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.8476,
+      "api_reference_blended_cny_per_m": 3.8447,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2593,9 +2156,7 @@
         "vendor_label": "Inkling Small"
       },
       "rank": 60,
-      "target_models": [
-        "thinkingmachines/inkling-small"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-deepseek-v4-flash-fast",
@@ -2773,9 +2334,7 @@
         "vendor_label": "Inkling"
       },
       "rank": 66,
-      "target_models": [
-        "thinkingmachines/inkling"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-qwen-3.8-max",
@@ -2805,7 +2364,7 @@
       },
       "rank": 67,
       "target_models": [
-        "qwen/qwen3.8-max"
+        "qwen/qwen3.8-max-0902"
       ]
     },
     {
@@ -2835,9 +2394,7 @@
         "vendor_label": "Qwen 3.7 Max"
       },
       "rank": 68,
-      "target_models": [
-        "qwen/qwen3.7-max"
-      ]
+      "target_models": []
     },
     {
       "id": "commandcode-goat-kimi-k3",
@@ -2928,7 +2485,9 @@
         "vendor_label": "Qwen 3.8 Max 0902"
       },
       "rank": 71,
-      "target_models": []
+      "target_models": [
+        "qwen/qwen3.8-max-0902"
+      ]
     },
     {
       "id": "opencode-go-glm-5.3",
@@ -2982,9 +2541,7 @@
         "vendor_slug": "qwen3.7-max"
       },
       "rank": 73,
-      "target_models": [
-        "qwen/qwen3.7-max"
-      ]
+      "target_models": []
     },
     {
       "id": "opencode-go-qwen3.8-max",
@@ -3011,7 +2568,7 @@
       },
       "rank": 74,
       "target_models": [
-        "qwen/qwen3.8-max"
+        "qwen/qwen3.8-max-0902"
       ]
     },
     {
