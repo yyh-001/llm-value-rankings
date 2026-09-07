@@ -690,6 +690,28 @@ def is_text_llm(model):
     return True
 
 
+def is_rankable_model(model):
+    """Return True for canonical, non-variant models suitable for the leaderboard."""
+    if not is_text_llm(model):
+        return False
+
+    model_id = str(model.get("id") or "").strip().lower()
+    canonical_slug = str(model.get("canonical_slug") or "").strip().lower()
+    if not model_id:
+        return False
+
+    # `~family-latest` is a moving router alias, not a reproducible snapshot.
+    if model_id.startswith("~") or canonical_slug.startswith("~"):
+        return False
+    if model_id.endswith("-latest") or canonical_slug.endswith("-latest"):
+        return False
+
+    # Keep one canonical entry instead of :free/:nitro/:batch-style variants.
+    if ":" in model_id:
+        return False
+    return True
+
+
 def normalize_permaslug(slug):
     """Normalize OpenRouter permaslugs for benchmark lookup."""
     if not slug:
@@ -699,6 +721,52 @@ def normalize_permaslug(slug):
     normalized = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", normalized)
     normalized = re.sub(r"-\d{8}$", "", normalized)
     return normalized
+
+
+def model_family_key(model):
+    """Return a stable family key shared by dated snapshots of one model."""
+    model_id = str(model.get("id") or "")
+    canonical_slug = str(model.get("canonical_slug") or "")
+    key = normalize_permaslug(canonical_slug or model_id)
+    if not key:
+        return ""
+
+    # Some older catalog records only expose a short MMDD suffix in `id`.
+    return re.sub(r"-(0[1-9]|1[0-2])[0-3]\d$", "", key)
+
+
+def model_release_sort_key(model):
+    """Sort snapshots by release date, then OpenRouter catalog creation time."""
+    canonical_slug = str(model.get("canonical_slug") or "").lower().split(":")[0]
+    dated = re.search(r"-(\d{8})$", canonical_slug)
+    release_date = int(dated.group(1)) if dated else 0
+
+    try:
+        created = int(model.get("created") or 0)
+    except (TypeError, ValueError):
+        created = 0
+    return (release_date, created, canonical_slug, str(model.get("id") or ""))
+
+
+def select_latest_models(models):
+    """Keep the newest canonical snapshot for each logical model family."""
+    latest = {}
+    for model in models:
+        if not is_rankable_model(model):
+            continue
+        family = model_family_key(model)
+        if not family:
+            continue
+        current = latest.get(family)
+        if current is None or model_release_sort_key(model) > model_release_sort_key(current):
+            latest[family] = model
+
+    selected = list(latest.values())
+    print(
+        f"  Selected {len(selected)} canonical latest models "
+        f"from {len(models)} OpenRouter catalog entries"
+    )
+    return selected
 
 
 def slug_tokens(slug):
@@ -725,6 +793,11 @@ def benchmark_match_score(model_slug, benchmark_slug):
     if not model_slug or not benchmark_slug:
         return 0
 
+    left_raw = str(model_slug).lower().split(":")[0]
+    right_raw = str(benchmark_slug).lower().split(":")[0]
+    if left_raw == right_raw:
+        return 110
+
     left = normalize_permaslug(model_slug)
     right = normalize_permaslug(benchmark_slug)
     if left == right:
@@ -735,7 +808,7 @@ def benchmark_match_score(model_slug, benchmark_slug):
 
 
 def build_intelligence_map(benchmark_rows, openrouter_models):
-    """Map OpenRouter model IDs to AA intelligence_index via embedded data + exact slug fallback."""
+    """Map model IDs to AA scores, preferring exact authenticated benchmark rows."""
     scored_rows = [
         row
         for row in benchmark_rows
@@ -757,7 +830,7 @@ def build_intelligence_map(benchmark_rows, openrouter_models):
 
     for model in openrouter_models:
         model_id = model.get("id")
-        if not model_id or model_id in intelligence_map:
+        if not model_id:
             continue
 
         best_score = 0
@@ -772,7 +845,13 @@ def build_intelligence_map(benchmark_rows, openrouter_models):
                 best_score = score
                 best_intel = round(float(row[AA_CAPABILITY_FIELD]))
 
-        if best_score >= 90 and best_intel is not None:
+        # Prefer an authenticated exact/normalized API match over a stale
+        # embedded value; only use token-reordered matching when no embedded
+        # score exists at all.
+        if best_intel is not None and (
+            best_score >= 100
+            or (model_id not in intelligence_map and best_score >= 90)
+        ):
             intelligence_map[model_id] = best_intel
             slug_count += 1
 
@@ -785,9 +864,8 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
     """
     Build capability scores from OpenRouter model records and benchmarks API.
 
-    Uses AA intelligence_index; prefers per-model embedded scores, exact slug fallback only.
-    The model catalog already contains embedded scores for many models, so those
-    scores remain usable when the authenticated benchmarks endpoint is unavailable.
+    Uses the authenticated AA benchmark snapshot when available, falling back to
+    scores embedded in the model catalog when the endpoint is unavailable.
     """
     embedded_map = build_intelligence_map([], openrouter_models)
     api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -805,7 +883,6 @@ def fetch_openrouter_intelligence_scores(openrouter_models):
             OPENROUTER_BENCHMARKS_API,
             params={
                 "source": "artificial-analysis",
-                "max_results": 100,
             },
             headers=get_openrouter_headers(),
             timeout=ENDPOINT_FETCH_TIMEOUT,
@@ -904,7 +981,7 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
 
     for model in openrouter_models:
         model_id = model.get("id", "")
-        if not is_text_llm(model):
+        if not is_rankable_model(model):
             continue
 
         provider = extract_provider(model_id)
@@ -934,10 +1011,10 @@ def process_models(openrouter_models, intelligence_map, endpoints_map, page_stat
                 intelligence, blended_price, speed, avg_intelligence
             )
 
-        base_name = model_id.split(":")[0] if ":" in model_id else model_id
-        if base_name in seen:
+        family = model_family_key(model) or model_id
+        if family in seen:
             continue
-        seen.add(base_name)
+        seen.add(family)
 
         processed.append({
             "id": model_id,
@@ -1133,10 +1210,14 @@ def main():
     print("=" * 60)
 
     # Fetch data
-    openrouter_models = fetch_openrouter_models()
-    if not openrouter_models:
+    catalog_models = fetch_openrouter_models()
+    if not catalog_models:
         print("Error: No models fetched from OpenRouter")
         sys.exit(1)
+
+    openrouter_models = select_latest_models(catalog_models)
+    if not openrouter_models:
+        raise RuntimeError("No canonical models were available after deduplication")
 
     intelligence_map = fetch_intelligence_scores(openrouter_models)
     avg_intelligence = compute_avg_intelligence(intelligence_map)
@@ -1152,12 +1233,12 @@ def main():
     seen_ids = set()
     for model in openrouter_models:
         model_id = model.get("id", "")
-        if not is_text_llm(model) or not model.get("pricing"):
+        if not is_rankable_model(model) or not model.get("pricing"):
             continue
-        base_name = model_id.split(":")[0] if ":" in model_id else model_id
-        if base_name in seen_ids:
+        family = model_family_key(model) or model_id
+        if family in seen_ids:
             continue
-        seen_ids.add(base_name)
+        seen_ids.add(family)
         candidate_ids.append(model_id)
 
     endpoints_map = fetch_endpoints_batch(candidate_ids)
