@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-06T18:58:20.913788Z",
+  "updated_at": "2026-09-07T02:40:43.606088Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -28,44 +28,6 @@
   "total_plans": 80,
   "by_model": {
     "deepseek/deepseek-v4-flash-0731": [
-      {
-        "id": "commandcode-goat-deepseek-v4-flash",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · DeepSeek V4 Flash (latest)",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.0165,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-deepseek-v4-flash",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "DeepSeek V4 Flash",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0399,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "deepseek-api-deepseek-v4-flash",
-        "provider": "deepseek",
-        "provider_display": "DeepSeek",
-        "plan": "V4 Flash",
-        "type": "api",
-        "badge": null,
-        "cost": 0.1,
-        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
-        "rank": 3
-      }
-    ],
-    "deepseek/deepseek-v4-flash": [
       {
         "id": "commandcode-goat-deepseek-v4-flash",
         "provider": "commandcode",
@@ -244,44 +206,6 @@
       }
     ],
     "deepseek/deepseek-v4-pro-0813": [
-      {
-        "id": "commandcode-goat-deepseek-v4-pro",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · DeepSeek V4 Pro (latest)",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.1326,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-deepseek-v4-pro",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "DeepSeek V4 Pro",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.2519,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "deepseek-api-deepseek-v4-pro",
-        "provider": "deepseek",
-        "provider_display": "DeepSeek",
-        "plan": "V4 Pro",
-        "type": "api",
-        "badge": null,
-        "cost": 0.3047,
-        "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
-        "pricing_source": "DeepSeek 官方 API",
-        "rank": 3
-      }
-    ],
-    "deepseek/deepseek-v4-pro": [
       {
         "id": "commandcode-goat-deepseek-v4-pro",
         "provider": "commandcode",
@@ -738,8 +662,7 @@
       },
       "rank": 8,
       "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash"
+        "deepseek/deepseek-v4-flash-0731"
       ]
     },
     {
@@ -757,7 +680,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2349,
+      "api_reference_blended_cny_per_m": 0.2313,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -972,8 +895,7 @@
       },
       "rank": 17,
       "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash"
+        "deepseek/deepseek-v4-flash-0731"
       ]
     },
     {
@@ -1594,8 +1516,7 @@
       },
       "rank": 40,
       "target_models": [
-        "deepseek/deepseek-v4-flash-0731",
-        "deepseek/deepseek-v4-flash"
+        "deepseek/deepseek-v4-flash-0731"
       ]
     },
     {
@@ -1626,8 +1547,7 @@
       },
       "rank": 41,
       "target_models": [
-        "deepseek/deepseek-v4-pro-0813",
-        "deepseek/deepseek-v4-pro"
+        "deepseek/deepseek-v4-pro-0813"
       ]
     },
     {
@@ -1934,8 +1854,7 @@
       },
       "rank": 52,
       "target_models": [
-        "deepseek/deepseek-v4-pro-0813",
-        "deepseek/deepseek-v4-pro"
+        "deepseek/deepseek-v4-pro-0813"
       ]
     },
     {
@@ -1982,8 +1901,7 @@
       },
       "rank": 54,
       "target_models": [
-        "deepseek/deepseek-v4-pro-0813",
-        "deepseek/deepseek-v4-pro"
+        "deepseek/deepseek-v4-pro-0813"
       ]
     },
     {
