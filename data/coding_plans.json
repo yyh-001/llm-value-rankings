@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-10T19:29:40.216053Z",
+  "updated_at": "2026-09-11T19:30:05.658423Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -63,6 +63,32 @@
         "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
         "pricing_source": "DeepSeek 官方 API",
         "rank": 3
+      }
+    ],
+    "deepseek/deepseek-v4.1-flash": [
+      {
+        "id": "commandcode-goat-deepseek-v4.1-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · DeepSeek V4.1 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0097,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-deepseek-v4.1-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4.1 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0465,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
       }
     ],
     "openai/gpt-5.6-luna": [
@@ -773,7 +799,9 @@
         "vendor_label": "DeepSeek V4.1 Flash"
       },
       "rank": 5,
-      "target_models": []
+      "target_models": [
+        "deepseek/deepseek-v4.1-flash"
+      ]
     },
     {
       "id": "commandcode-goat-mimo-v2.5",
@@ -903,7 +931,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2371,
+      "api_reference_blended_cny_per_m": 0.2363,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -1201,7 +1229,9 @@
         "vendor_slug": "deepseek-v4.1-flash"
       },
       "rank": 21,
-      "target_models": []
+      "target_models": [
+        "deepseek/deepseek-v4.1-flash"
+      ]
     },
     {
       "id": "opencode-go-deepseek-v4-flash-vision-exp",
@@ -2278,7 +2308,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.4532,
+      "api_reference_blended_cny_per_m": 3.8541,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
