@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T20:50:23.968074Z",
+  "updated_at": "2026-09-15T20:05:23.969151Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -380,6 +380,46 @@
         "cost": 0.2386,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      }
+    ],
+    "moonshotai/kimi-k2.6": [
+      {
+        "id": "opencode-go-kimi-k2.6",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K2.6",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.2249,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      }
+    ],
+    "z-ai/glm-5.2": [
+      {
+        "id": "commandcode-goat-glm-5.2",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · GLM-5.2",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.2894,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-glm-5.2",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GLM-5.2",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.319,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       }
     ],
@@ -919,7 +959,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2363,
+      "api_reference_blended_cny_per_m": 0.2385,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2000,7 +2040,9 @@
         "vendor_slug": "kimi-k2.6"
       },
       "rank": 49,
-      "target_models": []
+      "target_models": [
+        "moonshotai/kimi-k2.6"
+      ]
     },
     {
       "id": "commandcode-goat-qwen-3.6-plus",
@@ -2117,7 +2159,9 @@
         "vendor_label": "GLM-5.2"
       },
       "rank": 53,
-      "target_models": []
+      "target_models": [
+        "z-ai/glm-5.2"
+      ]
     },
     {
       "id": "deepseek-api-deepseek-v4-pro",
@@ -2161,7 +2205,9 @@
         "vendor_slug": "glm-5.2"
       },
       "rank": 55,
-      "target_models": []
+      "target_models": [
+        "z-ai/glm-5.2"
+      ]
     },
     {
       "id": "opencode-go-glm-5.1",
@@ -2268,7 +2314,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 4.3464,
+      "api_reference_blended_cny_per_m": 4.1144,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
