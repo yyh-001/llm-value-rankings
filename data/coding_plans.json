@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T19:29:28.683802Z",
+  "updated_at": "2026-09-19T19:14:59.634010Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -25,7 +25,7 @@
     "mimo_token_plan": "https://platform.xiaomimimo.com/token-plan",
     "mimo_token_plan_docs": "https://mimo.mi.com/docs/zh-CN/price/token-plan"
   },
-  "total_plans": 82,
+  "total_plans": 83,
   "by_model": {
     "deepseek/deepseek-v4-flash-0731": [
       {
@@ -919,6 +919,35 @@
       "target_models": []
     },
     {
+      "id": "commandcode-goat-longcat-2.0",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · LongCat 2.0",
+      "badge": "$10",
+      "cost": 0.0126,
+      "subscription_base_cost": 0.0126,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 5770282000,
+      "monthly_requests": 64100,
+      "tokens_per_request": 90020,
+      "vendor_slug": "longcat-2.0",
+      "vendor_label": "LongCat 2.0",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、LongCat 2.0 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, LongCat 2.0 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "longcat-2.0",
+        "vendor_label": "LongCat 2.0"
+      },
+      "rank": 9,
+      "target_models": []
+    },
+    {
       "id": "opencode-go-longcat-2.0",
       "type": "subscription",
       "provider": "opencode",
@@ -941,7 +970,7 @@
       "match": {
         "vendor_slug": "longcat-2.0"
       },
-      "rank": 9,
+      "rank": 10,
       "target_models": []
     },
     {
@@ -968,7 +997,7 @@
           "-pro"
         ]
       },
-      "rank": 10,
+      "rank": 11,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
@@ -996,7 +1025,7 @@
       "match": {
         "vendor_slug": "deepseek-v4-flash"
       },
-      "rank": 11,
+      "rank": 12,
       "target_models": [
         "deepseek/deepseek-v4-flash-0731"
       ]
@@ -1027,7 +1056,7 @@
         "vendor_slug": "hy3",
         "vendor_label": "Tencent Hy3"
       },
-      "rank": 12,
+      "rank": 13,
       "target_models": []
     },
     {
@@ -1056,7 +1085,7 @@
         "vendor_slug": "mimo-v2.5-pro",
         "vendor_label": "MiMo V2.5 Pro"
       },
-      "rank": 13,
+      "rank": 14,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1087,7 +1116,7 @@
         "vendor_slug": "deepseek-v4-flash-vision",
         "vendor_label": "DeepSeek V4 Flash Vision (exp)"
       },
-      "rank": 14,
+      "rank": 15,
       "target_models": []
     },
     {
@@ -1110,7 +1139,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 15,
+      "rank": 16,
       "target_models": []
     },
     {
@@ -1133,7 +1162,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 16,
+      "rank": 17,
       "target_models": []
     },
     {
@@ -1156,7 +1185,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 17,
+      "rank": 18,
       "target_models": []
     },
     {
@@ -1179,7 +1208,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 18,
+      "rank": 19,
       "target_models": []
     },
     {
@@ -1205,7 +1234,7 @@
       "match": {
         "vendor_slug": "glm-5.3-flash"
       },
-      "rank": 19,
+      "rank": 20,
       "target_models": [
         "z-ai/glm-5.3-flash"
       ]
@@ -1233,7 +1262,7 @@
       "match": {
         "vendor_slug": "qwen3.8-flash"
       },
-      "rank": 20,
+      "rank": 21,
       "target_models": []
     },
     {
@@ -1259,7 +1288,7 @@
       "match": {
         "vendor_slug": "hy3"
       },
-      "rank": 21,
+      "rank": 22,
       "target_models": []
     },
     {
@@ -1285,7 +1314,7 @@
       "match": {
         "vendor_slug": "deepseek-v4-flash-vision-exp"
       },
-      "rank": 22,
+      "rank": 23,
       "target_models": []
     },
     {
@@ -1311,7 +1340,7 @@
       "match": {
         "vendor_slug": "mimo-v2.5-pro"
       },
-      "rank": 23,
+      "rank": 24,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1342,7 +1371,7 @@
         "vendor_slug": "glm-5.3-flash",
         "vendor_label": "GLM-5.3 Flash"
       },
-      "rank": 24,
+      "rank": 25,
       "target_models": [
         "z-ai/glm-5.3-flash"
       ]
@@ -1370,7 +1399,7 @@
       "match": {
         "vendor_slug": "qwen3.7-plus"
       },
-      "rank": 25,
+      "rank": 26,
       "target_models": [
         "qwen/qwen3.7-plus"
       ]
@@ -1395,7 +1424,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 26,
+      "rank": 27,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1426,7 +1455,7 @@
         "vendor_slug": "qwen-3.8-27b",
         "vendor_label": "Qwen 3.8 27B"
       },
-      "rank": 27,
+      "rank": 28,
       "target_models": [
         "qwen/qwen3.8-27b"
       ]
@@ -1457,7 +1486,7 @@
         "vendor_slug": "qwen-3.8-flash",
         "vendor_label": "Qwen 3.8 Flash"
       },
-      "rank": 28,
+      "rank": 29,
       "target_models": []
     },
     {
@@ -1480,7 +1509,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 29,
+      "rank": 30,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1505,7 +1534,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 30,
+      "rank": 31,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1535,7 +1564,7 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 31,
+      "rank": 32,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1565,7 +1594,7 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 32,
+      "rank": 33,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1590,7 +1619,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 33,
+      "rank": 34,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1621,7 +1650,7 @@
         "vendor_slug": "qwen-3.8-omni-flash",
         "vendor_label": "Qwen 3.8 Omni Flash"
       },
-      "rank": 34,
+      "rank": 35,
       "target_models": []
     },
     {
@@ -1647,7 +1676,7 @@
       "match": {
         "vendor_slug": "minimax-m2.7"
       },
-      "rank": 35,
+      "rank": 36,
       "target_models": []
     },
     {
@@ -1673,7 +1702,7 @@
       "match": {
         "vendor_slug": "qwen3.6-plus"
       },
-      "rank": 36,
+      "rank": 37,
       "target_models": []
     },
     {
@@ -1699,7 +1728,7 @@
       "match": {
         "vendor_slug": "minimax-m3"
       },
-      "rank": 37,
+      "rank": 38,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1730,7 +1759,7 @@
         "vendor_slug": "step-3.5-flash",
         "vendor_label": "Step 3.5 Flash"
       },
-      "rank": 38,
+      "rank": 39,
       "target_models": []
     },
     {
@@ -1758,7 +1787,7 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 39,
+      "rank": 40,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1789,7 +1818,7 @@
         "vendor_slug": "minimax-m3",
         "vendor_label": "MiniMax M3"
       },
-      "rank": 40,
+      "rank": 41,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1820,7 +1849,7 @@
         "vendor_slug": "gpt-5.6-luna",
         "vendor_label": "GPT-5.6 Luna"
       },
-      "rank": 41,
+      "rank": 42,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
@@ -1838,7 +1867,7 @@
       "match": {
         "model_family": "deepseek/deepseek-v4-flash"
       },
-      "rank": 42,
+      "rank": 43,
       "target_models": [
         "deepseek/deepseek-v4-flash-0731"
       ]
@@ -1869,7 +1898,7 @@
         "vendor_slug": "deepseek-v4-pro",
         "vendor_label": "DeepSeek V4 Pro (latest)"
       },
-      "rank": 43,
+      "rank": 44,
       "target_models": [
         "deepseek/deepseek-v4-pro-0813"
       ]
@@ -1897,7 +1926,7 @@
       "match": {
         "vendor_slug": "gpt-5.6-luna"
       },
-      "rank": 44,
+      "rank": 45,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
@@ -1925,7 +1954,7 @@
       "match": {
         "vendor_slug": "hy4-preview"
       },
-      "rank": 45,
+      "rank": 46,
       "target_models": []
     },
     {
@@ -1954,7 +1983,7 @@
         "vendor_slug": "hy4-preview",
         "vendor_label": "Tencent Hy4 Preview"
       },
-      "rank": 46,
+      "rank": 47,
       "target_models": []
     },
     {
@@ -1983,7 +2012,7 @@
         "vendor_slug": "step-3.7-flash",
         "vendor_label": "Step 3.7 Flash"
       },
-      "rank": 47,
+      "rank": 48,
       "target_models": []
     },
     {
@@ -2012,7 +2041,7 @@
         "vendor_slug": "qwen-3.7-plus",
         "vendor_label": "Qwen 3.7 Plus"
       },
-      "rank": 48,
+      "rank": 49,
       "target_models": [
         "qwen/qwen3.7-plus"
       ]
@@ -2040,7 +2069,7 @@
       "match": {
         "vendor_slug": "kimi-k2.7-code"
       },
-      "rank": 49,
+      "rank": 50,
       "target_models": [
         "moonshotai/kimi-k2.7-code"
       ]
@@ -2068,7 +2097,7 @@
       "match": {
         "vendor_slug": "kimi-k2.6"
       },
-      "rank": 50,
+      "rank": 51,
       "target_models": [
         "moonshotai/kimi-k2.6"
       ]
@@ -2099,7 +2128,7 @@
         "vendor_slug": "qwen-3.6-plus",
         "vendor_label": "Qwen 3.6 Plus"
       },
-      "rank": 51,
+      "rank": 52,
       "target_models": []
     },
     {
@@ -2128,7 +2157,7 @@
         "vendor_slug": "kimi-k2.7-code",
         "vendor_label": "Kimi K2.7 Code"
       },
-      "rank": 52,
+      "rank": 53,
       "target_models": [
         "moonshotai/kimi-k2.7-code"
       ]
@@ -2156,7 +2185,7 @@
       "match": {
         "vendor_slug": "deepseek-v4-pro"
       },
-      "rank": 53,
+      "rank": 54,
       "target_models": [
         "deepseek/deepseek-v4-pro-0813"
       ]
@@ -2187,7 +2216,7 @@
         "vendor_slug": "glm-5.2",
         "vendor_label": "GLM-5.2"
       },
-      "rank": 54,
+      "rank": 55,
       "target_models": [
         "z-ai/glm-5.2"
       ]
@@ -2218,7 +2247,7 @@
         "vendor_slug": "glm-5.3-flashx",
         "vendor_label": "GLM-5.3 FlashX"
       },
-      "rank": 55,
+      "rank": 56,
       "target_models": []
     },
     {
@@ -2234,7 +2263,7 @@
       "match": {
         "model_family": "deepseek/deepseek-v4-pro"
       },
-      "rank": 56,
+      "rank": 57,
       "target_models": [
         "deepseek/deepseek-v4-pro-0813"
       ]
@@ -2262,7 +2291,7 @@
       "match": {
         "vendor_slug": "glm-5.2"
       },
-      "rank": 57,
+      "rank": 58,
       "target_models": [
         "z-ai/glm-5.2"
       ]
@@ -2290,7 +2319,7 @@
       "match": {
         "vendor_slug": "glm-5.1"
       },
-      "rank": 58,
+      "rank": 59,
       "target_models": [
         "z-ai/glm-5.1"
       ]
@@ -2321,7 +2350,7 @@
         "vendor_slug": "gemini-3.8-flash",
         "vendor_label": "Gemini 3.8 Flash"
       },
-      "rank": 59,
+      "rank": 60,
       "target_models": [
         "google/gemini-3.8-flash"
       ]
@@ -2352,7 +2381,7 @@
         "vendor_slug": "gemini-3.7-flash",
         "vendor_label": "Gemini 3.7 Flash"
       },
-      "rank": 60,
+      "rank": 61,
       "target_models": [
         "google/gemini-3.7-flash"
       ]
@@ -2372,7 +2401,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.9295,
+      "api_reference_blended_cny_per_m": 3.8526,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2381,7 +2410,7 @@
           "-pro"
         ]
       },
-      "rank": 61,
+      "rank": 62,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2412,7 +2441,7 @@
         "vendor_slug": "inkling-small",
         "vendor_label": "Inkling Small"
       },
-      "rank": 62,
+      "rank": 63,
       "target_models": [
         "thinkingmachines/inkling-small"
       ]
@@ -2443,7 +2472,7 @@
         "vendor_slug": "deepseek-v4-flash-fast",
         "vendor_label": "DeepSeek V4 Flash Fast"
       },
-      "rank": 63,
+      "rank": 64,
       "target_models": []
     },
     {
@@ -2472,7 +2501,7 @@
         "vendor_slug": "muse-spark-1.2",
         "vendor_label": "Muse Spark 1.2"
       },
-      "rank": 64,
+      "rank": 65,
       "target_models": [
         "meta/muse-spark-1.2"
       ]
@@ -2503,7 +2532,7 @@
         "vendor_slug": "nemotron-3-ultra",
         "vendor_label": "Nemotron 3 Ultra"
       },
-      "rank": 65,
+      "rank": 66,
       "target_models": []
     },
     {
@@ -2532,7 +2561,7 @@
         "vendor_slug": "muse-spark-1.3",
         "vendor_label": "Muse Spark 1.3"
       },
-      "rank": 66,
+      "rank": 67,
       "target_models": []
     },
     {
@@ -2561,7 +2590,7 @@
         "vendor_slug": "gpt-5.6-sol",
         "vendor_label": "GPT-5.6 Sol"
       },
-      "rank": 67,
+      "rank": 68,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2592,7 +2621,7 @@
         "vendor_slug": "inkling",
         "vendor_label": "Inkling"
       },
-      "rank": 68,
+      "rank": 69,
       "target_models": [
         "thinkingmachines/inkling"
       ]
@@ -2623,7 +2652,7 @@
         "vendor_slug": "qwen-3.8-max",
         "vendor_label": "Qwen 3.8 Max"
       },
-      "rank": 69,
+      "rank": 70,
       "target_models": [
         "qwen/qwen3.8-max-0902"
       ]
@@ -2654,7 +2683,7 @@
         "vendor_slug": "qwen-3.7-max",
         "vendor_label": "Qwen 3.7 Max"
       },
-      "rank": 70,
+      "rank": 71,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -2685,7 +2714,7 @@
         "vendor_slug": "kimi-k3",
         "vendor_label": "Kimi K3"
       },
-      "rank": 71,
+      "rank": 72,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -2716,7 +2745,7 @@
         "vendor_slug": "glm-5.3",
         "vendor_label": "GLM-5.3"
       },
-      "rank": 72,
+      "rank": 73,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -2747,7 +2776,7 @@
         "vendor_slug": "qwen-3.8-max-0902",
         "vendor_label": "Qwen 3.8 Max 0902"
       },
-      "rank": 73,
+      "rank": 74,
       "target_models": [
         "qwen/qwen3.8-max-0902"
       ]
@@ -2775,7 +2804,7 @@
       "match": {
         "vendor_slug": "glm-5.3"
       },
-      "rank": 74,
+      "rank": 75,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -2803,7 +2832,7 @@
       "match": {
         "vendor_slug": "qwen3.7-max"
       },
-      "rank": 75,
+      "rank": 76,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -2831,7 +2860,7 @@
       "match": {
         "vendor_slug": "qwen3.8-max"
       },
-      "rank": 76,
+      "rank": 77,
       "target_models": [
         "qwen/qwen3.8-max-0902"
       ]
@@ -2862,7 +2891,7 @@
         "vendor_slug": "kimi-k2.7-code-highspeed",
         "vendor_label": "Kimi K2.7 Code HighSpeed"
       },
-      "rank": 77,
+      "rank": 78,
       "target_models": []
     },
     {
@@ -2888,7 +2917,7 @@
       "match": {
         "vendor_slug": "kimi-k3"
       },
-      "rank": 78,
+      "rank": 79,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -2919,7 +2948,7 @@
         "vendor_slug": "glm-5.2-fast",
         "vendor_label": "GLM-5.2 Fast"
       },
-      "rank": 79,
+      "rank": 80,
       "target_models": []
     },
     {
@@ -2945,7 +2974,7 @@
       "match": {
         "vendor_slug": "grok-4.6"
       },
-      "rank": 80,
+      "rank": 81,
       "target_models": [
         "x-ai/grok-4.6"
       ]
@@ -2976,7 +3005,7 @@
         "vendor_slug": "grok-4.5",
         "vendor_label": "Grok 4.5"
       },
-      "rank": 81,
+      "rank": 82,
       "target_models": [
         "x-ai/grok-4.5"
       ]
@@ -3007,7 +3036,7 @@
         "vendor_slug": "grok-4.6",
         "vendor_label": "Grok 4.6"
       },
-      "rank": 82,
+      "rank": 83,
       "target_models": [
         "x-ai/grok-4.6"
       ]
