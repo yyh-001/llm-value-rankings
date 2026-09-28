@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T19:59:25.348097Z",
+  "updated_at": "2026-09-28T22:28:12.084435Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -25,9 +25,73 @@
     "mimo_token_plan": "https://platform.xiaomimimo.com/token-plan",
     "mimo_token_plan_docs": "https://mimo.mi.com/docs/zh-CN/price/token-plan"
   },
-  "total_plans": 93,
+  "total_plans": 92,
   "by_model": {
+    "xiaomi/mimo-v2.6-flash": [
+      {
+        "id": "opencode-go-mimo-v2.6-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.6-Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0033,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-mimo-v2.6-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · MiMo V2.6 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0154,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      }
+    ],
+    "deepseek/deepseek-v4.1-flash": [
+      {
+        "id": "opencode-go-deepseek-v4.1-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4.1 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0058,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-deepseek-v4.1-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · DeepSeek V4.1 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0097,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      }
+    ],
     "deepseek/deepseek-v4-flash-0731": [
+      {
+        "id": "opencode-go-deepseek-v4-flash",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4 Flash",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0058,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
       {
         "id": "commandcode-goat-deepseek-v4-flash",
         "provider": "commandcode",
@@ -38,18 +102,6 @@
         "cost": 0.0097,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-deepseek-v4-flash",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "DeepSeek V4 Flash",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0232,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       },
       {
@@ -65,71 +117,45 @@
         "rank": 3
       }
     ],
-    "deepseek/deepseek-v4.1-flash": [
+    "xiaomi/mimo-v2.6-pro": [
       {
-        "id": "commandcode-goat-deepseek-v4.1-flash",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · DeepSeek V4.1 Flash",
+        "id": "opencode-go-mimo-v2.6-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.6-Pro",
         "type": "subscription",
-        "badge": "$10",
-        "cost": 0.0097,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
+        "badge": "$10/月",
+        "cost": 0.0128,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
       },
       {
-        "id": "opencode-go-deepseek-v4.1-flash",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "DeepSeek V4.1 Flash",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0116,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "openai/gpt-5.6-luna": [
-      {
-        "id": "gpt-plus-gpt-5.6-luna",
-        "provider": "openai",
-        "provider_display": "GPT Plus",
-        "plan": "GPT-5.6 Luna",
-        "type": "subscription",
-        "badge": null,
-        "cost": 0.0199,
-        "url": "https://chatgpt.com/codex/pricing",
-        "pricing_source": "OpenAI Codex 官方定价",
-        "rank": 1
-      },
-      {
-        "id": "commandcode-goat-gpt-5.6-luna",
+        "id": "commandcode-goat-mimo-v2.6-pro",
         "provider": "commandcode",
         "provider_display": "Command Code",
-        "plan": "GOAT · GPT-5.6 Luna",
+        "plan": "GOAT · MiMo V2.6 Pro",
         "type": "subscription",
         "badge": "$10",
-        "cost": 0.0956,
+        "cost": 0.0292,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 2
-      },
-      {
-        "id": "opencode-go-gpt-5.6-luna",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GPT 5.6 Luna",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.1381,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 3
       }
     ],
     "xiaomi/mimo-v2.5-pro": [
+      {
+        "id": "opencode-go-mimo-v2.5-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.5-Pro",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0128,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
       {
         "id": "commandcode-goat-mimo-v2.5-pro",
         "provider": "commandcode",
@@ -140,18 +166,6 @@
         "cost": 0.0292,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-mimo-v2.5-pro",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiMo-V2.5-Pro",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0511,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       },
       {
@@ -203,32 +217,6 @@
         "rank": 6
       }
     ],
-    "xiaomi/mimo-v2.6-pro": [
-      {
-        "id": "commandcode-goat-mimo-v2.6-pro",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · MiMo V2.6 Pro",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.0292,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-mimo-v2.6-pro",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiMo-V2.6-Pro",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0511,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
     "z-ai/glm-5.3-flash": [
       {
         "id": "opencode-go-glm-5.3-flash",
@@ -237,7 +225,7 @@
         "plan": "GLM-5.3-Flash",
         "type": "subscription",
         "badge": "$10/月",
-        "cost": 0.0408,
+        "cost": 0.0136,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
@@ -257,6 +245,18 @@
     ],
     "openai/gpt-6-luna": [
       {
+        "id": "opencode-go-gpt-6-luna",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GPT 6 Luna",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0167,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
         "id": "commandcode-goat-gpt-6-luna",
         "provider": "commandcode",
         "provider_display": "Command Code",
@@ -266,18 +266,6 @@
         "cost": 0.0467,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-gpt-6-luna",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GPT 6 Luna",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.067,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       }
     ],
@@ -289,7 +277,7 @@
         "plan": "Qwen3.7 Plus",
         "type": "subscription",
         "badge": "$10/月",
-        "cost": 0.0582,
+        "cost": 0.0194,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
@@ -307,21 +295,57 @@
         "rank": 2
       }
     ],
-    "qwen/qwen3.8-27b": [
+    "openai/gpt-5.6-luna": [
       {
-        "id": "commandcode-goat-qwen-3.8-27b",
+        "id": "gpt-plus-gpt-5.6-luna",
+        "provider": "openai",
+        "provider_display": "GPT Plus",
+        "plan": "GPT-5.6 Luna",
+        "type": "subscription",
+        "badge": null,
+        "cost": 0.0199,
+        "url": "https://chatgpt.com/codex/pricing",
+        "pricing_source": "OpenAI Codex 官方定价",
+        "rank": 1
+      },
+      {
+        "id": "opencode-go-gpt-5.6-luna",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "GPT 5.6 Luna",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0345,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "commandcode-goat-gpt-5.6-luna",
         "provider": "commandcode",
         "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.8 27B",
+        "plan": "GOAT · GPT-5.6 Luna",
         "type": "subscription",
         "badge": "$10",
-        "cost": 0.0592,
+        "cost": 0.0956,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
+        "rank": 3
       }
     ],
     "minimax/minimax-m3": [
+      {
+        "id": "opencode-go-minimax-m3",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiniMax M3",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0266,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
       {
         "id": "minimax-token-plan-max",
         "provider": "minimax",
@@ -332,7 +356,7 @@
         "cost": 0.0661,
         "url": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
         "pricing_source": "MiniMax Token Plan 官方额度",
-        "rank": 1
+        "rank": 2
       },
       {
         "id": "minimax-token-plan-ultra",
@@ -344,18 +368,6 @@
         "cost": 0.0661,
         "url": "https://platform.minimaxi.com/subscribe/token-plan?tab=individual__monthly",
         "pricing_source": "MiniMax Token Plan 官方额度",
-        "rank": 2
-      },
-      {
-        "id": "opencode-go-minimax-m3",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "MiniMax M3",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.0799,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 3
       },
       {
@@ -383,7 +395,47 @@
         "rank": 5
       }
     ],
+    "moonshotai/kimi-k2.6": [
+      {
+        "id": "opencode-go-kimi-k2.6",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K2.6",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0562,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      }
+    ],
+    "qwen/qwen3.8-27b": [
+      {
+        "id": "commandcode-goat-qwen-3.8-27b",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.8 27B",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0592,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
     "deepseek/deepseek-v4-pro-0813": [
+      {
+        "id": "opencode-go-deepseek-v4-pro",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4 Pro",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.063,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
       {
         "id": "commandcode-goat-deepseek-v4-pro",
         "provider": "commandcode",
@@ -394,18 +446,6 @@
         "cost": 0.1326,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-deepseek-v4-pro",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "DeepSeek V4 Pro",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.2519,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       },
       {
@@ -429,7 +469,7 @@
         "plan": "Kimi K2.7 Code",
         "type": "subscription",
         "badge": "$10/月",
-        "cost": 0.1916,
+        "cost": 0.0639,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
@@ -447,21 +487,19 @@
         "rank": 2
       }
     ],
-    "moonshotai/kimi-k2.6": [
+    "z-ai/glm-5.2": [
       {
-        "id": "opencode-go-kimi-k2.6",
+        "id": "opencode-go-glm-5.2",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
-        "plan": "Kimi K2.6",
+        "plan": "GLM-5.2",
         "type": "subscription",
         "badge": "$10/月",
-        "cost": 0.2249,
+        "cost": 0.1063,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
-      }
-    ],
-    "z-ai/glm-5.2": [
+      },
       {
         "id": "commandcode-goat-glm-5.2",
         "provider": "commandcode",
@@ -472,33 +510,71 @@
         "cost": 0.2894,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-glm-5.2",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GLM-5.2",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 0.319,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
         "rank": 2
       }
     ],
-    "z-ai/glm-5.1": [
+    "z-ai/glm-5.3": [
       {
-        "id": "opencode-go-glm-5.1",
+        "id": "opencode-go-glm-5.3",
         "provider": "opencode",
         "provider_display": "OpenCode Go",
-        "plan": "GLM-5.1",
+        "plan": "GLM-5.3",
         "type": "subscription",
         "badge": "$10/月",
-        "cost": 0.319,
+        "cost": 0.1588,
         "url": "https://opencode.ai/go",
         "pricing_source": "OpenCode Go 官方文档",
         "rank": 1
+      },
+      {
+        "id": "commandcode-goat-glm-5.3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · GLM-5.3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.0162,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      }
+    ],
+    "qwen/qwen3.8-max-0902": [
+      {
+        "id": "opencode-go-qwen3.8-max",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Qwen3.8 Max",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.3359,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-qwen-3.8-max",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.8 Max",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.8307,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "commandcode-goat-qwen-3.8-max-0902",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.8 Max 0902",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.0852,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 3
       }
     ],
     "google/gemini-3.8-flash": [
@@ -569,6 +645,32 @@
         "rank": 1
       }
     ],
+    "moonshotai/kimi-k3": [
+      {
+        "id": "opencode-go-kimi-k3",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "Kimi K3",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.4751,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-kimi-k3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Kimi K3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.9503,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      }
+    ],
     "thinkingmachines/inkling": [
       {
         "id": "commandcode-goat-inkling",
@@ -583,42 +685,18 @@
         "rank": 1
       }
     ],
-    "qwen/qwen3.8-max-0902": [
+    "x-ai/grok-4.7": [
       {
-        "id": "commandcode-goat-qwen-3.8-max",
+        "id": "commandcode-goat-grok-4.7",
         "provider": "commandcode",
         "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.8 Max",
+        "plan": "GOAT · Grok 4.7",
         "type": "subscription",
         "badge": "$10",
-        "cost": 0.8307,
+        "cost": 1.1846,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
-      },
-      {
-        "id": "commandcode-goat-qwen-3.8-max-0902",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Qwen 3.8 Max 0902",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 1.0852,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 2
-      },
-      {
-        "id": "opencode-go-qwen3.8-max",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.8 Max",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 1.3435,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 3
       }
     ],
     "qwen/qwen3.7-max": [
@@ -629,85 +707,7 @@
         "plan": "GOAT · Qwen 3.7 Max",
         "type": "subscription",
         "badge": "$10",
-        "cost": 0.9382,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-qwen3.7-max",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Qwen3.7 Max",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 1.2955,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "moonshotai/kimi-k3": [
-      {
-        "id": "commandcode-goat-kimi-k3",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Kimi K3",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 0.9503,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-kimi-k3",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "Kimi K3",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 1.9006,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "z-ai/glm-5.3": [
-      {
-        "id": "commandcode-goat-glm-5.3",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · GLM-5.3",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 1.0162,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      },
-      {
-        "id": "opencode-go-glm-5.3",
-        "provider": "opencode",
-        "provider_display": "OpenCode Go",
-        "plan": "GLM-5.3",
-        "type": "subscription",
-        "badge": "$10/月",
-        "cost": 1.2702,
-        "url": "https://opencode.ai/go",
-        "pricing_source": "OpenCode Go 官方文档",
-        "rank": 2
-      }
-    ],
-    "x-ai/grok-4.7": [
-      {
-        "id": "commandcode-goat-grok-4.7",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Grok 4.7",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 1.1282,
+        "cost": 1.2255,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -744,6 +744,58 @@
   },
   "plans": [
     {
+      "id": "opencode-go-muse-spark-1.3-contributor",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Muse Spark 1.3 Contributor",
+      "badge": "$10/月",
+      "cost": 0.0022,
+      "subscription_base_cost": 0.0022,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 32775424000,
+      "monthly_requests": 453200,
+      "vendor_slug": "muse-spark-1.3-contributor",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Muse Spark 1.3 Contributor 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Muse Spark 1.3 Contributor monthly requests",
+      "match": {
+        "vendor_slug": "muse-spark-1.3-contributor"
+      },
+      "rank": 1,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-muse-spark-1.2-contributor",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Muse Spark 1.2 Contributor",
+      "badge": "$10/月",
+      "cost": 0.0022,
+      "subscription_base_cost": 0.0022,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 32775424000,
+      "monthly_requests": 453200,
+      "vendor_slug": "muse-spark-1.2-contributor",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Muse Spark 1.2 Contributor 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Muse Spark 1.2 Contributor monthly requests",
+      "match": {
+        "vendor_slug": "muse-spark-1.2-contributor"
+      },
+      "rank": 2,
+      "target_models": []
+    },
+    {
       "id": "commandcode-goat-jev",
       "type": "subscription",
       "provider": "commandcode",
@@ -769,58 +821,6 @@
         "vendor_slug": "jev",
         "vendor_label": "Jev"
       },
-      "rank": 1,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-muse-spark-1.3-contributor",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Muse Spark 1.3 Contributor",
-      "badge": "$10/月",
-      "cost": 0.0044,
-      "subscription_base_cost": 0.0044,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 16387712000,
-      "monthly_requests": 226600,
-      "vendor_slug": "muse-spark-1.3-contributor",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Muse Spark 1.3 Contributor 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Muse Spark 1.3 Contributor monthly requests",
-      "match": {
-        "vendor_slug": "muse-spark-1.3-contributor"
-      },
-      "rank": 2,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-muse-spark-1.2-contributor",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Muse Spark 1.2 Contributor",
-      "badge": "$10/月",
-      "cost": 0.0044,
-      "subscription_base_cost": 0.0044,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 16387712000,
-      "monthly_requests": 226600,
-      "vendor_slug": "muse-spark-1.2-contributor",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Muse Spark 1.2 Contributor 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Muse Spark 1.2 Contributor monthly requests",
-      "match": {
-        "vendor_slug": "muse-spark-1.2-contributor"
-      },
       "rank": 3,
       "target_models": []
     },
@@ -831,13 +831,13 @@
       "provider_display": "OpenCode Go",
       "plan": "MiMo-V2.6-Flash",
       "badge": "$10/月",
-      "cost": 0.0066,
-      "subscription_base_cost": 0.0066,
+      "cost": 0.0033,
+      "subscription_base_cost": 0.0033,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 10922800000,
-      "monthly_requests": 150400,
+      "quota_tokens": 21845600000,
+      "monthly_requests": 300800,
       "vendor_slug": "mimo-v2.6-flash",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
@@ -848,7 +848,9 @@
         "vendor_slug": "mimo-v2.6-flash"
       },
       "rank": 4,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.6-flash"
+      ]
     },
     {
       "id": "opencode-go-mimo-v2.5",
@@ -857,13 +859,13 @@
       "provider_display": "OpenCode Go",
       "plan": "MiMo-V2.5",
       "badge": "$10/月",
-      "cost": 0.0066,
-      "subscription_base_cost": 0.0066,
+      "cost": 0.0033,
+      "subscription_base_cost": 0.0033,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 10922800000,
-      "monthly_requests": 150400,
+      "quota_tokens": 21845600000,
+      "monthly_requests": 300800,
       "vendor_slug": "mimo-v2.5",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
@@ -875,6 +877,88 @@
       },
       "rank": 5,
       "target_models": []
+    },
+    {
+      "id": "opencode-go-longcat-2.0",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "LongCat-2.0",
+      "badge": "$10/月",
+      "cost": 0.0035,
+      "subscription_base_cost": 0.0035,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 20596576000,
+      "monthly_requests": 228800,
+      "vendor_slug": "longcat-2.0",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 LongCat-2.0 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and LongCat-2.0 monthly requests",
+      "match": {
+        "vendor_slug": "longcat-2.0"
+      },
+      "rank": 6,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-deepseek-v4.1-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4.1 Flash",
+      "badge": "$10/月",
+      "cost": 0.0058,
+      "subscription_base_cost": 0.0039,
+      "cost_buffer": 1.5,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 18725200000,
+      "monthly_requests": 260000,
+      "vendor_slug": "deepseek-v4.1-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4.1 Flash 月度请求量估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4.1 Flash monthly requests, ×1.5 for peak/off-peak exposure",
+      "match": {
+        "vendor_slug": "deepseek-v4.1-flash"
+      },
+      "rank": 7,
+      "target_models": [
+        "deepseek/deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-deepseek-v4-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4 Flash",
+      "badge": "$10/月",
+      "cost": 0.0058,
+      "subscription_base_cost": 0.0039,
+      "cost_buffer": 1.5,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 18725200000,
+      "monthly_requests": 260000,
+      "vendor_slug": "deepseek-v4-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Flash 月度请求量估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash monthly requests, ×1.5 for peak/off-peak exposure",
+      "match": {
+        "vendor_slug": "deepseek-v4-flash"
+      },
+      "rank": 8,
+      "target_models": [
+        "deepseek/deepseek-v4-flash-0731"
+      ]
     },
     {
       "id": "commandcode-goat-deepseek-v4-flash",
@@ -902,7 +986,7 @@
         "vendor_slug": "deepseek-v4-flash",
         "vendor_label": "DeepSeek V4 Flash (latest)"
       },
-      "rank": 6,
+      "rank": 9,
       "target_models": [
         "deepseek/deepseek-v4-flash-0731"
       ]
@@ -933,7 +1017,7 @@
         "vendor_slug": "deepseek-v4.1-flash",
         "vendor_label": "DeepSeek V4.1 Flash"
       },
-      "rank": 7,
+      "rank": 10,
       "target_models": [
         "deepseek/deepseek-v4.1-flash"
       ]
@@ -964,7 +1048,7 @@
         "vendor_slug": "mimo-v2.5",
         "vendor_label": "MiMo V2.5"
       },
-      "rank": 8,
+      "rank": 11,
       "target_models": []
     },
     {
@@ -993,7 +1077,7 @@
         "vendor_slug": "muse-spark-1.3-contributor",
         "vendor_label": "Muse Spark 1.3 Contributor"
       },
-      "rank": 9,
+      "rank": 12,
       "target_models": []
     },
     {
@@ -1022,15 +1106,15 @@
         "vendor_slug": "muse-spark-1.2-contributor",
         "vendor_label": "Muse Spark 1.2 Contributor"
       },
-      "rank": 10,
+      "rank": 13,
       "target_models": []
     },
     {
-      "id": "opencode-go-deepseek-v4.1-flash",
+      "id": "opencode-go-deepseek-v4-flash-vision-exp",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "DeepSeek V4.1 Flash",
+      "plan": "DeepSeek V4 Flash Vision Exp",
       "badge": "$10/月",
       "cost": 0.0116,
       "subscription_base_cost": 0.0077,
@@ -1039,19 +1123,43 @@
       "monthly_usd": 10.0,
       "quota_tokens": 9362600000,
       "monthly_requests": 130000,
-      "vendor_slug": "deepseek-v4.1-flash",
+      "vendor_slug": "deepseek-v4-flash-vision-exp",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4.1 Flash 月度请求量估算，并 ×1.5 计入峰谷等因素",
-      "note_en": "Estimated from $10/mo subscription and DeepSeek V4.1 Flash monthly requests, ×1.5 for peak/off-peak exposure",
+      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Flash Vision Exp 月度请求量估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash Vision Exp monthly requests, ×1.5 for peak/off-peak exposure",
       "match": {
-        "vendor_slug": "deepseek-v4.1-flash"
+        "vendor_slug": "deepseek-v4-flash-vision-exp"
       },
-      "rank": 11,
-      "target_models": [
-        "deepseek/deepseek-v4.1-flash"
-      ]
+      "rank": 14,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-hy3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Hy3",
+      "badge": "$10/月",
+      "cost": 0.0116,
+      "subscription_base_cost": 0.0116,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 6245750000,
+      "monthly_requests": 86000,
+      "vendor_slug": "hy3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Hy3 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Hy3 monthly requests",
+      "match": {
+        "vendor_slug": "hy3"
+      },
+      "rank": 15,
+      "target_models": []
     },
     {
       "id": "commandcode-goat-longcat-2.0",
@@ -1079,33 +1187,117 @@
         "vendor_slug": "longcat-2.0",
         "vendor_label": "LongCat 2.0"
       },
-      "rank": 12,
+      "rank": 16,
       "target_models": []
     },
     {
-      "id": "opencode-go-longcat-2.0",
+      "id": "opencode-go-mimo-v2.6-pro",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "LongCat-2.0",
+      "plan": "MiMo-V2.6-Pro",
       "badge": "$10/月",
-      "cost": 0.0141,
-      "subscription_base_cost": 0.0141,
+      "cost": 0.0128,
+      "subscription_base_cost": 0.0128,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 5149144000,
-      "monthly_requests": 57200,
-      "vendor_slug": "longcat-2.0",
+      "quota_tokens": 5678594000,
+      "monthly_requests": 65200,
+      "vendor_slug": "mimo-v2.6-pro",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 LongCat-2.0 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and LongCat-2.0 monthly requests",
+      "note_zh": "按官方 $10/月 订阅价与 MiMo-V2.6-Pro 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and MiMo-V2.6-Pro monthly requests",
       "match": {
-        "vendor_slug": "longcat-2.0"
+        "vendor_slug": "mimo-v2.6-pro"
       },
-      "rank": 13,
+      "rank": 17,
+      "target_models": [
+        "xiaomi/mimo-v2.6-pro"
+      ]
+    },
+    {
+      "id": "opencode-go-mimo-v2.5-pro",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiMo-V2.5-Pro",
+      "badge": "$10/月",
+      "cost": 0.0128,
+      "subscription_base_cost": 0.0128,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 5678594000,
+      "monthly_requests": 65200,
+      "vendor_slug": "mimo-v2.5-pro",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 MiMo-V2.5-Pro 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and MiMo-V2.5-Pro monthly requests",
+      "match": {
+        "vendor_slug": "mimo-v2.5-pro"
+      },
+      "rank": 18,
+      "target_models": [
+        "xiaomi/mimo-v2.5-pro"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.3-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.3-Flash",
+      "badge": "$10/月",
+      "cost": 0.0136,
+      "subscription_base_cost": 0.0136,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 5324388000,
+      "monthly_requests": 94740,
+      "vendor_slug": "glm-5.3-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 GLM-5.3-Flash 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and GLM-5.3-Flash monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.3-flash"
+      },
+      "rank": 19,
+      "target_models": [
+        "z-ai/glm-5.3-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-qwen3.8-flash",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.8 Flash",
+      "badge": "$10/月",
+      "cost": 0.0152,
+      "subscription_base_cost": 0.0152,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 4762800000,
+      "monthly_requests": 81000,
+      "vendor_slug": "qwen3.8-flash",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Qwen3.8 Flash 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Qwen3.8 Flash monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.8-flash"
+      },
+      "rank": 20,
       "target_models": []
     },
     {
@@ -1134,8 +1326,92 @@
         "vendor_slug": "mimo-v2.6-flash",
         "vendor_label": "MiMo V2.6 Flash"
       },
-      "rank": 14,
+      "rank": 21,
+      "target_models": [
+        "xiaomi/mimo-v2.6-flash"
+      ]
+    },
+    {
+      "id": "opencode-go-gpt-6-luna",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GPT 6 Luna",
+      "badge": "$10/月",
+      "cost": 0.0167,
+      "subscription_base_cost": 0.0167,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 4329114400,
+      "monthly_requests": 84520,
+      "vendor_slug": "gpt-6-luna",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 GPT 6 Luna 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and GPT 6 Luna monthly requests",
+      "match": {
+        "vendor_slug": "gpt-6-luna"
+      },
+      "rank": 22,
+      "target_models": [
+        "openai/gpt-6-luna"
+      ]
+    },
+    {
+      "id": "opencode-go-minimax-m2.7",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "MiniMax M2.7",
+      "badge": "$10/月",
+      "cost": 0.0192,
+      "subscription_base_cost": 0.0192,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 3768900000,
+      "monthly_requests": 68000,
+      "vendor_slug": "minimax-m2.7",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 MiniMax M2.7 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and MiniMax M2.7 monthly requests",
+      "match": {
+        "vendor_slug": "minimax-m2.7"
+      },
+      "rank": 23,
       "target_models": []
+    },
+    {
+      "id": "opencode-go-qwen3.7-plus",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Qwen3.7 Plus",
+      "badge": "$10/月",
+      "cost": 0.0194,
+      "subscription_base_cost": 0.0194,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 3738312000,
+      "monthly_requests": 64800,
+      "vendor_slug": "qwen3.7-plus",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Qwen3.7 Plus 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Plus monthly requests",
+      "match": {
+        "vendor_slug": "qwen3.7-plus"
+      },
+      "rank": 24,
+      "target_models": [
+        "qwen/qwen3.7-plus"
+      ]
     },
     {
       "id": "gpt-plus-gpt-5.6-luna",
@@ -1161,37 +1437,37 @@
           "-pro"
         ]
       },
-      "rank": 15,
+      "rank": 25,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
     },
     {
-      "id": "opencode-go-deepseek-v4-flash",
+      "id": "opencode-go-minimax-m3",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "DeepSeek V4 Flash",
+      "plan": "MiniMax M3",
       "badge": "$10/月",
-      "cost": 0.0232,
-      "subscription_base_cost": 0.0155,
-      "cost_buffer": 1.5,
+      "cost": 0.0266,
+      "subscription_base_cost": 0.0266,
+      "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 4681300000,
-      "monthly_requests": 65000,
-      "vendor_slug": "deepseek-v4-flash",
+      "quota_tokens": 2721600000,
+      "monthly_requests": 48000,
+      "vendor_slug": "minimax-m3",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Flash 月度请求量估算，并 ×1.5 计入峰谷等因素",
-      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash monthly requests, ×1.5 for peak/off-peak exposure",
+      "note_zh": "按官方 $10/月 订阅价与 MiniMax M3 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and MiniMax M3 monthly requests",
       "match": {
-        "vendor_slug": "deepseek-v4-flash"
+        "vendor_slug": "minimax-m3"
       },
-      "rank": 16,
+      "rank": 26,
       "target_models": [
-        "deepseek/deepseek-v4-flash-0731"
+        "minimax/minimax-m3"
       ]
     },
     {
@@ -1220,7 +1496,7 @@
         "vendor_slug": "hy3",
         "vendor_label": "Tencent Hy3"
       },
-      "rank": 17,
+      "rank": 27,
       "target_models": []
     },
     {
@@ -1249,7 +1525,7 @@
         "vendor_slug": "mimo-v2.5-pro",
         "vendor_label": "MiMo V2.5 Pro"
       },
-      "rank": 18,
+      "rank": 28,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1280,7 +1556,7 @@
         "vendor_slug": "mimo-v2.6-pro",
         "vendor_label": "MiMo V2.6 Pro"
       },
-      "rank": 19,
+      "rank": 29,
       "target_models": [
         "xiaomi/mimo-v2.6-pro"
       ]
@@ -1311,7 +1587,7 @@
         "vendor_slug": "deepseek-v4-flash-vision",
         "vendor_label": "DeepSeek V4 Flash Vision (exp)"
       },
-      "rank": 20,
+      "rank": 30,
       "target_models": []
     },
     {
@@ -1334,7 +1610,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 21,
+      "rank": 31,
       "target_models": []
     },
     {
@@ -1357,8 +1633,36 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 22,
+      "rank": 32,
       "target_models": []
+    },
+    {
+      "id": "opencode-go-gpt-5.6-luna",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GPT 5.6 Luna",
+      "badge": "$10/月",
+      "cost": 0.0345,
+      "subscription_base_cost": 0.0345,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2100020000,
+      "monthly_requests": 41000,
+      "vendor_slug": "gpt-5.6-luna",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 GPT 5.6 Luna 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and GPT 5.6 Luna monthly requests",
+      "match": {
+        "vendor_slug": "gpt-5.6-luna"
+      },
+      "rank": 33,
+      "target_models": [
+        "openai/gpt-5.6-luna"
+      ]
     },
     {
       "id": "mimo-token-plan-standard-mimo-v2.5",
@@ -1380,7 +1684,62 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 23,
+      "rank": 34,
+      "target_models": []
+    },
+    {
+      "id": "opencode-go-hy4-preview",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Hy4 preview",
+      "badge": "$10/月",
+      "cost": 0.0369,
+      "subscription_base_cost": 0.0369,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1966685000,
+      "monthly_requests": 27080,
+      "vendor_slug": "hy4-preview",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Hy4 preview 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Hy4 preview monthly requests",
+      "match": {
+        "vendor_slug": "hy4-preview"
+      },
+      "rank": 35,
+      "target_models": []
+    },
+    {
+      "id": "commandcode-goat-deepseek-v4.1-flash-fast",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · DeepSeek V4.1 Flash Fast",
+      "badge": "$10",
+      "cost": 0.037,
+      "subscription_base_cost": 0.0247,
+      "cost_buffer": 1.5,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 2932500000,
+      "monthly_requests": 57500,
+      "tokens_per_request": 51000,
+      "vendor_slug": "deepseek-v4.1-flash-fast",
+      "vendor_label": "DeepSeek V4.1 Flash Fast",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、DeepSeek V4.1 Flash Fast 月请求量与典型 Token 模式估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "From GOAT $10/mo, DeepSeek V4.1 Flash Fast monthly requests, and typical token pattern, ×1.5 for peak/off-peak exposure",
+      "match": {
+        "vendor_slug": "deepseek-v4.1-flash-fast",
+        "vendor_label": "DeepSeek V4.1 Flash Fast"
+      },
+      "rank": 36,
       "target_models": []
     },
     {
@@ -1403,113 +1762,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 24,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-glm-5.3-flash",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "GLM-5.3-Flash",
-      "badge": "$10/月",
-      "cost": 0.0408,
-      "subscription_base_cost": 0.0408,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1774796000,
-      "monthly_requests": 31580,
-      "vendor_slug": "glm-5.3-flash",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GLM-5.3-Flash 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GLM-5.3-Flash monthly requests",
-      "match": {
-        "vendor_slug": "glm-5.3-flash"
-      },
-      "rank": 25,
-      "target_models": [
-        "z-ai/glm-5.3-flash"
-      ]
-    },
-    {
-      "id": "opencode-go-qwen3.8-flash",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Qwen3.8 Flash",
-      "badge": "$10/月",
-      "cost": 0.0457,
-      "subscription_base_cost": 0.0457,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1587600000,
-      "monthly_requests": 27000,
-      "vendor_slug": "qwen3.8-flash",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.8 Flash 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.8 Flash monthly requests",
-      "match": {
-        "vendor_slug": "qwen3.8-flash"
-      },
-      "rank": 26,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-hy3",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Hy3",
-      "badge": "$10/月",
-      "cost": 0.0464,
-      "subscription_base_cost": 0.0464,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1561437500,
-      "monthly_requests": 21500,
-      "vendor_slug": "hy3",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Hy3 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Hy3 monthly requests",
-      "match": {
-        "vendor_slug": "hy3"
-      },
-      "rank": 27,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-deepseek-v4-flash-vision-exp",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "DeepSeek V4 Flash Vision Exp",
-      "badge": "$10/月",
-      "cost": 0.0465,
-      "subscription_base_cost": 0.031,
-      "cost_buffer": 1.5,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 2340650000,
-      "monthly_requests": 32500,
-      "vendor_slug": "deepseek-v4-flash-vision-exp",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Flash Vision Exp 月度请求量估算，并 ×1.5 计入峰谷等因素",
-      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Flash Vision Exp monthly requests, ×1.5 for peak/off-peak exposure",
-      "match": {
-        "vendor_slug": "deepseek-v4-flash-vision-exp"
-      },
-      "rank": 28,
+      "rank": 37,
       "target_models": []
     },
     {
@@ -1538,65 +1791,9 @@
         "vendor_slug": "gpt-6-luna",
         "vendor_label": "GPT-6 Luna"
       },
-      "rank": 29,
+      "rank": 38,
       "target_models": [
         "openai/gpt-6-luna"
-      ]
-    },
-    {
-      "id": "opencode-go-mimo-v2.6-pro",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "MiMo-V2.6-Pro",
-      "badge": "$10/月",
-      "cost": 0.0511,
-      "subscription_base_cost": 0.0511,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1419648500,
-      "monthly_requests": 16300,
-      "vendor_slug": "mimo-v2.6-pro",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 MiMo-V2.6-Pro 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and MiMo-V2.6-Pro monthly requests",
-      "match": {
-        "vendor_slug": "mimo-v2.6-pro"
-      },
-      "rank": 30,
-      "target_models": [
-        "xiaomi/mimo-v2.6-pro"
-      ]
-    },
-    {
-      "id": "opencode-go-mimo-v2.5-pro",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "MiMo-V2.5-Pro",
-      "badge": "$10/月",
-      "cost": 0.0511,
-      "subscription_base_cost": 0.0511,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1419648500,
-      "monthly_requests": 16300,
-      "vendor_slug": "mimo-v2.5-pro",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 MiMo-V2.5-Pro 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and MiMo-V2.5-Pro monthly requests",
-      "match": {
-        "vendor_slug": "mimo-v2.5-pro"
-      },
-      "rank": 31,
-      "target_models": [
-        "xiaomi/mimo-v2.5-pro"
       ]
     },
     {
@@ -1625,37 +1822,37 @@
         "vendor_slug": "glm-5.3-flash",
         "vendor_label": "GLM-5.3 Flash"
       },
-      "rank": 32,
+      "rank": 39,
       "target_models": [
         "z-ai/glm-5.3-flash"
       ]
     },
     {
-      "id": "opencode-go-qwen3.7-plus",
+      "id": "opencode-go-kimi-k2.6",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "Qwen3.7 Plus",
+      "plan": "Kimi K2.6",
       "badge": "$10/月",
-      "cost": 0.0582,
-      "subscription_base_cost": 0.0582,
+      "cost": 0.0562,
+      "subscription_base_cost": 0.0562,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 1246104000,
-      "monthly_requests": 21600,
-      "vendor_slug": "qwen3.7-plus",
+      "quota_tokens": 1289610000,
+      "monthly_requests": 23000,
+      "vendor_slug": "kimi-k2.6",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.7 Plus 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Plus monthly requests",
+      "note_zh": "按官方 $10/月 订阅价与 Kimi K2.6 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Kimi K2.6 monthly requests",
       "match": {
-        "vendor_slug": "qwen3.7-plus"
+        "vendor_slug": "kimi-k2.6"
       },
-      "rank": 33,
+      "rank": 40,
       "target_models": [
-        "qwen/qwen3.7-plus"
+        "moonshotai/kimi-k2.6"
       ]
     },
     {
@@ -1678,7 +1875,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 34,
+      "rank": 41,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1709,7 +1906,7 @@
         "vendor_slug": "qwen-3.8-27b",
         "vendor_label": "Qwen 3.8 27B"
       },
-      "rank": 35,
+      "rank": 42,
       "target_models": [
         "qwen/qwen3.8-27b"
       ]
@@ -1740,8 +1937,36 @@
         "vendor_slug": "qwen-3.8-flash",
         "vendor_label": "Qwen 3.8 Flash"
       },
-      "rank": 36,
+      "rank": 43,
       "target_models": []
+    },
+    {
+      "id": "opencode-go-deepseek-v4-pro",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "DeepSeek V4 Pro",
+      "badge": "$10/月",
+      "cost": 0.063,
+      "subscription_base_cost": 0.042,
+      "cost_buffer": 1.5,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1727232000,
+      "monthly_requests": 20800,
+      "vendor_slug": "deepseek-v4-pro",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Pro 月度请求量估算，并 ×1.5 计入峰谷等因素",
+      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Pro monthly requests, ×1.5 for peak/off-peak exposure",
+      "match": {
+        "vendor_slug": "deepseek-v4-pro"
+      },
+      "rank": 44,
+      "target_models": [
+        "deepseek/deepseek-v4-pro-0813"
+      ]
     },
     {
       "id": "mimo-token-plan-pro-mimo-v2.5-pro",
@@ -1763,9 +1988,37 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 37,
+      "rank": 45,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
+      ]
+    },
+    {
+      "id": "opencode-go-kimi-k2.7-code",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Kimi K2.7 Code",
+      "badge": "$10/月",
+      "cost": 0.0639,
+      "subscription_base_cost": 0.0639,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1135417500,
+      "monthly_requests": 20250,
+      "vendor_slug": "kimi-k2.7-code",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Kimi K2.7 Code 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Kimi K2.7 Code monthly requests",
+      "match": {
+        "vendor_slug": "kimi-k2.7-code"
+      },
+      "rank": 46,
+      "target_models": [
+        "moonshotai/kimi-k2.7-code"
       ]
     },
     {
@@ -1788,7 +2041,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 38,
+      "rank": 47,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1818,7 +2071,7 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 39,
+      "rank": 48,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -1848,37 +2101,9 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 40,
+      "rank": 49,
       "target_models": [
         "minimax/minimax-m3"
-      ]
-    },
-    {
-      "id": "opencode-go-gpt-6-luna",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "GPT 6 Luna",
-      "badge": "$10/月",
-      "cost": 0.067,
-      "subscription_base_cost": 0.067,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1082278600,
-      "monthly_requests": 21130,
-      "vendor_slug": "gpt-6-luna",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GPT 6 Luna 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GPT 6 Luna monthly requests",
-      "match": {
-        "vendor_slug": "gpt-6-luna"
-      },
-      "rank": 41,
-      "target_models": [
-        "openai/gpt-6-luna"
       ]
     },
     {
@@ -1901,7 +2126,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5-pro"
       },
-      "rank": 42,
+      "rank": 50,
       "target_models": [
         "xiaomi/mimo-v2.5-pro"
       ]
@@ -1932,88 +2157,8 @@
         "vendor_slug": "qwen-3.8-omni-flash",
         "vendor_label": "Qwen 3.8 Omni Flash"
       },
-      "rank": 43,
+      "rank": 51,
       "target_models": []
-    },
-    {
-      "id": "opencode-go-minimax-m2.7",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "MiniMax M2.7",
-      "badge": "$10/月",
-      "cost": 0.0769,
-      "subscription_base_cost": 0.0769,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 942225000,
-      "monthly_requests": 17000,
-      "vendor_slug": "minimax-m2.7",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 MiniMax M2.7 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and MiniMax M2.7 monthly requests",
-      "match": {
-        "vendor_slug": "minimax-m2.7"
-      },
-      "rank": 44,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-qwen3.6-plus",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Qwen3.6 Plus",
-      "badge": "$10/月",
-      "cost": 0.0771,
-      "subscription_base_cost": 0.0771,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 940347000,
-      "monthly_requests": 16300,
-      "vendor_slug": "qwen3.6-plus",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.6 Plus 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.6 Plus monthly requests",
-      "match": {
-        "vendor_slug": "qwen3.6-plus"
-      },
-      "rank": 45,
-      "target_models": []
-    },
-    {
-      "id": "opencode-go-minimax-m3",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "MiniMax M3",
-      "badge": "$10/月",
-      "cost": 0.0799,
-      "subscription_base_cost": 0.0799,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 907200000,
-      "monthly_requests": 16000,
-      "vendor_slug": "minimax-m3",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 MiniMax M3 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and MiniMax M3 monthly requests",
-      "match": {
-        "vendor_slug": "minimax-m3"
-      },
-      "rank": 46,
-      "target_models": [
-        "minimax/minimax-m3"
-      ]
     },
     {
       "id": "commandcode-goat-step-3.5-flash",
@@ -2041,7 +2186,7 @@
         "vendor_slug": "step-3.5-flash",
         "vendor_label": "Step 3.5 Flash"
       },
-      "rank": 47,
+      "rank": 52,
       "target_models": []
     },
     {
@@ -2069,7 +2214,7 @@
           "^minimax-m2\\.7"
         ]
       },
-      "rank": 48,
+      "rank": 53,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -2100,7 +2245,7 @@
         "vendor_slug": "minimax-m3",
         "vendor_label": "MiniMax M3"
       },
-      "rank": 49,
+      "rank": 54,
       "target_models": [
         "minimax/minimax-m3"
       ]
@@ -2131,7 +2276,7 @@
         "vendor_slug": "gpt-5.6-luna",
         "vendor_label": "GPT-5.6 Luna"
       },
-      "rank": 50,
+      "rank": 55,
       "target_models": [
         "openai/gpt-5.6-luna"
       ]
@@ -2149,9 +2294,37 @@
       "match": {
         "model_family": "deepseek/deepseek-v4-flash"
       },
-      "rank": 51,
+      "rank": 56,
       "target_models": [
         "deepseek/deepseek-v4-flash-0731"
+      ]
+    },
+    {
+      "id": "opencode-go-glm-5.2",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "GLM-5.2",
+      "badge": "$10/月",
+      "cost": 0.1063,
+      "subscription_base_cost": 0.1063,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 681765000,
+      "monthly_requests": 12900,
+      "vendor_slug": "glm-5.2",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 GLM-5.2 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and GLM-5.2 monthly requests",
+      "match": {
+        "vendor_slug": "glm-5.2"
+      },
+      "rank": 57,
+      "target_models": [
+        "z-ai/glm-5.2"
       ]
     },
     {
@@ -2180,64 +2353,38 @@
         "vendor_slug": "deepseek-v4-pro",
         "vendor_label": "DeepSeek V4 Pro (latest)"
       },
-      "rank": 52,
+      "rank": 58,
       "target_models": [
         "deepseek/deepseek-v4-pro-0813"
       ]
     },
     {
-      "id": "opencode-go-gpt-5.6-luna",
+      "id": "opencode-go-glm-5.3",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "GPT 5.6 Luna",
+      "plan": "GLM-5.3",
       "badge": "$10/月",
-      "cost": 0.1381,
-      "subscription_base_cost": 0.1381,
+      "cost": 0.1588,
+      "subscription_base_cost": 0.1588,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 525005000,
-      "monthly_requests": 10250,
-      "vendor_slug": "gpt-5.6-luna",
+      "quota_tokens": 456624000,
+      "monthly_requests": 8640,
+      "vendor_slug": "glm-5.3",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GPT 5.6 Luna 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GPT 5.6 Luna monthly requests",
+      "note_zh": "按官方 $10/月 订阅价与 GLM-5.3 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and GLM-5.3 monthly requests",
       "match": {
-        "vendor_slug": "gpt-5.6-luna"
+        "vendor_slug": "glm-5.3"
       },
-      "rank": 53,
+      "rank": 59,
       "target_models": [
-        "openai/gpt-5.6-luna"
+        "z-ai/glm-5.3"
       ]
-    },
-    {
-      "id": "opencode-go-hy4-preview",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Hy4 preview",
-      "badge": "$10/月",
-      "cost": 0.1475,
-      "subscription_base_cost": 0.1475,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 491671250,
-      "monthly_requests": 6770,
-      "vendor_slug": "hy4-preview",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Hy4 preview 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Hy4 preview monthly requests",
-      "match": {
-        "vendor_slug": "hy4-preview"
-      },
-      "rank": 54,
-      "target_models": []
     },
     {
       "id": "commandcode-goat-tencent-hy4-preview",
@@ -2265,7 +2412,7 @@
         "vendor_slug": "hy4-preview",
         "vendor_label": "Tencent Hy4 Preview"
       },
-      "rank": 55,
+      "rank": 60,
       "target_models": []
     },
     {
@@ -2294,7 +2441,7 @@
         "vendor_slug": "step-3.7-flash",
         "vendor_label": "Step 3.7 Flash"
       },
-      "rank": 56,
+      "rank": 61,
       "target_models": []
     },
     {
@@ -2323,95 +2470,10 @@
         "vendor_slug": "qwen-3.7-plus",
         "vendor_label": "Qwen 3.7 Plus"
       },
-      "rank": 57,
+      "rank": 62,
       "target_models": [
         "qwen/qwen3.7-plus"
       ]
-    },
-    {
-      "id": "opencode-go-kimi-k2.7-code",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Kimi K2.7 Code",
-      "badge": "$10/月",
-      "cost": 0.1916,
-      "subscription_base_cost": 0.1916,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 378472500,
-      "monthly_requests": 6750,
-      "vendor_slug": "kimi-k2.7-code",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Kimi K2.7 Code 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Kimi K2.7 Code monthly requests",
-      "match": {
-        "vendor_slug": "kimi-k2.7-code"
-      },
-      "rank": 58,
-      "target_models": [
-        "moonshotai/kimi-k2.7-code"
-      ]
-    },
-    {
-      "id": "opencode-go-kimi-k2.6",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Kimi K2.6",
-      "badge": "$10/月",
-      "cost": 0.2249,
-      "subscription_base_cost": 0.2249,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 322402500,
-      "monthly_requests": 5750,
-      "vendor_slug": "kimi-k2.6",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Kimi K2.6 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Kimi K2.6 monthly requests",
-      "match": {
-        "vendor_slug": "kimi-k2.6"
-      },
-      "rank": 59,
-      "target_models": [
-        "moonshotai/kimi-k2.6"
-      ]
-    },
-    {
-      "id": "commandcode-goat-qwen-3.6-plus",
-      "type": "subscription",
-      "provider": "commandcode",
-      "provider_display": "Command Code",
-      "plan": "GOAT · Qwen 3.6 Plus",
-      "badge": "$10",
-      "cost": 0.2285,
-      "subscription_base_cost": 0.2285,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 317295000,
-      "monthly_requests": 5500,
-      "tokens_per_request": 57690,
-      "vendor_slug": "qwen-3.6-plus",
-      "vendor_label": "Qwen 3.6 Plus",
-      "url": "https://commandcode.ai/docs/plans/goat",
-      "pricing_source": "Command Code GOAT 官方文档",
-      "source_url": "https://commandcode.ai/docs/plans/goat",
-      "note_zh": "按 GOAT $10/月、Qwen 3.6 Plus 月请求量与典型 Token 模式估算",
-      "note_en": "From GOAT $10/mo, Qwen 3.6 Plus monthly requests, and typical token pattern",
-      "match": {
-        "vendor_slug": "qwen-3.6-plus",
-        "vendor_label": "Qwen 3.6 Plus"
-      },
-      "rank": 60,
-      "target_models": []
     },
     {
       "id": "commandcode-goat-kimi-k2.7-code",
@@ -2439,38 +2501,39 @@
         "vendor_slug": "kimi-k2.7-code",
         "vendor_label": "Kimi K2.7 Code"
       },
-      "rank": 61,
+      "rank": 63,
       "target_models": [
         "moonshotai/kimi-k2.7-code"
       ]
     },
     {
-      "id": "opencode-go-deepseek-v4-pro",
+      "id": "commandcode-goat-qwen-3.6-plus",
       "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "DeepSeek V4 Pro",
-      "badge": "$10/月",
-      "cost": 0.2519,
-      "subscription_base_cost": 0.1679,
-      "cost_buffer": 1.5,
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · Qwen 3.6 Plus",
+      "badge": "$10",
+      "cost": 0.2585,
+      "subscription_base_cost": 0.2585,
+      "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 431808000,
-      "monthly_requests": 5200,
-      "vendor_slug": "deepseek-v4-pro",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 DeepSeek V4 Pro 月度请求量估算，并 ×1.5 计入峰谷等因素",
-      "note_en": "Estimated from $10/mo subscription and DeepSeek V4 Pro monthly requests, ×1.5 for peak/off-peak exposure",
+      "quota_tokens": 280500000,
+      "monthly_requests": 5500,
+      "tokens_per_request": 51000,
+      "vendor_slug": "qwen-3.6-plus",
+      "vendor_label": "Qwen 3.6 Plus",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、Qwen 3.6 Plus 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, Qwen 3.6 Plus monthly requests, and typical token pattern",
       "match": {
-        "vendor_slug": "deepseek-v4-pro"
+        "vendor_slug": "qwen-3.6-plus",
+        "vendor_label": "Qwen 3.6 Plus"
       },
-      "rank": 62,
-      "target_models": [
-        "deepseek/deepseek-v4-pro-0813"
-      ]
+      "rank": 64,
+      "target_models": []
     },
     {
       "id": "commandcode-goat-step-5-preview",
@@ -2498,7 +2561,7 @@
         "vendor_slug": "step-5-preview",
         "vendor_label": "Step 5 Preview"
       },
-      "rank": 63,
+      "rank": 65,
       "target_models": []
     },
     {
@@ -2527,7 +2590,7 @@
         "vendor_slug": "glm-5.2",
         "vendor_label": "GLM-5.2"
       },
-      "rank": 64,
+      "rank": 66,
       "target_models": [
         "z-ai/glm-5.2"
       ]
@@ -2558,7 +2621,7 @@
         "vendor_slug": "glm-5.3-flashx",
         "vendor_label": "GLM-5.3 FlashX"
       },
-      "rank": 65,
+      "rank": 67,
       "target_models": []
     },
     {
@@ -2574,65 +2637,37 @@
       "match": {
         "model_family": "deepseek/deepseek-v4-pro"
       },
-      "rank": 66,
+      "rank": 68,
       "target_models": [
         "deepseek/deepseek-v4-pro-0813"
       ]
     },
     {
-      "id": "opencode-go-glm-5.2",
+      "id": "opencode-go-qwen3.8-max",
       "type": "subscription",
       "provider": "opencode",
       "provider_display": "OpenCode Go",
-      "plan": "GLM-5.2",
+      "plan": "Qwen3.8 Max",
       "badge": "$10/月",
-      "cost": 0.319,
-      "subscription_base_cost": 0.319,
+      "cost": 0.3359,
+      "subscription_base_cost": 0.3359,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 227255000,
-      "monthly_requests": 4300,
-      "vendor_slug": "glm-5.2",
+      "quota_tokens": 215848800,
+      "monthly_requests": 3240,
+      "vendor_slug": "qwen3.8-max",
       "url": "https://opencode.ai/go",
       "pricing_source": "OpenCode Go 官方文档",
       "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GLM-5.2 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GLM-5.2 monthly requests",
+      "note_zh": "按官方 $10/月 订阅价与 Qwen3.8 Max 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Qwen3.8 Max monthly requests",
       "match": {
-        "vendor_slug": "glm-5.2"
+        "vendor_slug": "qwen3.8-max"
       },
-      "rank": 67,
+      "rank": 69,
       "target_models": [
-        "z-ai/glm-5.2"
-      ]
-    },
-    {
-      "id": "opencode-go-glm-5.1",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "GLM-5.1",
-      "badge": "$10/月",
-      "cost": 0.319,
-      "subscription_base_cost": 0.319,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 227255000,
-      "monthly_requests": 4300,
-      "vendor_slug": "glm-5.1",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GLM-5.1 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GLM-5.1 monthly requests",
-      "match": {
-        "vendor_slug": "glm-5.1"
-      },
-      "rank": 68,
-      "target_models": [
-        "z-ai/glm-5.1"
+        "qwen/qwen3.8-max-0902"
       ]
     },
     {
@@ -2661,7 +2696,7 @@
         "vendor_slug": "gemini-3.8-flash",
         "vendor_label": "Gemini 3.8 Flash"
       },
-      "rank": 69,
+      "rank": 70,
       "target_models": [
         "google/gemini-3.8-flash"
       ]
@@ -2692,7 +2727,7 @@
         "vendor_slug": "gemini-3.7-flash",
         "vendor_label": "Gemini 3.7 Flash"
       },
-      "rank": 70,
+      "rank": 71,
       "target_models": [
         "google/gemini-3.7-flash"
       ]
@@ -2712,7 +2747,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.1914,
+      "api_reference_blended_cny_per_m": 3.3401,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2721,7 +2756,7 @@
           "-pro"
         ]
       },
-      "rank": 71,
+      "rank": 72,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2752,7 +2787,7 @@
         "vendor_slug": "inkling-small",
         "vendor_label": "Inkling Small"
       },
-      "rank": 72,
+      "rank": 73,
       "target_models": []
     },
     {
@@ -2781,7 +2816,7 @@
         "vendor_slug": "deepseek-v4-flash-fast",
         "vendor_label": "DeepSeek V4 Flash Fast"
       },
-      "rank": 73,
+      "rank": 74,
       "target_models": []
     },
     {
@@ -2810,9 +2845,37 @@
         "vendor_slug": "muse-spark-1.2",
         "vendor_label": "Muse Spark 1.2"
       },
-      "rank": 74,
+      "rank": 75,
       "target_models": [
         "meta/muse-spark-1.2"
+      ]
+    },
+    {
+      "id": "opencode-go-kimi-k3",
+      "type": "subscription",
+      "provider": "opencode",
+      "provider_display": "OpenCode Go",
+      "plan": "Kimi K3",
+      "badge": "$10/月",
+      "cost": 0.4751,
+      "subscription_base_cost": 0.4751,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 152586000,
+      "monthly_requests": 1960,
+      "vendor_slug": "kimi-k3",
+      "url": "https://opencode.ai/go",
+      "pricing_source": "OpenCode Go 官方文档",
+      "source_url": "https://opencode.ai/docs/go.md",
+      "note_zh": "按官方 $10/月 订阅价与 Kimi K3 月度请求量估算",
+      "note_en": "Estimated from $10/mo subscription and Kimi K3 monthly requests",
+      "match": {
+        "vendor_slug": "kimi-k3"
+      },
+      "rank": 76,
+      "target_models": [
+        "moonshotai/kimi-k3"
       ]
     },
     {
@@ -2841,7 +2904,7 @@
         "vendor_slug": "nemotron-3-ultra",
         "vendor_label": "Nemotron 3 Ultra"
       },
-      "rank": 75,
+      "rank": 77,
       "target_models": []
     },
     {
@@ -2870,7 +2933,7 @@
         "vendor_slug": "muse-spark-1.3",
         "vendor_label": "Muse Spark 1.3"
       },
-      "rank": 76,
+      "rank": 78,
       "target_models": []
     },
     {
@@ -2899,7 +2962,7 @@
         "vendor_slug": "gpt-5.6-sol",
         "vendor_label": "GPT-5.6 Sol"
       },
-      "rank": 77,
+      "rank": 79,
       "target_models": [
         "openai/gpt-5.6-sol"
       ]
@@ -2930,7 +2993,7 @@
         "vendor_slug": "inkling",
         "vendor_label": "Inkling"
       },
-      "rank": 78,
+      "rank": 80,
       "target_models": [
         "thinkingmachines/inkling"
       ]
@@ -2961,40 +3024,9 @@
         "vendor_slug": "qwen-3.8-max",
         "vendor_label": "Qwen 3.8 Max"
       },
-      "rank": 79,
+      "rank": 81,
       "target_models": [
         "qwen/qwen3.8-max-0902"
-      ]
-    },
-    {
-      "id": "commandcode-goat-qwen-3.7-max",
-      "type": "subscription",
-      "provider": "commandcode",
-      "provider_display": "Command Code",
-      "plan": "GOAT · Qwen 3.7 Max",
-      "badge": "$10",
-      "cost": 0.9382,
-      "subscription_base_cost": 0.9382,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 77279200,
-      "monthly_requests": 1160,
-      "tokens_per_request": 66620,
-      "vendor_slug": "qwen-3.7-max",
-      "vendor_label": "Qwen 3.7 Max",
-      "url": "https://commandcode.ai/docs/plans/goat",
-      "pricing_source": "Command Code GOAT 官方文档",
-      "source_url": "https://commandcode.ai/docs/plans/goat",
-      "note_zh": "按 GOAT $10/月、Qwen 3.7 Max 月请求量与典型 Token 模式估算",
-      "note_en": "From GOAT $10/mo, Qwen 3.7 Max monthly requests, and typical token pattern",
-      "match": {
-        "vendor_slug": "qwen-3.7-max",
-        "vendor_label": "Qwen 3.7 Max"
-      },
-      "rank": 80,
-      "target_models": [
-        "qwen/qwen3.7-max"
       ]
     },
     {
@@ -3023,7 +3055,7 @@
         "vendor_slug": "kimi-k3",
         "vendor_label": "Kimi K3"
       },
-      "rank": 81,
+      "rank": 82,
       "target_models": [
         "moonshotai/kimi-k3"
       ]
@@ -3054,7 +3086,7 @@
         "vendor_slug": "mimo-v2.6-pro-ultraspeed",
         "vendor_label": "MiMo V2.6 Pro UltraSpeed"
       },
-      "rank": 82,
+      "rank": 83,
       "target_models": []
     },
     {
@@ -3083,7 +3115,7 @@
         "vendor_slug": "glm-5.3",
         "vendor_label": "GLM-5.3"
       },
-      "rank": 83,
+      "rank": 84,
       "target_models": [
         "z-ai/glm-5.3"
       ]
@@ -3114,7 +3146,7 @@
         "vendor_slug": "qwen-3.8-max-0902",
         "vendor_label": "Qwen 3.8 Max 0902"
       },
-      "rank": 84,
+      "rank": 85,
       "target_models": [
         "qwen/qwen3.8-max-0902"
       ]
@@ -3126,13 +3158,13 @@
       "provider_display": "Command Code",
       "plan": "GOAT · Grok 4.7",
       "badge": "$10",
-      "cost": 1.1282,
-      "subscription_base_cost": 1.1282,
+      "cost": 1.1846,
+      "subscription_base_cost": 1.1846,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 64260000,
-      "monthly_requests": 1260,
+      "quota_tokens": 61200000,
+      "monthly_requests": 1200,
       "tokens_per_request": 51000,
       "vendor_slug": "grok-4.7",
       "vendor_label": "Grok 4.7",
@@ -3145,93 +3177,40 @@
         "vendor_slug": "grok-4.7",
         "vendor_label": "Grok 4.7"
       },
-      "rank": 85,
+      "rank": 86,
       "target_models": [
         "x-ai/grok-4.7"
       ]
     },
     {
-      "id": "opencode-go-glm-5.3",
+      "id": "commandcode-goat-qwen-3.7-max",
       "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "GLM-5.3",
-      "badge": "$10/月",
-      "cost": 1.2702,
-      "subscription_base_cost": 1.2702,
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · Qwen 3.7 Max",
+      "badge": "$10",
+      "cost": 1.2255,
+      "subscription_base_cost": 1.2255,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 57078000,
-      "monthly_requests": 1080,
-      "vendor_slug": "glm-5.3",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 GLM-5.3 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and GLM-5.3 monthly requests",
+      "quota_tokens": 59160000,
+      "monthly_requests": 1160,
+      "tokens_per_request": 51000,
+      "vendor_slug": "qwen-3.7-max",
+      "vendor_label": "Qwen 3.7 Max",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、Qwen 3.7 Max 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, Qwen 3.7 Max monthly requests, and typical token pattern",
       "match": {
-        "vendor_slug": "glm-5.3"
-      },
-      "rank": 86,
-      "target_models": [
-        "z-ai/glm-5.3"
-      ]
-    },
-    {
-      "id": "opencode-go-qwen3.7-max",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Qwen3.7 Max",
-      "badge": "$10/月",
-      "cost": 1.2955,
-      "subscription_base_cost": 1.2955,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 55960800,
-      "monthly_requests": 840,
-      "vendor_slug": "qwen3.7-max",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.7 Max 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.7 Max monthly requests",
-      "match": {
-        "vendor_slug": "qwen3.7-max"
+        "vendor_slug": "qwen-3.7-max",
+        "vendor_label": "Qwen 3.7 Max"
       },
       "rank": 87,
       "target_models": [
         "qwen/qwen3.7-max"
-      ]
-    },
-    {
-      "id": "opencode-go-qwen3.8-max",
-      "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Qwen3.8 Max",
-      "badge": "$10/月",
-      "cost": 1.3435,
-      "subscription_base_cost": 1.3435,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 53962200,
-      "monthly_requests": 810,
-      "vendor_slug": "qwen3.8-max",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Qwen3.8 Max 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Qwen3.8 Max monthly requests",
-      "match": {
-        "vendor_slug": "qwen3.8-max"
-      },
-      "rank": 88,
-      "target_models": [
-        "qwen/qwen3.8-max-0902"
       ]
     },
     {
@@ -3260,36 +3239,37 @@
         "vendor_slug": "kimi-k2.7-code-highspeed",
         "vendor_label": "Kimi K2.7 Code HighSpeed"
       },
-      "rank": 89,
+      "rank": 88,
       "target_models": []
     },
     {
-      "id": "opencode-go-kimi-k3",
+      "id": "commandcode-goat-claude-sonnet-5.5",
       "type": "subscription",
-      "provider": "opencode",
-      "provider_display": "OpenCode Go",
-      "plan": "Kimi K3",
-      "badge": "$10/月",
-      "cost": 1.9006,
-      "subscription_base_cost": 1.9006,
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · Claude Sonnet 5.5",
+      "badge": "$10",
+      "cost": 1.9056,
+      "subscription_base_cost": 1.9056,
       "cost_buffer": null,
       "monthly_cny": 72.5,
       "monthly_usd": 10.0,
-      "quota_tokens": 38146500,
-      "monthly_requests": 490,
-      "vendor_slug": "kimi-k3",
-      "url": "https://opencode.ai/go",
-      "pricing_source": "OpenCode Go 官方文档",
-      "source_url": "https://opencode.ai/docs/go.md",
-      "note_zh": "按官方 $10/月 订阅价与 Kimi K3 月度请求量估算",
-      "note_en": "Estimated from $10/mo subscription and Kimi K3 monthly requests",
+      "quota_tokens": 38046000,
+      "monthly_requests": 746,
+      "tokens_per_request": 51000,
+      "vendor_slug": "claude-sonnet-5.5",
+      "vendor_label": "Claude Sonnet 5.5",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、Claude Sonnet 5.5 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, Claude Sonnet 5.5 monthly requests, and typical token pattern",
       "match": {
-        "vendor_slug": "kimi-k3"
+        "vendor_slug": "claude-sonnet-5.5",
+        "vendor_label": "Claude Sonnet 5.5"
       },
-      "rank": 90,
-      "target_models": [
-        "moonshotai/kimi-k3"
-      ]
+      "rank": 89,
+      "target_models": []
     },
     {
       "id": "commandcode-goat-grok-4.5",
@@ -3317,7 +3297,7 @@
         "vendor_slug": "grok-4.5",
         "vendor_label": "Grok 4.5"
       },
-      "rank": 91,
+      "rank": 90,
       "target_models": [
         "x-ai/grok-4.5"
       ]
@@ -3348,7 +3328,7 @@
         "vendor_slug": "grok-4.6",
         "vendor_label": "Grok 4.6"
       },
-      "rank": 92,
+      "rank": 91,
       "target_models": [
         "x-ai/grok-4.6"
       ]
@@ -3379,7 +3359,7 @@
         "vendor_slug": "glm-5.2-fast",
         "vendor_label": "GLM-5.2 Fast"
       },
-      "rank": 93,
+      "rank": 92,
       "target_models": []
     }
   ]
