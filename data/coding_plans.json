@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-28T22:28:12.084435Z",
+  "updated_at": "2026-09-29T21:19:16.572231Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -685,20 +685,6 @@
         "rank": 1
       }
     ],
-    "x-ai/grok-4.7": [
-      {
-        "id": "commandcode-goat-grok-4.7",
-        "provider": "commandcode",
-        "provider_display": "Command Code",
-        "plan": "GOAT · Grok 4.7",
-        "type": "subscription",
-        "badge": "$10",
-        "cost": 1.1846,
-        "url": "https://commandcode.ai/docs/plans/goat",
-        "pricing_source": "Command Code GOAT 官方文档",
-        "rank": 1
-      }
-    ],
     "qwen/qwen3.7-max": [
       {
         "id": "commandcode-goat-qwen-3.7-max",
@@ -708,6 +694,20 @@
         "type": "subscription",
         "badge": "$10",
         "cost": 1.2255,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "anthropic/claude-sonnet-5.5": [
+      {
+        "id": "commandcode-goat-claude-sonnet-5.5",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Claude Sonnet 5.5",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.9056,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -733,6 +733,20 @@
         "provider": "commandcode",
         "provider_display": "Command Code",
         "plan": "GOAT · Grok 4.6",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 1.9771,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "x-ai/grok-4.7": [
+      {
+        "id": "commandcode-goat-grok-4.7",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Grok 4.7",
         "type": "subscription",
         "badge": "$10",
         "cost": 1.9771,
@@ -2747,7 +2761,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.3401,
+      "api_reference_blended_cny_per_m": 3.733,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -3152,37 +3166,6 @@
       ]
     },
     {
-      "id": "commandcode-goat-grok-4.7",
-      "type": "subscription",
-      "provider": "commandcode",
-      "provider_display": "Command Code",
-      "plan": "GOAT · Grok 4.7",
-      "badge": "$10",
-      "cost": 1.1846,
-      "subscription_base_cost": 1.1846,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 61200000,
-      "monthly_requests": 1200,
-      "tokens_per_request": 51000,
-      "vendor_slug": "grok-4.7",
-      "vendor_label": "Grok 4.7",
-      "url": "https://commandcode.ai/docs/plans/goat",
-      "pricing_source": "Command Code GOAT 官方文档",
-      "source_url": "https://commandcode.ai/docs/plans/goat",
-      "note_zh": "按 GOAT $10/月、Grok 4.7 月请求量与典型 Token 模式估算",
-      "note_en": "From GOAT $10/mo, Grok 4.7 monthly requests, and typical token pattern",
-      "match": {
-        "vendor_slug": "grok-4.7",
-        "vendor_label": "Grok 4.7"
-      },
-      "rank": 86,
-      "target_models": [
-        "x-ai/grok-4.7"
-      ]
-    },
-    {
       "id": "commandcode-goat-qwen-3.7-max",
       "type": "subscription",
       "provider": "commandcode",
@@ -3208,7 +3191,7 @@
         "vendor_slug": "qwen-3.7-max",
         "vendor_label": "Qwen 3.7 Max"
       },
-      "rank": 87,
+      "rank": 86,
       "target_models": [
         "qwen/qwen3.7-max"
       ]
@@ -3239,7 +3222,7 @@
         "vendor_slug": "kimi-k2.7-code-highspeed",
         "vendor_label": "Kimi K2.7 Code HighSpeed"
       },
-      "rank": 88,
+      "rank": 87,
       "target_models": []
     },
     {
@@ -3268,8 +3251,10 @@
         "vendor_slug": "claude-sonnet-5.5",
         "vendor_label": "Claude Sonnet 5.5"
       },
-      "rank": 89,
-      "target_models": []
+      "rank": 88,
+      "target_models": [
+        "anthropic/claude-sonnet-5.5"
+      ]
     },
     {
       "id": "commandcode-goat-grok-4.5",
@@ -3297,7 +3282,7 @@
         "vendor_slug": "grok-4.5",
         "vendor_label": "Grok 4.5"
       },
-      "rank": 90,
+      "rank": 89,
       "target_models": [
         "x-ai/grok-4.5"
       ]
@@ -3328,9 +3313,40 @@
         "vendor_slug": "grok-4.6",
         "vendor_label": "Grok 4.6"
       },
-      "rank": 91,
+      "rank": 90,
       "target_models": [
         "x-ai/grok-4.6"
+      ]
+    },
+    {
+      "id": "commandcode-goat-grok-4.7",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · Grok 4.7",
+      "badge": "$10",
+      "cost": 1.9771,
+      "subscription_base_cost": 1.9771,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 36669000,
+      "monthly_requests": 719,
+      "tokens_per_request": 51000,
+      "vendor_slug": "grok-4.7",
+      "vendor_label": "Grok 4.7",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、Grok 4.7 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, Grok 4.7 monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "grok-4.7",
+        "vendor_label": "Grok 4.7"
+      },
+      "rank": 91,
+      "target_models": [
+        "x-ai/grok-4.7"
       ]
     },
     {
