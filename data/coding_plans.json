@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-30T21:20:35.206076Z",
+  "updated_at": "2026-10-01T21:42:40.583830Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -237,7 +237,7 @@
         "plan": "GOAT · GLM-5.3 Flash",
         "type": "subscription",
         "badge": "$10",
-        "cost": 0.0547,
+        "cost": 0.0364,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 2
@@ -1716,6 +1716,37 @@
       "target_models": []
     },
     {
+      "id": "commandcode-goat-glm-5.3-flash",
+      "type": "subscription",
+      "provider": "commandcode",
+      "provider_display": "Command Code",
+      "plan": "GOAT · GLM-5.3 Flash",
+      "badge": "$10",
+      "cost": 0.0364,
+      "subscription_base_cost": 0.0364,
+      "cost_buffer": null,
+      "monthly_cny": 72.5,
+      "monthly_usd": 10.0,
+      "quota_tokens": 1989480000,
+      "monthly_requests": 35400,
+      "tokens_per_request": 56200,
+      "vendor_slug": "glm-5.3-flash",
+      "vendor_label": "GLM-5.3 Flash",
+      "url": "https://commandcode.ai/docs/plans/goat",
+      "pricing_source": "Command Code GOAT 官方文档",
+      "source_url": "https://commandcode.ai/docs/plans/goat",
+      "note_zh": "按 GOAT $10/月、GLM-5.3 Flash 月请求量与典型 Token 模式估算",
+      "note_en": "From GOAT $10/mo, GLM-5.3 Flash monthly requests, and typical token pattern",
+      "match": {
+        "vendor_slug": "glm-5.3-flash",
+        "vendor_label": "GLM-5.3 Flash"
+      },
+      "rank": 35,
+      "target_models": [
+        "z-ai/glm-5.3-flash"
+      ]
+    },
+    {
       "id": "opencode-go-hy4-preview",
       "type": "subscription",
       "provider": "opencode",
@@ -1738,7 +1769,7 @@
       "match": {
         "vendor_slug": "hy4-preview"
       },
-      "rank": 35,
+      "rank": 36,
       "target_models": []
     },
     {
@@ -1767,7 +1798,7 @@
         "vendor_slug": "deepseek-v4.1-flash-fast",
         "vendor_label": "DeepSeek V4.1 Flash Fast"
       },
-      "rank": 36,
+      "rank": 37,
       "target_models": []
     },
     {
@@ -1790,7 +1821,7 @@
       "match": {
         "model_family": "xiaomi/mimo-v2.5"
       },
-      "rank": 37,
+      "rank": 38,
       "target_models": []
     },
     {
@@ -1819,40 +1850,9 @@
         "vendor_slug": "gpt-6-luna",
         "vendor_label": "GPT-6 Luna"
       },
-      "rank": 38,
-      "target_models": [
-        "openai/gpt-6-luna"
-      ]
-    },
-    {
-      "id": "commandcode-goat-glm-5.3-flash",
-      "type": "subscription",
-      "provider": "commandcode",
-      "provider_display": "Command Code",
-      "plan": "GOAT · GLM-5.3 Flash",
-      "badge": "$10",
-      "cost": 0.0547,
-      "subscription_base_cost": 0.0547,
-      "cost_buffer": null,
-      "monthly_cny": 72.5,
-      "monthly_usd": 10.0,
-      "quota_tokens": 1326320000,
-      "monthly_requests": 23600,
-      "tokens_per_request": 56200,
-      "vendor_slug": "glm-5.3-flash",
-      "vendor_label": "GLM-5.3 Flash",
-      "url": "https://commandcode.ai/docs/plans/goat",
-      "pricing_source": "Command Code GOAT 官方文档",
-      "source_url": "https://commandcode.ai/docs/plans/goat",
-      "note_zh": "按 GOAT $10/月、GLM-5.3 Flash 月请求量与典型 Token 模式估算",
-      "note_en": "From GOAT $10/mo, GLM-5.3 Flash monthly requests, and typical token pattern",
-      "match": {
-        "vendor_slug": "glm-5.3-flash",
-        "vendor_label": "GLM-5.3 Flash"
-      },
       "rank": 39,
       "target_models": [
-        "z-ai/glm-5.3-flash"
+        "openai/gpt-6-luna"
       ]
     },
     {
@@ -2806,7 +2806,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.348,
+      "api_reference_blended_cny_per_m": 3.3365,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
