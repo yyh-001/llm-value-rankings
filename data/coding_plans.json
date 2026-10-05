@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-04T20:00:12.446449Z",
+  "updated_at": "2026-10-05T23:05:42.947766Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -51,6 +51,80 @@
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 2
+      }
+    ],
+    "xiaomi/mimo-v2.5": [
+      {
+        "id": "opencode-go-mimo-v2.5",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "MiMo-V2.5",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0033,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
+      },
+      {
+        "id": "commandcode-goat-mimo-v2.5",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · MiMo V2.5",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0102,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 2
+      },
+      {
+        "id": "mimo-token-plan-max-mimo-v2.5",
+        "provider": "xiaomi",
+        "provider_display": "MiMo Token Plan",
+        "plan": "Max · V2.5",
+        "type": "subscription",
+        "badge": "¥659/月",
+        "cost": 0.0315,
+        "url": "https://platform.xiaomimimo.com/token-plan",
+        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
+        "rank": 3
+      },
+      {
+        "id": "mimo-token-plan-pro-mimo-v2.5",
+        "provider": "xiaomi",
+        "provider_display": "MiMo Token Plan",
+        "plan": "Pro · V2.5",
+        "type": "subscription",
+        "badge": "¥329/月",
+        "cost": 0.034,
+        "url": "https://platform.xiaomimimo.com/token-plan",
+        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
+        "rank": 4
+      },
+      {
+        "id": "mimo-token-plan-standard-mimo-v2.5",
+        "provider": "xiaomi",
+        "provider_display": "MiMo Token Plan",
+        "plan": "Standard · V2.5",
+        "type": "subscription",
+        "badge": "¥99/月",
+        "cost": 0.0353,
+        "url": "https://platform.xiaomimimo.com/token-plan",
+        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
+        "rank": 5
+      },
+      {
+        "id": "mimo-token-plan-lite-mimo-v2.5",
+        "provider": "xiaomi",
+        "provider_display": "MiMo Token Plan",
+        "plan": "Lite · V2.5",
+        "type": "subscription",
+        "badge": "¥39/月",
+        "cost": 0.0373,
+        "url": "https://platform.xiaomimimo.com/token-plan",
+        "pricing_source": "MiMo Token Plan 官方 Credit 额度",
+        "rank": 6
       }
     ],
     "deepseek/deepseek-v4.1-flash": [
@@ -115,6 +189,20 @@
         "url": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
         "pricing_source": "DeepSeek 官方 API",
         "rank": 3
+      }
+    ],
+    "deepseek/deepseek-v4-flash-vision-exp": [
+      {
+        "id": "opencode-go-deepseek-v4-flash-vision-exp",
+        "provider": "opencode",
+        "provider_display": "OpenCode Go",
+        "plan": "DeepSeek V4 Flash Vision Exp",
+        "type": "subscription",
+        "badge": "$10/月",
+        "cost": 0.0116,
+        "url": "https://opencode.ai/go",
+        "pricing_source": "OpenCode Go 官方文档",
+        "rank": 1
       }
     ],
     "xiaomi/mimo-v2.6-pro": [
@@ -539,6 +627,20 @@
         "rank": 2
       }
     ],
+    "qwen/qwen3.6-plus": [
+      {
+        "id": "commandcode-goat-qwen-3.6-plus",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.6 Plus",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.2585,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
     "moonshotai/kimi-k3": [
       {
         "id": "commandcode-goat-kimi-k3",
@@ -680,6 +782,20 @@
         "type": "subscription",
         "badge": "$10",
         "cost": 0.4685,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "meta/muse-spark-1.3": [
+      {
+        "id": "commandcode-goat-muse-spark-1.3",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Muse Spark 1.3",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.6643,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -904,7 +1020,9 @@
         "vendor_slug": "mimo-v2.5"
       },
       "rank": 5,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "opencode-go-longcat-2.0",
@@ -1077,7 +1195,9 @@
         "vendor_label": "MiMo V2.5"
       },
       "rank": 11,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "commandcode-goat-muse-spark-1.3-contributor",
@@ -1161,7 +1281,9 @@
         "vendor_slug": "deepseek-v4-flash-vision-exp"
       },
       "rank": 14,
-      "target_models": []
+      "target_models": [
+        "deepseek/deepseek-v4-flash-vision-exp"
+      ]
     },
     {
       "id": "opencode-go-hy3",
@@ -1456,7 +1578,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 0.2313,
+      "api_reference_blended_cny_per_m": 0.2306,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -1639,7 +1761,9 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 31,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "mimo-token-plan-pro-mimo-v2.5",
@@ -1662,7 +1786,9 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 32,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "opencode-go-gpt-5.6-luna",
@@ -1713,7 +1839,9 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 34,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "commandcode-goat-glm-5.3-flash",
@@ -1822,7 +1950,9 @@
         "model_family": "xiaomi/mimo-v2.5"
       },
       "rank": 38,
-      "target_models": []
+      "target_models": [
+        "xiaomi/mimo-v2.5"
+      ]
     },
     {
       "id": "commandcode-goat-gpt-6-luna",
@@ -2561,7 +2691,9 @@
         "vendor_label": "Qwen 3.6 Plus"
       },
       "rank": 64,
-      "target_models": []
+      "target_models": [
+        "qwen/qwen3.6-plus"
+      ]
     },
     {
       "id": "commandcode-goat-step-5-preview",
@@ -2806,7 +2938,7 @@
       "url": "https://chatgpt.com/codex/pricing",
       "pricing_source": "OpenAI Codex 官方定价",
       "source_url": "https://developers.openai.com/codex/pricing.md",
-      "api_reference_blended_cny_per_m": 3.3386,
+      "api_reference_blended_cny_per_m": 3.2951,
       "note_zh": "按 Plus $20/月：每 5h 消息上限 × 周滚动窗口数 × 月周数；未纳入官方未公开的周总量上限",
       "note_en": "Plus $20/mo: max msgs per 5h × rolling windows/week × weeks/month; undisclosed weekly pool cap not modeled",
       "match": {
@@ -2995,7 +3127,9 @@
         "vendor_label": "Muse Spark 1.3"
       },
       "rank": 79,
-      "target_models": []
+      "target_models": [
+        "meta/muse-spark-1.3"
+      ]
     },
     {
       "id": "commandcode-goat-gpt-5.6-sol",
