@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T22:26:08.074931Z",
+  "updated_at": "2026-11-14T21:14:32.098188Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -92,6 +92,20 @@
         "type": "subscription",
         "badge": "$10",
         "cost": 0.0475,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "inclusionai/ling-3.1-flash": [
+      {
+        "id": "commandcode-goat-ling-3.1-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Ling 3.1 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0487,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -879,7 +893,9 @@
         "vendor_label": "Ling 3.1 Flash"
       },
       "rank": 20,
-      "target_models": []
+      "target_models": [
+        "inclusionai/ling-3.1-flash"
+      ]
     },
     {
       "id": "commandcode-goat-ling-3.1-flash-1019",
