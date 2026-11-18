@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T23:47:17.569042Z",
+  "updated_at": "2026-11-18T23:19:27.773119Z",
   "methodology": {
     "unit": "effective blended price (¥/M tokens, coding-agent token mix)",
     "cache_hit_rate": 0.95,
@@ -64,6 +64,20 @@
         "type": "subscription",
         "badge": "$10",
         "cost": 0.0241,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "meta/muse-ember": [
+      {
+        "id": "commandcode-goat-muse-ember",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Muse Ember",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.027,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -175,6 +189,20 @@
         "rank": 4
       }
     ],
+    "qwen/qwen3.8-flash": [
+      {
+        "id": "commandcode-goat-qwen-3.8-flash",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 3.8 Flash",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.0725,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
     "tencent/hy4": [
       {
         "id": "commandcode-goat-tencent-hy4",
@@ -226,6 +254,20 @@
         "type": "subscription",
         "badge": "$10",
         "cost": 0.3626,
+        "url": "https://commandcode.ai/docs/plans/goat",
+        "pricing_source": "Command Code GOAT 官方文档",
+        "rank": 1
+      }
+    ],
+    "qwen/qwen4-max": [
+      {
+        "id": "commandcode-goat-qwen-4-max",
+        "provider": "commandcode",
+        "provider_display": "Command Code",
+        "plan": "GOAT · Qwen 4 Max",
+        "type": "subscription",
+        "badge": "$10",
+        "cost": 0.5553,
         "url": "https://commandcode.ai/docs/plans/goat",
         "pricing_source": "Command Code GOAT 官方文档",
         "rank": 1
@@ -666,7 +708,9 @@
         "vendor_label": "Muse Ember"
       },
       "rank": 11,
-      "target_models": []
+      "target_models": [
+        "meta/muse-ember"
+      ]
     },
     {
       "id": "mimo-token-plan-max-mimo-v2.5",
@@ -1268,7 +1312,9 @@
         "vendor_label": "Qwen 3.8 Flash"
       },
       "rank": 33,
-      "target_models": []
+      "target_models": [
+        "qwen/qwen3.8-flash"
+      ]
     },
     {
       "id": "commandcode-goat-step-3.5-flash",
@@ -1976,7 +2022,9 @@
         "vendor_label": "Qwen 4 Max"
       },
       "rank": 58,
-      "target_models": []
+      "target_models": [
+        "qwen/qwen4-max"
+      ]
     },
     {
       "id": "commandcode-goat-mistral-large-4",
